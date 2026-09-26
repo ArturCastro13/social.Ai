@@ -8,7 +8,7 @@ import { ultimaPorPost } from "@/lib/feedback";
 import { fetchLimited, normalizeUrl } from "@/lib/brand/fetch";
 import { corte, depoimentosDoSite, frasesDeProduto, frasesDoSite, numerosDoSite } from "@/lib/engine/texto-local";
 import { textoDaMarca } from "@/lib/engine/nicho";
-import { tomDeVozSchema, type Preferencias, type TomDeVoz } from "./contrato";
+import { conhecimentoPreenchido, tomDeVozSchema, type Preferencias, type TomDeVoz } from "./contrato";
 import { MOTOR_DO_FORMATO, nichoParaMotor, type NichoMotor } from "./mapa";
 import { publicoAlvoDoSite } from "./enderecamento";
 
@@ -18,6 +18,8 @@ export interface ContextoMotor {
   perfil_alvo: Preferencias["perfil_alvo"];
   /** Quem os posts precisam fazer se reconhecer: o que o founder escreveu ou, se vazio, o inferido do site. */
   publico_alvo: string;
+  /** "O que só você sabe": primeira fonte de tema. null quando o founder pulou as três perguntas. */
+  conhecimento_founder: { objecao_cliente: string | null; crenca_contraria: string | null; historia: string | null } | null;
   empresa: {
     site_url: string;
     site_extraido: { proposta: string; publico: string; produtos: string[]; provas: string[]; paleta: string[]; fontes: string[] };
@@ -182,6 +184,12 @@ function desempenho(resultados: ResultadoPost[], posts: Map<string, PostGerado>)
     });
 }
 
+function conhecimentoDoContexto(p: Preferencias | null): ContextoMotor["conhecimento_founder"] {
+  const c = conhecimentoPreenchido(p?.conhecimento_founder);
+  if (!c) return null;
+  return { objecao_cliente: c.objecao_cliente ?? null, crenca_contraria: c.crenca_contraria ?? null, historia: c.historia ?? null };
+}
+
 /**
  * Objeto CONTEXTO do motor (Parte 2 da spec). Só com o brand já funciona: campos sem dado ficam vazios ou null.
  * Nunca inventa horário nem métrica: insights e benchmarks saem como "nao_disponivel".
@@ -193,6 +201,7 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
   return {
     perfil_alvo: p?.perfil_alvo ?? "empresa",
     publico_alvo: p?.publico_alvo?.trim() || publicoAlvoDoSite(brand),
+    conhecimento_founder: conhecimentoDoContexto(p),
     empresa: {
       site_url: brand.url,
       site_extraido: siteExtraido(brand),

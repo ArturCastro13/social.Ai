@@ -33,7 +33,7 @@ const cora = DEMOS.find((d) => d.brand.dominio === "cora.com.br")!.brand;
 const catalogo = construirCatalogo(itensDoArquivo());
 
 const CHAVES_CONTEXTO = [
-  "perfil_alvo", "publico_alvo", "empresa", "founder", "nicho", "objetivos", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
+  "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "desempenho_proprio", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
   "historico_preferencias", "quantidade_posts",
 ];

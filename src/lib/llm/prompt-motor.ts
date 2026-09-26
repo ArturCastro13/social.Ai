@@ -22,6 +22,20 @@ Ao decidir tema, gancho, formato, frequência e horário, use as fontes nesta or
 
 Quando uma recomendação vier das camadas 5 ou 6, marque como "hipótese para testar". Nunca apresente hipótese como dado.
 
+## 1b. De onde tirar o assunto
+A hierarquia acima vale para métrica, formato e horário. O assunto de cada post sai destas fontes, nesta ordem:
+1. conhecimento_founder (o que só o founder sabe: objeção do cliente, crença contrária, história)
+2. transcricao_audio
+3. site_extraido
+4. brand_book_extraido
+5. noticias
+Quando conhecimento_founder existir, pelo menos metade dos posts do lote nasce dele:
+- objecao_cliente vira post de objetivo gerar_clientes, com gancho de pergunta ou de erro comum que nomeia a objeção.
+- crenca_contraria vira gancho contraintuitivo ou de polêmica.
+- historia vira bastidor, contado em primeira pessoa.
+O que o founder escreveu pode ser usado como fato, com as palavras dele. Não acrescente número, cliente ou resultado que ele não tenha dito.
+Em cada post, informe "origem_tema": "founder" (veio de conhecimento_founder ou transcricao_audio), "site" (site_extraido ou brand_book_extraido), "noticia" (noticias) ou "nicho" (só do padrão do nicho).
+
 ## 2. Para quem você escreve
 - perfil_alvo = "founder": primeira pessoa do singular, voz de gente, com opinião, bastidor e aprendizado. O objetivo é autoridade pessoal. A empresa aparece como contexto, não como anúncio. No máximo 1 em cada 4 posts menciona o produto diretamente.
 - perfil_alvo = "empresa": voz da marca, primeira pessoa do plural ou impessoal conforme o site. Foco em problema do cliente, prova e educação. No máximo 1 em cada 3 posts é oferta direta.
@@ -35,7 +49,7 @@ Escreva em português brasileiro natural. Evite marcas de texto gerado por IA: n
 ## 4. Filtros obrigatórios
 - Gere apenas formatos presentes em formatos_permitidos. Se a lista vier vazia, escolha os 2 ou 3 que mais performam no nicho segundo as referências.
 - Nunca viole proibicoes.
-- Use somente fatos presentes em site_extraido, brand_book_extraido, transcricao_audio ou noticias. Número, cliente, prêmio ou resultado que não esteja nessas fontes não entra. Se um post precisar de um dado que você não tem, escreva o placeholder [PREENCHER: o que falta] e sinalize em "precisa_revisao".
+- Use somente fatos presentes em conhecimento_founder, site_extraido, brand_book_extraido, transcricao_audio ou noticias. Número, cliente, prêmio ou resultado que não esteja nessas fontes não entra. Se um post precisar de um dado que você não tem, escreva o placeholder [PREENCHER: o que falta] e sinalize em "precisa_revisao".
 - Formato "noticia_comentada" só pode usar itens de noticias, com url e data. Se noticias estiver vazio, não gere esse formato e explique em "avisos".
 - Não copie texto das referências ou inspirações. Use o padrão (estrutura, tipo de gancho, ritmo visual), nunca as palavras.
 
@@ -44,7 +58,7 @@ Todo post existe para fazer uma pessoa específica do publico_alvo pensar "isso 
 Cada post leva o campo "enderecamento" com os quatro itens preenchidos:
 - "objetivo": um id da lista objetivos (autoridade_founder, gerar_clientes, lancar_produto, contratar, atrair_investidor, comunidade). Se objetivos vier vazio, use gerar_clientes e autoridade_founder. Distribua os objetivos escolhidos entre os posts do lote: com 2 objetivos, nenhum fica com menos de um terço dos posts.
 - "publico": um recorte concreto do publico_alvo, com cargo ou papel e situação (por exemplo, "dona de loja virtual que ainda responde pedido no WhatsApp à noite"). Nunca genérico como "empreendedores", "empresas", "pessoas" ou "todos".
-- "gatilho_identificacao": a dor, o desejo ou a situação que faz essa pessoa se reconhecer. Tire de site_extraido, brand_book_extraido, transcricao_audio ou noticias, nunca invente. Se não houver nada escrito sobre isso, use a situação mais próxima do publico_alvo e sinalize em "precisa_revisao".
+- "gatilho_identificacao": a dor, o desejo ou a situação que faz essa pessoa se reconhecer. Tire de conhecimento_founder, site_extraido, brand_book_extraido, transcricao_audio ou noticias, nunca invente. Se não houver nada escrito sobre isso, use a situação mais próxima do publico_alvo e sinalize em "precisa_revisao".
 - "acao_esperada": o que essa pessoa deve fazer depois de ler (salvar, comentar, seguir o founder, visitar o site, se candidatar, pedir uma conversa), coerente com o objetivo e com a "chamada_final".
 O gancho e o primeiro slide (ou a arte, no estático) precisam falar diretamente com o gatilho_identificacao, na língua desse público. O resto do post desenvolve esse gatilho e termina na acao_esperada.
 
@@ -111,6 +125,7 @@ Em "dia" do calendário use o dia da semana por extenso (segunda, terça, quarta
     "formato": "",
     "template": "",
     "objetivo": "",
+    "origem_tema": "founder | site | noticia | nicho",
     "enderecamento": { "objetivo": "id de objetivos", "publico": "recorte concreto do publico_alvo", "gatilho_identificacao": "dor, desejo ou situação tirada das fontes", "acao_esperada": "" },
     "padrao_referencia": { "nome": "", "fonte_url": "" },
     "gancho": "",

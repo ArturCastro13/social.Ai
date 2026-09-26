@@ -2,6 +2,7 @@ import { z } from "zod";
 import type { Formato, TemplateId } from "@/lib/types";
 import { formatoSchema, nichoSchema, redeSchema } from "@/lib/virais/schema";
 import { templateDoFormato } from "@/lib/virais/catalogo";
+import { ORIGENS_TEMA } from "@/lib/motor/contrato";
 
 export const TEMPLATES: TemplateId[] = [
   "capa-gancho", "lista", "citacao", "dado-impacto", "print-x", "bastidor", "antes-depois", "checklist",
@@ -61,6 +62,8 @@ export const postIASchema = z.object({
   padrao_inspirador: z.string().trim().max(80).default(""),
   por_que: z.string().trim().max(400).default(""),
   enderecamento: enderecamentoIASchema.optional(),
+  /** De onde veio o assunto. Valor desconhecido vira undefined, nunca derruba a validação. */
+  origem_tema: z.enum(ORIGENS_TEMA).optional().catch(undefined),
 });
 
 export const analiseIASchema = z.object({

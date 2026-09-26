@@ -292,6 +292,7 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
           hashtags: tags.slice(0, 5),
           padrao_inspirador: padrao?.id ?? "",
           por_que: porQue(padrao, m, ideia, nicho),
+          origem_tema: m.usaSite ? "site" : "nicho",
         });
         break;
       }

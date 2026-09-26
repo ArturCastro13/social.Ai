@@ -5,7 +5,7 @@ import type { Analise, BrandProfile, CalendarioItem, Nicho, PadraoViral, Rede, T
 import { enderecamentoIASchema, TEMPLATES, semTravessao, type AnaliseIA } from "@/lib/engine/schema";
 import { hojeEmSaoPaulo } from "@/lib/engine/calendario";
 import { corte } from "@/lib/engine/texto-local";
-import type { ExtrasAnalise, ExtrasPost, Preferencias } from "./contrato";
+import { ORIGENS_TEMA, type ExtrasAnalise, type ExtrasPost, type OrigemTema, type Preferencias } from "./contrato";
 import { completarEnderecamento, objetivosDoRodizio, publicoAlvoDoSite, REVISAR_PUBLICO, type ContextoEnderecamento } from "./enderecamento";
 import {
   distribuirFrequencia,
@@ -48,6 +48,17 @@ const slideSchema = z.union([
   z.string().transform((s) => ({ titulo: "", texto: s.trim().slice(0, 600) })),
 ]);
 
+/** "Fundador", "Notícia", "SITE" viram o id certo; ausente ou desconhecido vira "site". Nunca falha. */
+export function normalizarOrigemTema(v: unknown): OrigemTema {
+  if (typeof v !== "string") return "site";
+  const k = v.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+  if ((ORIGENS_TEMA as readonly string[]).includes(k)) return k as OrigemTema;
+  if (/founder|fundador|conhecimento|transcri|audio/.test(k)) return "founder";
+  if (/noticia/.test(k)) return "noticia";
+  if (/nicho|padrao|referencia/.test(k)) return "nicho";
+  return "site";
+}
+
 export const postMotorSchema = z
   .object({
     post_id: txt(40),
@@ -56,6 +67,7 @@ export const postMotorSchema = z
     formato: txt(40),
     template: txt(40),
     objetivo: txt(60),
+    origem_tema: z.unknown().optional().transform(normalizarOrigemTema),
     enderecamento: enderecamentoIASchema,
     padrao_referencia: z.object({ nome: txt(120), fonte_url: txt(500) }).catch({ nome: "", fonte_url: "" }),
     gancho: txt(400),
@@ -329,6 +341,7 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
       objetivo: p.objetivo || enderecamento.objetivo,
       enderecamento,
       formato_motor: fm,
+      origem_tema: p.origem_tema,
       padrao_referencia: nomePadrao || p.padrao_referencia.fonte_url ? { nome: nomePadrao, fonte_url: p.padrao_referencia.fonte_url } : undefined,
       chamada_final: p.chamada_final || undefined,
       precisa_revisao: revisar,

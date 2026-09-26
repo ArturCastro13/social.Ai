@@ -70,6 +70,7 @@ ${guia}
 Gere exatamente ${ctx.quantidade} posts. Redes com @ informado têm prioridade: ${ctx.redes.join(", ") || "linkedin e instagram"}.
 Distribua os posts entre as redes da estratégia e use pelo menos 3 formatos diferentes quando houver 3 ou mais posts.
 Cada post indica em "padrao_inspirador" o id do padrão acima que o inspirou.
+Cada post indica em "origem_tema" de onde veio o assunto: "site" quando nasce do texto do site, "nicho" quando nasce só do padrão do nicho.
 Cada post traz "enderecamento": "objetivo" é "gerar_clientes" ou "autoridade_founder" (alterne entre os dois ao longo do lote), "publico" é um recorte concreto de quem compra, "gatilho_identificacao" é a dor, desejo ou situação do site que faz essa pessoa se reconhecer, e "acao_esperada" é o que ela deve fazer depois de ler.
 O diagnóstico compara o que os posts fortes do nicho fazem com o que esta empresa comunica hoje pelo site e pelas redes: seja específico e honesto, sem elogio vazio.
 
@@ -92,6 +93,7 @@ Formato da resposta (JSON):
     "legendas": {"instagram": "", "linkedin": "", "x": "", "facebook": ""},
     "hashtags": ["sem #, no máximo 5"],
     "padrao_inspirador": "id do padrão",
+    "origem_tema": "site|nicho",
     "por_que": "uma frase dizendo qual padrão da base o post segue e por que deve funcionar",
     "enderecamento": {"objetivo": "gerar_clientes|autoridade_founder", "publico": "", "gatilho_identificacao": "", "acao_esperada": ""}
   }]

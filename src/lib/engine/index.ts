@@ -12,6 +12,8 @@ import { palpiteNicho } from "./nicho";
 import { analiseIASchema, extrairJson, semTravessao, templateValido, type AnaliseIA } from "./schema";
 import { demoPorDominio } from "./demo";
 import type { Preferencias } from "@/lib/motor/contrato";
+import { intercalar, postsDoFounder, referenciaDoPadrao } from "@/lib/motor/local-founder";
+import { aplicarLinkDestino } from "@/lib/motor/link-destino";
 import { extrairInspiracoes, montarContexto, redesDoMotor } from "@/lib/motor/contexto";
 import { filtrarLocal } from "@/lib/motor/local-filtros";
 import { aplicarExtras, saidaMotorSchema, saidaParaAnaliseIA, type ResultadoMotor } from "@/lib/motor/saida";
@@ -89,6 +91,7 @@ export function finalizar(
     hashtags: p.hashtags.map((h) => h.replace(/^#/, "").replace(/\s+/g, "")).filter(Boolean),
     padrao_inspirador: p.padrao_inspirador,
     por_que: p.por_que,
+    ...(p.origem_tema ? { origem_tema: p.origem_tema } : {}),
   }));
   return {
     id,
@@ -110,6 +113,13 @@ export function finalizar(
     avisos: [...brand.avisos, ...avisos],
     criadoEm: new Date().toISOString(),
   };
+}
+
+/** Sem padrao_referencia, usa o nome do padrão da base e o link da fonte verificada, quando o id existe no catálogo. */
+function comReferencia(p: PostGerado): PostGerado {
+  if (p.padrao_referencia?.nome?.trim()) return p;
+  const ref = referenciaDoPadrao(p.padrao_inspirador);
+  return ref ? { ...p, padrao_referencia: ref } : p;
 }
 
 /** Copia o endereçamento que veio na saída; com contexto, completa o que faltar. */
@@ -159,8 +169,34 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
 
   const demo = demoPorDominio(brand.dominio);
   if (demo && (!llm || !op.forcarNovo)) {
-    const posts = garantirEnderecamento(demo, enderecarSite(false, demo.contexto_inferido?.publico)).posts.slice(0, quantidade);
-    return {
+    const ctxDemo = enderecarSite(false, demo.contexto_inferido?.publico);
+    const doSite = garantirEnderecamento(demo, ctxDemo).posts.map(comReferencia);
+    // Com "O que só você sabe" preenchido, os posts do founder (motor local, instantâneo) entram intercalados na frente.
+    const doFounder: PostGerado[] = pref
+      ? postsDoFounder(pref.conhecimento_founder, {
+          perfil_alvo: pref.perfil_alvo,
+          publico: ctxDemo.publico,
+          redes: demo.estrategia.map((e) => e.rede),
+          hashtags: demo.posts[0]?.hashtags,
+          nomeFounder: pref.founder?.nome,
+          marca: demo.brand.nome,
+        }).map(({ post, extras }, i) => ({
+          ...extras,
+          id: `${demo.id}-f${i + 1}`,
+          rede_principal: post.rede_principal,
+          formato: post.formato,
+          template: templateValido(post.template, post.formato),
+          gancho: post.gancho,
+          slides: post.slides,
+          legendas: post.legendas,
+          hashtags: post.hashtags,
+          padrao_inspirador: post.padrao_inspirador,
+          por_que: post.por_que,
+        }))
+      : [];
+    const posts = intercalar(semTravessao(doFounder), doSite).slice(0, quantidade);
+    const total = doSite.length + doFounder.length;
+    const pronta: Analise = {
       ...demo,
       id: `demo-${demo.id}`,
       posts,
@@ -168,9 +204,11 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       origem: "demo",
       avisos: [
         "Exemplo pré-processado do modo demo, gerado a partir do site público da empresa.",
-        ...(demo.posts.length < quantidade ? [`Este exemplo tem ${demo.posts.length} posts prontos; mostramos todos.`] : []),
+        ...(doFounder.length ? ["Os posts marcados como vindos do que você contou foram montados na hora, a partir das suas respostas."] : []),
+        ...(total < quantidade ? [`Este exemplo tem ${total} posts prontos; mostramos todos.`] : []),
       ],
     };
+    return aplicarLinkDestino(pronta, pref?.link_destino);
   }
 
   // 2. Cache: mesma URL e mesma quantidade não pagam de novo.
@@ -302,7 +340,8 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     ? { ...enderecarSite(true, motor?.extrasAnalise.contexto_inferido?.publico || saida.publico), gatilho: "gancho" }
     : enderecarSite(false, motor?.extrasAnalise.contexto_inferido?.publico);
   const base = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos, motor ? undefined : ctxEnd);
-  const analise = garantirEnderecamento(motor ? aplicarExtras(base, motor) : base, ctxEnd);
+  const comExtras = garantirEnderecamento(motor ? aplicarExtras(base, motor) : base, ctxEnd);
+  const analise = aplicarLinkDestino({ ...comExtras, posts: comExtras.posts.map(comReferencia) }, pref?.link_destino);
   try {
     // Só análises feitas pela IA entram no cache; as do motor local são baratas e podem melhorar depois.
     if (provedor) await store.salvarAnalise(analise, urlChave, op.email, quantidade);

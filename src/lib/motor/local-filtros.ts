@@ -7,6 +7,7 @@ import { semAcento } from "@/lib/brand/nome";
 import type { ExtrasPost, ObjetivoId, Preferencias } from "./contrato";
 import { distribuirFrequencia, formatosDoApp, MOTOR_DO_FORMATO, postsPorSemana } from "./mapa";
 import type { ResultadoMotor } from "./saida";
+import { intercalar, postsDoFounder, referenciaDoPadrao } from "./local-founder";
 
 type PostIA = AnaliseIA["posts"][number];
 
@@ -93,28 +94,42 @@ export function filtrarLocal(saida: AnaliseIA, pref: Preferencias, op: OpcoesFil
     candidatos = [...escolhidos, ...sobra];
   }
 
-  const posts = candidatos.slice(0, op.quantidade);
   const objetivos: ObjetivoId[] = pref.objetivos.length
     ? pref.objetivos
     : pref.perfil_alvo === "founder"
       ? ["autoridade_founder"]
       : ["gerar_clientes"];
 
-  const extrasPosts: ExtrasPost[] = posts.map((p, i) => {
+  // "O que só você sabe": cada resposta vira um post, intercalado na frente (founder, outro, founder...).
+  // Não passa pelo filtro de formatos: é o assunto que o founder pediu.
+  const doFounder = postsDoFounder(pref.conhecimento_founder, {
+    perfil_alvo: pref.perfil_alvo,
+    publico: pref.publico_alvo?.trim() || saida.publico,
+    redes: saida.estrategia.map((e) => e.rede),
+    hashtags: saida.posts[0]?.hashtags,
+    nomeFounder: pref.founder?.nome,
+    marca: op.marca,
+  });
+  const outros = candidatos.map((post, i) => {
     const trilho: "founder" | "empresa" =
       pref.perfil_alvo === "ambos" ? (i % 2 === 0 ? "founder" : "empresa") : pref.perfil_alvo === "founder" ? "founder" : "empresa";
     const revisar: string[] = [];
-    if (/confirme com o time/i.test(p.por_que)) revisar.push("Confirme se o relato bate com a experiência real antes de publicar.");
-    if (p.formato === "dado-impacto") revisar.push("Confira o número no site antes de publicar.");
-    if (trilho === "founder" && !FORMATOS_FOUNDER.includes(p.formato)) revisar.push("Ajuste para a primeira pessoa do founder antes de publicar.");
-    return {
+    if (/confirme com o time/i.test(post.por_que)) revisar.push("Confirme se o relato bate com a experiência real antes de publicar.");
+    if (post.formato === "dado-impacto") revisar.push("Confira o número no site antes de publicar.");
+    if (trilho === "founder" && !FORMATOS_FOUNDER.includes(post.formato)) revisar.push("Ajuste para a primeira pessoa do founder antes de publicar.");
+    const extras: ExtrasPost = {
       trilho,
       objetivo: objetivos[i % objetivos.length],
-      formato_motor: MOTOR_DO_FORMATO[p.formato],
-      padrao_referencia: p.padrao_inspirador ? { nome: p.padrao_inspirador, fonte_url: "" } : undefined,
+      formato_motor: MOTOR_DO_FORMATO[post.formato],
+      ...(post.origem_tema ? { origem_tema: post.origem_tema } : {}),
+      padrao_referencia: referenciaDoPadrao(post.padrao_inspirador) ?? (post.padrao_inspirador ? { nome: post.padrao_inspirador, fonte_url: "" } : undefined),
       precisa_revisao: revisar,
     };
+    return { post, extras };
   });
+  const lote = intercalar(doFounder, outros).slice(0, op.quantidade);
+  const posts = lote.map((x) => x.post);
+  const extrasPosts: ExtrasPost[] = lote.map((x) => x.extras);
 
   // Citação de post de founder: assinada pelo founder quando o nome veio no onboarding.
   const nomeFounder = pref.founder?.nome?.trim();
