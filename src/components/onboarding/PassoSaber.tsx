@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PERGUNTAS_FOUNDER } from "@/lib/client/onboarding";
 import type { ConhecimentoFounder } from "@/lib/motor/contrato";
 import { BotaoGravar } from "./ui";
@@ -17,6 +17,7 @@ const CAMPO =
  * Passo "O que só você sabe": três perguntas diretas sobre o negócio (problema, dúvida antes da compra
  * e diferencial), por texto ou voz. Nada é obrigatório e o "Pular por agora" fica sempre à vista.
  * As chaves antigas (crenca_contraria, historia) continuam no estado, mas não aparecem aqui.
+ * Uma pergunta por vez: a próxima só abre depois que a anterior foi respondida, para não assustar.
  */
 export function PassoSaber({
   saber,
@@ -45,6 +46,26 @@ export function PassoSaber({
     atual.current = saber;
   }, [saber]);
   const respondidas = PERGUNTAS_FOUNDER.filter((p) => saber[p.id].trim()).length;
+  const total = PERGUNTAS_FOUNDER.length;
+  // Quantas perguntas estão abertas. Começa com as já respondidas (respostas salvas) mais uma.
+  const ultimaRespondida = (s: Saber) => PERGUNTAS_FOUNDER.reduce((u, p, i) => (s[p.id].trim() ? i : u), -1);
+  const [abertas, setAbertas] = useState(() => Math.min(total, ultimaRespondida(saber) + 2));
+  // Respostas salvas chegam depois de montar (o site ainda estava sendo lido): abre até elas.
+  const ultima = ultimaRespondida(saber);
+  if (ultima >= abertas) setAbertas(Math.min(total, ultima + 2));
+  const foco = useRef<string | null>(null);
+  useEffect(() => {
+    if (!foco.current) return;
+    document.getElementById(`saber-${foco.current}`)?.focus();
+    foco.current = null;
+  }, [abertas]);
+
+  function proxima(i: number) {
+    if (i + 1 >= total || !saber[PERGUNTAS_FOUNDER[i].id].trim()) return;
+    voz.parar();
+    foco.current = PERGUNTAS_FOUNDER[i + 1].id;
+    setAbertas((a) => Math.max(a, i + 2));
+  }
 
   return (
     <div className="animate-subir">
@@ -72,11 +93,23 @@ export function PassoSaber({
         </p>
       )}
 
-      <div className="mt-8 space-y-7 rounded-3xl border border-tinta/10 bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] sm:p-8">
-        {PERGUNTAS_FOUNDER.map((p, i) => {
+      <div className="mt-8 flex items-center gap-3" aria-hidden>
+        <div className="flex gap-1.5">
+          {PERGUNTAS_FOUNDER.map((p, i) => (
+            <span key={p.id} className={`h-1.5 w-8 rounded-full transition-colors duration-500 ${i < abertas ? (saber[p.id].trim() ? "bg-pauta" : "bg-tinta/40") : "bg-tinta/10"}`} />
+          ))}
+        </div>
+        <span className="text-sm tabular-nums text-tinta-3">
+          {Math.min(abertas, total)} de {total}
+        </span>
+      </div>
+
+      <div className="mt-3 space-y-7 rounded-3xl border border-tinta/10 bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] sm:p-8">
+        {PERGUNTAS_FOUNDER.slice(0, abertas).map((p, i) => {
           const gravando = voz.gravando === p.id;
+          const atualAberta = i === abertas - 1;
           return (
-            <div key={p.id}>
+            <div key={p.id} className={i > 0 ? "animate-subir" : ""}>
               <div className="flex items-start justify-between gap-3">
                 <label htmlFor={`saber-${p.id}`} className="font-display text-lg font-semibold leading-snug tracking-[-0.01em]">
                   <span className="mr-1.5 text-tinta-3">{i + 1}.</span>
@@ -100,9 +133,25 @@ export function PassoSaber({
                 maxLength={LIMITE}
                 value={saber[p.id]}
                 onChange={(e) => onChange({ ...saber, [p.id]: e.target.value })}
+                onKeyDown={(e) => {
+                  // Enter passa para a próxima pergunta; Shift+Enter quebra a linha.
+                  if (e.key === "Enter" && !e.shiftKey && atualAberta && i + 1 < total && saber[p.id].trim()) {
+                    e.preventDefault();
+                    proxima(i);
+                  }
+                }}
                 placeholder={p.exemplo}
                 className={CAMPO}
               />
+              {atualAberta && i + 1 < total && saber[p.id].trim() && (
+                <button
+                  type="button"
+                  onClick={() => proxima(i)}
+                  className="tocavel animate-subir mt-3 inline-flex h-10 items-center gap-2 rounded-full bg-tinta px-4 text-sm font-semibold text-papel hover:bg-tinta-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+                >
+                  Próxima pergunta <span aria-hidden>→</span>
+                </button>
+              )}
               {voz.aviso?.id === p.id && (
                 <p className="mt-2 text-sm text-pauta-escura" role="alert">
                   {voz.aviso.texto}
@@ -112,7 +161,7 @@ export function PassoSaber({
           );
         })}
         <p className="sr-only" aria-live="polite">
-          {voz.gravando ? "Gravando" : ""}
+          {voz.gravando ? "Gravando" : `Pergunta ${Math.min(abertas, total)} de ${total}`}
         </p>
       </div>
 
@@ -125,9 +174,12 @@ export function PassoSaber({
             voz.parar();
             onContinuar(true);
           }}
-          className="h-12 flex-1 rounded-full bg-pauta px-7 text-base font-semibold text-white transition-colors hover:bg-pauta-escura focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tinta disabled:cursor-not-allowed disabled:opacity-40 sm:h-14 sm:flex-none sm:text-lg"
+          // Enquanto há pergunta por abrir, "Próxima pergunta" é a ação principal e o Continuar fica discreto.
+          className={`tocavel h-12 flex-1 rounded-full px-7 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tinta disabled:cursor-not-allowed disabled:opacity-40 sm:h-14 sm:flex-none sm:text-lg ${
+            abertas >= total ? "bg-pauta text-white hover:bg-pauta-escura" : "border border-tinta/20 bg-white text-tinta hover:border-tinta"
+          }`}
         >
-          Continuar
+          {abertas >= total ? "Continuar" : "Continuar assim"}
         </button>
         <button
           type="button"
