@@ -10,7 +10,7 @@ Antes de subir: página aberta em `https://social-ai-beige.vercel.app`, zoom do 
 
 "Levanta a mão quem aqui é founder e cuida do marketing da própria startup. [pausa] Pois é. Hoje de manhã a gente conversou com [N] founders aqui no evento. [X] deles cuidam do marketing sozinhos, sem ninguém dedicado. Um deles disse: [frase real da pergunta 5, lida do painel]."
 
-"O founder cuida de produto, de venda, de investidor. O Instagram da empresa fica para depois. E depois vira nunca."
+"O founder é quem mais sabe do mercado, do produto e do cliente. Ele responde a mesma objeção em toda call de venda. Só que esse conhecimento fica na cabeça dele e não vira conteúdo, porque não sobra tempo nem estrutura. O Instagram da empresa fica para depois. E depois vira nunca."
 
 ## 0:25 a 0:50, a dor já paga
 
@@ -24,19 +24,23 @@ Fonte dos números da Doxa, para ter no bolso se perguntarem: [BrazilCham](https
 
 "Esse é o social.Ai. Vou colar o site da [startup do hackathon]."
 
-[Operador cola a URL, escolhe 6 posts, clica em gerar.]
+[Operador cola a URL.]
 
-"Enquanto ele trabalha, olha o que está acontecendo: ele abriu o site, tirou a paleta e as fontes direto do código, [cores aparecem] olha as cores da marca aqui. Agora ele está descobrindo o nicho e comparando com a nossa base de posts virais de founders, que tem link para cada fonte e não tem nenhum número inventado."
+"Enquanto ele lê o site, a gente responde três perguntas. É o que o ChatGPT não sabe sobre essa empresa: a objeção que o cliente mais faz, o que o mercado acredita e o founder acha errado, e uma história que mudou o jeito de ver o problema. Dá para responder falando."
+
+[Operador cola as três respostas já combinadas com o founder da startup, ajusta a quantidade para 6 e clica em gerar.]
+
+"Ele tirou a paleta e as fontes direto do código do site, [cores aparecem] e agora cruza o que o founder contou com a nossa base de posts que já viralizaram nesse nicho, com link para cada fonte e nenhum número inventado."
 
 [Resultado aparece.]
 
-"Aqui está o que um CMO entregaria. O posicionamento em uma frase. O diagnóstico: o que os posts que viralizam no nicho de vocês fazem e vocês ainda não fazem. Estratégia por rede, calendário das próximas semanas. E os posts, prontos, na identidade da marca. Não é imagem de IA: é arte desenhada por código com as cores e a fonte do site, por isso sai em um segundo e custa quase zero. Se não gostou da cor, troca. [clica numa cor] Se quer outro formato, troca. [troca o modelo] Legenda para Instagram, LinkedIn, X e Facebook. Baixa tudo num ZIP e posta."
+"Primeiro, a semana: cada post num dia e horário. Olha a etiqueta: 'hipótese do nicho'. A gente não finge que conhece a audiência de vocês antes de ter dado. [aponta um post com o selo] Esse post aqui tem o selo 'da sua cabeça': nasceu da objeção que o founder acabou de contar. Em cada post, três linhas: para quem é, por que funciona, com o padrão da base que ele usou, e de onde veio o assunto. A arte é desenhada por código com as cores e a fonte do site, por isso sai em um segundo e custa quase zero. Se não gostou da cor, troca. [clica numa cor] Legenda para Instagram, LinkedIn, X e Facebook, e o post de gerar cliente já termina com o link de vocês. Baixa tudo num ZIP e posta."
 
-Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e clicar no exemplo Cora.
+Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e usar a Cora com as mesmas três respostas: a demo responde na hora, sem internet, e também mostra os posts com o selo "da sua cabeça".
 
 ## 1:55 a 2:20, diferencial e modelo
 
-"A diferença para a Doxa: post estático e estratégia, sem gravar nem clonar ninguém, focado em founder de startup, com preço de ferramenta. A diferença para uma social media: o primeiro post sai em um minuto e já vem com o raciocínio de por que ele deve funcionar."
+"A diferença para a Doxa: o assunto sai do que o founder sabe, não de um roteiro genérico. Post estático e estratégia, sem gravar nem clonar ninguém, focado em founder de startup, com preço de ferramenta. A diferença para uma social media: o primeiro post sai em um minuto e já vem com o raciocínio de por que ele deve funcionar."
 
 "Modelo: assinatura mensal. A hipótese de hoje é a partir de 49 reais por mês, bem abaixo do custo de qualquer pessoa dedicada. E a gente já perguntou: dos founders que ouvimos, a mediana do que pagariam é [R$ valor do painel] por mês."
 
@@ -54,7 +58,7 @@ Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e clicar no
 
 ## Perguntas prováveis do júri
 
-**"Isso não é só um ChatGPT com template?"** O diferencial está em três coisas que o ChatGPT não faz sozinho: ler a identidade visual real do site, usar uma base curada de padrões virais do nicho com fonte, e entregar a arte pronta na marca. E a análise inteira custa uma chamada de IA, com cache.
+**"Isso não é só um ChatGPT com template?"** O ChatGPT só sabe o que está na internet, e o site da startup qualquer IA lê. O diferencial começa no que só o founder sabe: as três perguntas viram matéria-prima de pelo menos metade dos posts, e cada um mostra que veio dali. Depois vêm a base curada de padrões que viralizaram no nicho, com fonte, a pauta da semana com dia e horário, e a arte pronta na identidade visual real do site. A análise inteira custa uma chamada de IA, com cache.
 
 **"De onde vêm os virais?"** Base curada pelo time, com link de cada fonte. Hoje são 74 itens em 5 nichos, 52 com fonte verificada. Métrica de engajamento só entra quando a gente leu no post original.
 

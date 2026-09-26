@@ -4,7 +4,14 @@ Base de produção: `https://social-ai-beige.vercel.app`
 
 ## O produto em um parágrafo
 
-O social.Ai é um CMO de IA para o founder de startup que cuida de tudo sozinho. A pessoa cola a URL do site (e, se quiser, os @ das redes). O sistema lê a identidade visual e o posicionamento da marca, identifica o nicho, cruza com uma base curada de posts de alto desempenho daquele nicho e devolve um diagnóstico, uma estratégia de conteúdo por rede, um calendário de publicação e N posts estáticos prontos, com arte na identidade da marca e legenda para Instagram, LinkedIn, X e Facebook. O modelo de negócio é assinatura mensal com preço de ferramenta.
+Startups têm conhecimento de mercado, produto e cliente concentrado no founder, mas faltam estrutura e tempo para transformar esse conhecimento em aquisição de forma consistente. O social.Ai converte o conhecimento do founder em conteúdo de autoridade que atrai o cliente certo, usando padrões que já geraram alcance no nicho, com a pauta da semana pronta e o melhor dia e horário para cada post. Na prática: a pessoa cola a URL do site (de onde saem marca, paleta, fontes e posicionamento) e responde três perguntas curtas sobre o que só ela sabe. O sistema cruza isso com uma base curada de posts de alto desempenho do nicho e devolve a semana: posts estáticos com arte na identidade da marca, legenda para Instagram, LinkedIn, X e Facebook, e em cada post para quem ele é, qual padrão da base usou e de onde veio o assunto. O modelo de negócio é assinatura mensal com preço de ferramenta.
+
+As quatro promessas e onde cada uma aparece no produto:
+
+1. **Conhecimento do founder**: passo "O que só você sabe" no onboarding (`conhecimento_founder`) e selo "da sua cabeça" nos posts com `origem_tema: "founder"`.
+2. **Cliente certo**: linha "Para quem" em cada post (`enderecamento.publico` e `acao_esperada`) e o link de destino com UTM nos posts de `gerar_clientes`.
+3. **Padrões que já geraram alcance no nicho**: linha "Por que funciona" com o `padrao_referencia` (nome e link da fonte verificada).
+4. **Pauta da semana com melhor dia e horário**: bloco "Sua semana", com a fonte de cada horário.
 
 ## Princípios que guiam as decisões
 
@@ -13,6 +20,10 @@ Gasto de API perto de zero: a arte é desenhada por código (Satori), nunca por 
 ## Fluxos
 
 **Fluxo principal (página inicial).** O usuário digita a URL e escolhe quantos posts quer (3, 6, 9 ou 12). A interface chama `POST /api/brand`, mostra a paleta e as fontes assim que chegam, e em seguida chama `POST /api/analyze` com o perfil de marca. Enquanto espera, a tela de redação mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando). Com a resposta, o painel exibe posicionamento, diagnóstico, pilares, estratégia por rede, calendário e a grade de posts. Cada post mostra a arte (`GET /api/render/{postId}`), permite trocar a cor principal e o template, e traz a legenda de cada rede com botão de copiar.
+
+**Onboarding.** `/app` pede só a URL. A tela seguinte começa pelo passo "O que só você sabe" (três perguntas, texto ou voz, "Pular por agora" sempre visível) enquanto o site é lido em segundo plano, e depois mostra os ajustes já preenchidos (público, link de destino, quem assina, redes, objetivo, tom, formatos, frequência e o turbo opcional).
+
+**Sua semana.** No resultado, logo abaixo do posicionamento, o bloco "Sua semana" (`src/components/estudio/SuaSemana.tsx`) mostra os 7 dias a partir da primeira data do calendário: 7 colunas no desktop, lista por dia no celular. Cada slot tem horário, rede, gancho, a etiqueta da fonte do horário ("hipótese do nicho", "teste" ou "sua audiência"; sem fonte, "hipótese do nicho") e o selo "da sua cabeça" quando o post veio do founder. Posts depois do sétimo dia ficam numa lista curta "Depois desta semana". Em cada post, três linhas fixas: **Para quem** (público e ação esperada), **Por que funciona** (padrão da base com link para a fonte) e **Veio de** ("o que você contou", "seu site", "notícia" ou "padrão do nicho"). Diagnóstico e estratégia ficam recolhidos em "Ver análise completa".
 
 **Ideias do dia.** Logo abaixo do cabeçalho do resultado e antes do diagnóstico, as ideias de post aparecem em um baralho (`src/components/baralho/Baralho.tsx`, montado em `src/components/estudio/IdeiasEMetricas.tsx`). Arrastar para a direita aprova, para a esquerda pula. Os dois botões e as setas do teclado fazem o mesmo. A pilha é ordenada pelo Opportunity Score uma vez, com o histórico de quando a análise abriu, para que decidir uma carta não reembaralhe as outras. Ideias já decididas nesta análise não voltam. Ao lado do baralho ficam a nota da carta do topo, os motivos, o `por_que` do post e a legenda por rede com botão de copiar.
 
@@ -166,6 +177,12 @@ Saída (resumida, exemplo real do modo demo):
     "frequencia_escolhida": "leve | constante | intenso",
     "proibicoes": ["nada de política"],
     "inspiracoes": [{ "url": "https://...", "tipo": "post | perfil | video" }],
+    "conhecimento_founder": {
+      "objecao_cliente": "Todo cliente pergunta se precisa trocar de banco para usar a conta.",
+      "crenca_contraria": "O mercado acha que PME não liga para gestão financeira. Liga, só não tem tempo.",
+      "historia": "Um cliente fechou as portas com dinheiro para receber porque cobrava tudo no papel."
+    },
+    "link_destino": "https://wa.me/5511999999999",
     "brand_book_texto": "",
     "noticias": [{ "titulo": "", "resumo": "", "url": "https://...", "data": "2026-09-20" }]
   }
@@ -176,9 +193,29 @@ Se vier inválido, a rota responde 400 com `erro` em português e `detalhes` no 
 
 Com preferências e IA configurada, o motor monta o objeto CONTEXTO da Parte 2 de `PROMPT_MOTOR_POSTS.md` (`src/lib/motor/contexto.ts`: site lido sem IA, base curada do nicho, histórico de decisões e métricas digitadas, og:title e og:description das inspirações lidos em até 4 s cada) e usa o system prompt da Parte 3 (`src/lib/llm/prompt-motor.ts`). Horários de audiência e benchmarks saem sempre como `nao_disponivel`: nada é inventado. A saída do modelo passa por um schema tolerante e é convertida para o formato de sempre (`src/lib/motor/saida.ts`). Sem IA, o motor local gera candidatos a mais e filtra por formato permitido, proibições e perfil (`src/lib/motor/local-filtros.ts`). A chave de cache inclui um hash das preferências. Sem `preferencias`, o fluxo é idêntico ao anterior; o modo demo responde igual.
 
+#### Conhecimento do founder (`conhecimento_founder`)
+
+Três respostas opcionais, até 600 caracteres cada (acima disso, 400 com "Cada resposta pode ter até 600 caracteres."), vindas do passo "O que só você sabe" (`src/components/onboarding/PassoSaber.tsx`), que aparece logo depois da URL e aproveita o tempo de leitura do site. Cada pergunta aceita texto ou voz (Web Speech API no navegador, `useDitado`), e "Pular por agora" fica sempre à vista.
+
+- `objecao_cliente`: "Qual a objeção ou dúvida que você mais ouve do seu cliente?"
+- `crenca_contraria`: "O que o seu mercado acredita que você acha errado?"
+- `historia`: "Conta um momento da empresa que mudou como você enxerga o problema."
+
+No CONTEXTO do motor, `conhecimento_founder` vem logo depois de `publico_alvo` (respostas vazias viram `null`) e convive com `founder.transcricao_audio`. O system prompt põe as fontes de **tema** nesta ordem: conhecimento do founder, transcrição, site, brand book, notícias (a hierarquia de evidências para métrica e horário não muda). Com respostas, pelo menos metade dos posts nasce delas: a objeção vira post de `gerar_clientes`, a crença vira gancho contraintuitivo ou de polêmica, a história vira bastidor. O que o founder escreveu pode ser usado como fato; número ou cliente além disso continua proibido. Continua sendo uma chamada de IA por análise.
+
+Sem IA (`src/lib/motor/local-founder.ts`), cada resposta vira um post determinístico, intercalado na frente do lote (founder, outro, founder...), sem passar pelo filtro de formatos nem de proibições: objeção vira print de tweet com gancho de pergunta e objetivo `gerar_clientes` (marcado para o founder acrescentar a resposta), crença vira citação com gancho contraintuitivo, história vira bastidor do founder. O texto é a resposta do founder mais frases neutras de ligação. Nas demos (Cora, Pipefy, Sallve), os mesmos posts entram intercalados na análise pré-processada, que continua instantânea e offline; sem respostas, a demo fica igual.
+
+#### De onde veio o assunto (`origem_tema`)
+
+Todo post novo traz `origem_tema`: `founder`, `site`, `noticia` ou `nicho`. A saída da IA passa por `normalizarOrigemTema` (`src/lib/motor/saida.ts`): ausente ou desconhecido vira `site`, sem derrubar a análise. O motor local marca `site` quando o modelo de post usa fato do site e `nicho` quando parte do tema do nicho. Demo e cache antigos não têm o campo; a interface mostra "seu site".
+
+#### Link de destino com UTM (`link_destino`)
+
+Campo opcional de uma linha na tela de ajustes: "Para onde você quer mandar quem gostar do post?". Se vier, cada legenda dos posts com `enderecamento.objetivo = "gerar_clientes"` termina com "Quer conversar sobre isso?" e o link com `utm_source={rede da legenda}&utm_medium=social&utm_campaign=socialai&utm_content={post_id}` (`src/lib/motor/link-destino.ts`). Parâmetros que o link já tinha são mantidos. No X (280) e no LinkedIn (3000), o corpo da legenda é cortado para caber, nunca o link. É idempotente e vale para IA, motor local e demo. Nenhum outro rastreamento, e a interface não promete conversão.
+
 Campos extras na saída (todos opcionais; demo e cache antigos não têm):
 
-- Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `enderecamento` (ver abaixo), `formato_motor` (id do motor), `padrao_referencia` `{ nome, fonte_url }`, `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
+- Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `enderecamento` (ver abaixo), `formato_motor` (id do motor), `origem_tema`, `padrao_referencia` `{ nome, fonte_url }` (quando falta, é completado pelo catálogo com o nome do padrão e o link do primeiro exemplo verificado), `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
 - Na análise: `contexto_inferido` `{ nicho, publico, tom_resumo, objetivos, confianca }`, `por_rede` `[{ rede, papel }]`, `comentario_frequencia`, `o_que_aprendi`, `perfil_alvo`.
 - Em cada item do calendário: `fonte` (`sua audiência`, `hipótese do nicho` ou `teste`) quando o calendário veio do modelo. Se os slots do modelo não forem coerentes, o calendário é montado pelas janelas de sempre.
 

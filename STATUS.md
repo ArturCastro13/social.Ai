@@ -4,6 +4,23 @@
 
 Produção: **https://social-ai-beige.vercel.app** · Repositório: https://github.com/bruno-dotcom12/social.Ai
 
+## Reposicionamento (PROMPT_3_REPOSICIONAR.md), tarde de 26/09/2026
+
+Feito:
+- **Onboarding:** passo "O que só você sabe" logo depois da URL: três perguntas (objeção do cliente, crença contrária, história), por texto ou voz, com "Pular por agora" sempre visível. O site é lido em segundo plano enquanto o founder responde. As respostas vão em `preferencias.conhecimento_founder` (até 600 caracteres cada) e entram no hash do cache.
+- **Motor:** `conhecimento_founder` é a primeira fonte de tema no CONTEXTO e no prompt, e pelo menos metade dos posts deve nascer dele. Todo post tem `origem_tema`. Sem IA, cada resposta vira um post determinístico; nas demos, esses posts entram intercalados e a resposta continua instantânea.
+- **Resultado:** bloco "Sua semana" com horário e fonte do horário, três linhas por post (Para quem, Por que funciona, Veio de), selo "da sua cabeça" e análise completa recolhida.
+- **Aquisição:** campo "Para onde você quer mandar quem gostar do post?"; os posts de gerar cliente terminam com o link e o UTM da rede.
+- **Landing:** hero, Como funciona, FAQ e meta a partir da nova tese; saíram Manifesto, Métricas de exemplo e o vídeo antigo.
+- **Verificação:** lint, `tsc` e 168 testes passando. Fluxo completo percorrido no navegador (Playwright, desktop e celular) com cora.com.br e contaazul.com respondendo as três perguntas. Esse teste pegou e corrigiu um bug: as artes dos posts do founder na demo davam 404.
+
+Pendente:
+- **Caminho com IA:** o motor novo não foi testado com chave de verdade. A regra "pelo menos metade do founder" depende só do prompt; nada completa com posts locais se o modelo ignorar as respostas.
+- **Motor local e demo:** um post por resposta, ou seja, 3 de 9 posts, não metade.
+- **Post da objeção:** vai para revisão pedindo a resposta do founder, porque ele conta a dúvida mas não a resposta, e o motor não inventa uma.
+- **"Sua semana":** mostra os 7 dias a partir da primeira data do calendário, em ordem cronológica, e não segunda a domingo fixos. É uma decisão: o calendário começa amanhã.
+- **Vídeo da landing:** saiu porque mostrava o fluxo antigo; `public/video/demo.mp4` continua no repositório e precisa ser refeito.
+
 ## Primeira coisa de manhã (em ordem)
 
 1. **Ligar a IA.** Hoje a produção roda sem chave: Cora, Pipefy e Sallve respondem com as análises pré-processadas e qualquer outro site passa pelo motor local, que é honesto mas genérico. Com `GEMINI_API_KEY` a estratégia e os posts passam a ser escritos pela IA. São cinco minutos; os comandos estão em `DEPLOY.md`. Depois disso, rodar 3 sites de startups presentes no evento e ler os posts gerados com olho crítico.
