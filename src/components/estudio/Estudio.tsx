@@ -43,10 +43,15 @@ export function Estudio({
   return (
     <>
       <section id="topo" className="scroll-mt-4">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:gap-10 sm:px-6 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14 lg:pb-28 lg:pt-10">
-          <div className="flex flex-col justify-center pb-2 pt-10 sm:pb-4 sm:pt-16 lg:py-0">
+        <div
+          className={`mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:gap-10 sm:px-6 sm:pb-20 lg:pb-28 lg:pt-10 ${
+            vitrine ? "lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14" : "sm:text-center"
+          }`}
+        >
+          {/* Sem vitrine, o topo é uma coluna só, centrada a partir do tablet (no celular fica alinhado à esquerda). */}
+          <div className={`flex flex-col justify-center pb-2 pt-6 sm:pb-4 sm:pt-16 ${vitrine ? "lg:py-0" : "lg:pt-20"}`}>
           {cabecalho}
-          <div style={{ "--atraso": "340ms" } as CSSProperties} className="entrada mt-8 max-w-2xl sm:mt-10">
+          <div style={{ "--atraso": "340ms" } as CSSProperties} className={`entrada mt-8 max-w-2xl sm:mt-10 ${vitrine ? "" : "sm:mx-auto"}`}>
             {aberto ? (
               <Formulario onEnviar={ir} ocupado={indo} />
             ) : (
