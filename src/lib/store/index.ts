@@ -1,0 +1,249 @@
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { promises as fs } from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import type { Analise, ViralItem } from "@/lib/types";
+
+export interface Lead {
+  email: string;
+  nome?: string | null;
+  empresa?: string | null;
+  url?: string | null;
+  analise_id?: string | null;
+  origem?: string;
+}
+
+export interface RespostaValidacao {
+  email?: string | null;
+  analise_id?: string | null;
+  respostas: Record<string, string | number | boolean | null>;
+}
+
+export interface Entrevista {
+  id: string;
+  entrevistador?: string | null;
+  founder?: string | null;
+  startup?: string | null;
+  quem_cuida?: string | null;
+  horas_semana?: number | null;
+  ja_tentou?: string | null;
+  pagaria_mes?: number | null;
+  ultima_vez_sem_postar?: string | null;
+  dor_nota?: number | null;
+  quer_testar?: boolean;
+  contato?: string | null;
+  notas?: string | null;
+  criado_em?: string;
+}
+
+export interface Store {
+  tipo: "supabase" | "local";
+  buscarAnalise(id: string): Promise<Analise | null>;
+  buscarCache(urlChave: string, nPosts: number, maxIdadeHoras?: number): Promise<Analise | null>;
+  salvarAnalise(a: Analise, urlChave: string, email?: string | null): Promise<void>;
+  contarUso(email: string): Promise<number>;
+  registrarUso(email: string, url: string): Promise<void>;
+  salvarLead(l: Lead): Promise<void>;
+  salvarValidacao(r: RespostaValidacao): Promise<void>;
+  listarValidacoes(): Promise<(RespostaValidacao & { criado_em: string })[]>;
+  listarEntrevistas(): Promise<Entrevista[]>;
+  salvarEntrevista(e: Entrevista): Promise<void>;
+  removerEntrevista(id: string): Promise<void>;
+  listarVirais(): Promise<ViralItem[]>;
+  salvarViral(v: ViralItem): Promise<{ destino: string }>;
+}
+
+// ---------------- Supabase ----------------
+
+function supabaseStore(client: SupabaseClient): Store {
+  const ok = <T>(r: { data: T; error: { message: string } | null }) => {
+    if (r.error) throw new Error(r.error.message);
+    return r.data;
+  };
+  return {
+    tipo: "supabase",
+    async buscarAnalise(id) {
+      const r = await client.from("analises").select("dados").eq("id", id).maybeSingle();
+      return (ok(r)?.dados as Analise) ?? null;
+    },
+    async buscarCache(urlChave, nPosts, maxIdadeHoras = 24 * 7) {
+      const desde = new Date(Date.now() - maxIdadeHoras * 3600e3).toISOString();
+      const r = await client
+        .from("analises")
+        .select("dados")
+        .eq("url_chave", urlChave)
+        .eq("n_posts", nPosts)
+        .gte("criado_em", desde)
+        .order("criado_em", { ascending: false })
+        .limit(1);
+      const row = ok(r)?.[0];
+      return row ? (row.dados as Analise) : null;
+    },
+    async salvarAnalise(a, urlChave, email) {
+      ok(await client.from("analises").upsert({ id: a.id, url_chave: urlChave, n_posts: a.posts.length, dados: a, email: email ?? null }));
+    },
+    async contarUso(email) {
+      const r = await client.from("uso").select("id", { count: "exact", head: true }).eq("email", email.toLowerCase());
+      if (r.error) throw new Error(r.error.message);
+      return r.count ?? 0;
+    },
+    async registrarUso(email, url) {
+      ok(await client.from("uso").insert({ email: email.toLowerCase(), url }));
+    },
+    async salvarLead(l) {
+      ok(await client.from("leads").insert({ ...l, email: l.email.toLowerCase() }));
+    },
+    async salvarValidacao(r) {
+      ok(await client.from("validacao").insert(r));
+    },
+    async listarValidacoes() {
+      return ok(await client.from("validacao").select("*").order("criado_em", { ascending: false }).limit(500)) ?? [];
+    },
+    async listarEntrevistas() {
+      return ok(await client.from("entrevistas").select("*").order("criado_em", { ascending: false }).limit(500)) ?? [];
+    },
+    async salvarEntrevista(e) {
+      ok(await client.from("entrevistas").upsert(e));
+    },
+    async removerEntrevista(id) {
+      ok(await client.from("entrevistas").delete().eq("id", id));
+    },
+    async listarVirais() {
+      return (ok(await client.from("virais").select("*").limit(2000)) ?? []) as ViralItem[];
+    },
+    async salvarViral(v) {
+      ok(await client.from("virais").upsert({ ...v, atualizado_em: new Date().toISOString() }));
+      return { destino: "supabase" };
+    },
+  };
+}
+
+// ---------------- Arquivo local ----------------
+// Sem Supabase, salva em .data/ (ou /tmp na Vercel, que é efêmero). Serve para dev e para a demo.
+
+function localStore(): Store {
+  const naVercel = !!process.env.VERCEL;
+  const dir = naVercel ? path.join(os.tmpdir(), "social-ai") : path.join(process.cwd(), ".data");
+  const memoria = new Map<string, unknown[]>();
+
+  async function ler<T>(nome: string): Promise<T[]> {
+    try {
+      const txt = await fs.readFile(path.join(dir, `${nome}.json`), "utf8");
+      return JSON.parse(txt) as T[];
+    } catch {
+      return (memoria.get(nome) as T[]) ?? [];
+    }
+  }
+  async function gravar<T>(nome: string, dados: T[]) {
+    memoria.set(nome, dados);
+    try {
+      await fs.mkdir(dir, { recursive: true });
+      await fs.writeFile(path.join(dir, `${nome}.json`), JSON.stringify(dados, null, 2));
+    } catch {
+      /* sistema de arquivos só leitura: fica em memória */
+    }
+  }
+  const agora = () => new Date().toISOString();
+  type Registro = { id: string; url_chave: string; n_posts: number; dados: Analise; email: string | null; criado_em: string };
+
+  const arquivoVirais = (nicho: string) => path.join(process.cwd(), "data", "virais", nicho, "itens.json");
+
+  return {
+    tipo: "local",
+    async buscarAnalise(id) {
+      return (await ler<Registro>("analises")).find((r) => r.id === id)?.dados ?? null;
+    },
+    async buscarCache(urlChave, nPosts, maxIdadeHoras = 24 * 7) {
+      const limite = Date.now() - maxIdadeHoras * 3600e3;
+      const r = (await ler<Registro>("analises"))
+        .filter((x) => x.url_chave === urlChave && x.n_posts === nPosts && Date.parse(x.criado_em) >= limite)
+        .sort((a, b) => b.criado_em.localeCompare(a.criado_em))[0];
+      return r?.dados ?? null;
+    },
+    async salvarAnalise(a, urlChave, email) {
+      const todos = (await ler<Registro>("analises")).filter((r) => r.id !== a.id);
+      todos.push({ id: a.id, url_chave: urlChave, n_posts: a.posts.length, dados: a, email: email ?? null, criado_em: agora() });
+      await gravar("analises", todos.slice(-200));
+    },
+    async contarUso(email) {
+      return (await ler<{ email: string }>("uso")).filter((u) => u.email === email.toLowerCase()).length;
+    },
+    async registrarUso(email, url) {
+      const todos = await ler<{ email: string; url: string; criado_em: string }>("uso");
+      todos.push({ email: email.toLowerCase(), url, criado_em: agora() });
+      await gravar("uso", todos);
+    },
+    async salvarLead(l) {
+      const todos = await ler<Lead & { criado_em: string }>("leads");
+      todos.push({ ...l, email: l.email.toLowerCase(), criado_em: agora() });
+      await gravar("leads", todos);
+    },
+    async salvarValidacao(r) {
+      const todos = await ler<RespostaValidacao & { criado_em: string }>("validacao");
+      todos.push({ ...r, criado_em: agora() });
+      await gravar("validacao", todos);
+    },
+    async listarValidacoes() {
+      return (await ler<RespostaValidacao & { criado_em: string }>("validacao")).reverse();
+    },
+    async listarEntrevistas() {
+      return (await ler<Entrevista>("entrevistas")).sort((a, b) => (b.criado_em ?? "").localeCompare(a.criado_em ?? ""));
+    },
+    async salvarEntrevista(e) {
+      const todos = (await ler<Entrevista>("entrevistas")).filter((x) => x.id !== e.id);
+      todos.push({ ...e, criado_em: e.criado_em ?? agora() });
+      await gravar("entrevistas", todos);
+    },
+    async removerEntrevista(id) {
+      await gravar("entrevistas", (await ler<Entrevista>("entrevistas")).filter((x) => x.id !== id));
+    },
+    async listarVirais() {
+      // Em dev, lê os arquivos do repositório de novo para refletir o que o /admin acabou de salvar.
+      if (naVercel) return ler<ViralItem>("virais");
+      const nichos = ["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"];
+      const listas = await Promise.all(
+        nichos.map(async (n) => {
+          try {
+            return JSON.parse(await fs.readFile(arquivoVirais(n), "utf8")) as ViralItem[];
+          } catch {
+            return [];
+          }
+        }),
+      );
+      return listas.flat();
+    },
+    async salvarViral(v) {
+      if (!naVercel) {
+        // Grava direto no espelho versionado: o time commita e todo mundo recebe.
+        const arq = arquivoVirais(v.nicho);
+        let lista: ViralItem[] = [];
+        try {
+          lista = JSON.parse(await fs.readFile(arq, "utf8"));
+        } catch {
+          await fs.mkdir(path.dirname(arq), { recursive: true });
+        }
+        const i = lista.findIndex((x) => x.id === v.id);
+        if (i >= 0) lista[i] = v;
+        else lista.push(v);
+        await fs.writeFile(arq, JSON.stringify(lista, null, 2) + "\n");
+        return { destino: `data/virais/${v.nicho}/itens.json` };
+      }
+      const todos = (await ler<ViralItem>("virais")).filter((x) => x.id !== v.id);
+      todos.push(v);
+      await gravar("virais", todos);
+      return { destino: "temporário (configure o Supabase para persistir)" };
+    },
+  };
+}
+
+function criarStore(): Store {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (url && key) {
+    return supabaseStore(createClient(url, key, { auth: { persistSession: false } }));
+  }
+  return localStore();
+}
+
+const g = globalThis as unknown as { __socialAiStore?: Store };
+export const store: Store = g.__socialAiStore ?? (g.__socialAiStore = criarStore());

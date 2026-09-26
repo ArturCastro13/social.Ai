@@ -1,0 +1,653 @@
+{
+  "gerado_em": "2026-09-26T04:15:12.484Z",
+  "total_itens": 74,
+  "padroes": [
+    {
+      "id": "citacao--contraintuitivo",
+      "nome": "Citação com gancho de contraintuitivo",
+      "formato": "citacao",
+      "tipo_gancho": "contraintuitivo",
+      "descricao": "Frase de efeito do founder com nome e cargo. Pega uma conquista que seria só comemorativa e inverte a leitura: o número enorme vira ponto de partida. A inversão gera curiosidade e posiciona a empresa como ambiciosa sem soar arrogante.",
+      "modelo_gancho": "Todo mundo acha que [crença comum]. Na prática, [o oposto].",
+      "nichos": [
+        "fintech",
+        "healthtech",
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 5,
+      "exemplos": [
+        "fintech-04",
+        "healthtech-01",
+        "edtech-01"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "dado-impacto--numero",
+      "nome": "Dado de impacto com gancho de número",
+      "formato": "dado-impacto",
+      "tipo_gancho": "numero",
+      "descricao": "Um número enorme com uma linha de contexto. Número exato e grande dá credibilidade de pesquisa proprietária; a promessa de surpresa cria lacuna de curiosidade. Dados do próprio produto viram conteúdo que só aquela empresa pode publicar.",
+      "modelo_gancho": "[Número] [coisas] que [resultado] em [prazo]",
+      "nichos": [
+        "saas-b2b",
+        "fintech",
+        "healthtech",
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 5,
+      "exemplos": [
+        "saas-b2b-04",
+        "fintech-08",
+        "healthtech-03",
+        "edtech-09"
+      ],
+      "template_sugerido": "dado-impacto"
+    },
+    {
+      "id": "print-tweet--polemica",
+      "nome": "Print de tweet com gancho de polêmica",
+      "formato": "print-tweet",
+      "tipo_gancho": "polemica",
+      "descricao": "Opinião curta com cara de post nativo do X. Crítica curta a uma prática que todos no ecossistema já perceberam valida uma dor coletiva; virou gatilho para o lançamento do TrustMRR em 48 horas.",
+      "modelo_gancho": "[Prática popular] está matando [algo que o público valoriza].",
+      "nichos": [
+        "saas-b2b",
+        "healthtech",
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 5,
+      "exemplos": [
+        "saas-b2b-09",
+        "edtech-04",
+        "ecommerce-dtc-07"
+      ],
+      "template_sugerido": "print-x"
+    },
+    {
+      "id": "bastidor-founder--historia-pessoal",
+      "nome": "Bastidor do founder com gancho de história pessoal",
+      "formato": "bastidor-founder",
+      "tipo_gancho": "historia-pessoal",
+      "descricao": "Relato em primeira pessoa de algo que aconteceu na empresa. Combina bastidor pessoal (viagem, cena concreta) com opinião comparativa Brasil x EUA, tema que provoca identificação e discordância entre founders brasileiros, o que gera muitos comentários.",
+      "modelo_gancho": "Em [momento], eu [erro ou virada]. Foi assim que [aprendizado].",
+      "nichos": [
+        "saas-b2b",
+        "fintech",
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 4,
+      "exemplos": [
+        "saas-b2b-01",
+        "fintech-15",
+        "edtech-02",
+        "ecommerce-dtc-01"
+      ],
+      "template_sugerido": "bastidor"
+    },
+    {
+      "id": "carrossel--erro-comum",
+      "nome": "Carrossel com gancho de erro comum",
+      "formato": "carrossel",
+      "tipo_gancho": "erro-comum",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. Regulação é complexa e afeta dinheiro de empresas, então um explicativo visual passo a passo é salvo e repassado para colegas. Carrossel é o formato de maior engajamento médio no LinkedIn segundo o levantamento citado.",
+      "modelo_gancho": "O erro que [público] mais comete com [tema] (e como evitar)",
+      "nichos": [
+        "fintech",
+        "healthtech",
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 4,
+      "exemplos": [
+        "fintech-14"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "imagem-unica--prova-social",
+      "nome": "Imagem única com gancho de prova social",
+      "formato": "imagem-unica",
+      "tipo_gancho": "prova-social",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. Prova social de terceiro com autoridade (ranking global) transforma autopromoção em notícia. Atribuir o mérito ao cliente e à cultura, e não ao marketing, convida comentários de profissionais querendo entender a fórmula.",
+      "modelo_gancho": "[Cliente ou número] [resultado concreto]. O que mudou foi [detalhe].",
+      "nichos": [
+        "fintech",
+        "healthtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 4,
+      "exemplos": [
+        "fintech-03",
+        "healthtech-04",
+        "ecommerce-dtc-11"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "carrossel--pergunta",
+      "nome": "Carrossel com gancho de pergunta",
+      "formato": "carrossel",
+      "tipo_gancho": "pergunta",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. Pega carona na dúvida mais comum do público no momento e responde sem negar a IA, reposicionando o curso como o que a IA não entrega. A pergunta no gancho convida o leitor a ter uma opinião.",
+      "modelo_gancho": "Por que [situação que o público vive] ainda [problema]?",
+      "nichos": [
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 3,
+      "exemplos": [
+        "edtech-08"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "imagem-unica--promessa",
+      "nome": "Imagem única com gancho de promessa",
+      "formato": "imagem-unica",
+      "tipo_gancho": "promessa",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. CTA de comentar palavra-chave transforma cada interessado em comentário, o que o algoritmo do LinkedIn premia com mais alcance; a promessa grande e o senso de pertencimento a um grupo de founders ampliam a adesão.",
+      "modelo_gancho": "Como [resultado desejado] sem [esforço temido]",
+      "nichos": [
+        "saas-b2b",
+        "healthtech",
+        "edtech"
+      ],
+      "frequencia": 3,
+      "exemplos": [
+        "saas-b2b-02",
+        "edtech-11"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "lista--promessa",
+      "nome": "Lista com gancho de promessa",
+      "formato": "lista",
+      "tipo_gancho": "promessa",
+      "descricao": "Itens numerados que dão vontade de salvar. Promessa concreta, gratuita e com prazo, vinda do founder em primeira pessoa. A lista de profissões amplia o público para além de devs e a parceria com marca grande empresta credibilidade.",
+      "modelo_gancho": "Como [resultado desejado] sem [esforço temido]",
+      "nichos": [
+        "edtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 3,
+      "exemplos": [
+        "edtech-10",
+        "ecommerce-dtc-02",
+        "ecommerce-dtc-06"
+      ],
+      "template_sugerido": "lista"
+    },
+    {
+      "id": "antes-depois--numero",
+      "nome": "Antes e depois com gancho de número",
+      "formato": "antes-depois",
+      "tipo_gancho": "numero",
+      "descricao": "Contraste direto entre o jeito velho e o novo. Credencial numérica logo no gancho e exemplos lado a lado tornam a lição fácil de copiar; formato antes-depois é visualmente escaneável.",
+      "modelo_gancho": "[Número] [coisas] que [resultado] em [prazo]",
+      "nichos": [
+        "saas-b2b",
+        "fintech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "saas-b2b-08"
+      ],
+      "template_sugerido": "antes-depois"
+    },
+    {
+      "id": "antes-depois--prova-social",
+      "nome": "Antes e depois com gancho de prova social",
+      "formato": "antes-depois",
+      "tipo_gancho": "prova-social",
+      "descricao": "Contraste direto entre o jeito velho e o novo. Combina dado agregado (credibilidade) com rosto e história individual (emoção). O antes e depois de um membro real é mais crível que qualquer promessa de plano de saúde.",
+      "modelo_gancho": "[Cliente ou número] [resultado concreto]. O que mudou foi [detalhe].",
+      "nichos": [
+        "healthtech",
+        "edtech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "healthtech-07",
+        "edtech-03"
+      ],
+      "template_sugerido": "antes-depois"
+    },
+    {
+      "id": "carrossel--historia-pessoal",
+      "nome": "Carrossel com gancho de história pessoal",
+      "formato": "carrossel",
+      "tipo_gancho": "historia-pessoal",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. Estudo da 5W Public Relations com 50 founders de health tech aponta a 'história de paciente' contada pelo founder como o formato com 2,9 vezes mais compartilhamentos que os demais.",
+      "modelo_gancho": "Em [momento], eu [erro ou virada]. Foi assim que [aprendizado].",
+      "nichos": [
+        "healthtech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "healthtech-08",
+        "ecommerce-dtc-09"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "carrossel--numero",
+      "nome": "Carrossel com gancho de número",
+      "formato": "carrossel",
+      "tipo_gancho": "numero",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. A carta anual dos founders vira evento recorrente que a comunidade espera. Quebrar a carta em um número por slide deixa cada dado compartilhável isoladamente e reforça autoridade de infraestrutura.",
+      "modelo_gancho": "[Número] [coisas] que [resultado] em [prazo]",
+      "nichos": [
+        "fintech",
+        "healthtech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "fintech-11",
+        "healthtech-05"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "carrossel--promessa",
+      "nome": "Carrossel com gancho de promessa",
+      "formato": "carrossel",
+      "tipo_gancho": "promessa",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. Carrossel de processo é o formato mais salvo em B2B segundo a Oktopost; a promessa de um processo pronto e o contexto de empresa grande dão credibilidade, e cada slide entrega progresso, aumentando tempo de permanência.",
+      "modelo_gancho": "Como [resultado desejado] sem [esforço temido]",
+      "nichos": [
+        "saas-b2b",
+        "fintech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "saas-b2b-14",
+        "fintech-10"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "imagem-unica--erro-comum",
+      "nome": "Imagem única com gancho de erro comum",
+      "formato": "imagem-unica",
+      "tipo_gancho": "erro-comum",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. Infográfico denso e de referência é salvo e repostado; apontar um erro comum gera sensação de urgência, e o CTA de compartilhar puxa distribuição.",
+      "modelo_gancho": "O erro que [público] mais comete com [tema] (e como evitar)",
+      "nichos": [
+        "saas-b2b",
+        "edtech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "saas-b2b-15",
+        "edtech-05"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "imagem-unica--polemica",
+      "nome": "Imagem única com gancho de polêmica",
+      "formato": "imagem-unica",
+      "tipo_gancho": "polemica",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. Mostra o efeito de segunda onda: o post de LinkedIn do founder vira conteúdo de Instagram para veículos de negócios. Para uma startup, a lição é escrever posts com uma frase forte e um dado citável, porque é isso que outros perfis recortam e redistribuem.",
+      "modelo_gancho": "[Prática popular] está matando [algo que o público valoriza].",
+      "nichos": [
+        "fintech",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "fintech-02",
+        "ecommerce-dtc-08"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "lista--historia-pessoal",
+      "nome": "Lista com gancho de história pessoal",
+      "formato": "lista",
+      "tipo_gancho": "historia-pessoal",
+      "descricao": "Itens numerados que dão vontade de salvar. Mistura história pessoal (credibilidade e empatia) com lista numerada fácil de salvar. Princípios de construção de produto atraem founders e profissionais de tecnologia, público que mais interage no LinkedIn.",
+      "modelo_gancho": "Em [momento], eu [erro ou virada]. Foi assim que [aprendizado].",
+      "nichos": [
+        "fintech",
+        "healthtech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "fintech-07",
+        "healthtech-02"
+      ],
+      "template_sugerido": "lista"
+    },
+    {
+      "id": "print-tweet--numero",
+      "nome": "Print de tweet com gancho de número",
+      "formato": "print-tweet",
+      "tipo_gancho": "numero",
+      "descricao": "Opinião curta com cara de post nativo do X. No build in public, um número de receita forte é o gancho que mais viraliza; mostrar churn e CAC junto evita a desconfiança de print falso.",
+      "modelo_gancho": "[Número] [coisas] que [resultado] em [prazo]",
+      "nichos": [
+        "saas-b2b",
+        "ecommerce-dtc"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "saas-b2b-10",
+        "ecommerce-dtc-15"
+      ],
+      "template_sugerido": "print-x"
+    },
+    {
+      "id": "print-tweet--prova-social",
+      "nome": "Print de tweet com gancho de prova social",
+      "formato": "print-tweet",
+      "tipo_gancho": "prova-social",
+      "descricao": "Opinião curta com cara de post nativo do X. Anúncio de rodada curto, sem jargão, com um benchmark que qualquer investidor entende. A frase de efeito final dá algo para citar, e o print do tweet funciona bem reaproveitado no LinkedIn e Instagram.",
+      "modelo_gancho": "[Cliente ou número] [resultado concreto]. O que mudou foi [detalhe].",
+      "nichos": [
+        "fintech"
+      ],
+      "frequencia": 2,
+      "exemplos": [
+        "fintech-12",
+        "fintech-13"
+      ],
+      "template_sugerido": "print-x"
+    },
+    {
+      "id": "antes-depois--contraintuitivo",
+      "nome": "Antes e depois com gancho de contraintuitivo",
+      "formato": "antes-depois",
+      "tipo_gancho": "contraintuitivo",
+      "descricao": "Contraste direto entre o jeito velho e o novo. Antes e depois com dois números simples conta uma virada de público inesperada. O contraste com a percepção de marca gera curiosidade e debate.",
+      "modelo_gancho": "Todo mundo acha que [crença comum]. Na prática, [o oposto].",
+      "nichos": [
+        "ecommerce-dtc"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "ecommerce-dtc-05"
+      ],
+      "template_sugerido": "antes-depois"
+    },
+    {
+      "id": "antes-depois--historia-pessoal",
+      "nome": "Antes e depois com gancho de história pessoal",
+      "formato": "antes-depois",
+      "tipo_gancho": "historia-pessoal",
+      "descricao": "Contraste direto entre o jeito velho e o novo. Transição de carreira é o desejo central do público de escolas de tecnologia. Um rosto real e uma jornada crível funcionam como prova social muito mais forte que depoimento genérico.",
+      "modelo_gancho": "Em [momento], eu [erro ou virada]. Foi assim que [aprendizado].",
+      "nichos": [
+        "edtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "edtech-14"
+      ],
+      "template_sugerido": "antes-depois"
+    },
+    {
+      "id": "bastidor-founder--contraintuitivo",
+      "nome": "Bastidor do founder com gancho de contraintuitivo",
+      "formato": "bastidor-founder",
+      "tipo_gancho": "contraintuitivo",
+      "descricao": "Relato em primeira pessoa de algo que aconteceu na empresa. Decisão que parece irracional (descartar receita no melhor momento) cria tensão e curiosidade; o bastidor da decisão mostra coragem do founder.",
+      "modelo_gancho": "Todo mundo acha que [crença comum]. Na prática, [o oposto].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-12"
+      ],
+      "template_sugerido": "bastidor"
+    },
+    {
+      "id": "bastidor-founder--curiosidade",
+      "nome": "Bastidor do founder com gancho de curiosidade",
+      "formato": "bastidor-founder",
+      "tipo_gancho": "curiosidade",
+      "descricao": "Relato em primeira pessoa de algo que aconteceu na empresa. Cria curiosidade com um contraste inesperado (anos de patrocínio versus primeira vez como convidado) e promete bastidores que não aparecem na propaganda, algo que o público de DTC busca.",
+      "modelo_gancho": "Ninguém fala disso sobre [tema], mas [revelação].",
+      "nichos": [
+        "ecommerce-dtc"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "ecommerce-dtc-03"
+      ],
+      "template_sugerido": "bastidor"
+    },
+    {
+      "id": "bastidor-founder--erro-comum",
+      "nome": "Bastidor do founder com gancho de erro comum",
+      "formato": "bastidor-founder",
+      "tipo_gancho": "erro-comum",
+      "descricao": "Relato em primeira pessoa de algo que aconteceu na empresa. Segundo o estudo da 5W Public Relations, a 'confissão do founder' (decisão difícil, produto que falhou, lição aprendida) teve a maior taxa de comentários entre os formatos analisados, com média de 187 comentários nos posts do decil superior.",
+      "modelo_gancho": "O erro que [público] mais comete com [tema] (e como evitar)",
+      "nichos": [
+        "healthtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "healthtech-09"
+      ],
+      "template_sugerido": "bastidor"
+    },
+    {
+      "id": "bastidor-founder--pergunta",
+      "nome": "Bastidor do founder com gancho de pergunta",
+      "formato": "bastidor-founder",
+      "tipo_gancho": "pergunta",
+      "descricao": "Relato em primeira pessoa de algo que aconteceu na empresa. Pergunta universal abre espaço para comentário, e o bastidor real (agenda) prova que a founder de uma empresa de saúde mental pratica o que vende.",
+      "modelo_gancho": "Por que [situação que o público vive] ainda [problema]?",
+      "nichos": [
+        "healthtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "healthtech-06"
+      ],
+      "template_sugerido": "bastidor"
+    },
+    {
+      "id": "carrossel--contraintuitivo",
+      "nome": "Carrossel com gancho de contraintuitivo",
+      "formato": "carrossel",
+      "tipo_gancho": "contraintuitivo",
+      "descricao": "Capa com gancho forte e um passo por slide, fechando com chamada. Insights de dados simples e aplicáveis imediatamente, que contrariam o senso comum do vendedor, geram salvamentos e compartilhamentos; é o pilar do Gong Labs.",
+      "modelo_gancho": "Todo mundo acha que [crença comum]. Na prática, [o oposto].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-05"
+      ],
+      "template_sugerido": "capa-gancho"
+    },
+    {
+      "id": "citacao--curiosidade",
+      "nome": "Citação com gancho de curiosidade",
+      "formato": "citacao",
+      "tipo_gancho": "curiosidade",
+      "descricao": "Frase de efeito do founder com nome e cargo. Dar nome a um framework cria curiosidade e torna a ideia compartilhável; o exemplo pronto para copiar faz os leitores aplicarem nos comentários, gerando meta-engajamento.",
+      "modelo_gancho": "Ninguém fala disso sobre [tema], mas [revelação].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-06"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "dado-impacto--curiosidade",
+      "nome": "Dado de impacto com gancho de curiosidade",
+      "formato": "dado-impacto",
+      "tipo_gancho": "curiosidade",
+      "descricao": "Um número enorme com uma linha de contexto. O founder usa o próprio dado de uso como vitrine do produto. Estatística pessoal desperta curiosidade e dá motivo para o leitor comparar e comentar com os seus números.",
+      "modelo_gancho": "Ninguém fala disso sobre [tema], mas [revelação].",
+      "nichos": [
+        "edtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "edtech-06"
+      ],
+      "template_sugerido": "dado-impacto"
+    },
+    {
+      "id": "dado-impacto--polemica",
+      "nome": "Dado de impacto com gancho de polêmica",
+      "formato": "dado-impacto",
+      "tipo_gancho": "polemica",
+      "descricao": "Um número enorme com uma linha de contexto. Founder entra num debate público já quente (Febraban contra fintechs) com dado verificável em gráfico simples. A polêmica gera comentários e a comparação direta com concorrentes nomeados vira pauta de imprensa, ampliando o alcance muito além da rede de seguidores.",
+      "modelo_gancho": "[Prática popular] está matando [algo que o público valoriza].",
+      "nichos": [
+        "fintech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "fintech-01"
+      ],
+      "template_sugerido": "dado-impacto"
+    },
+    {
+      "id": "dado-impacto--prova-social",
+      "nome": "Dado de impacto com gancho de prova social",
+      "formato": "dado-impacto",
+      "tipo_gancho": "prova-social",
+      "descricao": "Um número enorme com uma linha de contexto. Retrospectiva anual com números agregados de uso funciona como prova social da plataforma sem parecer anúncio; formato 'wrapped' é familiar e compartilhável.",
+      "modelo_gancho": "[Cliente ou número] [resultado concreto]. O que mudou foi [detalhe].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-11"
+      ],
+      "template_sugerido": "dado-impacto"
+    },
+    {
+      "id": "imagem-unica--curiosidade",
+      "nome": "Imagem única com gancho de curiosidade",
+      "formato": "imagem-unica",
+      "tipo_gancho": "curiosidade",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. Quebra total do tom habitual de humor da marca: o público fica sem saber se é real. O mistério gera especulação, memes e respostas de outras marcas, virando assunto fora da bolha do app.",
+      "modelo_gancho": "Ninguém fala disso sobre [tema], mas [revelação].",
+      "nichos": [
+        "edtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "edtech-07"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "imagem-unica--pergunta",
+      "nome": "Imagem única com gancho de pergunta",
+      "formato": "imagem-unica",
+      "tipo_gancho": "pergunta",
+      "descricao": "Uma ideia só, frase grande, lida em dois segundos. Trocadilho visual (banco de sentar contra banco tradicional) provoca o concorrente com humor, sem ataque direto. Objeto físico entregue a clientes gera fotos espontâneas e conteúdo orgânico.",
+      "modelo_gancho": "Por que [situação que o público vive] ainda [problema]?",
+      "nichos": [
+        "fintech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "fintech-09"
+      ],
+      "template_sugerido": "citacao"
+    },
+    {
+      "id": "lista--pergunta",
+      "nome": "Lista com gancho de pergunta",
+      "formato": "lista",
+      "tipo_gancho": "pergunta",
+      "descricao": "Itens numerados que dão vontade de salvar. Desafia a confiança em software de atribuição com uma solução simples e acionável em 3 passos; tema polêmico entre marketing e vendas gera debate nos comentários.",
+      "modelo_gancho": "Por que [situação que o público vive] ainda [problema]?",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-07"
+      ],
+      "template_sugerido": "lista"
+    },
+    {
+      "id": "lista--polemica",
+      "nome": "Lista com gancho de polêmica",
+      "formato": "lista",
+      "tipo_gancho": "polemica",
+      "descricao": "Itens numerados que dão vontade de salvar. Criticar uma plataforma que todos usam dá permissão para o público concordar ou acrescentar itens, e fechar com pergunta eleva a taxa de comentários. Adaptável para SaaS B2B criticando o CRM ou a ferramenta dominante da categoria.",
+      "modelo_gancho": "[Prática popular] está matando [algo que o público valoriza].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-13"
+      ],
+      "template_sugerido": "lista"
+    },
+    {
+      "id": "lista--prova-social",
+      "nome": "Lista com gancho de prova social",
+      "formato": "lista",
+      "tipo_gancho": "prova-social",
+      "descricao": "Itens numerados que dão vontade de salvar. Enquadra o próprio produto como tendência de mercado e usa nomes de marcas brasileiras conhecidas como prova social, gerando curiosidade sem parecer anúncio.",
+      "modelo_gancho": "[Cliente ou número] [resultado concreto]. O que mudou foi [detalhe].",
+      "nichos": [
+        "saas-b2b"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "saas-b2b-03"
+      ],
+      "template_sugerido": "lista"
+    },
+    {
+      "id": "print-tweet--contraintuitivo",
+      "nome": "Print de tweet com gancho de contraintuitivo",
+      "formato": "print-tweet",
+      "tipo_gancho": "contraintuitivo",
+      "descricao": "Opinião curta com cara de post nativo do X. Surfou o debate de \"founder mode\" no momento em que estava em alta e trouxe uma decisão concreta e controversa, com resultados. Opinião forte com prova gera citação, reposts e respostas discordando.",
+      "modelo_gancho": "Todo mundo acha que [crença comum]. Na prática, [o oposto].",
+      "nichos": [
+        "fintech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "fintech-05"
+      ],
+      "template_sugerido": "print-x"
+    },
+    {
+      "id": "print-tweet--curiosidade",
+      "nome": "Print de tweet com gancho de curiosidade",
+      "formato": "print-tweet",
+      "tipo_gancho": "curiosidade",
+      "descricao": "Opinião curta com cara de post nativo do X. Humor torna um setor burocrático compartilhável. Nikhil Krishnan construiu a Out-Of-Pocket (newsletter, comunidade e fundo) usando memes para explicar o sistema de saúde americano.",
+      "modelo_gancho": "Ninguém fala disso sobre [tema], mas [revelação].",
+      "nichos": [
+        "healthtech"
+      ],
+      "frequencia": 1,
+      "exemplos": [
+        "healthtech-14"
+      ],
+      "template_sugerido": "print-x"
+    }
+  ]
+}

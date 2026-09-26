@@ -26,3 +26,10 @@ export async function lerJson<T = unknown>(req: Request): Promise<T | null> {
     return null;
   }
 }
+
+/** Páginas /admin: se ADMIN_PASSWORD estiver definido, exige o header x-admin-password. */
+export function adminOk(req: Request): boolean {
+  const senha = process.env.ADMIN_PASSWORD;
+  if (!senha) return true;
+  return req.headers.get("x-admin-password") === senha;
+}
