@@ -12,7 +12,7 @@ const container = "mx-auto w-full max-w-6xl px-5 sm:px-8";
 const heading = "font-display text-[2.2rem] font-semibold leading-[1.08] tracking-[-0.035em] sm:text-5xl";
 const perguntas = [
   ["É para a minha empresa?", "Estamos começando por founders de startups que ainda cuidam do conteúdo entre uma reunião de vendas e outra. Se essa rotina parece com a sua, queremos ouvir você."],
-  ["Já posso usar?", "Ainda não. Estamos desenvolvendo o produto. Entre na lista e avisaremos por e-mail quando o acesso abrir. Ainda não há uma data confirmada."],
+  ["Já posso usar?", "Ainda não abrimos para todo mundo. Entre na lista e avisaremos por e-mail quando o acesso abrir."],
   ["Preciso pagar para entrar?", "Não. A lista é gratuita, sem cartão e sem compromisso de contratação."],
   ["Por que não usar só o ChatGPT?", "Porque ele não conhece a sua empresa. Você teria que explicar tudo de novo a cada post. O social.Ai parte do seu site e do que você conta, e entrega o post pronto na sua marca."],
   ["Vai publicar por mim?", "Não. Você aprova cada post e decide o que vai para as redes."],
