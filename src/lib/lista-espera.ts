@@ -1,10 +1,11 @@
 export interface InscricaoEspera {
+  nome: string;
   empresa: string;
   email: string;
   criado_em: string;
 }
 
-export const COLUNAS_CSV = ["empresa", "email", "criado_em"] as const;
+export const COLUNAS_CSV = ["nome", "empresa", "email", "criado_em"] as const;
 
 const DIA = 24 * 3600e3;
 
@@ -27,10 +28,10 @@ export function resumirEspera(itens: readonly InscricaoEspera[], agora = new Dat
   return { total: itens.length, hoje, semana, emailsUnicos: porEmail.size, duplicadas, repetidos: new Set([...porEmail].filter(([, n]) => n > 1).map(([e]) => e)) };
 }
 
-/** Busca simples por empresa ou e-mail, sem diferenciar maiúsculas e acentos. */
+/** Busca simples por nome, empresa ou e-mail, sem diferenciar maiúsculas e acentos. */
 export function filtrarEspera<T extends InscricaoEspera>(itens: readonly T[], busca: string): T[] {
   const norm = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
   const q = norm(busca.trim());
   if (!q) return [...itens];
-  return itens.filter((i) => norm(i.empresa).includes(q) || norm(i.email).includes(q));
+  return itens.filter((i) => norm(i.nome ?? "").includes(q) || norm(i.empresa).includes(q) || norm(i.email).includes(q));
 }

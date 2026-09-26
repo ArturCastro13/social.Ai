@@ -22,7 +22,7 @@ export function FormularioEspera() {
       const resposta = await fetch("/api/lista-de-espera", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ empresa: dados.get("empresa"), email: dados.get("email"), website: dados.get("website") }),
+        body: JSON.stringify({ nome: dados.get("nome"), empresa: dados.get("empresa"), email: dados.get("email"), website: dados.get("website") }),
       });
       const resultado = await resposta.json();
       if (!resposta.ok || resultado.ok !== true) throw new Error(resultado.erro || "Não foi possível salvar. Tente novamente.");
@@ -47,13 +47,17 @@ export function FormularioEspera() {
         </div>
       ) : (
         <form onSubmit={enviar} aria-label="Lista de espera" aria-busy={estado === "enviando"}>
-          {/* No celular os campos empilham; a partir de sm ficam lado a lado e o botão ocupa a linha toda. */}
+          {/* No celular os campos empilham; a partir de sm nome e empresa ficam lado a lado e o e-mail ocupa a linha toda. */}
           <div className="grid gap-3 sm:grid-cols-2">
+            <div className="min-w-0">
+              <label htmlFor="nome-espera" className="mb-1.5 block text-sm font-medium">Seu nome</label>
+              <input id="nome-espera" name="nome" type="text" autoComplete="name" autoCapitalize="words" enterKeyHint="next" required minLength={2} maxLength={120} placeholder="Como você se chama?" disabled={estado === "enviando"} className={campo} />
+            </div>
             <div className="min-w-0">
               <label htmlFor="empresa-espera" className="mb-1.5 block text-sm font-medium">Nome da empresa</label>
               <input id="empresa-espera" name="empresa" type="text" inputMode="text" autoComplete="organization" autoCapitalize="words" enterKeyHint="next" required minLength={2} maxLength={120} placeholder="Como sua empresa se chama?" disabled={estado === "enviando"} className={campo} />
             </div>
-            <div className="min-w-0">
+            <div className="min-w-0 sm:col-span-2">
               <label htmlFor="email-espera" className="mb-1.5 block text-sm font-medium">Seu e-mail</label>
               <input id="email-espera" name="email" type="email" inputMode="email" autoComplete="email" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="send" required maxLength={254} placeholder="voce@suaempresa.com" disabled={estado === "enviando"} aria-describedby="aviso-espera erro-espera" aria-invalid={estado === "erro" || undefined} className={campo} />
             </div>

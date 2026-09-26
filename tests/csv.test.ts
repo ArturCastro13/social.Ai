@@ -4,9 +4,9 @@ import { COLUNAS_CSV, filtrarEspera, resumirEspera } from "@/lib/lista-espera";
 
 describe("CSV", () => {
   it("começa com BOM, tem cabeçalho e usa CRLF", () => {
-    const csv = montarCsv(COLUNAS_CSV, [{ empresa: "Açaí & Cia", email: "a@x.com", criado_em: "2026-09-26T10:00:00Z" }]);
+    const csv = montarCsv(COLUNAS_CSV, [{ nome: "João Açaí", empresa: "Açaí & Cia", email: "a@x.com", criado_em: "2026-09-26T10:00:00Z" }]);
     expect(csv.startsWith(BOM)).toBe(true);
-    expect(csv.slice(1)).toBe("empresa,email,criado_em\r\nAçaí & Cia,a@x.com,2026-09-26T10:00:00Z\r\n");
+    expect(csv.slice(1)).toBe("nome,empresa,email,criado_em\r\nJoão Açaí,Açaí & Cia,a@x.com,2026-09-26T10:00:00Z\r\n");
   });
 
   it("escapa aspas, vírgulas e quebras de linha", () => {
@@ -30,11 +30,11 @@ describe("resumo da lista de espera", () => {
   const agora = new Date(2026, 8, 26, 15, 0);
   const em = (dias: number, h = 12) => new Date(2026, 8, 26 - dias, h).toISOString();
   const itens = [
-    { empresa: "A", email: "a@x.com", criado_em: em(0, 9) },
-    { empresa: "B", email: "B@x.com", criado_em: em(1) },
-    { empresa: "C", email: "c@x.com", criado_em: em(6) },
-    { empresa: "B de novo", email: "b@x.com", criado_em: em(10) },
-    { empresa: "B outra vez", email: "b@x.com", criado_em: em(20) },
+    { nome: "Pessoa A", empresa: "A", email: "a@x.com", criado_em: em(0, 9) },
+    { nome: "Pessoa B", empresa: "B", email: "B@x.com", criado_em: em(1) },
+    { nome: "Pessoa C", empresa: "C", email: "c@x.com", criado_em: em(6) },
+    { nome: "Pessoa B de novo", empresa: "B de novo", email: "b@x.com", criado_em: em(10) },
+    { nome: "Pessoa B outra vez", empresa: "B outra vez", email: "b@x.com", criado_em: em(20) },
   ];
 
   it("conta hoje, 7 dias e repetidos por e-mail", () => {
@@ -43,10 +43,11 @@ describe("resumo da lista de espera", () => {
     expect([...r.repetidos]).toEqual(["b@x.com"]);
   });
 
-  it("busca por empresa ou e-mail sem ligar para acentos", () => {
-    const lista = [{ empresa: "Padaria São João", email: "pao@x.com", criado_em: "" }, ...itens];
+  it("busca por nome, empresa ou e-mail sem ligar para acentos", () => {
+    const lista = [{ nome: "Márcia Pães", empresa: "Padaria São João", email: "pao@x.com", criado_em: "" }, ...itens];
     expect(filtrarEspera(lista, "sao joao").map((i) => i.empresa)).toEqual(["Padaria São João"]);
     expect(filtrarEspera(lista, "C@X").map((i) => i.empresa)).toEqual(["C"]);
     expect(filtrarEspera(lista, "  ")).toHaveLength(6);
+    expect(filtrarEspera(lista, "marcia").map((i) => i.empresa)).toEqual(["Padaria São João"]);
   });
 });

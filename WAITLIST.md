@@ -12,7 +12,7 @@ O formulário usa `POST /api/lista-de-espera` e grava na tabela `leads` já defi
 
 A rota sai junto com o resto do app no deploy de produção (`vercel deploy --prod --yes`). Para divulgar, compartilhe `https://social-ai-beige.vercel.app/lista-de-espera`.
 
-Para ver e exportar as inscrições, use `/admin/lista-de-espera` (senha `ADMIN_PASSWORD`, com botão de CSV) ou, no Supabase, filtre `leads.origem` por `lista-de-espera`. Os campos utilizados são `empresa` (obrigatório, de 2 a 120 caracteres), `email`, `origem` e `criado_em`. Esta versão não envia e-mail de confirmação e não faz deduplicação; inscrições repetidas ficam como linhas separadas. Atenda pedidos de saída antes de enviar novas comunicações.
+Para ver e exportar as inscrições, use `/admin/lista-de-espera` (senha `ADMIN_PASSWORD`, com botão de CSV) ou, no Supabase, filtre `leads.origem` por `lista-de-espera`. Os campos utilizados são `nome` (obrigatório, 2 a 120 caracteres), `empresa` (obrigatório, de 2 a 120 caracteres), `email`, `origem` e `criado_em`. Esta versão não envia e-mail de confirmação e não faz deduplicação; inscrições repetidas ficam como linhas separadas. Atenda pedidos de saída antes de enviar novas comunicações.
 
 ## Verificação antes de divulgar
 

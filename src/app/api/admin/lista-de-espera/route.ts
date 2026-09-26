@@ -18,7 +18,7 @@ export async function GET(req: Request) {
   }
   const itens: InscricaoEspera[] = leads
     .filter((l) => l.origem === ORIGEM)
-    .map((l) => ({ empresa: l.empresa ?? "", email: l.email, criado_em: l.criado_em }))
+    .map((l) => ({ nome: l.nome ?? "", empresa: l.empresa ?? "", email: l.email, criado_em: l.criado_em }))
     .sort((a, b) => (Date.parse(b.criado_em) || 0) - (Date.parse(a.criado_em) || 0));
   return json({ itens, total: itens.length, armazenamento: store.tipo, persistente: store.tipo === "supabase" });
 }

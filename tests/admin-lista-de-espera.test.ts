@@ -8,9 +8,9 @@ const pedir = (senha?: string) =>
   GET(new Request("http://localhost/api/admin/lista-de-espera", { headers: senha === undefined ? {} : { "x-admin-password": senha } }));
 
 const leads = [
-  { email: "a@x.com", empresa: "Antiga", origem: "lista-de-espera", criado_em: "2026-09-20T10:00:00.000Z" },
+  { email: "a@x.com", nome: "Ana", empresa: "Antiga", origem: "lista-de-espera", criado_em: "2026-09-20T10:00:00.000Z" },
   { email: "b@x.com", empresa: "Download", origem: "download", criado_em: "2026-09-25T10:00:00.000Z" },
-  { email: "c@x.com", empresa: "Nova", origem: "lista-de-espera", criado_em: "2026-09-26T10:00:00.000Z" },
+  { email: "c@x.com", nome: "Caio", empresa: "Nova", origem: "lista-de-espera", criado_em: "2026-09-26T10:00:00.000Z" },
   { email: "a@x.com", empresa: null, origem: "lista-de-espera", criado_em: "2026-09-22T10:00:00.000Z" },
 ];
 
@@ -42,9 +42,9 @@ describe("GET /api/admin/lista-de-espera", () => {
     expect(d.total).toBe(3);
     expect(d.persistente).toBe(true);
     expect(d.itens).toEqual([
-      { empresa: "Nova", email: "c@x.com", criado_em: "2026-09-26T10:00:00.000Z" },
-      { empresa: "", email: "a@x.com", criado_em: "2026-09-22T10:00:00.000Z" },
-      { empresa: "Antiga", email: "a@x.com", criado_em: "2026-09-20T10:00:00.000Z" },
+      { nome: "Caio", empresa: "Nova", email: "c@x.com", criado_em: "2026-09-26T10:00:00.000Z" },
+      { nome: "", empresa: "", email: "a@x.com", criado_em: "2026-09-22T10:00:00.000Z" },
+      { nome: "Ana", empresa: "Antiga", email: "a@x.com", criado_em: "2026-09-20T10:00:00.000Z" },
     ]);
   });
 
