@@ -33,6 +33,7 @@ export function sugestoesPadrao(perfil: PerfilAlvo): SugestoesOnboarding {
   const tom: TomDeVoz = { formal_descontraido: 0.5, tecnico_simples: 0.5, serio_humor: 0.3, cauteloso_provocador: 0.4 };
   return {
     nicho: "outro",
+    publico_alvo: "",
     objetivos,
     tom_de_voz: tom,
     exemplo_tom: fraseDoTom(tom),

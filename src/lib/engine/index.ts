@@ -16,6 +16,16 @@ import { extrairInspiracoes, montarContexto, redesDoMotor } from "@/lib/motor/co
 import { filtrarLocal } from "@/lib/motor/local-filtros";
 import { aplicarExtras, saidaMotorSchema, saidaParaAnaliseIA, type ResultadoMotor } from "@/lib/motor/saida";
 import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
+import {
+  completarEnderecamento,
+  contextoDoSite,
+  garantirEnderecamento,
+  objetivosDoRodizio,
+  REVISAR_PUBLICO,
+  type ContextoEnderecamento,
+} from "@/lib/motor/enderecamento";
+import { objetivosDoSite } from "@/lib/motor/inferir";
+import { textoDaMarca } from "./nicho";
 
 export const LIMITE_POSTS = 12;
 
@@ -63,9 +73,12 @@ export function finalizar(
   origem: Analise["origem"],
   provedor: string | null,
   avisos: string[],
+  /** Com contexto, o endereçamento de cada post é copiado e completado (o que faltar vai para revisão, se pedido). */
+  enderecar?: ContextoEnderecamento,
 ): Analise {
   const limpa = semTravessao(saida);
   const posts: PostGerado[] = limpa.posts.map((p, i) => ({
+    ...enderecamentoDoPost(p, i, enderecar),
     id: `${id}-p${i + 1}`,
     rede_principal: p.rede_principal,
     formato: p.formato,
@@ -97,6 +110,14 @@ export function finalizar(
     avisos: [...brand.avisos, ...avisos],
     criadoEm: new Date().toISOString(),
   };
+}
+
+/** Copia o endereçamento que veio na saída; com contexto, completa o que faltar. */
+function enderecamentoDoPost(p: AnaliseIA["posts"][number], i: number, ctx?: ContextoEnderecamento): Pick<PostGerado, "enderecamento" | "precisa_revisao"> {
+  if (!ctx) return {};
+  const legenda = p.legendas[p.rede_principal] || p.legendas.instagram;
+  const { enderecamento, completou } = completarEnderecamento(p.enderecamento, { ...p, legenda }, i, ctx);
+  return ctx.marcarRevisao && completou ? { enderecamento, precisa_revisao: [REVISAR_PUBLICO] } : { enderecamento };
 }
 
 export interface AnalisarOpcoes {
@@ -131,9 +152,14 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   const llm = provedorConfigurado();
 
   // 1. Empresas de exemplo: resposta instantânea e idêntica em qualquer cenário de palco.
+  // Objetivos do rodízio quando o post não traz um: os do onboarding ou, sem ele, os que o site sugere.
+  const objetivos = pref ? objetivosDoRodizio(pref) : objetivosDoSite(textoDaMarca(brand), palpiteNicho(brand).nicho);
+  const enderecarSite = (marcarRevisao: boolean, publico?: string | null) =>
+    contextoDoSite(brand, { objetivos, publico: pref?.publico_alvo || publico, gatilho: "site", marcarRevisao });
+
   const demo = demoPorDominio(brand.dominio);
   if (demo && (!llm || !op.forcarNovo)) {
-    const posts = demo.posts.slice(0, quantidade);
+    const posts = garantirEnderecamento(demo, enderecarSite(false, demo.contexto_inferido?.publico)).posts.slice(0, quantidade);
     return {
       ...demo,
       id: `demo-${demo.id}`,
@@ -153,8 +179,13 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       const c = await store.buscarCache(urlChave, quantidade);
       if (c) {
         // Datas novas a partir de hoje e a marca como está agora (paleta ou @ podem ter mudado).
+        // Análises salvas antes do endereçamento: completa pelo gancho e pede para confirmar o público.
+        const comEnd = garantirEnderecamento(c, {
+          ...enderecarSite(true, c.contexto_inferido?.publico),
+          gatilho: c.origem === "local" ? "site" : "gancho",
+        });
         return {
-          ...c,
+          ...comEnd,
           brand: { ...c.brand, paleta: brand.paleta, handles: brand.handles, fontes: brand.fontes },
           calendario: montarCalendario(c.posts, c.estrategia),
           origem: "cache",
@@ -265,8 +296,13 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     if (!llm) avisos.push("Modo demo: sem chave de IA configurada, a estratégia foi montada pelo motor local a partir do texto do site.");
   }
 
-  const base = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos);
-  const analise = motor ? aplicarExtras(base, motor) : base;
+  // Endereçamento: a IA manda o dela (o que faltar é completado pelo gancho e vai para revisão);
+  // o motor local tira o gatilho das dores reais do site.
+  const ctxEnd: ContextoEnderecamento = provedor
+    ? { ...enderecarSite(true, motor?.extrasAnalise.contexto_inferido?.publico || saida.publico), gatilho: "gancho" }
+    : enderecarSite(false, motor?.extrasAnalise.contexto_inferido?.publico);
+  const base = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos, motor ? undefined : ctxEnd);
+  const analise = garantirEnderecamento(motor ? aplicarExtras(base, motor) : base, ctxEnd);
   try {
     // Só análises feitas pela IA entram no cache; as do motor local são baratas e podem melhorar depois.
     if (provedor) await store.salvarAnalise(analise, urlChave, op.email, quantidade);

@@ -93,7 +93,7 @@ export function IdeiasEMetricas({ analise }: { analise: Analise }) {
     );
   }, [analise, sinais, historicoInicial]);
   const cartas: Carta[] = useMemo(
-    () => ordem.map(({ post: p }) => ({ id: p.id, src: urlArte(analise, p, { tamanho: "feed" }), alt: `Ideia de post: ${p.gancho}` })),
+    () => ordem.map(({ post: p }) => ({ id: p.id, src: urlArte(analise, p, { tamanho: "feed" }), alt: `Ideia de post: ${p.gancho}`, para: p.enderecamento?.publico || undefined })),
     [ordem, analise],
   );
   const opTopo = ordem.find((o) => o.post.id === topo);

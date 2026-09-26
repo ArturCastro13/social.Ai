@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { baixarZip, type Personalizacao } from "@/lib/client/artes";
+import { OBJETIVOS } from "@/lib/motor/constantes";
 import type { ExtrasAnalise, ExtrasPost } from "@/lib/motor/contrato";
 import { NICHOS, type Analise, type Rede } from "@/lib/types";
 import { IdeiasEMetricas } from "./IdeiasEMetricas";
@@ -35,6 +36,19 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
   const extras = analise as Analise & ExtrasAnalise;
   const paraRevisar = analise.posts.filter((p) => ((p as ExtrasPost).precisa_revisao ?? []).length > 0).length;
   const nicho = NICHOS.find((n) => n.id === analise.nicho)?.nome ?? analise.nicho;
+  const publicoUsado = extras.contexto_inferido?.publico?.trim();
+  // "3 posts para Gerar clientes, 2 para Autoridade do founder": só conta posts que vieram endereçados.
+  const porObjetivo = useMemo(() => {
+    const contagem = new Map<string, number>();
+    for (const p of analise.posts) {
+      const id = (p as ExtrasPost).enderecamento?.objetivo;
+      if (id) contagem.set(id, (contagem.get(id) ?? 0) + 1);
+    }
+    return [...contagem.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([id, n]) => ({ n, nome: OBJETIVOS.find((o) => o.id === id)?.nome ?? id }));
+  }, [analise]);
+  const frasePorObjetivo = porObjetivo.map((o, i) => `${o.n}${i === 0 ? (o.n === 1 ? " post" : " posts") : ""} para ${o.nome}`).join(", ");
 
   const semanas = useMemo(() => {
     const grupos: { titulo: string; itens: typeof analise.calendario }[] = [];
@@ -178,7 +192,7 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
       <div id="estrategia" className="order-3 scroll-mt-28 border-t border-tinta/10">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h3 className={TITULO_SECAO}>Estratégia</h3>
-          {(extras.o_que_aprendi || extras.contexto_inferido) && (
+          {(extras.o_que_aprendi || extras.contexto_inferido || porObjetivo.length > 0) && (
             <div className="mt-6 max-w-3xl rounded-3xl border border-tinta/10 bg-white p-6">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-sm font-medium text-tinta-3">O que aprendi com você</p>
@@ -191,6 +205,22 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
                 )}
               </div>
               {extras.o_que_aprendi && <p className="mt-2 leading-relaxed text-tinta">{extras.o_que_aprendi}</p>}
+              {(publicoUsado || porObjetivo.length > 0) && (
+                <dl className="mt-4 space-y-3 border-t border-tinta/10 pt-4 text-sm">
+                  {publicoUsado && (
+                    <div>
+                      <dt className="text-tinta-3">Público que os posts miram</dt>
+                      <dd className="mt-0.5 font-semibold leading-snug text-tinta">{publicoUsado}</dd>
+                    </div>
+                  )}
+                  {porObjetivo.length > 0 && (
+                    <div>
+                      <dt className="text-tinta-3">Objetivo de cada post</dt>
+                      <dd className="mt-0.5 leading-snug text-tinta">{frasePorObjetivo}.</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
             </div>
           )}
           <div className="mt-8 grid gap-4 md:grid-cols-3">

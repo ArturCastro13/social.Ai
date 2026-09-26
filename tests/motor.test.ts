@@ -1,8 +1,25 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
+
+vi.mock("@/lib/store", () => ({
+  store: {
+    buscarCache: async () => null,
+    salvarAnalise: async () => undefined,
+    contarUso: async () => 0,
+    registrarUso: async () => undefined,
+    listarDecisoes: async () => [],
+    listarResultados: async () => [],
+    listarVirais: async () => [],
+    buscarAnalise: async () => null,
+  },
+}));
+
 import { DEMOS } from "@/lib/engine/demo";
 import { analiseLocal } from "@/lib/engine/local";
 import { analiseIASchema } from "@/lib/engine/schema";
-import { chaveCache, finalizar, hashPreferencias } from "@/lib/engine";
+import { analisar, chaveCache, finalizar, hashPreferencias } from "@/lib/engine";
+import type { Analise, BrandProfile } from "@/lib/types";
+import { doresDoSite, publicoAlvoDoSite, REVISAR_PUBLICO } from "@/lib/motor/enderecamento";
+import { OBJETIVOS } from "@/lib/motor/contrato";
 import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
 import { itensDoArquivo } from "@/lib/virais";
 import { preferenciasSchema } from "@/lib/motor/contrato";
@@ -16,7 +33,7 @@ const cora = DEMOS.find((d) => d.brand.dominio === "cora.com.br")!.brand;
 const catalogo = construirCatalogo(itensDoArquivo());
 
 const CHAVES_CONTEXTO = [
-  "perfil_alvo", "empresa", "founder", "nicho", "objetivos", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
+  "perfil_alvo", "publico_alvo", "empresa", "founder", "nicho", "objetivos", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "desempenho_proprio", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
   "historico_preferencias", "quantidade_posts",
 ];
@@ -26,6 +43,7 @@ describe("montarContexto", () => {
     const c = montarContexto(cora);
     expect(Object.keys(c).sort()).toEqual([...CHAVES_CONTEXTO].sort());
     expect(c.perfil_alvo).toBe("empresa");
+    expect(c.publico_alvo).toBe(publicoAlvoDoSite(cora));
     expect(c.empresa.site_url).toBe(cora.url);
     expect(c.empresa.site_extraido.proposta.length).toBeGreaterThan(0);
     expect(c.empresa.brand_book_extraido).toBeNull();
@@ -61,6 +79,7 @@ describe("montarContexto", () => {
     });
     expect(c.nicho).toBe("saas_b2b");
     expect(c.founder.arroba.linkedin).toBe("@ana");
+    expect(montarContexto(cora, { ...pref, publico_alvo: "Donas de clínica pequena" }).publico_alvo).toBe("Donas de clínica pequena");
     expect(c.redes).toContain("linkedin");
     expect(c.inspiracoes[0].descricao_extraida).toBe("Título. Descrição");
     expect(c.referencias_nicho.length).toBeGreaterThan(0);
@@ -78,6 +97,8 @@ describe("montarContexto", () => {
   it("system prompt não tem travessão e fala de template", () => {
     expect(SISTEMA_MOTOR).not.toContain("—");
     expect(SISTEMA_MOTOR).toContain('"template"');
+    expect(SISTEMA_MOTOR).toContain('"enderecamento"');
+    expect(SISTEMA_MOTOR).toContain("gatilho_identificacao");
   });
 });
 
@@ -222,6 +243,8 @@ describe("inferência do onboarding", () => {
     expect(["leve", "constante"]).toContain(s.frequencia);
     expect(s.porque_frequencia.length).toBeGreaterThan(10);
     expect(s.exemplo_tom.length).toBeGreaterThan(10);
+    expect(s.publico_alvo.length).toBeGreaterThan(20);
+    expect(s.publico_alvo).not.toMatch(/[—–]/);
     expect(JSON.stringify(s)).not.toContain("—");
     for (const v of Object.values(s.tom_de_voz)) expect(v).toBeGreaterThanOrEqual(0);
   });
@@ -230,6 +253,8 @@ describe("inferência do onboarding", () => {
     const b = brandParaInferencia({ url: "https://x.com.br", headings: { h1: ["Estamos contratando"], h2: ["Lançamento do novo produto"] }, paragrafos: ["Veja as vagas abertas."] })!;
     expect(b).not.toBeNull();
     expect(inferirSugestoes(b).objetivos).toEqual(["contratar", "lancar_produto"]);
+    // Mesmo com site mínimo, o público nunca volta vazio.
+    expect(inferirSugestoes(b).publico_alvo.trim().length).toBeGreaterThan(10);
     expect(brandParaInferencia({ nome: "sem url" })).toBeNull();
   });
 
@@ -249,5 +274,115 @@ describe("cache com preferências", () => {
     expect(chaveCache("https://cora.com.br", a)).not.toBe(chaveCache("https://cora.com.br", b));
     expect(chaveCache("https://cora.com.br", a)).toBe(chaveCache("https://www.cora.com.br/", preferenciasSchema.parse({ perfil_alvo: "founder" })));
     expect(hashPreferencias(a)).toHaveLength(12);
+    // O público-alvo faz parte da chave: mudar o público gera outra análise.
+    const c = preferenciasSchema.parse({ perfil_alvo: "founder", publico_alvo: "Gestores de clínica" });
+    expect(hashPreferencias(c)).not.toBe(hashPreferencias(a));
+  });
+});
+
+const IDS_OBJETIVO: string[] = OBJETIVOS.map((o) => o.id);
+
+function enderecamentoCompleto(a: Analise) {
+  expect(a.posts.length).toBeGreaterThan(0);
+  for (const p of a.posts) {
+    const e = p.enderecamento;
+    expect(e, `post ${p.id} sem enderecamento`).toBeDefined();
+    expect(IDS_OBJETIVO).toContain(e!.objetivo);
+    expect(e!.publico.trim().length).toBeGreaterThan(10);
+    expect(e!.gatilho_identificacao.trim().length).toBeGreaterThan(3);
+    expect(e!.acao_esperada.trim().length).toBeGreaterThan(3);
+    expect(JSON.stringify(e)).not.toMatch(/[—–]/);
+  }
+}
+
+describe("objetivo endereçado", () => {
+  beforeAll(() => {
+    vi.stubEnv("DEMO_MODE", "1");
+  });
+
+  // Mesmo site da Cora, em outro domínio, para não cair na demo pré-processada.
+  const coraLocal: BrandProfile = { ...cora, url: "https://cora-teste.com.br", dominio: "cora-teste.com.br" };
+
+  it("tira dores reais do site", () => {
+    const site = JSON.stringify(cora).toLowerCase();
+    const dores = doresDoSite(coraLocal);
+    expect(dores.length).toBeGreaterThan(0);
+    for (const d of dores) expect(site).toContain(d.replace(/^Ainda lidar com /, "").toLowerCase().slice(0, 20));
+  });
+
+  it("motor local sem preferências endereça todos os posts, com gatilho do site", async () => {
+    const a = await analisar(coraLocal, { quantidade: 6, identificadores: [] });
+    expect(a.origem).toBe("local");
+    enderecamentoCompleto(a);
+    const dores = doresDoSite(coraLocal);
+    if (dores.length) expect(a.posts.some((p) => dores.includes(p.enderecamento!.gatilho_identificacao))).toBe(true);
+    expect(a.posts.every((p) => !(p.precisa_revisao ?? []).includes(REVISAR_PUBLICO))).toBe(true);
+  });
+
+  it("motor local com preferências distribui os objetivos e usa o público escolhido", async () => {
+    const pref = preferenciasSchema.parse({
+      perfil_alvo: "ambos",
+      objetivos: ["gerar_clientes", "contratar"],
+      publico_alvo: "Donos de pequenas empresas que ainda pagam boleto na mão",
+    });
+    const a = await analisar(coraLocal, { quantidade: 6, identificadores: [], preferencias: pref });
+    enderecamentoCompleto(a);
+    expect(new Set(a.posts.map((p) => p.enderecamento!.objetivo))).toEqual(new Set(["gerar_clientes", "contratar"]));
+    expect(a.posts.every((p) => p.enderecamento!.publico === pref.publico_alvo)).toBe(true);
+  });
+
+  it("demo sai com endereçamento em todos os posts", async () => {
+    for (const d of DEMOS) {
+      const a = await analisar(d.brand, { quantidade: 12, identificadores: [] });
+      expect(a.origem).toBe("demo");
+      enderecamentoCompleto(a);
+    }
+  });
+
+  it("adaptador completa o que o modelo não mandou e marca revisão", () => {
+    const saida = saidaMotorSchema.parse({
+      ...SAIDA_EXEMPLO,
+      posts: [
+        {
+          ...SAIDA_EXEMPLO.posts[0],
+          enderecamento: {
+            objetivo: "Gerar clientes",
+            publico: "Dona de agência pequena que mistura conta pessoal e PJ",
+            gatilho_identificacao: "Fecha o mês sem saber quanto sobrou",
+            acao_esperada: "Salvar o post",
+          },
+        },
+        { ...SAIDA_EXEMPLO.posts[1], enderecamento: { publico: "" } },
+        { ...SAIDA_EXEMPLO.posts[2], enderecamento: "lixo" },
+      ],
+    });
+    const pref = preferenciasSchema.parse({ objetivos: ["gerar_clientes", "autoridade_founder"], publico_alvo: "Donos de PME que fazem o financeiro sozinhos" });
+    const r = saidaParaAnaliseIA(saida, { brand: cora, palpite: "fintech", quantidade: 6, redes: ["instagram", "x"], preferencias: pref });
+    const [e1, e2, e3] = r.extrasPosts;
+    expect(e1.enderecamento).toMatchObject({ objetivo: "gerar_clientes", gatilho_identificacao: "Fecha o mês sem saber quanto sobrou" });
+    expect(e1.precisa_revisao).not.toContain(REVISAR_PUBLICO);
+    expect(e2.enderecamento).toMatchObject({ objetivo: "autoridade_founder", publico: pref.publico_alvo, gatilho_identificacao: "Taxa escondida é o pior tipo de taxa" });
+    expect(e2.precisa_revisao).toContain(REVISAR_PUBLICO);
+    expect(e3.enderecamento?.objetivo).toBe("gerar_clientes");
+    expect(e3.enderecamento?.acao_esperada.length).toBeGreaterThan(3);
+    expect(e3.precisa_revisao).toContain(REVISAR_PUBLICO);
+    const a = aplicarExtras(finalizar("t", cora, r.analise, "ia", "teste", []), r);
+    enderecamentoCompleto(a);
+  });
+
+  it("prompt antigo aceita enderecamento parcial e finalizar completa com revisão", () => {
+    const local = analiseLocal(cora, "fintech", padroesDoNicho(catalogo, "fintech", 10), 3, ["instagram"]);
+    const comParcial = { ...local, posts: local.posts.map((p, i) => (i === 0 ? { ...p, enderecamento: { objetivo: "autoridade_founder", publico: "", gatilho_identificacao: "", acao_esperada: "" } } : p)) };
+    const v = analiseIASchema.parse(comParcial);
+    const a = finalizar("t", cora, v, "ia", "teste", [], {
+      objetivos: ["gerar_clientes", "autoridade_founder"],
+      publico: "Donos de PME",
+      gatilho: "gancho",
+      marcarRevisao: true,
+    });
+    enderecamentoCompleto(a);
+    expect(a.posts[0].enderecamento?.objetivo).toBe("autoridade_founder");
+    expect(a.posts[1].enderecamento?.objetivo).toBe("autoridade_founder");
+    expect(a.posts.every((p) => p.precisa_revisao?.includes(REVISAR_PUBLICO))).toBe(true);
   });
 });

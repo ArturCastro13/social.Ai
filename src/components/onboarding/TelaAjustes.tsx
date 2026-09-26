@@ -55,6 +55,7 @@ function sugestaoValida(s: Partial<SugestoesOnboarding> | null, padrao: Sugestoe
   }
   return {
     nicho: s.nicho || padrao.nicho,
+    publico_alvo: typeof s.publico_alvo === "string" ? s.publico_alvo.trim().slice(0, 300) : padrao.publico_alvo,
     objetivos: objetivos.length ? objetivos : padrao.objetivos,
     tom_de_voz: tom,
     exemplo_tom: s.exemplo_tom?.trim() || fraseDoTom(tom),
@@ -78,6 +79,7 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
 
   const [perfil, setPerfil] = useState<PerfilAlvo>(perfilInicial);
   const [founder, setFounder] = useState<{ valor: string; rede: RedeArroba }>({ valor: dados.founder ?? "", rede: dados.redeFounder ?? "linkedin" });
+  const [publico, setPublico] = useState(sugestao.publico_alvo);
   const [objetivos, setObjetivos] = useState<ObjetivoId[]>(sugestao.objetivos);
   const [tom, setTom] = useState<TomDeVoz>(sugestao.tom_de_voz);
   const [mexeuNoTom, setMexeuNoTom] = useState(false);
@@ -88,6 +90,7 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
   const turboRef = useRef<HTMLDivElement>(null);
 
   function aplicarSugestao(s: SugestoesOnboarding) {
+    setPublico(s.publico_alvo);
     setObjetivos(s.objetivos);
     setTom(s.tom_de_voz);
     setMexeuNoTom(false);
@@ -123,6 +126,7 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
       if (salvas) {
         setDaUltimaVez(true);
         if (!dados.perfil && salvas.perfil_alvo) setPerfil(salvas.perfil_alvo);
+        setPublico(salvas.publico_alvo?.trim() || s.publico_alvo);
         setObjetivos(salvas.objetivos.length ? salvas.objetivos : s.objetivos);
         setTom(salvas.tom_de_voz ?? s.tom_de_voz);
         setMexeuNoTom(!!salvas.tom_de_voz);
@@ -173,6 +177,7 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
       .map((url) => ({ url, tipo: tipoDaInspiracao(url) }));
     return {
       perfil_alvo: perfil,
+      ...(publico.trim() ? { publico_alvo: publico.trim().slice(0, 300) } : {}),
       founder: {
         ...(arroba ? { [founder.rede]: arroba } : {}),
         ...(turbo.fala.trim() ? { transcricao_audio: turbo.fala.trim().slice(0, 6000) } : {}),
@@ -259,8 +264,24 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
       )}
 
       <div className="mt-8 space-y-8 rounded-3xl border border-tinta/10 bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] sm:p-8">
+        <div>
+          <label htmlFor="ajuste-publico" className={`block ${SUBTITULO}`}>
+            Quem você quer atingir?
+          </label>
+          <p className="mt-1 text-sm text-tinta-3">Quanto mais específico, mais a pessoa se reconhece no post.</p>
+          <input
+            id="ajuste-publico"
+            value={publico}
+            onChange={(e) => setPublico(e.target.value)}
+            maxLength={300}
+            placeholder="Ex.: dona de clínica pequena que perde paciente no WhatsApp"
+            autoComplete="off"
+            className="mt-3 h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3 focus:border-tinta"
+          />
+        </div>
+
         <fieldset>
-          <legend className={SUBTITULO}>Para quem</legend>
+          <legend className={SUBTITULO}>Quem assina os posts</legend>
           <div className="mt-3 flex flex-wrap gap-2">
             {PERFIS.map((p) => (
               <Chip key={p.id} ativo={perfil === p.id} onClick={() => setPerfil(p.id)}>

@@ -23,6 +23,7 @@ Regras de escrita, sem exceção:
 3b. Nunca afirme que um formato é "o mais salvo", "o que mais converte" ou "o que mais engaja": a base de referência não tem esses números. Diga que o post segue um padrão da base.
 4. Legendas com cara de gente: primeira linha é o gancho, depois 2 a 5 linhas curtas, uma chamada para ação no fim. Emojis no máximo 1 ou 2, e só no Instagram e Facebook. LinkedIn sem hashtags em excesso (no máximo 3). X com até 260 caracteres.
 5. Cada post precisa ter um motivo para existir: ensinar algo, provocar uma opinião, mostrar bastidor ou provar valor. Varie formatos.
+5b. Todo post tem objetivo endereçado: um público concreto (cargo ou papel e situação, nunca genérico como "empreendedores" ou "empresas") e o gatilho que faz essa pessoa pensar "isso sou eu", tirado do texto do site, nunca inventado. O gancho e o primeiro slide falam direto com esse gatilho. Post sem público endereçado não deve existir.
 6. Responda só com JSON válido, sem comentários e sem texto fora do JSON.`;
 
 function resumoMarca(b: BrandProfile): string {
@@ -69,6 +70,7 @@ ${guia}
 Gere exatamente ${ctx.quantidade} posts. Redes com @ informado têm prioridade: ${ctx.redes.join(", ") || "linkedin e instagram"}.
 Distribua os posts entre as redes da estratégia e use pelo menos 3 formatos diferentes quando houver 3 ou mais posts.
 Cada post indica em "padrao_inspirador" o id do padrão acima que o inspirou.
+Cada post traz "enderecamento": "objetivo" é "gerar_clientes" ou "autoridade_founder" (alterne entre os dois ao longo do lote), "publico" é um recorte concreto de quem compra, "gatilho_identificacao" é a dor, desejo ou situação do site que faz essa pessoa se reconhecer, e "acao_esperada" é o que ela deve fazer depois de ler.
 O diagnóstico compara o que os posts fortes do nicho fazem com o que esta empresa comunica hoje pelo site e pelas redes: seja específico e honesto, sem elogio vazio.
 
 Formato da resposta (JSON):
@@ -90,7 +92,8 @@ Formato da resposta (JSON):
     "legendas": {"instagram": "", "linkedin": "", "x": "", "facebook": ""},
     "hashtags": ["sem #, no máximo 5"],
     "padrao_inspirador": "id do padrão",
-    "por_que": "uma frase dizendo qual padrão da base o post segue e por que deve funcionar"
+    "por_que": "uma frase dizendo qual padrão da base o post segue e por que deve funcionar",
+    "enderecamento": {"objetivo": "gerar_clientes|autoridade_founder", "publico": "", "gatilho_identificacao": "", "acao_esperada": ""}
   }]
 }`;
 }

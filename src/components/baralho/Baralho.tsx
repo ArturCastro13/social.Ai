@@ -12,6 +12,8 @@ export interface Carta {
   alt: string;
   /** Imagens estáticas de /public passam pelo otimizador do Next; artes geradas na hora, não. */
   estatica?: boolean;
+  /** Público que o post quer atingir; aparece como "Para: ..." no pé da carta. */
+  para?: string;
 }
 
 const LIMIAR = 90;
@@ -194,6 +196,11 @@ export function Baralho({
                 aria-hidden={!topo}
               >
                 <Figura carta={carta} prioridade={topo && indice === 0} />
+                {carta.para && (
+                  <p className="pointer-events-none absolute inset-x-3 bottom-3 line-clamp-2 rounded-xl bg-white/95 px-3 py-2 text-xs leading-snug text-tinta-2 shadow-sm">
+                    <span className="text-tinta-3">Para:</span> <strong className="font-semibold text-tinta">{carta.para}</strong>
+                  </p>
+                )}
                 {topo && (
                   <>
                     <span className="absolute left-4 top-4 rounded-full bg-aprovado px-3 py-1 text-sm font-semibold text-white" style={{ opacity: forcaSim }}>

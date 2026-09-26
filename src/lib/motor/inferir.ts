@@ -8,6 +8,7 @@ import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
 import { itensDoArquivo } from "@/lib/virais";
 import type { FormatoMotor, ObjetivoId, SugestoesOnboarding, TomDeVoz } from "./contrato";
 import { MOTOR_DO_FORMATO } from "./mapa";
+import { publicoAlvoDoSite } from "./enderecamento";
 
 const conta = (t: string, re: RegExp) => (t.match(re) ?? []).length;
 const arred = (x: number) => Math.round(Math.min(1, Math.max(0, x)) * 100) / 100;
@@ -105,6 +106,7 @@ export function inferirSugestoes(brand: BrandProfile): SugestoesOnboarding {
 
   return {
     nicho,
+    publico_alvo: publicoAlvoDoSite(brand),
     objetivos,
     tom_de_voz: tom,
     exemplo_tom: exemploDoTom(tom),

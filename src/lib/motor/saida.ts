@@ -2,10 +2,11 @@
 // que o painel e o renderizador já entendem (AnaliseIA + extras).
 import { z } from "zod";
 import type { Analise, BrandProfile, CalendarioItem, Nicho, PadraoViral, Rede, TemplateId } from "@/lib/types";
-import { TEMPLATES, semTravessao, type AnaliseIA } from "@/lib/engine/schema";
+import { enderecamentoIASchema, TEMPLATES, semTravessao, type AnaliseIA } from "@/lib/engine/schema";
 import { hojeEmSaoPaulo } from "@/lib/engine/calendario";
 import { corte } from "@/lib/engine/texto-local";
 import type { ExtrasAnalise, ExtrasPost, Preferencias } from "./contrato";
+import { completarEnderecamento, objetivosDoRodizio, publicoAlvoDoSite, REVISAR_PUBLICO, type ContextoEnderecamento } from "./enderecamento";
 import {
   distribuirFrequencia,
   formatoDoApp,
@@ -55,6 +56,7 @@ export const postMotorSchema = z
     formato: txt(40),
     template: txt(40),
     objetivo: txt(60),
+    enderecamento: enderecamentoIASchema,
     padrao_referencia: z.object({ nome: txt(120), fonte_url: txt(500) }).catch({ nome: "", fonte_url: "" }),
     gancho: txt(400),
     slides_ou_arte: lista(slideSchema, 8),
@@ -291,6 +293,15 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
 
   const posts = saida.posts.slice(0, op.quantidade);
   const extrasPosts: ExtrasPost[] = [];
+  // Endereçamento: o que o modelo não mandou é completado aqui (rodízio de objetivos, público da
+  // preferência ou do contexto inferido, gatilho do gancho) e o post vai para revisão.
+  const ctxEnd: ContextoEnderecamento = {
+    objetivos: objetivosDoRodizio(pref),
+    publico: pref?.publico_alvo?.trim() || saida.contexto_inferido.publico || publicoAlvoDoSite(op.brand),
+    gatilho: "gancho",
+    marca: op.brand.nome || undefined,
+    marcarRevisao: true,
+  };
   const analisePosts: AnaliseIA["posts"] = posts.map((p, i) => {
     const rede = normalizarRede(p.rede) ?? redes[i % redes.length];
     const fm = normalizarFormatoMotor(p.formato) ?? (p.slides_ou_arte.length > 1 ? "carrossel" : "estatico");
@@ -306,9 +317,17 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
     // "ambos": sem trilho informado, o post vai para o trilho com menos posts até aqui.
     const nFounder = extrasPosts.filter((e) => e.trilho === "founder").length;
     const trilho = perfil === "ambos" ? (p.trilho ?? (nFounder <= i - nFounder ? "founder" : "empresa")) : perfil;
+    const { enderecamento, completou } = completarEnderecamento(
+      p.enderecamento,
+      { gancho, slides, legenda: p.legenda, chamada_final: p.chamada_final, objetivo: p.objetivo },
+      i,
+      ctxEnd,
+    );
+    if (completou && !revisar.includes(REVISAR_PUBLICO)) revisar.push(REVISAR_PUBLICO);
     extrasPosts.push({
       trilho,
-      objetivo: p.objetivo || undefined,
+      objetivo: p.objetivo || enderecamento.objetivo,
+      enderecamento,
       formato_motor: fm,
       padrao_referencia: nomePadrao || p.padrao_referencia.fonte_url ? { nome: nomePadrao, fonte_url: p.padrao_referencia.fonte_url } : undefined,
       chamada_final: p.chamada_final || undefined,

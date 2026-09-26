@@ -10,11 +10,14 @@ import { corte, depoimentosDoSite, frasesDeProduto, frasesDoSite, numerosDoSite 
 import { textoDaMarca } from "@/lib/engine/nicho";
 import { tomDeVozSchema, type Preferencias, type TomDeVoz } from "./contrato";
 import { MOTOR_DO_FORMATO, nichoParaMotor, type NichoMotor } from "./mapa";
+import { publicoAlvoDoSite } from "./enderecamento";
 
 type Arroba = { instagram: string; linkedin: string; x: string };
 
 export interface ContextoMotor {
   perfil_alvo: Preferencias["perfil_alvo"];
+  /** Quem os posts precisam fazer se reconhecer: o que o founder escreveu ou, se vazio, o inferido do site. */
+  publico_alvo: string;
   empresa: {
     site_url: string;
     site_extraido: { proposta: string; publico: string; produtos: string[]; provas: string[]; paleta: string[]; fontes: string[] };
@@ -189,6 +192,7 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
   const insp = extras.inspiracoesExtraidas ?? {};
   return {
     perfil_alvo: p?.perfil_alvo ?? "empresa",
+    publico_alvo: p?.publico_alvo?.trim() || publicoAlvoDoSite(brand),
     empresa: {
       site_url: brand.url,
       site_extraido: siteExtraido(brand),

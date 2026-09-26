@@ -20,6 +20,8 @@ export type TomDeVoz = z.infer<typeof tomDeVozSchema>;
 /** O que a interface manda em POST /api/analyze no campo `preferencias` (telas 1, 2 e 3). */
 export const preferenciasSchema = z.object({
   perfil_alvo: z.enum(["founder", "empresa", "ambos"]).default("empresa"),
+  /** Quem o founder/empresa quer atingir, em texto livre (vem pré-preenchido pela inferência e é editável). */
+  publico_alvo: z.string().trim().max(300).optional(),
   founder: z
     .object({
       nome: z.string().trim().max(120).optional(),
@@ -51,6 +53,8 @@ export type Preferencias = z.infer<typeof preferenciasSchema>;
 /** Resposta de POST /api/inferir: o que a tela 2 mostra já preenchido, inferido do site sem IA. */
 export interface SugestoesOnboarding {
   nicho: string;
+  /** Público-alvo inferido do site, em uma frase editável. */
+  publico_alvo: string;
   objetivos: ObjetivoId[];
   tom_de_voz: TomDeVoz;
   /** Frase de exemplo escrita no tom inferido (a interface também pode gerar a própria ao mexer nas réguas). */
@@ -60,10 +64,24 @@ export interface SugestoesOnboarding {
   porque_frequencia: string;
 }
 
+/** Objetivo endereçado: todo post existe para fazer um público específico se reconhecer e agir. */
+export interface Enderecamento {
+  /** Id de OBJETIVOS que este post serve. */
+  objetivo: ObjetivoId;
+  /** Recorte concreto do público-alvo (ex.: "gestor comercial de PME que perde lead no WhatsApp"). */
+  publico: string;
+  /** A dor, desejo ou situação que faz esse público pensar "isso sou eu". */
+  gatilho_identificacao: string;
+  /** O que o post quer que essa pessoa faça depois de ler. */
+  acao_esperada: string;
+}
+
 /** Campos extras que o motor novo adiciona a cada post (todos opcionais para não quebrar demo e cache antigos). */
 export interface ExtrasPost {
   trilho?: "founder" | "empresa";
   objetivo?: string;
+  /** Quem deve se reconhecer neste post e por quê. Obrigatório em todo post gerado (IA, local ou demo normalizado). */
+  enderecamento?: Enderecamento;
   formato_motor?: FormatoMotor;
   padrao_referencia?: { nome: string; fonte_url: string };
   chamada_final?: string;

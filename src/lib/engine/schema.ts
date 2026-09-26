@@ -28,6 +28,23 @@ const slideSchema = z.object({
   texto: z.string().trim().max(600).default(""),
 });
 
+/** Texto tolerante: número vira texto, o resto vira "". */
+const textoLivre = (max: number) =>
+  z.preprocess((v) => (typeof v === "string" ? v : typeof v === "number" ? String(v) : ""), z.string()).transform((s) => s.trim().slice(0, max));
+
+/**
+ * Objetivo endereçado do post, como o modelo mandou. Nunca derruba a validação: campo ausente ou inválido
+ * vira texto vazio e é completado depois (garantirEnderecamento), com o post marcado para revisão.
+ */
+export const enderecamentoIASchema = z
+  .object({
+    objetivo: textoLivre(60).default(""),
+    publico: textoLivre(300).default(""),
+    gatilho_identificacao: textoLivre(300).default(""),
+    acao_esperada: textoLivre(200).default(""),
+  })
+  .catch({ objetivo: "", publico: "", gatilho_identificacao: "", acao_esperada: "" });
+
 export const postIASchema = z.object({
   rede_principal: redeSchema,
   formato: formatoSchema,
@@ -43,6 +60,7 @@ export const postIASchema = z.object({
   hashtags: z.array(z.string().trim().max(40)).max(12).default([]),
   padrao_inspirador: z.string().trim().max(80).default(""),
   por_que: z.string().trim().max(400).default(""),
+  enderecamento: enderecamentoIASchema.optional(),
 });
 
 export const analiseIASchema = z.object({

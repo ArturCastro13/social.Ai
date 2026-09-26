@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
+import { OBJETIVOS } from "@/lib/motor/constantes";
 import type { ExtrasPost } from "@/lib/motor/contrato";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
 
@@ -19,6 +20,35 @@ export const NOMES_TEMPLATE: Record<TemplateId, string> = {
 
 const NOMES_REDE: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };
 const ORDEM_REDES: Rede[] = ["instagram", "linkedin", "x", "facebook"];
+
+function nomeObjetivo(id: string | undefined) {
+  return OBJETIVOS.find((o) => o.id === id)?.nome;
+}
+
+/** Faixa curta "para quem é este post": aparece só quando o motor mandou o endereçamento. */
+function FaixaEnderecamento({ e }: { e: NonNullable<ExtrasPost["enderecamento"]> }) {
+  const objetivo = nomeObjetivo(e.objetivo);
+  return (
+    <div className="space-y-1 border-b border-tinta/10 bg-papel px-4 py-2.5 text-xs leading-snug text-tinta-2">
+      <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <span className="min-w-0 flex-1 text-sm">
+          <span className="text-tinta-3">Para:</span> <strong className="font-semibold text-tinta">{e.publico}</strong>
+        </span>
+        {objetivo && <span className="shrink-0 rounded-full bg-tinta px-2 py-0.5 text-[11px] font-semibold text-papel">{objetivo}</span>}
+      </p>
+      {e.gatilho_identificacao && (
+        <p>
+          <span className="text-tinta-3">Vai se reconhecer em:</span> {e.gatilho_identificacao}
+        </p>
+      )}
+      {e.acao_esperada && (
+        <p>
+          <span className="text-tinta-3">Ação esperada:</span> {e.acao_esperada}
+        </p>
+      )}
+    </div>
+  );
+}
 
 /** Destaca os [PREENCHER: ...] na legenda, para a pessoa ver onde falta um dado dela. */
 function comLacunas(texto: string) {
@@ -95,6 +125,8 @@ export function PostCard({
           </p>
         )}
       </header>
+
+      {extra.enderecamento?.publico && <FaixaEnderecamento e={extra.enderecamento} />}
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}

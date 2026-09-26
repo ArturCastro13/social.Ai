@@ -158,6 +158,7 @@ Saída (resumida, exemplo real do modo demo):
 {
   "preferencias": {
     "perfil_alvo": "founder | empresa | ambos",
+    "publico_alvo": "Donos de pequenas empresas que fazem o financeiro sozinhos pelo celular",
     "founder": { "nome": "", "instagram": "", "linkedin": "", "x": "", "transcricao_audio": "" },
     "objetivos": ["autoridade_founder", "gerar_clientes"],
     "tom_de_voz": { "formal_descontraido": 0.5, "tecnico_simples": 0.5, "serio_humor": 0.3, "cauteloso_provocador": 0.4 },
@@ -177,9 +178,33 @@ Com preferências e IA configurada, o motor monta o objeto CONTEXTO da Parte 2 d
 
 Campos extras na saída (todos opcionais; demo e cache antigos não têm):
 
-- Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `formato_motor` (id do motor), `padrao_referencia` `{ nome, fonte_url }`, `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
+- Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `enderecamento` (ver abaixo), `formato_motor` (id do motor), `padrao_referencia` `{ nome, fonte_url }`, `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
 - Na análise: `contexto_inferido` `{ nicho, publico, tom_resumo, objetivos, confianca }`, `por_rede` `[{ rede, papel }]`, `comentario_frequencia`, `o_que_aprendi`, `perfil_alvo`.
 - Em cada item do calendário: `fonte` (`sua audiência`, `hipótese do nicho` ou `teste`) quando o calendário veio do modelo. Se os slots do modelo não forem coerentes, o calendário é montado pelas janelas de sempre.
+
+#### Objetivo endereçado (`enderecamento`)
+
+Todo post que sai de `POST /api/analyze` (IA com ou sem preferências, motor local, demo e cache) traz `enderecamento`, para dizer quem precisa se reconhecer nele e por quê:
+
+```json
+{
+  "enderecamento": {
+    "objetivo": "gerar_clientes",
+    "publico": "Dona de agência pequena que mistura conta pessoal e PJ",
+    "gatilho_identificacao": "Ainda lidar com burocracias ou taxas escondidas",
+    "acao_esperada": "Salvar o post para consultar depois e mandar para quem precisa"
+  }
+}
+```
+
+- `objetivo`: um id de `OBJETIVOS` (`autoridade_founder`, `gerar_clientes`, `lancar_produto`, `contratar`, `atrair_investidor`, `comunidade`).
+- `publico`: recorte concreto do público-alvo (papel e situação), nunca genérico.
+- `gatilho_identificacao`: a dor, o desejo ou a situação que faz essa pessoa pensar "isso sou eu", tirada do site, do brand book, da transcrição ou das notícias.
+- `acao_esperada`: o que a pessoa deve fazer depois de ler.
+
+O público-alvo vem de `preferencias.publico_alvo` (texto livre, até 300 caracteres); vazio, vale o inferido do site (`publicoAlvoDoSite`, o mesmo que `/api/inferir` devolve). Ele vai no CONTEXTO do motor como `publico_alvo` e faz parte do hash de cache das preferências. Os dois system prompts exigem `enderecamento` em todo post, com o gancho e o primeiro slide falando direto com o gatilho; no fluxo sem preferências, os objetivos alternam entre `gerar_clientes` e `autoridade_founder`.
+
+A saída do modelo passa por um schema tolerante (`enderecamentoIASchema`): campo ausente, vazio ou inválido nunca derruba a análise. O que faltar é completado de forma determinística (`src/lib/motor/enderecamento.ts`): objetivo em rodízio pelos objetivos da preferência (sem escolha: os do perfil, ou os sugeridos pelo site), público do `publico_alvo` ou do `contexto_inferido.publico`, gatilho a partir do gancho e ação a partir da `chamada_final`, do fim da legenda ou do objetivo. Quando isso acontece com texto da IA (ou com análise antiga do cache), o post ganha `"Confirmar público deste post"` em `precisa_revisao`. No motor local e na demo, o gatilho vem das dores escritas no próprio site (frases de dor e o que vem depois de "sem ..."), com a situação do tema do nicho quando o site quase não fala de dor; esses posts não são marcados para revisão.
 
 ### POST /api/inferir
 
@@ -188,6 +213,7 @@ Preenche a tela 2 do onboarding a partir do site, sem IA. Entrada: `{ "brand": {
 ```json
 {
   "nicho": "fintech",
+  "publico_alvo": "Donos de pequenas empresas e MEIs que pagam tarifa no banco tradicional e cuidam do financeiro pelo celular, entre um cliente e outro.",
   "objetivos": ["gerar_clientes", "autoridade_founder"],
   "tom_de_voz": { "formal_descontraido": 0.74, "tecnico_simples": 0.75, "serio_humor": 0.26, "cauteloso_provocador": 0.36 },
   "exemplo_tom": "Olha o que mudou quando a gente simplificou esse processo.",
@@ -197,7 +223,7 @@ Preenche a tela 2 do onboarding a partir do site, sem IA. Entrada: `{ "brand": {
 }
 ```
 
-`nicho` usa os ids do app (`saas-b2b`, `fintech`, `healthtech`, `edtech`, `ecommerce-dtc`). Objetivos por palavras do site (vagas, lançamento, B2B), no máximo 2. Réguas de tom pelo uso de "você", informalidade, exclamações e jargão técnico. Formatos pela base curada do nicho, com carrossel sempre e dado de impacto só se o site tiver número real. Frequência `constante`, ou `leve` quando o foco é autoridade e o site é enxuto. Erros: 400 para entrada inválida, 422 para endereço que não dá para ler.
+`nicho` usa os ids do app (`saas-b2b`, `fintech`, `healthtech`, `edtech`, `ecommerce-dtc`). `publico_alvo` é uma frase editável, nunca vazia: o público do tema detectado no texto do site mais os segmentos que o site cita literalmente (PMEs, MEIs, contadores, clínicas...). Objetivos por palavras do site (vagas, lançamento, B2B), no máximo 2. Réguas de tom pelo uso de "você", informalidade, exclamações e jargão técnico. Formatos pela base curada do nicho, com carrossel sempre e dado de impacto só se o site tiver número real. Frequência `constante`, ou `leve` quando o foco é autoridade e o site é enxuto. Erros: 400 para entrada inválida, 422 para endereço que não dá para ler.
 
 ### GET /api/analise/{id}
 
