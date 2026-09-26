@@ -21,7 +21,7 @@ function lerAprendizados(analise: Analise) {
  * "Seus resultados": o que foi aprovado e os números do que foi postado. É daqui que a próxima pauta aprende.
  * Totais e barras usam todo o histórico da marca neste navegador; a lista mostra só esta pauta.
  */
-export function SeusResultados({ analise, fb }: { analise: Analise; fb: Feedback }) {
+export function SeusResultados({ analise, fb, onAbrir }: { analise: Analise; fb: Feedback; onAbrir?: (ancora: string) => void }) {
   const aprendizados = lerAprendizados(analise);
   const { resumo } = fb;
   const postados = [
@@ -37,9 +37,11 @@ export function SeusResultados({ analise, fb }: { analise: Analise; fb: Feedback
   const vazio = resumo.total === 0 && totalPostados === 0;
 
   return (
-    <div id="resultados" className="scroll-mt-28 border-t border-tinta/10 bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-14">
-        <h3 className="font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">Seus resultados</h3>
+    <section aria-labelledby="titulo-seus-resultados">
+      <div>
+        <h2 id="titulo-seus-resultados" className="font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl">
+          Seus resultados
+        </h2>
 
         {aprendizados && (
           <div className="mt-6 max-w-3xl rounded-3xl border border-tinta/10 bg-papel p-5 sm:p-6">
@@ -75,7 +77,9 @@ export function SeusResultados({ analise, fb }: { analise: Analise; fb: Feedback
         )}
 
         {vazio ? (
-          <p className="mt-3 max-w-xl text-tinta-2">Depois de postar, coloque os números aqui. A próxima pauta aprende com eles.</p>
+          <p className="mt-3 max-w-xl text-tinta-2">
+            Depois de postar, toque em &quot;Já postei&quot; no post aprovado, na aba Calendário, e coloque os números. A próxima pauta aprende com eles.
+          </p>
         ) : (
           <div className="mt-6 grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -123,17 +127,18 @@ export function SeusResultados({ analise, fb }: { analise: Analise; fb: Feedback
             <div>
               <h4 className="font-semibold">Postados desta pauta</h4>
               {postados.length === 0 ? (
-                <p className="mt-2 text-sm text-tinta-2">Depois de postar, clique em &quot;Já postei&quot; no card e coloque os números.</p>
+                <p className="mt-2 text-sm text-tinta-2">Depois de postar, toque em &quot;Já postei&quot; no post aprovado, na aba Calendário.</p>
               ) : (
                 <ul className="mt-3 divide-y divide-tinta/10 border-y border-tinta/10">
                   {postados.map((p) => (
                     <li key={p.id} className="py-3">
-                      <a
-                        href={p.rede.startsWith("Vídeo") ? `#video-${p.id}` : `#post-${p.id}`}
-                        className="line-clamp-1 text-sm font-medium text-tinta hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+                      <button
+                        type="button"
+                        onClick={() => onAbrir?.(p.rede.startsWith("Vídeo") ? `video-${p.id}` : `post-${p.id}`)}
+                        className="line-clamp-1 text-left text-sm font-medium text-tinta hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
                       >
                         {p.titulo}
-                      </a>
+                      </button>
                       <p className="mt-0.5 text-xs tabular-nums text-tinta-2">
                         {p.rede} · {resumoPostado(p.r)}
                         {p.r.curtidas != null && <> · {formatarNumero(p.r.curtidas)} curtidas</>}
@@ -149,6 +154,6 @@ export function SeusResultados({ analise, fb }: { analise: Analise; fb: Feedback
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { RoteiroVideo } from "@/lib/motor/contrato";
 import { AprovarRecusar, JaPostei, Recusado } from "./JaPostei";
+import { CaixaSelecao } from "./PostCard";
 import { BOTAO_SECUNDARIO, CaixaRevisar, SeloFounder, TresLinhas, comLacunas } from "./Partes";
 import { NOMES_REDE_VIDEO, diaCurto, duracaoVideo } from "./rotulos";
 import type { Escolha, Postado } from "./useFeedback";
@@ -15,6 +16,7 @@ export function RoteiroCard({
   onDecidir,
   resultado,
   onResultado,
+  selecao,
 }: {
   roteiro: RoteiroVideo;
   indice: number;
@@ -22,6 +24,8 @@ export function RoteiroCard({
   onDecidir?: (escolha: Escolha | null) => void;
   resultado?: Postado;
   onResultado?: (v: Postado) => void;
+  /** Modo de seleção do calendário: uma caixa no topo do card. */
+  selecao?: { marcado: boolean; onMarcar: (v: boolean) => void };
 }) {
   const [copiado, setCopiado] = useState(false);
   const rede = NOMES_REDE_VIDEO[r.rede] ?? r.rede;
@@ -41,7 +45,8 @@ export function RoteiroCard({
 
   const cabecalho = (
     <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
-      <p className="min-w-0 text-xs text-tinta-3">
+      {selecao && <CaixaSelecao {...selecao} rotulo={`Selecionar o vídeo ${indice + 1}`} />}
+      <p className="min-w-0 flex-1 text-xs text-tinta-3">
         <span className="font-semibold text-tinta">Vídeo {indice + 1}</span> · {rede}
         {duracao && <> · {duracao}</>}
         {r.origem_tema === "founder" && <SeloFounder className="ml-1.5" />}
@@ -65,7 +70,7 @@ export function RoteiroCard({
 
   return (
     <article
-      className={`flex flex-col overflow-hidden rounded-3xl border bg-white ${aprovado ? "border-aprovado ring-2 ring-aprovado/60" : "border-tinta/10"}`}
+      className={`flex flex-col overflow-hidden rounded-3xl border bg-white ${aprovado ? "border-aprovado ring-2 ring-aprovado/60" : selecao?.marcado ? "border-tinta ring-2 ring-tinta/40" : "border-tinta/10"}`}
       style={{ animation: `subir .6s ${Math.min(indice, 8) * 0.06}s both` }}
     >
       {cabecalho}

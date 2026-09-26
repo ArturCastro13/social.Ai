@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { Carregando } from "@/components/estudio/Carregando";
 import { Formulario, type DadosFormulario } from "@/components/estudio/Formulario";
-import { Painel, secoesResultado } from "@/components/estudio/Painel";
+import { useAba } from "@/components/estudio/abas";
+import { Painel } from "@/components/estudio/Painel";
 import { useGeracao } from "@/components/estudio/useGeracao";
 import { TelaAjustes } from "@/components/onboarding/TelaAjustes";
 import type { Preferencias } from "@/lib/motor/contrato";
@@ -61,6 +62,9 @@ export function AppMvp({
   }, [chave]);
 
   const pronto = g.fase === "pronto" && g.analise;
+  const [aba, irAba] = useAba();
+  // Lugar no cabeçalho onde o painel coloca as abas do computador.
+  const [slotAbas, setSlotAbas] = useState<HTMLDivElement | null>(null);
 
   return (
     <div className="flex min-h-full flex-1 flex-col">
@@ -70,8 +74,13 @@ export function AppMvp({
             <Link href="/" className="font-display text-xl font-semibold tracking-[-0.02em]">
               social.Ai
             </Link>
-            {dados && <span className="truncate rounded-full bg-papel-2 px-3 py-1 text-sm text-tinta-2">{g.dominio || (dados.semSite ? "Sem site" : dados.url)}</span>}
+            {dados && (
+              <span className={`truncate rounded-full bg-papel-2 px-3 py-1 text-sm text-tinta-2 ${pronto ? "md:hidden lg:inline" : ""}`}>
+                {g.dominio || (dados.semSite ? "Sem site" : dados.url)}
+              </span>
+            )}
           </div>
+          {pronto && <div ref={setSlotAbas} className="hidden md:block" />}
           {dados && (
             <Link
               href="/app"
@@ -81,19 +90,6 @@ export function AppMvp({
             </Link>
           )}
         </div>
-        {pronto && (
-          <nav aria-label="Seções do resultado" className="mx-auto flex w-full max-w-6xl gap-1 overflow-x-auto px-4 pb-3 sm:px-6">
-            {secoesResultado(g.analise!).map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                className="shrink-0 rounded-full px-3 py-1.5 text-sm text-tinta-2 transition-colors hover:bg-tinta/5 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
-              >
-                {s.nome}
-              </a>
-            ))}
-          </nav>
-        )}
       </header>
 
       <main className="flex-1">
@@ -157,7 +153,7 @@ export function AppMvp({
           </section>
         )}
 
-        {pronto && g.analise && <Painel key={g.analise.id} analise={g.analise} />}
+        {pronto && g.analise && <Painel key={g.analise.id} analise={g.analise} aba={aba} onAba={irAba} slotAbas={slotAbas} />}
       </main>
     </div>
   );

@@ -65,7 +65,13 @@ function gravarHistorico(dominio: string, h: Historico) {
   }
 }
 function enviar(corpo: object) {
-  fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) }).catch(() => undefined);
+  return fetch("/api/feedback", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(corpo) }).catch(() => undefined);
+}
+
+// Fila única de envios: aprovar vários de uma vez manda um registro por vez, sem travar a tela nem disparar dezenas de pedidos juntos.
+let fila: Promise<unknown> = Promise.resolve();
+function enviarEmFila(corpos: object[]) {
+  for (const c of corpos) fila = fila.then(() => enviar(c));
 }
 
 /** (curtidas + comentários + salvos + compartilhamentos) / alcance, a mesma conta de resumirPreferencias. Sem alcance, null. */
@@ -82,11 +88,14 @@ export function engajamento(n: Partial<Numeros> | undefined): number | null {
 export function useFeedback(analise: Analise) {
   const dominio = analise.brand.dominio;
   const [hist, setHist] = useState<Historico>(VAZIO);
+  // Domínio cujo histórico já foi lido: até lá, a aba "Hoje" não sabe qual post ainda está pendente.
+  const [lido, setLido] = useState("");
 
   // Lê depois de montar, para o HTML do servidor e o do navegador baterem.
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setHist(lerHistorico(dominio));
+    setLido(dominio);
   }, [dominio]);
 
   const mudar = useCallback(
@@ -122,6 +131,59 @@ export function useFeedback(analise: Analise) {
       enviar({ tipo: "decisao", ...d });
     },
     [analise.id, analise.nicho, dominio, mudar],
+  );
+
+  /**
+   * Mesma decisão para vários posts e roteiros de uma vez (aprovar todos, aprovar selecionados).
+   * Grava tudo no histórico numa só atualização e manda os posts para a API em fila, um de cada vez.
+   */
+  const decidirVarios = useCallback(
+    (posts: PostGerado[], roteiros: RoteiroVideo[], escolha: Escolha) => {
+      if (!posts.length && !roteiros.length) return;
+      const novas: Decisao[] = posts.map((post) => ({
+        analise_id: analise.id,
+        post_id: post.id,
+        dominio,
+        nicho: analise.nicho,
+        formato: post.formato,
+        template: post.template,
+        padrao: (post.padrao_inspirador ?? "").slice(0, 80),
+        rede: post.rede_principal,
+        decisao: escolha,
+      }));
+      const ids = new Set(posts.map((p) => p.id));
+      const rids = new Set(roteiros.map((r) => r.id));
+      mudar((h) => {
+        const videos = [...h.videos];
+        for (const rot of roteiros) {
+          const k = videos.findIndex((x) => x.roteiro_id === rot.id && x.analise_id === analise.id);
+          const atual = k >= 0 ? videos[k] : { analise_id: analise.id, roteiro_id: rot.id, titulo: rot.titulo, rede: rot.rede };
+          if (k >= 0) videos.splice(k, 1);
+          videos.push({ ...atual, decisao: escolha });
+        }
+        return {
+          ...h,
+          decisoes: [...h.decisoes.filter((x) => !(x.analise_id === analise.id && ids.has(x.post_id))), ...novas],
+          videos: rids.size ? videos : h.videos,
+        };
+      });
+      enviarEmFila(novas.map((d) => ({ tipo: "decisao", ...d })));
+    },
+    [analise.id, analise.nicho, dominio, mudar],
+  );
+
+  /** Desfaz decisões locais (o "desfazer" depois de aprovar vários). A API guarda a última decisão, como no desfazer de um card. */
+  const desfazerVarios = useCallback(
+    (postIds: string[], roteiroIds: string[]) => {
+      const ids = new Set(postIds);
+      const rids = new Set(roteiroIds);
+      mudar((h) => ({
+        ...h,
+        decisoes: h.decisoes.filter((x) => !(x.analise_id === analise.id && ids.has(x.post_id))),
+        videos: h.videos.map((v) => (v.analise_id === analise.id && rids.has(v.roteiro_id) ? { ...v, decisao: undefined } : v)),
+      }));
+    },
+    [analise.id, mudar],
   );
 
   const salvarResultado = useCallback(
@@ -169,7 +231,7 @@ export function useFeedback(analise: Analise) {
   const aprovados =
     Object.values(daAnalise.decisoes).filter((d) => d === "aprovado").length + Object.values(daAnalise.videos).filter((v) => v.decisao === "aprovado").length;
 
-  return { ...daAnalise, resumo, aprovados, decidir, salvarResultado, decidirVideo, salvarVideo };
+  return { ...daAnalise, carregado: lido === dominio, resumo, aprovados, decidir, decidirVarios, desfazerVarios, salvarResultado, decidirVideo, salvarVideo };
 }
 
 export type Feedback = ReturnType<typeof useFeedback>;

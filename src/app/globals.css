@@ -58,6 +58,10 @@ body {
 }
 
 @layer base {
+  /* Fieldset não encolhe abaixo do conteúdo por padrão; sem isso, um link longo empurra a tela para o lado no celular. */
+  fieldset {
+    min-width: 0;
+  }
   :focus-visible {
     outline: 2px solid var(--color-tinta);
     outline-offset: 3px;

@@ -25,6 +25,24 @@ const ORDEM_REDES: Rede[] = ["instagram", "linkedin", "x", "facebook"];
 const CAMPO =
   "w-full rounded-xl border border-tinta/15 bg-white px-3 py-2 text-sm leading-snug text-tinta focus-visible:border-tinta/40 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-pauta";
 
+const ACAO_PEQUENA =
+  "inline-flex h-9 items-center rounded-full px-2.5 text-xs font-semibold text-tinta-2 transition-colors hover:bg-tinta/5 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta";
+
+/** Caixa de seleção redonda do modo "selecionar" do calendário. Usada no post e no roteiro. */
+export function CaixaSelecao({ marcado, onMarcar, rotulo }: { marcado: boolean; onMarcar: (v: boolean) => void; rotulo: string }) {
+  return (
+    <label className="-my-1 -ml-1 flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full focus-within:outline-2 focus-within:outline-offset-1 focus-within:outline-pauta">
+      <input type="checkbox" checked={marcado} onChange={(e) => onMarcar(e.target.checked)} aria-label={rotulo} className="peer sr-only" />
+      <span
+        aria-hidden="true"
+        className={`flex h-5 w-5 items-center justify-center rounded-md border-2 text-[12px] font-bold leading-none transition-colors ${marcado ? "border-aprovado bg-aprovado text-white" : "border-tinta/30 bg-white text-transparent"}`}
+      >
+        ✓
+      </span>
+    </label>
+  );
+}
+
 interface Rascunho {
   gancho: string;
   slides: { titulo: string; texto: string }[];
@@ -43,6 +61,8 @@ export function PostCard({
   onDecidir,
   resultado,
   onResultado,
+  foco = false,
+  selecao,
 }: {
   analise: Analise;
   post: PostGerado;
@@ -55,6 +75,10 @@ export function PostCard({
   onDecidir?: (escolha: Escolha | null) => void;
   resultado?: Postado;
   onResultado?: (v: Postado) => void;
+  /** Aba "Hoje": sem as três linhas e sem Aprovar e Recusar (a aba tem os seus), com as outras ações pequenas. */
+  foco?: boolean;
+  /** Modo de seleção do calendário: uma caixa no topo do card. */
+  selecao?: { marcado: boolean; onMarcar: (v: boolean) => void };
 }) {
   const post = postEditado(original, pers);
   const editado = temEdicao(pers);
@@ -126,7 +150,8 @@ export function PostCard({
 
   const cabecalho = (
     <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
-      <p className="min-w-0 text-xs text-tinta-3">
+      {selecao && <CaixaSelecao {...selecao} rotulo={`Selecionar o post ${indice + 1}`} />}
+      <p className="min-w-0 flex-1 text-xs text-tinta-3">
         <span className="font-semibold text-tinta">Post {indice + 1}</span> · {NOMES_REDE[post.rede_principal]} · {NOMES_TEMPLATE[template]}
         {post.trilho && (
           <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${post.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
@@ -155,17 +180,19 @@ export function PostCard({
 
   return (
     <article
-      className={`group flex flex-col overflow-hidden rounded-3xl border bg-white transition hover:shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] ${aprovado ? "border-aprovado ring-2 ring-aprovado/60" : "border-tinta/10"}`}
-      style={{ animation: `subir .6s ${Math.min(indice, 8) * 0.06}s both` }}
+      className={`group flex flex-col overflow-hidden rounded-3xl border bg-white transition hover:shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] ${aprovado ? "border-aprovado ring-2 ring-aprovado/60" : selecao?.marcado ? "border-tinta ring-2 ring-tinta/40" : "border-tinta/10"}`}
+      style={{ animation: `subir .6s ${foco ? 0 : Math.min(indice, 8) * 0.06}s both` }}
     >
       {cabecalho}
 
-      <TresLinhas
-        enderecamento={post.enderecamento}
-        padrao={post.padrao_referencia?.nome?.trim() || nomeDoPadrao(post.padrao_inspirador)}
-        fonte={post.padrao_referencia?.fonte_url}
-        origem={post.origem_tema}
-      />
+      {!foco && (
+        <TresLinhas
+          enderecamento={post.enderecamento}
+          padrao={post.padrao_referencia?.nome?.trim() || nomeDoPadrao(post.padrao_inspirador)}
+          fonte={post.padrao_referencia?.fonte_url}
+          origem={post.origem_tema}
+        />
+      )}
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}
@@ -369,24 +396,25 @@ export function PostCard({
           </details>
         )}
 
-        {onDecidir && <AprovarRecusar decisao={decisao} onDecidir={onDecidir} />}
-        {aprovado && onResultado && <JaPostei atual={resultado} onSalvar={onResultado} />}
-        <div className="mt-2 grid grid-cols-2 gap-2">
+        {/* Na aba "Hoje", Aprovar e Recusar ficam numa barra fixa da própria aba, sempre à vista. */}
+        {!foco && onDecidir && <AprovarRecusar decisao={decisao} onDecidir={onDecidir} />}
+        {!foco && aprovado && onResultado && <JaPostei atual={resultado} onSalvar={onResultado} />}
+        <div className={foco ? "mt-3 flex flex-wrap justify-center" : "mt-2 grid grid-cols-2 gap-2"}>
           <button
             type="button"
             aria-expanded={!!rascunho}
             onClick={() => setRascunho(rascunho ? null : { gancho: post.gancho, slides: post.slides.map((x) => ({ ...x })), legendas: {} })}
-            className={BOTAO_SECUNDARIO}
+            className={foco ? ACAO_PEQUENA : BOTAO_SECUNDARIO}
           >
             Customizar
           </button>
-          <button type="button" onClick={paraCanva} className={BOTAO_SECUNDARIO} title="Baixa a arte e abre o Canva em outra aba">
-            Editar no Canva
+          <button type="button" onClick={paraCanva} className={foco ? ACAO_PEQUENA : BOTAO_SECUNDARIO} title="Baixa a arte e abre o Canva em outra aba">
+            {foco ? "Canva" : "Editar no Canva"}
           </button>
-          <button type="button" onClick={copiar} className={BOTAO_SECUNDARIO}>
+          <button type="button" onClick={copiar} className={foco ? ACAO_PEQUENA : BOTAO_SECUNDARIO}>
             {copiado ? <span className="text-aprovado">Copiado ✓</span> : "Copiar legenda"}
           </button>
-          <button type="button" onClick={() => onBaixar(base, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)} className={BOTAO_SECUNDARIO}>
+          <button type="button" onClick={() => onBaixar(base, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)} className={foco ? ACAO_PEQUENA : BOTAO_SECUNDARIO}>
             Baixar arte
           </button>
         </div>
