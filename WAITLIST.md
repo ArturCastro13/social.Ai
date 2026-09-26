@@ -10,7 +10,7 @@ O formulário usa `POST /api/lista-de-espera` e grava na tabela `leads` já defi
 
 Publique esta branch em um projeto/preview separado na Vercel e compartilhe a rota `/lista-de-espera`. Não é necessário substituir o deployment do Bruno. Se o fork estiver ligado a um deployment automático, confira a branch de produção antes de promover.
 
-No Supabase, filtre `leads.origem` por `lista-de-espera` para consultar/exportar os contatos. Os campos utilizados são `email`, `origem` e `criado_em`. Esta versão não envia e-mail de confirmação e não faz deduplicação; inscrições repetidas ficam como linhas separadas. Atenda pedidos de saída antes de enviar novas comunicações.
+No Supabase, filtre `leads.origem` por `lista-de-espera` para consultar/exportar os contatos. Os campos utilizados são `empresa` (obrigatório, 2–120 caracteres), `email`, `origem` e `criado_em`. Esta versão não envia e-mail de confirmação e não faz deduplicação; inscrições repetidas ficam como linhas separadas. Atenda pedidos de saída antes de enviar novas comunicações.
 
 ## Verificação antes de divulgar
 

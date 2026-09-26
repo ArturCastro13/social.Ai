@@ -16,7 +16,7 @@ export function FormularioEspera() {
       const resposta = await fetch("/api/lista-de-espera", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: dados.get("email"), website: dados.get("website") }),
+        body: JSON.stringify({ empresa: dados.get("empresa"), email: dados.get("email"), website: dados.get("website") }),
       });
       const resultado = await resposta.json();
       if (!resposta.ok || resultado.ok !== true) throw new Error(resultado.erro || "Não foi possível salvar. Tente novamente.");
@@ -36,11 +36,13 @@ export function FormularioEspera() {
         </div>
       ) : (
         <form onSubmit={enviar} aria-label="Lista de espera" aria-busy={estado === "enviando"}>
+          <label htmlFor="empresa-espera" className="mb-2 block text-sm font-medium">Nome da empresa</label>
+          <input id="empresa-espera" name="empresa" autoComplete="organization" required minLength={2} maxLength={120} placeholder="Como sua empresa se chama?" disabled={estado === "enviando"} className="mb-4 min-h-13 w-full rounded-2xl border border-tinta/20 bg-white px-5 text-base disabled:opacity-60" />
           <label htmlFor="email-espera" className="mb-2 block text-sm font-medium">Seu e-mail</label>
-          <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="flex flex-col gap-3">
             <input id="email-espera" name="email" type="email" autoComplete="email" required maxLength={254} placeholder="voce@suaempresa.com" disabled={estado === "enviando"} aria-describedby="aviso-espera erro-espera" aria-invalid={estado === "erro" || undefined} className="min-h-13 min-w-0 rounded-full border border-tinta/20 bg-white px-5 text-base disabled:opacity-60 sm:flex-1" />
-            <button type="submit" disabled={estado === "enviando"} className="min-h-13 shrink-0 rounded-full bg-pauta px-6 py-3 font-semibold text-white transition-colors hover:bg-pauta-escura disabled:cursor-wait disabled:opacity-70">
-              {estado === "enviando" ? "Salvando…" : "Entrar na lista de espera"}
+            <button type="submit" disabled={estado === "enviando"} className="min-h-13 shrink-0 rounded-full bg-pauta px-6 py-3 font-semibold text-tinta transition-colors hover:bg-pauta-escura hover:text-white motion-reduce:transition-none disabled:cursor-wait disabled:opacity-70">
+              {estado === "enviando" ? "Salvando…" : "Quero entrar na lista"}
             </button>
           </div>
           <div hidden aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
