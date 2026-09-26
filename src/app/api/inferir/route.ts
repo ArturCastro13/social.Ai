@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { readBrand } from "@/lib/brand";
+import { ehSemSite } from "@/lib/brand/sem-site";
 import { erro, json, lerJson, options } from "@/lib/http";
 import { brandParaInferencia, inferirSugestoes } from "@/lib/motor/inferir";
 import type { BrandProfile } from "@/lib/types";
@@ -29,6 +30,7 @@ export async function POST(req: Request) {
   if (!brand) {
     const url = d.url ?? (typeof d.brand?.url === "string" ? d.brand.url : "");
     if (!url) return erro("O objeto brand veio incompleto. Envie o resultado de /api/brand ou só a url.", 400);
+    if (ehSemSite(url)) return erro("Os dados da empresa sem site vieram incompletos. Volte e preencha nome e descrição de novo.", 400);
     try {
       brand = await readBrand({ url });
     } catch (e) {

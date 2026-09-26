@@ -80,6 +80,8 @@ export function nomeDaMarca(f: FontesNome): string {
  * pode ter vindo de um pedaço genérico do title (ex.: "Solução para empresas").
  */
 export function nomeDoPerfil(b: BrandProfile): string {
+  // Sem site o nome é o que o founder digitou; o domínio é interno e não diz nada.
+  if (b.sem_site && b.nome?.trim()) return b.nome.trim();
   return nomeDaMarca({
     siteName: b.nome,
     title: b.title,

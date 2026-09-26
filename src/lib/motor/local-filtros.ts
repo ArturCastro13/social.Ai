@@ -8,6 +8,7 @@ import type { ExtrasPost, ObjetivoId, Preferencias } from "./contrato";
 import { distribuirFrequencia, formatosDoApp, MOTOR_DO_FORMATO, postsPorSemana } from "./mapa";
 import type { ResultadoMotor } from "./saida";
 import { intercalar, postsDoFounder, referenciaDoPadrao } from "./local-founder";
+import { ordenarPorAprendizado } from "./aprendizados";
 
 type PostIA = AnaliseIA["posts"][number];
 
@@ -46,6 +47,8 @@ const FORMATOS_FOUNDER: Formato[] = ["bastidor-founder", "print-tweet", "citacao
 export interface OpcoesFiltroLocal {
   quantidade: number;
   marca: string;
+  /** Nota pelo que funcionou com o founder (pontuacaoAprendida). Maior sobe; empate mantém a ordem. */
+  nota?: (p: PostIA) => number;
 }
 
 /**
@@ -70,6 +73,8 @@ export function filtrarLocal(saida: AnaliseIA, pref: Preferencias, op: OpcoesFil
   if (pref.formatos_permitidos.includes("noticia_comentada") && !pref.noticias.length) {
     avisos.push("Notícia comentada precisa de notícias com link e data. Sem elas, esse formato ficou de fora.");
   }
+  // O que ficou acima da mediana do founder sobe; o que ficou abaixo desce. Sem número, nada muda.
+  if (op.nota) candidatos = ordenarPorAprendizado(candidatos, op.nota);
   if (saida.posts.length > semProibidos.length) {
     avisos.push("Deixamos de fora ideias que tocavam em assuntos da sua lista de nunca postaria.");
   }

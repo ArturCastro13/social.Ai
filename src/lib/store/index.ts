@@ -126,7 +126,13 @@ function supabaseStore(client: SupabaseClient): Store {
       return ((r ?? []) as Decisao[]).reverse();
     },
     async salvarResultado(r) {
-      ok(await client.from("metricas").insert(r));
+      const res = await client.from("metricas").insert(r);
+      // Banco sem a coluna compartilhamentos (migração ainda não rodada): salva o resto.
+      if (res.error && /compartilhamentos/.test(res.error.message)) {
+        const { compartilhamentos: _, ...semCompart } = r;
+        void _;
+        ok(await client.from("metricas").insert(semCompart));
+      } else ok(res);
     },
     async listarResultados(dominio) {
       // As 2000 mais recentes, devolvidas da mais antiga para a mais nova (a última de cada post prevalece).

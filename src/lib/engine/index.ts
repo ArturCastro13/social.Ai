@@ -27,6 +27,19 @@ import {
   type ContextoEnderecamento,
 } from "@/lib/motor/enderecamento";
 import { objetivosDoSite } from "@/lib/motor/inferir";
+import { garantirRoteiros } from "@/lib/motor/roteiros-locais";
+import {
+  aprendizadosLocais,
+  calcularAprendizados,
+  desempenhoDosPosts,
+  ordenarPorAprendizado,
+  pontuacaoAprendida,
+  temAprendizado,
+} from "@/lib/motor/aprendizados";
+import { diaDaSemana } from "@/lib/motor/saida";
+import type { Decisao, ResultadoPost } from "@/lib/feedback";
+import { ultimaPorPost } from "@/lib/feedback";
+import type { CalendarioItem } from "@/lib/types";
 import { textoDaMarca } from "./nicho";
 
 export const LIMITE_POSTS = 12;
@@ -56,10 +69,21 @@ export function hashPreferencias(p: Preferencias): string {
   return createHash("sha256").update(JSON.stringify(ordenar(p))).digest("base64url").slice(0, 12);
 }
 
-/** Chave do cache: a URL e, quando houver, o hash das preferências (preferências diferentes = análise diferente). */
-export function chaveCache(url: string, preferencias?: Preferencias | null): string {
+/** Hash curto dos resultados informados (o último de cada post). Vazio quando não há nenhum. */
+export function hashResultados(resultados: ResultadoPost[] = []): string {
+  const rs = ultimaPorPost(resultados).map((r) => [r.post_id, r.curtidas, r.comentarios, r.salvamentos, r.alcance, r.compartilhamentos ?? null]);
+  return rs.length ? createHash("sha256").update(JSON.stringify(rs)).digest("base64url").slice(0, 10) : "";
+}
+
+/**
+ * Chave do cache: a URL, o hash das preferências (preferências diferentes = análise diferente) e, quando o founder
+ * já informou números, o hash dos resultados: plano feito antes das métricas não é servido depois delas.
+ */
+export function chaveCache(url: string, preferencias?: Preferencias | null, resultados?: ResultadoPost[]): string {
   const base = chaveUrl(url);
-  return preferencias ? `${base}#m:${hashPreferencias(preferencias)}` : base;
+  const comPref = preferencias ? `${base}#m:${hashPreferencias(preferencias)}` : base;
+  const r = hashResultados(resultados);
+  return r ? `${comPref}#r:${r}` : comPref;
 }
 
 function redesAtivas(b: BrandProfile): Rede[] {
@@ -158,7 +182,6 @@ const PRAZO_IA_MS = 85_000;
 export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise<Analise> {
   const quantidade = Math.min(LIMITE_POSTS, Math.max(1, Math.round(op.quantidade)));
   const pref = op.preferencias ?? null;
-  const urlChave = chaveCache(brand.url, pref);
   const llm = provedorConfigurado();
 
   // 1. Empresas de exemplo: resposta instantânea e idêntica em qualquer cenário de palco.
@@ -196,11 +219,18 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       : [];
     const posts = intercalar(semTravessao(doFounder), doSite).slice(0, quantidade);
     const total = doSite.length + doFounder.length;
+    const calendario = montarCalendario(posts, demo.estrategia);
+    // Roteiros de vídeo montados na hora, sem IA: das respostas do founder ou dos posts da demo.
+    const comRoteiros = garantirRoteiros(
+      { ...demo, id: `demo-${demo.id}`, posts, calendario },
+      { conhecimento: pref?.conhecimento_founder, perfil_alvo: pref?.perfil_alvo, publico: ctxDemo.publico },
+    );
     const pronta: Analise = {
       ...demo,
       id: `demo-${demo.id}`,
       posts,
-      calendario: montarCalendario(posts, demo.estrategia),
+      calendario,
+      roteiros: semTravessao(comRoteiros.roteiros),
       origem: "demo",
       avisos: [
         "Exemplo pré-processado do modo demo, gerado a partir do site público da empresa.",
@@ -210,6 +240,13 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     };
     return aplicarLinkDestino(pronta, pref?.link_destino);
   }
+
+  // Histórico da marca: decisões, números informados e as análises de origem. Entra na chave do cache,
+  // no CONTEXTO da IA e na ordem do motor local.
+  const hist = await historicoDaMarca(brand);
+  const desempenho = desempenhoDosPosts(hist.resultados, hist.postsAnteriores, hist.calendarioAnterior);
+  const calc = calcularAprendizados(desempenho);
+  const urlChave = chaveCache(brand.url, pref, hist.resultados);
 
   // 2. Cache: mesma URL e mesma quantidade não pagam de novo.
   if (!op.forcarNovo) {
@@ -222,12 +259,19 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
           ...enderecarSite(true, c.contexto_inferido?.publico),
           gatilho: c.origem === "local" ? "site" : "gancho",
         });
-        return {
-          ...comEnd,
-          brand: { ...c.brand, paleta: brand.paleta, handles: brand.handles, fontes: brand.fontes },
-          calendario: montarCalendario(c.posts, c.estrategia),
-          origem: "cache",
-        };
+        const calendario = montarCalendario(c.posts, c.estrategia);
+        const comRoteiros = garantirRoteiros(
+          { ...comEnd, calendario },
+          { conhecimento: pref?.conhecimento_founder, perfil_alvo: pref?.perfil_alvo, publico: pref?.publico_alvo, reagendar: true },
+        );
+        return aplicarLinkDestino(
+          {
+            ...comRoteiros,
+            brand: { ...c.brand, paleta: brand.paleta, handles: brand.handles, fontes: brand.fontes },
+            origem: "cache",
+          },
+          pref?.link_destino,
+        );
       }
     } catch {
       /* cache indisponível não impede a análise */
@@ -267,25 +311,30 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
 
       if (pref) {
         const redes = redesDoMotor(brand, pref);
-        const ctx = await contextoDoMotor(brand, pref, { palpite, quantidade, redes, referencias: contexto });
+        const ctx = await contextoDoMotor(brand, pref, hist, { palpite, quantidade, redes, referencias: contexto });
+        // Dia e horário com número real do founder: só neles o modelo pode dizer "sua audiência".
+        const horariosComDado = desempenho.flatMap((d) => {
+          const dia = diaDaSemana(d.dia_semana);
+          return d.engajamento_pct !== null && dia !== null && d.horario ? [`${dia}|${d.horario}`] : [];
+        });
         sistema = SISTEMA_MOTOR;
         prompt = montarPromptMotor(ctx);
         interpretar = (txt) => {
           const bruto = saidaMotorSchema.safeParse(extrairJson(txt));
           if (!bruto.success) return { erro: erroZod(bruto.error.issues) };
-          const r = saidaParaAnaliseIA(bruto.data, { brand, palpite, quantidade, redes, preferencias: pref, padroes: contexto.map((c) => c.padrao) });
+          const r = saidaParaAnaliseIA(bruto.data, { brand, palpite, quantidade, redes, preferencias: pref, padroes: contexto.map((c) => c.padrao), horariosComDado });
           const v = analiseIASchema.safeParse(r.analise);
           if (!v.success) return { erro: erroZod(v.error.issues) };
           return { saida: v.data, motor: { ...r, analise: v.data } };
         };
       } else {
-        let preferencias = "";
-        try {
-          const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
-          preferencias = textoPreferencias(resumirPreferencias(decisoes, resultados));
-        } catch {
-          /* sem histórico, segue */
-        }
+        const aprendido = aprendizadosLocais(calc);
+        const preferencias = [
+          textoPreferencias(resumirPreferencias(hist.decisoes, hist.resultados)),
+          aprendido ? `O que os números dos posts publicados mostram:\n- ${[...aprendido.funcionou, ...aprendido.nao_funcionou].join("\n- ")}\n${aprendido.ajuste}` : "",
+        ]
+          .filter(Boolean)
+          .join("\n\n");
         prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand), preferencias });
         interpretar = (txt) => {
           const parsed = analiseIASchema.safeParse(extrairJson(txt));
@@ -323,13 +372,22 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
 
   if (!saida) {
     const contexto = await contextoViralDoNicho(palpite, 10);
+    // O que funcionou com o founder sobe na fila (padrões e posts); sem número informado, a ordem não muda.
+    const nota = pontuacaoAprendida(calc);
+    const padroes = ordenarPorAprendizado(
+      contexto.map((c) => c.padrao),
+      (p) => nota({ formato: p.formato, padrao_inspirador: p.id }),
+    );
     if (pref) {
       // Gera candidatos a mais para sobrar post depois dos filtros de formato e proibição.
-      const bruto = analiseLocal(brand, palpite, contexto.map((c) => c.padrao), Math.min(36, quantidade * 3), redesDoMotor(brand, pref));
-      motor = filtrarLocal(bruto, pref, { quantidade, marca: nomeDoPerfil(brand) });
+      const bruto = analiseLocal(brand, palpite, padroes, Math.min(36, quantidade * 3), redesDoMotor(brand, pref));
+      motor = filtrarLocal(bruto, pref, { quantidade, marca: nomeDoPerfil(brand), nota });
       saida = motor.analise;
+    } else if (temAprendizado(calc)) {
+      const bruto = analiseLocal(brand, palpite, padroes, Math.min(36, quantidade * 3), redesAtivas(brand));
+      saida = { ...bruto, posts: ordenarPorAprendizado(bruto.posts, nota).slice(0, quantidade) };
     } else {
-      saida = analiseLocal(brand, palpite, contexto.map((c) => c.padrao), quantidade, redesAtivas(brand));
+      saida = analiseLocal(brand, palpite, padroes, quantidade, redesAtivas(brand));
     }
     if (!llm) avisos.push("Modo demo: sem chave de IA configurada, a estratégia foi montada pelo motor local a partir do texto do site.");
   }
@@ -341,7 +399,20 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     : enderecarSite(false, motor?.extrasAnalise.contexto_inferido?.publico);
   const base = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos, motor ? undefined : ctxEnd);
   const comExtras = garantirEnderecamento(motor ? aplicarExtras(base, motor) : base, ctxEnd);
-  const analise = aplicarLinkDestino({ ...comExtras, posts: comExtras.posts.map(comReferencia) }, pref?.link_destino);
+  const comRoteiros = garantirRoteiros(
+    { ...comExtras, posts: comExtras.posts.map(comReferencia) },
+    { conhecimento: pref?.conhecimento_founder, perfil_alvo: pref?.perfil_alvo, publico: ctxEnd.publico },
+  );
+  const aprendizados = comRoteiros.aprendizados ?? aprendizadosLocais(calc) ?? undefined;
+  const analise = aplicarLinkDestino(
+    {
+      ...comRoteiros,
+      roteiros: semTravessao(comRoteiros.roteiros),
+      ...(aprendizados ? { aprendizados: semTravessao(aprendizados) } : {}),
+      ...(brand.sem_site ? { sem_site: true } : {}),
+    },
+    pref?.link_destino,
+  );
   try {
     // Só análises feitas pela IA entram no cache; as do motor local são baratas e podem melhorar depois.
     if (provedor) await store.salvarAnalise(analise, urlChave, op.email, quantidade);
@@ -352,25 +423,40 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   return analise;
 }
 
-/** Busca o que o CONTEXTO do motor precisa fora do brand: histórico do founder, posts anteriores e inspirações. */
+export interface HistoricoMarca {
+  decisoes: Decisao[];
+  resultados: ResultadoPost[];
+  postsAnteriores: PostGerado[];
+  calendarioAnterior: CalendarioItem[];
+}
+
+/** Decisões, números informados e as análises em que os posts nasceram (no máximo 5 leituras). Falha vira vazio. */
+export async function historicoDaMarca(brand: BrandProfile): Promise<HistoricoMarca> {
+  try {
+    const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
+    const ids = [...new Set([...decisoes, ...resultados].map((d) => d.analise_id))].slice(-5);
+    const analises = await Promise.all(ids.map((i) => store.buscarAnalise(i).catch(() => null)));
+    return {
+      decisoes: decisoes ?? [],
+      resultados: resultados ?? [],
+      postsAnteriores: analises.flatMap((a) => a?.posts ?? []),
+      calendarioAnterior: analises.flatMap((a) => a?.calendario ?? []),
+    };
+  } catch {
+    return { decisoes: [], resultados: [], postsAnteriores: [], calendarioAnterior: [] };
+  }
+}
+
+/** Monta o CONTEXTO do motor: histórico já lido, inspirações e concorrentes lidos em paralelo pelo fetch seguro. */
 async function contextoDoMotor(
   brand: BrandProfile,
   pref: Preferencias,
+  historico: HistoricoMarca,
   x: { palpite: Nicho; quantidade: number; redes: Rede[]; referencias: Awaited<ReturnType<typeof contextoViralDoNicho>> },
 ) {
-  const [historico, inspiracoesExtraidas] = await Promise.all([
-    (async () => {
-      try {
-        const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
-        // Ganchos e redes das decisões vêm das análises em que os posts nasceram (no máximo 5 leituras).
-        const ids = [...new Set([...decisoes, ...resultados].map((d) => d.analise_id))].slice(-5);
-        const analises = await Promise.all(ids.map((i) => store.buscarAnalise(i).catch(() => null)));
-        return { decisoes, resultados, postsAnteriores: analises.flatMap((a) => a?.posts ?? []) };
-      } catch {
-        return { decisoes: [], resultados: [], postsAnteriores: [] };
-      }
-    })(),
+  const [inspiracoesExtraidas, concorrenciaExtraida] = await Promise.all([
     extrairInspiracoes(pref.inspiracoes),
+    extrairInspiracoes((pref.concorrentes ?? []).map((url) => ({ url }))),
   ]);
   return montarContexto(brand, pref, {
     nicho: x.palpite,
@@ -378,6 +464,7 @@ async function contextoDoMotor(
     redes: x.redes,
     referencias: x.referencias,
     inspiracoesExtraidas,
+    concorrenciaExtraida,
     ...historico,
   });
 }

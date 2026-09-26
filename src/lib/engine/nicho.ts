@@ -1,4 +1,4 @@
-import type { BrandProfile, Nicho } from "@/lib/types";
+import { NICHOS, type BrandProfile, type Nicho } from "@/lib/types";
 
 // Palpite de nicho sem IA, por palavras-chave no texto do site. A chamada de IA confirma ou corrige.
 const PALAVRAS: Record<Nicho, string[]> = {
@@ -44,6 +44,9 @@ export function palpiteNicho(b: BrandProfile): { nicho: Nicho; pontuacao: Record
       return acc + Math.min(n, 4) * (p.includes(" ") ? 2 : 1);
     }, 0);
   }
+  // Sem site, o founder escolheu o nicho: vale mais que o palpite pelo texto (uma ou duas frases).
+  const informado = NICHOS.find((n) => n.id === b.nicho_informado)?.id;
+  if (informado) return { nicho: informado, pontuacao };
   // Empate: um nicho específico ganha de saas-b2b, que é o genérico (ex.: plataforma de e-commerce).
   const nicho = (Object.entries(pontuacao) as [Nicho, number][]).sort(
     (a, b) => b[1] - a[1] || Number(a[0] === "saas-b2b") - Number(b[0] === "saas-b2b"),

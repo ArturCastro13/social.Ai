@@ -33,6 +33,7 @@ const Entrada = z.discriminatedUnion("tipo", [
     comentarios: numero,
     salvamentos: numero,
     alcance: numero,
+    compartilhamentos: numero.optional(),
   }),
 ]);
 

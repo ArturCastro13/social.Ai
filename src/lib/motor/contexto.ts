@@ -2,7 +2,7 @@
 // perfil de marca (lido sem IA), preferências do onboarding, base curada e histórico do founder.
 // O JSON sai compacto (textos cortados, listas curtas) para custar pouco token.
 import * as cheerio from "cheerio";
-import type { BrandProfile, Nicho, PadraoViral, PostGerado, Rede, ViralItem } from "@/lib/types";
+import type { BrandProfile, CalendarioItem, Nicho, PadraoViral, PostGerado, Rede, ViralItem } from "@/lib/types";
 import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import { ultimaPorPost } from "@/lib/feedback";
 import { fetchLimited, normalizeUrl } from "@/lib/brand/fetch";
@@ -11,6 +11,7 @@ import { textoDaMarca } from "@/lib/engine/nicho";
 import { conhecimentoPreenchido, tomDeVozSchema, type Preferencias, type TomDeVoz } from "./contrato";
 import { MOTOR_DO_FORMATO, nichoParaMotor, type NichoMotor } from "./mapa";
 import { publicoAlvoDoSite } from "./enderecamento";
+import { calcularAprendizados, desempenhoDosPosts, type AprendizadosCalculados } from "./aprendizados";
 
 type Arroba = { instagram: string; linkedin: string; x: string };
 
@@ -35,20 +36,43 @@ export interface ContextoMotor {
   redes: Rede[];
   proibicoes: string[];
   inspiracoes: { url: string; tipo: string; descricao_extraida: string }[];
+  /** Concorrentes que o founder acompanha. Só para achar ganchos, ângulos e brechas; nunca aparece no resultado. */
+  concorrencia: { url: string; descricao_extraida: string }[];
+  /** Posts publicados com os números que o founder informou, e o que se sabe de cada um. */
   desempenho_proprio: {
     rede: string;
     post_url: string;
     formato: string;
     gancho: string;
+    origem_tema: string;
+    padrao: string;
+    objetivo: string;
+    dia_semana: string;
+    horario: string;
     curtidas: number | null;
     comentarios: number | null;
     compartilhamentos: number | null;
     salvamentos: number | null;
     alcance: number | null;
+    /** Interações sobre alcance, em %. null sem alcance. */
+    engajamento_pct: number | null;
     data_hora: string;
   }[];
+  /** Médias por formato, origem, padrão e rede comparadas com a mediana do próprio founder. Sem benchmark externo. */
+  aprendizados_calculados: AprendizadosCalculados;
   insights_audiencia: { horarios_pico: null; fonte: "nao_disponivel" };
-  referencias_nicho: { padrao: string; gancho_modelo: string; formato: string; rede: string; metrica_verificada: boolean; fonte_url: string }[];
+  /** Por que cada viral do nicho funcionou: gancho real, estrutura e mecanismo. Para adaptar o mecanismo, nunca as palavras. */
+  referencias_nicho: {
+    padrao: string;
+    gancho_modelo: string;
+    formato: string;
+    rede: string;
+    metrica_verificada: boolean;
+    fonte_url: string;
+    texto_gancho: string;
+    estrutura: string[];
+    por_que_funciona: string;
+  }[];
   benchmarks_publicacao: { por_rede: Record<string, never>; fonte: "nao_disponivel" };
   noticias: { titulo: string; resumo: string; url: string; data: string }[];
   historico_preferencias: { aprovados: ItemHistorico[]; recusados: ItemHistorico[] };
@@ -72,8 +96,12 @@ export interface ExtrasContexto {
   resultados?: ResultadoPost[];
   /** Posts de análises anteriores, para achar gancho e rede de decisões e resultados. */
   postsAnteriores?: PostGerado[];
+  /** Calendário das análises anteriores, para saber dia e horário em que cada post saiu. */
+  calendarioAnterior?: CalendarioItem[];
   /** url da inspiração → og:title + og:description (de extrairInspiracoes). */
   inspiracoesExtraidas?: Record<string, string>;
+  /** url do concorrente → og:title + og:description (mesma leitura das inspirações). */
+  concorrenciaExtraida?: Record<string, string>;
 }
 
 const ARROBA_VAZIO: Arroba = { instagram: "", linkedin: "", x: "" };
@@ -130,6 +158,14 @@ export function redesDoMotor(b: BrandProfile, p?: Preferencias | null): Rede[] {
   return r.length ? r : ["linkedin", "instagram"];
 }
 
+/** Itens curados pelo painel podem trazer travessão; o CONTEXTO não. */
+const semTraco = (s: string) => s.replace(/\s*[—–]\s*/g, ", ").trim();
+
+/**
+ * Referências do nicho com o porquê de cada viral: gancho real, os 4 primeiros passos da estrutura e o
+ * mecanismo, cortados para o JSON ficar compacto. A base curada hoje só tem posts estáticos e carrosséis,
+ * sem vídeo: os roteiros de vídeo adaptam esses mesmos padrões de gancho (o gancho vira a fala de abertura).
+ */
 function referenciasDoNicho(refs: ExtrasContexto["referencias"] = []): ContextoMotor["referencias_nicho"] {
   const out: ContextoMotor["referencias_nicho"] = [];
   for (const { padrao, exemplos } of refs) {
@@ -142,6 +178,9 @@ function referenciasDoNicho(refs: ExtrasContexto["referencias"] = []): ContextoM
         rede: e?.rede ?? "",
         metrica_verificada: e?.status === "verificado",
         fonte_url: e?.link_fonte ?? "",
+        texto_gancho: corte(semTraco(e?.texto_gancho ?? ""), 200),
+        estrutura: (e?.estrutura ?? []).slice(0, 4).map((x) => corte(semTraco(x), 100)),
+        por_que_funciona: corte(semTraco(e?.por_que_funciona || padrao.descricao || ""), 200),
       });
     }
   }
@@ -163,25 +202,25 @@ function historico(decisoes: Decisao[], posts: Map<string, PostGerado>): Context
   };
 }
 
-function desempenho(resultados: ResultadoPost[], posts: Map<string, PostGerado>): ContextoMotor["desempenho_proprio"] {
-  return ultimaPorPost(resultados)
-    .filter((r) => [r.curtidas, r.comentarios, r.salvamentos, r.alcance].some((v) => v !== null && v !== undefined))
-    .slice(-10)
-    .map((r) => {
-      const p = posts.get(r.post_id);
-      return {
-        rede: p?.rede_principal ?? "",
-        post_url: "",
-        formato: MOTOR_DO_FORMATO[r.formato] ?? r.formato,
-        gancho: corte(p?.gancho ?? "", 140),
-        curtidas: r.curtidas ?? null,
-        comentarios: r.comentarios ?? null,
-        compartilhamentos: null,
-        salvamentos: r.salvamentos ?? null,
-        alcance: r.alcance ?? null,
-        data_hora: "",
-      };
-    });
+function desempenho(ds: ReturnType<typeof desempenhoDosPosts>): ContextoMotor["desempenho_proprio"] {
+  return ds.slice(-12).map((d) => ({
+    rede: d.rede,
+    post_url: "",
+    formato: MOTOR_DO_FORMATO[d.formato] ?? d.formato,
+    gancho: corte(d.gancho, 140),
+    origem_tema: d.origem_tema,
+    padrao: d.padrao,
+    objetivo: d.objetivo,
+    dia_semana: d.dia_semana,
+    horario: d.horario,
+    curtidas: d.curtidas,
+    comentarios: d.comentarios,
+    compartilhamentos: d.compartilhamentos,
+    salvamentos: d.salvamentos,
+    alcance: d.alcance,
+    engajamento_pct: d.engajamento_pct,
+    data_hora: "",
+  }));
 }
 
 function conhecimentoDoContexto(p: Preferencias | null): ContextoMotor["conhecimento_founder"] {
@@ -197,6 +236,7 @@ function conhecimentoDoContexto(p: Preferencias | null): ContextoMotor["conhecim
 export function montarContexto(brand: BrandProfile, preferencias?: Preferencias | null, extras: ExtrasContexto = {}): ContextoMotor {
   const p = preferencias ?? null;
   const posts = new Map((extras.postsAnteriores ?? []).map((x) => [x.id, x]));
+  const ds = desempenhoDosPosts(extras.resultados ?? [], extras.postsAnteriores ?? [], extras.calendarioAnterior ?? []);
   const insp = extras.inspiracoesExtraidas ?? {};
   return {
     perfil_alvo: p?.perfil_alvo ?? "empresa",
@@ -227,7 +267,9 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
     redes: extras.redes ?? redesDoMotor(brand, p),
     proibicoes: p?.proibicoes ?? [],
     inspiracoes: (p?.inspiracoes ?? []).map((i) => ({ url: i.url, tipo: i.tipo, descricao_extraida: corte(insp[i.url] ?? "", 300) })),
-    desempenho_proprio: desempenho(extras.resultados ?? [], posts),
+    concorrencia: (p?.concorrentes ?? []).map((url) => ({ url, descricao_extraida: corte(extras.concorrenciaExtraida?.[url] ?? "", 300) })),
+    desempenho_proprio: desempenho(ds),
+    aprendizados_calculados: calcularAprendizados(ds),
     insights_audiencia: { horarios_pico: null, fonte: "nao_disponivel" },
     referencias_nicho: referenciasDoNicho(extras.referencias),
     benchmarks_publicacao: { por_rede: {}, fonte: "nao_disponivel" },

@@ -141,6 +141,16 @@ export interface RoteiroVideo {
   precisa_revisao?: string[];
 }
 
+/** Por que os posts publicados funcionaram ou não, a partir dos números que o founder informou. */
+export interface Aprendizados {
+  /** O que ficou acima da mediana do founder, com a métrica e o tamanho da amostra. */
+  funcionou: string[];
+  /** O que ficou abaixo da mediana do founder. */
+  nao_funcionou: string[];
+  /** O que muda neste lote por causa disso. */
+  ajuste: string;
+}
+
 /** Campos extras que o motor novo adiciona à análise. */
 export interface ExtrasAnalise {
   contexto_inferido?: { nicho: string; publico: string; tom_resumo: string; objetivos: string[]; confianca: "alta" | "media" | "baixa" };
@@ -152,6 +162,8 @@ export interface ExtrasAnalise {
   roteiros?: RoteiroVideo[];
   /** A análise foi montada sem site, só com o que o founder contou. */
   sem_site?: boolean;
+  /** Ausente quando nenhum post publicado tem alcance informado. */
+  aprendizados?: Aprendizados;
 }
 
 /** Só as respostas preenchidas; null quando o founder pulou as três. */

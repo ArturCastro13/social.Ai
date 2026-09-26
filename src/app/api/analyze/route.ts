@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { readBrand } from "@/lib/brand";
+import { ehSemSite } from "@/lib/brand/sem-site";
 import { analisar, LIMITE_POSTS } from "@/lib/engine";
 import { adminOk, erro, json, lerJson, options } from "@/lib/http";
 import { preferenciasSchema } from "@/lib/motor/contrato";
@@ -66,6 +67,8 @@ export async function POST(req: Request) {
     else {
       const url = d.url ?? (typeof d.brand?.url === "string" ? d.brand.url : "");
       if (!url) return erro("O objeto brand veio incompleto. Envie o resultado de /api/brand ou só a url.", 400);
+      // Marca sem site não tem página para ler: o perfil precisa vir inteiro do onboarding.
+      if (ehSemSite(url)) return erro("Os dados da empresa sem site vieram incompletos. Volte e preencha nome e descrição de novo.", 400);
       brand = await readBrand({ url, instagram: d.instagram, linkedin: d.linkedin, x: d.x, facebook: d.facebook });
     }
   } catch (e) {

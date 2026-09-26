@@ -2,14 +2,15 @@
 // escolheu no onboarding. Nenhum outro rastreamento, nenhuma promessa de conversão.
 import type { Analise, PostGerado, Rede } from "@/lib/types";
 import { corte } from "@/lib/engine/texto-local";
+import type { RoteiroVideo } from "./contrato";
 
 export const CHAMADA_LINK = "Quer conversar sobre isso?";
 
 /** Limite de caracteres por rede (o do X e o do LinkedIn são duros; os outros são generosos). */
-const LIMITE: Record<Rede, number> = { x: 280, linkedin: 3000, instagram: 2200, facebook: 2200 };
+const LIMITE: Record<Rede | RoteiroVideo["rede"], number> = { x: 280, linkedin: 3000, instagram: 2200, facebook: 2200, tiktok: 2200, youtube: 2200 };
 
 /** O link com utm_source da rede, utm_medium social, utm_campaign socialai e utm_content do post. Mantém os parâmetros que já existiam. null se o link for inválido. */
-export function linkComUtm(link: string, rede: Rede, postId: string): string | null {
+export function linkComUtm(link: string, rede: Rede | RoteiroVideo["rede"], postId: string): string | null {
   let u: URL;
   try {
     u = new URL(link.trim());
@@ -49,11 +50,23 @@ function aplicarNoPost(p: PostGerado, link: string): PostGerado {
   return { ...p, legendas };
 }
 
+/** Roteiro de gerar_clientes: a legenda do vídeo ganha a chamada e o link com utm_source da rede do vídeo. */
+function aplicarNoRoteiro(r: RoteiroVideo, link: string): RoteiroVideo {
+  if (r.enderecamento?.objetivo !== "gerar_clientes") return r;
+  const url = linkComUtm(link, r.rede, r.id);
+  if (!url || typeof r.legenda !== "string") return r;
+  return { ...r, legenda: comLink(r.legenda, url, LIMITE[r.rede] ?? 2200) };
+}
+
 /**
  * Posts com objetivo gerar_clientes ganham, em cada legenda, a chamada e o link com UTM da rede daquela legenda.
- * Os outros objetivos ficam como estão. Link inválido ou vazio: nada muda. Idempotente.
+ * Roteiros de vídeo de gerar_clientes recebem o mesmo na legenda. Os outros objetivos ficam como estão. Link inválido ou vazio: nada muda. Idempotente.
  */
 export function aplicarLinkDestino(analise: Analise, link: string | null | undefined): Analise {
   if (!link?.trim() || !linkComUtm(link, "x", "teste")) return analise;
-  return { ...analise, posts: analise.posts.map((p) => aplicarNoPost(p, link)) };
+  return {
+    ...analise,
+    posts: analise.posts.map((p) => aplicarNoPost(p, link)),
+    ...(analise.roteiros ? { roteiros: analise.roteiros.map((r) => aplicarNoRoteiro(r, link)) } : {}),
+  };
 }

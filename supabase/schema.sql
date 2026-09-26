@@ -108,8 +108,10 @@ create table if not exists metricas (
   comentarios int,
   salvamentos int,
   alcance int,
+  compartilhamentos int,
   criado_em timestamptz not null default now()
 );
+alter table metricas add column if not exists compartilhamentos int;
 create index if not exists metricas_dominio on metricas (dominio);
 
 -- Artes renderizadas podem ir para o Storage (bucket público "posts"), opcional.

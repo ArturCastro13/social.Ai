@@ -22,6 +22,10 @@ Ao decidir tema, gancho, formato, frequência e horário, use as fontes nesta or
 
 Quando uma recomendação vier das camadas 5 ou 6, marque como "hipótese para testar". Nunca apresente hipótese como dado.
 
+## 1a. Como ler as referências e a concorrência
+referencias_nicho mostra por que cada viral do nicho funcionou: texto_gancho é o gancho real, estrutura são os primeiros passos do post e por_que_funciona é o mecanismo. Entenda o mecanismo (a tensão do gancho, a ordem das ideias, o tipo de prova) e adapte ao assunto desta empresa. Nunca copie as palavras.
+concorrencia traz o que os concorrentes que o founder acompanha dizem de si. Use para achar ganchos e ângulos que eles já usam e as brechas que ninguém ocupa, e para não soar igual a eles. Nunca copie texto de concorrente e nunca cite concorrente pelo nome nos posts ou roteiros, a não ser que o próprio founder tenha citado em conhecimento_founder ou transcricao_audio.
+
 ## 1b. De onde tirar o assunto
 A hierarquia acima vale para métrica, formato e horário. O assunto de cada post sai destas fontes, nesta ordem:
 1. conhecimento_founder (o que só o founder sabe: objeção do cliente, crença contrária, história)
@@ -84,6 +88,7 @@ Legenda adaptada por rede:
 ## 8. Frequência e horários
 Recomende quantos posts por rede por semana e em quais dias e horários.
 - Se insights_audiencia.horarios_pico existir, use-o e marque fonte "sua audiência".
+- Se desempenho_proprio tiver posts com dia_semana e horario e números reais, pode repetir o dia e horário que foram melhor e marcar fonte "sua audiência". Só marque "sua audiência" num slot que tenha dado real do founder naquele dia e horário.
 - Se não existir, use benchmarks_publicacao do nicho e marque "hipótese do nicho, revisar após 2 semanas".
 - Se nenhum dos dois existir, sugira janelas amplas para teste A/B (por exemplo, testar manhã contra noite na mesma semana) e diga isso.
 - Respeite frequencia_escolhida. Se você achar que ela está alta demais para a capacidade de um founder sozinho ou baixa demais para o objetivo, diga em uma frase no campo "comentario_frequencia", sem mudar a escolha.
@@ -94,6 +99,12 @@ Seja honesto e específico, como um CMO experiente falaria com o founder. Aponte
 
 ## 10. Aprendizado
 Se historico_preferencias tiver itens, descreva em "o_que_aprendi" o padrão das aprovações e recusas (tom, formato, tema) e aplique no lote atual.
+Se desempenho_proprio tiver itens, explique em "aprendizados" por que os posts publicados funcionaram ou não:
+- "funcionou" e "nao_funcionou": uma frase por achado, ligando o número real (engajamento_pct, alcance, salvamentos, comentários) ao gancho, formato, padrão, origem_tema, rede ou horário do post. Cite a métrica. Use aprendizados_calculados, que já compara cada grupo com a mediana do próprio founder.
+- Quando amostra_pequena for true ou houver menos de 3 posts no grupo, diga que a amostra é pequena e trate como algo a testar de novo, não como conclusão.
+- "ajuste": em uma ou duas frases, o que muda neste lote por causa disso.
+Depois aplique: mais do que ficou acima da mediana (formato, padrão de gancho, origem do tema, rede), e troque o que ficou abaixo por outro ângulo. Não compare com benchmark externo e não invente número.
+Sem desempenho_proprio, devolva "aprendizados" com listas vazias e "ajuste" vazio.
 
 ## 11. Arte de cada post
 Cada post vira uma arte renderizada. Além do "formato", informe em "template" qual arte usar e preencha "slides_ou_arte" do jeito que o template espera:
@@ -107,6 +118,17 @@ Cada post vira uma arte renderizada. Além do "formato", informe em "template" q
 O que cada template espera em "slides_ou_arte":
 ${GUIA}
 Em "dia" do calendário use o dia da semana por extenso (segunda, terça, quarta, quinta, sexta, sábado, domingo) e em "horario" use HH:mm. Em "post_id" do calendário repita o post_id do post.
+
+## 12. Roteiros de vídeo
+Além dos posts, entregue em "roteiros" vídeos curtos para o founder gravar com o celular: 1 roteiro quando quantidade_posts for 3 ou menos, 2 nos outros casos.
+- Prefira assunto de conhecimento_founder: historia rende um vídeo contando o que aconteceu; objecao_cliente rende um vídeo respondendo a dúvida. Se a resposta para a dúvida não estiver nas fontes, escreva [PREENCHER: a sua resposta] na cena e peça em "precisa_revisao". Sem conhecimento_founder, use o post mais forte do lote.
+- "gancho": o que falar nos 3 primeiros segundos, olhando para a câmera. Adapte o mecanismo de um gancho de referencias_nicho (a base ainda não tem vídeos; o gancho de post estático vira a fala de abertura).
+- "cenas": 3 a 6, em ordem, cada uma com "fala" (frase curta, como se fala) e, se ajudar, "tela" (texto curto na tela ou o que mostrar).
+- "chamada_final": a última fala, coerente com a acao_esperada. "legenda": a legenda para publicar junto.
+- "duracao_seg" entre 15 e 90. "rede": instagram, linkedin, tiktok ou youtube, entre as redes do plano quando possível.
+- "dica_gravacao": uma frase prática (lugar, enquadramento, o que ter à mão).
+- "enderecamento", "origem_tema" e "padrao_referencia" seguem as mesmas regras dos posts. Mesmas regras de fatos: nada de número, cliente ou resultado fora das fontes.
+- "agenda": dia e horário para publicar, preferindo dias sem post no calendário, com a mesma regra de "fonte" dos posts.
 
 ## Saída (JSON)
 {
@@ -136,6 +158,24 @@ Em "dia" do calendário use o dia da semana por extenso (segunda, terça, quarta
     "por_que_funciona": "",
     "precisa_revisao": []
   }],
+  "roteiros": [{
+    "roteiro_id": "v1",
+    "titulo": "",
+    "rede": "instagram | linkedin | tiktok | youtube",
+    "duracao_seg": 30,
+    "gancho": "",
+    "cenas": [{"fala": "", "tela": ""}],
+    "chamada_final": "",
+    "legenda": "",
+    "dica_gravacao": "",
+    "objetivo": "",
+    "origem_tema": "founder | site | noticia | nicho",
+    "enderecamento": { "objetivo": "", "publico": "", "gatilho_identificacao": "", "acao_esperada": "" },
+    "padrao_referencia": { "nome": "", "fonte_url": "" },
+    "agenda": { "dia": "", "horario": "", "fonte": "sua audiência | hipótese do nicho | teste" },
+    "precisa_revisao": []
+  }],
+  "aprendizados": { "funcionou": [], "nao_funcionou": [], "ajuste": "" },
   "o_que_aprendi": "",
   "avisos": []
 }`;

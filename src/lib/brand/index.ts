@@ -4,6 +4,7 @@ import { extractColorsFromCss, extractFontsFromCss, mergeCounts, rankColors } fr
 import { fetchLimited, FetchError, normalizeUrl } from "./fetch";
 import { extractFromHtml, guessBrandName, type HtmlExtract } from "./html";
 import { normalizarFonte, sugerirPar } from "./fonts";
+import { ehSemSite } from "./sem-site";
 
 export interface ReadBrandOptions {
   /** Cores extraídas no navegador a partir de um print do grid do Instagram. */
@@ -76,6 +77,8 @@ function montarPaleta(pesos: Map<string, { peso: number; fonte: BrandColor["font
 export async function readBrand(input: BrandInput, opts: ReadBrandOptions = {}): Promise<BrandProfile> {
   const avisos: string[] = [];
   const url = normalizeUrl(input.url);
+  // Endereço interno das marcas sem site: não existe para ler.
+  if (ehSemSite(url)) throw new Error("Marca sem site: envie o perfil montado no onboarding, não a url.");
   const dominio = new URL(url).hostname.replace(/^www\./, "");
   let ex: HtmlExtract | null = null;
   let finalUrl = url;

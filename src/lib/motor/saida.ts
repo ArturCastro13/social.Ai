@@ -5,7 +5,7 @@ import type { Analise, BrandProfile, CalendarioItem, Nicho, PadraoViral, Rede, T
 import { enderecamentoIASchema, TEMPLATES, semTravessao, type AnaliseIA } from "@/lib/engine/schema";
 import { hojeEmSaoPaulo } from "@/lib/engine/calendario";
 import { corte } from "@/lib/engine/texto-local";
-import { ORIGENS_TEMA, type ExtrasAnalise, type ExtrasPost, type OrigemTema, type Preferencias } from "./contrato";
+import { ORIGENS_TEMA, type ExtrasAnalise, type ExtrasPost, type OrigemTema, type Preferencias, type RoteiroVideo } from "./contrato";
 import { completarEnderecamento, objetivosDoRodizio, publicoAlvoDoSite, REVISAR_PUBLICO, type ContextoEnderecamento } from "./enderecamento";
 import {
   distribuirFrequencia,
@@ -15,6 +15,7 @@ import {
   normalizarRede,
   postsPorSemana,
 } from "./mapa";
+import { agendarRoteiros, duracaoDoRoteiro, FONTE_HIPOTESE, normalizarRedeVideo, proximaDataDoDia, quantosRoteiros, redesDeVideo } from "./roteiros-locais";
 
 // ---------- Schema tolerante ----------
 
@@ -80,6 +81,34 @@ export const postMotorSchema = z
   })
   .refine((p) => p.gancho.length > 0, { message: "post sem gancho" });
 
+const cenaSchema = z
+  .union([
+    z.object({ fala: txt(400), tela: txt(160) }),
+    z.string().transform((s) => ({ fala: s.trim().slice(0, 400), tela: "" })),
+  ])
+  .refine((c) => c.fala.length > 0);
+
+/** Roteiro de vídeo como o modelo mandou. Inválido (sem gancho ou com menos de 2 cenas) é descartado, nunca derruba a análise. */
+export const roteiroMotorSchema = z
+  .object({
+    roteiro_id: txt(40),
+    titulo: txt(160),
+    rede: txt(20),
+    duracao_seg: num,
+    gancho: txt(300),
+    cenas: lista(cenaSchema, 6),
+    chamada_final: txt(300),
+    legenda: txt(2200),
+    dica_gravacao: txt(300),
+    objetivo: txt(60),
+    origem_tema: z.unknown().optional().transform(normalizarOrigemTema),
+    enderecamento: enderecamentoIASchema,
+    padrao_referencia: z.object({ nome: txt(120), fonte_url: txt(500) }).catch({ nome: "", fonte_url: "" }),
+    agenda: z.object({ dia: txt(30), horario: txt(30), fonte: txt(80) }).catch({ dia: "", horario: "", fonte: "" }),
+    precisa_revisao: lista(txt(200), 6),
+  })
+  .refine((r) => r.gancho.length > 0 && r.cenas.length >= 2, { message: "roteiro sem gancho ou cenas" });
+
 export const saidaMotorSchema = z.object({
   diagnostico: z
     .object({ problemas: lista(pontoSchema, 3), oportunidades: lista(pontoSchema, 3) })
@@ -108,6 +137,11 @@ export const saidaMotorSchema = z.object({
     })
     .catch({ frequencia_semana: [], slots: [], comentario_frequencia: "" }),
   posts: lista(postMotorSchema, 12).refine((p) => p.length > 0, { message: "nenhum post válido" }),
+  /** Ausente ou inválido vira lista vazia; o motor local completa depois. */
+  roteiros: lista(roteiroMotorSchema, 4),
+  aprendizados: z
+    .object({ funcionou: lista(txt(400), 5), nao_funcionou: lista(txt(400), 5), ajuste: txt(600) })
+    .catch({ funcionou: [], nao_funcionou: [], ajuste: "" }),
   o_que_aprendi: txt(800),
   avisos: lista(txt(300), 8),
 });
@@ -125,12 +159,20 @@ export interface SlotMotor {
   fonte: string;
 }
 
+/** Roteiro do modelo já normalizado, antes de ganhar id e data (o id vem da análise final). */
+export interface RoteiroMotor extends Omit<RoteiroVideo, "id" | "agenda"> {
+  /** Dia (0 = domingo) e horário que o modelo sugeriu; null quando não veio válido. */
+  slot: { dia: number; horario: string; fonte: string } | null;
+}
+
 export interface ResultadoMotor {
   analise: AnaliseIA;
   extrasPosts: ExtrasPost[];
   extrasAnalise: ExtrasAnalise;
   /** Calendário do modelo, só quando veio coerente; senão null e o calendário é montado pelas janelas. */
   slots: SlotMotor[] | null;
+  /** Roteiros de vídeo do modelo. Vazio ou ausente: o motor local monta os seus em analisar. */
+  roteiros?: RoteiroMotor[];
   avisos: string[];
 }
 
@@ -142,6 +184,15 @@ export interface OpcoesAdaptador {
   preferencias?: Preferencias | null;
   /** Para trocar o nome do padrão pelo id do catálogo quando o modelo citar um padrão da base. */
   padroes?: PadraoViral[];
+  /** Dia e horário com dado real do founder ("2|19:00", 0 = domingo). Só neles a fonte pode ser "sua audiência". */
+  horariosComDado?: string[];
+}
+
+/** "sua audiência" só vale num slot com dado real do founder; sem isso, vira hipótese do nicho. */
+export function fonteDoSlot(fonte: string, dia: number, horario: string, comDado: Set<string>, padrao: string): string {
+  const f = fonte.trim();
+  if (/audi/i.test(f)) return comDado.has(`${dia}|${horario}`) ? "sua audiência" : "hipótese do nicho";
+  return f || padrao;
 }
 
 // ---------- Legendas por rede ----------
@@ -204,12 +255,12 @@ const DIAS: Record<string, number> = {
 };
 const DIAS_NOME = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
 
-function diaDaSemana(s: string): number | null {
+export function diaDaSemana(s: string): number | null {
   const k = s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/-?feira/, "").trim();
   return DIAS[k] ?? DIAS[k.slice(0, 3)] ?? null;
 }
 
-function horarioValido(s: string): string | null {
+export function horarioValido(s: string): string | null {
   const m = s.match(/(\d{1,2})\s*(?:[:h]\s*(\d{2}))?/i);
   if (m) {
     const h = Number(m[1]);
@@ -228,7 +279,7 @@ function horarioValido(s: string): string | null {
  * Slots coerentes: todo slot aponta para um post (pelo post_id ou pela posição, "p2" ou "2"),
  * dia e horário válidos, e todo post do lote tem exatamente um slot. Senão null.
  */
-function slotsCoerentes(saida: SaidaMotor, idsPosts: string[], redesPosts: Rede[]): SlotMotor[] | null {
+function slotsCoerentes(saida: SaidaMotor, idsPosts: string[], redesPosts: Rede[], comDado: Set<string>): SlotMotor[] | null {
   const total = redesPosts.length;
   const idx = new Map<string, number>();
   idsPosts.forEach((id, i) => {
@@ -249,7 +300,7 @@ function slotsCoerentes(saida: SaidaMotor, idsPosts: string[], redesPosts: Rede[
     const horario = horarioValido(s.horario);
     if (i === undefined || i < 0 || i >= total || dia === null || !horario || cobertos.has(i)) return null;
     cobertos.add(i);
-    out.push({ indice: i, dia, horario, rede: normalizarRede(s.rede) ?? redesPosts[i], fonte: s.fonte || "teste" });
+    out.push({ indice: i, dia, horario, rede: normalizarRede(s.rede) ?? redesPosts[i], fonte: fonteDoSlot(s.fonte, dia, horario, comDado, "teste") });
   }
   return cobertos.size === total && total > 0 ? out : null;
 }
@@ -409,7 +460,11 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
     posts: analisePosts,
   };
 
-  const slots = slotsCoerentes(saida, saida.posts.map((p) => p.post_id), analisePosts.map((p) => p.rede_principal));
+  const comDado = new Set(op.horariosComDado ?? []);
+  const slots = slotsCoerentes(saida, saida.posts.map((p) => p.post_id), analisePosts.map((p) => p.rede_principal), comDado);
+  const roteiros = roteirosDoModelo(saida, redes, ctxEnd, comDado).slice(0, quantosRoteiros(op.quantidade));
+  const ap = saida.aprendizados;
+  const aprendizados = ap.funcionou.length || ap.nao_funcionou.length || ap.ajuste ? ap : undefined;
 
   return {
     analise,
@@ -420,10 +475,73 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
       comentario_frequencia: saida.calendario.comentario_frequencia || undefined,
       o_que_aprendi: saida.o_que_aprendi || undefined,
       perfil_alvo: perfil,
+      ...(aprendizados ? { aprendizados } : {}),
     },
     slots,
+    roteiros,
     avisos: saida.avisos.filter(Boolean),
   };
+}
+
+function roteirosDoModelo(saida: SaidaMotor, redes: Rede[], ctxEnd: ContextoEnderecamento, comDado: Set<string>): RoteiroMotor[] {
+  const redesVideo = redesDeVideo(redes);
+  return saida.roteiros.map((r, i) => {
+    const gancho = corte(r.gancho, 220);
+    const cenas = r.cenas.map((c) => (c.tela ? { fala: c.fala, tela: c.tela } : { fala: c.fala }));
+    const legendaBase = r.legenda || [gancho, ...cenas.map((c) => c.fala), r.chamada_final].filter(Boolean).join("\n\n");
+    const { enderecamento, completou } = completarEnderecamento(
+      r.enderecamento,
+      { gancho, slides: cenas.map((c) => ({ titulo: c.tela ?? "", texto: c.fala })), legenda: legendaBase, chamada_final: r.chamada_final, objetivo: r.objetivo },
+      i,
+      ctxEnd,
+    );
+    const chamada = r.chamada_final || `${enderecamento.acao_esperada.replace(/[.!]+$/, "")}.`;
+    const revisar = [...r.precisa_revisao];
+    const todoTexto = [gancho, legendaBase, chamada, ...cenas.flatMap((c) => [c.fala, c.tela ?? ""])].join(" ");
+    if (/\[PREENCHER/i.test(todoTexto) && !revisar.length) revisar.push("Há um [PREENCHER] no roteiro: complete antes de gravar.");
+    if (completou && !revisar.includes(REVISAR_PUBLICO)) revisar.push(REVISAR_PUBLICO);
+    const dia = diaDaSemana(r.agenda.dia);
+    const horario = horarioValido(r.agenda.horario);
+    const duracao = r.duracao_seg >= 15 && r.duracao_seg <= 90 ? Math.round(r.duracao_seg) : duracaoDoRoteiro({ gancho, cenas, chamada_final: chamada });
+    const nomePadrao = r.padrao_referencia.nome;
+    return {
+      titulo: corte(r.titulo || gancho, 140),
+      rede: normalizarRedeVideo(r.rede) ?? redesVideo[i % redesVideo.length],
+      duracao_seg: duracao,
+      gancho,
+      cenas,
+      chamada_final: corte(chamada, 300),
+      legenda: corte(legendaBase, 2200),
+      ...(r.dica_gravacao ? { dica_gravacao: r.dica_gravacao } : {}),
+      origem_tema: r.origem_tema,
+      enderecamento,
+      ...(nomePadrao || r.padrao_referencia.fonte_url
+        ? { padrao_referencia: { nome: nomePadrao, fonte_url: r.padrao_referencia.fonte_url } }
+        : {}),
+      precisa_revisao: revisar,
+      slot: dia !== null && horario ? { dia, horario, fonte: fonteDoSlot(r.agenda.fonte, dia, horario, comDado, FONTE_HIPOTESE) } : null,
+    };
+  });
+}
+
+/**
+ * Roteiros do modelo com id `${analise.id}-v{n}` e data real: o dia da semana que o modelo pediu cai na
+ * próxima ocorrência a partir de amanhã (como calendarioDosSlots); sem dia válido, vai para um dia livre.
+ */
+export function roteirosFinais(roteiros: RoteiroMotor[], analiseId: string, calendario: Pick<CalendarioItem, "data">[], agora = new Date()): RoteiroVideo[] {
+  const vezes = new Map<number, number>();
+  const comData = roteiros.map(({ slot, ...r }, i) => {
+    const id = `${analiseId}-v${i + 1}`;
+    if (!slot) return { ...r, id, agenda: undefined };
+    const n = vezes.get(slot.dia) ?? 0;
+    vezes.set(slot.dia, n + 1);
+    const data = proximaDataDoDia(slot.dia, agora, n);
+    return { ...r, id, agenda: { data, dia_semana: DIAS_NOME[slot.dia], horario: slot.horario, fonte: slot.fonte } };
+  });
+  const ocupados = [...calendario, ...comData.flatMap((r) => (r.agenda ? [{ data: r.agenda.data }] : []))];
+  const semData = agendarRoteiros(comData.filter((r) => !r.agenda), ocupados, agora);
+  let j = 0;
+  return comData.map((r) => (r.agenda ? (r as RoteiroVideo) : semData[j++]));
 }
 
 /** Junta os extras na análise já finalizada (ids prontos) e usa o calendário do modelo quando ele veio coerente. */
@@ -432,11 +550,14 @@ export function aplicarExtras(analise: Analise, r: ResultadoMotor, agora = new D
   const extrasAnalise = semTravessao(r.extrasAnalise);
   const posts = analise.posts.map((p, i) => ({ ...p, ...(extrasPosts[i] ?? {}) }));
   const slots = r.slots?.filter((s) => s.indice < posts.length) ?? null;
+  const calendario = slots && slots.length === posts.length ? calendarioDosSlots(slots, posts.map((p) => p.id), agora) : analise.calendario;
+  const roteiros = r.roteiros?.length ? semTravessao(roteirosFinais(r.roteiros, analise.id, calendario, agora)) : undefined;
   return {
     ...analise,
     ...extrasAnalise,
     posts,
-    calendario: slots && slots.length === posts.length ? calendarioDosSlots(slots, posts.map((p) => p.id), agora) : analise.calendario,
+    calendario,
+    ...(roteiros ? { roteiros } : {}),
     avisos: [...analise.avisos, ...semTravessao(r.avisos)],
   };
 }

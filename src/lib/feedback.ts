@@ -23,6 +23,8 @@ export interface ResultadoPost {
   comentarios: number | null;
   salvamentos: number | null;
   alcance: number | null;
+  /** Opcional: registros antigos não têm. */
+  compartilhamentos?: number | null;
 }
 
 export interface LinhaFormato {
@@ -87,7 +89,7 @@ export function resumirPreferencias(decisoes: Decisao[], resultados: ResultadoPo
     const l = linha(r.formato);
     l.publicados++;
     if (r.alcance && r.alcance > 0) {
-      l.interacoes += (r.curtidas ?? 0) + (r.comentarios ?? 0) + (r.salvamentos ?? 0);
+      l.interacoes += (r.curtidas ?? 0) + (r.comentarios ?? 0) + (r.salvamentos ?? 0) + (r.compartilhamentos ?? 0);
       l.alcanceTotal += r.alcance;
     }
   }
