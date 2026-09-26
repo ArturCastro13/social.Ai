@@ -95,6 +95,16 @@ const ACAO_DO_OBJETIVO: Record<ObjetivoId, string> = {
 
 const IDS = new Set<string>(OBJETIVOS.map((o) => o.id));
 
+/** Pistas de cada objetivo em texto normalizado (sem acento, minúsculo, espaços viram "_"). */
+const PISTAS: [RegExp, ObjetivoId][] = [
+  [/cliente|venda|lead/, "gerar_clientes"],
+  [/autoridade|founder/, "autoridade_founder"],
+  [/lanc/, "lancar_produto"],
+  [/contrat|vaga|talento/, "contratar"],
+  [/invest/, "atrair_investidor"],
+  [/comunidade/, "comunidade"],
+];
+
 /** Aceita o id ("gerar_clientes"), o nome ("Gerar clientes") ou variações. null se não reconhecer. */
 export function normalizarObjetivo(v: unknown): ObjetivoId | null {
   if (typeof v !== "string") return null;
@@ -102,13 +112,18 @@ export function normalizarObjetivo(v: unknown): ObjetivoId | null {
   if (IDS.has(k)) return k as ObjetivoId;
   const porNome = OBJETIVOS.find((o) => normal(o.nome).replace(/\s+/g, "_") === k);
   if (porNome) return porNome.id;
-  if (/cliente|venda|lead/.test(k)) return "gerar_clientes";
-  if (/autoridade|founder/.test(k)) return "autoridade_founder";
-  if (/lanc/.test(k)) return "lancar_produto";
-  if (/contrat|vaga|talento/.test(k)) return "contratar";
-  if (/invest/.test(k)) return "atrair_investidor";
-  if (/comunidade/.test(k)) return "comunidade";
-  return null;
+  return PISTAS.find(([re]) => re.test(k))?.[1] ?? null;
+}
+
+/**
+ * Objetivo escrito pelo founder ("quero mais clientes pelo LinkedIn") convertido em id só quando o texto
+ * aponta para um objetivo só. Texto vazio, sem pista ou com pistas de objetivos diferentes: null.
+ */
+export function objetivoDoTextoLivre(v: unknown): ObjetivoId | null {
+  if (typeof v !== "string" || !v.trim()) return null;
+  const k = normal(v).trim().replace(/[\s-]+/g, "_");
+  const ids = new Set(PISTAS.filter(([re]) => re.test(k)).map(([, id]) => id));
+  return ids.size === 1 ? normalizarObjetivo(v) : null;
 }
 
 /** Ação pelo texto do post (chamada final ou fim da legenda); cai para a ação padrão do objetivo. */
@@ -229,9 +244,21 @@ export function garantirEnderecamento(a: Analise, ctx: ContextoEnderecamento): A
   return { ...a, posts };
 }
 
-/** Objetivos do rodízio: os escolhidos no onboarding; sem escolha, os padrões do perfil. */
-export function objetivosDoRodizio(pref?: { objetivos?: ObjetivoId[]; perfil_alvo?: string } | null): ObjetivoId[] {
-  if (pref?.objetivos?.length) return pref.objetivos;
+/**
+ * Objetivos escolhidos: os botões do onboarding mais o id do objetivo escrito (objetivo_livre), quando ele
+ * aponta claramente para um objetivo e ainda cabe (no máximo 2). Vazio quando não há nenhum dos dois.
+ */
+export function objetivosEscolhidos(pref?: { objetivos?: ObjetivoId[]; objetivo_livre?: string } | null): ObjetivoId[] {
+  const out = [...(pref?.objetivos ?? [])];
+  const livre = objetivoDoTextoLivre(pref?.objetivo_livre);
+  if (livre && !out.includes(livre) && out.length < 2) out.push(livre);
+  return out;
+}
+
+/** Objetivos do rodízio: os escolhidos no onboarding (botões e texto livre); sem escolha, os padrões do perfil. */
+export function objetivosDoRodizio(pref?: { objetivos?: ObjetivoId[]; objetivo_livre?: string; perfil_alvo?: string } | null): ObjetivoId[] {
+  const escolhidos = objetivosEscolhidos(pref);
+  if (escolhidos.length) return escolhidos;
   if (pref?.perfil_alvo === "founder") return ["autoridade_founder"];
   if (pref?.perfil_alvo === "empresa") return ["gerar_clientes"];
   return ["gerar_clientes", "autoridade_founder"];

@@ -28,6 +28,7 @@ import {
 } from "@/lib/motor/enderecamento";
 import { objetivosDoSite } from "@/lib/motor/inferir";
 import { garantirRoteiros } from "@/lib/motor/roteiros-locais";
+import { benchmarkLocal } from "@/lib/motor/benchmark";
 import {
   aprendizadosLocais,
   calcularAprendizados,
@@ -278,6 +279,12 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     }
   }
 
+  // Páginas dos concorrentes informados: lidas uma vez, em paralelo com o resto (4 s no máximo cada).
+  // Servem ao CONTEXTO da IA e ao benchmark sem IA. A demo nunca chega aqui: continua instantânea.
+  const concorrenciaExtraida: Promise<Record<string, string>> = pref?.concorrentes?.length
+    ? extrairInspiracoes(pref.concorrentes.map((url) => ({ url }))).catch(() => ({}))
+    : Promise.resolve({});
+
   const { nicho: palpite } = palpiteNicho(brand);
   const avisos: string[] = [];
   const id = novoId();
@@ -311,7 +318,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
 
       if (pref) {
         const redes = redesDoMotor(brand, pref);
-        const ctx = await contextoDoMotor(brand, pref, hist, { palpite, quantidade, redes, referencias: contexto });
+        const ctx = await contextoDoMotor(brand, pref, hist, { palpite, quantidade, redes, referencias: contexto, concorrenciaExtraida });
         // Dia e horário com número real do founder: só neles o modelo pode dizer "sua audiência".
         const horariosComDado = desempenho.flatMap((d) => {
           const dia = diaDaSemana(d.dia_semana);
@@ -404,11 +411,18 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     { conhecimento: pref?.conhecimento_founder, perfil_alvo: pref?.perfil_alvo, publico: ctxEnd.publico },
   );
   const aprendizados = comRoteiros.aprendizados ?? aprendizadosLocais(calc) ?? undefined;
+  // Benchmark: o da IA (mesma chamada) ou, sem ele, o resumo local do que a página de cada concorrente mostra.
+  const benchmark = comRoteiros.benchmark_concorrentes?.length
+    ? comRoteiros.benchmark_concorrentes
+    : pref?.concorrentes?.length
+      ? benchmarkLocal(pref.concorrentes, await concorrenciaExtraida)
+      : [];
   const analise = aplicarLinkDestino(
     {
       ...comRoteiros,
       roteiros: semTravessao(comRoteiros.roteiros),
       ...(aprendizados ? { aprendizados: semTravessao(aprendizados) } : {}),
+      ...(benchmark.length ? { benchmark_concorrentes: semTravessao(benchmark) } : {}),
       ...(brand.sem_site ? { sem_site: true } : {}),
     },
     pref?.link_destino,
@@ -452,12 +466,16 @@ async function contextoDoMotor(
   brand: BrandProfile,
   pref: Preferencias,
   historico: HistoricoMarca,
-  x: { palpite: Nicho; quantidade: number; redes: Rede[]; referencias: Awaited<ReturnType<typeof contextoViralDoNicho>> },
+  x: {
+    palpite: Nicho;
+    quantidade: number;
+    redes: Rede[];
+    referencias: Awaited<ReturnType<typeof contextoViralDoNicho>>;
+    /** Leitura dos concorrentes já disparada em analisar (a mesma serve ao benchmark sem IA). */
+    concorrenciaExtraida: Promise<Record<string, string>>;
+  },
 ) {
-  const [inspiracoesExtraidas, concorrenciaExtraida] = await Promise.all([
-    extrairInspiracoes(pref.inspiracoes),
-    extrairInspiracoes((pref.concorrentes ?? []).map((url) => ({ url }))),
-  ]);
+  const [inspiracoesExtraidas, concorrenciaExtraida] = await Promise.all([extrairInspiracoes(pref.inspiracoes), x.concorrenciaExtraida]);
   return montarContexto(brand, pref, {
     nicho: x.palpite,
     quantidade: x.quantidade,

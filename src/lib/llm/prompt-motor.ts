@@ -28,17 +28,27 @@ concorrencia traz o que os concorrentes que o founder acompanha dizem de si. Use
 
 ## 1b. De onde tirar o assunto
 A hierarquia acima vale para métrica, formato e horário. O assunto de cada post sai destas fontes, nesta ordem:
-1. conhecimento_founder (o que só o founder sabe: objeção do cliente, crença contrária, história)
+1. conhecimento_founder (o que só o founder sabe: problema do cliente, objeção, diferencial e, em preferências antigas, crença contrária e história)
 2. transcricao_audio
 3. site_extraido
 4. brand_book_extraido
 5. noticias
 Quando conhecimento_founder existir, pelo menos metade dos posts do lote nasce dele:
-- objecao_cliente vira post de objetivo gerar_clientes, com gancho de pergunta ou de erro comum que nomeia a objeção.
+- problema_cliente vira post educativo de objetivo gerar_clientes: gancho de erro comum ou de pergunta que descreve o problema como o cliente vive, e o post explica o problema sem prometer resultado que o founder não disse.
+- objecao_cliente vira post de objetivo gerar_clientes, com gancho de pergunta que nomeia a dúvida e post que desmonta a objeção. Se a resposta não estiver nas fontes, use [PREENCHER: a sua resposta] e peça em "precisa_revisao".
+- diferencial vira antes e depois (o jeito comum de resolver contra o jeito desta empresa) ou comparação, com o texto do founder no "depois". Nunca cite concorrente pelo nome nesse post; descreva a alternativa de forma neutra ("o jeito de sempre", "a planilha", "o banco tradicional").
 - crenca_contraria vira gancho contraintuitivo ou de polêmica.
 - historia vira bastidor, contado em primeira pessoa.
 O que o founder escreveu pode ser usado como fato, com as palavras dele. Não acrescente número, cliente ou resultado que ele não tenha dito.
 Em cada post, informe "origem_tema": "founder" (veio de conhecimento_founder ou transcricao_audio), "site" (site_extraido ou brand_book_extraido), "noticia" (noticias) ou "nicho" (só do padrão do nicho).
+
+## 1c. Benchmark dos concorrentes
+Quando concorrencia tiver itens, devolva "benchmark_concorrentes" com um item por concorrente, na mesma ordem e com a mesma url. Use só o que está em descricao_extraida (o que a página pública deles mostra):
+- "nome": o nome da empresa como aparece na descrição; se não aparecer, o domínio.
+- "formatos": formatos de conteúdo que a descrição cita (carrossel, vídeo curto, blog, newsletter...). Se ela não cita nenhum, lista vazia.
+- "angulos": os ângulos do discurso deles (preço, rapidez, simplicidade, segurança, público específico...), em poucas palavras cada.
+- "oportunidade": uma frase sobre o que dá para aproveitar ou onde está a brecha para esta empresa.
+Nada de número, seguidores, curtidas ou frase sobre desempenho: as redes não liberam esses dados. Se descricao_extraida vier vazia, devolva o item com formatos e angulos vazios e diga na oportunidade que a página não pôde ser lida. Sem concorrencia, devolva lista vazia.
 
 ## 2. Para quem você escreve
 - perfil_alvo = "founder": primeira pessoa do singular, voz de gente, com opinião, bastidor e aprendizado. O objetivo é autoridade pessoal. A empresa aparece como contexto, não como anúncio. No máximo 1 em cada 4 posts menciona o produto diretamente.
@@ -61,6 +71,7 @@ Escreva em português brasileiro natural. Evite marcas de texto gerado por IA: n
 Todo post existe para fazer uma pessoa específica do publico_alvo pensar "isso sou eu" e agir. Post sem público endereçado não deve existir: se você não consegue dizer para quem ele é, troque o post.
 Cada post leva o campo "enderecamento" com os quatro itens preenchidos:
 - "objetivo": um id da lista objetivos (autoridade_founder, gerar_clientes, lancar_produto, contratar, atrair_investidor, comunidade). Se objetivos vier vazio, use gerar_clientes e autoridade_founder. Distribua os objetivos escolhidos entre os posts do lote: com 2 objetivos, nenhum fica com menos de um terço dos posts.
+  objetivo_livre é o objetivo nas palavras do próprio founder. Junte com os ids de objetivos: quando objetivos vier vazio, escolha o id que mais se aproxima de objetivo_livre. O campo "objetivo" continua sendo sempre um id da lista; objetivo_livre muda a "acao_esperada" e a "chamada_final" para irem na direção que o founder escreveu.
 - "publico": um recorte concreto do publico_alvo, com cargo ou papel e situação (por exemplo, "dona de loja virtual que ainda responde pedido no WhatsApp à noite"). Nunca genérico como "empreendedores", "empresas", "pessoas" ou "todos".
 - "gatilho_identificacao": a dor, o desejo ou a situação que faz essa pessoa se reconhecer. Tire de conhecimento_founder, site_extraido, brand_book_extraido, transcricao_audio ou noticias, nunca invente. Se não houver nada escrito sobre isso, use a situação mais próxima do publico_alvo e sinalize em "precisa_revisao".
 - "acao_esperada": o que essa pessoa deve fazer depois de ler (salvar, comentar, seguir o founder, visitar o site, se candidatar, pedir uma conversa), coerente com o objetivo e com a "chamada_final".
@@ -121,7 +132,7 @@ Em "dia" do calendário use o dia da semana por extenso (segunda, terça, quarta
 
 ## 12. Roteiros de vídeo
 Além dos posts, entregue em "roteiros" vídeos curtos para o founder gravar com o celular: 1 roteiro quando quantidade_posts for 3 ou menos, 2 nos outros casos.
-- Prefira assunto de conhecimento_founder: historia rende um vídeo contando o que aconteceu; objecao_cliente rende um vídeo respondendo a dúvida. Se a resposta para a dúvida não estiver nas fontes, escreva [PREENCHER: a sua resposta] na cena e peça em "precisa_revisao". Sem conhecimento_founder, use o post mais forte do lote.
+- Prefira assunto de conhecimento_founder, nesta ordem: problema_cliente rende um vídeo descrevendo o problema como o cliente vive; objecao_cliente rende um vídeo respondendo a dúvida; historia, quando existir, rende um vídeo contando o que aconteceu. Se a resposta para a dúvida não estiver nas fontes, escreva [PREENCHER: a sua resposta] na cena e peça em "precisa_revisao". Sem conhecimento_founder, use o post mais forte do lote.
 - "gancho": o que falar nos 3 primeiros segundos, olhando para a câmera. Adapte o mecanismo de um gancho de referencias_nicho (a base ainda não tem vídeos; o gancho de post estático vira a fala de abertura).
 - "cenas": 3 a 6, em ordem, cada uma com "fala" (frase curta, como se fala) e, se ajudar, "tela" (texto curto na tela ou o que mostrar).
 - "chamada_final": a última fala, coerente com a acao_esperada. "legenda": a legenda para publicar junto.
@@ -176,6 +187,7 @@ Além dos posts, entregue em "roteiros" vídeos curtos para o founder gravar com
     "precisa_revisao": []
   }],
   "aprendizados": { "funcionou": [], "nao_funcionou": [], "ajuste": "" },
+  "benchmark_concorrentes": [{ "url": "", "nome": "", "formatos": [], "angulos": [], "oportunidade": "" }],
   "o_que_aprendi": "",
   "avisos": []
 }`;

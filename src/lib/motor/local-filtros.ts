@@ -9,6 +9,7 @@ import { distribuirFrequencia, formatosDoApp, MOTOR_DO_FORMATO, postsPorSemana }
 import type { ResultadoMotor } from "./saida";
 import { intercalar, postsDoFounder, referenciaDoPadrao } from "./local-founder";
 import { ordenarPorAprendizado } from "./aprendizados";
+import { objetivosEscolhidos } from "./enderecamento";
 
 type PostIA = AnaliseIA["posts"][number];
 
@@ -99,8 +100,9 @@ export function filtrarLocal(saida: AnaliseIA, pref: Preferencias, op: OpcoesFil
     candidatos = [...escolhidos, ...sobra];
   }
 
-  const objetivos: ObjetivoId[] = pref.objetivos.length
-    ? pref.objetivos
+  const escolhidos = objetivosEscolhidos(pref);
+  const objetivos: ObjetivoId[] = escolhidos.length
+    ? escolhidos
     : pref.perfil_alvo === "founder"
       ? ["autoridade_founder"]
       : ["gerar_clientes"];

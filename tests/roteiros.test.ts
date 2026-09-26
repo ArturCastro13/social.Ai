@@ -38,6 +38,11 @@ const CONHECIMENTO = {
   crenca_contraria: "O mercado acha que PME não liga para gestão financeira. Liga, só não tem tempo.",
   historia: "Um cliente fechou as portas com dinheiro para receber porque cobrava tudo no papel. Foi ali que a gente entendeu o tamanho do problema.",
 };
+const NOVAS = {
+  problema_cliente: "Dono de pequena empresa cobra cliente no papel e perde dinheiro sem perceber. No fim do mês não sabe quanto entrou. Quem cobrava tudo no papel sente isso primeiro.",
+  objecao_cliente: "Todo cliente pergunta se precisa trocar de banco para usar a conta.",
+  diferencial: "A gente junta cobrança e conta no mesmo app, e o dono vê o caixa do dia no celular.",
+};
 const NEUTRAS = [
   "Deixa eu te contar o que aconteceu.",
   "Vou direto ao ponto.",
@@ -83,7 +88,8 @@ describe("roteiros locais", () => {
     });
     expect(rs.map((r) => r.id)).toEqual(["a1-v1", "a1-v2"]);
     for (const r of rs) formaValida(r);
-    const [hist, obj] = rs;
+    // Objeção vem antes da história (a tela nova prioriza problema e objeção); crença não vira vídeo com 2 vagas.
+    const [obj, hist] = rs;
     expect(hist.origem_tema).toBe("founder");
     expect(hist.enderecamento?.objetivo).toBe("autoridade_founder");
     expect(hist.cenas.map((c) => c.fala).join(" ")).toContain("cobrava tudo no papel");
@@ -100,6 +106,26 @@ describe("roteiros locais", () => {
       expect(r.agenda!.data > "2026-09-26").toBe(true);
     }
     expect(hist.agenda!.data).not.toBe(obj.agenda!.data);
+  });
+
+  it("perguntas novas: problema e objeção viram vídeo, e o diferencial responde o problema com as palavras do founder", () => {
+    const base = { analiseId: "a3", posts: cora.posts, calendario, perfil_alvo: "founder" as const, publico: "Donos de PME que cuidam do financeiro sozinhos", redes: ["instagram" as const], max: 2, agora: AGORA };
+    const rs = roteirosLocais({ ...base, conhecimento: { ...NOVAS, historia: CONHECIMENTO.historia } });
+    expect(rs.map((r) => r.origem_tema)).toEqual(["founder", "founder"]);
+    const [prob, obj] = rs;
+    for (const r of rs) formaValida(r);
+    expect(prob.enderecamento?.objetivo).toBe("gerar_clientes");
+    expect(textos(prob).join(" ")).toContain("cobrava tudo no papel");
+    expect(prob.cenas.map((c) => c.fala).join(" ")).toContain("vê o caixa do dia no celular");
+    expect(prob.cenas.some((c) => c.fala.includes("[PREENCHER"))).toBe(false);
+    expect(obj.cenas.some((c) => c.fala.includes("[PREENCHER"))).toBe(true);
+    // Sem diferencial, a solução fica para o founder gravar.
+    const [semDif] = roteirosLocais({ ...base, max: 1, conhecimento: { problema_cliente: NOVAS.problema_cliente } });
+    expect(semDif.cenas.some((c) => c.fala.includes("[PREENCHER"))).toBe(true);
+    expect(semDif.precisa_revisao?.length).toBeGreaterThan(0);
+    // Só história (preferência antiga): continua virando vídeo.
+    const [hist] = roteirosLocais({ ...base, max: 1, conhecimento: { historia: CONHECIMENTO.historia } });
+    expect(hist.enderecamento?.objetivo).toBe("autoridade_founder");
   });
 
   it("só com posts: carrossel e bastidor viram vídeo, com texto que já existe nos posts", () => {

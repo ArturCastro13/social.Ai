@@ -15,6 +15,7 @@ import {
   normalizarRede,
   postsPorSemana,
 } from "./mapa";
+import { limparBenchmark } from "./benchmark";
 import { agendarRoteiros, duracaoDoRoteiro, FONTE_HIPOTESE, normalizarRedeVideo, proximaDataDoDia, quantosRoteiros, redesDeVideo } from "./roteiros-locais";
 
 // ---------- Schema tolerante ----------
@@ -144,6 +145,13 @@ export const saidaMotorSchema = z.object({
     .catch({ funcionou: [], nao_funcionou: [], ajuste: "" }),
   o_que_aprendi: txt(800),
   avisos: lista(txt(300), 8),
+  /** O que a página pública de cada concorrente informado mostra. Ausente ou inválido vira lista vazia. */
+  benchmark_concorrentes: lista(
+    z
+      .object({ url: txt(500), nome: txt(120), formatos: lista(txt(60), 6), angulos: lista(txt(160), 6), oportunidade: txt(400) })
+      .refine((b) => b.url.length > 0),
+    3,
+  ),
 });
 
 export type SaidaMotor = z.infer<typeof saidaMotorSchema>;
@@ -465,6 +473,8 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
   const roteiros = roteirosDoModelo(saida, redes, ctxEnd, comDado).slice(0, quantosRoteiros(op.quantidade));
   const ap = saida.aprendizados;
   const aprendizados = ap.funcionou.length || ap.nao_funcionou.length || ap.ajuste ? ap : undefined;
+  // Só concorrentes que o founder informou, sem número nem frase de desempenho.
+  const benchmark = limparBenchmark(saida.benchmark_concorrentes, pref?.concorrentes ?? []);
 
   return {
     analise,
@@ -476,6 +486,7 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
       o_que_aprendi: saida.o_que_aprendi || undefined,
       perfil_alvo: perfil,
       ...(aprendizados ? { aprendizados } : {}),
+      ...(benchmark.length ? { benchmark_concorrentes: benchmark } : {}),
     },
     slots,
     roteiros,

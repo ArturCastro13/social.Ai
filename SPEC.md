@@ -21,7 +21,7 @@ Gasto de API perto de zero: a arte é desenhada por código (Satori), nunca por 
 
 **Fluxo principal (página inicial).** O usuário digita a URL e escolhe quantos posts quer (3, 6, 9 ou 12). A interface chama `POST /api/brand`, mostra a paleta e as fontes assim que chegam, e em seguida chama `POST /api/analyze` com o perfil de marca. Enquanto espera, a tela de redação mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando). Com a resposta, o painel exibe posicionamento, diagnóstico, pilares, estratégia por rede, calendário e a grade de posts. Cada post mostra a arte (`GET /api/render/{postId}`), permite trocar a cor principal e o template, e traz a legenda de cada rede com botão de copiar.
 
-**Onboarding.** `/app` pede só a URL. A tela seguinte começa pelo passo "O que só você sabe" (três perguntas, texto ou voz, "Pular por agora" sempre visível) enquanto o site é lido em segundo plano, e depois mostra os ajustes já preenchidos (público, link de destino, quem assina, redes, objetivo, tom, formatos, frequência e o turbo opcional).
+**Onboarding.** `/app` pede só a URL. A tela seguinte começa pelo passo "O que só você sabe" (três perguntas, texto ou voz, "Pular por agora" sempre visível) enquanto o site é lido em segundo plano, e depois mostra os ajustes já preenchidos (público, link de destino, quem assina, redes, objetivo com botões e texto livre, concorrentes com sugestões de `/api/concorrentes`, tom, formatos, frequência e o turbo opcional).
 
 **Sua semana.** No resultado, logo abaixo do posicionamento, o bloco "Sua semana" (`src/components/estudio/SuaSemana.tsx`) mostra os 7 dias a partir da primeira data do calendário: 7 colunas no desktop, lista por dia no celular. Cada slot tem horário, rede, gancho, a etiqueta da fonte do horário ("hipótese do nicho", "teste" ou "sua audiência"; sem fonte, "hipótese do nicho") e o selo "da sua cabeça" quando o post veio do founder. Posts depois do sétimo dia ficam numa lista curta "Depois desta semana". Em cada post, três linhas fixas: **Para quem** (público e ação esperada), **Por que funciona** (padrão da base com link para a fonte) e **Veio de** ("o que você contou", "seu site", "notícia" ou "padrão do nicho"). Diagnóstico e estratégia ficam recolhidos em "Ver análise completa".
 
@@ -184,11 +184,13 @@ Saída (resumida, exemplo real do modo demo):
     "proibicoes": ["nada de política"],
     "inspiracoes": [{ "url": "https://...", "tipo": "post | perfil | video" }],
     "conhecimento_founder": {
+      "problema_cliente": "Dono de pequena empresa cobra no papel e perde dinheiro sem perceber.",
       "objecao_cliente": "Todo cliente pergunta se precisa trocar de banco para usar a conta.",
-      "crenca_contraria": "O mercado acha que PME não liga para gestão financeira. Liga, só não tem tempo.",
-      "historia": "Um cliente fechou as portas com dinheiro para receber porque cobrava tudo no papel."
+      "diferencial": "Cobrança e conta no mesmo app, com o caixa do dia no celular."
     },
+    "objetivo_livre": "Fechar mais clientes pelo LinkedIn até dezembro",
     "link_destino": "https://wa.me/5511999999999",
+    "concorrentes": ["https://concorrente.com.br"],
     "brand_book_texto": "",
     "noticias": [{ "titulo": "", "resumo": "", "url": "https://...", "data": "2026-09-20" }]
   }
@@ -201,15 +203,39 @@ Com preferências e IA configurada, o motor monta o objeto CONTEXTO da Parte 2 d
 
 #### Conhecimento do founder (`conhecimento_founder`)
 
-Três respostas opcionais, até 600 caracteres cada (acima disso, 400 com "Cada resposta pode ter até 600 caracteres."), vindas do passo "O que só você sabe" (`src/components/onboarding/PassoSaber.tsx`), que aparece logo depois da URL e aproveita o tempo de leitura do site. Cada pergunta aceita texto ou voz (Web Speech API no navegador, `useDitado`), e "Pular por agora" fica sempre à vista.
+Respostas opcionais, até 600 caracteres cada (acima disso, 400 com "Cada resposta pode ter até 600 caracteres."), vindas do passo "O que só você sabe" (`src/components/onboarding/PassoSaber.tsx`), que aparece logo depois da URL e aproveita o tempo de leitura do site. Cada pergunta aceita texto ou voz (Web Speech API no navegador, `useDitado`), e "Pular por agora" fica sempre à vista. As três perguntas da tela:
 
-- `objecao_cliente`: "Qual a objeção ou dúvida que você mais ouve do seu cliente?"
-- `crenca_contraria`: "O que o seu mercado acredita que você acha errado?"
-- `historia`: "Conta um momento da empresa que mudou como você enxerga o problema."
+- `problema_cliente`: o problema que a empresa resolve para o cliente.
+- `objecao_cliente`: a dúvida que mais aparece antes de alguém comprar.
+- `diferencial`: por que o cliente escolhe a empresa e não outra opção.
 
-No CONTEXTO do motor, `conhecimento_founder` vem logo depois de `publico_alvo` (respostas vazias viram `null`) e convive com `founder.transcricao_audio`. O system prompt põe as fontes de **tema** nesta ordem: conhecimento do founder, transcrição, site, brand book, notícias (a hierarquia de evidências para métrica e horário não muda). Com respostas, pelo menos metade dos posts nasce delas: a objeção vira post de `gerar_clientes`, a crença vira gancho contraintuitivo ou de polêmica, a história vira bastidor. O que o founder escreveu pode ser usado como fato; número ou cliente além disso continua proibido. Continua sendo uma chamada de IA por análise.
+`crenca_contraria` ("O que o seu mercado acredita que você acha errado?") e `historia` ("Conta um momento da empresa que mudou como você enxerga o problema.") são da versão anterior da tela. Continuam aceitas (preferências salvas no navegador) e usadas do mesmo jeito. `CHAVES_CONHECIMENTO` lista as cinco.
 
-Sem IA (`src/lib/motor/local-founder.ts`), cada resposta vira um post determinístico, intercalado na frente do lote (founder, outro, founder...), sem passar pelo filtro de formatos nem de proibições: objeção vira print de tweet com gancho de pergunta e objetivo `gerar_clientes` (marcado para o founder acrescentar a resposta), crença vira citação com gancho contraintuitivo, história vira bastidor do founder. O texto é a resposta do founder mais frases neutras de ligação. Nas demos (Cora, Pipefy, Sallve), os mesmos posts entram intercalados na análise pré-processada, que continua instantânea e offline; sem respostas, a demo fica igual.
+No CONTEXTO do motor, `conhecimento_founder` vem logo depois de `publico_alvo`, sempre com as cinco chaves (resposta vazia vira `null`; tudo vazio vira `null`), e convive com `founder.transcricao_audio`. O system prompt põe as fontes de **tema** nesta ordem: conhecimento do founder, transcrição, site, brand book, notícias (a hierarquia de evidências para métrica e horário não muda). Com respostas, pelo menos metade dos posts nasce delas:
+
+- problema vira post educativo de `gerar_clientes`, com gancho de erro comum ou de pergunta que descreve o problema como o cliente vive;
+- objeção vira post de `gerar_clientes` com gancho de pergunta que desmonta a dúvida (sem a resposta nas fontes, `[PREENCHER: a sua resposta]` e pedido em `precisa_revisao`);
+- diferencial vira antes e depois ou comparação, com o texto do founder no "depois" e a alternativa descrita de forma neutra, nunca pelo nome do concorrente;
+- crença vira gancho contraintuitivo ou de polêmica; história vira bastidor.
+
+O que o founder escreveu pode ser usado como fato; número ou cliente além disso continua proibido. Continua sendo uma chamada de IA por análise.
+
+Sem IA (`src/lib/motor/local-founder.ts`), cada resposta vira um post determinístico, na ordem problema, objeção, diferencial, crença, história, intercalado na frente do lote (founder, outro, founder...), sem passar pelo filtro de formatos nem de proibições:
+
+- problema: carrossel quando o texto tem de 3 a 6 frases (capa, uma frase do founder por slide, fechamento para salvar); senão imagem única (template `citacao`) com gancho de erro comum. Objetivo `gerar_clientes`.
+- objeção: print de tweet com gancho de pergunta e objetivo `gerar_clientes`, marcado para o founder acrescentar a resposta.
+- diferencial: com problema contado, antes e depois (antes = o problema com as palavras do founder, depois = o diferencial); sem problema, imagem única com a frase do diferencial. Objetivo `gerar_clientes`.
+- crença: citação com gancho contraintuitivo. História: bastidor do founder.
+
+O texto é a resposta do founder mais frases neutras de ligação. Os roteiros de vídeo sem IA (`src/lib/motor/roteiros-locais.ts`) preferem problema e objeção, depois a história quando existe. No vídeo do problema, a cena de "como a gente resolve" usa o diferencial do founder; sem ele, fica `[PREENCHER]` e o pedido em `precisa_revisao`. Nas demos (Cora, Pipefy, Sallve), os mesmos posts entram intercalados na análise pré-processada, que continua instantânea e offline; sem respostas, a demo fica igual.
+
+#### Objetivo escrito pelo founder (`objetivo_livre`)
+
+Texto opcional de até 200 caracteres, ao lado dos botões de objetivo. Vai no CONTEXTO como `objetivo_livre` (vazio vira `null`) e entra no hash de cache das preferências. O system prompt trata o texto como o objetivo nas palavras do founder: `enderecamento.objetivo` continua sendo sempre um id (sem botão escolhido, o id mais próximo do texto), e o texto orienta `acao_esperada` e `chamada_final`. Sem IA, o texto só entra no rodízio de objetivos quando aponta claramente para um id (`objetivoDoTextoLivre` em `src/lib/motor/enderecamento.ts`: pistas de um objetivo só; "contratar e vender" ou "crescer" não contam) e ainda cabe no máximo de 2; senão é ignorado.
+
+#### Benchmark dos concorrentes (`benchmark_concorrentes`)
+
+Quando `preferencias.concorrentes` tem links, a análise devolve `benchmark_concorrentes`: um item por concorrente com `{ url, nome, formatos, angulos, oportunidade }`. Com IA, sai da mesma chamada da análise (seção 1c do system prompt), feito só com `concorrencia[].descricao_extraida` (og:title e og:description da página pública, lidos em até 4 s). A saída passa por `limparBenchmark` (`src/lib/motor/benchmark.ts`): só concorrentes que o founder informou, na ordem dele, sem número de audiência nem frase de desempenho. Sem IA, `benchmarkLocal` monta um item por página lida: nome pelo og:title (ou domínio), `formatos` vazio, `angulos` por palavras da página (preço, rapidez, simplicidade, segurança, público específico...) e uma frase neutra de oportunidade; página que não foi lida fica de fora. A demo nunca lê concorrentes e não tem benchmark. A interface deve dizer que não há número de desempenho: as redes não liberam esses dados.
 
 #### De onde veio o assunto (`origem_tema`)
 
@@ -222,7 +248,7 @@ Campo opcional de uma linha na tela de ajustes: "Para onde você quer mandar que
 Campos extras na saída (todos opcionais; demo e cache antigos não têm):
 
 - Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `enderecamento` (ver abaixo), `formato_motor` (id do motor), `origem_tema`, `padrao_referencia` `{ nome, fonte_url }` (quando falta, é completado pelo catálogo com o nome do padrão e o link do primeiro exemplo verificado), `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
-- Na análise: `contexto_inferido` `{ nicho, publico, tom_resumo, objetivos, confianca }`, `por_rede` `[{ rede, papel }]`, `comentario_frequencia`, `o_que_aprendi`, `perfil_alvo`.
+- Na análise: `contexto_inferido` `{ nicho, publico, tom_resumo, objetivos, confianca }`, `por_rede` `[{ rede, papel }]`, `comentario_frequencia`, `o_que_aprendi`, `perfil_alvo`, `benchmark_concorrentes` (só com concorrentes informados, ver acima).
 - Em cada item do calendário: `fonte` (`sua audiência`, `hipótese do nicho` ou `teste`) quando o calendário veio do modelo. Se os slots do modelo não forem coerentes, o calendário é montado pelas janelas de sempre.
 
 #### Objetivo endereçado (`enderecamento`)
@@ -267,6 +293,21 @@ Preenche a tela 2 do onboarding a partir do site, sem IA. Entrada: `{ "brand": {
 ```
 
 `nicho` usa os ids do app (`saas-b2b`, `fintech`, `healthtech`, `edtech`, `ecommerce-dtc`). `publico_alvo` é uma frase editável, nunca vazia: o público do tema detectado no texto do site mais os segmentos que o site cita literalmente (PMEs, MEIs, contadores, clínicas...). Objetivos por palavras do site (vagas, lançamento, B2B), no máximo 2. Réguas de tom pelo uso de "você", informalidade, exclamações e jargão técnico. Formatos pela base curada do nicho, com carrossel sempre e dado de impacto só se o site tiver número real. Frequência `constante`, ou `leve` quando o foco é autoridade e o site é enxuto. Erros: 400 para entrada inválida, 422 para endereço que não dá para ler.
+
+### POST /api/concorrentes
+
+Sugere até 5 concorrentes ou referências para a tela de ajustes. Entrada: `{ "brand": { "...": "objeto de /api/brand ou da empresa sem site" }, "publico": "opcional, até 300 caracteres" }`, com a mesma checagem mínima de `/api/inferir` (`brandParaInferencia`). Saída:
+
+```json
+{
+  "sugestoes": [
+    { "nome": "Feegow", "url": "https://feegow.com.br/", "motivo": "Software de gestão para clínicas.", "fonte": "ia" },
+    { "nome": "Tatiana Pimenta (CEO e fundadora da Vittude)", "url": "https://pt.linkedin.com/posts/...", "motivo": "Referência do nicho na nossa base curada, com post verificado.", "fonte": "base_nicho" }
+  ]
+}
+```
+
+Com IA configurada (`src/lib/motor/concorrentes.ts`): uma chamada pequena pede empresas reais do mesmo mercado no Brasil, com o site oficial e um motivo de uma linha, só em JSON. Cada site passa pelo fetch seguro (sem rede interna, 3 s no máximo, em paralelo); site que não responde, dá 404 ou repete domínio sai, e a própria empresa nunca entra (recusa de robô, 403, conta como site que existe). Essas saem com `fonte: "ia"`. O que faltar para 5 vem da base curada do nicho (`palpiteNicho`, com o nicho informado valendo para quem não tem site): itens verificados com autor e `link_fonte`, um por autor, sem a própria marca, com `fonte: "base_nicho"`. Sem IA, com a IA fora do prazo (12 s), com erro ou sem nenhum site confirmado, a resposta é só a base. Empresas de exemplo (demo) usam só a base, na hora e sem rede. Nenhuma URL é inventada. Limite em memória por instância: `LIMITE_CONCORRENTES_POR_IP` (padrão 10) e `LIMITE_CONCORRENTES_DIA` (padrão 200) chamadas de IA por dia; passou disso, só a base. A rota nunca devolve erro por falha de IA ou de rede; 400 só para entrada inválida.
 
 ### GET /api/analise/{id}
 

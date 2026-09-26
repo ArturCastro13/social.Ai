@@ -22,6 +22,7 @@ import { montarContexto } from "@/lib/motor/contexto";
 import { filtrarLocal } from "@/lib/motor/local-filtros";
 import { postsDoFounder, referenciaDoPadrao } from "@/lib/motor/local-founder";
 import { aplicarLinkDestino, CHAMADA_LINK } from "@/lib/motor/link-destino";
+import { objetivoDoTextoLivre, objetivosDoRodizio } from "@/lib/motor/enderecamento";
 import { aplicarExtras, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor/saida";
 import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
 import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
@@ -111,7 +112,7 @@ describe("contexto e prompt com conhecimento do founder", () => {
     const sem = montarContexto(cora.brand);
     expect(sem.conhecimento_founder).toBeNull();
     const c = montarContexto(cora.brand, preferenciasSchema.parse({ conhecimento_founder: { objecao_cliente: CONHECIMENTO.objecao_cliente } }));
-    expect(c.conhecimento_founder).toEqual({ objecao_cliente: CONHECIMENTO.objecao_cliente, crenca_contraria: null, historia: null });
+    expect(c.conhecimento_founder).toEqual({ problema_cliente: null, objecao_cliente: CONHECIMENTO.objecao_cliente, diferencial: null, crenca_contraria: null, historia: null });
     expect(Object.keys(c).indexOf("conhecimento_founder")).toBe(Object.keys(c).indexOf("publico_alvo") + 1);
     expect(montarPromptMotor(c)).toContain(CONHECIMENTO.objecao_cliente);
   });
@@ -298,5 +299,145 @@ describe("demo com e sem conhecimento do founder", () => {
       expect(p.legendas.x.length).toBeLessThanOrEqual(280);
     }
     expect(JSON.stringify({ ...a, brand: undefined })).not.toMatch(/[—–]/);
+  });
+});
+
+// ---------- Perguntas novas: problema, objeção e diferencial ----------
+
+const NOVAS = {
+  problema_cliente: "Dono de pequena empresa cobra cliente no papel e perde dinheiro sem perceber. No fim do mês não sabe quanto entrou. E só descobre quando falta para pagar as contas.",
+  objecao_cliente: "Todo cliente pergunta se precisa trocar de banco para usar a conta.",
+  diferencial: "A gente junta cobrança e conta no mesmo app, e o dono vê o caixa do dia no celular.",
+};
+
+describe("perguntas novas do founder", () => {
+  const op = { perfil_alvo: "founder" as const, publico: "Donos de PME que cuidam do financeiro sozinhos", redes: ["linkedin", "instagram", "x"] as ("linkedin" | "instagram" | "x")[], hashtags: ["contapj", "gestao"], marca: "Cora" };
+
+  it("aceita as três chaves novas e as antigas juntas", () => {
+    const p = preferenciasSchema.parse({ conhecimento_founder: { ...NOVAS, ...CONHECIMENTO } });
+    expect(conhecimentoPreenchido(p.conhecimento_founder)).toEqual({ ...NOVAS, ...CONHECIMENTO });
+  });
+
+  it("o CONTEXTO leva as cinco chaves, com null no que ficou vazio, e o prompt explica cada uma", () => {
+    const c = montarContexto(cora.brand, preferenciasSchema.parse({ conhecimento_founder: { problema_cliente: NOVAS.problema_cliente, diferencial: NOVAS.diferencial } }));
+    expect(c.conhecimento_founder).toEqual({ problema_cliente: NOVAS.problema_cliente, objecao_cliente: null, diferencial: NOVAS.diferencial, crenca_contraria: null, historia: null });
+    for (const k of ["problema_cliente", "objecao_cliente", "diferencial", "crenca_contraria", "historia"]) expect(SISTEMA_MOTOR).toContain(k);
+    expect(SISTEMA_MOTOR).toMatch(/Nunca cite concorrente pelo nome nesse post/);
+  });
+
+  it("problema com 3 frases vira carrossel só com o texto do founder; objeção e diferencial seguem", () => {
+    const fs = postsDoFounder(NOVAS, op);
+    expect(fs.map((f) => f.post.formato)).toEqual(["carrossel", "print-tweet", "antes-depois"]);
+    const [prob, , dif] = fs;
+    expect(prob.post.template).toBe("capa-gancho");
+    expect(prob.post.slides.length).toBeGreaterThanOrEqual(5);
+    expect(prob.post.slides.length).toBeLessThanOrEqual(8);
+    // Miolo do carrossel: cada frase do founder, como está.
+    const miolo = prob.post.slides.slice(1, -1).map((s) => s.texto);
+    expect(miolo).toEqual(["Dono de pequena empresa cobra cliente no papel e perde dinheiro sem perceber.", "No fim do mês não sabe quanto entrou.", "E só descobre quando falta para pagar as contas."]);
+    expect(prob.extras.enderecamento?.objetivo).toBe("gerar_clientes");
+    // Diferencial: antes = o problema do founder, depois = o diferencial.
+    expect(dif.post.template).toBe("antes-depois");
+    expect(dif.post.slides).toHaveLength(2);
+    expect(NOVAS.problema_cliente.startsWith(dif.post.slides[0].texto.replace(/…$/, ""))).toBe(true);
+    expect(dif.post.slides[1].texto).toBe(NOVAS.diferencial);
+    expect(dif.extras.enderecamento?.objetivo).toBe("gerar_clientes");
+    for (const { post, extras } of fs) {
+      regrasPorRede(post);
+      expect(idsCatalogo.has(post.padrao_inspirador), post.padrao_inspirador).toBe(true);
+      expect(extras.origem_tema).toBe("founder");
+      expect(extras.padrao_referencia?.nome.length).toBeGreaterThan(5);
+      for (const t of textos(post)) {
+        expect(/[—–]/.test(t), t).toBe(false);
+        expect(/descubr|desvend|potencializ/i.test(t), t).toBe(false);
+      }
+    }
+    // Determinístico.
+    expect(postsDoFounder(NOVAS, op)).toEqual(fs);
+  });
+
+  it("problema curto vira imagem única; diferencial sem problema vira imagem única com a frase do founder", () => {
+    const [prob] = postsDoFounder({ problema_cliente: "dono de clínica fecha o mês sem saber o lucro" }, op);
+    expect(prob.post).toMatchObject({ formato: "imagem-unica", template: "citacao" });
+    expect(prob.post.gancho).toBe("Dono de clínica fecha o mês sem saber o lucro. Isso é a sua rotina?");
+    regrasPorRede(prob.post);
+    const [dif] = postsDoFounder({ diferencial: NOVAS.diferencial }, op);
+    expect(dif.post).toMatchObject({ formato: "imagem-unica", template: "citacao" });
+    expect(dif.post.slides[0].texto).toBe(NOVAS.diferencial);
+    regrasPorRede(dif.post);
+  });
+
+  it("com as cinco respostas, a ordem é problema, objeção, diferencial, crença, história", () => {
+    const fs = postsDoFounder({ ...NOVAS, ...CONHECIMENTO }, op);
+    expect(fs.map((f) => f.post.formato)).toEqual(["carrossel", "print-tweet", "antes-depois", "citacao", "bastidor-founder"]);
+    expect(fs.every((f) => f.extras.origem_tema === "founder")).toBe(true);
+  });
+
+  it("filtrarLocal e analisar sem IA levam os posts novos na frente, válidos", async () => {
+    const pref = preferenciasSchema.parse({ perfil_alvo: "empresa", conhecimento_founder: NOVAS });
+    const bruto = analiseLocal(cora.brand, "fintech", padroesDoNicho(catalogo, "fintech", 10), 24, ["instagram", "linkedin"]);
+    const r = filtrarLocal(bruto, pref, { quantidade: 6, marca: "Cora" });
+    expect(analiseIASchema.safeParse(r.analise).success).toBe(true);
+    expect(r.extrasPosts.filter((_, i) => i % 2 === 0).map((e) => e.origem_tema)).toEqual(["founder", "founder", "founder"]);
+    vi.stubEnv("DEMO_MODE", "1");
+    const coraLocal: BrandProfile = { ...cora.brand, url: "https://cora-novas.com.br", dominio: "cora-novas.com.br" };
+    const a = await analisar(coraLocal, { quantidade: 6, identificadores: [], preferencias: pref });
+    expect(a.posts.filter((p) => p.origem_tema === "founder").map((p) => p.formato)).toEqual(["carrossel", "print-tweet", "antes-depois"]);
+    expect(a.roteiros![0].origem_tema).toBe("founder");
+    expect(JSON.stringify({ ...a, brand: undefined })).not.toMatch(/[—–]/);
+    vi.unstubAllEnvs();
+  });
+
+  it("demo continua instantânea com as perguntas novas", async () => {
+    vi.stubEnv("DEMO_MODE", "1");
+    const inicio = Date.now();
+    const a = await analisar(cora.brand, { quantidade: 9, identificadores: [], preferencias: preferenciasSchema.parse({ conhecimento_founder: NOVAS }) });
+    expect(Date.now() - inicio).toBeLessThan(2000);
+    expect(a.origem).toBe("demo");
+    expect(a.posts.filter((p) => p.origem_tema === "founder").map((p) => p.formato)).toEqual(["carrossel", "print-tweet", "antes-depois"]);
+    expect(a.benchmark_concorrentes).toBeUndefined();
+    vi.unstubAllEnvs();
+  });
+});
+
+// ---------- Objetivo escrito pelo founder ----------
+
+describe("preferencias.objetivo_livre", () => {
+  it("aceita até 200 caracteres e entra no hash do cache", () => {
+    expect(preferenciasSchema.safeParse({ objetivo_livre: "a".repeat(201) }).success).toBe(false);
+    const sem = preferenciasSchema.parse({ objetivos: ["gerar_clientes"] });
+    const com = preferenciasSchema.parse({ objetivos: ["gerar_clientes"], objetivo_livre: "Fechar 5 clínicas novas até dezembro" });
+    const outro = preferenciasSchema.parse({ objetivos: ["gerar_clientes"], objetivo_livre: "Fechar 6 clínicas novas até dezembro" });
+    expect(hashPreferencias(sem)).not.toBe(hashPreferencias(com));
+    expect(hashPreferencias(com)).not.toBe(hashPreferencias(outro));
+  });
+
+  it("vai no CONTEXTO com as palavras do founder, e o prompt diz como usar", () => {
+    const c = montarContexto(cora.brand, preferenciasSchema.parse({ objetivos: ["gerar_clientes"], objetivo_livre: "Fechar clínicas novas até dezembro" }));
+    expect(c.objetivo_livre).toBe("Fechar clínicas novas até dezembro");
+    expect(c.objetivos).toEqual(["gerar_clientes"]);
+    expect(montarContexto(cora.brand, preferenciasSchema.parse({ objetivo_livre: "   " })).objetivo_livre).toBeNull();
+    expect(SISTEMA_MOTOR).toContain("objetivo_livre");
+  });
+
+  it("só escolhe o objetivo do rodízio quando o texto aponta claramente para um id", () => {
+    expect(objetivoDoTextoLivre("Quero mais clientes pelo LinkedIn")).toBe("gerar_clientes");
+    expect(objetivoDoTextoLivre("Atrair investidores para a rodada")).toBe("atrair_investidor");
+    expect(objetivoDoTextoLivre("Contratar vendedor e ganhar clientes")).toBeNull();
+    expect(objetivoDoTextoLivre("Crescer")).toBeNull();
+    expect(objetivoDoTextoLivre("")).toBeNull();
+    expect(objetivosDoRodizio({ objetivos: [], objetivo_livre: "Atrair investidores", perfil_alvo: "empresa" })).toEqual(["atrair_investidor"]);
+    expect(objetivosDoRodizio({ objetivos: ["gerar_clientes"], objetivo_livre: "Contratar dois devs" })).toEqual(["gerar_clientes", "contratar"]);
+    expect(objetivosDoRodizio({ objetivos: ["gerar_clientes", "comunidade"], objetivo_livre: "Contratar dois devs" })).toEqual(["gerar_clientes", "comunidade"]);
+    expect(objetivosDoRodizio({ objetivos: [], objetivo_livre: "Crescer", perfil_alvo: "empresa" })).toEqual(["gerar_clientes"]);
+  });
+
+  it("o motor local usa o objetivo escrito no rodízio quando não há botão escolhido", () => {
+    const bruto = analiseLocal(cora.brand, "fintech", padroesDoNicho(catalogo, "fintech", 10), 12, ["instagram", "linkedin"]);
+    const r = filtrarLocal(bruto, preferenciasSchema.parse({ objetivo_livre: "Achar pessoas para contratar" }), { quantidade: 4, marca: "Cora" });
+    expect(r.extrasAnalise.contexto_inferido?.objetivos).toEqual(["contratar"]);
+    expect(r.extrasPosts.every((e) => e.objetivo === "contratar")).toBe(true);
+    const nada = filtrarLocal(bruto, preferenciasSchema.parse({ objetivo_livre: "Crescer rápido" }), { quantidade: 4, marca: "Cora" });
+    expect(nada.extrasAnalise.contexto_inferido?.objetivos).toEqual(["gerar_clientes"]);
   });
 });

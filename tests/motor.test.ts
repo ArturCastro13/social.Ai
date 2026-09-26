@@ -33,7 +33,7 @@ const cora = DEMOS.find((d) => d.brand.dominio === "cora.com.br")!.brand;
 const catalogo = construirCatalogo(itensDoArquivo());
 
 const CHAVES_CONTEXTO = [
-  "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
+  "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "objetivo_livre", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "concorrencia", "desempenho_proprio", "aprendizados_calculados", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
   "historico_preferencias", "quantidade_posts",
 ];
@@ -49,6 +49,7 @@ describe("montarContexto", () => {
     expect(c.empresa.brand_book_extraido).toBeNull();
     expect(c.founder).toEqual({ nome: "", arroba: { instagram: "", linkedin: "", x: "" }, transcricao_audio: null });
     expect(c.objetivos).toEqual([]);
+    expect(c.objetivo_livre).toBeNull();
     expect(c.inspiracoes).toEqual([]);
     expect(c.desempenho_proprio).toEqual([]);
     expect(c.concorrencia).toEqual([]);

@@ -195,6 +195,41 @@ function deObjecao(texto: string, voz: Voz, rede: RedeVideo, publico: string, ta
   };
 }
 
+function deProblema(texto: string, voz: Voz, rede: RedeVideo, publico: string, tags: string[], diferencial?: string): Parcial {
+  const t = linha(texto);
+  const curto = t.length <= 140 && frasesDe(t).length <= 1;
+  const gancho = curto ? `${semPonto(t).replace(/^\p{Ll}/u, (c) => c.toUpperCase())}. Isso é a sua rotina?` : `O problema que ${v(voz, "eu resolvo", "a gente resolve")}, em poucas palavras.`;
+  const relato = curto ? [] : falasDoRelato(t, 3).map((fala, i) => (i === 0 ? { fala, tela: "O problema" } : { fala }));
+  // Como a empresa resolve só entra com as palavras do founder (diferencial); sem isso, fica um [PREENCHER].
+  const solucao = diferencial?.trim()
+    ? { fala: corte(comPonto(linha(diferencial)), 320), tela: v(voz, "Como eu resolvo", "Como a gente resolve") }
+    : { fala: "[PREENCHER: como vocês resolvem isso, em uma ou duas frases]", tela: v(voz, "Como eu resolvo", "Como a gente resolve") };
+  const cenas = [
+    ...(relato.length ? relato : [{ fala: "Se você se reconheceu, fica até o fim." }]),
+    { fala: "Se isso é o seu dia a dia, você não é o único." },
+    solucao,
+  ];
+  const chamada = "Se isso é a sua rotina, comenta aqui ou chama para uma conversa.";
+  return {
+    titulo: v(voz, "Conto o problema que eu resolvo, do jeito que ele acontece", "Contamos o problema que a gente resolve, do jeito que ele acontece"),
+    rede,
+    gancho,
+    cenas,
+    chamada_final: chamada,
+    legenda: legendaDoRoteiro(gancho, curto ? ["Se isso é o seu dia a dia, você não é o único."] : [corte(comPonto(t), 300)], chamada, tags),
+    dica_gravacao: DICA_CAMERA,
+    origem_tema: "founder",
+    enderecamento: {
+      objetivo: "gerar_clientes",
+      publico,
+      gatilho_identificacao: corte(semPonto(t), 160),
+      acao_esperada: "Comentar se vive esse problema ou pedir uma conversa",
+    },
+    padrao_referencia: referenciaDoPadrao("carrossel--erro-comum") ?? referenciaDoPadrao("imagem-unica--erro-comum"),
+    precisa_revisao: diferencial?.trim() ? [] : ["Grave como a empresa resolve esse problema: o roteiro não responde por você."],
+  };
+}
+
 function deCrenca(texto: string, voz: Voz, rede: RedeVideo, publico: string, tags: string[]): Parcial {
   const t = linha(texto);
   const gancho = `O mercado acredita numa coisa que ${v(voz, "eu acho errada", "a gente acha errada")}.`;
@@ -338,8 +373,9 @@ export interface OpcoesRoteiros {
 }
 
 /**
- * Roteiros de vídeo sem IA. Primeiro o que o founder contou (história, objeção, crença), depois os
- * melhores posts do lote (carrossel e bastidor primeiro). Nada inventado.
+ * Roteiros de vídeo sem IA. Primeiro o que o founder contou (problema, objeção e, se houver, história
+ * e crença da versão anterior da tela), depois os melhores posts do lote (carrossel e bastidor primeiro).
+ * Nada inventado.
  */
 export function roteirosLocais(op: OpcoesRoteiros): RoteiroVideo[] {
   const max = Math.max(0, op.max);
@@ -352,8 +388,9 @@ export function roteirosLocais(op: OpcoesRoteiros): RoteiroVideo[] {
 
   const parciais: Parcial[] = [];
   const c = conhecimentoPreenchido(op.conhecimento);
-  if (c?.historia) parciais.push(deHistoria(c.historia, voz, rede(parciais.length), publico, tags));
+  if (c?.problema_cliente) parciais.push(deProblema(c.problema_cliente, voz, rede(parciais.length), publico, tags, c.diferencial));
   if (c?.objecao_cliente) parciais.push(deObjecao(c.objecao_cliente, voz, rede(parciais.length), publico, tags));
+  if (c?.historia) parciais.push(deHistoria(c.historia, voz, rede(parciais.length), publico, tags));
   if (c?.crenca_contraria) parciais.push(deCrenca(c.crenca_contraria, voz, rede(parciais.length), publico, tags));
 
   if (parciais.length < max) {

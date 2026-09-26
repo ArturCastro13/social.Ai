@@ -1,11 +1,15 @@
 // Motor local (sem IA) para "O que só você sabe": cada resposta do founder vira um post, de forma
 // determinística. Nada é inventado: o texto do post é a resposta do founder mais frases neutras de ligação.
+// - problema do cliente: carrossel quando o texto tem 3 frases ou mais (uma por slide); senão imagem única
+//   com gancho de erro comum. Objetivo gerar_clientes.
 // - objeção do cliente: gancho de pergunta, print de tweet, objetivo gerar_clientes
-// - crença contrária: gancho contraintuitivo, citação, objetivo autoridade_founder
-// - história: bastidor do founder, objetivo autoridade_founder
+// - diferencial: antes e depois quando há problema contado ("antes" = o problema, "depois" = o diferencial);
+//   sem problema, imagem única com a frase do diferencial. Objetivo gerar_clientes. Nunca cita concorrente.
+// - crença contrária (versão anterior da tela): gancho contraintuitivo, citação, objetivo autoridade_founder
+// - história (versão anterior da tela): bastidor do founder, objetivo autoridade_founder
 import type { Formato, PadraoViral, Rede, TemplateId, TipoGancho, ViralItem } from "@/lib/types";
 import type { AnaliseIA } from "@/lib/engine/schema";
-import { corte, paraHashtag } from "@/lib/engine/texto-local";
+import { corte, maiuscula, paraHashtag } from "@/lib/engine/texto-local";
 import { construirCatalogo } from "@/lib/virais/catalogo";
 import { itensDoArquivo } from "@/lib/virais";
 import { conhecimentoPreenchido, type ConhecimentoFounder, type ExtrasPost, type ObjetivoId, type Preferencias } from "./contrato";
@@ -161,6 +165,100 @@ function objecao(texto: string, voz: Voz): Rascunho {
   };
 }
 
+/** Frases do texto (ponto, exclamação ou interrogação seguidos de espaço), sem as vazias. */
+const frasesDoTexto = (t: string) =>
+  t
+    .split(/(?<=[.!?…])\s+/)
+    .map((f) => f.trim())
+    .filter(Boolean);
+
+const FECHO_PROBLEMA = "Se isso é o seu dia a dia, você não é o único.";
+
+function problema(texto: string, voz: Voz): Rascunho {
+  const t = linha(texto);
+  const frases = frasesDoTexto(t);
+  // Carrossel só com o que o founder escreveu: 3 a 6 frases de tamanho de slide, uma por slide.
+  const carrossel = frases.length >= 3 && frases.length <= 6 && frases.every((f) => f.length <= 220 && f.split(/\s+/).length >= 3);
+  const resolve = v(voz, "eu resolvo", "a gente resolve");
+  const cabeNoGancho = t.length <= 140 && frases.length === 1;
+  const gancho = cabeNoGancho ? `${maiuscula(semPonto(t))}. Isso é a sua rotina?` : `O problema que ${resolve}, do jeito que ele acontece.`;
+  const comum = {
+    chave: "problema_cliente" as const,
+    tipo: "erro-comum" as const,
+    objetivo: "gerar_clientes" as const,
+    gancho,
+    ctaInstagram: "Se isso é a sua rotina, comenta aqui ou manda no direct.",
+    ctaLinkedin: "Isso acontece aí também? Conta nos comentários.",
+    gatilho: corte(semPonto(t), 160),
+    acao: "Comentar se vive esse problema ou pedir uma conversa",
+    motivo: "descrever o problema do jeito que o cliente vive faz quem passa por ele se reconhecer na primeira linha.",
+    revisar: [] as string[],
+  };
+  if (carrossel) {
+    return {
+      ...comum,
+      formato: "carrossel",
+      template: "capa-gancho",
+      padroes: ["carrossel--erro-comum", "carrossel--pergunta", "imagem-unica--erro-comum"],
+      slides: [
+        { titulo: `O problema que ${resolve}`, texto: "Do jeito que ele acontece." },
+        ...frases.map((f, i) => ({ titulo: String(i + 1), texto: corte(comPonto(f), 220) })),
+        { titulo: "Salva para lembrar", texto: "E manda para quem vive o mesmo problema." },
+      ],
+      corpo: [...frases.slice(0, 3).map((f) => corte(comPonto(f), 200)), FECHO_PROBLEMA].slice(0, 4),
+    };
+  }
+  return {
+    ...comum,
+    formato: "imagem-unica",
+    template: "citacao",
+    padroes: ["imagem-unica--erro-comum", "imagem-unica--pergunta", "carrossel--erro-comum"],
+    slides: [{ titulo: v(voz, "O problema que eu resolvo", "O problema que a gente resolve"), texto: corte(comPonto(t), 160) }],
+    corpo: [...(cabeNoGancho ? [] : [corte(comPonto(t), 300)]), FECHO_PROBLEMA, "Vale conversar sobre isso."],
+  };
+}
+
+function diferencial(texto: string, voz: Voz, problemaDoCliente?: string): Rascunho {
+  const t = linha(texto);
+  const antes = problemaDoCliente ? linha(problemaDoCliente) : "";
+  const comum = {
+    chave: "diferencial" as const,
+    objetivo: "gerar_clientes" as const,
+    gancho: "Por que o cliente escolhe a gente e não outra opção.",
+    ctaInstagram: "Quer ver a diferença na prática? Chama no direct.",
+    ctaLinkedin: v(voz, "Faz sentido para você? Me chama para conversar.", "Faz sentido para você? Chama a gente para conversar."),
+    gatilho: corte(semPonto(antes || t), 160),
+    acao: "Pedir uma conversa para ver a diferença na prática",
+    revisar: [] as string[],
+  };
+  if (antes) {
+    // Antes = o problema com as palavras do founder; depois = o diferencial. Sem nome de concorrente.
+    return {
+      ...comum,
+      formato: "antes-depois",
+      template: "antes-depois",
+      tipo: "contraintuitivo",
+      padroes: ["antes-depois--contraintuitivo", "antes-depois--prova-social", "antes-depois--historia-pessoal"],
+      slides: [
+        { titulo: "Antes", texto: corte(comPonto(antes), 110) },
+        { titulo: "Depois", texto: corte(comPonto(t), 110) },
+      ],
+      corpo: [`Antes: ${corte(comPonto(antes), 200)}`, `Com a gente: ${corte(comPonto(t), 240)}`],
+      motivo: "o contraste entre o problema e o jeito da empresa mostra a diferença sem precisar falar de ninguém.",
+    };
+  }
+  return {
+    ...comum,
+    formato: "imagem-unica",
+    template: "citacao",
+    tipo: "promessa",
+    padroes: ["imagem-unica--promessa", "imagem-unica--prova-social", "citacao--curiosidade"],
+    slides: [{ titulo: v(voz, "Por que me escolhem", "Por que escolhem a gente"), texto: corte(comPonto(t), 160) }],
+    corpo: [corte(comPonto(t), 300), "É isso que o cliente leva quando escolhe a gente."],
+    motivo: "dizer em uma frase por que o cliente escolhe a empresa ajuda quem está comparando opções a decidir.",
+  };
+}
+
 function crenca(texto: string, voz: Voz, assinatura: string): Rascunho {
   const t = linha(texto);
   return {
@@ -205,7 +303,8 @@ function historia(texto: string, voz: Voz): Rascunho {
 }
 
 /**
- * Um post por resposta preenchida, na ordem objeção, crença, história. Lista vazia sem respostas.
+ * Um post por resposta preenchida, na ordem problema, objeção, diferencial, crença, história.
+ * Lista vazia sem respostas.
  * Todos saem com origem_tema "founder" e endereçamento completo.
  */
 export function postsDoFounder(conhecimento: ConhecimentoFounder | null | undefined, op: OpcoesFounder): PostFounder[] {
@@ -218,7 +317,9 @@ export function postsDoFounder(conhecimento: ConhecimentoFounder | null | undefi
   const redes = op.redes.length ? op.redes : (["linkedin", "instagram"] as Rede[]);
 
   const rascunhos: Rascunho[] = [];
+  if (c.problema_cliente) rascunhos.push(problema(c.problema_cliente, voz));
   if (c.objecao_cliente) rascunhos.push(objecao(c.objecao_cliente, voz));
+  if (c.diferencial) rascunhos.push(diferencial(c.diferencial, voz, c.problema_cliente));
   if (c.crenca_contraria) rascunhos.push(crenca(c.crenca_contraria, voz, assinatura));
   if (c.historia) rascunhos.push(historia(c.historia, voz));
 

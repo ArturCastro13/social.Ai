@@ -19,8 +19,17 @@ export interface ContextoMotor {
   perfil_alvo: Preferencias["perfil_alvo"];
   /** Quem os posts precisam fazer se reconhecer: o que o founder escreveu ou, se vazio, o inferido do site. */
   publico_alvo: string;
-  /** "O que só você sabe": primeira fonte de tema. null quando o founder pulou as três perguntas. */
-  conhecimento_founder: { objecao_cliente: string | null; crenca_contraria: string | null; historia: string | null } | null;
+  /**
+   * "O que só você sabe": primeira fonte de tema. null quando o founder pulou todas as perguntas.
+   * As três da tela atual (problema, objeção, diferencial) vêm primeiro; crença e história são da versão anterior.
+   */
+  conhecimento_founder: {
+    problema_cliente: string | null;
+    objecao_cliente: string | null;
+    diferencial: string | null;
+    crenca_contraria: string | null;
+    historia: string | null;
+  } | null;
   empresa: {
     site_url: string;
     site_extraido: { proposta: string; publico: string; produtos: string[]; provas: string[]; paleta: string[]; fontes: string[] };
@@ -30,6 +39,8 @@ export interface ContextoMotor {
   founder: { nome: string; arroba: Arroba; transcricao_audio: string | null };
   nicho: NichoMotor;
   objetivos: string[];
+  /** Objetivo nas palavras do founder, além dos ids escolhidos. null quando não escreveu. */
+  objetivo_livre: string | null;
   tom_de_voz: TomDeVoz;
   formatos_permitidos: string[];
   frequencia_escolhida: string | null;
@@ -226,7 +237,13 @@ function desempenho(ds: ReturnType<typeof desempenhoDosPosts>): ContextoMotor["d
 function conhecimentoDoContexto(p: Preferencias | null): ContextoMotor["conhecimento_founder"] {
   const c = conhecimentoPreenchido(p?.conhecimento_founder);
   if (!c) return null;
-  return { objecao_cliente: c.objecao_cliente ?? null, crenca_contraria: c.crenca_contraria ?? null, historia: c.historia ?? null };
+  return {
+    problema_cliente: c.problema_cliente ?? null,
+    objecao_cliente: c.objecao_cliente ?? null,
+    diferencial: c.diferencial ?? null,
+    crenca_contraria: c.crenca_contraria ?? null,
+    historia: c.historia ?? null,
+  };
 }
 
 /**
@@ -261,6 +278,7 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
     },
     nicho: nichoParaMotor(extras.nicho),
     objetivos: p?.objetivos ?? [],
+    objetivo_livre: p?.objetivo_livre?.trim() ? semTraco(p.objetivo_livre) : null,
     tom_de_voz: p?.tom_de_voz ?? REGUAS_PADRAO,
     formatos_permitidos: p?.formatos_permitidos ?? [],
     frequencia_escolhida: p?.frequencia_escolhida ?? null,
