@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Bricolage";
+        src: url("assets/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-500-normal.woff2") format("woff2");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: #f7f6f2;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f7f6f2;
+        font-family: "Geist", sans-serif;
+        color: #16130f;
+      }
+      .glow {
+        position: absolute;
+        width: 1100px;
+        height: 1100px;
+        right: -420px;
+        top: -560px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 74, 28, 0.22) 0%, rgba(255, 74, 28, 0) 65%);
+      }
+      .glow-2 {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        left: -420px;
+        bottom: -520px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(254, 62, 109, 0.16) 0%, rgba(254, 62, 109, 0) 65%);
+      }
+      .janela {
+        position: absolute;
+        inset: 56px 48px;
+        background: #ffffff;
+        border: 2px solid rgba(22, 19, 15, 0.08);
+        border-radius: 36px;
+        box-shadow: 0 40px 80px -40px rgba(22, 19, 15, 0.3);
+      }
+      .barra {
+        position: absolute;
+        left: 48px;
+        right: 48px;
+        top: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "Bricolage", sans-serif;
+        font-weight: 600;
+        font-size: 42px;
+        letter-spacing: -0.02em;
+      }
+      .passo {
+        font-size: 30px;
+        color: #6f675b;
+      }
+      .linha-url {
+        position: absolute;
+        left: 48px;
+        right: 48px;
+        top: 128px;
+        display: flex;
+        gap: 18px;
+      }
+      .campo {
+        flex: 1;
+        height: 108px;
+        border: 3px solid rgba(22, 19, 15, 0.2);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        padding: 0 36px;
+        font-size: 46px;
+      }
+      .campo .c {
+        display: none;
+      }
+      .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 52px;
+        margin-left: 3px;
+        background: #16130f;
+      }
+      .botao {
+        width: 230px;
+        height: 108px;
+        border-radius: 999px;
+        background: #ff4a1c;
+        color: #ffffff;
+        font-size: 38px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .palco {
+        position: absolute;
+        left: 48px;
+        right: 48px;
+        top: 276px;
+        bottom: 44px;
+      }
+      .cena {
+        position: absolute;
+        inset: 0;
+      }
+      /* Cena 1: a marca sendo lida. */
+      .leitura {
+        display: flex;
+        flex-direction: column;
+        gap: 44px;
+        padding-top: 36px;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 38px;
+        font-weight: 500;
+      }
+      .ponto {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #ff4a1c;
+      }
+      .item {
+        border-top: 3px solid rgba(22, 19, 15, 0.08);
+        padding-top: 36px;
+      }
+      .rotulo {
+        font-size: 30px;
+        color: #6f675b;
+      }
+      .valor {
+        margin-top: 10px;
+        font-size: 54px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+      }
+      .cores {
+        margin-top: 18px;
+        display: flex;
+        gap: 18px;
+      }
+      .cor {
+        display: block;
+        width: 128px;
+        height: 128px;
+        border-radius: 28px;
+        border: 3px solid rgba(22, 19, 15, 0.08);
+      }
+      .aa {
+        font-weight: 600;
+        margin-right: 14px;
+      }
+      /* Cena 2: o post do dia, como na aba Hoje. */
+      .faixa {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 28px;
+        color: #6f675b;
+      }
+      .faixa .mini {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        border: 2px solid rgba(22, 19, 15, 0.08);
+      }
+      .faixa .ok {
+        margin-left: auto;
+        padding: 8px 20px;
+        border-radius: 999px;
+        background: rgba(47, 93, 80, 0.12);
+        color: #2f5d50;
+        font-weight: 600;
+      }
+      .topo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 74px;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      .topo h2 {
+        font-family: "Bricolage", sans-serif;
+        font-weight: 600;
+        font-size: 58px;
+        letter-spacing: -0.03em;
+      }
+      .topo span {
+        font-size: 30px;
+        color: #6f675b;
+      }
+      .baralho {
+        position: absolute;
+        left: 50%;
+        top: 150px;
+        width: 480px;
+        height: 600px;
+        margin-left: -240px;
+      }
+      .carta {
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: 0 36px 60px -34px rgba(22, 19, 15, 0.55);
+        background: #ffffff;
+        opacity: 0;
+      }
+      .carta img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .selo {
+        position: absolute;
+        top: 26px;
+        left: 26px;
+        padding: 10px 24px;
+        border-radius: 999px;
+        font-size: 32px;
+        font-weight: 600;
+        color: #ffffff;
+        background: #1f8a5b;
+      }
+      .acoes {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        gap: 22px;
+      }
+      .acoes div {
+        flex: 1;
+        height: 104px;
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 38px;
+        font-weight: 600;
+      }
+      .recusar {
+        border: 3px solid rgba(22, 19, 15, 0.16);
+        background: #ffffff;
+      }
+      .aprovar {
+        background: #16130f;
+        color: #f7f6f2;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1350">
+      <div class="glow" id="glow"></div>
+      <div class="glow-2" id="glow2"></div>
+
+      <div class="janela">
+        <div class="barra">
+          <div class="logo">social.Ai</div>
+          <div class="passo" id="passo">Cole o site</div>
+        </div>
+
+        <div class="linha-url">
+          <div class="campo">
+            <span class="c">c</span><span class="c">o</span><span class="c">r</span><span class="c">a</span><span class="c">.</span><span class="c">c</span><span class="c">o</span><span class="c">m</span><span class="c">.</span><span class="c">b</span><span class="c">r</span><span class="cursor" id="cursor"></span>
+          </div>
+          <div class="botao" id="botao">Gerar</div>
+        </div>
+
+        <div class="palco">
+          <div class="cena leitura" id="leitura">
+            <div class="status" id="status"><span class="ponto" id="ponto"></span><span id="status-txt">Lendo cora.com.br</span></div>
+            <div class="item" id="i-paleta">
+              <div class="rotulo">Paleta</div>
+              <div class="cores">
+                <span class="cor" style="background: #fe3e6d"></span>
+                <span class="cor" style="background: #fc82a0"></span>
+                <span class="cor" style="background: #ffe5eb"></span>
+                <span class="cor" style="background: #007aff"></span>
+                <span class="cor" style="background: #3b3b3b"></span>
+              </div>
+            </div>
+            <div class="item" id="i-fonte">
+              <div class="rotulo">Fonte</div>
+              <div class="valor"><span class="aa">Aa</span>Plus Jakarta Sans</div>
+            </div>
+            <div class="item" id="i-tom">
+              <div class="rotulo">Tom de voz</div>
+              <div class="valor">De igual para igual, sem enrolação</div>
+            </div>
+          </div>
+
+          <div class="cena" id="post">
+            <div class="faixa" id="faixa">
+              <span class="mini" style="background: #fe3e6d"></span>
+              <span class="mini" style="background: #007aff"></span>
+              <span class="mini" style="background: #3b3b3b"></span>
+              Cora · Plus Jakarta Sans
+              <span class="ok">Marca lida</span>
+            </div>
+            <div class="topo" id="topo">
+              <h2>Post do dia</h2>
+              <span id="quando">seg · 19:00</span>
+            </div>
+            <div class="baralho">
+              <div class="carta" id="c3"><img src="assets/posts/cora-p2.png" alt="" /></div>
+              <div class="carta" id="c2"><img src="assets/posts/cora-p5.png" alt="" /><span class="selo" id="s2">Aprovado</span></div>
+              <div class="carta" id="c1"><img src="assets/posts/cora-p1.png" alt="" /><span class="selo" id="s1">Aprovado</span></div>
+            </div>
+            <div class="acoes" id="acoes">
+              <div class="recusar">Recusar</div>
+              <div class="aprovar" id="aprovar">Aprovar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const T = 12;
+
+      // Fundo: um respiro lento que volta ao ponto de partida no fim, para o loop fechar.
+      tl.fromTo("#glow", { scale: 1 }, { scale: 1.12, duration: T / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.fromTo("#glow2", { scale: 1.1 }, { scale: 1, duration: T / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+
+      // Cursor piscando em ciclos de 0,5 s: número par de meias-voltas, termina aceso.
+      tl.fromTo("#cursor", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "steps(1)", yoyo: true, repeat: Math.max(0, Math.floor(T / 0.5) - 1) }, 0);
+
+      // 1. Digitação.
+      const letras = gsap.utils.toArray(".campo .c");
+      letras.forEach((el, i) => tl.set(el, { display: "inline" }, 0.45 + i * 0.1));
+
+      // 2. Clique.
+      tl.to("#botao", { scale: 0.93, duration: 0.12, ease: "power2.in" }, 1.75);
+      tl.to("#botao", { scale: 1, duration: 0.35, ease: "back.out(3)" }, 1.87);
+      tl.set("#passo", { textContent: "Lendo a marca" }, 1.9);
+
+      // 3. Leitura da marca.
+      tl.fromTo("#status", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 2.0);
+      tl.fromTo("#ponto", { scale: 1 }, { scale: 0.55, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 2.0);
+      tl.fromTo("#i-paleta", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.35);
+      tl.fromTo("#i-paleta .cor", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.2)", stagger: 0.07 }, 2.5);
+      tl.fromTo("#i-fonte", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.15);
+      tl.fromTo("#i-tom", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.75);
+      tl.set("#status-txt", { textContent: "Marca lida" }, 4.5);
+      tl.to("#ponto", { backgroundColor: "#2f5d50", duration: 0.3 }, 4.5);
+
+      // 4. A leitura sai para cima e o post do dia entra, como na aba Hoje.
+      tl.to("#leitura", { opacity: 0, y: -40, duration: 0.5, ease: "power2.in" }, 5.0);
+      tl.set("#passo", { textContent: "Hoje" }, 5.2);
+      tl.fromTo("#faixa", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.3);
+      tl.fromTo("#topo", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.4);
+      tl.fromTo("#c3", { opacity: 0, y: 70, scale: 0.84 }, { opacity: 1, y: 34, scale: 0.9, duration: 0.8, ease: "expo.out" }, 5.45);
+      tl.fromTo("#c2", { opacity: 0, y: 70, scale: 0.88 }, { opacity: 1, y: 17, scale: 0.95, duration: 0.8, ease: "expo.out" }, 5.55);
+      tl.fromTo("#c1", { opacity: 0, y: 70, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "expo.out" }, 5.65);
+      tl.fromTo("#acoes", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 5.9);
+      tl.fromTo(["#s1", "#s2"], { opacity: 0, scale: 0.7 }, { opacity: 0, scale: 0.7, duration: 0.01 }, 0);
+
+      // Aprovar o primeiro.
+      tl.to("#aprovar", { scale: 0.95, duration: 0.12, ease: "power2.in" }, 7.0);
+      tl.to("#aprovar", { scale: 1, duration: 0.35, ease: "back.out(3)" }, 7.12);
+      tl.to("#s1", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 7.1);
+      tl.to("#c1", { x: 700, rotation: 16, opacity: 0, duration: 0.6, ease: "power3.in" }, 7.5);
+      tl.to("#c2", { y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 7.85);
+      tl.to("#c3", { y: 17, scale: 0.95, duration: 0.5, ease: "power3.out" }, 7.9);
+      tl.set("#quando", { textContent: "1 de 6 decididos" }, 7.9);
+
+      // Aprovar o segundo.
+      tl.to("#aprovar", { scale: 0.95, duration: 0.12, ease: "power2.in" }, 9.0);
+      tl.to("#aprovar", { scale: 1, duration: 0.35, ease: "back.out(3)" }, 9.12);
+      tl.to("#s2", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 9.1);
+      tl.to("#c2", { x: 700, rotation: 16, opacity: 0, duration: 0.6, ease: "power3.in" }, 9.5);
+      tl.to("#c3", { y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 9.85);
+      tl.set("#quando", { textContent: "2 de 6 decididos" }, 9.9);
+
+      // 5. Volta ao quadro inicial para o loop.
+      tl.to(["#faixa", "#topo", "#c3", "#acoes"], { opacity: 0, duration: 0.5, ease: "power2.in", stagger: 0.04 }, 10.9);
+      [...letras].reverse().forEach((el, i) => tl.set(el, { display: "none" }, 11.3 + i * 0.04));
+      tl.set("#passo", { textContent: "Cole o site" }, 11.6);
+      tl.set("#status-txt", { textContent: "Lendo cora.com.br" }, 11.6);
+      tl.set("#quando", { textContent: "seg · 19:00" }, 11.6);
+      tl.set("#ponto", { backgroundColor: "#ff4a1c" }, 11.6);
+      tl.set(["#c1", "#c2"], { x: 0, rotation: 0 }, 11.7);
+      tl.set("#leitura", { y: 0 }, 11.7);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
