@@ -22,6 +22,8 @@ export function PassoSaber({
   onChange,
   onContinuar,
   lendo,
+  espera,
+  onVoltar,
 }: {
   saber: Saber;
   onChange: (s: Saber) => void;
@@ -29,6 +31,10 @@ export function PassoSaber({
   onContinuar: (usar: boolean) => void;
   /** Domínio que ainda está sendo lido em segundo plano, para avisar que a espera está sendo aproveitada. */
   lendo?: string | null;
+  /** Frase pronta no lugar do "a gente lê {domínio}", para o caminho sem site. */
+  espera?: string | null;
+  /** Volta para a tela anterior (caminho sem site). */
+  onVoltar?: () => void;
 }) {
   const voz = useDitado(60);
   const atual = useRef(saber);
@@ -39,12 +45,24 @@ export function PassoSaber({
 
   return (
     <div className="animate-subir">
+      {onVoltar && (
+        <button
+          type="button"
+          onClick={() => {
+            voz.parar();
+            onVoltar();
+          }}
+          className="mb-4 text-sm text-tinta-2 underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+        >
+          Voltar para a empresa
+        </button>
+      )}
       <p className="text-sm font-medium text-pauta-escura">Passo principal</p>
       <h1 className="mt-2 text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl">O que só você sabe</h1>
       <p className="mt-3 text-lg leading-relaxed text-tinta-2">Isso é o que o ChatGPT não sabe sobre a sua empresa. Uma ou duas linhas bastam{voz.temVoz ? ", e dá para responder falando" : ""}.</p>
-      {lendo && (
+      {(espera || lendo) && (
         <p className="mt-2 text-sm text-tinta-3" role="status" aria-live="polite">
-          Enquanto isso, a gente lê {lendo}. <span className="inline-block animate-pisca text-pauta">▍</span>
+          {espera ?? `Enquanto isso, a gente lê ${lendo}.`} <span className="inline-block animate-pisca text-pauta">▍</span>
         </p>
       )}
 

@@ -126,6 +126,16 @@ export function normalizarLink(v: string): string | null {
   }
 }
 
+/** Até 3 links de concorrentes, completos e sem repetição. O que não parece link fica de fora. */
+export function normalizarConcorrentes(links: string[]): string[] {
+  const vistos = new Set<string>();
+  for (const l of links) {
+    const u = normalizarLink(l);
+    if (u && u.length <= 500) vistos.add(u);
+  }
+  return [...vistos].slice(0, 3);
+}
+
 // ---------- Memória local por domínio ----------
 
 const CHAVE = (dominio: string) => `socialai:preferencias:${dominio}`;
@@ -144,6 +154,29 @@ export function lerPreferenciasSalvas(dominio: string): Preferencias | null {
 export function salvarPreferencias(dominio: string, p: Preferencias) {
   try {
     localStorage.setItem(CHAVE(dominio), JSON.stringify(p));
+  } catch {
+    /* navegador sem armazenamento: segue sem lembrar */
+  }
+}
+
+// ---------- Última empresa sem site ----------
+
+const CHAVE_EMPRESA = "socialai:empresa-sem-site";
+
+/** Lembra o que a pessoa contou na tela da empresa, para não digitar tudo de novo ao voltar. */
+export function lerEmpresaSalva<T extends object>(): Partial<T> | null {
+  try {
+    const bruto = localStorage.getItem(CHAVE_EMPRESA);
+    const e = bruto ? JSON.parse(bruto) : null;
+    return e && typeof e === "object" ? (e as Partial<T>) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function salvarEmpresa(e: object) {
+  try {
+    localStorage.setItem(CHAVE_EMPRESA, JSON.stringify(e));
   } catch {
     /* navegador sem armazenamento: segue sem lembrar */
   }

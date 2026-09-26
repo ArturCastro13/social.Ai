@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import type { PerfilAlvo, RedeArroba } from "@/lib/client/onboarding";
+import { urlDoApp } from "@/lib/client/parametros";
 
 export interface DadosFormulario {
   url: string;
@@ -16,6 +18,8 @@ export interface DadosFormulario {
   /** @ ou link do founder, com a rede detectada ou escolhida. */
   founder?: string;
   redeFounder?: RedeArroba;
+  /** Caminho sem site: a marca é montada com o que a pessoa conta na tela da empresa. */
+  semSite?: boolean;
 }
 
 /** Tela 1 do onboarding: só o site. Redes, quem assina e o resto ficam na tela seguinte, já com o site lido. */
@@ -66,7 +70,15 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           {erroUrl}
         </p>
       )}
-
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <Link
+          href={urlDoApp({ url: "", semSite: true })}
+          className="inline-flex h-11 items-center rounded-full border border-tinta/25 bg-white px-5 text-base font-medium text-tinta transition-colors hover:border-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+        >
+          Não tenho site
+        </Link>
+        <span className="text-sm text-tinta-3">Você conta sobre a empresa e a gente monta a pauta.</span>
+      </div>
     </form>
   );
 }

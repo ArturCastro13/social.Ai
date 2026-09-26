@@ -1,14 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { AjustesRedes, type Redes } from "./AjustesRedes";
+import { AjustesRedes, CampoQuantidade, type Redes } from "./AjustesRedes";
 import { dominioDe } from "@/components/estudio/useGeracao";
 import type { DadosFormulario } from "@/components/estudio/Formulario";
+import { brandSemSite } from "@/lib/brand/sem-site";
 import {
   fraseDoTom,
+  lerEmpresaSalva,
   lerPreferenciasSalvas,
+  normalizarConcorrentes,
   normalizarLink,
   PERFIS,
+  salvarEmpresa,
   salvarPreferencias,
   sugestoesPadrao,
   tipoDaInspiracao,
@@ -20,7 +24,8 @@ import { conhecimentoPreenchido, type Preferencias, type SugestoesOnboarding, ty
 import { NICHOS, type BrandProfile } from "@/lib/types";
 import { PassoSaber, SABER_VAZIO, type Saber } from "./PassoSaber";
 import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
-import { Chip } from "./ui";
+import { EMPRESA_VAZIA, empresaParaMarca, TelaSemSite, type Empresa } from "./TelaSemSite";
+import { CampoConcorrentes, Chip } from "./ui";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
 
@@ -70,6 +75,7 @@ function sugestaoValida(s: Partial<SugestoesOnboarding> | null, padrao: Sugestoe
 /**
  * Tela 2: "A gente entendeu isso. Ajusta o que estiver errado."
  * Lê o site, pede as sugestões ao /api/inferir e mostra tudo já marcado. A tela 3 abre aqui mesmo.
+ * Sem site (`dados.semSite`), começa pela tela da empresa e monta a marca com `brandSemSite`, sem abrir /api/brand.
  */
 export function TelaAjustes({
   dados,
@@ -79,6 +85,7 @@ export function TelaAjustes({
   /** `redes` volta com os @, a quantidade e a paleta do print, que agora são escolhidos aqui. */
   onGerar: (p: Preferencias, brand: BrandProfile | null, redes: Partial<DadosFormulario>) => void;
 }) {
+  const semSite = !!dados.semSite;
   const dominio = dominioDe(dados.url);
   const perfilInicial: PerfilAlvo = dados.perfil ?? "empresa";
   const [carregando, setCarregando] = useState(true);
@@ -102,7 +109,10 @@ export function TelaAjustes({
   const [turbo, setTurbo] = useState<Turbo>(TURBO_VAZIO);
   const turboRef = useRef<HTMLDivElement>(null);
   // Passo "O que só você sabe" vem antes dos ajustes e aproveita o tempo de leitura do site.
-  const [passo, setPasso] = useState<"saber" | "ajustes">("saber");
+  const [passo, setPasso] = useState<"empresa" | "saber" | "ajustes">(semSite ? "empresa" : "saber");
+  const [empresa, setEmpresa] = useState<Empresa>(EMPRESA_VAZIA);
+  const [concorrentes, setConcorrentes] = useState<string[]>(["", "", ""]);
+  const execucao = useRef(0);
   const [saber, setSaber] = useState<Saber>(SABER_VAZIO);
   const [usarSaber, setUsarSaber] = useState(true);
   const [link, setLink] = useState("");
@@ -116,11 +126,17 @@ export function TelaAjustes({
     setFrequencia(s.frequencia);
   }
 
-  useEffect(() => {
-    let vivo = true;
-    (async () => {
+  /**
+   * Pega as sugestões do /api/inferir e aplica o que a pessoa ajustou da última vez nesta marca.
+   * Com `pronta` (sem site), a marca já vem montada; sem ela, o site é lido pelo /api/brand.
+   */
+  async function carregar(pronta?: BrandProfile, publicoInformado = "") {
+    const minha = ++execucao.current;
+    const vivo = () => execucao.current === minha;
+    setCarregando(true);
+    let b: BrandProfile | null = pronta ?? null;
+    if (!pronta) {
       const handles = { instagram: dados.instagram || undefined, linkedin: dados.linkedin || undefined, x: dados.x || undefined, facebook: dados.facebook || undefined };
-      let b: BrandProfile | null = null;
       try {
         b = await postar<BrandProfile>(
           "/api/brand",
@@ -130,56 +146,95 @@ export function TelaAjustes({
       } catch {
         b = null; // a geração tenta de novo e mostra o erro com calma
       }
-      const padrao = sugestoesPadrao(perfilInicial);
-      let s = padrao;
-      try {
-        s = sugestaoValida(await postar<Partial<SugestoesOnboarding>>("/api/inferir", b ? { brand: b } : { url: dados.url }, 15000), padrao);
-      } catch {
-        /* sem inferência, seguem os padrões locais */
+    }
+    const padrao = sugestoesPadrao(perfilInicial);
+    let s = padrao;
+    try {
+      s = sugestaoValida(await postar<Partial<SugestoesOnboarding>>("/api/inferir", b ? { brand: b } : { url: dados.url }, 15000), padrao);
+    } catch {
+      /* sem inferência, seguem os padrões locais */
+    }
+    if (!vivo()) return;
+    // O público que o founder escreveu vale mais que o deduzido.
+    if (publicoInformado.trim()) s = { ...s, publico_alvo: publicoInformado.trim().slice(0, 300) };
+    setBrand(b);
+    setSugestao(s);
+    const salvas = lerPreferenciasSalvas(pronta ? pronta.dominio : dominioDe(dados.url));
+    if (salvas) {
+      setDaUltimaVez(true);
+      if (!dados.perfil && salvas.perfil_alvo) setPerfil(salvas.perfil_alvo);
+      setPublico(salvas.publico_alvo?.trim() || s.publico_alvo);
+      setObjetivos(salvas.objetivos.length ? salvas.objetivos : s.objetivos);
+      setTom(salvas.tom_de_voz ?? s.tom_de_voz);
+      setMexeuNoTom(!!salvas.tom_de_voz);
+      setFormatos(salvas.formatos_permitidos.length ? salvas.formatos_permitidos : s.formatos);
+      setFrequencia(salvas.frequencia_escolhida ?? s.frequencia);
+      const f = salvas.founder ?? {};
+      if (!dados.founder) {
+        const rede = (["linkedin", "instagram", "x"] as const).find((r) => f[r]);
+        // Só preenche se a pessoa não escreveu o @ na tela da empresa.
+        if (rede) setFounder((atual) => (atual.valor.trim() ? atual : { valor: f[rede] ?? "", rede }));
       }
-      if (!vivo) return;
-      setBrand(b);
-      setSugestao(s);
-      const salvas = lerPreferenciasSalvas(dominioDe(dados.url));
-      if (salvas) {
-        setDaUltimaVez(true);
-        if (!dados.perfil && salvas.perfil_alvo) setPerfil(salvas.perfil_alvo);
-        setPublico(salvas.publico_alvo?.trim() || s.publico_alvo);
-        setObjetivos(salvas.objetivos.length ? salvas.objetivos : s.objetivos);
-        setTom(salvas.tom_de_voz ?? s.tom_de_voz);
-        setMexeuNoTom(!!salvas.tom_de_voz);
-        setFormatos(salvas.formatos_permitidos.length ? salvas.formatos_permitidos : s.formatos);
-        setFrequencia(salvas.frequencia_escolhida ?? s.frequencia);
-        const f = salvas.founder ?? {};
-        if (!dados.founder) {
-          const rede = (["linkedin", "instagram", "x"] as const).find((r) => f[r]);
-          if (rede) setFounder({ valor: f[rede] ?? "", rede });
-        }
-        const cf = salvas.conhecimento_founder;
-        // Só preenche se a pessoa ainda não começou a escrever enquanto o site carregava.
-        if (cf) setSaber((atual) => (Object.values(atual).some((v) => v.trim()) ? atual : { ...SABER_VAZIO, ...cf }));
-        setLink(salvas.link_destino ?? "");
-        const insp = salvas.inspiracoes.map((i) => i.url).slice(0, 3);
-        setTurbo({
-          inspiracoes: [...insp, "", "", ""].slice(0, 3),
-          brandBook: salvas.brand_book_texto ?? "",
-          fala: f.transcricao_audio ?? "",
-          proibicoes: salvas.proibicoes,
+      const cf = salvas.conhecimento_founder;
+      // Só preenche se a pessoa ainda não começou a escrever enquanto o site carregava.
+      if (cf) setSaber((atual) => (Object.values(atual).some((v) => v.trim()) ? atual : { ...SABER_VAZIO, ...cf }));
+      setLink(salvas.link_destino ?? "");
+      const conc = salvas.concorrentes ?? [];
+      if (conc.length) setConcorrentes((atual) => (atual.some((v) => v.trim()) ? atual : [...conc, "", "", ""].slice(0, 3)));
+      const insp = salvas.inspiracoes.map((i) => i.url).slice(0, 3);
+      setTurbo({
+        inspiracoes: [...insp, "", "", ""].slice(0, 3),
+        brandBook: salvas.brand_book_texto ?? "",
+        fala: f.transcricao_audio ?? "",
+        proibicoes: salvas.proibicoes,
+      });
+    } else {
+      setDaUltimaVez(false);
+      aplicarSugestao(s);
+    }
+    setCarregando(false);
+  }
+
+  useEffect(() => {
+    if (semSite) {
+      // Quem já contou sobre a empresa antes não precisa digitar tudo de novo.
+      const salva = lerEmpresaSalva<Empresa>();
+      if (salva) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setEmpresa({
+          ...EMPRESA_VAZIA,
+          ...salva,
+          redes: { ...EMPRESA_VAZIA.redes, ...salva.redes },
+          semRede: { ...EMPRESA_VAZIA.semRede, ...salva.semRede },
+          paleta: Array.isArray(salva.paleta) ? salva.paleta : [],
         });
-      } else {
-        aplicarSugestao(s);
       }
-      setCarregando(false);
-    })();
+    } else {
+      carregar();
+    }
+    // Invalida a leitura em andamento quando a tela sai (a resposta atrasada não mexe em nada).
+    const exec = execucao;
     return () => {
-      vivo = false;
+      exec.current++;
     };
     // Roda uma vez por site; a tela é remontada quando os dados mudam.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /** Sem site: a marca nasce do que a pessoa contou. Só pede sugestões de novo se nome ou descrição mudaram. */
+  function confirmarEmpresa() {
+    const b = brandSemSite(empresaParaMarca(empresa));
+    salvarEmpresa(empresa);
+    const mesmaMarca = brand?.dominio === b.dominio && !carregando;
+    setBrand(b);
+    if (!mesmaMarca) carregar(b, empresa.publico);
+    else if (empresa.publico.trim() && !publico.trim()) setPublico(empresa.publico.trim().slice(0, 300));
+    setPasso("saber");
+    window.scrollTo({ top: 0 });
+  }
+
   const frase = useMemo(() => (mexeuNoTom ? fraseDoTom(tom) : sugestao.exemplo_tom), [mexeuNoTom, tom, sugestao.exemplo_tom]);
-  const nicho = NICHOS.find((n) => n.id === sugestao.nicho)?.nome;
+  const nicho = NICHOS.find((n) => n.id === (empresa.nicho ?? sugestao.nicho))?.nome;
   const freqSugerida = FREQUENCIAS.find((f) => f.id === sugestao.frequencia);
 
   function alternarObjetivo(id: ObjetivoId) {
@@ -222,13 +277,31 @@ export function TelaAjustes({
       inspiracoes,
       ...(turbo.brandBook.trim() ? { brand_book_texto: turbo.brandBook.trim().slice(0, 20000) } : {}),
       noticias: [],
-      concorrentes: [],
+      concorrentes: normalizarConcorrentes(concorrentes),
     };
   }
 
   function gerar(e: React.FormEvent) {
     e.preventDefault();
     const p = montarPreferencias();
+    const quem = { perfil, founder: founder.valor.trim() || undefined, redeFounder: founder.valor.trim() ? founder.rede : undefined };
+    if (semSite) {
+      const dadosEmpresa = empresaParaMarca(empresa);
+      const b = brandSemSite(dadosEmpresa);
+      salvarPreferencias(b.dominio, p);
+      const h = dadosEmpresa.handles ?? {};
+      onGerar(p, b, {
+        url: b.url,
+        instagram: h.instagram ?? "",
+        linkedin: h.linkedin ?? "",
+        x: h.x ?? "",
+        facebook: h.facebook ?? "",
+        quantidade: redes.quantidade,
+        paletaInstagram: dadosEmpresa.paleta ?? [],
+        ...quem,
+      });
+      return;
+    }
     salvarPreferencias(dominio, p);
     const arroba = redes.empresa.valor.trim();
     onGerar(p, redes.paletaInstagram.length ? null : brand, {
@@ -238,9 +311,7 @@ export function TelaAjustes({
       facebook: redes.facebook.trim(),
       quantidade: redes.quantidade,
       paletaInstagram: redes.paletaInstagram,
-      perfil,
-      founder: founder.valor.trim() || undefined,
-      redeFounder: founder.valor.trim() ? founder.rede : undefined,
+      ...quem,
     });
   }
 
@@ -249,12 +320,35 @@ export function TelaAjustes({
     if (!abrirTurbo) requestAnimationFrame(() => turboRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
 
+  function irPara(p: typeof passo) {
+    setPasso(p);
+    window.scrollTo({ top: 0 });
+  }
+
+  if (passo === "empresa") {
+    return (
+      <TelaSemSite
+        empresa={empresa}
+        onChange={setEmpresa}
+        founder={founder}
+        onFounder={setFounder}
+        concorrentes={concorrentes}
+        onConcorrentes={setConcorrentes}
+        onContinuar={confirmarEmpresa}
+      />
+    );
+  }
+
+  const nomeEmpresa = empresa.nome.trim() || "a sua empresa";
+
   if (passo === "saber") {
     return (
       <PassoSaber
         saber={saber}
         onChange={setSaber}
-        lendo={carregando ? dominio : null}
+        lendo={carregando && !semSite ? dominio : null}
+        espera={carregando && semSite ? `Enquanto isso, a gente prepara as sugestões para ${nomeEmpresa}.` : null}
+        onVoltar={semSite ? () => irPara("empresa") : undefined}
         onContinuar={(usar) => {
           setUsarSaber(usar);
           setPasso("ajustes");
@@ -270,9 +364,10 @@ export function TelaAjustes({
   if (carregando) {
     return (
       <div role="status" aria-live="polite">
-        <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Lendo {dominio}</h1>
+        <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">{semSite ? `Pensando em ${nomeEmpresa}` : `Lendo ${dominio}`}</h1>
         <p className="mt-3 text-tinta-2">
-          Tirando do site o que dá para tirar, para você só corrigir. <span className="inline-block animate-pisca text-pauta">▍</span>
+          {semSite ? "Montando as sugestões com o que você contou, para você só corrigir." : "Tirando do site o que dá para tirar, para você só corrigir."}{" "}
+          <span className="inline-block animate-pisca text-pauta">▍</span>
         </p>
         <div className="mt-8 space-y-6 rounded-3xl border border-tinta/10 bg-white p-5 sm:p-8" aria-hidden>
           {[5, 4, 6].map((n, i) => (
@@ -311,7 +406,7 @@ export function TelaAjustes({
 
       {daUltimaVez && (
         <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-tinta/10 bg-white px-4 py-3 text-sm text-tinta-2">
-          Trouxe os ajustes que você fez da última vez neste site.
+          {semSite ? "Trouxe os ajustes que você fez da última vez para esta empresa." : "Trouxe os ajustes que você fez da última vez neste site."}
           <button
             type="button"
             onClick={() => {
@@ -320,7 +415,7 @@ export function TelaAjustes({
             }}
             className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
           >
-            usar o que o site sugere
+            {semSite ? "usar a sugestão nova" : "usar o que o site sugere"}
           </button>
         </p>
       )}
@@ -328,19 +423,31 @@ export function TelaAjustes({
       <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-tinta/10 bg-white px-4 py-3 text-sm text-tinta-2">
         <span>
           <strong className="text-tinta">O que só você sabe:</strong>{" "}
-          {respondidas ? `${respondidas} de 3 respondidas, e elas viram assunto de post.` : "pulado por agora. Os posts saem só do site."}
+          {respondidas ? `${respondidas} de 3 respondidas, e elas viram assunto de post.` : `pulado por agora. Os posts saem só do ${semSite ? "que você contou" : "site"}.`}
         </span>
         <button
           type="button"
-          onClick={() => {
-            setPasso("saber");
-            window.scrollTo({ top: 0 });
-          }}
+          onClick={() => irPara("saber")}
           className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
         >
           {respondidas ? "editar" : "responder agora"}
         </button>
       </p>
+
+      {semSite && (
+        <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-tinta/10 bg-white px-4 py-3 text-sm text-tinta-2">
+          <span>
+            <strong className="text-tinta">Sua empresa e redes:</strong> {resumoRedes(empresa)}
+          </span>
+          <button
+            type="button"
+            onClick={() => irPara("empresa")}
+            className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
+          >
+            editar
+          </button>
+        </p>
+      )}
 
       <div className="mt-8 space-y-8 rounded-3xl border border-tinta/10 bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] sm:p-8">
         <div>
@@ -379,6 +486,9 @@ export function TelaAjustes({
           {linkInvalido && <p className="mt-1 pl-4 text-xs text-pauta-escura">Esse não parece um link. Ele vai ficar de fora.</p>}
         </div>
 
+        {/* Sem site, os concorrentes já foram pedidos na tela da empresa. */}
+        {!semSite && <CampoConcorrentes valores={concorrentes} onChange={setConcorrentes} titulo={SUBTITULO} />}
+
         <fieldset>
           <legend className={SUBTITULO}>Quem assina os posts</legend>
           <div className="mt-3 flex flex-wrap gap-2">
@@ -390,7 +500,16 @@ export function TelaAjustes({
           </div>
         </fieldset>
 
-        <AjustesRedes redes={redes} onChange={setRedes} founder={founder} onFounder={setFounder} titulo={SUBTITULO} />
+        {semSite ? (
+          <fieldset>
+            <legend className={SUBTITULO}>Quantos posts</legend>
+            <div className="mt-3">
+              <CampoQuantidade valor={redes.quantidade} onChange={(quantidade) => setRedes((r) => ({ ...r, quantidade }))} />
+            </div>
+          </fieldset>
+        ) : (
+          <AjustesRedes redes={redes} onChange={setRedes} founder={founder} onFounder={setFounder} titulo={SUBTITULO} />
+        )}
 
         <fieldset>
           <legend className={SUBTITULO}>Objetivo</legend>
@@ -504,4 +623,13 @@ export function TelaAjustes({
       </div>
     </form>
   );
+}
+
+const NOMES_REDES = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" } as const;
+
+/** "Instagram e LinkedIn" ou "nenhuma rede ainda", para o resumo da tela de ajustes. */
+function resumoRedes(e: Empresa): string {
+  const com = (Object.keys(NOMES_REDES) as (keyof typeof NOMES_REDES)[]).filter((r) => !e.semRede[r] && e.redes[r].trim()).map((r) => NOMES_REDES[r]);
+  const redes = com.length ? (com.length === 1 ? com[0] : `${com.slice(0, -1).join(", ")} e ${com[com.length - 1]}`) : "nenhuma rede ainda";
+  return `${e.nome.trim()}, ${redes}.`;
 }

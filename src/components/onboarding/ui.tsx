@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { detectarRede, REDES_ARROBA, type RedeArroba } from "@/lib/client/onboarding";
+import { detectarRede, normalizarLink, REDES_ARROBA, type RedeArroba } from "@/lib/client/onboarding";
 
 /** Chip clicável que liga e desliga. Mesmo desenho dos botões de quantidade do formulário. */
 export function Chip({
@@ -110,5 +110,51 @@ export function BotaoGravar({
       <span className={`h-2.5 w-2.5 rounded-full bg-pauta ${gravando ? "animate-pisca" : ""}`} aria-hidden />
       {gravando ? `Parar ${relogio}` : temTexto ? "Gravar mais" : "Gravar"}
     </button>
+  );
+}
+
+/**
+ * Até 3 links de concorrentes ou perfis que a pessoa acompanha. Só o motor usa, para achar o que já
+ * funciona no nicho; nada disso aparece no resultado.
+ */
+export function CampoConcorrentes({ valores, onChange, titulo }: { valores: string[]; onChange: (v: string[]) => void; titulo: string }) {
+  return (
+    <fieldset>
+      <legend className={titulo}>
+        Concorrentes ou perfis que você acompanha <span className="font-sans text-sm font-normal text-tinta-3">(opcional)</span>
+      </legend>
+      <p className="mt-1 text-sm text-tinta-3">Até 3 links. A gente usa só por dentro, para ver o que já funciona no seu mercado. Não aparece nos posts.</p>
+      <div className="mt-3 space-y-2">
+        {valores.map((v, i) => {
+          const invalido = v.trim() !== "" && !normalizarLink(v);
+          return (
+            <div key={i}>
+              <label htmlFor={`concorrente-${i}`} className="sr-only">
+                Link de concorrente ou perfil {i + 1}
+              </label>
+              <input
+                id={`concorrente-${i}`}
+                inputMode="url"
+                autoCapitalize="none"
+                autoComplete="off"
+                spellCheck={false}
+                maxLength={500}
+                value={v}
+                placeholder={["instagram.com/concorrente", "linkedin.com/company/...", "site-do-concorrente.com.br"][i]}
+                onChange={(e) => onChange(valores.map((x, k) => (k === i ? e.target.value : x)))}
+                aria-invalid={invalido}
+                aria-describedby={invalido ? `concorrente-${i}-erro` : undefined}
+                className="h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus-visible:outline-none"
+              />
+              {invalido && (
+                <p id={`concorrente-${i}-erro`} className="mt-1 pl-4 text-xs text-pauta-escura">
+                  Esse não parece um link. Ele vai ficar de fora.
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </fieldset>
   );
 }

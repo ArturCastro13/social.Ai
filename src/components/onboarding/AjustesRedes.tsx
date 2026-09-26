@@ -28,27 +28,6 @@ export function AjustesRedes({
   titulo: string;
 }) {
   const [abrirMais, setAbrirMais] = useState(false);
-  const [lendoPrint, setLendoPrint] = useState(false);
-  const inputArquivo = useRef<HTMLInputElement>(null);
-
-  async function lerPrint(arquivo: File) {
-    setLendoPrint(true);
-    const url = URL.createObjectURL(arquivo);
-    try {
-      const { Vibrant } = await import("node-vibrant/browser");
-      const p = await Vibrant.from(url).getPalette();
-      const cores = [p.Vibrant, p.DarkVibrant, p.Muted, p.LightVibrant, p.DarkMuted]
-        .filter((s): s is NonNullable<typeof s> => !!s)
-        .sort((a, b) => b.population - a.population)
-        .map((s) => s.hex.toLowerCase());
-      onChange({ ...redes, paletaInstagram: cores.slice(0, 5) });
-    } catch {
-      onChange({ ...redes, paletaInstagram: [] });
-    } finally {
-      URL.revokeObjectURL(url);
-      setLendoPrint(false);
-    }
-  }
 
   return (
     <fieldset>
@@ -83,20 +62,7 @@ export function AjustesRedes({
 
       {abrirMais && (
         <div className="mt-4 grid gap-4 border-t border-tinta/10 pt-4">
-          <div className="flex flex-wrap items-center gap-1.5 text-sm" role="group" aria-label="Quantidade de posts">
-            <span className="mr-1.5 text-tinta-2">Posts</span>
-            {QUANTIDADES.map((q) => (
-              <button
-                type="button"
-                key={q}
-                onClick={() => onChange({ ...redes, quantidade: q })}
-                aria-pressed={redes.quantidade === q}
-                className={`h-9 w-10 rounded-full border tabular-nums transition-colors ${redes.quantidade === q ? "border-tinta bg-tinta text-papel" : "border-tinta/20 hover:border-tinta"}`}
-              >
-                {q}
-              </button>
-            ))}
-          </div>
+          <CampoQuantidade valor={redes.quantidade} onChange={(quantidade) => onChange({ ...redes, quantidade })} />
           <label className="block">
             <span className="text-sm text-tinta-2">Facebook da empresa</span>
             <input
@@ -108,36 +74,92 @@ export function AjustesRedes({
               className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
             />
           </label>
-          <div>
-            <input
-              ref={inputArquivo}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={(e) => e.target.files?.[0] && lerPrint(e.target.files[0])}
-            />
-            <button
-              type="button"
-              onClick={() => inputArquivo.current?.click()}
-              className="flex w-full items-center justify-between gap-3 rounded-2xl border border-tinta/20 bg-white px-4 py-3 text-left text-sm transition-colors hover:border-tinta"
-            >
-              <span className="text-tinta-2">
-                <span className="font-medium text-tinta">Print do grid do Instagram (opcional).</span> As cores são lidas no seu navegador, a imagem não
-                sai daqui.
-              </span>
-              <span className="flex shrink-0 gap-1">
-                {lendoPrint ? (
-                  <span className="animate-pisca">lendo</span>
-                ) : redes.paletaInstagram.length ? (
-                  redes.paletaInstagram.map((c) => <span key={c} className="h-6 w-6 rounded-full border border-tinta/20" style={{ background: c }} />)
-                ) : (
-                  <span className="underline underline-offset-4">escolher</span>
-                )}
-              </span>
-            </button>
-          </div>
+          <CampoPrint paleta={redes.paletaInstagram} onPaleta={(paletaInstagram) => onChange({ ...redes, paletaInstagram })} />
         </div>
       )}
     </fieldset>
+  );
+}
+
+/** Tira as cores de um print do grid do Instagram, no navegador. Falhou, volta vazio. */
+async function paletaDoPrint(arquivo: File): Promise<string[]> {
+  const url = URL.createObjectURL(arquivo);
+  try {
+    const { Vibrant } = await import("node-vibrant/browser");
+    const p = await Vibrant.from(url).getPalette();
+    return [p.Vibrant, p.DarkVibrant, p.Muted, p.LightVibrant, p.DarkMuted]
+      .filter((s): s is NonNullable<typeof s> => !!s)
+      .sort((a, b) => b.population - a.population)
+      .map((s) => s.hex.toLowerCase())
+      .slice(0, 5);
+  } catch {
+    return [];
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+/** Botão do print do grid do Instagram. A imagem não sai do navegador; só as cores seguem. */
+export function CampoPrint({ paleta, onPaleta }: { paleta: string[]; onPaleta: (cores: string[]) => void }) {
+  const [lendo, setLendo] = useState(false);
+  const inputArquivo = useRef<HTMLInputElement>(null);
+
+  async function ler(arquivo: File) {
+    setLendo(true);
+    onPaleta(await paletaDoPrint(arquivo));
+    setLendo(false);
+  }
+
+  return (
+    <div>
+      <input
+        ref={inputArquivo}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        tabIndex={-1}
+        aria-hidden
+        onChange={(e) => e.target.files?.[0] && ler(e.target.files[0])}
+      />
+      <button
+        type="button"
+        onClick={() => inputArquivo.current?.click()}
+        className="flex w-full items-center justify-between gap-3 rounded-2xl border border-tinta/20 bg-white px-4 py-3 text-left text-sm transition-colors hover:border-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+      >
+        <span className="text-tinta-2">
+          <span className="font-medium text-tinta">Print do grid do Instagram (opcional).</span> As cores são lidas no seu navegador, a imagem não sai
+          daqui.
+        </span>
+        <span className="flex shrink-0 gap-1">
+          {lendo ? (
+            <span className="animate-pisca">lendo</span>
+          ) : paleta.length ? (
+            paleta.map((c) => <span key={c} className="h-6 w-6 rounded-full border border-tinta/20" style={{ background: c }} />)
+          ) : (
+            <span className="underline underline-offset-4">escolher</span>
+          )}
+        </span>
+      </button>
+    </div>
+  );
+}
+
+/** Quantos posts sair na pauta. */
+export function CampoQuantidade({ valor, onChange }: { valor: number; onChange: (q: number) => void }) {
+  return (
+    <div className="flex flex-wrap items-center gap-1.5 text-sm" role="group" aria-label="Quantidade de posts">
+      <span className="mr-1.5 text-tinta-2">Posts</span>
+      {QUANTIDADES.map((q) => (
+        <button
+          type="button"
+          key={q}
+          onClick={() => onChange(q)}
+          aria-pressed={valor === q}
+          className={`h-9 w-10 rounded-full border tabular-nums transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta ${valor === q ? "border-tinta bg-tinta text-papel" : "border-tinta/20 hover:border-tinta"}`}
+        >
+          {q}
+        </button>
+      ))}
+    </div>
   );
 }

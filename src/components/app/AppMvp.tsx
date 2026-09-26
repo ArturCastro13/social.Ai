@@ -23,6 +23,7 @@ const SECOES = [
 /**
  * Página do MVP em camadas: tela 1 (site, para quem, @), tela 2 (ajustes já preenchidos, com a tela 3 opcional)
  * e o resultado. Com `direto` (exemplos prontos), pula a tela 2 e gera na hora, como antes.
+ * Sem site (`dados.semSite`), a tela 2 começa pela tela da empresa e a marca é montada no navegador.
  */
 export function AppMvp({
   dados,
@@ -76,14 +77,14 @@ export function AppMvp({
             <Link href="/" className="font-display text-xl font-semibold tracking-[-0.02em]">
               social.Ai
             </Link>
-            {dados && <span className="truncate rounded-full bg-papel-2 px-3 py-1 text-sm text-tinta-2">{g.dominio || dados.url}</span>}
+            {dados && <span className="truncate rounded-full bg-papel-2 px-3 py-1 text-sm text-tinta-2">{g.dominio || (dados.semSite ? "Sem site" : dados.url)}</span>}
           </div>
           {dados && (
             <Link
               href="/app"
               className="inline-flex h-10 shrink-0 items-center rounded-full border border-tinta/15 bg-white px-4 text-sm font-medium transition-colors hover:border-tinta"
             >
-              Outro site
+              {dados.semSite ? "Recomeçar" : "Outro site"}
             </Link>
           )}
         </div>
@@ -133,9 +134,11 @@ export function AppMvp({
         {dados && (g.fase === "trabalhando" || (direto && g.fase === "parado")) && (
           <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20">
             <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Preparando as ideias de hoje</h1>
-            <p className="mt-3 text-tinta-2">Estamos lendo a sua marca e o seu nicho. Não feche esta página.</p>
+            <p className="mt-3 text-tinta-2">
+              {dados.semSite ? "Estamos pensando na sua empresa e no seu nicho." : "Estamos lendo a sua marca e o seu nicho."} Não feche esta página.
+            </p>
             <div className="mt-8">
-              <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || dados.url} />
+              <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || (dados.semSite ? "sua empresa" : dados.url)} />
             </div>
           </section>
         )}
@@ -155,7 +158,7 @@ export function AppMvp({
                 Tentar de novo
               </button>
               <Link href="/app" className="inline-flex h-12 items-center rounded-full border border-tinta/15 bg-white px-6 font-medium transition-colors hover:border-tinta">
-                Usar outro site
+                {dados.semSite ? "Começar de novo" : "Usar outro site"}
               </Link>
             </div>
           </section>

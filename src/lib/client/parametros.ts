@@ -1,4 +1,5 @@
 import type { DadosFormulario } from "@/components/estudio/Formulario";
+import { HOST_SEM_SITE } from "@/lib/brand/sem-site";
 import { PERFIS_VALIDOS, REDES_ARROBA, type PerfilAlvo, type RedeArroba } from "@/lib/client/onboarding";
 
 const REDES = ["instagram", "linkedin", "x", "facebook"] as const;
@@ -9,6 +10,8 @@ const QUANTIDADES = [3, 6, 9, 12];
  * `direto` pula a tela de ajustes e gera na hora (usado nos exemplos prontos).
  */
 export function urlDoApp(d: Partial<DadosFormulario> & { url: string }, direto = false): string {
+  // Sem site: a empresa é contada na tela seguinte, então a URL só marca o caminho.
+  if (d.semSite) return "/app?semsite=1";
   const q = new URLSearchParams({ url: d.url.trim() });
   for (const r of REDES) {
     const v = d[r]?.trim();
@@ -28,8 +31,14 @@ export function urlDoApp(d: Partial<DadosFormulario> & { url: string }, direto =
 type Busca = Record<string, string | string[] | undefined>;
 const um = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)?.slice(0, 300) ?? "";
 
+/** Endereço provisório do caminho sem site. A marca de verdade (com o slug) nasce na tela da empresa. */
+export const URL_SEM_SITE = `https://${HOST_SEM_SITE}/`;
+
 /** Lê os parâmetros da página do app. Sem url, devolve null e a página mostra o formulário. */
 export function dadosDaBusca(b: Busca): DadosFormulario | null {
+  if (um(b.semsite) === "1") {
+    return { url: URL_SEM_SITE, semSite: true, instagram: "", linkedin: "", x: "", facebook: "", quantidade: 6, paletaInstagram: [] };
+  }
   const url = um(b.url).trim();
   if (!/\.[a-z]{2,}/i.test(url)) return null;
   const n = Number(um(b.n));
@@ -55,4 +64,4 @@ export function dadosDaBusca(b: Busca): DadosFormulario | null {
 }
 
 /** Veio de um exemplo pronto: gera direto, sem a tela de ajustes. */
-export const diretoDaBusca = (b: Busca) => um(b.ir) === "1";
+export const diretoDaBusca = (b: Busca) => um(b.ir) === "1" && um(b.semsite) !== "1";
