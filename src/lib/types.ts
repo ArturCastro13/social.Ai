@@ -127,6 +127,10 @@ export interface BrandProfile {
   };
   avisos: string[];
   lidoEm: string;
+  /** Sem site: nicho escolhido pelo founder, que vale mais que o palpite pelo texto. */
+  nicho_informado?: Nicho;
+  /** Perfil montado com o que o founder contou, sem ler site nenhum. */
+  sem_site?: boolean;
 }
 
 // ---------- Motor de análise ----------

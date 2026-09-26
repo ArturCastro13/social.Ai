@@ -60,6 +60,8 @@ export const preferenciasSchema = z.object({
   conhecimento_founder: conhecimentoFounderSchema.optional(),
   /** Para onde mandar quem gostar do post (agendamento, WhatsApp, cadastro). Posts de gerar_clientes terminam com esse link e UTM. */
   link_destino: z.string().trim().max(500).url("O link de destino precisa ser um endereço completo, com https://.").optional(),
+  /** Concorrentes ou perfis que o founder acompanha (até 3 links). Só o motor usa, para achar ganchos e brechas; não aparece no resultado. */
+  concorrentes: z.array(z.string().trim().url("Cada concorrente precisa ser um link completo.").max(500)).max(3).default([]),
   /** Texto extraído do brand book (PDF lido no navegador) ou colado. */
   brand_book_texto: z.string().trim().max(20000).optional(),
   noticias: z
@@ -109,6 +111,36 @@ export interface ExtrasPost {
   precisa_revisao?: string[];
 }
 
+/**
+ * Roteiro de vídeo curto para o founder gravar (Reels, TikTok, Shorts, vídeo do LinkedIn).
+ * O resultado mostra só o que gravar e quando; a análise de virais e concorrência fica dentro do motor.
+ */
+export interface RoteiroVideo {
+  id: string;
+  /** Uma linha: do que o vídeo fala. */
+  titulo: string;
+  /** Rede onde publicar o vídeo. */
+  rede: "instagram" | "linkedin" | "tiktok" | "youtube";
+  /** Duração alvo, em segundos (15 a 90). */
+  duracao_seg: number;
+  /** O que falar nos primeiros 3 segundos, olhando para a câmera. */
+  gancho: string;
+  /** Cenas em ordem: o que falar e, se houver, o que mostrar ou escrever na tela. */
+  cenas: { fala: string; tela?: string }[];
+  /** Última fala: o que a pessoa deve fazer depois de assistir. */
+  chamada_final: string;
+  /** Legenda para publicar junto. */
+  legenda: string;
+  /** Dica curta de gravação (lugar, enquadramento, o que ter à mão). */
+  dica_gravacao?: string;
+  origem_tema?: OrigemTema;
+  enderecamento?: Enderecamento;
+  padrao_referencia?: { nome: string; fonte_url: string };
+  /** Quando gravar e publicar. `fonte` segue a mesma regra do calendário ("hipótese do nicho" sem dado real). */
+  agenda?: { data: string; dia_semana: string; horario: string; fonte?: string };
+  precisa_revisao?: string[];
+}
+
 /** Campos extras que o motor novo adiciona à análise. */
 export interface ExtrasAnalise {
   contexto_inferido?: { nicho: string; publico: string; tom_resumo: string; objetivos: string[]; confianca: "alta" | "media" | "baixa" };
@@ -116,6 +148,10 @@ export interface ExtrasAnalise {
   comentario_frequencia?: string;
   o_que_aprendi?: string;
   perfil_alvo?: Preferencias["perfil_alvo"];
+  /** Roteiros de vídeo para gravar. Ausente em demo e cache antigos. */
+  roteiros?: RoteiroVideo[];
+  /** A análise foi montada sem site, só com o que o founder contou. */
+  sem_site?: boolean;
 }
 
 /** Só as respostas preenchidas; null quando o founder pulou as três. */

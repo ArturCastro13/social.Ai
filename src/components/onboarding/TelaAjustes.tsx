@@ -222,6 +222,7 @@ export function TelaAjustes({
       inspiracoes,
       ...(turbo.brandBook.trim() ? { brand_book_texto: turbo.brandBook.trim().slice(0, 20000) } : {}),
       noticias: [],
+      concorrentes: [],
     };
   }
 
