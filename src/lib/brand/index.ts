@@ -186,7 +186,11 @@ export async function readBrand(input: BrandInput, opts: ReadBrandOptions = {}):
   return {
     url: finalUrl,
     dominio,
-    nome: guessBrandName(ex ?? { siteName: null, title: null, og: { title: null, description: null, image: null } }, dominio),
+    nome: guessBrandName(
+      ex ?? { siteName: null, title: null, og: { title: null, description: null, image: null } },
+      dominio,
+      ex ? [...ex.h1, ...ex.h2, ...ex.paragrafos, ex.description ?? "", ex.og.description ?? ""] : [],
+    ),
     title: ex?.title ?? null,
     description: ex?.description ?? ex?.og.description ?? null,
     og: ex?.og ?? { title: null, description: null, image: null },

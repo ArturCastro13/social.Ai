@@ -47,7 +47,6 @@ export default function Home() {
             </PainelHero>
           }
           exemplos={DEMOS.map((d) => ({ nome: d.brand.nome, dominio: d.brand.dominio }))}
-          totalVirais={itens.length}
         />
         <Dor />
         <Manifesto />

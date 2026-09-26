@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 import { parseColor } from "@/lib/color";
 import { fontsFromGoogleUrl } from "./css";
+import { nomeDaMarca } from "./nome";
 
 export interface HtmlExtract {
   title: string | null;
@@ -181,17 +182,14 @@ export function extractFromHtml(html: string, pageUrl: string): HtmlExtract {
   };
 }
 
-/** Nome da marca: site_name, depois o pedaço mais curto do title, depois o domínio. */
-export function guessBrandName(ex: Pick<HtmlExtract, "siteName" | "title" | "og">, dominio: string): string {
-  if (ex.siteName && ex.siteName.length <= 40) return ex.siteName;
-  const base = dominio.replace(/^www\./, "").split(".")[0];
-  const t = ex.og.title ?? ex.title;
-  if (t) {
-    const parts = t.split(/\s[|\-–:·•]\s|\s[|–·•]\s?/).map((p) => p.trim()).filter(Boolean);
-    const matchDomain = parts.find((p) => p.length <= 30 && p.toLowerCase().replace(/\s/g, "").includes(base.toLowerCase()));
-    if (matchDomain) return matchDomain;
-    const short = parts.filter((p) => p.length <= 30).sort((a, b) => a.length - b.length)[0];
-    if (short && parts.length > 1) return short;
-  }
-  return base.charAt(0).toUpperCase() + base.slice(1);
+/**
+ * Nome da marca: site_name ou pedaço do title que bate com o domínio, depois o jeito como o
+ * texto do site escreve o domínio, e por fim o domínio capitalizado. Regras em ./nome.ts.
+ */
+export function guessBrandName(
+  ex: Pick<HtmlExtract, "siteName" | "title" | "og">,
+  dominio: string,
+  textos: string[] = [],
+): string {
+  return nomeDaMarca({ siteName: ex.siteName, title: ex.title, ogTitle: ex.og.title, dominio, textos });
 }

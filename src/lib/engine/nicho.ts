@@ -44,6 +44,9 @@ export function palpiteNicho(b: BrandProfile): { nicho: Nicho; pontuacao: Record
       return acc + Math.min(n, 4) * (p.includes(" ") ? 2 : 1);
     }, 0);
   }
-  const nicho = (Object.entries(pontuacao) as [Nicho, number][]).sort((a, b) => b[1] - a[1])[0];
+  // Empate: um nicho específico ganha de saas-b2b, que é o genérico (ex.: plataforma de e-commerce).
+  const nicho = (Object.entries(pontuacao) as [Nicho, number][]).sort(
+    (a, b) => b[1] - a[1] || Number(a[0] === "saas-b2b") - Number(b[0] === "saas-b2b"),
+  )[0];
   return { nicho: nicho[1] > 0 ? nicho[0] : "saas-b2b", pontuacao };
 }

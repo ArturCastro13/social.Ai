@@ -75,7 +75,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           onChange={(e) => setD({ ...d, url: e.target.value })}
           aria-invalid={!!erroUrl}
           aria-describedby={erroUrl ? "url-erro" : undefined}
-          className="h-14 w-full min-w-0 border sm:flex-1 border-tinta/25 bg-white text-lg text-tinta outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus:shadow-[inset_0_0_0_1px_var(--color-tinta)] focus-visible:outline-none"
+          className="h-14 w-full min-w-0 rounded-full border border-tinta/25 bg-white px-6 text-lg sm:flex-1 text-tinta outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus:shadow-[inset_0_0_0_1px_var(--color-tinta)] focus-visible:outline-none"
         />
         <button
           type="submit"
@@ -90,6 +90,22 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           {erroUrl}
         </p>
       )}
+
+      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        {REDES.slice(0, 2).map((r) => (
+          <label key={r.k} className="block">
+            <span className="text-sm text-tinta-2">{r.rotulo} (opcional)</span>
+            <input
+              value={d[r.k]}
+              onChange={(e) => setD({ ...d, [r.k]: e.target.value })}
+              placeholder={r.ph}
+              autoCapitalize="none"
+              spellCheck={false}
+              className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
+            />
+          </label>
+        ))}
+      </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
         <fieldset className="flex items-center gap-1.5">
@@ -113,13 +129,13 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           aria-expanded={abrirRedes}
           className="text-tinta-2 underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
         >
-          {abrirRedes ? "Esconder redes" : "Adicionar @ das redes (opcional)"}
+          {abrirRedes ? "Menos opções" : "Mais redes (X, Facebook, print do Instagram)"}
         </button>
       </div>
 
       {abrirRedes && (
         <div className="mt-5 grid gap-3 border-t border-tinta/10 pt-5 sm:grid-cols-2">
-          {REDES.map((r) => (
+          {REDES.slice(2).map((r) => (
             <label key={r.k} className="block">
               <span className="text-sm text-tinta-2">{r.rotulo}</span>
               <input
@@ -128,7 +144,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
                 placeholder={r.ph}
                 autoCapitalize="none"
                 spellCheck={false}
-                className="mt-1 h-11 w-full border border-tinta/20 bg-white px-3 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
+                className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
               />
             </label>
           ))}

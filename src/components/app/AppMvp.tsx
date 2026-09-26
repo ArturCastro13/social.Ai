@@ -1,0 +1,144 @@
+"use client";
+
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Fragment, useEffect, useState } from "react";
+import { Carregando } from "@/components/estudio/Carregando";
+import { Formulario, type DadosFormulario } from "@/components/estudio/Formulario";
+import { Painel } from "@/components/estudio/Painel";
+import { useGeracao } from "@/components/estudio/useGeracao";
+import { urlDoApp } from "@/lib/client/parametros";
+
+const SECOES = [
+  { id: "ideias", nome: "Ideias de hoje" },
+  { id: "metricas", nome: "Métricas" },
+  { id: "bombando", nome: "Bombando" },
+  { id: "estrategia", nome: "Estratégia" },
+  { id: "posts", nome: "Posts" },
+];
+
+/** Página do MVP: recebe o site e as redes pela URL, gera as ideias e mostra tudo numa tela só. */
+export function AppMvp({
+  dados,
+  totalVirais,
+  exemplos,
+}: {
+  dados: DadosFormulario | null;
+  totalVirais: number;
+  exemplos: { nome: string; dominio: string }[];
+}) {
+  const router = useRouter();
+  const g = useGeracao(totalVirais);
+  const [indo, setIndo] = useState(false);
+  const chave = dados ? JSON.stringify(dados) : "";
+
+  // Começa a gerar assim que a página abre com um site na URL (e de novo se o site mudar).
+  useEffect(() => {
+    if (dados) g.gerar(dados);
+    // A chave resume os dados; `g.gerar` muda a cada render e não deve disparar outra geração.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [chave]);
+
+  function ir(d: DadosFormulario) {
+    setIndo(true);
+    router.push(urlDoApp(d));
+  }
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIndo(false);
+  }, [chave]);
+
+  const pronto = g.fase === "pronto" && g.analise;
+
+  return (
+    <div className="flex min-h-full flex-1 flex-col">
+      <header className="sticky top-0 z-40 border-b border-tinta/[0.06] bg-papel/85 backdrop-blur-md">
+        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+          <div className="flex min-w-0 items-center gap-3">
+            <Link href="/" className="font-display text-xl font-semibold tracking-[-0.02em]">
+              social.Ai
+            </Link>
+            {dados && <span className="truncate rounded-full bg-papel-2 px-3 py-1 text-sm text-tinta-2">{g.dominio || dados.url}</span>}
+          </div>
+          {dados && (
+            <Link
+              href="/app"
+              className="inline-flex h-10 shrink-0 items-center rounded-full border border-tinta/15 bg-white px-4 text-sm font-medium transition-colors hover:border-tinta"
+            >
+              Outro site
+            </Link>
+          )}
+        </div>
+        {pronto && (
+          <nav aria-label="Seções do resultado" className="mx-auto flex w-full max-w-6xl gap-1 overflow-x-auto px-4 pb-3 sm:px-6">
+            {SECOES.map((s) => (
+              <a
+                key={s.id}
+                href={`#${s.id}`}
+                className="shrink-0 rounded-full px-3 py-1.5 text-sm text-tinta-2 transition-colors hover:bg-tinta/5 hover:text-tinta"
+              >
+                {s.nome}
+              </a>
+            ))}
+          </nav>
+        )}
+      </header>
+
+      <main className="flex-1">
+        {!dados && (
+          <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24">
+            <h1 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl">Cole o site da sua startup.</h1>
+            <p className="mt-4 text-lg leading-relaxed text-tinta-2">Com as redes, as ideias saem mais parecidas com o que você já posta. Leva cerca de um minuto.</p>
+            <div className="mt-10">
+              <Formulario onEnviar={ir} ocupado={indo} />
+            </div>
+            <p className="mt-6 text-sm text-tinta-3">
+              ver exemplo:{" "}
+              {exemplos.map((ex, i) => (
+                <Fragment key={ex.dominio}>
+                  <Link href={urlDoApp({ url: ex.dominio })} className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta">
+                    {ex.nome}
+                  </Link>
+                  {i < exemplos.length - 1 ? ", " : ""}
+                </Fragment>
+              ))}
+            </p>
+          </section>
+        )}
+
+        {dados && (g.fase === "trabalhando" || g.fase === "parado") && (
+          <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20">
+            <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Preparando as ideias de hoje</h1>
+            <p className="mt-3 text-tinta-2">Estamos lendo a sua marca e o seu nicho. Não feche esta página.</p>
+            <div className="mt-8">
+              <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || dados.url} />
+            </div>
+          </section>
+        )}
+
+        {dados && g.fase === "erro" && (
+          <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24">
+            <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Não deu certo desta vez</h1>
+            <p className="mt-3 rounded-2xl border border-pauta/30 bg-pauta/5 px-4 py-3 text-tinta-2" role="alert">
+              {g.erro}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => g.gerar(dados)}
+                className="inline-flex h-12 items-center rounded-full bg-pauta px-6 font-semibold text-white transition-colors hover:bg-pauta-escura"
+              >
+                Tentar de novo
+              </button>
+              <Link href="/app" className="inline-flex h-12 items-center rounded-full border border-tinta/15 bg-white px-6 font-medium transition-colors hover:border-tinta">
+                Usar outro site
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {pronto && g.analise && <Painel key={g.analise.id} analise={g.analise} ideiasPrimeiro />}
+      </main>
+    </div>
+  );
+}

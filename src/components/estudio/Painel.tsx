@@ -19,7 +19,7 @@ const ORIGEM: Record<Analise["origem"], { rotulo: string; classe: string }> = {
 const TITULO_SECAO = "font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl";
 const CHIP = "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium";
 
-export function Painel({ analise, onNova }: { analise: Analise; onNova: () => void }) {
+export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: Analise; onNova?: () => void; ideiasPrimeiro?: boolean }) {
   const [pers, setPers] = useState<Record<string, Personalizacao>>({});
   const [zip, setZip] = useState<{ feito: number; total: number } | null>(null);
   const [aviso, setAviso] = useState("");
@@ -72,13 +72,14 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
   }
 
   return (
-    <section id="resultado" className="scroll-mt-4 border-t border-tinta/10 bg-papel">
+    <section id="resultado" className="flex scroll-mt-4 flex-col bg-papel">
       {/* Cabeçalho do resultado */}
-      <div className="mx-auto max-w-6xl px-4 pb-10 pt-10 sm:pt-14">
+      <div className={`mx-auto w-full max-w-6xl px-4 pb-10 pt-10 sm:pt-14 ${ideiasPrimeiro ? "order-2 border-t border-tinta/10" : ""}`}>
         <div className="flex flex-wrap items-center gap-2">
           <span className={`${CHIP} ${ORIGEM[analise.origem].classe}`}>{ORIGEM[analise.origem].rotulo}</span>
           <span className={`${CHIP} border border-tinta/10 bg-white text-tinta-2`}>Nicho: {nicho}</span>
           <span className={`${CHIP} border border-tinta/10 bg-white text-tinta-2`}>{analise.posts.length} posts</span>
+          {onNova && (
           <button
             type="button"
             onClick={onNova}
@@ -86,11 +87,12 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
           >
             ← analisar outro site
           </button>
+          )}
         </div>
         <div className="mt-8 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
             <p className="text-sm font-medium text-tinta-3">Pauta de {b.nome}</p>
-            <h2 className="mt-2 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl">{analise.posicionamento}</h2>
+            <h2 className="mt-2 max-w-3xl text-balance font-display text-2xl font-semibold leading-[1.15] tracking-[-0.02em] sm:text-[2rem]">{analise.posicionamento}</h2>
           </div>
           <div className="flex items-end gap-4 rounded-3xl bg-white p-4 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] lg:justify-self-end">
             <div className="flex gap-1.5">
@@ -116,10 +118,12 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
         )}
       </div>
 
-      <IdeiasEMetricas analise={analise} />
+      <div className={ideiasPrimeiro ? "order-1" : ""}>
+        <IdeiasEMetricas analise={analise} />
+      </div>
 
       {/* Diagnóstico */}
-      <div className="border-t border-tinta/10">
+      <div id="diagnostico" className="order-3 scroll-mt-28 border-t border-tinta/10">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <div className="space-y-6">
             <h3 className={TITULO_SECAO}>Diagnóstico</h3>
@@ -156,7 +160,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
       </div>
 
       {/* Estratégia */}
-      <div className="border-t border-tinta/10">
+      <div id="estrategia" className="order-3 scroll-mt-28 border-t border-tinta/10">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h3 className={TITULO_SECAO}>Estratégia</h3>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
@@ -184,7 +188,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
       </div>
 
       {/* Calendário */}
-      <div className="border-t border-tinta/10 bg-papel-2/40">
+      <div id="calendario" className="order-3 scroll-mt-28 border-t border-tinta/10 bg-papel-2/40">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h3 className={TITULO_SECAO}>Calendário</h3>
           <p className="mt-2 text-tinta-2">As próximas semanas, já decididas.</p>
@@ -221,7 +225,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
       </div>
 
       {/* Posts */}
-      <div className="border-t border-tinta/10">
+      <div id="posts" className="order-3 scroll-mt-28 border-t border-tinta/10">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>

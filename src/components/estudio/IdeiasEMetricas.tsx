@@ -133,7 +133,7 @@ export function IdeiasEMetricas({ analise }: { analise: Analise }) {
 
   return (
     <div className="border-t border-tinta/15 bg-white">
-      <div id="ideias" className="mx-auto grid max-w-6xl scroll-mt-6 gap-12 px-4 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
+      <div id="ideias" className="mx-auto grid max-w-6xl scroll-mt-28 gap-12 px-4 py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
         <div>
           <h3 className="font-display text-3xl font-semibold tracking-[-0.02em]">Ideias de hoje</h3>
           <p className="mt-2 max-w-md text-tinta-2">
@@ -167,7 +167,7 @@ export function IdeiasEMetricas({ analise }: { analise: Analise }) {
 
       <div className="border-t border-tinta/10">
         <div className="mx-auto grid max-w-6xl gap-14 px-4 py-14 lg:grid-cols-2 lg:gap-20">
-          <div id="metricas" className="scroll-mt-6">
+          <div id="metricas" className="scroll-mt-28">
             <h3 className="font-display text-3xl font-semibold tracking-[-0.02em]">Métricas</h3>
             {resumo.total === 0 ? (
               <p className="mt-2 max-w-md text-tinta-2">Aprove ou pule algumas ideias e aqui aparece o que mais combina com a sua marca.</p>
@@ -288,8 +288,8 @@ function PorQue({ post, op }: { post: Analise["posts"][number]; op: Oportunidade
 
 function Radar({ sinais, pronto }: { sinais: SinaisNicho | null; pronto: boolean }) {
   return (
-    <div>
-      <h3 className="font-display text-3xl font-semibold tracking-[-0.02em]">Radar do nicho</h3>
+    <div id="bombando" className="scroll-mt-28">
+      <h3 className="font-display text-3xl font-semibold tracking-[-0.02em]">Bombando no seu nicho</h3>
       <p className="mt-2 max-w-md text-tinta-2">Posts da base curada que performaram bem acima da mediana do seu nicho. Servem de referência, nunca de cópia.</p>
       {!pronto ? (
         <p className="mt-6 text-sm text-tinta-3">Carregando.</p>

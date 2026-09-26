@@ -1,6 +1,7 @@
 import { randomBytes } from "node:crypto";
 import type { Analise, BrandProfile, PostGerado, Rede } from "@/lib/types";
 import { provedorConfigurado } from "@/lib/llm";
+import { nomeDoPerfil } from "@/lib/brand/nome";
 import { resumirPreferencias, textoPreferencias } from "@/lib/feedback";
 import { montarPrompt, SISTEMA } from "@/lib/llm/prompt";
 import { store } from "@/lib/store";
@@ -62,7 +63,8 @@ export function finalizar(
     estrategia: limpa.estrategia,
     posts,
     calendario: montarCalendario(posts, limpa.estrategia),
-    brand,
+    // Perfis lidos antes da correção de nome (ex.: "Solução para empresas" no lugar de "Omie") saem com o nome certo.
+    brand: origem === "demo" ? brand : { ...brand, nome: nomeDoPerfil(brand) },
     origem,
     provedor,
     avisos: [...brand.avisos, ...avisos],

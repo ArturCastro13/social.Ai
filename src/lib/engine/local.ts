@@ -1,310 +1,328 @@
-import type { BrandProfile, Nicho, PadraoViral, Rede, TemplateId } from "@/lib/types";
+import type { BrandProfile, Formato, Nicho, PadraoViral, Rede } from "@/lib/types";
+import { NICHOS } from "@/lib/types";
+import { nomeDoPerfil } from "@/lib/brand/nome";
+import { templateDoFormato } from "@/lib/virais/catalogo";
 import type { AnaliseIA } from "./schema";
+import { textoDaMarca } from "./nicho";
+import { escolherTema, type Tema } from "./temas-locais";
+import { MODELOS, MOTIVO_FORMATO, MOTIVO_GANCHO, type Chamada, type Contexto, type Ideia, type Modelo } from "./ideias-locais";
+import {
+  corte,
+  depoimentosDoSite,
+  ehNavegacao,
+  frasesDe,
+  frasesDeProduto,
+  frasesDoSite,
+  generoDaMarca,
+  hashTexto,
+  frasesMaiusculas,
+  numerosDoSite,
+  paraHashtag,
+  PROIBIDAS,
+  temProibida,
+} from "./texto-local";
 
 // Motor de regras: produz uma análise completa sem nenhuma chamada de IA.
-// Usa só o que o site diz. É o plano B quando não há chave ou a IA falha.
+// É o gerador do MVP enquanto não há chave de IA, e a rede de segurança quando a IA falha.
+// Usa o banco de temas por nicho (temas-locais.ts), o banco de ideias por formato
+// (ideias-locais.ts) e só fatos que aparecem no texto do site. Determinístico: a mesma
+// marca gera sempre a mesma saída (a variação entre marcas vem do hash do domínio).
 
-interface PerfilNicho {
-  publico: string;
-  tom: string;
-  pilares: [string, string][];
-  diag: [string, string][];
-  opinioes: string[];
-  capas: string[];
-  antes: string;
-  depois: string;
-  cta: string;
-}
+/** Diagnóstico de nicho, com base no que a base de virais mostra. Completa o diagnóstico do site. */
+const DIAG_NICHO: Record<Nicho, [string, string][]> = {
+  "saas-b2b": [
+    ["Dê voz ao founder", "Parte dos exemplos da base de SaaS B2B vem do perfil pessoal de founders, com bastidores e opinião. Vale testar posts em primeira pessoa no LinkedIn, além da página da empresa."],
+    ["Crie uma série que se repete", "Uma série fixa por semana, como um carrossel de passo a passo, ajuda quem acompanha a criar hábito. É mais fácil de manter do que inventar um formato novo a cada post."],
+  ],
+  fintech: [
+    ["Explique o que ninguém explica", "Carrosséis que traduzem uma regra, uma taxa ou uma mudança em poucos slides aparecem com frequência na base de fintech. É conteúdo útil que a pessoa guarda."],
+    ["Mostre quem está por trás", "Confiar dinheiro a uma marca nova exige confiança. Posts de founders e do time falando de decisões difíceis ajudam a construir isso."],
+  ],
+  healthtech: [
+    ["Conte histórias, com cuidado", "Na base de healthtech, relatos de paciente e de profissional aparecem mais do que peças institucionais. Vale testar histórias reais, sempre com consentimento."],
+    ["Eduque em formato fácil de guardar", "Listas e checklists curtos sobre prevenção e uso do serviço são formatos simples de manter e de compartilhar."],
+  ],
+  edtech: [
+    ["Ensine antes de vender", "Vários posts de edtech da base entregam uma aula curta no próprio post. Vale dar uma amostra do jeito de ensinar antes de falar do curso."],
+    ["Mostre a virada do aluno", "Antes e depois de alunos, com números reais que eles autorizaram mostrar, conecta direto com quem está decidindo."],
+  ],
+  "ecommerce-dtc": [
+    ["Tenha opinião", "Vários virais de DTC da base vêm de marcas que assumem posições e falam como gente. Vale revisar se o tom atual soa mais como conversa ou como catálogo."],
+    ["Faça do cliente o conteúdo", "Avaliações, fotos e perguntas de clientes viram antes e depois e listas que o público guarda, sempre com autorização."],
+  ],
+};
 
-const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "depois" | "cta">> = {
-  "saas-b2b": {
-    opinioes: [
-      "a maioria dos processos da sua empresa não está desenhada em lugar nenhum. está no e-mail de alguém.",
-      "ferramenta boa não é a que tem mais funções. é a que o time continua usando depois do primeiro mês.",
-    ],
-    capas: ["O custo escondido do jeito antigo", "O que muda quando o processo sai da planilha"],
-    antes: "Planilha paralela, e-mail perdido e ninguém sabe onde o pedido parou.",
-    depois: "Um fluxo claro, cada pessoa sabendo o que é com ela.",
-    cta: "Comenta qual processo mais te trava hoje.",
+const REDES_NOME: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };
+
+/** Rede preferida por formato: a primeira ativa com menos posts leva. */
+const REDE_DO_FORMATO: Record<Formato, Rede[]> = {
+  carrossel: ["instagram", "linkedin", "facebook", "x"],
+  lista: ["instagram", "linkedin", "facebook", "x"],
+  "print-tweet": ["x", "linkedin", "instagram", "facebook"],
+  "bastidor-founder": ["linkedin", "instagram", "facebook", "x"],
+  citacao: ["linkedin", "instagram", "facebook", "x"],
+  "imagem-unica": ["instagram", "facebook", "linkedin", "x"],
+  "antes-depois": ["instagram", "facebook", "linkedin", "x"],
+  "dado-impacto": ["linkedin", "instagram", "facebook", "x"],
+};
+
+/** Ordem de reserva, depois dos formatos que aparecem nos padrões do nicho. */
+const ORDEM_FORMATOS: Formato[] = [
+  "carrossel", "print-tweet", "lista", "antes-depois", "bastidor-founder", "citacao", "imagem-unica", "dado-impacto",
+];
+
+const juntar = (itens: string[]) =>
+  itens.length <= 1 ? (itens[0] ?? "") : `${itens.slice(0, -1).join(", ")} e ${itens[itens.length - 1]}`;
+
+const chaveGancho = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+
+// ---------- Legendas ----------
+
+const CHAMADAS: Record<Chamada, { instagram: string[]; linkedin: string[]; emoji: string }> = {
+  salvar: {
+    instagram: ["Salva para consultar depois e manda para quem precisa ver.", "Salva este post e volta nele quando precisar."],
+    linkedin: ["Guarde para consultar depois e mande para quem cuida disso com você.", "Vale salvar e compartilhar com o time."],
+    emoji: "📌",
   },
-  fintech: {
-    opinioes: [
-      "pagar tarifa para movimentar o próprio dinheiro ainda é normal para muita gente. não deveria ser.",
-      "o financeiro da maioria das pequenas empresas é o dono, às 23h, com uma planilha aberta.",
-    ],
-    capas: ["O que seu banco não te explica", "Dinheiro de empresa sem letra miúda"],
-    antes: "Tarifa em tudo, burocracia e atendimento que demora dias.",
-    depois: "Dinheiro organizado no app, sem letra miúda.",
-    cta: "Salva e manda para quem cuida do financeiro.",
+  comentar: {
+    instagram: ["Conta aqui nos comentários: isso acontece aí?", "Concorda? Comenta aqui."],
+    linkedin: ["Como isso funciona aí? Conta nos comentários.", "Concorda ou discorda? Quero ler a sua opinião nos comentários."],
+    emoji: "👇",
   },
-  healthtech: {
-    opinioes: [
-      "cuidar da saúde não deveria parecer uma maratona de telefonemas e salas de espera.",
-      "o melhor momento de cuidar é antes do problema aparecer. o sistema ainda é desenhado para depois.",
-    ],
-    capas: ["O que muda quando o cuidado vem antes", "Saúde explicada sem pressa"],
-    antes: "Ligação, fila, espera e nenhum acompanhamento depois da consulta.",
-    depois: "Cuidado contínuo, com gente que conhece o seu histórico.",
-    cta: "Salva e compartilha com quem precisa ler isso.",
-  },
-  edtech: {
-    opinioes: [
-      "decorar para a prova não é aprender. é alugar o conteúdo por uma semana.",
-      "ninguém desiste de estudar por preguiça. desiste porque não vê progresso.",
-    ],
-    capas: ["Aprenda isso em 1 minuto", "Estudar menos horas e aprender mais"],
-    antes: "Horas de estudo, anotação bonita e a sensação de não sair do lugar.",
-    depois: "Menos horas, método claro e progresso que dá para ver.",
-    cta: "Salva para revisar antes da prova.",
-  },
-  "ecommerce-dtc": {
-    opinioes: [
-      "cliente não compra produto. compra a versão de si mesmo que vai usar o produto.",
-      "a melhor propaganda de uma marca ainda é a foto que o cliente tira sem ninguém pedir.",
-    ],
-    capas: ["O detalhe em que ninguém repara", "Do jeito que é feito, de verdade"],
-    antes: "Compra por impulso, produto parado na gaveta.",
-    depois: "Poucos produtos certos, usados todo dia.",
-    cta: "Conta aqui qual você escolheria.",
+  conhecer: {
+    instagram: ["Conheça {aMarca}: link na bio.", "Mais detalhes no link da bio."],
+    linkedin: ["Conheça {aMarca} pelo site.", "Mais detalhes no site {daMarca}."],
+    emoji: "👉",
   },
 };
 
-const PERFIL_BASE: Record<Nicho, { publico: string; tom: string; pilares: [string, string][]; diag: [string, string][] }> = {
-  "saas-b2b": {
-    publico: "gestores e donos de empresa que perdem tempo com processo manual e querem previsibilidade sem contratar mais gente",
-    tom: "Fala de resultado de operação com clareza e confiança, sem jargão de TI.",
-    pilares: [
-      ["Dor da operação", "Mostrar o custo escondido do jeito antigo de trabalhar, com situações que o gestor reconhece."],
-      ["Como se faz", "Ensinar o passo a passo de resolver o problema, mesmo antes de falar do produto."],
-      ["Bastidor do founder", "Decisões, erros e aprendizados de quem está construindo a empresa."],
-    ],
-    diag: [
-      ["Abra pela consequência, não pela funcionalidade", "Vários posts de SaaS B2B da base abrem com o efeito no negócio (tempo, dinheiro, erro evitado) e só depois mostram o como. Vale revisar se a comunicação atual segue essa ordem."],
-      ["Dê voz ao founder", "Parte dos exemplos da base vem do perfil pessoal de founders, com bastidores e opinião. Vale testar posts em primeira pessoa no LinkedIn, além da página da empresa."],
-      ["Crie uma série que se repete", "Uma série fixa por semana, como um carrossel de passo a passo, ajuda quem acompanha a criar hábito. É mais fácil de manter do que inventar um formato novo a cada post."],
-    ],
-  },
-  fintech: {
-    publico: "pessoas e pequenas empresas cansadas de taxa, burocracia e atendimento de banco tradicional",
-    tom: "Explica dinheiro sem economês, com transparência e uma pitada de provocação.",
-    pilares: [
-      ["Dinheiro sem letra miúda", "Traduzir taxas, regras e produtos financeiros em linguagem simples."],
-      ["Contra o jeito antigo", "Comparar a experiência com o banco tradicional, sempre com fatos."],
-      ["Confiança", "Mostrar segurança, regulação e gente real por trás do produto."],
-    ],
-    diag: [
-      ["Use o contraste a seu favor", "Vários virais de fintech da base colocam o banco tradicional como antagonista e mostram a diferença numa imagem só. Vale testar uma comparação direta, sempre com fatos que a marca pode provar."],
-      ["Explique o que ninguém explica", "Carrosséis que traduzem uma regra, uma taxa ou uma mudança em poucos slides aparecem com frequência na base. É conteúdo útil que a pessoa guarda."],
-      ["Mostre quem está por trás", "Confiar dinheiro a uma marca nova exige confiança. Posts de founders e do time falando de decisões difíceis ajudam a construir isso."],
-    ],
-  },
-  healthtech: {
-    publico: "pessoas e empresas que querem cuidar da saúde sem a experiência fria e demorada do sistema tradicional",
-    tom: "Explica saúde com cuidado e sem alarmismo, perto de quem lê.",
-    pilares: [
-      ["Cuidado na prática", "Histórias e situações reais de cuidado, sempre com consentimento e sem expor ninguém."],
-      ["Saúde explicada", "Conteúdo educativo curto, revisado por profissional, que tira dúvida comum."],
-      ["Por dentro da operação", "Como o time trabalha, quem são os profissionais e por que as decisões são tomadas."],
-    ],
-    diag: [
-      ["Conte histórias, com cuidado", "Na base de healthtech, relatos de paciente e de profissional aparecem mais do que peças institucionais. Vale testar histórias reais, sempre com consentimento."],
-      ["Tenha uma opinião sobre o setor", "Founders de saúde que publicam uma posição clara, com argumento, aparecem entre os exemplos da base. Opinião gera conversa e autoridade."],
-      ["Eduque em formato fácil de guardar", "Listas e checklists curtos sobre prevenção e uso do serviço são formatos simples de manter e de compartilhar."],
-    ],
-  },
-  edtech: {
-    publico: "estudantes e profissionais que querem aprender algo que muda sua carreira ou nota, sem perder tempo",
-    tom: "Fala como um bom professor fala no intervalo: perto, animado e com humor.",
-    pilares: [
-      ["Aprenda em 1 minuto", "Um conceito útil por post, explicado de forma que dê para aplicar hoje."],
-      ["Histórias de virada", "Trajetórias de alunos e do time, com antes e depois concretos."],
-      ["Opinião sobre educação", "Posições claras sobre como se aprende de verdade, que provocam comentário."],
-    ],
-    diag: [
-      ["Ensine antes de vender", "Vários posts de edtech da base entregam uma aula curta no próprio post. Vale dar uma amostra do jeito de ensinar antes de falar do curso."],
-      ["Defina uma voz com personalidade", "Marcas de educação com uma voz reconhecível aparecem entre os exemplos da base. Vale escolher um jeito próprio de falar e manter."],
-      ["Mostre a transformação", "Antes e depois de alunos, com números reais que eles autorizaram mostrar, é um formato que conecta direto com quem está decidindo."],
-    ],
-  },
-  "ecommerce-dtc": {
-    publico: "consumidores que compram online, valorizam marca com propósito e decidem pela experiência e pela prova de outros clientes",
-    tom: "Fala como uma amiga que entende do assunto, com personalidade e sem medo de opinião.",
-    pilares: [
-      ["Produto na vida real", "Uso real do produto, com detalhe que só quem usa percebe."],
-      ["Bastidor da marca", "Como o produto é feito, decisões do founder, erros e acertos."],
-      ["Comunidade", "Clientes, comentários e cocriação transformados em conteúdo."],
-    ],
-    diag: [
-      ["Tenha opinião", "Vários virais de DTC da base vêm de marcas que brincam com críticas, assumem posições e falam como gente. Vale revisar se o tom atual soa mais como conversa ou como catálogo."],
-      ["Leve o founder para o LinkedIn", "Parte dos exemplos da base são posts de founders contando decisões e números da operação. É um canal que muitas marcas DTC ainda não usam."],
-      ["Faça do cliente o conteúdo", "Depoimentos, fotos e perguntas de clientes viram antes e depois e listas que o público guarda."],
-    ],
-  },
-};
+function legendas(c: Contexto, ideia: Ideia, tags: string[], i: number): AnaliseIA["posts"][number]["legendas"] {
+  const troca = (s: string) => s.replace("{aMarca}", c.aMarca).replace("{daMarca}", c.daMarca);
+  const ch = CHAMADAS[ideia.chamada];
+  const ctaIg = troca(ch.instagram[i % ch.instagram.length]);
+  const ctaLi = troca(ch.linkedin[i % ch.linkedin.length]);
+  const corpo = ideia.corpo.filter(Boolean).slice(0, 5);
+  const hashtags = (n: number) => tags.slice(0, n).map((t) => `#${t}`).join(" ");
 
-const PERFIL_NICHO: Record<Nicho, PerfilNicho> = Object.fromEntries(
-  (Object.keys(PERFIL_BASE) as Nicho[]).map((n) => [n, { ...PERFIL_BASE[n], ...EXTRA[n] }]),
-) as Record<Nicho, PerfilNicho>;
+  const instagram = [ideia.gancho, "", ...corpo, "", `${ctaIg} ${ch.emoji}`, "", hashtags(5)].join("\n").trim();
+  const facebook = [ideia.gancho, "", ...corpo, "", `${ctaIg} ${ch.emoji}`].join("\n").trim();
+  const linkedin = [ideia.gancho, "", corpo.join("\n\n"), "", ctaLi, "", hashtags(3)].join("\n").trim();
 
-const corte = (s: string, n: number) => (s.length <= n ? s : s.slice(0, n - 1).replace(/[\s,;:.]+\S*$/, "") + "…");
-const primeiraFrase = (s: string) => (s.match(/^[^.!?]+[.!?]/)?.[0] ?? s).trim();
-
-function frasesDoSite(b: BrandProfile): string[] {
-  return [...b.headings.h1, ...b.headings.h2, ...b.paragrafos.map(primeiraFrase), b.description ?? ""]
-    .map((s) => s.replace(/\s+/g, " ").trim())
-    .filter((s) => s.length > 12 && s.length < 180 && !/cookie|javascript|©|todos os direitos/i.test(s))
-    .filter((s, i, arr) => arr.indexOf(s) === i);
-}
-
-function numerosDoSite(b: BrandProfile): { numero: string; contexto: string }[] {
-  const out: { numero: string; contexto: string }[] = [];
-  for (const f of [...b.headings.h1, ...b.headings.h2, ...b.paragrafos, b.description ?? ""]) {
-    const m = f.match(/((?:\+|mais de )?\d[\d.,]*\s?(?:%|mil|milhões|milhão|mi|bi|x|k)?)/i);
-    if (m && /\d{2,}|%|mil|milh|x\b/i.test(m[1]) && f.length < 200) out.push({ numero: m[1].trim(), contexto: f.trim() });
+  // X: gancho e quantas linhas do miolo couberem em 260 caracteres.
+  let x = ideia.gancho;
+  for (const linha of corpo) {
+    const prox = `${x}\n\n${linha}`;
+    if (prox.length > 260) break;
+    x = prox;
   }
-  return out;
+  return { instagram, linkedin, x: corte(x, 260), facebook };
 }
 
-function legendas(nome: string, gancho: string, corpo: string[], cta: string, tags: string[]) {
-  const linhas = corpo.filter(Boolean).slice(0, 4);
-  const base = [gancho, "", ...linhas, "", cta].join("\n");
-  const tagsTxt = tags.map((t) => `#${t}`).join(" ");
-  return {
-    instagram: `${base}\n\n${tagsTxt}`.trim(),
-    linkedin: `${[gancho, "", ...linhas].join("\n")}\n\n${cta.replace("link na bio", "site")}\n\n${tags.slice(0, 3).map((t) => `#${t}`).join(" ")}`.trim(),
-    x: corte(`${gancho} ${linhas[0] ?? ""}`, 260),
-    facebook: base,
+// ---------- Análise ----------
+
+function publicoDoSite(tema: Tema, texto: string): string {
+  const segmentos: string[] = [];
+  const t = texto.toLowerCase();
+  if (/\bpmes?\b|pequenas e m[ée]dias/.test(t)) segmentos.push("pequenas e médias empresas");
+  if (/grandes? empresas?/.test(t)) segmentos.push("empresas grandes");
+  if (/\bmeis?\b|microempreendedor/.test(t)) segmentos.push("MEIs");
+  if (/aut[ôo]nom[oa]s?/.test(t)) segmentos.push("autônomos");
+  if (/escrit[óo]rios? de contabilidade|contadores/.test(t)) segmentos.push("contadores");
+  const base = `${tema.publico}.`;
+  return segmentos.length ? `${base} O site fala direto com ${juntar(segmentos)}.` : base;
+}
+
+function tomDeVoz(c: Contexto, texto: string, frases: string[]): string {
+  const informal = /(?<![\p{L}])(a gente|tá|vem cá|fala,|bora|pra)(?![\p{L}])/iu.test(texto);
+  const minusculas = frases.filter((f) => /^\p{Ll}/u.test(f)).length >= 3;
+  const exemplo = c.produto.find((f) => f.length >= 20 && f.length <= 70);
+  const jeito = informal || minusculas
+    ? "Próximo e informal, de igual para igual, como o site já faz"
+    : "Direto e claro, falando com você e com foco no resultado para quem usa";
+  const trecho = exemplo && (informal || minusculas) ? ` em "${exemplo}"` : "";
+  const exemploRede = frasesMaiusculas(c.tema.opinioes[c.seed % c.tema.opinioes.length]);
+  return corte(`${jeito}${trecho}. Nas redes, dá para ter mais opinião, sem jargão. Exemplo: "${exemploRede}"`, 300);
+}
+
+function diagnostico(c: Contexto, b: BrandProfile, frases: string[]): AnaliseIA["diagnostico"] {
+  const itens: { titulo: string; texto: string }[] = [];
+
+  const h1 = b.headings.h1[0] ? frasesDe(b.headings.h1[0]).join(" ") : "";
+  if (h1 && (ehNavegacao(h1) || temProibida(h1))) {
+    itens.push({ titulo: "A página abre sem uma promessa clara", texto: `O título principal do site apresenta o menu ou a empresa, não o que muda para quem compra. Nas redes, a primeira linha precisa falar de ${c.tema.dor} e de como sair disso.` });
+  } else if (h1 && h1.length <= 120) {
+    const falaDeAcao = /^(venda|crie|controle|gerencie|automatize|receba|reduza|organize|tenha|ganhe|pague|cobre|aprenda|cuide|escute|viva|monte)(?![\p{L}])/iu.test(h1);
+    itens.push(
+      falaDeAcao
+        ? { titulo: "A promessa do site já fala de ação", texto: `A página abre com "${h1.replace(/[.!]+$/, "")}". É um bom ponto de partida: nas redes, mostre o antes e o depois dessa promessa na rotina de ${c.tema.quem}.` }
+        : { titulo: "O site descreve o produto, os posts precisam mostrar a consequência", texto: `A página abre com "${h1.replace(/[.!]+$/, "")}". Nas redes, a primeira linha precisa falar do que muda para ${c.tema.quem}, como sair de ${c.tema.dor}, e só depois do produto.` },
+    );
+  }
+
+  if (c.numeros.length) {
+    itens.push({ titulo: "Há prova concreta no site", texto: `O site mostra "${c.numeros[0].frase}". Número real vale mais do que adjetivo: use em post de dado e repita na bio, sem arredondar para cima.` });
+  } else {
+    itens.push({ titulo: "Faltam provas concretas no texto do site", texto: "Não encontramos números de resultado no texto lido. Sem isso, os posts se apoiam em ensino e opinião; quando houver um caso real autorizado, ele vira um bom post de prova." });
+  }
+
+  if (c.depoimentos.length) {
+    itens.push({ titulo: "Os relatos de clientes estão parados no site", texto: `O site tem ${c.depoimentos.length > 1 ? `${c.depoimentos.length} relatos` : "um relato"} de cliente em primeira pessoa. Com autorização, cada um rende um antes e depois ou uma citação nas redes.` });
+  }
+
+  if (frases.some((f) => PROIBIDAS.test(f))) {
+    itens.push({ titulo: "O texto do site usa palavras de anúncio", texto: `Algumas frases do site usam verbos grandes de mudança que qualquer concorrente poderia usar. Nas redes, troque por o que muda na prática para ${c.tema.quem}: menos tempo, menos erro, menos custo.` });
+  }
+
+  const handles = (Object.keys(REDES_NOME) as Rede[]).filter((r) => b.handles[r]);
+  if (!handles.length) {
+    itens.push({ titulo: "Redes sem ligação com o site", texto: "Não encontramos links de redes sociais no site. Colocar os perfis no rodapé ajuda quem chega pelo Google a seguir a marca." });
+  } else if (c.nicho === "saas-b2b" && !handles.includes("linkedin")) {
+    itens.push({ titulo: "Falta o LinkedIn para uma empresa B2B", texto: `Achamos ${juntar(handles.map((r) => REDES_NOME[r]))}, mas não o LinkedIn, que é onde se lê sobre trabalho e onde decisões de compra B2B costumam começar.` });
+  }
+
+  for (const [titulo, texto] of DIAG_NICHO[c.nicho]) if (itens.length < 5) itens.push({ titulo, texto });
+  return itens.slice(0, 5).map((d) => ({ titulo: corte(d.titulo, 120), texto: corte(d.texto, 600) }));
+}
+
+function estrategiaPorRede(c: Contexto, redes: Rede[]): AnaliseIA["estrategia"] {
+  const t = c.tema;
+  const foco: Record<Rede, string> = {
+    linkedin: `Voz do founder e do time: bastidor e opinião sobre ${t.assunto}, com um carrossel de passo a passo por semana para ${t.quem}.`,
+    instagram: `Carrosséis e listas feitos para ${t.quem} guardar, mais antes e depois, sempre com a identidade visual ${c.daMarca}.`,
+    x: `Opiniões curtas sobre ${t.assunto} e conversa com quem responde, no tom de gente falando.`,
+    facebook: `Reaproveitar os posts que forem melhor no Instagram, com legenda um pouco mais explicada.`,
   };
+  const freq: Record<Rede, number> = { linkedin: 3, instagram: 3, x: 4, facebook: 2 };
+  return redes.slice(0, 4).map((rede) => ({ rede, frequencia_semanal: freq[rede], foco: corte(foco[rede], 300) }));
+}
+
+// ---------- Posts ----------
+
+function escolherPadrao(padroes: PadraoViral[], nicho: Nicho, formato: Formato, tipo: string): PadraoViral | null {
+  const doNicho = padroes.filter((p) => p.nichos.includes(nicho));
+  return (
+    doNicho.find((p) => p.formato === formato && p.tipo_gancho === tipo) ??
+    doNicho.find((p) => p.formato === formato) ??
+    padroes.find((p) => p.formato === formato && p.tipo_gancho === tipo) ??
+    padroes.find((p) => p.formato === formato) ??
+    null
+  );
+}
+
+function porQue(p: PadraoViral | null, m: Modelo, ideia: Ideia, nicho: Nicho): string {
+  const nomeNicho = NICHOS.find((n) => n.id === nicho)?.nome ?? nicho;
+  const gancho = MOTIVO_GANCHO[m.tipo];
+  const base = p
+    ? p.tipo_gancho === m.tipo
+      ? `Segue o padrão "${p.nome}" da base de ${nomeNicho}: ${gancho}.`
+      : `Segue o formato do padrão "${p.nome}" da base de ${nomeNicho}, com gancho de outro tipo: ${gancho}.`
+    : `Formato incluído para variar a grade: ${gancho}.`;
+  const revisar = ideia.revisar ? " Confirme com o time se o relato bate com a experiência real antes de publicar." : "";
+  return corte(`${base} ${MOTIVO_FORMATO[m.formato]}${revisar}`, 400);
 }
 
 export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral[], quantidade: number, redesAtivas: Rede[]): AnaliseIA {
-  const perfil = PERFIL_NICHO[nicho];
-  const nome = b.nome;
+  const marca = nomeDoPerfil(b);
+  const texto = textoDaMarca(b);
+  const tema = escolherTema(texto, nicho);
   const frases = frasesDoSite(b);
-  const numeros = numerosDoSite(b);
-  const promessa = b.headings.h1[0] ?? b.og.title ?? b.title ?? `${nome} resolve um problema real`;
-  const descricao = b.description ?? b.paragrafos[0] ?? promessa;
-  const tagNome = nome.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const tagsNicho: Record<Nicho, string[]> = {
-    "saas-b2b": ["gestao", "produtividade", "saas"],
-    fintech: ["financas", "fintech", "dinheiro"],
-    healthtech: ["saude", "healthtech", "cuidado"],
-    edtech: ["educacao", "carreira", "estudos"],
-    "ecommerce-dtc": ["marca", "lojaonline", "novidade"],
+  const genero = generoDaMarca(texto, marca);
+  const seed = hashTexto(b.dominio || marca);
+
+  const c: Contexto = {
+    marca,
+    aMarca: `${genero} ${marca}`,
+    AMarca: `${genero.toUpperCase()} ${marca}`,
+    daMarca: `${genero === "a" ? "da" : "do"} ${marca}`,
+    comAMarca: `com ${genero} ${marca}`,
+    nicho,
+    tema,
+    produto: frasesDeProduto(frases),
+    numeros: numerosDoSite(frases),
+    depoimentos: depoimentosDoSite(b),
+    seed,
   };
-  const tags = [tagNome, ...tagsNicho[nicho]].filter(Boolean);
+
+  const tagMarca = paraHashtag(marca);
+  const tags = [...new Set([...(tagMarca.length >= 3 && tagMarca.length <= 30 ? [tagMarca] : []), ...tema.tags].map(paraHashtag).filter(Boolean))];
 
   const redes: Rede[] = redesAtivas.length ? redesAtivas : ["linkedin", "instagram"];
-  const estrategia = redes.map((rede) => ({
-    rede,
-    frequencia_semanal: rede === "linkedin" ? 3 : rede === "instagram" ? 3 : rede === "x" ? 4 : 2,
-    foco:
-      rede === "linkedin"
-        ? "Voz do founder: bastidores, opinião sobre o setor e aprendizados. Carrossel uma vez por semana."
-        : rede === "instagram"
-          ? "Carrosséis educativos e antes e depois, com a identidade visual da marca sempre igual."
-          : rede === "x"
-            ? "Opiniões curtas e observações do dia a dia do mercado, conversando com quem comenta."
-            : "Reaproveitar os melhores posts do Instagram com legenda mais explicada.",
-  }));
 
-  // Sequência de formatos: segue os padrões do nicho, pulando dado de impacto se o site não tem número.
-  // Sem número real no site, sem dado de impacto. Sem pelo menos 3 frases curtas, sem lista.
-  const frasesCurtas = frases.filter((x) => x.length <= 70).length;
-  const filtrados = padroes.filter(
-    (p) =>
-      (p.template_sugerido !== "dado-impacto" || numeros.length > 0) &&
-      (!["lista", "checklist"].includes(p.template_sugerido) || frasesCurtas >= 3),
-  );
-  const fila = filtrados.length ? filtrados : padroes.filter((p) => p.template_sugerido === "citacao" || p.template_sugerido === "print-x");
+  // Formatos: os que aparecem nos padrões do nicho, na ordem da base, com o carrossel na frente.
+  // Dado de impacto só entra com número real do site.
+  let formatos = [...new Set([...padroes.map((p) => p.formato), ...ORDEM_FORMATOS])];
+  if (!c.numeros.length) formatos = formatos.filter((f) => f !== "dado-impacto");
+  formatos = ["carrossel" as Formato, ...formatos.filter((f) => f !== "carrossel")];
+
+  const usados = new Set<string>();
+  const ganchos = new Set<string>();
+  const porRede = new Map<Rede, number>();
   const posts: AnaliseIA["posts"] = [];
-  for (let i = 0; i < quantidade; i++) {
-    const p = fila[i % fila.length];
-    const rede = p.formato === "print-tweet" && redes.includes("x") ? "x" : redes[i % redes.length];
-    const f = (k: number) => frases[(i + k) % Math.max(frases.length, 1)] ?? promessa;
-    const t = p.template_sugerido as TemplateId;
-    let gancho = "";
-    let slides: { titulo: string; texto: string }[] = [];
-    const cta = rede === "instagram" ? `${perfil.cta} Mais no link na bio.` : `${perfil.cta} Conheça ${nome}.`;
 
-    const curta = (x: string) => x.length <= 70;
-    switch (t) {
-      case "capa-gancho": {
-        const h1 = primeiraFrase(promessa).replace(/\.$/, "");
-        gancho = i === 0 && curta(h1) ? h1 : perfil.capas[i % perfil.capas.length];
-        const passos = frases.filter((x) => x !== promessa).slice(0, 4);
-        slides = [
-          { titulo: gancho, texto: corte(descricao, 110) },
-          ...passos.map((x, k) => ({ titulo: `${k + 1}.`, texto: corte(x, 200) })),
-          { titulo: `Isso é ${nome}.`, texto: perfil.cta },
-        ];
-        break;
-      }
-      case "lista":
-      case "checklist": {
-        const itens = frases.filter((x) => x.length <= 70).slice(0, 5);
-        gancho = t === "lista" ? `${itens.length} motivos para conhecer ${nome}` : "Antes de escolher, confira";
-        slides = [{ titulo: gancho, texto: "" }, ...itens.map((x) => ({ titulo: x.replace(/\.$/, ""), texto: "" }))];
-        break;
-      }
-      case "citacao": {
-        const opcoes = frases.filter((x) => x.length <= 150);
-        gancho = primeiraFrase(opcoes[i % Math.max(opcoes.length, 1)] ?? promessa);
-        slides = [{ titulo: nome, texto: gancho }];
-        break;
-      }
-      case "dado-impacto": {
-        const n = numeros[i % numeros.length];
-        gancho = corte(n.contexto, 120);
-        slides = [{ titulo: n.numero, texto: corte(n.contexto, 120) }];
-        break;
-      }
-      case "print-x": {
-        gancho = perfil.opinioes[i % perfil.opinioes.length];
-        slides = [{ titulo: "", texto: gancho }];
-        break;
-      }
-      case "bastidor": {
-        gancho = `Por que ${nome} existe`;
-        slides = [{ titulo: gancho, texto: corte(descricao, 190) }];
-        break;
-      }
-      case "antes-depois": {
-        gancho = `Antes e depois: ${nome}`;
-        slides = [
-          { titulo: "Antes", texto: perfil.antes },
-          { titulo: "Depois", texto: perfil.depois },
-        ];
+  for (let rodada = 0; posts.length < quantidade && rodada < 6; rodada++) {
+    for (const f of formatos) {
+      if (posts.length >= quantidade) break;
+      // Modelos do formato: primeiro os que usam fato do site, depois os de tipo de gancho que aparece na base do nicho.
+      const tiposDaBase = padroes.filter((p) => p.formato === f).map((p) => p.tipo_gancho);
+      const candidatos = MODELOS[f]
+        .filter((m) => !usados.has(m.id))
+        .map((m, i) => ({ m, ordem: (m.usaSite ? 0 : 20) + (tiposDaBase.includes(m.tipo) ? 0 : 10) + ((i + seed) % MODELOS[f].length) / 10 }))
+        .sort((a, b) => a.ordem - b.ordem)
+        .map((x) => x.m);
+      for (const m of candidatos) {
+        usados.add(m.id);
+        const ideia = m.gerar(c);
+        if (!ideia || ganchos.has(chaveGancho(ideia.gancho))) continue;
+        ganchos.add(chaveGancho(ideia.gancho));
+
+        // Rede: preferência do formato pesa, mas a rede com menos posts ganha espaço.
+        const preferidas = REDE_DO_FORMATO[f].filter((r) => redes.includes(r));
+        const nota = (r: Rede) => (porRede.get(r) ?? 0) + preferidas.indexOf(r) * 0.75;
+        const rede = [...preferidas].sort((a, b2) => nota(a) - nota(b2))[0] ?? redes[0];
+        porRede.set(rede, (porRede.get(rede) ?? 0) + 1);
+
+        const padrao = escolherPadrao(padroes, nicho, f, m.tipo);
+        posts.push({
+          rede_principal: rede,
+          formato: f,
+          template: templateDoFormato(f),
+          gancho: corte(ideia.gancho, 220),
+          slides: ideia.slides.slice(0, 8).map((s) => ({ titulo: corte(s.titulo, 200), texto: corte(s.texto, 600) })),
+          legendas: legendas(c, ideia, tags, posts.length),
+          hashtags: tags.slice(0, 5),
+          padrao_inspirador: padrao?.id ?? "",
+          por_que: porQue(padrao, m, ideia, nicho),
+        });
         break;
       }
     }
-    posts.push({
-      rede_principal: rede,
-      formato: p.formato,
-      template: t,
-      gancho,
-      slides,
-      legendas: legendas(nome, gancho, [i % 2 ? corte(descricao, 180) : "", f(1), f(2)].filter((x) => x && x !== gancho), cta, tags),
-      hashtags: tags.slice(0, 4),
-      padrao_inspirador: p.id,
-      por_que: `Segue o padrão "${p.nome}", que aparece ${p.frequencia} vezes na base de virais.`,
-    });
   }
+
+  const promessa = c.produto[0];
+  const testeGratis = /teste gr[áa]tis|experimente gr[áa]tis|gr[áa]tis por \d+ dias|crie sua loja gr[áa]tis|1º m[êe]s gr[áa]tis/i.test(texto);
+  const lojasFisicas = tema.nicho === "ecommerce-dtc" && /farm[áa]cias|lojas f[íi]sicas|nas lojas/i.test(texto);
+  const resumo = [
+    `${c.AMarca} é ${tema.categoria} para ${tema.quem}.`,
+    promessa ? `No site, a promessa principal é: ${promessa.charAt(0).toLowerCase() + promessa.slice(1)}.` : "",
+    `Modelo de receita provável: ${tema.receita}${lojasFisicas ? ", e também em lojas físicas, segundo o site" : ""}.`,
+    testeGratis ? "O site oferece uso grátis como porta de entrada." : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const posicionamento = promessa
+    ? `Para ${tema.quem}, ${c.aMarca} é ${tema.categoria}. A promessa: ${promessa.charAt(0).toLowerCase() + promessa.slice(1)}.`
+    : `Para ${tema.quem}, ${c.aMarca} é ${tema.categoria} que tira da rotina ${tema.dor}.`;
 
   return {
     nicho,
-    resumo_negocio: corte(`${nome}: ${descricao}`, 400),
-    publico: perfil.publico.charAt(0).toUpperCase() + perfil.publico.slice(1) + ".",
-    tom_de_voz: perfil.tom,
-    posicionamento: corte(`Para ${perfil.publico.split(" que ")[0]}, ${nome}: ${primeiraFrase(promessa).replace(/\.$/, "")}.`, 230),
-    pilares: perfil.pilares.map(([n, d]) => ({ nome: n, descricao: d })),
-    diagnostico: [
-      ...perfil.diag.map(([titulo, texto]) => ({ titulo, texto })),
-      ...(Object.values(b.handles).filter(Boolean).length === 0
-        ? [{ titulo: "Redes sem ligação com o site", texto: "Não encontramos links de redes sociais no site. Colocar os perfis no rodapé ajuda quem chega pelo Google a seguir a marca." }]
-        : []),
-    ].slice(0, 5),
-    estrategia,
+    resumo_negocio: corte(resumo, 600),
+    publico: corte(publicoDoSite(tema, texto), 500),
+    tom_de_voz: tomDeVoz(c, texto, frases),
+    posicionamento: corte(posicionamento, 240),
+    pilares: tema.pilares.map(([nome, descricao]) => ({ nome, descricao })),
+    diagnostico: diagnostico(c, b, frases),
+    estrategia: estrategiaPorRede(c, redes),
     posts,
   };
 }

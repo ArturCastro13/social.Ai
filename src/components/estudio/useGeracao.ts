@@ -1,0 +1,116 @@
+"use client";
+
+import { useRef, useState } from "react";
+import type { Analise, BrandProfile } from "@/lib/types";
+import type { Etapa } from "./Carregando";
+import type { DadosFormulario } from "./Formulario";
+
+const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const agora = () => Date.now();
+
+/** Lê JSON da API; se vier HTML (timeout da plataforma) ou erro, vira uma mensagem legível. */
+async function lerResposta(res: Response, mensagemPadrao: string) {
+  const txt = await res.text();
+  let dados: { erro?: string } | null = null;
+  try {
+    dados = JSON.parse(txt);
+  } catch {
+    throw new Error(mensagemPadrao);
+  }
+  if (!res.ok) throw new Error(dados?.erro ?? mensagemPadrao);
+  return dados as never;
+}
+
+export const dominioDe = (url: string) => url.replace(/^https?:\/\//, "").replace(/^www\./, "").split("/")[0].toLowerCase();
+
+function etapasIniciais(dominio: string, quantidade: number, totalVirais: number): Etapa[] {
+  return [
+    { id: "abrir", texto: `Abrindo ${dominio} e lendo o que a empresa diz sobre si`, estado: "andando" },
+    { id: "paleta", texto: "Tirando paleta, fontes e logo do código do site", estado: "pendente" },
+    { id: "nicho", texto: "Descobrindo nicho, público e tom de voz", estado: "pendente" },
+    { id: "virais", texto: `Comparando com ${totalVirais} posts da base de virais`, estado: "pendente" },
+    { id: "escrever", texto: `Escrevendo estratégia e ${quantidade} ideias de post`, estado: "pendente" },
+    { id: "artes", texto: "Diagramando as artes na identidade da marca", estado: "pendente" },
+  ];
+}
+
+/** Lê a marca e gera a análise, mostrando as etapas reais enquanto espera. */
+export function useGeracao(totalVirais: number) {
+  const [fase, setFase] = useState<"parado" | "trabalhando" | "pronto" | "erro">("parado");
+  const [etapas, setEtapas] = useState<Etapa[]>([]);
+  const [brand, setBrand] = useState<BrandProfile | null>(null);
+  const [analise, setAnalise] = useState<Analise | null>(null);
+  const [dominio, setDominio] = useState("");
+  const [erro, setErro] = useState("");
+  const execucao = useRef(0);
+
+  const marcar = (id: string, estado: Etapa["estado"]) => setEtapas((es) => es.map((e) => (e.id === id ? { ...e, estado } : e)));
+
+  async function gerar(d: DadosFormulario) {
+    const minha = ++execucao.current;
+    const vivo = () => execucao.current === minha;
+    const dom = dominioDe(d.url);
+    setDominio(dom);
+    setErro("");
+    setBrand(null);
+    setAnalise(null);
+    setEtapas(etapasIniciais(dom, d.quantidade, totalVirais));
+    setFase("trabalhando");
+    const inicio = agora();
+
+    try {
+      const handles = { instagram: d.instagram || undefined, linkedin: d.linkedin || undefined, x: d.x || undefined, facebook: d.facebook || undefined };
+      const rb = await fetch("/api/brand", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ url: d.url, ...handles, paletaInstagram: d.paletaInstagram.length ? d.paletaInstagram : undefined }),
+      });
+      const b = await lerResposta(rb, "Não consegui ler esse site.");
+      if (!vivo()) return;
+      marcar("abrir", "feito");
+      marcar("paleta", "andando");
+      await espera(450);
+      setBrand(b);
+      marcar("paleta", "feito");
+      marcar("nicho", "andando");
+
+      // As etapas de escrita avançam enquanto a resposta não chega; a última só fecha com a resposta.
+      const avancos = ["nicho", "virais", "escrever"];
+      let k = 0;
+      const timer = setInterval(() => {
+        if (k < avancos.length - 1) {
+          marcar(avancos[k], "feito");
+          marcar(avancos[k + 1], "andando");
+          k++;
+        }
+      }, 1400);
+      let ra: Response;
+      try {
+        ra = await fetch("/api/analyze", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade }),
+        });
+      } finally {
+        clearInterval(timer);
+      }
+      const a = await lerResposta(ra, "O motor demorou demais para responder. Tente de novo ou use um dos exemplos.");
+      if (!vivo()) return;
+      for (const id of avancos) marcar(id, "feito");
+      marcar("artes", "andando");
+      // Um respiro mínimo para a pessoa conseguir ler o que aconteceu, mesmo quando vem do cache.
+      await espera(Math.max(600, 3600 - (agora() - inicio)));
+      marcar("artes", "feito");
+      await espera(250);
+      if (!vivo()) return;
+      setAnalise(a);
+      setFase("pronto");
+    } catch (e) {
+      if (!vivo()) return;
+      setErro(e instanceof TypeError ? "Sem conexão com o servidor. Confira a internet e tente de novo." : (e as Error).message);
+      setFase("erro");
+    }
+  }
+
+  return { fase, etapas, brand, analise, dominio, erro, gerar };
+}
