@@ -22,8 +22,12 @@ export interface DadosFormulario {
   semSite?: boolean;
 }
 
-/** Tela 1 do onboarding: só o site. Redes, quem assina e o resto ficam na tela seguinte, já com o site lido. */
-export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulario) => void; ocupado: boolean }) {
+/**
+ * Tela 1 do onboarding: só o site. Redes, quem assina e o resto ficam na tela seguinte, já com o site lido.
+ * `centrado` é para o topo da landing, que é centrado a partir do sm: rótulo e erro seguem o campo (à esquerda),
+ * a linha do "Não tenho site" fica no meio. No celular tudo continua alinhado à esquerda.
+ */
+export function Formulario({ onEnviar, ocupado, centrado = false }: { onEnviar: (d: DadosFormulario) => void; ocupado: boolean; centrado?: boolean }) {
   const [d, setD] = useState<DadosFormulario>({ url: "", instagram: "", linkedin: "", x: "", facebook: "", quantidade: 6, paletaInstagram: [] });
   const [erroUrl, setErroUrl] = useState("");
 
@@ -39,7 +43,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
   }
 
   return (
-    <form onSubmit={enviar} className="w-full">
+    <form onSubmit={enviar} className={`w-full ${centrado ? "sm:text-left" : ""}`}>
       <label htmlFor="url" className="text-sm font-medium text-tinta-2">
         Endereço do site
       </label>
@@ -70,7 +74,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           {erroUrl}
         </p>
       )}
-      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <div className={`mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 ${centrado ? "sm:justify-center" : ""}`}>
         <Link
           href={urlDoApp({ url: "", semSite: true })}
           className="tocavel inline-flex h-11 items-center rounded-full border border-tinta/25 bg-white px-5 text-base font-medium text-tinta transition-colors hover:border-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"

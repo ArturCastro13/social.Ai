@@ -24,17 +24,17 @@ export function Topo() {
           social.Ai
         </Link>
         <nav className="hidden items-center gap-7 text-sm text-tinta-2 md:flex" aria-label="Seções">
-          <a href="#como-funciona" className="hover:text-tinta">
+          <a href="#como-funciona" className="inline-flex min-h-11 items-center transition-colors hover:text-tinta">
             Como funciona
           </a>
-          <a href="#exemplo" className="hover:text-tinta">
+          <a href="#exemplo" className="inline-flex min-h-11 items-center transition-colors hover:text-tinta">
             Exemplo
           </a>
-          <a href="#preco" className="hover:text-tinta">
+          <a href="#preco" className="inline-flex min-h-11 items-center transition-colors hover:text-tinta">
             Preço
           </a>
         </nav>
-        <BotaoComecar className="inline-flex h-11 items-center rounded-full bg-tinta px-4 sm:h-10 text-sm font-medium text-papel transition-colors hover:bg-tinta-2" />
+        <BotaoComecar className="inline-flex h-11 items-center rounded-full bg-tinta px-4 text-sm font-medium text-papel transition-colors hover:bg-tinta-2" />
       </div>
     </header>
   );
@@ -60,7 +60,8 @@ export function Cabecalho() {
 
 export function Dor() {
   return (
-    <section className={`${CONTEUDO} ${SECAO}`}>
+    // Vem colada no topo e abre o vídeo logo abaixo: respiro menor que o das outras seções dos dois lados.
+    <section className={`${CONTEUDO} pb-10 pt-10 sm:pb-14 lg:pb-16 lg:pt-12`}>
       <TextoRevelado como="h2" className={`${H2} max-w-3xl`} texto="O que você sabe do seu cliente não vira post." />
       <Revelar>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-tinta-2">
@@ -132,9 +133,9 @@ export function Exemplo() {
 
 export function Planos() {
   const planos = [
-    { nome: "Solo", preco: "49", itens: ["A pauta da semana pronta", "1 marca", "Radar do nicho"] },
-    { nome: "Tração", preco: "129", itens: ["Mais posts por semana", "Até 3 marcas", "Legendas para LinkedIn, Instagram e X"] },
-    { nome: "Time", preco: "290", itens: ["Posts sem limite", "Até 10 marcas", "Aprovação em equipe"] },
+    { nome: "Solo", preco: "49", itens: ["A semana pronta: posts e roteiros de vídeo", "1 marca", "Legenda para Instagram, LinkedIn, X e Facebook"] },
+    { nome: "Tração", preco: "129", itens: ["Mais posts e vídeos por semana", "Até 3 marcas", "O que funciona nos concorrentes"] },
+    { nome: "Time", preco: "290", itens: ["Posts e vídeos sem limite", "Até 10 marcas", "Tudo do plano Tração"] },
   ];
   return (
     <section id="preco" className="scroll-mt-20">
@@ -169,8 +170,8 @@ export function Planos() {
 
 export function Perguntas() {
   const perguntas = [
-    ["Por que não usar o ChatGPT?", "Ele não sabe o que você sabe, não conhece os padrões que viralizaram no seu nicho e não entrega a arte na sua marca."],
-    ["A IA inventa coisas sobre a minha empresa?", "Não. Ela usa o seu site e o que você contou nas três perguntas. Você aprova cada post antes de publicar."],
+    ["Por que não usar o ChatGPT?", "Porque ele não conhece a sua empresa. Você teria que explicar tudo de novo a cada post. O social.Ai parte do seu site e do que você conta, e entrega o post pronto na sua marca."],
+    ["A IA inventa coisas sobre a minha empresa?", "Não. Ela usa o seu site e o que você conta sobre o negócio. Você aprova cada post antes de publicar."],
     ["De onde vêm os posts de referência?", "De uma base curada pelo time, com link para cada fonte e métrica só quando dá para conferir."],
   ];
   return (
@@ -180,7 +181,7 @@ export function Perguntas() {
         <div className="divide-y divide-tinta/10 border-y border-tinta/10">
           {perguntas.map(([q, r]) => (
             <details key={q} className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-medium leading-snug">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-medium leading-snug [&::-webkit-details-marker]:hidden">
                 {q}
                 <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 transition-transform group-open:rotate-45" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
                   <path d="M12 5v14M5 12h14" />

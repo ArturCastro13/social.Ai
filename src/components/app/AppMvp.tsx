@@ -95,8 +95,8 @@ export function AppMvp({
       <main className="flex-1">
         {!dados && (
           <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24">
-            <h1 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl">Cole o site da sua startup.</h1>
-            <p className="mt-4 text-lg leading-relaxed text-tinta-2">A gente lê o site e te mostra o que entendeu. Você só corrige o que estiver errado.</p>
+            <h1 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl">Comece pelo seu site.</h1>
+            <p className="mt-4 text-lg leading-relaxed text-tinta-2">A gente lê o site, faz três perguntas sobre o negócio e monta a sua semana. Sem site? Tudo bem, é só contar sobre a empresa.</p>
             <div className="mt-10">
               <Formulario onEnviar={ir} ocupado={indo} />
             </div>

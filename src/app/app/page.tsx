@@ -5,8 +5,8 @@ import { DEMOS } from "@/lib/engine/demo";
 import { itensDoArquivo } from "@/lib/virais";
 
 export const metadata: Metadata = {
-  title: "social.Ai | Suas ideias de hoje",
-  description: "Cole o site da sua startup e aprove as ideias de post do dia, com estratégia e métricas.",
+  title: "social.Ai | Comece pelo seu site",
+  description: "Cole o site ou conte sobre a sua empresa. Três perguntas e a sua semana de posts e vídeos sai pronta.",
 };
 
 export default async function PaginaApp({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {

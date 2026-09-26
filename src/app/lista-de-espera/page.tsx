@@ -14,8 +14,8 @@ const perguntas = [
   ["É para a minha empresa?", "Estamos começando por founders de startups que ainda cuidam do conteúdo entre uma reunião de vendas e outra. Se essa rotina parece com a sua, queremos ouvir você."],
   ["Já posso usar?", "Ainda não. Estamos desenvolvendo o produto. Entre na lista e avisaremos por e-mail quando o acesso abrir. Ainda não há uma data confirmada."],
   ["Preciso pagar para entrar?", "Não. A lista é gratuita, sem cartão e sem compromisso de contratação."],
-  ["Por que não usar só o ChatGPT?", "A proposta é juntar sua marca, o que você sabe sobre o cliente e as pautas em um só fluxo. Para você não precisar começar do zero a cada post."],
-  ["Vai publicar por mim?", "A proposta é você revisar e aprovar o conteúdo. Você conhece seu negócio e continua decidindo o que vai para as redes."],
+  ["Por que não usar só o ChatGPT?", "Porque ele não conhece a sua empresa. Você teria que explicar tudo de novo a cada post. O social.Ai parte do seu site e do que você conta, e entrega o post pronto na sua marca."],
+  ["Vai publicar por mim?", "Não. Você aprova cada post e decide o que vai para as redes."],
 ];
 
 export default function ListaDeEspera() {
@@ -59,7 +59,7 @@ export default function ListaDeEspera() {
         </div>
         <figure className="w-full">
           <VideoFalaAoPost />
-          <figcaption className="mt-3 text-sm leading-relaxed text-tinta-3">Prévia ilustrativa. O produto ainda está em desenvolvimento.</figcaption>
+          <figcaption className="mt-3 text-sm leading-relaxed text-tinta-3">Prévia ilustrativa. A Rota ERP é uma marca fictícia.</figcaption>
         </figure>
       </section>
       <section id="perguntas" className={`${container} grid scroll-mt-20 gap-6 border-t border-tinta/10 py-14 sm:py-20 lg:grid-cols-[0.8fr_1.2fr]`}>
