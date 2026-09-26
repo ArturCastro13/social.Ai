@@ -100,11 +100,11 @@ export function AppMvp({
             <div className="mt-10">
               <Formulario onEnviar={ir} ocupado={indo} />
             </div>
-            <p className="mt-6 text-sm text-tinta-3">
+            <p className="mt-3 text-sm text-tinta-3">
               ver exemplo:{" "}
               {exemplos.map((ex, i) => (
                 <Fragment key={ex.dominio}>
-                  <Link href={urlDoApp({ url: ex.dominio }, true)} className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta">
+                  <Link href={urlDoApp({ url: ex.dominio }, true)} className="inline-flex min-h-11 items-center underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta">
                     {ex.nome}
                   </Link>
                   {i < exemplos.length - 1 ? ", " : ""}

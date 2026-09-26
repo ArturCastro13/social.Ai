@@ -40,7 +40,7 @@ export function Passos({ abas }: { abas: Aba[] }) {
 
   const rodando = automatico && naTela;
   return (
-    <div ref={ref} className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+    <div ref={ref} className="grid grid-cols-[minmax(0,1fr)] gap-8 sm:gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
       <div role="tablist" aria-orientation="vertical" className="flex flex-col">
         {abas.map((a, i) => (
           <button
@@ -85,15 +85,16 @@ export function Passos({ abas }: { abas: Aba[] }) {
           </button>
         ))}
       </div>
-      <div className="relative">
+      {/* Os painéis ficam empilhados na mesma célula: a altura é a do maior e a página não pula quando o passo troca.
+          A chave muda ao ativar para a entrada do painel tocar de novo. */}
+      <div className="relative grid grid-cols-[minmax(0,1fr)]">
         {abas.map((a, i) => (
           <div
-            key={a.titulo}
+            key={`${a.titulo}-${ativa === i}`}
             id={`${id}-p${i}`}
             role="tabpanel"
             aria-labelledby={`${id}-t${i}`}
-            hidden={ativa !== i}
-            className="animate-[aparecer_.5s_cubic-bezier(.16,1,.3,1)]"
+            className={`[grid-area:1/1] ${ativa === i ? "animate-[aparecer_.5s_cubic-bezier(.16,1,.3,1)]" : "invisible"}`}
           >
             {a.painel}
           </div>
@@ -119,7 +120,7 @@ export function AbasHorizontais({ abas }: { abas: Aba[] }) {
             aria-selected={ativa === i}
             aria-controls={`${id}-p${i}`}
             onClick={() => setAtiva(i)}
-            className={`h-10 rounded-full px-4 text-sm font-medium transition-colors ${ativa === i ? "bg-tinta text-papel" : "bg-papel-2 text-tinta-2 hover:text-tinta"}`}
+            className={`h-11 rounded-full px-4 text-sm font-medium transition-colors ${ativa === i ? "bg-tinta text-papel" : "bg-papel-2 text-tinta-2 hover:text-tinta"}`}
           >
             {a.titulo}
           </button>
