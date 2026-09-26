@@ -25,8 +25,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${geist.variable} ${bricolage.variable} ${instrument.variable} ${jetbrains.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="pt-BR" suppressHydrationWarning className={`${geist.variable} ${bricolage.variable} ${instrument.variable} ${jetbrains.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+        {children}
+      </body>
     </html>
   );
 }

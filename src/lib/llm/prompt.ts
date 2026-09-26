@@ -8,6 +8,8 @@ export interface ContextoPrompt {
   padroes: { padrao: PadraoViral; exemplos: ViralItem[] }[];
   quantidade: number;
   redes: string[];
+  /** Resumo das ideias que o founder aprovou ou pulou antes (vazio se ainda não há o bastante). */
+  preferencias?: string;
 }
 
 // Parte fixa do prompt: fica igual entre chamadas (ajuda cache de prompt nos provedores).
@@ -60,7 +62,7 @@ ${resumoMarca(ctx.brand)}
 Palpite inicial de nicho: "${ctx.palpite}". Confirme ou corrija entre: ${nichos}.
 ${resumoPadroes(ctx)}
 
-# Templates de arte disponíveis e o que cada um espera em "slides"
+${ctx.preferencias ? `# O que este founder aprovou antes\n${ctx.preferencias}\n\n` : ""}# Templates de arte disponíveis e o que cada um espera em "slides"
 ${guia}
 
 # Tarefa

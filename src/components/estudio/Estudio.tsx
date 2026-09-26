@@ -36,10 +36,12 @@ function etapasIniciais(dominio: string, quantidade: number, totalVirais: number
 
 export function Estudio({
   cabecalho,
+  vitrine,
   exemplos,
   totalVirais,
 }: {
   cabecalho: ReactNode;
+  vitrine?: ReactNode;
   exemplos: { nome: string; dominio: string }[];
   totalVirais: number;
 }) {
@@ -145,7 +147,8 @@ export function Estudio({
   return (
     <>
       <section id="topo" className="scroll-mt-4">
-        <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-6xl flex-col justify-center px-4 pb-32 pt-8 sm:min-h-0 sm:px-6 sm:pb-24 sm:pt-24 lg:pt-32">
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14 lg:pb-28 lg:pt-10">
+          <div className="flex flex-col justify-center pb-4 pt-12 sm:pt-16 lg:py-0">
           {cabecalho}
           <div className="mt-10 max-w-2xl">
             {fase === "trabalhando" ? (
@@ -170,7 +173,7 @@ export function Estudio({
               <button
                 type="button"
                 onClick={() => window.dispatchEvent(new Event(EVENTO_COMECAR))}
-                className="h-14 bg-pauta px-8 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura"
+                className="h-14 rounded-full bg-pauta px-8 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura"
               >
                 Começar agora
               </button>
@@ -193,6 +196,8 @@ export function Estudio({
               </p>
             )}
           </div>
+          </div>
+          {vitrine && <div className="min-w-0">{vitrine}</div>}
         </div>
       </section>
       {fase === "pronto" && analise && <Painel key={analise.id} analise={analise} onNova={nova} />}

@@ -2,6 +2,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { promises as fs } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import type { Analise, ViralItem } from "@/lib/types";
 
 export interface Lead {
@@ -51,6 +52,10 @@ export interface Store {
   salvarEntrevista(e: Entrevista): Promise<void>;
   removerEntrevista(id: string): Promise<void>;
   listarVirais(): Promise<ViralItem[]>;
+  salvarDecisao(d: Decisao): Promise<void>;
+  listarDecisoes(dominio: string): Promise<Decisao[]>;
+  salvarResultado(r: ResultadoPost): Promise<void>;
+  listarResultados(dominio: string): Promise<ResultadoPost[]>;
   salvarViral(v: ViralItem): Promise<{ destino: string }>;
 }
 
@@ -111,6 +116,22 @@ function supabaseStore(client: SupabaseClient): Store {
     },
     async listarVirais() {
       return (ok(await client.from("virais").select("*").limit(2000)) ?? []) as ViralItem[];
+    },
+    async salvarDecisao(d) {
+      ok(await client.from("feedback").insert(d));
+    },
+    async listarDecisoes(dominio) {
+      // As 2000 mais recentes, devolvidas da mais antiga para a mais nova (a última de cada post prevalece).
+      const r = ok(await client.from("feedback").select("*").eq("dominio", dominio).order("criado_em", { ascending: false }).limit(2000));
+      return ((r ?? []) as Decisao[]).reverse();
+    },
+    async salvarResultado(r) {
+      ok(await client.from("metricas").insert(r));
+    },
+    async listarResultados(dominio) {
+      // As 2000 mais recentes, devolvidas da mais antiga para a mais nova (a última de cada post prevalece).
+      const r = ok(await client.from("metricas").select("*").eq("dominio", dominio).order("criado_em", { ascending: false }).limit(2000));
+      return ((r ?? []) as ResultadoPost[]).reverse();
     },
     async salvarViral(v) {
       ok(await client.from("virais").upsert({ ...v, atualizado_em: new Date().toISOString() }));
@@ -197,6 +218,22 @@ function localStore(): Store {
     },
     async removerEntrevista(id) {
       await gravar("entrevistas", (await ler<Entrevista>("entrevistas")).filter((x) => x.id !== id));
+    },
+    async salvarDecisao(d) {
+      const todos = await ler<Decisao & { criado_em: string }>("feedback");
+      todos.push({ ...d, criado_em: agora() });
+      await gravar("feedback", todos.slice(-5000));
+    },
+    async listarDecisoes(dominio) {
+      return (await ler<Decisao>("feedback")).filter((d) => d.dominio === dominio);
+    },
+    async salvarResultado(r) {
+      const todos = await ler<ResultadoPost & { criado_em: string }>("metricas");
+      todos.push({ ...r, criado_em: agora() });
+      await gravar("metricas", todos.slice(-5000));
+    },
+    async listarResultados(dominio) {
+      return (await ler<ResultadoPost>("metricas")).filter((r) => r.dominio === dominio);
     },
     async listarVirais() {
       // Em dev, lê os arquivos do repositório de novo para refletir o que o /admin acabou de salvar.

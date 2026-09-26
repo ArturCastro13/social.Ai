@@ -14,6 +14,14 @@ Gasto de API perto de zero: a arte é desenhada por código (Satori), nunca por 
 
 **Fluxo principal (página inicial).** O usuário digita a URL e escolhe quantos posts quer (3, 6, 9 ou 12). A interface chama `POST /api/brand`, mostra a paleta e as fontes assim que chegam, e em seguida chama `POST /api/analyze` com o perfil de marca. Enquanto espera, a tela de redação mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando). Com a resposta, o painel exibe posicionamento, diagnóstico, pilares, estratégia por rede, calendário e a grade de posts. Cada post mostra a arte (`GET /api/render/{postId}`), permite trocar a cor principal e o template, e traz a legenda de cada rede com botão de copiar.
 
+**Ideias do dia.** Logo abaixo do cabeçalho do resultado e antes do diagnóstico, as ideias de post aparecem em um baralho (`src/components/baralho/Baralho.tsx`, montado em `src/components/estudio/IdeiasEMetricas.tsx`). Arrastar para a direita aprova, para a esquerda pula. Os dois botões e as setas do teclado fazem o mesmo. A pilha é ordenada pelo Opportunity Score uma vez, com o histórico de quando a análise abriu, para que decidir uma carta não reembaralhe as outras. Ideias já decididas nesta análise não voltam. Ao lado do baralho ficam a nota da carta do topo, os motivos, o `por_que` do post e a legenda por rede com botão de copiar.
+
+**Learning loop.** Cada decisão vai para `POST /api/feedback` e também fica no `localStorage` do navegador, na chave `socialai:historico:{dominio}`, para as métricas sobreviverem a uma nova análise do mesmo site. Na próxima `POST /api/analyze` com IA, o motor lê as decisões e os resultados da marca (`store.listarDecisoes` e `store.listarResultados`) e, com pelo menos 4 decisões, `textoPreferencias` (`src/lib/feedback.ts`) acrescenta ao prompt a seção "O que este founder aprovou antes", com a taxa de aprovação e o engajamento informado por formato. Com menos de 4 decisões, o prompt fica igual. As demos, o cache (a mesma URL em até 7 dias volta do cache, a não ser com `forcarNovo`) e o motor local não usam esse histórico.
+
+**Métricas.** No painel, o bloco de métricas mostra ideias avaliadas, aprovadas e a taxa de aprovação, e um gráfico de barras com a aprovação por formato. Para cada post aprovado, o founder pode informar alcance, curtidas, comentários e salvos (qualquer campo pode ficar vazio). O engajamento é (curtidas + comentários + salvos) / alcance e só é calculado quando há alcance informado. Esses números são digitados pelo founder: não há integração com as APIs do Instagram, do LinkedIn ou do X.
+
+**Radar do nicho.** Ao lado das métricas, o painel chama `GET /api/radar` e lista até 4 posts da base curada que passaram de 1,5x a mediana de curtidas do nicho, com autor, formato e link para o original.
+
 **Download.** O download é direto, sem pedir e-mail. O ZIP é montado no navegador: uma pasta por post com as imagens (uma por slide no carrossel), um `legendas.md` com as quatro legendas e a data sugerida, e um `calendario.csv` na raiz.
 
 **Validação de dor.** A landing não tem mais formulário. `POST /api/validacao` continua aceitando respostas e o `GET` alimenta `/admin/entrevistas`.
@@ -167,6 +175,94 @@ O contraste é garantido automaticamente: todo par texto e fundo passa por checa
 
 Lista as empresas de exemplo: `[{ "id": "demo-cora", "nome": "Cora", "url": "...", "dominio": "cora.com.br", "nicho": "fintech", "cor": "#fe3e6d", "posts": 8 }]`.
 
+### POST /api/feedback
+
+Registra uma decisão do baralho ou o resultado de um post publicado. O campo `tipo` define o formato.
+
+Decisão:
+
+```json
+{
+  "tipo": "decisao",
+  "analise_id": "demo-cora",
+  "post_id": "cora-p1",
+  "dominio": "cora.com.br",
+  "nicho": "fintech",
+  "formato": "carrossel",
+  "template": "capa-gancho",
+  "padrao": "carrossel--erro-comum",
+  "rede": "instagram",
+  "decisao": "aprovado"
+}
+```
+
+`decisao` é `aprovado` ou `pulado`. `nicho` e `formato` precisam ser valores conhecidos; `padrao` é opcional (padrão `""`).
+
+Resultado:
+
+```json
+{
+  "tipo": "resultado",
+  "analise_id": "demo-cora",
+  "post_id": "cora-p1",
+  "dominio": "cora.com.br",
+  "formato": "carrossel",
+  "alcance": 1800,
+  "curtidas": 95,
+  "comentarios": 7,
+  "salvamentos": 12
+}
+```
+
+Os quatro números são inteiros de 0 a 1 bilhão ou `null` quando o founder não informou. O `dominio` é guardado em minúsculas.
+
+Saída: `{ "ok": true }`. Erros: `400` para dados inválidos, `503` quando o armazenamento falha. Com Supabase, decisões vão para a tabela `feedback` e resultados para `metricas`; sem Supabase, para `.data/` (ou `/tmp` na Vercel).
+
+### GET /api/feedback?dominio={dominio}
+
+Resumo por formato de uma marca. Conta só a decisão mais recente de cada post e o resultado mais recente de cada post. Formatos ordenados pela taxa de aprovação.
+
+```json
+{
+  "total": 5,
+  "aprovados": 3,
+  "formatos": [
+    { "formato": "carrossel", "aprovados": 2, "pulados": 0, "taxa": 1, "engajamento": 0.0633, "publicados": 1 },
+    { "formato": "citacao", "aprovados": 1, "pulados": 2, "taxa": 0.3333, "engajamento": null, "publicados": 0 }
+  ]
+}
+```
+
+Exemplo ilustrativo. `taxa` e `engajamento` vão de 0 a 1. `engajamento` fica `null` quando nenhum post do formato tem alcance informado. Erro: `400` sem `dominio`.
+
+### GET /api/radar?nicho={nicho}
+
+Sinais do nicho na base curada (arquivo mais Supabase). Nichos: `saas-b2b`, `fintech`, `healthtech`, `edtech`, `ecommerce-dtc`.
+
+Saída (resumida, fintech com a base atual):
+
+```json
+{
+  "nicho": "fintech",
+  "totalBase": 15,
+  "frequencias": { "print-tweet--prova-social": 2, "carrossel--erro-comum": 1, "imagem-unica--polemica": 1 },
+  "outliers": [
+    {
+      "id": "fintech-03",
+      "gancho": "Fomos eleitos a marca de banco número 1 do mundo. E não foi por causa de anúncio.",
+      "autor": "Cristina Junqueira (Nubank)",
+      "rede": "linkedin",
+      "formato": "imagem-unica",
+      "link": "https://www.linkedin.com/posts/crisjunqueira_...",
+      "curtidas": 1323,
+      "multiplo": 1.64
+    }
+  ]
+}
+```
+
+`frequencias` conta os itens do nicho por padrão (`formato--tipo_gancho`). Outlier só entra se o item está `verificado`, tem curtidas lidas na fonte e `link_fonte`. A mediana é calculada sobre esses itens, e entram os que chegam a 1,5x ela, do maior `multiplo` para o menor. Erro: `400` sem nicho válido.
+
 ### POST /api/validacao
 
 ```json
@@ -192,8 +288,20 @@ Lista as empresas de exemplo: `[{ "id": "demo-cora", "nome": "Cora", "url": "...
 
 `GET`, `POST` e `DELETE /api/admin/entrevistas`: lista, grava e remove entrevistas; toda resposta inclui `numeros`, os indicadores do pitch calculados só a partir do que foi registrado.
 
+## Opportunity Score
+
+Calculado no navegador por `pontuar` em `src/lib/oportunidade.ts`, de 0 a 100, com três sinais que o produto consegue medir hoje:
+
+- **Força do padrão no nicho (40%).** Frequência do `padrao_inspirador` do post na base curada, relativa ao padrão mais frequente do nicho: `0,25 + 0,75 x freq / freqMax`. Sem dados do radar, fica em 0,5.
+- **Aderência à marca (40%).** Aprovações do founder no mesmo formato com suavização: `(aprovados + 1) / (decisões + 2)`, que dá 50% sem histórico. Se houver resultados com alcance no formato, mistura 70% disso com 30% do engajamento informado (5% de engajamento ou mais conta como nota cheia).
+- **Frescor (20%).** `1 / (1 + 0,5 x aprovações recentes do formato)`, olhando as últimas 10 decisões. Evita repetir o formato que acabou de ser aprovado.
+
+Cada sinal gera um motivo em texto só quando há número real por trás (por exemplo, "Você aprovou 2 de 3 ideias em carrossel."). Empate no score é desfeito pelo id do post.
+
+**Próximos passos, ainda não implementados.** Velocidade de tendência: o score não mede se um padrão está crescendo, porque para isso é preciso uma série temporal das redes, e a base curada é uma foto. Integração com as APIs do Instagram, do LinkedIn e do X: hoje as métricas dos posts publicados são digitadas pelo founder.
+
 ## Dados
 
-Supabase (rode `supabase/schema.sql`): `virais`, `analises` (cache), `uso` (limite da demo), `leads`, `validacao`, `entrevistas` e o bucket público `posts`. Sem Supabase, tudo vai para `.data/` localmente (ou para `/tmp` na Vercel, que é temporário).
+Supabase (rode `supabase/schema.sql`): `virais`, `analises` (cache), `uso` (limite da demo), `leads`, `validacao`, `entrevistas`, `feedback` (decisões do baralho), `metricas` (resultados informados dos posts) e o bucket público `posts`. Sem Supabase, tudo vai para `.data/` localmente (ou para `/tmp` na Vercel, que é temporário).
 
 Base de virais versionada em `data/virais/<nicho>/itens.json` e catálogo em `data/virais/catalogo.json` (`npm run virais:catalogo`). Demos em `data/demo/`, geradas por `npm run demo:gerar` a partir de `data/demo/conteudo/`.

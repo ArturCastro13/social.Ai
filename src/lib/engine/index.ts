@@ -1,6 +1,7 @@
 import { randomBytes } from "node:crypto";
 import type { Analise, BrandProfile, PostGerado, Rede } from "@/lib/types";
 import { provedorConfigurado } from "@/lib/llm";
+import { resumirPreferencias, textoPreferencias } from "@/lib/feedback";
 import { montarPrompt, SISTEMA } from "@/lib/llm/prompt";
 import { store } from "@/lib/store";
 import { contextoViralDoNicho } from "@/lib/virais";
@@ -155,7 +156,14 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       await Promise.all(op.identificadores.map((k) => store.registrarUso(k, brand.url).catch(() => undefined)));
       const inicio = Date.now();
       const contexto = await contextoViralDoNicho(palpite, 10);
-      const prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand) });
+      let preferencias = "";
+      try {
+        const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
+        preferencias = textoPreferencias(resumirPreferencias(decisoes, resultados));
+      } catch {
+        /* sem histórico, segue */
+      }
+      const prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand), preferencias });
       let erroAnterior = "";
       // Segunda tentativa só se a primeira falhou rápido o bastante para caber no prazo.
       for (let tentativa = 0; tentativa < 2 && !saida && Date.now() - inicio < PRAZO_IA_MS / 2; tentativa++) {

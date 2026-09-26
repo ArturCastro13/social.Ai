@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1280, height=720" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Bricolage";
+        src: url("assets/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-400-normal.woff2") format("woff2");
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-500-normal.woff2") format("woff2");
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/geist-sans-latin-600-normal.woff2") format("woff2");
+        font-weight: 600;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1280px;
+        height: 720px;
+        overflow: hidden;
+        background: #f7f6f2;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #f7f6f2;
+        font-family: "Geist", sans-serif;
+        color: #16130f;
+      }
+      .glow {
+        position: absolute;
+        width: 900px;
+        height: 900px;
+        right: -260px;
+        top: -420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 74, 28, 0.2) 0%, rgba(255, 74, 28, 0) 65%);
+      }
+      .glow-2 {
+        position: absolute;
+        width: 700px;
+        height: 700px;
+        left: -300px;
+        bottom: -420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(254, 62, 109, 0.14) 0%, rgba(254, 62, 109, 0) 65%);
+      }
+      .janela {
+        position: absolute;
+        inset: 52px 72px;
+        background: #ffffff;
+        border: 2px solid rgba(22, 19, 15, 0.08);
+        border-radius: 22px;
+        box-shadow: 0 30px 60px -30px rgba(22, 19, 15, 0.25);
+        padding: 30px 40px 36px;
+        display: flex;
+        flex-direction: column;
+      }
+      .barra {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-family: "Bricolage", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -0.02em;
+      }
+      .passo {
+        font-size: 18px;
+        color: #6f675b;
+      }
+      .linha-url {
+        margin-top: 22px;
+        display: flex;
+        gap: 14px;
+      }
+      .campo {
+        flex: 1;
+        height: 64px;
+        border: 2px solid rgba(22, 19, 15, 0.2);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        padding: 0 22px;
+        font-size: 28px;
+      }
+      .campo .c {
+        display: none;
+      }
+      .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 32px;
+        margin-left: 2px;
+        background: #16130f;
+      }
+      .botao {
+        width: 210px;
+        height: 64px;
+        border-radius: 12px;
+        background: #ff4a1c;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .corpo {
+        margin-top: 28px;
+        flex: 1;
+        display: grid;
+        grid-template-columns: 372px 1fr;
+        gap: 40px;
+        min-height: 0;
+      }
+      .leitura {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .ponto {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ff4a1c;
+      }
+      .item {
+        border-top: 2px solid rgba(22, 19, 15, 0.08);
+        padding-top: 14px;
+      }
+      .rotulo {
+        font-size: 18px;
+        color: #6f675b;
+      }
+      .valor {
+        margin-top: 6px;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 1.3;
+      }
+      .cores {
+        margin-top: 10px;
+        display: flex;
+        gap: 10px;
+      }
+      .cor {
+        display: block;
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+        border: 2px solid rgba(22, 19, 15, 0.08);
+      }
+      .aa {
+        font-family: "Geist", sans-serif;
+        font-weight: 600;
+        margin-right: 8px;
+      }
+      .posts {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .posts-topo {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        font-size: 20px;
+        font-weight: 500;
+      }
+      .posts-topo span {
+        font-size: 18px;
+        font-weight: 400;
+        color: #6f675b;
+      }
+      .mesa {
+        position: relative;
+        flex: 1;
+        margin-top: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 44px;
+      }
+      .baralho {
+        position: relative;
+        width: 300px;
+        height: 375px;
+      }
+      .carta {
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 24px 40px -24px rgba(22, 19, 15, 0.5);
+        background: #ffffff;
+        opacity: 0;
+      }
+      .carta img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .selo {
+        position: absolute;
+        top: 18px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      .selo.sim {
+        left: 18px;
+        background: #2f5d50;
+      }
+      .selo.nao {
+        right: 18px;
+        background: #16130f;
+      }
+      .acao {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        border: 2px solid rgba(22, 19, 15, 0.14);
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .acao svg {
+        width: 30px;
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1280" data-height="720">
+      <div class="glow" id="glow"></div>
+      <div class="glow-2" id="glow2"></div>
+
+      <div class="janela" id="janela">
+        <div class="barra">
+          <div class="logo">social.Ai</div>
+          <div class="passo" id="passo">Cole o endereço do site</div>
+        </div>
+
+        <div class="linha-url">
+          <div class="campo">
+            <span class="c">c</span><span class="c">o</span><span class="c">r</span><span class="c">a</span><span class="c">.</span><span class="c">c</span><span class="c">o</span><span class="c">m</span><span class="c">.</span><span class="c">b</span><span class="c">r</span><span class="cursor" id="cursor"></span>
+          </div>
+          <div class="botao" id="botao">Gerar posts</div>
+        </div>
+
+        <div class="corpo">
+          <div class="leitura">
+            <div class="status" id="status"><span class="ponto" id="ponto"></span><span id="status-txt">Lendo cora.com.br</span></div>
+            <div class="item" id="i-paleta">
+              <div class="rotulo">Paleta</div>
+              <div class="cores">
+                <span class="cor" style="background: #fe3e6d"></span>
+                <span class="cor" style="background: #fc82a0"></span>
+                <span class="cor" style="background: #ffe5eb"></span>
+                <span class="cor" style="background: #007aff"></span>
+                <span class="cor" style="background: #3b3b3b"></span>
+              </div>
+            </div>
+            <div class="item" id="i-fonte">
+              <div class="rotulo">Fonte</div>
+              <div class="valor"><span class="aa">Aa</span>Plus Jakarta Sans</div>
+            </div>
+            <div class="item" id="i-tom">
+              <div class="rotulo">Tom de voz</div>
+              <div class="valor">De igual para igual, sem enrolação</div>
+            </div>
+          </div>
+
+          <div class="posts">
+            <div class="posts-topo" id="posts-topo">Ideias de hoje <span id="contador">8 posts · fintech</span></div>
+            <div class="mesa" id="mesa">
+              <div class="acao" id="b-nao">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#16130f" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              </div>
+              <div class="baralho">
+                <div class="carta" id="c3"><img src="assets/posts/cora-p2.png" alt="" /></div>
+                <div class="carta" id="c2"><img src="assets/posts/cora-p5.png" alt="" /><span class="selo nao" id="s2">Pular</span></div>
+                <div class="carta" id="c1"><img src="assets/posts/cora-p1.png" alt="" /><span class="selo sim" id="s1">Aprovar</span></div>
+              </div>
+              <div class="acao" id="b-sim">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2f5d50" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      const T = 12;
+
+      // Fundo: um respiro lento que volta ao ponto de partida no fim, para o loop fechar.
+      tl.fromTo("#glow", { scale: 1 }, { scale: 1.12, duration: T / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+      tl.fromTo("#glow2", { scale: 1.1 }, { scale: 1, duration: T / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+
+      // Cursor piscando em ciclos de 0,5 s: número par de meias-voltas, termina aceso.
+      tl.fromTo("#cursor", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "steps(1)", yoyo: true, repeat: Math.max(0, Math.floor(T / 0.5) - 1) }, 0);
+
+      // 1. Digitação.
+      const letras = gsap.utils.toArray(".campo .c");
+      letras.forEach((el, i) => tl.set(el, { display: "inline" }, 0.5 + i * 0.11));
+
+      // 2. Clique.
+      tl.to("#botao", { scale: 0.94, duration: 0.12, ease: "power2.in" }, 1.95);
+      tl.to("#botao", { scale: 1, duration: 0.35, ease: "back.out(3)" }, 2.07);
+      tl.set("#passo", { textContent: "Lendo a marca" }, 2.1);
+
+      // 3. Leitura da marca.
+      tl.fromTo("#status", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.5, ease: "expo.out" }, 2.2);
+      tl.fromTo("#ponto", { scale: 1 }, { scale: 0.55, duration: 0.4, ease: "sine.inOut", yoyo: true, repeat: 5 }, 2.2);
+      tl.fromTo("#i-paleta", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.6);
+      tl.fromTo("#i-paleta .cor", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(2.2)", stagger: 0.08 }, 2.75);
+      tl.fromTo("#i-fonte", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.5);
+      tl.fromTo("#i-tom", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 4.2);
+      tl.set("#status-txt", { textContent: "Marca lida" }, 5.0);
+      tl.to("#ponto", { backgroundColor: "#2f5d50", duration: 0.3 }, 5.0);
+
+      // 4. Ideias do dia: arrastar para aprovar ou pular.
+      tl.set("#passo", { textContent: "Ideias de hoje" }, 5.2);
+      tl.fromTo("#posts-topo", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.2);
+      tl.fromTo(["#b-nao", "#b-sim"], { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.08 }, 5.6);
+      tl.fromTo("#c3", { opacity: 0, y: 60, scale: 0.84, rotation: 0 }, { opacity: 1, y: 28, scale: 0.9, duration: 0.8, ease: "expo.out" }, 5.3);
+      tl.fromTo("#c2", { opacity: 0, y: 60, scale: 0.88, rotation: 0 }, { opacity: 1, y: 14, scale: 0.95, duration: 0.8, ease: "expo.out" }, 5.42);
+      tl.fromTo("#c1", { opacity: 0, y: 60, scale: 0.94, rotation: 0 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "expo.out" }, 5.54);
+      tl.fromTo(["#s1", "#s2"], { opacity: 0, scale: 0.7 }, { opacity: 0, scale: 0.7, duration: 0.01 }, 0);
+
+      // Aprovar: puxa para a direita.
+      tl.to("#c1", { x: 40, rotation: 4, duration: 0.5, ease: "power2.out" }, 6.7);
+      tl.to("#s1", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 6.75);
+      tl.to("#b-sim", { scale: 1.14, duration: 0.2, ease: "power2.out", yoyo: true, repeat: 1 }, 7.1);
+      tl.to("#c1", { x: 560, rotation: 18, opacity: 0, duration: 0.55, ease: "power3.in" }, 7.2);
+      tl.to("#c2", { y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 7.5);
+      tl.to("#c3", { y: 14, scale: 0.95, duration: 0.5, ease: "power3.out" }, 7.55);
+      tl.set("#contador", { textContent: "1 aprovado · 7 para ver" }, 7.6);
+
+      // Pular: puxa para a esquerda.
+      tl.to("#c2", { x: -40, rotation: -4, duration: 0.5, ease: "power2.out" }, 8.4);
+      tl.to("#s2", { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.5)" }, 8.45);
+      tl.to("#b-nao", { scale: 1.14, duration: 0.2, ease: "power2.out", yoyo: true, repeat: 1 }, 8.8);
+      tl.to("#c2", { x: -560, rotation: -18, opacity: 0, duration: 0.55, ease: "power3.in" }, 8.9);
+      tl.to("#c3", { y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 9.2);
+      tl.set("#contador", { textContent: "1 aprovado · 6 para ver" }, 9.3);
+
+      // 5. Volta ao quadro inicial para o loop.
+      const saem = ["#status", "#i-paleta", "#i-fonte", "#i-tom", "#posts-topo", "#b-nao", "#b-sim", "#c3"];
+      tl.to(saem, { opacity: 0, duration: 0.5, ease: "power2.in", stagger: 0.03 }, 10.9);
+      [...letras].reverse().forEach((el, i) => tl.set(el, { display: "none" }, 11.3 + i * 0.04));
+      tl.set("#passo", { textContent: "Cole o endereço do site" }, 11.6);
+      tl.set("#status-txt", { textContent: "Lendo cora.com.br" }, 11.6);
+      tl.set("#contador", { textContent: "8 posts · fintech" }, 11.6);
+      tl.set("#ponto", { backgroundColor: "#ff4a1c" }, 11.6);
+      tl.set(["#c1", "#c2"], { x: 0, rotation: 0 }, 11.7);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

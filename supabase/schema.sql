@@ -81,6 +81,37 @@ create table if not exists entrevistas (
   criado_em timestamptz not null default now()
 );
 
+-- Ideias aprovadas ou puladas pelo founder. Alimentam o prompt das próximas análises da mesma marca.
+create table if not exists feedback (
+  id bigserial primary key,
+  analise_id text not null,
+  post_id text not null,
+  dominio text not null,
+  nicho text not null,
+  formato text not null,
+  template text not null,
+  padrao text not null,
+  rede text not null,
+  decisao text not null check (decisao in ('aprovado', 'pulado')),
+  criado_em timestamptz not null default now()
+);
+create index if not exists feedback_dominio on feedback (dominio);
+
+-- Resultados de posts publicados, informados pelo founder no painel de métricas.
+create table if not exists metricas (
+  id bigserial primary key,
+  analise_id text not null,
+  post_id text not null,
+  dominio text not null,
+  formato text not null,
+  curtidas int,
+  comentarios int,
+  salvamentos int,
+  alcance int,
+  criado_em timestamptz not null default now()
+);
+create index if not exists metricas_dominio on metricas (dominio);
+
 -- Artes renderizadas podem ir para o Storage (bucket público "posts"), opcional.
 insert into storage.buckets (id, name, public) values ('posts', 'posts', true)
 on conflict (id) do nothing;
@@ -91,3 +122,5 @@ alter table uso enable row level security;
 alter table leads enable row level security;
 alter table validacao enable row level security;
 alter table entrevistas enable row level security;
+alter table feedback enable row level security;
+alter table metricas enable row level security;

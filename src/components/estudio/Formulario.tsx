@@ -75,12 +75,12 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           onChange={(e) => setD({ ...d, url: e.target.value })}
           aria-invalid={!!erroUrl}
           aria-describedby={erroUrl ? "url-erro" : undefined}
-          className="h-14 w-full min-w-0 border sm:flex-1 border-tinta/25 bg-white px-4 text-lg text-tinta outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus:shadow-[inset_0_0_0_1px_var(--color-tinta)] focus-visible:outline-none"
+          className="h-14 w-full min-w-0 border sm:flex-1 border-tinta/25 bg-white text-lg text-tinta outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus:shadow-[inset_0_0_0_1px_var(--color-tinta)] focus-visible:outline-none"
         />
         <button
           type="submit"
           disabled={ocupado}
-          className="h-14 shrink-0 bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
+          className="h-14 shrink-0 rounded-full bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
         >
           {ocupado ? "Gerando..." : "Gerar posts"}
         </button>

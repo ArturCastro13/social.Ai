@@ -24,11 +24,19 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 
 **Landing e painel.** Página única que é a própria demo, tela de redação mostrando as etapas reais, painel com diagnóstico, estratégia, calendário e posts, download direto. A landing tem só o campo de URL: lista de espera, captura de e-mail e formulário de dor saíram na revisão de design. Mobile first, conferida no navegador em desktop e celular.
 
+**Ideias do dia** (ainda sem commit). No painel de resultado, as ideias viram um baralho: direita aprova, esquerda pula, também pelos botões e pelas setas do teclado. A pilha é ordenada pelo Opportunity Score (`src/lib/oportunidade.ts`), que combina força do padrão no nicho (frequência na base curada), aderência à marca (aprovações e engajamento informado, com suavização) e frescor (não repetir formato recém aprovado). Ao lado, a nota da carta do topo com os motivos em texto, cada um apoiado em número real.
+
+**Learning loop.** Decisões e resultados vão para `POST /api/feedback` e ficam também no `localStorage` do navegador, por domínio. `GET /api/feedback?dominio=` devolve o resumo por formato. Com 4 decisões ou mais, esse resumo entra no prompt da próxima análise com IA da mesma marca (`src/lib/engine/index.ts`, `src/lib/llm/prompt.ts`).
+
+**Métricas e radar.** O painel mostra aprovação por formato em barras, os resultados de cada post aprovado (alcance, curtidas, comentários, salvos, digitados pelo founder) e o engajamento por formato. O Radar do nicho (`GET /api/radar?nicho=`) traz a frequência dos padrões e os outliers da base curada: posts verificados, com curtidas e fonte, a partir de 1,5x a mediana do nicho. Tabelas novas `feedback` e `metricas` no `supabase/schema.sql`.
+
+**Vídeo e artes de exemplo.** `public/video/demo.mp4` (12 s, cerca de 290 KB, sem áudio) feito com HyperFrames, com a fonte em `video/` e o comando para refazer no `README.md`. Artes estáticas de exemplo em `public/exemplos/*.png` (22 PNGs de Cora, Pipefy e Sallve). A landing usa essas artes no baralho do topo (`BaralhoHero`, que recomeça quando acaba) e nas seções de exemplo, sempre via `next/image`. O vídeo entra numa seção própria (`VideoDemo`), que só baixa e toca quando aparece na tela e não toca com movimento reduzido ativado.
+
 **Kit de validação.** Roteiro, `/admin/entrevistas` com números do pitch ao vivo (atualiza a cada 15 segundos em todos os celulares).
 
 **Documentos.** `SPEC.md` (contratos da API com exemplos reais), `ADAPTA_PROMPT.md` (prompt para o Skip recriar a interface chamando nossa API, e prompt para o Apresentações ONE 27 gerar os slides), `PITCH.md` (roteiro de 3 minutos com perguntas prováveis do júri), `PLANO.md`, `NOMES.md` (5 nomes com domínio .com.br e .ai checados de verdade), `DEPLOY.md`.
 
-**Verificação.** Build de produção, lint, `tsc` e 32 testes passando. Fluxo completo testado em produção com 3 sites fora do demo (RD Station, Conta Azul e Alice) e pelo navegador, em desktop e celular.
+**Verificação.** Build de produção, lint, `tsc` e 32 testes passando. Depois das ideias do dia: lint, `tsc` e 38 testes passando (6 novos em `tests/feedback.test.ts` e `tests/oportunidade.test.ts`); o build de produção não foi rodado de novo. Fluxo completo testado em produção com 3 sites fora do demo (RD Station, Conta Azul e Alice) e pelo navegador, em desktop e celular.
 
 **Auditorias da última fase.** Duas revisões independentes rodaram no fim da noite:
 - *Copy*: tirei afirmações sem base (superlativos como "o formato que mais converte", uma anedota inventada nas legendas da Cora, um "80/20" sem fonte, o selo "mais pedido" nos planos), corrigi artigos, crase e anglicismos, e reforcei o prompt da IA para não repetir esses vícios.
@@ -41,6 +49,10 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 - **Download individual e ZIP no navegador** foram validados por script (mesmas URLs, 13 imagens da Cora e 8 de um site fora do demo). Não disparei o download de arquivo no navegador sem ninguém por perto; vale clicar uma vez de manhã.
 - **O motor local escreve texto genérico** para sites fora do demo quando não há IA. Serve de rede de segurança, não é o produto.
 - **Sem Supabase, uma análise feita em produção pode não ser encontrada** por `GET /api/analise/{id}` depois. A interface não depende disso: as artes vão com os dados do post na própria URL.
+- **Com o Supabase ligado, rodar o `supabase/schema.sql` de novo** para criar `feedback` e `metricas`. Sem essas tabelas, `POST /api/feedback` responde 503 e o histórico fica só no navegador.
+- **Velocidade de tendência** não existe no Opportunity Score. Precisa de série temporal das redes; a base curada é uma foto. Próximo passo, sem prazo.
+- **Integração com as APIs do Instagram, LinkedIn e X** não existe. As métricas dos posts publicados são digitadas pelo founder. Próximo passo, sem prazo.
+- **O learning loop só age em análise nova com IA.** Demo, cache de 7 dias e motor local ignoram as preferências.
 - **Domínio próprio.** Nenhum nome de `NOMES.md` foi comprado.
 - **Riscos residuais conhecidos:** a checagem de DNS contra SSRF acontece antes do fetch (um ataque de DNS rebinding ainda seria possível em tese); sem Supabase, os limites de uso da IA valem por instância da Vercel. Nada disso afeta a demo, mas fica anotado para depois do hackathon.
 
