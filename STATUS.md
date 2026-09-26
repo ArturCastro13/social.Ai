@@ -1,8 +1,35 @@
 # Status: o que ficou pronto, o que falta e por onde começar
 
-Última atualização: madrugada de 26/09/2026, antes do dia do hackathon.
+Última atualização: noite de 26/09/2026.
 
 Produção: **https://social-ai-beige.vercel.app** · Repositório: https://github.com/bruno-dotcom12/social.Ai
+
+## 26/09/2026 noite
+
+A mensagem pública mudou e foi aprovada pelo founder. Hero: "Seu negócio está na sua cabeça. Seu marketing não deveria estar." Subtítulo: "Transforme o que você sabe sobre o seu mercado, produto e cliente em marketing que gera resultado. Sem passar horas pesquisando, criando, revisando ou ensinando uma IA sobre a sua própria empresa."
+
+Feito:
+- **Lista de espera (`/lista-de-espera`):** hero novo, mobile first, formulário com nome da empresa e e-mail e o botão "Quero ser um dos primeiros a testar". Grava em `leads` com `origem = 'lista-de-espera'`. Sem preços e sem data de lançamento.
+- **Como funciona em quatro etapas** (`ComoFuncionaEspera.tsx`), que acendem conforme a rolagem: Entendemos a sua empresa, Entendemos o mercado, Transformamos insight em estratégia, Entregamos pronto. O mesmo componente está na home e na lista.
+- **Exemplo "Da sua fala ao post pronto":** loop 4:5 de 10 s (`public/video/fala-ao-post.mp4`, fonte em `video-fala-post/`), com a marca fictícia Rota ERP. Só toca quando aparece; com movimento reduzido, fica o pôster.
+- **Home (`/`):** mesmo hero, mesmas etapas e mesmo exemplo. O CTA continua "Começar agora", porque o produto roda ali (URL ou "Não tenho site").
+- **Vídeo vertical para o celular:** `public/video/demo-vertical.mp4` (4:5, 12 s, fonte em `video-vertical/`). Abaixo de 640 px a página usa essa versão; acima, o `demo.mp4` 16:9.
+- **Admin da lista (`/admin/lista-de-espera`):** total, hoje, últimos 7 dias, e-mails repetidos, busca e CSV, atualizado a cada 30 s. Todas as páginas `/admin` passam por uma tela de senha que confere `GET /api/admin/verificar`.
+- **Painel em três abas:** Hoje (o post do dia), Calendário (a semana, todos os posts e vídeos, aprovação em massa e ZIP) e Resultados (números, aprendizados e concorrentes e nicho).
+- **Onboarding:** três perguntas diretas (`problema_cliente`, `objecao_cliente`, `diferencial`), uma por vez, com texto ou voz. Objetivo em texto livre. Concorrentes sugeridos por `/api/concorrentes`.
+- **Motor:** roteiros de vídeo em toda análise e aprendizado com as métricas digitadas (a IA explica e aplica; o motor local reordena).
+- **Infra:** Supabase provisionado pela Vercel Marketplace, com as variáveis em production, preview e development, e `supabase/schema.sql` aplicado. `ADMIN_PASSWORD` definido em production e preview. Com isso, os itens "variáveis do Supabase", "ADMIN_PASSWORD" e "rodar o schema de novo" da seção abaixo estão resolvidos.
+
+Pendente:
+- **Chave de IA:** ainda não há `GEMINI_API_KEY` nem `ANTHROPIC_API_KEY`. Cora, Pipefy e Sallve respondem com as demos; qualquer outro site passa pelo motor local, que é honesto mas genérico. A regra de pelo menos metade dos posts vindos do founder e as sugestões de concorrentes pela IA ainda não rodaram com chave de verdade.
+- **Inscrições repetidas:** a lista não junta e-mails repetidos. Cada envio vira uma linha; o admin só mostra quantas são repetidas.
+- **Sem e-mail de confirmação:** quem se inscreve vê a mensagem na página e mais nada. Também não há limite de envios por IP além do campo escondido contra robôs, nem política de privacidade publicada.
+- **Canva:** sem integração oficial. "Editar no Canva" baixa a arte e abre a página de criar post do Canva (Instagram ou LinkedIn); o founder arrasta o arquivo para lá. A integração real pede um app no Canva Developers (Canva Connect API).
+- **Métricas das redes:** digitadas pelo founder. Não há API do Instagram, LinkedIn, X ou TikTok.
+- **Promessas da etapa "Entendemos o mercado" que ainda não existem:** a página fala em acompanhar tendências, sinais de interesse do público e os vídeos que viralizam no nicho. Hoje o motor não monitora tendências, não lê sinais de interesse e não assiste a vídeo. O que existe é a base curada de posts estáticos (uma foto, sem série no tempo), os concorrentes sugeridos e a leitura da página pública deles.
+- **"Materiais" na etapa 1:** o que dá para conectar hoje é o site, os @ das redes, o brand book colado como texto e um áudio transcrito. Não há upload de arquivo.
+- **Lista e home juntas:** a lista diz "Ainda não" para "Já posso usar?", e a home deixa usar agora. Quem visitar as duas vê as duas respostas. Sugestões de texto no relatório de revisão desta noite.
+- **Inscrição de teste em produção:** conferir uma vez com um e-mail do time (passo em `WAITLIST.md`) e apagar a linha depois, se isso ainda não foi feito.
 
 ## Motor de distribuição, noite de 26/09/2026
 
@@ -45,6 +72,8 @@ Pendente:
 - **Vídeo da landing:** saiu porque mostrava o fluxo antigo; `public/video/demo.mp4` continua no repositório e precisa ser refeito.
 
 ## Primeira coisa de manhã (em ordem)
+
+Nota da noite de 26/09: os itens 2 e 3 já foram feitos (Supabase pela Vercel Marketplace e `ADMIN_PASSWORD` em production e preview). O item 1 continua pendente.
 
 1. **Ligar a IA.** Hoje a produção roda sem chave: Cora, Pipefy e Sallve respondem com as análises pré-processadas e qualquer outro site passa pelo motor local, que é honesto mas genérico. Com `GEMINI_API_KEY` a estratégia e os posts passam a ser escritos pela IA. São cinco minutos; os comandos estão em `DEPLOY.md`. Depois disso, rodar 3 sites de startups presentes no evento e ler os posts gerados com olho crítico.
 2. **Ligar o Supabase.** Sem ele, leads, entrevistas e respostas do formulário ficam em `/tmp` da Vercel e se perdem a cada deploy. Como as entrevistas de hoje viram os números do pitch, isso não pode ficar para depois. Passo a passo em `DEPLOY.md`.

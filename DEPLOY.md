@@ -25,24 +25,38 @@ Para usar Claude em vez de Gemini: `vercel env add ANTHROPIC_API_KEY production`
 
 Localmente, coloque as mesmas variáveis em `.env.local` (esse arquivo já existe, criado pela Vercel CLI; só acrescente as linhas).
 
-## Ligar o Supabase
+## Supabase (Vercel Marketplace)
 
-Sem Supabase a produção grava leads, entrevistas, análises, decisões do baralho e métricas informadas em `/tmp` da função, que some a cada novo deploy ou quando a função esfria. Para o dia do hackathon, ligue o Supabase logo cedo:
+O banco vem da integração do Supabase na Vercel Marketplace, ligada ao projeto `social-ai`. A integração cadastrou sozinha as variáveis em production, preview e development: `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (as duas que o app lê, em `src/lib/store/index.ts`), `NEXT_PUBLIC_SUPABASE_ANON_KEY` e as outras `SUPABASE_*` e `POSTGRES_*`. O `supabase/schema.sql` já foi aplicado.
 
-1. Crie um projeto em https://supabase.com (região São Paulo).
-2. Em SQL Editor, cole e rode o arquivo `supabase/schema.sql` inteiro. Se o banco já existia, rode de novo: o arquivo usa `if not exists` e cria só o que falta, como as tabelas `feedback` (ideias aprovadas ou puladas) e `metricas` (resultados informados dos posts).
-3. Em Project Settings, API, copie a URL, a anon key e a service_role key.
-4. Cadastre e publique:
+- **Abrir o painel do Supabase:** no painel da Vercel, projeto `social-ai`, aba Storage, abra o banco do Supabase e use o botão que leva ao painel do Supabase.
+- **Mudou o schema:** cole o `supabase/schema.sql` inteiro no SQL Editor do Supabase e rode. Ele usa `if not exists` e `add column if not exists`, então só cria o que falta.
+- **Rodar local com o banco de verdade:** `vercel env pull .env.local` traz as variáveis de development. Sem elas, o app grava em `.data/`.
+- As variáveis do Supabase são gerenciadas pela integração. Para trocar de banco, mexa na integração, não nas variáveis.
+
+A base de virais do repositório não precisa ser migrada: o motor junta arquivo e banco. Itens salvos em `/admin/virais` vão para o banco.
+
+## Ver as inscrições da lista de espera
+
+1. Abra `https://social-ai-beige.vercel.app/admin/lista-de-espera` e digite a senha do time (`ADMIN_PASSWORD`). O navegador guarda a senha para a próxima visita; "Sair" apaga.
+2. A página mostra o total, as de hoje, as dos últimos 7 dias e quantas repetem o mesmo e-mail, com busca e atualização a cada 30 segundos. "Baixar CSV" exporta empresa, e-mail e data.
+3. Direto no banco: no painel do Supabase, Table Editor, tabela `leads`, filtro `origem` igual a `lista-de-espera`.
+
+Inscrições repetidas não são juntadas e ninguém recebe e-mail de confirmação (ver `WAITLIST.md`).
+
+## Trocar a senha do admin (`ADMIN_PASSWORD`)
+
+A senha está em production e preview. Nunca escreva o valor em arquivo do repositório, em commit ou em mensagem de chat. Para trocar:
 
 ```bash
-vercel env add NEXT_PUBLIC_SUPABASE_URL production
-vercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production
-vercel env add SUPABASE_SERVICE_ROLE_KEY production
-vercel env add ADMIN_PASSWORD production      # senha simples para /admin
+vercel env rm ADMIN_PASSWORD production --yes
+vercel env add ADMIN_PASSWORD production      # digite a senha nova quando pedir
+vercel env rm ADMIN_PASSWORD preview --yes
+vercel env add ADMIN_PASSWORD preview         # a mesma ou outra, também só no prompt
 vercel deploy --prod --yes
 ```
 
-5. Para subir a base de virais do repositório para o Supabase, abra `/admin/virais` e salve os itens que editar; o motor já junta arquivo e banco automaticamente, então não é obrigatório migrar tudo.
+A senha nova só vale depois do deploy: a variável é lida quando a função sobe. Quem tinha a senha antiga salva no navegador cai de volta na tela de senha e precisa digitar a nova. Localmente, sem `ADMIN_PASSWORD` no `.env.local`, o admin abre sem senha; na Vercel, sem a variável, ele fica fechado.
 
 ## Plano B no palco
 
