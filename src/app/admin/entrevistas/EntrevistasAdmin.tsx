@@ -107,7 +107,7 @@ export function EntrevistasAdmin() {
       </div>
 
       <AvisoTemporario armazenamento={dados?.armazenamento ?? ""} />
-      {msg && !dados && <p className="border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm">{msg}</p>}
+      {msg && !dados && <p className="border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm">{msg}</p>}
 
       {/* Números do pitch */}
       <section className="border-2 border-tinta bg-tinta p-5 text-papel sm:p-8">
@@ -246,7 +246,7 @@ export function EntrevistasAdmin() {
           <input className={campo} placeholder="Contato (e-mail ou @), se topou" value={f.contato ?? ""} onChange={(e) => set("contato", e.target.value)} />
           <input className={campo} placeholder="Notas" value={f.notas ?? ""} onChange={(e) => set("notas", e.target.value)} />
         </div>
-        {msg && <p className="border-l-4 border-salvia bg-salvia/10 px-3 py-2 text-sm">{msg}</p>}
+        {msg && <p className="border border-salvia/40 bg-salvia/5 px-3 py-2 text-sm">{msg}</p>}
         <button disabled={salvando} className="h-14 w-full bg-pauta text-lg font-bold text-white transition hover:bg-pauta-escura disabled:opacity-60">
           {salvando ? "Salvando..." : f.id ? "Salvar alterações" : "Salvar entrevista"}
         </button>

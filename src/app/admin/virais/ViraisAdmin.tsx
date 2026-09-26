@@ -131,7 +131,7 @@ export function ViraisAdmin() {
 
         <AvisoTemporario armazenamento={armazenamento} />
         {msg && (
-          <p className={`mt-4 border-l-4 px-3 py-2 text-sm ${msg.tipo === "ok" ? "border-salvia bg-salvia/10" : "border-pauta bg-pauta/10"}`}>{msg.texto}</p>
+          <p className={`mt-4 border px-3 py-2 text-sm ${msg.tipo === "ok" ? "border-salvia/40 bg-salvia/5" : "border-pauta/40 bg-pauta/5"}`}>{msg.texto}</p>
         )}
 
         <ul className="mt-6 divide-y divide-tinta/10 border-y border-tinta/10">

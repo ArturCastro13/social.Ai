@@ -150,7 +150,7 @@ export function Estudio({
                 <>
                   <Formulario onEnviar={rodar} ocupado={false} exemplos={exemplos} onExemplo={exemplo} />
                   {erro && (
-                    <p className="mt-4 border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm" role="alert">
+                    <p className="mt-4 border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm" role="alert">
                       {erro}
                     </p>
                   )}

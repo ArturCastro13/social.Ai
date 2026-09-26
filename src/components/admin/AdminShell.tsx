@@ -44,7 +44,7 @@ export function SenhaAdmin({ senha, setSenha }: { senha: string; setSenha: (s: s
 export function AvisoTemporario({ armazenamento }: { armazenamento: string }) {
   if (armazenamento !== "local") return null;
   return (
-    <p className="mt-4 border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm">
+    <p className="mt-4 border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm">
       Sem Supabase configurado: em produção, o que for salvo aqui é temporário e some a cada deploy. Localmente vai para os arquivos do
       repositório. Veja DEPLOY.md para ligar o Supabase.
     </p>

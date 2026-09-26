@@ -208,7 +208,7 @@ export function PostCard({
           ))}
         </div>
         <p className="mt-3 max-h-40 flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-tinta-2">{post.legendas[rede]}</p>
-        <p className="mt-3 border-l-2 border-limao bg-limao/15 px-2 py-1.5 text-xs leading-relaxed text-tinta-2">
+        <p className="mt-3 bg-limao/25 px-2 py-1.5 text-xs leading-relaxed text-tinta-2">
           <strong className="text-tinta">Por que funciona:</strong> {post.por_que}
         </p>
         <div className="mt-4 grid grid-cols-2 gap-2">

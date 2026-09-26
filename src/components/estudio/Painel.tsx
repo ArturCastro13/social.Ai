@@ -121,7 +121,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
           </div>
         </div>
         {analise.avisos.length > 0 && (
-          <ul className="mt-6 space-y-1 border-l-4 border-pauta bg-pauta/5 px-4 py-3 text-sm text-tinta-2">
+          <ul className="mt-6 space-y-1 border border-pauta/40 bg-pauta/5 px-4 py-3 text-sm text-tinta-2">
             {analise.avisos.map((a) => (
               <li key={a}>{a}</li>
             ))}
@@ -246,7 +246,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
             </button>
           </div>
           {aviso && (
-            <p className="mt-4 border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm" role="alert">
+            <p className="mt-4 border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm" role="alert">
               {aviso}
             </p>
           )}
