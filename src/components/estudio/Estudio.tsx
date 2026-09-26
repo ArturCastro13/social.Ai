@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+import { EVENTO_COMECAR } from "@/components/landing/BotaoComecar";
 import type { Analise, BrandProfile } from "@/lib/types";
 import { Carregando, type Etapa } from "./Carregando";
 import { Formulario, type DadosFormulario } from "./Formulario";
 import { Painel } from "./Painel";
 
 const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const agora = () => Date.now();
 
 /** Lê JSON da API; se vier HTML (timeout da plataforma) ou erro, vira uma mensagem legível. */
 async function lerResposta(res: Response, mensagemPadrao: string) {
@@ -34,22 +36,32 @@ function etapasIniciais(dominio: string, quantidade: number, totalVirais: number
 
 export function Estudio({
   cabecalho,
-  vitrine,
   exemplos,
   totalVirais,
 }: {
   cabecalho: ReactNode;
-  vitrine: ReactNode;
-  exemplos: { nome: string; dominio: string; cor: string }[];
+  exemplos: { nome: string; dominio: string }[];
   totalVirais: number;
 }) {
   const [fase, setFase] = useState<"form" | "trabalhando" | "pronto">("form");
+  // O campo de URL só aparece depois do "Começar agora", para o topo ficar limpo.
+  const [aberto, setAberto] = useState(false);
   const [etapas, setEtapas] = useState<Etapa[]>([]);
   const [brand, setBrand] = useState<BrandProfile | null>(null);
   const [analise, setAnalise] = useState<Analise | null>(null);
   const [dominio, setDominio] = useState("");
   const [erro, setErro] = useState("");
   const execucao = useRef(0);
+
+  useEffect(() => {
+    const abrir = () => {
+      setAberto(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      requestAnimationFrame(() => document.getElementById("url")?.focus({ preventScroll: true }));
+    };
+    window.addEventListener(EVENTO_COMECAR, abrir);
+    return () => window.removeEventListener(EVENTO_COMECAR, abrir);
+  }, []);
 
   const marcar = (id: string, estado: Etapa["estado"]) => setEtapas((es) => es.map((e) => (e.id === id ? { ...e, estado } : e)));
 
@@ -64,7 +76,7 @@ export function Estudio({
     setEtapas(etapasIniciais(dom, d.quantidade, totalVirais));
     setFase("trabalhando");
     requestAnimationFrame(() => document.getElementById("redacao")?.scrollIntoView({ behavior: "smooth", block: "center" }));
-    const inicio = Date.now();
+    const inicio = agora();
 
     try {
       const handles = { instagram: d.instagram || undefined, linkedin: d.linkedin || undefined, x: d.x || undefined, facebook: d.facebook || undefined };
@@ -92,16 +104,10 @@ export function Estudio({
           k++;
         }
       }, 1400);
-      let email: string | undefined;
-      try {
-        email = localStorage.getItem("socialai_email") ?? undefined;
-      } catch {
-        /* ignora */
-      }
       const ra = await fetch("/api/analyze", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade, email }),
+        body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade }),
       });
       clearInterval(timer);
       const a = await lerResposta(ra, "O motor demorou demais para responder. Tente de novo ou use um dos exemplos.");
@@ -109,7 +115,7 @@ export function Estudio({
       for (const id of avancos) marcar(id, "feito");
       marcar("artes", "andando");
       // Um respiro mínimo para a pessoa conseguir ler o que aconteceu, mesmo quando vem do cache.
-      await espera(Math.max(600, 3600 - (Date.now() - inicio)));
+      await espera(Math.max(600, 3600 - (agora() - inicio)));
       marcar("artes", "feito");
       await espera(250);
       if (!vivo()) return;
@@ -130,6 +136,7 @@ export function Estudio({
   function nova() {
     execucao.current++;
     setFase("form");
+    setAberto(true);
     setAnalise(null);
     setBrand(null);
     requestAnimationFrame(() => document.getElementById("topo")?.scrollIntoView({ behavior: "smooth" }));
@@ -137,33 +144,55 @@ export function Estudio({
 
   return (
     <>
-      <section id="topo" className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-16 pt-8 sm:pt-10 lg:grid-cols-[1.2fr_1fr] lg:gap-12 lg:pb-20">
-          <div className="flex flex-col justify-center">
-            {cabecalho}
-            <div className="mt-7">
-              {fase === "trabalhando" ? (
-                <div id="redacao">
-                  <Carregando etapas={etapas} brand={brand} dominio={dominio} />
-                </div>
-              ) : (
-                <>
-                  <Formulario onEnviar={rodar} ocupado={false} exemplos={exemplos} onExemplo={exemplo} />
-                  {erro && (
-                    <p className="mt-4 border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm" role="alert">
-                      {erro}
-                    </p>
-                  )}
-                  {fase === "pronto" && analise && (
-                    <a href="#resultado" className="retranca mt-5 inline-block text-pauta underline underline-offset-4">
-                      ↓ ver a pauta gerada
-                    </a>
-                  )}
-                </>
-              )}
-            </div>
+      <section id="topo" className="scroll-mt-4">
+        <div className="mx-auto flex min-h-[calc(100svh-4.5rem)] max-w-6xl flex-col justify-center px-4 pb-32 pt-8 sm:min-h-0 sm:px-6 sm:pb-24 sm:pt-24 lg:pt-32">
+          {cabecalho}
+          <div className="mt-10 max-w-2xl">
+            {fase === "trabalhando" ? (
+              <div id="redacao">
+                <Carregando etapas={etapas} brand={brand} dominio={dominio} />
+              </div>
+            ) : aberto || fase === "pronto" ? (
+              <>
+                <Formulario onEnviar={rodar} ocupado={false} />
+                {erro && (
+                  <p className="mt-4 border border-pauta/40 bg-pauta/5 px-3 py-2 text-sm" role="alert">
+                    {erro}
+                  </p>
+                )}
+                {fase === "pronto" && analise && (
+                  <a href="#resultado" className="mt-5 inline-block text-sm underline underline-offset-4 hover:text-tinta-2">
+                    Ver os posts gerados
+                  </a>
+                )}
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(EVENTO_COMECAR))}
+                className="h-14 bg-pauta px-8 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura"
+              >
+                Começar agora
+              </button>
+            )}
+            {fase !== "trabalhando" && exemplos.length > 0 && (
+              <p className={`mt-6 text-sm text-tinta-3 ${aberto || fase === "pronto" ? "" : "hidden sm:block"}`}>
+                ver exemplo:{" "}
+                {exemplos.map((ex, i) => (
+                  <Fragment key={ex.dominio}>
+                    <button
+                      type="button"
+                      onClick={() => exemplo(ex.dominio)}
+                      className="underline decoration-tinta/30 underline-offset-4 transition-colors hover:text-tinta hover:decoration-tinta"
+                    >
+                      {ex.nome}
+                    </button>
+                    {i < exemplos.length - 1 ? ", " : ""}
+                  </Fragment>
+                ))}
+              </p>
+            )}
           </div>
-          <div className="relative">{vitrine}</div>
         </div>
       </section>
       {fase === "pronto" && analise && <Painel key={analise.id} analise={analise} onNova={nova} />}

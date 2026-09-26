@@ -14,9 +14,9 @@ Gasto de API perto de zero: a arte é desenhada por código (Satori), nunca por 
 
 **Fluxo principal (página inicial).** O usuário digita a URL e escolhe quantos posts quer (3, 6, 9 ou 12). A interface chama `POST /api/brand`, mostra a paleta e as fontes assim que chegam, e em seguida chama `POST /api/analyze` com o perfil de marca. Enquanto espera, a tela de redação mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando). Com a resposta, o painel exibe posicionamento, diagnóstico, pilares, estratégia por rede, calendário e a grade de posts. Cada post mostra a arte (`GET /api/render/{postId}`), permite trocar a cor principal e o template, e traz a legenda de cada rede com botão de copiar.
 
-**Download.** Antes do primeiro download a interface pede o e-mail e chama `POST /api/leads`. O ZIP é montado no navegador: uma pasta por post com as imagens (uma por slide no carrossel), um `legendas.md` com as quatro legendas e a data sugerida, e um `calendario.csv` na raiz.
+**Download.** O download é direto, sem pedir e-mail. O ZIP é montado no navegador: uma pasta por post com as imagens (uma por slide no carrossel), um `legendas.md` com as quatro legendas e a data sugerida, e um `calendario.csv` na raiz.
 
-**Validação de dor.** Depois do resultado aparece um formulário de cinco perguntas que grava em `POST /api/validacao`.
+**Validação de dor.** A landing não tem mais formulário. `POST /api/validacao` continua aceitando respostas e o `GET` alimenta `/admin/entrevistas`.
 
 **Área do time.** `/admin/virais` para cadastrar e verificar itens da base. `/admin/entrevistas` para registrar entrevistas com founders pelo celular, com um painel que calcula os números do pitch ao vivo. Se `ADMIN_PASSWORD` estiver definido, essas rotas exigem o header `x-admin-password`.
 
@@ -166,14 +166,6 @@ O contraste é garantido automaticamente: todo par texto e fundo passa por checa
 ### GET /api/demo
 
 Lista as empresas de exemplo: `[{ "id": "demo-cora", "nome": "Cora", "url": "...", "dominio": "cora.com.br", "nicho": "fintech", "cor": "#fe3e6d", "posts": 8 }]`.
-
-### POST /api/leads
-
-```json
-{ "email": "founder@startup.com.br", "empresa": "Cora", "url": "https://cora.com.br", "analise_id": "demo-cora", "plano": "Tração", "origem": "download" }
-```
-
-`origem` é `download`, `lista-espera` ou `validacao`. Resposta `{ "ok": true }`; `400` para e-mail inválido.
 
 ### POST /api/validacao
 

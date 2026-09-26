@@ -33,8 +33,7 @@ Para forçar o modo demo no palco, mesmo com chave configurada, use `DEMO_MODE=1
 src/app/api/brand        leitor de marca (sem API de IA)
 src/app/api/analyze      motor de análise e estratégia (uma chamada de IA)
 src/app/api/render       artes em PNG via Satori, a partir de templates
-src/app/api/leads        e-mails capturados antes do download
-src/app/api/validacao    respostas do formulário de dor
+src/app/api/validacao    respostas do formulário de dor (a landing não mostra mais o formulário; o GET alimenta o admin)
 src/app/admin            páginas internas (virais e entrevistas)
 src/lib/brand            extração de HTML, paleta e fontes
 src/lib/llm              adaptador Gemini ou Claude, prompt e schema zod

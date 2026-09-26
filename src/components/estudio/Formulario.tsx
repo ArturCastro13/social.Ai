@@ -21,17 +21,7 @@ const REDES: { k: "instagram" | "linkedin" | "x" | "facebook"; rotulo: string; p
   { k: "facebook", rotulo: "Facebook", ph: "facebook.com/..." },
 ];
 
-export function Formulario({
-  onEnviar,
-  ocupado,
-  exemplos,
-  onExemplo,
-}: {
-  onEnviar: (d: DadosFormulario) => void;
-  ocupado: boolean;
-  exemplos: { nome: string; dominio: string; cor: string }[];
-  onExemplo: (dominio: string) => void;
-}) {
+export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulario) => void; ocupado: boolean }) {
   const [d, setD] = useState<DadosFormulario>({ url: "", instagram: "", linkedin: "", x: "", facebook: "", quantidade: 6, paletaInstagram: [] });
   const [abrirRedes, setAbrirRedes] = useState(false);
   const [lendoPrint, setLendoPrint] = useState(false);
@@ -70,48 +60,48 @@ export function Formulario({
 
   return (
     <form onSubmit={enviar} className="w-full">
-      <label htmlFor="url" className="retranca text-tinta-3">
-        Endereço do site da sua startup
+      <label htmlFor="url" className="text-sm font-medium text-tinta-2">
+        Endereço do site
       </label>
-      <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-stretch">
-        <div className="relative flex-1">
-          <input
-            id="url"
-            inputMode="url"
-            autoComplete="url"
-            autoCapitalize="none"
-            spellCheck={false}
-            placeholder="suaempresa.com.br"
-            value={d.url}
-            onChange={(e) => setD({ ...d, url: e.target.value })}
-            className="h-16 w-full border-2 border-tinta bg-white px-5 font-serif text-2xl italic text-tinta shadow-[5px_5px_0_var(--color-tinta)] outline-none transition placeholder:text-tinta/30 focus:shadow-[5px_5px_0_var(--color-pauta)] sm:text-3xl"
-          />
-        </div>
+      <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+        <input
+          id="url"
+          inputMode="url"
+          autoComplete="url"
+          autoCapitalize="none"
+          spellCheck={false}
+          placeholder="suaempresa.com.br"
+          value={d.url}
+          onChange={(e) => setD({ ...d, url: e.target.value })}
+          aria-invalid={!!erroUrl}
+          aria-describedby={erroUrl ? "url-erro" : undefined}
+          className="h-14 w-full min-w-0 border sm:flex-1 border-tinta/25 bg-white px-4 text-lg text-tinta outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus:shadow-[inset_0_0_0_1px_var(--color-tinta)] focus-visible:outline-none"
+        />
         <button
           type="submit"
           disabled={ocupado}
-          className="group h-16 shrink-0 border-2 border-tinta bg-pauta px-7 text-lg font-bold text-white shadow-[5px_5px_0_var(--color-tinta)] transition hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-tinta)] active:translate-y-0.5 active:shadow-[2px_2px_0_var(--color-tinta)] disabled:opacity-60"
+          className="h-14 shrink-0 bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
         >
-          {ocupado ? "Trabalhando..." : (
-            <>
-              Gerar minha pauta <span className="inline-block transition group-hover:translate-x-1">→</span>
-            </>
-          )}
+          {ocupado ? "Gerando..." : "Gerar posts"}
         </button>
       </div>
-      {erroUrl && <p className="mt-2 text-sm font-medium text-pauta-escura">{erroUrl}</p>}
+      {erroUrl && (
+        <p id="url-erro" className="mt-2 text-sm text-pauta-escura">
+          {erroUrl}
+        </p>
+      )}
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <fieldset className="flex items-center gap-2">
+      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
+        <fieldset className="flex items-center gap-1.5">
           <legend className="sr-only">Quantidade de posts</legend>
-          <span className="retranca text-tinta-3">Posts</span>
+          <span className="mr-1.5 text-tinta-2">Posts</span>
           {QUANTIDADES.map((q) => (
             <button
               type="button"
               key={q}
               onClick={() => setD({ ...d, quantidade: q })}
               aria-pressed={d.quantidade === q}
-              className={`h-9 w-10 border font-mono text-sm transition ${d.quantidade === q ? "border-tinta bg-tinta text-papel" : "border-tinta/25 hover:border-tinta"}`}
+              className={`h-9 w-10 border tabular-nums transition-colors ${d.quantidade === q ? "border-tinta bg-tinta text-papel" : "border-tinta/20 hover:border-tinta"}`}
             >
               {q}
             </button>
@@ -121,24 +111,24 @@ export function Formulario({
           type="button"
           onClick={() => setAbrirRedes((v) => !v)}
           aria-expanded={abrirRedes}
-          className="retranca text-tinta-2 underline decoration-pauta decoration-2 underline-offset-4 hover:text-pauta"
+          className="text-tinta-2 underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
         >
-          {abrirRedes ? "− esconder redes" : "+ adicionar @ das redes"}
+          {abrirRedes ? "Esconder redes" : "Adicionar @ das redes (opcional)"}
         </button>
       </div>
 
       {abrirRedes && (
-        <div className="mt-4 grid gap-3 border-t border-dashed border-tinta/25 pt-4 sm:grid-cols-2">
+        <div className="mt-5 grid gap-3 border-t border-tinta/10 pt-5 sm:grid-cols-2">
           {REDES.map((r) => (
             <label key={r.k} className="block">
-              <span className="retranca text-tinta-3">{r.rotulo}</span>
+              <span className="text-sm text-tinta-2">{r.rotulo}</span>
               <input
                 value={d[r.k]}
                 onChange={(e) => setD({ ...d, [r.k]: e.target.value })}
                 placeholder={r.ph}
                 autoCapitalize="none"
                 spellCheck={false}
-                className="mt-1 h-11 w-full border border-tinta/25 bg-white/70 px-3 text-base outline-none focus:border-pauta"
+                className="mt-1 h-11 w-full border border-tinta/20 bg-white px-3 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
               />
             </label>
           ))}
@@ -153,41 +143,23 @@ export function Formulario({
             <button
               type="button"
               onClick={() => inputArquivo.current?.click()}
-              className="flex w-full items-center justify-between gap-3 border border-dashed border-tinta/40 bg-papel-2/60 px-4 py-3 text-left text-sm transition hover:border-pauta"
+              className="flex w-full items-center justify-between gap-3 border border-tinta/20 bg-white px-4 py-3 text-left text-sm transition-colors hover:border-tinta"
             >
-              <span>
-                <strong className="font-semibold">Tem um print do grid do seu Instagram?</strong>{" "}
-                <span className="text-tinta-2">A gente tira as cores dele aqui no seu navegador, sem subir a imagem.</span>
+              <span className="text-tinta-2">
+                <span className="font-medium text-tinta">Print do grid do Instagram (opcional).</span> As cores são lidas no seu navegador, a imagem não
+                sai daqui.
               </span>
               <span className="flex shrink-0 gap-1">
                 {lendoPrint ? (
-                  <span className="retranca animate-pisca">lendo</span>
+                  <span className="animate-pisca">lendo</span>
                 ) : d.paletaInstagram.length ? (
                   d.paletaInstagram.map((c) => <span key={c} className="h-6 w-6 border border-tinta/20" style={{ background: c }} />)
                 ) : (
-                  <span className="retranca text-pauta">escolher</span>
+                  <span className="underline underline-offset-4">escolher</span>
                 )}
               </span>
             </button>
           </div>
-        </div>
-      )}
-
-      {exemplos.length > 0 && (
-        <div className="mt-6 flex flex-wrap items-center gap-2">
-          <span className="text-sm text-tinta-2">Sem site à mão? Veja um exemplo:</span>
-          {exemplos.map((ex) => (
-            <button
-              key={ex.dominio}
-              type="button"
-              disabled={ocupado}
-              onClick={() => onExemplo(ex.dominio)}
-              className="inline-flex items-center gap-2 border border-tinta/20 bg-white/60 px-3 py-1.5 text-sm transition hover:border-tinta disabled:opacity-50"
-            >
-              <span className="h-2.5 w-2.5 rounded-full" style={{ background: ex.cor }} />
-              {ex.nome}
-            </button>
-          ))}
         </div>
       )}
     </form>

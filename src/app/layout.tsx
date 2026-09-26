@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const geist = Geist({ variable: "--font-geist", subsets: ["latin"], display: "swap" });
 const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], display: "swap" });
 const instrument = Instrument_Serif({
   variable: "--font-instrument",
@@ -13,18 +14,18 @@ const instrument = Instrument_Serif({
 const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "social.Ai | O CMO de IA do founder que faz tudo sozinho",
+  title: "social.Ai | Posts prontos para a sua marca, a partir do seu site",
   description:
-    "Cole a URL do seu site. Em um minuto você recebe diagnóstico, estratégia e posts prontos na identidade da sua marca, baseados no que viraliza no seu nicho.",
+    "Cole o endereço do seu site e receba posts com a identidade da sua marca, mais estratégia e calendário.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f4efe6",
+  themeColor: "#f7f6f2",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="pt-BR" className={`${bricolage.variable} ${instrument.variable} ${jetbrains.variable} h-full antialiased`}>
+    <html lang="pt-BR" className={`${geist.variable} ${bricolage.variable} ${instrument.variable} ${jetbrains.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

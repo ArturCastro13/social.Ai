@@ -22,7 +22,7 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 
 **Artes** (`GET /api/render/{postId}`). 8 templates em Satori (carrossel com capa, lista, citação, dado de impacto, print de post, bastidor, antes e depois, checklist), 4 tamanhos (1080x1350, 1080x1080, 1200x627, 1600x900), contraste checado automaticamente, troca de cor e de template por post, fontes embutidas para funcionar sem internet, ZIP com artes, legendas e calendário.
 
-**Landing e painel.** Página única que é a própria demo, tela de redação mostrando as etapas reais, painel com diagnóstico, estratégia, calendário e posts, captura de e-mail antes do download, lista de espera por plano e formulário de dor de 5 perguntas. Mobile first, conferida no navegador em desktop e celular.
+**Landing e painel.** Página única que é a própria demo, tela de redação mostrando as etapas reais, painel com diagnóstico, estratégia, calendário e posts, download direto. A landing tem só o campo de URL: lista de espera, captura de e-mail e formulário de dor saíram na revisão de design. Mobile first, conferida no navegador em desktop e celular.
 
 **Kit de validação.** Roteiro, `/admin/entrevistas` com números do pitch ao vivo (atualiza a cada 15 segundos em todos os celulares).
 
@@ -42,7 +42,7 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 - **O motor local escreve texto genérico** para sites fora do demo quando não há IA. Serve de rede de segurança, não é o produto.
 - **Sem Supabase, uma análise feita em produção pode não ser encontrada** por `GET /api/analise/{id}` depois. A interface não depende disso: as artes vão com os dados do post na própria URL.
 - **Domínio próprio.** Nenhum nome de `NOMES.md` foi comprado.
-- **Riscos residuais conhecidos:** a checagem de DNS contra SSRF acontece antes do fetch (um ataque de DNS rebinding ainda seria possível em tese); `/api/leads` não tem limite de taxa; sem Supabase, os limites de uso da IA valem por instância da Vercel. Nada disso afeta a demo, mas fica anotado para depois do hackathon.
+- **Riscos residuais conhecidos:** a checagem de DNS contra SSRF acontece antes do fetch (um ataque de DNS rebinding ainda seria possível em tese); sem Supabase, os limites de uso da IA valem por instância da Vercel. Nada disso afeta a demo, mas fica anotado para depois do hackathon.
 
 ## Decisões que tomei sozinho durante a noite
 

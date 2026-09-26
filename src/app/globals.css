@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
-/* social.Ai: direção "redação editorial". Papel, tinta e um vermelhão de pauta. */
+/* social.Ai: fundo claro, tinta quase preta e um laranja reservado para a ação principal. */
 @theme {
-  --color-papel: #f4efe6;
+  --color-papel: #f7f6f2;
   --color-papel-2: #ebe4d6;
   --color-papel-3: #e0d7c5;
   --color-tinta: #16130f;
@@ -14,21 +14,17 @@
   --color-limao: #d7f25c;
   --color-linha: #16130f1f;
 
-  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   --animate-subir: subir 0.8s cubic-bezier(0.2, 0.7, 0.1, 1) both;
-  --animate-ticker: ticker 40s linear infinite;
   --animate-pisca: pisca 1.2s steps(2) infinite;
 
   @keyframes subir {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: none; }
-  }
-  @keyframes ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
   }
   @keyframes pisca {
     0% { opacity: 1; }
@@ -49,19 +45,6 @@ body {
   background: var(--color-papel);
   color: var(--color-tinta);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "ss02";
-}
-
-/* Grão de papel por cima de tudo, bem sutil. */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.22;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 .35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 ::selection {
@@ -69,9 +52,11 @@ body::before {
   color: var(--color-papel);
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-pauta);
-  outline-offset: 3px;
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-tinta);
+    outline-offset: 3px;
+  }
 }
 
 @layer components {

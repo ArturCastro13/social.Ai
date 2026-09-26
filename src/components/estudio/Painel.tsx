@@ -3,9 +3,7 @@
 import { useMemo, useState } from "react";
 import { baixarZip, type Personalizacao } from "@/lib/client/artes";
 import { NICHOS, type Analise, type Rede } from "@/lib/types";
-import { EmailGate } from "./EmailGate";
 import { PostCard } from "./PostCard";
-import { Validacao } from "./Validacao";
 
 const NOMES_REDE: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };
 const COR_REDE: Record<Rede, string> = { instagram: "#e1306c", linkedin: "#0a66c2", x: "#16130f", facebook: "#1877f2" };
@@ -17,18 +15,8 @@ const ORIGEM: Record<Analise["origem"], { rotulo: string; classe: string }> = {
   local: { rotulo: "Motor local, sem IA", classe: "bg-papel-3 text-tinta" },
 };
 
-function emailSalvo(): string | null {
-  try {
-    return localStorage.getItem("socialai_email");
-  } catch {
-    return null;
-  }
-}
-
 export function Painel({ analise, onNova }: { analise: Analise; onNova: () => void }) {
   const [pers, setPers] = useState<Record<string, Personalizacao>>({});
-  const [email, setEmail] = useState<string | null>(() => (typeof window === "undefined" ? null : emailSalvo()));
-  const [gate, setGate] = useState<null | (() => void)>(null);
   const [zip, setZip] = useState<{ feito: number; total: number } | null>(null);
   const [aviso, setAviso] = useState("");
   const b = analise.brand;
@@ -51,41 +39,32 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
     return grupos;
   }, [analise]);
 
-  function comEmail(acao: () => void) {
-    if (email) acao();
-    else setGate(() => acao);
+  async function baixarUma(url: string, nome: string) {
+    setAviso("");
+    const res = await fetch(url).catch(() => null);
+    if (!res?.ok) {
+      setAviso("Não deu para baixar essa arte agora. Tente de novo em instantes.");
+      return;
+    }
+    const blob = await res.blob();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = nome;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
   }
 
-  function baixarUma(url: string, nome: string) {
-    comEmail(async () => {
-      setAviso("");
-      const res = await fetch(url).catch(() => null);
-      if (!res?.ok) {
-        setAviso("Não deu para baixar essa arte agora. Tente de novo em instantes.");
-        return;
-      }
-      const blob = await res.blob();
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = nome;
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
-    });
-  }
-
-  function baixarTudo() {
-    comEmail(async () => {
-      setZip({ feito: 0, total: 1 });
-      setAviso("");
-      try {
-        const r = await baixarZip(analise, pers, (feito, total) => setZip({ feito, total }));
-        if (r.falhas) setAviso(`${r.falhas} de ${r.total} imagens não vieram; o ZIP foi baixado com as demais.`);
-      } catch (e) {
-        setAviso((e as Error).message);
-      } finally {
-        setZip(null);
-      }
-    });
+  async function baixarTudo() {
+    setZip({ feito: 0, total: 1 });
+    setAviso("");
+    try {
+      const r = await baixarZip(analise, pers, (feito, total) => setZip({ feito, total }));
+      if (r.falhas) setAviso(`${r.falhas} de ${r.total} imagens não vieram; o ZIP foi baixado com as demais.`);
+    } catch (e) {
+      setAviso((e as Error).message);
+    } finally {
+      setZip(null);
+    }
   }
 
   return (
@@ -267,24 +246,6 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
           </div>
         </div>
       </div>
-
-      <div className="border-t border-tinta/15 bg-papel-2">
-        <div className="mx-auto max-w-3xl px-4 py-12">
-          <Validacao analiseId={analise.id} email={email} />
-        </div>
-      </div>
-
-      <EmailGate
-        aberto={!!gate}
-        onFechar={() => setGate(null)}
-        onLiberado={(e) => {
-          setEmail(e);
-          const acao = gate;
-          setGate(null);
-          acao?.();
-        }}
-        contexto={{ url: analise.url, empresa: b.nome, analiseId: analise.id }}
-      />
     </section>
   );
 }
