@@ -60,7 +60,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
         <button
           type="submit"
           disabled={ocupado}
-          className="h-14 shrink-0 rounded-full bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
+          className="tocavel h-14 shrink-0 rounded-full bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
         >
           {ocupado ? "Abrindo..." : "Ler meu site"}
         </button>
@@ -73,7 +73,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
       <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
         <Link
           href={urlDoApp({ url: "", semSite: true })}
-          className="inline-flex h-11 items-center rounded-full border border-tinta/25 bg-white px-5 text-base font-medium text-tinta transition-colors hover:border-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+          className="tocavel inline-flex h-11 items-center rounded-full border border-tinta/25 bg-white px-5 text-base font-medium text-tinta transition-colors hover:border-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
         >
           Não tenho site
         </Link>

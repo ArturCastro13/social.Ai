@@ -1,17 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { Outlier } from "@/lib/oportunidade";
 import type { Analise } from "@/lib/types";
 import { AbasHorizontais, Passos } from "./Abas";
 import { BotaoComecar } from "./BotaoComecar";
+import { CenaVideo } from "./CenaVideo";
 import { Revelar } from "./Revelar";
+import { TextoRevelado } from "./TextoRevelado";
+import { VideoDemo } from "./VideoDemo";
 
 const CONTEUDO = "mx-auto w-full max-w-6xl px-4 sm:px-6";
 const H2 = "font-display text-[2rem] font-semibold leading-[1.08] tracking-[-0.03em] sm:text-5xl";
 const CARTAO = "rounded-3xl bg-white shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)]";
-const BOTAO_PRINCIPAL = "inline-flex h-12 items-center justify-center rounded-full bg-pauta px-6 font-semibold text-white transition-colors hover:bg-pauta-escura";
-const BOTAO_CLARO = "inline-flex h-11 items-center justify-center rounded-full border border-tinta/15 bg-white px-5 font-medium transition-colors hover:border-tinta";
+const BOTAO_PRINCIPAL = "tocavel inline-flex h-12 items-center justify-center rounded-full bg-pauta px-6 font-semibold text-white transition-colors hover:bg-pauta-escura";
+const BOTAO_CLARO = "tocavel inline-flex h-11 items-center justify-center rounded-full border border-tinta/15 bg-white px-5 font-medium transition-colors hover:border-tinta";
 
 export const arteEstatica = (id: string) => `/exemplos/${id}.png`;
 const NOME_REDE = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" } as const;
@@ -45,11 +48,11 @@ export function Topo() {
 export function Cabecalho() {
   return (
     <>
-      <h1 className="max-w-[17ch] text-balance font-display text-[2.5rem] font-semibold leading-[1.04] tracking-[-0.04em] sm:text-[3.4rem] lg:text-[3.9rem]">
+      <h1 style={{ "--atraso": "60ms" } as CSSProperties} className="entrada max-w-[17ch] text-balance font-display text-[2.5rem] font-semibold leading-[1.04] tracking-[-0.04em] sm:text-[3.4rem] lg:text-[3.9rem]">
         Você sabe o que o seu cliente precisa ouvir.{" "}
         <em className="font-serif font-normal italic tracking-[-0.02em] text-pauta">Falta tempo para postar.</em>
       </h1>
-      <p className="mt-6 max-w-lg text-lg leading-relaxed text-tinta-2">
+      <p style={{ "--atraso": "200ms" } as CSSProperties} className="entrada mt-6 max-w-lg text-lg leading-relaxed text-tinta-2">
         O social.Ai transforma o que você sabe sobre mercado, produto e cliente em posts de autoridade para o cliente certo, com a pauta da semana pronta e o melhor horário para cada um.
       </p>
     </>
@@ -77,11 +80,24 @@ export function PainelHero({ children }: { children: ReactNode }) {
 export function Dor() {
   return (
     <section className={`${CONTEUDO} py-24 sm:py-32`}>
+      <TextoRevelado como="h2" className={`${H2} max-w-3xl`} texto="O que você sabe do seu cliente não vira post." />
       <Revelar>
-        <h2 className={`${H2} max-w-3xl`}>O que você sabe do seu cliente não vira post.</h2>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-tinta-2">
           Está na sua cabeça, nas calls de venda e nas objeções que você responde toda semana. Falta tempo, não assunto.
         </p>
+      </Revelar>
+    </section>
+  );
+}
+
+export function Video() {
+  return (
+    <section aria-label="O produto em vídeo" className={`${CONTEUDO} pb-24 sm:pb-32`}>
+      <CenaVideo>
+        <VideoDemo />
+      </CenaVideo>
+      <Revelar>
+        <p className="mt-4 text-sm text-tinta-3">O produto em doze segundos: cora.com.br entra, a marca é lida e os posts chegam prontos para aprovar.</p>
       </Revelar>
     </section>
   );
@@ -99,7 +115,7 @@ function CartaoPerguntas() {
       <p className="text-sm text-tinta-3">O que só você sabe</p>
       <ol className="mt-5 divide-y divide-tinta/10">
         {PERGUNTAS_FOUNDER.map((q, i) => (
-          <li key={q} className="py-4 first:pt-0 last:pb-0">
+          <li key={q} style={{ "--atraso": `${i * 110}ms` } as CSSProperties} className="entrada py-4 first:pt-0 last:pb-0">
             <p className="font-medium leading-snug">
               <span className="mr-2 tabular-nums text-tinta-3">{i + 1}</span>
               {q}
@@ -123,8 +139,8 @@ function CartaoRadar({ outliers, nicho }: { outliers: Outlier[]; nicho: string }
     <div className={`${CARTAO} p-7 sm:p-9`}>
       <p className="text-sm text-tinta-3">Fora da curva em {nicho}, na base curada</p>
       <ul className="mt-5 divide-y divide-tinta/10">
-        {outliers.slice(0, 3).map((o) => (
-          <li key={o.id} className="py-4 first:pt-0 last:pb-0">
+        {outliers.slice(0, 3).map((o, i) => (
+          <li key={o.id} style={{ "--atraso": `${i * 110}ms` } as CSSProperties} className="entrada py-4 first:pt-0 last:pb-0">
             <div className="flex items-baseline justify-between gap-4 text-sm">
               <span className="truncate text-tinta-3">{o.autor}</span>
               <span className="shrink-0 font-semibold tabular-nums">{vezes(o.multiplo)}</span>
@@ -146,10 +162,10 @@ function CartaoSemana({ a }: { a: Analise }) {
         <p className="text-sm text-tinta-3">Exemplo com {a.brand.dominio}</p>
       </div>
       <ul className="mt-5 divide-y divide-tinta/10">
-        {semana.map((c) => {
+        {semana.map((c, i) => {
           const post = a.posts.find((p) => p.id === c.post_id);
           return (
-            <li key={`${c.data}-${c.post_id}`} className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-4 py-3.5 first:pt-0 last:pb-0">
+            <li key={`${c.data}-${c.post_id}`} style={{ "--atraso": `${i * 90}ms` } as CSSProperties} className="entrada grid grid-cols-[4.5rem_minmax(0,1fr)] gap-4 py-3.5 first:pt-0 last:pb-0">
               <div className="text-sm">
                 <p className="font-medium capitalize">{c.dia_semana}</p>
                 <p className="tabular-nums text-tinta-3">{c.horario}</p>
@@ -256,7 +272,7 @@ export function Planos() {
         <div className="mt-12 grid gap-4 md:grid-cols-3">
           {planos.map((p, i) => (
             <Revelar key={p.nome} atraso={i * 90} className="h-full">
-              <div className="flex h-full flex-col rounded-3xl bg-white p-7">
+              <div className="erguer flex h-full flex-col rounded-3xl bg-white p-7">
                 <h3 className="text-lg font-semibold">{p.nome}</h3>
                 <p className="mt-4">
                   <span className="font-display text-5xl font-semibold tabular-nums tracking-[-0.03em]">R$ {p.preco}</span>

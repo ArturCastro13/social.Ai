@@ -12,6 +12,7 @@ import {
   Planos,
   Rodape,
   Topo,
+  Video,
 } from "@/components/landing/Secoes";
 import { DEMOS } from "@/lib/engine/demo";
 import { sinaisDoNicho } from "@/lib/oportunidade";
@@ -45,6 +46,7 @@ export default function Home() {
           exemplos={DEMOS.map((d) => ({ nome: d.brand.nome, dominio: d.brand.dominio }))}
         />
         <Dor />
+        <Video />
         <ComoFunciona demo={cora} outliers={radar.outliers} nichoRadar={NICHOS.find((n) => n.id === "saas-b2b")?.nome ?? "SaaS B2B"} />
         <Exemplos demos={DEMOS} />
         <Planos />

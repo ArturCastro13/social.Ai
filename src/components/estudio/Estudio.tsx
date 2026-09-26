@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Fragment, useEffect, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { EVENTO_COMECAR } from "@/components/landing/BotaoComecar";
 import { urlDoApp } from "@/lib/client/parametros";
 import { Formulario, type DadosFormulario } from "./Formulario";
@@ -46,14 +46,14 @@ export function Estudio({
         <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14 lg:pb-28 lg:pt-10">
           <div className="flex flex-col justify-center pb-4 pt-12 sm:pt-16 lg:py-0">
           {cabecalho}
-          <div className="mt-10 max-w-2xl">
+          <div style={{ "--atraso": "340ms" } as CSSProperties} className="entrada mt-10 max-w-2xl">
             {aberto ? (
               <Formulario onEnviar={ir} ocupado={indo} />
             ) : (
               <button
                 type="button"
                 onClick={() => window.dispatchEvent(new Event(EVENTO_COMECAR))}
-                className="h-14 rounded-full bg-pauta px-8 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura"
+                className="tocavel h-14 rounded-full bg-pauta px-8 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura"
               >
                 Começar agora
               </button>
@@ -77,7 +77,11 @@ export function Estudio({
             )}
           </div>
           </div>
-          {vitrine && <div className="min-w-0">{vitrine}</div>}
+          {vitrine && (
+            <div style={{ "--atraso": "260ms" } as CSSProperties} className="entrada min-w-0">
+              {vitrine}
+            </div>
+          )}
         </div>
       </section>
     </>
