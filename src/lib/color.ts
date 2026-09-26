@@ -197,3 +197,10 @@ export function withAlpha(hex: string, alpha: number): string {
   if (!rgb) return hex;
   return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`;
 }
+
+/** Mistura linear entre duas cores (t = 0 devolve a, t = 1 devolve b). */
+export function mix(a: string, b: string, t: number): string {
+  const x = hexToRgb(a), y = hexToRgb(b);
+  if (!x || !y) return a;
+  return rgbToHex({ r: x.r + (y.r - x.r) * t, g: x.g + (y.g - x.g) * t, b: x.b + (y.b - x.b) * t });
+}
