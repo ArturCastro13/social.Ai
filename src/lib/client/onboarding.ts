@@ -1,6 +1,7 @@
 // Apoio do onboarding em camadas (telas 1, 2 e 3). Tudo aqui roda no navegador e não chama IA.
 import type { ConhecimentoFounder, FormatoMotor, Frequencia, ObjetivoId, Preferencias, SugestaoConcorrente, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
+import { semContextoPrivado } from "@/lib/contexto/revisao";
 
 export type PerfilAlvo = Preferencias["perfil_alvo"];
 export type RedeArroba = "instagram" | "linkedin" | "x";
@@ -204,7 +205,7 @@ export function lerPreferenciasSalvas(dominio: string): Preferencias | null {
 
 export function salvarPreferencias(dominio: string, p: Preferencias) {
   try {
-    localStorage.setItem(CHAVE(dominio), JSON.stringify(p));
+    localStorage.setItem(CHAVE(dominio), JSON.stringify(semContextoPrivado(p)));
   } catch {
     /* navegador sem armazenamento: segue sem lembrar */
   }
