@@ -74,6 +74,7 @@ body::before {
   outline-offset: 3px;
 }
 
+@layer components {
 /* Retranca: rótulo mono em caixa alta, como etiqueta de pauta de jornal. */
 .retranca {
   font-family: var(--font-mono);
@@ -111,6 +112,8 @@ body::before {
 
 .sublinhado-pauta {
   background-image: linear-gradient(transparent 62%, color-mix(in srgb, var(--color-pauta) 35%, transparent) 62%);
+}
+
 }
 
 @media (prefers-reduced-motion: reduce) {

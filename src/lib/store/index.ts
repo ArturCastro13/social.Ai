@@ -10,6 +10,7 @@ export interface Lead {
   empresa?: string | null;
   url?: string | null;
   analise_id?: string | null;
+  plano?: string | null;
   origem?: string;
 }
 

@@ -34,7 +34,8 @@ export function adaptarSlides(post: PostGerado, template: TemplateId): Slide[] {
       ];
     }
     case "citacao":
-      return [{ titulo: principal.titulo && principal.texto ? principal.titulo : "", texto: principal.texto || principal.titulo || post.gancho }];
+      // Veio de outro formato: quem assina a citação é a marca (o título original não é um autor).
+      return [{ titulo: "", texto: principal.texto || principal.titulo || post.gancho }];
     case "print-x":
       return [{ titulo: "", texto: (principal.texto || post.gancho).slice(0, 280) }];
     case "bastidor":

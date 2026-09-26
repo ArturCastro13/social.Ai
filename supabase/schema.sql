@@ -49,6 +49,7 @@ create table if not exists leads (
   empresa text,
   url text,
   analise_id text,
+  plano text,
   origem text default 'download',
   criado_em timestamptz not null default now()
 );
