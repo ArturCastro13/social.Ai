@@ -12,10 +12,12 @@ import { conhecimentoPreenchido, tomDeVozSchema, type Preferencias, type TomDeVo
 import { MOTOR_DO_FORMATO, nichoParaMotor, type NichoMotor } from "./mapa";
 import { publicoAlvoDoSite } from "./enderecamento";
 import { calcularAprendizados, desempenhoDosPosts, type AprendizadosCalculados } from "./aprendizados";
+import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
 type Arroba = { instagram: string; linkedin: string; x: string };
 
 export interface ContextoMotor {
+  contexto_confirmado?: ContextoConfirmado;
   perfil_alvo: Preferencias["perfil_alvo"];
   /** Quem os posts precisam fazer se reconhecer: o que o founder escreveu ou, se vazio, o inferido do site. */
   publico_alvo: string;
@@ -257,7 +259,8 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
   const insp = extras.inspiracoesExtraidas ?? {};
   return {
     perfil_alvo: p?.perfil_alvo ?? "empresa",
-    publico_alvo: p?.publico_alvo?.trim() || publicoAlvoDoSite(brand),
+    ...(p?.contexto_empresa ? { contexto_confirmado: p.contexto_empresa } : {}),
+    publico_alvo: p?.contexto_empresa?.entendimento.publico || p?.publico_alvo?.trim() || publicoAlvoDoSite(brand),
     conhecimento_founder: conhecimentoDoContexto(p),
     empresa: {
       site_url: brand.url,
@@ -276,14 +279,14 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
         : { ...ARROBA_VAZIO },
       transcricao_audio: p?.founder?.transcricao_audio ? corte(p.founder.transcricao_audio, 3000) : null,
     },
-    nicho: nichoParaMotor(extras.nicho),
+    nicho: nichoParaMotor(p?.contexto_empresa?.entendimento.nicho ?? extras.nicho),
     objetivos: p?.objetivos ?? [],
     objetivo_livre: p?.objetivo_livre?.trim() ? semTraco(p.objetivo_livre) : null,
     tom_de_voz: p?.tom_de_voz ?? REGUAS_PADRAO,
     formatos_permitidos: p?.formatos_permitidos ?? [],
     frequencia_escolhida: p?.frequencia_escolhida ?? null,
     redes: extras.redes ?? redesDoMotor(brand, p),
-    proibicoes: p?.proibicoes ?? [],
+    proibicoes: [...(p?.proibicoes ?? []), ...(p?.contexto_empresa?.materiais.flatMap(m => m.fatos.filter(f => f.campo === "proibicao").map(f => f.texto)) ?? [])],
     inspiracoes: (p?.inspiracoes ?? []).map((i) => ({ url: i.url, tipo: i.tipo, descricao_extraida: corte(insp[i.url] ?? "", 300) })),
     concorrencia: (p?.concorrentes ?? []).map((url) => ({ url, descricao_extraida: corte(extras.concorrenciaExtraida?.[url] ?? "", 300) })),
     desempenho_proprio: desempenho(ds),

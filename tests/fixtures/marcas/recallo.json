@@ -1,0 +1,11 @@
+{
+  "nome": "Recallo", "url": "https://recallo.com.br/", "dominio": "recallo.com.br",
+  "title": "Recallo — Inglês que fica",
+  "description": "A plataforma que prepara você para o English Assessment e exames de inglês como IELTS e TOEFL. Vocabulário, gramática, redação e listening em um só lugar.",
+  "og": { "title": "Recallo", "description": "A plataforma que prepara você para o English Assessment e exames de inglês como IELTS e TOEFL. Vocabulário, gramática, redação e listening em um só lugar.", "image": null },
+  "headings": { "h1": [], "h2": [] }, "paragrafos": [], "handles": {}, "redesEncontradas": {},
+  "paleta": { "primaria": "#FF4A1C", "secundaria": "#16130F", "destaque": "#FFB199", "fundo": "#FFFFFF", "texto": "#111111", "todas": [] },
+  "fontes": { "titulo": "Inter", "corpo": "Inter", "encontradas": [], "sugeridas": true },
+  "avisos": ["Site montado em JavaScript; revisão necessária."], "lidoEm": "2026-09-26T23:00:00.000Z",
+  "favicon": null, "appleTouchIcon": null, "logo": null, "themeColor": null
+}

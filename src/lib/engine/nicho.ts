@@ -20,7 +20,7 @@ const PALAVRAS: Record<Nicho, string[]> = {
   edtech: [
     "curso", "aula", "aluno", "estudante", "ensino", "educação", "educacao", "enem", "vestibular", "faculdade",
     "pós", "certificado", "aprender", "aprendizado", "professor", "escola", "formação", "formacao", "bootcamp",
-    "trilha", "mentoria",
+    "trilha", "mentoria", "inglês", "ingles", "idiomas", "ielts", "toefl", "english assessment",
   ],
   "ecommerce-dtc": [
     "loja", "frete", "comprar", "carrinho", "produto", "coleção", "colecao", "moda", "roupa", "skincare",
@@ -40,7 +40,9 @@ export function palpiteNicho(b: BrandProfile): { nicho: Nicho; pontuacao: Record
   const pontuacao = {} as Record<Nicho, number>;
   for (const [nicho, palavras] of Object.entries(PALAVRAS) as [Nicho, string[]][]) {
     pontuacao[nicho] = palavras.reduce((acc, p) => {
-      const n = texto.split(p).length - 1;
+      // Whole words (with plural s), never `api` inside an unrelated word.
+      const fonte = nicho === "healthtech" ? texto.replace(/exames? de ingl[êe]s/g, "avaliação de idioma") : texto;
+      const n = [...fonte.matchAll(new RegExp(`(?<![\\p{L}\\p{N}])${p}s?(?![\\p{L}\\p{N}])`, "gu"))].length;
       return acc + Math.min(n, 4) * (p.includes(" ") ? 2 : 1);
     }, 0);
   }
