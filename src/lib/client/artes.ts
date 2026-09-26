@@ -50,7 +50,9 @@ export function urlArte(
   if (opts.tamanho) q.set("tamanho", opts.tamanho);
   if (opts.template && opts.template !== post.template) q.set("template", opts.template);
   if (opts.cor && opts.cor.toLowerCase() !== analise.brand.paleta.primaria.toLowerCase()) q.set("cor", opts.cor);
-  if (analise.origem !== "demo") {
+  // Na demo, a rota acha o post pelo id no arquivo pré-processado; os posts montados na hora
+  // a partir do que o founder contou não estão lá, então vão com os dados na URL.
+  if (analise.origem !== "demo" || post.origem_tema === "founder") {
     const { legendas: _l, ...semLegenda } = post;
     void _l;
     q.set("d", base64url(JSON.stringify({ post: semLegenda, brand: marcaMinima(analise.brand) })));
