@@ -4,6 +4,29 @@
 
 Produção: **https://social-ai-beige.vercel.app** · Repositório: https://github.com/bruno-dotcom12/social.Ai
 
+## Motor de distribuição, noite de 26/09/2026
+
+Feito:
+- **Sem site:** "Não tenho site" abaixo do campo leva à tela da empresa (nome, o que faz, para quem, nicho, redes com "Não tenho essa rede social", concorrentes). A marca é montada com `brandSemSite` e segue para as três perguntas e os ajustes.
+- **Resultado só com a recomendação:** Sua semana (Postar e Gravar), posts prontos, vídeos para gravar e Seus resultados. Diagnóstico, estratégia, radar e baralho ficam só no motor.
+- **Ações em cada post:** Aprovar, Recusar, Customizar (texto e arte), Editar no Canva (baixa a arte e abre o Canva), Já postei (métricas).
+- **Motor:**
+  - roteiros de vídeo em toda análise;
+  - concorrentes lidos por dentro;
+  - referências do nicho com o gancho real e o porquê de cada viral;
+  - aprendizado com as métricas digitadas: a IA explica e aplica, o motor local reordena;
+  - cache que muda com resultados novos.
+- **Verificação:** lint, `tsc` e 191 testes. Fluxos sem site e demo percorridos no navegador, com aprovar e customizar.
+
+Pendente:
+- **Chaves:** `GEMINI_API_KEY` ou `ANTHROPIC_API_KEY` (o padrão `claude-opus-5` em `src/lib/llm/index.ts` não é um id válido; usar `ANTHROPIC_MODEL`), as variáveis do Supabase e `ADMIN_PASSWORD`. Ver `DEPLOY.md`.
+- **Supabase:** rodar o `supabase/schema.sql` de novo; `metricas` ganhou `compartilhamentos`.
+- **Vídeos no feedback:** aprovações e métricas dos vídeos ficam só no navegador, porque `/api/feedback` só aceita formatos de post estático.
+- **"Desfazer":** tira a decisão só do navegador; no servidor fica a última.
+- **Canva:** sem integração de verdade, precisa de app no Canva Developers.
+- **Métricas das redes:** digitadas pelo founder, sem API do Instagram, LinkedIn ou X.
+- **Vídeos virais:** o motor não assiste a vídeo; a base curada só tem post estático.
+
 ## Reposicionamento (PROMPT_3_REPOSICIONAR.md), tarde de 26/09/2026
 
 Feito:
