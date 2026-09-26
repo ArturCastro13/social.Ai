@@ -38,7 +38,7 @@ export function AppMvp({
   const router = useRouter();
   const g = useGeracao(totalVirais);
   const [indo, setIndo] = useState(false);
-  const [ultimas, setUltimas] = useState<{ chave?: string; preferencias?: Preferencias; brand?: BrandProfile | null }>({});
+  const [ultimas, setUltimas] = useState<{ chave?: string; dados?: DadosFormulario; preferencias?: Preferencias; brand?: BrandProfile | null }>({});
   const chave = dados ? JSON.stringify(dados) + (direto ? ":direto" : "") : "";
 
   // Exemplo pronto gera assim que a página abre; site novo volta para a tela de ajustes.
@@ -49,11 +49,12 @@ export function AppMvp({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chave]);
 
-  function gerarComAjustes(preferencias: Preferencias, brand: BrandProfile | null) {
+  function gerarComAjustes(preferencias: Preferencias, brand: BrandProfile | null, redes: Partial<DadosFormulario>) {
     if (!dados) return;
-    setUltimas({ chave, preferencias, brand });
+    const completos = { ...dados, ...redes };
+    setUltimas({ chave, dados: completos, preferencias, brand });
     window.scrollTo({ top: 0 });
-    g.gerar(dados, { preferencias, brand });
+    g.gerar(completos, { preferencias, brand });
   }
 
   function ir(d: DadosFormulario) {
@@ -148,7 +149,7 @@ export function AppMvp({
             <div className="mt-8 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => g.gerar(dados, ultimas.chave === chave ? ultimas : {})}
+                onClick={() => (ultimas.chave === chave ? g.gerar(ultimas.dados ?? dados, ultimas) : g.gerar(dados))}
                 className="inline-flex h-12 items-center rounded-full bg-pauta px-6 font-semibold text-white transition-colors hover:bg-pauta-escura"
               >
                 Tentar de novo

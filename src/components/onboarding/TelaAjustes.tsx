@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { AjustesRedes, type Redes } from "./AjustesRedes";
 import { dominioDe } from "@/components/estudio/useGeracao";
 import type { DadosFormulario } from "@/components/estudio/Formulario";
 import {
@@ -18,7 +19,7 @@ import { FORMATOS_MOTOR, FREQUENCIAS, OBJETIVOS, REGUAS_TOM, type FormatoMotor, 
 import type { Preferencias, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
 import { NICHOS, type BrandProfile } from "@/lib/types";
 import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
-import { CampoArroba, Chip } from "./ui";
+import { Chip } from "./ui";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
 
@@ -69,7 +70,14 @@ function sugestaoValida(s: Partial<SugestoesOnboarding> | null, padrao: Sugestoe
  * Tela 2: "A gente entendeu isso. Ajusta o que estiver errado."
  * Lê o site, pede as sugestões ao /api/inferir e mostra tudo já marcado. A tela 3 abre aqui mesmo.
  */
-export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGerar: (p: Preferencias, brand: BrandProfile | null) => void }) {
+export function TelaAjustes({
+  dados,
+  onGerar,
+}: {
+  dados: DadosFormulario;
+  /** `redes` volta com os @, a quantidade e a paleta do print, que agora são escolhidos aqui. */
+  onGerar: (p: Preferencias, brand: BrandProfile | null, redes: Partial<DadosFormulario>) => void;
+}) {
   const dominio = dominioDe(dados.url);
   const perfilInicial: PerfilAlvo = dados.perfil ?? "empresa";
   const [carregando, setCarregando] = useState(true);
@@ -79,6 +87,10 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
 
   const [perfil, setPerfil] = useState<PerfilAlvo>(perfilInicial);
   const [founder, setFounder] = useState<{ valor: string; rede: RedeArroba }>({ valor: dados.founder ?? "", rede: dados.redeFounder ?? "linkedin" });
+  const [redes, setRedes] = useState<Redes>(() => {
+    const rede = (["instagram", "linkedin", "x"] as const).find((r) => dados[r]) ?? "instagram";
+    return { empresa: { valor: dados[rede] ?? "", rede }, facebook: dados.facebook, quantidade: dados.quantidade, paletaInstagram: dados.paletaInstagram };
+  });
   const [publico, setPublico] = useState(sugestao.publico_alvo);
   const [objetivos, setObjetivos] = useState<ObjetivoId[]>(sugestao.objetivos);
   const [tom, setTom] = useState<TomDeVoz>(sugestao.tom_de_voz);
@@ -197,7 +209,18 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
     e.preventDefault();
     const p = montarPreferencias();
     salvarPreferencias(dominio, p);
-    onGerar(p, brand);
+    const arroba = redes.empresa.valor.trim();
+    onGerar(p, redes.paletaInstagram.length ? null : brand, {
+      instagram: redes.empresa.rede === "instagram" ? arroba : "",
+      linkedin: redes.empresa.rede === "linkedin" ? arroba : "",
+      x: redes.empresa.rede === "x" ? arroba : "",
+      facebook: redes.facebook.trim(),
+      quantidade: redes.quantidade,
+      paletaInstagram: redes.paletaInstagram,
+      perfil,
+      founder: founder.valor.trim() || undefined,
+      redeFounder: founder.valor.trim() ? founder.rede : undefined,
+    });
   }
 
   function alternarTurbo() {
@@ -289,19 +312,9 @@ export function TelaAjustes({ dados, onGerar }: { dados: DadosFormulario; onGera
               </Chip>
             ))}
           </div>
-          {perfil !== "empresa" && (
-            <div className="mt-4 max-w-md">
-              <CampoArroba
-                id="ajuste-founder"
-                rotulo="@ do founder"
-                valor={founder.valor}
-                rede={founder.rede}
-                onChange={(valor, rede) => setFounder({ valor, rede })}
-                placeholder="@voce ou link do perfil"
-              />
-            </div>
-          )}
         </fieldset>
+
+        <AjustesRedes redes={redes} onChange={setRedes} founder={founder} onFounder={setFounder} titulo={SUBTITULO} />
 
         <fieldset>
           <legend className={SUBTITULO}>Objetivo</legend>
