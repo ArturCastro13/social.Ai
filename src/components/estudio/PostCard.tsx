@@ -4,8 +4,8 @@
 import { useState } from "react";
 import { totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
 import { OBJETIVOS } from "@/lib/motor/constantes";
-import type { ExtrasPost } from "@/lib/motor/contrato";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
+import { NOMES_REDE, SELO_FOUNDER, ehLink, nomeDoPadrao, rotuloOrigem } from "./rotulos";
 
 export const NOMES_TEMPLATE: Record<TemplateId, string> = {
   "capa-gancho": "Carrossel com capa",
@@ -18,35 +18,57 @@ export const NOMES_TEMPLATE: Record<TemplateId, string> = {
   checklist: "Checklist",
 };
 
-const NOMES_REDE: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };
 const ORDEM_REDES: Rede[] = ["instagram", "linkedin", "x", "facebook"];
 
 function nomeObjetivo(id: string | undefined) {
   return OBJETIVOS.find((o) => o.id === id)?.nome;
 }
 
-/** Faixa curta "para quem é este post": aparece só quando o motor mandou o endereçamento. */
-function FaixaEnderecamento({ e }: { e: NonNullable<ExtrasPost["enderecamento"]> }) {
-  const objetivo = nomeObjetivo(e.objetivo);
+/**
+ * Três linhas fixas, sempre na mesma ordem: para quem, por que funciona e de onde veio o tema.
+ * Demo e cache antigos não têm os campos novos; cada linha tem um fallback ou some sozinha.
+ */
+function TresLinhas({ post }: { post: PostGerado }) {
+  const e = post.enderecamento;
+  const objetivo = nomeObjetivo(e?.objetivo);
+  const padrao = post.padrao_referencia?.nome?.trim() || nomeDoPadrao(post.padrao_inspirador);
+  const fonte = post.padrao_referencia?.fonte_url;
   return (
-    <div className="space-y-1 border-b border-tinta/10 bg-papel px-4 py-2.5 text-xs leading-snug text-tinta-2">
-      <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="min-w-0 flex-1 text-sm">
-          <span className="text-tinta-3">Para:</span> <strong className="font-semibold text-tinta">{e.publico}</strong>
-        </span>
-        {objetivo && <span className="shrink-0 rounded-full bg-tinta px-2 py-0.5 text-[11px] font-semibold text-papel">{objetivo}</span>}
-      </p>
-      {e.gatilho_identificacao && (
-        <p>
-          <span className="text-tinta-3">Vai se reconhecer em:</span> {e.gatilho_identificacao}
-        </p>
+    <dl className="grid grid-cols-[6.5rem_1fr] gap-x-2 gap-y-1 border-b border-tinta/10 bg-papel px-4 py-2.5 text-xs leading-snug text-tinta-2">
+      {e?.publico && (
+        <>
+          <dt className="text-tinta-3">Para quem</dt>
+          <dd className="min-w-0">
+            <span className="flex items-start justify-between gap-2">
+              <strong className="line-clamp-2 font-semibold text-tinta">{e.publico}</strong>
+              {objetivo && <span className="shrink-0 rounded-full bg-tinta px-2 py-0.5 text-[11px] font-semibold text-papel">{objetivo}</span>}
+            </span>
+            {e.acao_esperada && <span className="mt-0.5 line-clamp-1 block" title={e.acao_esperada}>depois de ler: {e.acao_esperada}</span>}
+          </dd>
+        </>
       )}
-      {e.acao_esperada && (
-        <p>
-          <span className="text-tinta-3">Ação esperada:</span> {e.acao_esperada}
-        </p>
+      {padrao && (
+        <>
+          <dt className="text-tinta-3">Por que funciona</dt>
+          <dd className="min-w-0">
+            {ehLink(fonte) ? (
+              <a
+                href={fonte}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-tinta underline decoration-tinta/30 underline-offset-2 hover:decoration-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+              >
+                {padrao}
+              </a>
+            ) : (
+              <span className="font-medium text-tinta">{padrao}</span>
+            )}
+          </dd>
+        </>
       )}
-    </div>
+      <dt className="text-tinta-3">Veio de</dt>
+      <dd className={post.origem_tema === "founder" ? "font-semibold text-salvia" : "text-tinta"}>{rotuloOrigem(post.origem_tema)}</dd>
+    </dl>
   );
 }
 
@@ -94,8 +116,7 @@ export function PostCard({
   const pal = analise.brand.paleta;
   const cores = [...new Set([pal.primaria, pal.secundaria, pal.destaque].map((c) => c.toLowerCase()))];
   const corAtual = (pers.cor ?? pal.primaria).toLowerCase();
-  const extra = post as PostGerado & ExtrasPost;
-  const revisar = extra.precisa_revisao ?? [];
+  const revisar = post.precisa_revisao ?? [];
 
   async function copiar() {
     const texto = post.legendas[rede] + (rede !== "linkedin" && post.hashtags.length && !post.legendas[rede].includes("#") ? "\n\n" + post.hashtags.map((h) => "#" + h).join(" ") : "");
@@ -113,9 +134,14 @@ export function PostCard({
       <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
         <p className="text-xs text-tinta-3">
           <span className="font-semibold text-tinta">Post {indice + 1}</span> · {NOMES_REDE[post.rede_principal]} · {NOMES_TEMPLATE[template]}
-          {extra.trilho && (
-            <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${extra.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
-              {extra.trilho === "founder" ? "Founder" : "Empresa"}
+          {post.trilho && (
+            <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${post.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
+              {post.trilho === "founder" ? "Founder" : "Empresa"}
+            </span>
+          )}
+          {post.origem_tema === "founder" && (
+            <span className="ml-1.5 inline-flex rounded-full bg-salvia px-2 py-0.5 text-[11px] font-semibold text-papel" title="Este post nasceu do que você contou">
+              {SELO_FOUNDER}
             </span>
           )}
         </p>
@@ -126,7 +152,7 @@ export function PostCard({
         )}
       </header>
 
-      {extra.enderecamento?.publico && <FaixaEnderecamento e={extra.enderecamento} />}
+      <TresLinhas post={post} />
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}
@@ -272,26 +298,14 @@ export function PostCard({
             </ul>
           </div>
         )}
-        <p className="mt-3 rounded-2xl bg-papel px-3 py-2 text-xs leading-relaxed text-tinta-2">
-          <strong className="text-tinta">Por que funciona:</strong> {post.por_que}
-          {extra.padrao_referencia?.nome && (
-            <span className="mt-1 block">
-              Padrão de referência:{" "}
-              {/^https?:\/\//.test(extra.padrao_referencia.fonte_url) ? (
-                <a
-                  href={extra.padrao_referencia.fonte_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-tinta underline decoration-tinta/30 underline-offset-2 hover:decoration-tinta"
-                >
-                  {extra.padrao_referencia.nome}
-                </a>
-              ) : (
-                <span className="font-medium text-tinta">{extra.padrao_referencia.nome}</span>
-              )}
-            </span>
-          )}
-        </p>
+        {post.por_que && (
+          <details className="group/porque mt-3 rounded-2xl bg-papel px-3 py-2 text-xs leading-relaxed text-tinta-2">
+            <summary className="cursor-pointer list-none font-semibold text-tinta [&::-webkit-details-marker]:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta">
+              Mais sobre esta ideia <span aria-hidden="true" className="inline-block transition group-open/porque:rotate-90">›</span>
+            </summary>
+            <p className="mt-1">{post.por_que}</p>
+          </details>
+        )}
         <div className="mt-4 grid grid-cols-2 gap-2">
           <button type="button" onClick={copiar} className="h-10 rounded-full border border-tinta/20 text-sm font-semibold transition hover:border-tinta/40 hover:bg-papel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta">
             {copiado ? <span className="text-aprovado">Copiado ✓</span> : "Copiar legenda"}

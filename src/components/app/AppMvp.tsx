@@ -13,11 +13,11 @@ import type { BrandProfile } from "@/lib/types";
 import { urlDoApp } from "@/lib/client/parametros";
 
 const SECOES = [
-  { id: "ideias", nome: "Ideias de hoje" },
-  { id: "metricas", nome: "Métricas" },
-  { id: "bombando", nome: "Bombando" },
-  { id: "estrategia", nome: "Estratégia" },
+  { id: "semana", nome: "Semana" },
   { id: "posts", nome: "Posts" },
+  { id: "ideias", nome: "Ideias" },
+  { id: "metricas", nome: "Métricas" },
+  { id: "analise", nome: "Análise" },
 ];
 
 /**
@@ -93,7 +93,7 @@ export function AppMvp({
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="shrink-0 rounded-full px-3 py-1.5 text-sm text-tinta-2 transition-colors hover:bg-tinta/5 hover:text-tinta"
+                className="shrink-0 rounded-full px-3 py-1.5 text-sm text-tinta-2 transition-colors hover:bg-tinta/5 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
               >
                 {s.nome}
               </a>
@@ -161,7 +161,7 @@ export function AppMvp({
           </section>
         )}
 
-        {pronto && g.analise && <Painel key={g.analise.id} analise={g.analise} ideiasPrimeiro />}
+        {pronto && g.analise && <Painel key={g.analise.id} analise={g.analise} />}
       </main>
     </div>
   );

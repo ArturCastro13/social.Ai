@@ -8,6 +8,7 @@ import { urlArte } from "@/lib/client/artes";
 import { NOMES_FORMATO, resumirPreferencias, type Decisao, type ResultadoPost } from "@/lib/feedback";
 import { ordenarPorOportunidade, type Oportunidade, type SinaisNicho } from "@/lib/oportunidade";
 import type { Analise, Rede } from "@/lib/types";
+import { SELO_FOUNDER, rotuloOrigem } from "./rotulos";
 
 const NOMES_REDE = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" } as const;
 
@@ -240,6 +241,14 @@ function PorQue({ post, op }: { post: Analise["posts"][number]; op: Oportunidade
       </div>
       <p className="mt-1 text-sm text-tinta-2">
         {NOMES_FORMATO[post.formato]} · feito para {NOMES_REDE[post.rede_principal]}
+      </p>
+      <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-tinta-2">
+        <span>
+          <span className="text-tinta-3">Veio de:</span> {rotuloOrigem(post.origem_tema)}
+        </span>
+        {post.origem_tema === "founder" && (
+          <span className="inline-flex rounded-full bg-salvia px-2 py-0.5 text-[11px] font-semibold text-papel">{SELO_FOUNDER}</span>
+        )}
       </p>
       <h4 className="mt-6 font-semibold">Por que esta ideia</h4>
       <ul className="mt-2 space-y-2 text-tinta-2">
