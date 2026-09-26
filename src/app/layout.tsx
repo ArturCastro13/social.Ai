@@ -14,9 +14,9 @@ const instrument = Instrument_Serif({
 const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "social.Ai | Posts prontos para a sua marca, a partir do seu site",
+  title: "social.Ai | O que você sabe vira post de autoridade",
   description:
-    "Cole o endereço do seu site e receba posts com a identidade da sua marca, mais estratégia e calendário.",
+    "Conte o que só você sabe sobre mercado, produto e cliente. O social.Ai transforma isso em posts de autoridade para o cliente certo, com a pauta da semana pronta e o melhor horário para cada um.",
 };
 
 export const viewport: Viewport = {
