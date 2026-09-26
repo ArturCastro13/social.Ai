@@ -7,6 +7,7 @@ import { NICHOS, type Nicho } from "@/lib/types";
 import { CampoPrint } from "./AjustesRedes";
 import { CampoConcorrentes, type ControleConcorrentes } from "./Concorrentes";
 import { CampoArroba, Chip } from "./ui";
+import { MateriaisEmpresa, type ControleMateriais } from "./MateriaisEmpresa";
 
 export type RedeEmpresa = "instagram" | "linkedin" | "x" | "facebook";
 
@@ -71,6 +72,7 @@ export function TelaSemSite({
   onFounder,
   concorrentes,
   onContinuar,
+  materiais,
 }: {
   empresa: Empresa;
   onChange: (e: Empresa) => void;
@@ -78,6 +80,7 @@ export function TelaSemSite({
   onFounder: (f: { valor: string; rede: RedeArroba }) => void;
   concorrentes: ControleConcorrentes;
   onContinuar: () => void;
+  materiais?: ControleMateriais;
 }) {
   const [erros, setErros] = useState<{ nome?: string; descricao?: string }>({});
 
@@ -288,6 +291,7 @@ export function TelaSemSite({
         <div className="border-t border-tinta/10 pt-6">
           <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />
         </div>
+        {materiais && <div className="border-t border-tinta/10 pt-6"><MateriaisEmpresa controle={materiais} /></div>}
       </div>
 
       <div className="mt-8">

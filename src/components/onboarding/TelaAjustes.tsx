@@ -28,6 +28,7 @@ import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
 import { EMPRESA_VAZIA, empresaParaMarca, TelaSemSite, type Empresa } from "./TelaSemSite";
 import { CampoConcorrentes, useConcorrentes } from "./Concorrentes";
 import { Chip } from "./ui";
+import { MateriaisEmpresa, useMateriaisEmpresa } from "./MateriaisEmpresa";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
 
@@ -89,6 +90,7 @@ export function TelaAjustes({
 }) {
   const semSite = !!dados.semSite;
   const dominio = dominioDe(dados.url);
+  const materiais = useMateriaisEmpresa(dados.semSite ? "empresa-sem-site-desta-sessao" : dominio);
   const perfilInicial: PerfilAlvo = dados.perfil ?? "empresa";
   const [carregando, setCarregando] = useState(true);
   const [brand, setBrand] = useState<BrandProfile | null>(null);
@@ -340,6 +342,7 @@ export function TelaAjustes({
   if (passo === "empresa") {
     return (
       <TelaSemSite
+        materiais={materiais}
         empresa={empresa}
         onChange={setEmpresa}
         founder={founder}
@@ -522,6 +525,8 @@ export function TelaAjustes({
         ) : (
           <AjustesRedes redes={redes} onChange={setRedes} founder={founder} onFounder={setFounder} titulo={SUBTITULO} />
         )}
+
+        <MateriaisEmpresa controle={materiais} />
 
         <fieldset>
           <legend className={SUBTITULO}>Objetivo</legend>
