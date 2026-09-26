@@ -1,6 +1,6 @@
 # social.Ai
 
-Um CMO de IA para o founder que cuida de tudo sozinho. Você cola a URL do site e os @ das redes, e o social.Ai lê a identidade visual da marca, compara com o que viraliza no seu nicho, entrega um diagnóstico com estratégia e gera posts estáticos prontos para postar, com legenda para Instagram, LinkedIn, X e Facebook e um calendário de publicação.
+Um CMO de IA para o founder que cuida de tudo sozinho. Você cola a URL do site e os @ das redes, e o social.Ai lê a identidade visual da marca, compara com o que viraliza no seu nicho, entrega um diagnóstico com estratégia e gera posts estáticos prontos para publicar, com legenda para Instagram, LinkedIn, X e Facebook e um calendário de publicação.
 
 Projeto do Hackathon Adapta.
 

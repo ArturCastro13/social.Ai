@@ -1,8 +1,8 @@
-# Plano do dia do hackathon
+# Plano para o dia do hackathon
 
 Somos três programadores e temos o dia inteiro. O júri olha duas coisas: MVP funcionando e dor validada. Então o plano tem uma regra simples: a demo precisa rodar do começo ao fim a qualquer momento do dia, e a validação com founders começa cedo, não no fim da tarde.
 
-A base já está no repositório (leitor de marca, motor, gerador de artes, landing, modo demo). O trabalho de amanhã é deixar cada parte afiada e juntar tudo no pitch.
+A base já está no repositório (leitor de marca, motor, gerador de artes, landing, modo demo). O trabalho do dia é deixar cada parte afiada e juntar tudo no pitch.
 
 ## Frente A: base de virais e curadoria
 

@@ -186,7 +186,7 @@ Lista as empresas de exemplo: `[{ "id": "demo-cora", "nome": "Cora", "url": "...
     "horas_semana": "De 1 a 3 horas",
     "dor": "4",
     "usaria": "Sim, com pequenos ajustes",
-    "pagaria": "De R$ 50 a R$ 150",
+    "pagaria": "De R$ 51 a R$ 150",
     "comentario": "..."
   }
 }

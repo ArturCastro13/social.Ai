@@ -10,7 +10,7 @@ export const PERGUNTAS_VALIDACAO = [
     id: "horas_semana",
     pergunta: "Quantas horas por semana isso te toma?",
     tipo: "opcoes",
-    opcoes: ["Menos de 1 hora", "De 1 a 3 horas", "De 3 a 6 horas", "Mais de 6 horas"],
+    opcoes: ["Menos de 1 hora", "De 1 a 3 horas", "De 4 a 6 horas", "Mais de 6 horas"],
   },
   {
     id: "dor",
@@ -20,7 +20,7 @@ export const PERGUNTAS_VALIDACAO = [
   },
   {
     id: "usaria",
-    pergunta: "Você postaria os posts que o social.Ai gerou para você?",
+    pergunta: "Você publicaria os posts que o social.Ai gerou para você?",
     tipo: "opcoes",
     opcoes: ["Sim, do jeito que estão", "Sim, com pequenos ajustes", "Só alguns", "Não"],
   },
@@ -28,6 +28,6 @@ export const PERGUNTAS_VALIDACAO = [
     id: "pagaria",
     pergunta: "Quanto pagaria por mês para ter isso toda semana?",
     tipo: "opcoes",
-    opcoes: ["Nada", "Até R$ 50", "De R$ 50 a R$ 150", "De R$ 150 a R$ 400", "Mais de R$ 400"],
+    opcoes: ["Nada", "Até R$ 50", "De R$ 51 a R$ 150", "De R$ 151 a R$ 400", "Mais de R$ 400"],
   },
 ] as const;

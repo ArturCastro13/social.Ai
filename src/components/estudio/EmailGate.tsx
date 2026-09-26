@@ -58,9 +58,9 @@ export function EmailGate({
     >
       <form onSubmit={enviar} className="p-6 sm:p-8">
         <p className="retranca text-pauta">Último passo</p>
-        <h2 className="mt-2 font-serif text-3xl leading-tight">Para onde a gente manda as novidades?</h2>
+        <h2 className="mt-2 font-serif text-3xl leading-tight">Para onde a gente manda seus posts?</h2>
         <p className="mt-3 text-sm leading-relaxed text-tinta-2">
-          Deixe seu e-mail para baixar os posts. Você entra na lista de acesso antecipado e a gente só escreve quando tiver algo útil.
+          Deixe seu e-mail para baixar os posts. Você entra na lista de espera e a gente só escreve quando tiver algo útil.
         </p>
         <label className="mt-5 block">
           <span className="sr-only">E-mail</span>

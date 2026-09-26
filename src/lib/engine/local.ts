@@ -19,20 +19,20 @@ interface PerfilNicho {
 const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "depois" | "cta">> = {
   "saas-b2b": {
     opinioes: [
-      "a maioria dos processos da sua empresa não está desenhada em lugar nenhum. está no email de alguém.",
+      "a maioria dos processos da sua empresa não está desenhada em lugar nenhum. está no e-mail de alguém.",
       "ferramenta boa não é a que tem mais funções. é a que o time continua usando depois do primeiro mês.",
     ],
-    capas: ["O custo escondido do jeito antigo", "4 sinais de que sua operação travou"],
+    capas: ["O custo escondido do jeito antigo", "O que muda quando o processo sai da planilha"],
     antes: "Planilha paralela, e-mail perdido e ninguém sabe onde o pedido parou.",
     depois: "Um fluxo claro, cada pessoa sabendo o que é com ela.",
     cta: "Comenta qual processo mais te trava hoje.",
   },
   fintech: {
     opinioes: [
-      "pagar tarifa para movimentar o próprio dinheiro ainda é normal pra muita gente. não deveria ser.",
+      "pagar tarifa para movimentar o próprio dinheiro ainda é normal para muita gente. não deveria ser.",
       "o financeiro da maioria das pequenas empresas é o dono, às 23h, com uma planilha aberta.",
     ],
-    capas: ["O que seu banco não te explica", "4 decisões de dinheiro que ninguém te ensinou"],
+    capas: ["O que seu banco não te explica", "Dinheiro de empresa sem letra miúda"],
     antes: "Tarifa em tudo, burocracia e atendimento que demora dias.",
     depois: "Dinheiro organizado no app, sem letra miúda.",
     cta: "Salva e manda para quem cuida do financeiro.",
@@ -42,7 +42,7 @@ const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "d
       "cuidar da saúde não deveria parecer uma maratona de telefonemas e salas de espera.",
       "o melhor momento de cuidar é antes do problema aparecer. o sistema ainda é desenhado para depois.",
     ],
-    capas: ["O que muda quando o cuidado vem antes", "4 dúvidas que todo mundo tem e ninguém pergunta"],
+    capas: ["O que muda quando o cuidado vem antes", "Saúde explicada sem pressa"],
     antes: "Ligação, fila, espera e nenhum acompanhamento depois da consulta.",
     depois: "Cuidado contínuo, com gente que conhece o seu histórico.",
     cta: "Salva e compartilha com quem precisa ler isso.",
@@ -52,7 +52,7 @@ const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "d
       "decorar para a prova não é aprender. é alugar o conteúdo por uma semana.",
       "ninguém desiste de estudar por preguiça. desiste porque não vê progresso.",
     ],
-    capas: ["Aprenda isso em 1 minuto", "4 erros que fazem você estudar mais e aprender menos"],
+    capas: ["Aprenda isso em 1 minuto", "Estudar menos horas e aprender mais"],
     antes: "Horas de estudo, anotação bonita e a sensação de não sair do lugar.",
     depois: "Menos horas, método claro e progresso que dá para ver.",
     cta: "Salva para revisar antes da prova.",
@@ -62,7 +62,7 @@ const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "d
       "cliente não compra produto. compra a versão de si mesmo que vai usar o produto.",
       "a melhor propaganda de uma marca ainda é a foto que o cliente tira sem ninguém pedir.",
     ],
-    capas: ["O detalhe que ninguém repara (mas faz toda diferença)", "4 perguntas que nossos clientes mais fazem"],
+    capas: ["O detalhe em que ninguém repara", "Do jeito que é feito, de verdade"],
     antes: "Compra por impulso, produto parado na gaveta.",
     depois: "Poucos produtos certos, usados todo dia.",
     cta: "Conta aqui qual você escolheria.",
@@ -72,72 +72,72 @@ const EXTRA: Record<Nicho, Pick<PerfilNicho, "opinioes" | "capas" | "antes" | "d
 const PERFIL_BASE: Record<Nicho, { publico: string; tom: string; pilares: [string, string][]; diag: [string, string][] }> = {
   "saas-b2b": {
     publico: "gestores e donos de empresa que perdem tempo com processo manual e querem previsibilidade sem contratar mais gente",
-    tom: "Claro, prático e confiante. Fala de resultado de operação, sem jargão de TI.",
+    tom: "Fala de resultado de operação com clareza e confiança, sem jargão de TI.",
     pilares: [
       ["Dor da operação", "Mostrar o custo escondido do jeito antigo de trabalhar, com situações que o gestor reconhece."],
       ["Como se faz", "Ensinar o passo a passo de resolver o problema, mesmo antes de falar do produto."],
       ["Bastidor do founder", "Decisões, erros e aprendizados de quem está construindo a empresa."],
     ],
     diag: [
-      ["Os fortes do nicho falam de resultado, não de funcionalidade", "Nos SaaS B2B que mais engajam, o post abre com a consequência para o negócio (tempo, dinheiro, erro evitado) e só depois mostra o como. O site ainda apresenta o produto pelo que ele faz, não pelo que ele muda na rotina de quem compra."],
-      ["Founder aparece, marca acompanha", "Na base de virais, os posts de founder no LinkedIn superam a página da empresa com o mesmo conteúdo. Vale ter uma voz em primeira pessoa com bastidores e opinião."],
-      ["Falta um formato que se repete", "Quem cresce no nicho tem uma série reconhecível, como carrosséis de passo a passo ou listas de erros comuns. Uma série fixa por semana cria hábito no público."],
+      ["Abra pela consequência, não pela funcionalidade", "Vários posts de SaaS B2B da base abrem com o efeito no negócio (tempo, dinheiro, erro evitado) e só depois mostram o como. Vale revisar se a comunicação atual segue essa ordem."],
+      ["Dê voz ao founder", "Parte dos exemplos da base vem do perfil pessoal de founders, com bastidores e opinião. Vale testar posts em primeira pessoa no LinkedIn, além da página da empresa."],
+      ["Crie uma série que se repete", "Uma série fixa por semana, como um carrossel de passo a passo, ajuda quem acompanha a criar hábito. É mais fácil de manter do que inventar um formato novo a cada post."],
     ],
   },
   fintech: {
     publico: "pessoas e pequenas empresas cansadas de taxa, burocracia e atendimento de banco tradicional",
-    tom: "Direto, transparente e um pouco provocador. Explica dinheiro sem economês.",
+    tom: "Explica dinheiro sem economês, com transparência e uma pitada de provocação.",
     pilares: [
       ["Dinheiro sem letra miúda", "Traduzir taxas, regras e produtos financeiros em linguagem simples."],
       ["Contra o jeito antigo", "Comparar a experiência com o banco tradicional, sempre com fatos."],
       ["Confiança", "Mostrar segurança, regulação e gente real por trás do produto."],
     ],
     diag: [
-      ["O nicho ganha atenção com contraste", "Fintechs que viralizam colocam o banco tradicional como antagonista e mostram o antes e depois com clareza. O site explica o produto, mas ainda não assume uma posição forte contra algo."],
-      ["Explicar é o conteúdo mais salvo", "Carrosséis que explicam uma regra, uma taxa ou uma mudança regulatória em poucos slides são os mais salvos e compartilhados no nicho."],
-      ["Confiança precisa de rosto", "Nos exemplos fortes, founders e time aparecem falando de decisões difíceis. Isso reduz o medo natural de confiar dinheiro a uma marca nova."],
+      ["Use o contraste a seu favor", "Vários virais de fintech da base colocam o banco tradicional como antagonista e mostram a diferença numa imagem só. Vale testar uma comparação direta, sempre com fatos que a marca pode provar."],
+      ["Explique o que ninguém explica", "Carrosséis que traduzem uma regra, uma taxa ou uma mudança em poucos slides aparecem com frequência na base. É conteúdo útil que a pessoa guarda."],
+      ["Mostre quem está por trás", "Confiar dinheiro a uma marca nova exige confiança. Posts de founders e do time falando de decisões difíceis ajudam a construir isso."],
     ],
   },
   healthtech: {
     publico: "pessoas e empresas que querem cuidar da saúde sem a experiência fria e demorada do sistema tradicional",
-    tom: "Acolhedor, responsável e humano. Explica saúde com cuidado e sem alarmismo.",
+    tom: "Explica saúde com cuidado e sem alarmismo, perto de quem lê.",
     pilares: [
       ["Cuidado na prática", "Histórias e situações reais de cuidado, sempre com consentimento e sem expor ninguém."],
       ["Saúde explicada", "Conteúdo educativo curto, revisado por profissional, que tira dúvida comum."],
       ["Por dentro da operação", "Como o time trabalha, quem são os profissionais e por que as decisões são tomadas."],
     ],
     diag: [
-      ["Histórias vencem institucional", "Na base de virais do nicho, relatos de paciente e de profissional engajam bem mais que peças institucionais. O site ainda fala mais de estrutura do que de pessoas."],
-      ["Opinião clínica gera conversa", "Founders de saúde que publicam uma opinião clara sobre o setor, com argumento, geram debate e autoridade."],
-      ["Educação precisa ser fácil de salvar", "Listas e checklists curtos sobre prevenção e uso do serviço são o formato mais compartilhado."],
+      ["Conte histórias, com cuidado", "Na base de healthtech, relatos de paciente e de profissional aparecem mais do que peças institucionais. Vale testar histórias reais, sempre com consentimento."],
+      ["Tenha uma opinião sobre o setor", "Founders de saúde que publicam uma posição clara, com argumento, aparecem entre os exemplos da base. Opinião gera conversa e autoridade."],
+      ["Eduque em formato fácil de guardar", "Listas e checklists curtos sobre prevenção e uso do serviço são formatos simples de manter e de compartilhar."],
     ],
   },
   edtech: {
     publico: "estudantes e profissionais que querem aprender algo que muda sua carreira ou nota, sem perder tempo",
-    tom: "Motivador, próximo e bem-humorado. Fala como um bom professor fala no intervalo.",
+    tom: "Fala como um bom professor fala no intervalo: perto, animado e com humor.",
     pilares: [
       ["Aprenda em 1 minuto", "Um conceito útil por post, explicado de forma que dê para aplicar hoje."],
       ["Histórias de virada", "Trajetórias de alunos e do time, com antes e depois concretos."],
       ["Opinião sobre educação", "Posições claras sobre como se aprende de verdade, que provocam comentário."],
     ],
     diag: [
-      ["Os fortes do nicho ensinam antes de vender", "Os posts de maior alcance em edtech entregam uma aula curta no próprio post. O site vende o curso, mas o conteúdo ainda não dá uma amostra do jeito de ensinar."],
-      ["Humor e personagem funcionam", "Marcas de educação que criaram uma voz com personalidade viralizam com frequência. Vale definir um jeito próprio de falar e manter."],
-      ["Prova de transformação", "Antes e depois de alunos, com números reais que eles autorizaram mostrar, é o formato que mais converte no nicho."],
+      ["Ensine antes de vender", "Vários posts de edtech da base entregam uma aula curta no próprio post. Vale dar uma amostra do jeito de ensinar antes de falar do curso."],
+      ["Defina uma voz com personalidade", "Marcas de educação com uma voz reconhecível aparecem entre os exemplos da base. Vale escolher um jeito próprio de falar e manter."],
+      ["Mostre a transformação", "Antes e depois de alunos, com números reais que eles autorizaram mostrar, é um formato que conecta direto com quem está decidindo."],
     ],
   },
   "ecommerce-dtc": {
     publico: "consumidores que compram online, valorizam marca com propósito e decidem pela experiência e pela prova de outros clientes",
-    tom: "Próximo, com personalidade e sem medo de opinião. Fala como amiga que entende do assunto.",
+    tom: "Fala como uma amiga que entende do assunto, com personalidade e sem medo de opinião.",
     pilares: [
       ["Produto na vida real", "Uso real do produto, com detalhe que só quem usa percebe."],
       ["Bastidor da marca", "Como o produto é feito, decisões do founder, erros e acertos."],
       ["Comunidade", "Clientes, comentários e cocriação transformados em conteúdo."],
     ],
     diag: [
-      ["Marcas DTC fortes têm opinião", "Os virais do nicho vêm de marcas que brincam com críticas, assumem posições e falam como gente. O site é bonito, mas o tom ainda é mais catálogo que conversa."],
-      ["Bastidor do founder vende", "Posts do founder contando decisões difíceis e números da operação geram muito engajamento no LinkedIn e levam gente para a loja."],
-      ["Cliente é o melhor conteúdo", "Depoimentos, fotos e perguntas de clientes viram antes e depois e listas que o público salva."],
+      ["Tenha opinião", "Vários virais de DTC da base vêm de marcas que brincam com críticas, assumem posições e falam como gente. Vale revisar se o tom atual soa mais como conversa ou como catálogo."],
+      ["Leve o founder para o LinkedIn", "Parte dos exemplos da base são posts de founders contando decisões e números da operação. É um canal que muitas marcas DTC ainda não usam."],
+      ["Faça do cliente o conteúdo", "Depoimentos, fotos e perguntas de clientes viram antes e depois e listas que o público guarda."],
     ],
   },
 };
@@ -171,7 +171,7 @@ function legendas(nome: string, gancho: string, corpo: string[], cta: string, ta
   const tagsTxt = tags.map((t) => `#${t}`).join(" ");
   return {
     instagram: `${base}\n\n${tagsTxt}`.trim(),
-    linkedin: `${[gancho, "", ...linhas].join("\n")}\n\n${cta.replace("link na bio", `site da ${nome}`)}\n\n${tags.slice(0, 3).map((t) => `#${t}`).join(" ")}`.trim(),
+    linkedin: `${[gancho, "", ...linhas].join("\n")}\n\n${cta.replace("link na bio", "site")}\n\n${tags.slice(0, 3).map((t) => `#${t}`).join(" ")}`.trim(),
     x: corte(`${gancho} ${linhas[0] ?? ""}`, 260),
     facebook: base,
   };
@@ -209,7 +209,14 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
   }));
 
   // Sequência de formatos: segue os padrões do nicho, pulando dado de impacto se o site não tem número.
-  const fila = padroes.filter((p) => p.template_sugerido !== "dado-impacto" || numeros.length > 0);
+  // Sem número real no site, sem dado de impacto. Sem pelo menos 3 frases curtas, sem lista.
+  const frasesCurtas = frases.filter((x) => x.length <= 70).length;
+  const filtrados = padroes.filter(
+    (p) =>
+      (p.template_sugerido !== "dado-impacto" || numeros.length > 0) &&
+      (!["lista", "checklist"].includes(p.template_sugerido) || frasesCurtas >= 3),
+  );
+  const fila = filtrados.length ? filtrados : padroes.filter((p) => p.template_sugerido === "citacao" || p.template_sugerido === "print-x");
   const posts: AnaliseIA["posts"] = [];
   for (let i = 0; i < quantidade; i++) {
     const p = fila[i % fila.length];
@@ -218,7 +225,7 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
     const t = p.template_sugerido as TemplateId;
     let gancho = "";
     let slides: { titulo: string; texto: string }[] = [];
-    const cta = rede === "instagram" ? `${perfil.cta} Mais no link na bio.` : `${perfil.cta} Conheça a ${nome}.`;
+    const cta = rede === "instagram" ? `${perfil.cta} Mais no link na bio.` : `${perfil.cta} Conheça ${nome}.`;
 
     const curta = (x: string) => x.length <= 70;
     switch (t) {
@@ -229,14 +236,14 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
         slides = [
           { titulo: gancho, texto: corte(descricao, 110) },
           ...passos.map((x, k) => ({ titulo: `${k + 1}.`, texto: corte(x, 200) })),
-          { titulo: `Isso é a ${nome}.`, texto: perfil.cta },
+          { titulo: `Isso é ${nome}.`, texto: perfil.cta },
         ];
         break;
       }
       case "lista":
       case "checklist": {
         const itens = frases.filter((x) => x.length <= 70).slice(0, 5);
-        gancho = t === "lista" ? `${Math.max(3, itens.length)} motivos para conhecer a ${nome}` : `Checklist: ${perfil.pilares[1][0].toLowerCase()}`;
+        gancho = t === "lista" ? `${itens.length} motivos para conhecer ${nome}` : "Antes de escolher, confira";
         slides = [{ titulo: gancho, texto: "" }, ...itens.map((x) => ({ titulo: x.replace(/\.$/, ""), texto: "" }))];
         break;
       }
@@ -258,12 +265,12 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
         break;
       }
       case "bastidor": {
-        gancho = `Por que existe a ${nome}`;
+        gancho = `Por que ${nome} existe`;
         slides = [{ titulo: gancho, texto: corte(descricao, 190) }];
         break;
       }
       case "antes-depois": {
-        gancho = `Antes e depois da ${nome}`;
+        gancho = `Antes e depois: ${nome}`;
         slides = [
           { titulo: "Antes", texto: perfil.antes },
           { titulo: "Depois", texto: perfil.depois },
@@ -289,7 +296,7 @@ export function analiseLocal(b: BrandProfile, nicho: Nicho, padroes: PadraoViral
     resumo_negocio: corte(`${nome}: ${descricao}`, 400),
     publico: perfil.publico.charAt(0).toUpperCase() + perfil.publico.slice(1) + ".",
     tom_de_voz: perfil.tom,
-    posicionamento: corte(`Para ${perfil.publico.split(" que ")[0]}, a ${nome} é ${primeiraFrase(promessa).replace(/\.$/, "").toLowerCase()}.`, 230),
+    posicionamento: corte(`Para ${perfil.publico.split(" que ")[0]}, ${nome}: ${primeiraFrase(promessa).replace(/\.$/, "")}.`, 230),
     pilares: perfil.pilares.map(([n, d]) => ({ nome: n, descricao: d })),
     diagnostico: [
       ...perfil.diag.map(([titulo, texto]) => ({ titulo, texto })),

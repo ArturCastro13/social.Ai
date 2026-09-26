@@ -14,6 +14,8 @@ Antes de subir: página aberta em `{{BASE_URL}}`, zoom do navegador em 110%, o s
 
 ## 0:25 a 0:50, a dor já paga
 
+Fonte dos números da Doxa, para ter no bolso se perguntarem: [BrazilCham](https://brazilcham.com/news/posts/startup-de-ia-ligada-ao-insper-fatura-rdollar-30-milhoes-e-abre-operacao-em-miami) e [Money Report](https://www.moneyreport.com.br/negocios/doxa-mira-lideranca-global-em-distribuicao-de-conteudo-com-ia-dizem-fundadores/).
+
 "Isso não é uma dor que a gente imaginou. A Doxa, uma startup brasileira, faturou 30 milhões de reais em 2025 com mais de 1.500 clientes produzindo vídeo a partir de padrões que viralizam, com o avatar clonado do cliente. O mercado já paga para ter conteúdo que funciona sem precisar pensar nele."
 
 "A gente olhou para o pedaço que ficou de fora: o founder de startup que não quer gravar, não quer clonar a própria cara, e precisa de algo que custe como ferramenta, não como serviço."

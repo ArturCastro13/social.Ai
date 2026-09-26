@@ -92,7 +92,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
         </div>
         <div className="mt-6 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:items-end">
           <div>
-            <p className="retranca text-pauta">Pauta de {b.nome}</p>
+            <p className="retranca text-pauta">Pauta · {b.nome}</p>
             <h2 className="mt-2 font-serif text-4xl leading-[1.05] sm:text-6xl">{analise.posicionamento}</h2>
           </div>
           <div className="flex items-end gap-4 lg:justify-end">
@@ -139,7 +139,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
           </div>
           <div>
             <h3 className="font-serif text-3xl leading-tight sm:text-4xl">
-              O que os virais de {nicho.toLowerCase()} fazem <em className="sublinhado-pauta">e {b.nome} ainda não</em>
+              O que os virais de {nicho} fazem <em className="sublinhado-pauta">e você ainda não</em>
             </h3>
             <ol className="mt-6 space-y-5">
               {analise.diagnostico.map((d, i) => (
@@ -176,7 +176,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
                   <span className="h-2.5 w-2.5 rounded-full" style={{ background: COR_REDE[e.rede] }} />
                   {NOMES_REDE[e.rede]}
                 </p>
-                <p className="font-mono text-sm">{e.frequencia_semanal}x por semana</p>
+                <p className="font-mono text-sm">{e.frequencia_semanal} {e.frequencia_semanal === 1 ? "vez" : "vezes"} por semana</p>
                 <p className="text-sm leading-relaxed text-tinta-2">{e.foco}</p>
               </div>
             ))}

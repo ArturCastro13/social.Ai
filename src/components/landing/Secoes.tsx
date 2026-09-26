@@ -101,18 +101,18 @@ export function ComoFunciona() {
   const passos = [
     {
       n: "01",
-      t: "Cola o site",
+      t: "Cole o site",
       d: "Sem cadastro, sem briefing de 40 perguntas. O social.Ai lê o seu site como um estrategista leria: o que você vende, para quem, com que cara e com que voz.",
     },
     {
       n: "02",
       t: "A gente cruza com o que viraliza",
-      d: "Seu nicho é comparado com uma base curada de posts de founders e startups que performaram, com gancho, formato e estrutura de cada um.",
+      d: "Seu nicho é comparado com uma base curada de posts de founders e startups que funcionaram, com gancho, formato e estrutura de cada um.",
     },
     {
       n: "03",
       t: "Você recebe a pauta pronta",
-      d: "Diagnóstico honesto, estratégia por rede, calendário e os posts com arte e legenda. Troca a cor, troca o modelo, baixa e posta.",
+      d: "Diagnóstico honesto, estratégia por rede, calendário e os posts com arte e legenda. Troque a cor, troque o modelo, baixe e publique.",
     },
   ];
   return (
@@ -271,11 +271,11 @@ export function AntesDepois({ demos }: { demos: Analise[] }) {
 
 export function Comparacao() {
   const linhas: [string, string, string, string][] = [
-    ["Primeira entrega", "Em um minuto", "Depois do briefing e da contratação", "Depois do onboarding"],
-    ["Estratégia de CMO", "Inclusa em toda análise", "Depende da experiência da pessoa", "Inclusa, com fee à parte"],
+    ["Primeira entrega", "Em um minuto", "Depois do briefing e da contratação", "Depois da integração"],
+    ["Estratégia de CMO", "Inclusa em toda análise", "Depende da experiência da pessoa", "Cobrada à parte"],
     ["Referência do que viraliza no nicho", "Base curada com fonte", "Repertório pessoal", "Repertório da equipe"],
     ["Identidade visual aplicada", "Automática, lida do seu site", "Manual", "Manual"],
-    ["Forma de pagamento", "Assinatura de ferramenta", "Salário ou contrato mensal", "Fee mensal de serviço"],
+    ["Forma de pagamento", "Assinatura de ferramenta", "Salário ou contrato mensal", "Mensalidade de serviço"],
   ];
   return (
     <section className="border-b border-tinta/15 bg-papel-2">
@@ -283,7 +283,7 @@ export function Comparacao() {
         <p className="retranca text-pauta">Comparação</p>
         <h2 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.05] sm:text-6xl">Para quando contratar alguém ainda não cabe.</h2>
         <p className="mt-4 max-w-2xl text-tinta-2">
-          Social media e agência fazem coisas que uma ferramenta não faz, como gravar, responder comunidade e fazer parceria. O social.Ai
+          Social media e agência fazem coisas que uma ferramenta não faz, como gravar, responder à comunidade e fechar parceria. O social.Ai
           cobre o começo: saber o que postar e ter o post pronto.
         </p>
         <div className="mt-10 overflow-x-auto">
@@ -325,7 +325,7 @@ export function Planos() {
         <p className="retranca text-pauta">Planos</p>
         <div className="flex flex-wrap items-end justify-between gap-4">
           <h2 className="mt-3 max-w-2xl font-serif text-4xl leading-[1.05] sm:text-6xl">Preço de ferramenta, não de serviço.</h2>
-          <p className="retranca max-w-xs text-tinta-3">Valores de lançamento em teste. Ainda não cobramos ninguém.</p>
+          <p className="retranca max-w-xs text-tinta-3">Preços em teste. Ainda não cobramos ninguém.</p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {planos.map((p) => (
@@ -371,7 +371,7 @@ export function Faq() {
   const perguntas = [
     [
       "Preciso gravar vídeo ou aparecer?",
-      "Não. O social.Ai faz post estático: carrossel, citação, lista, dado, antes e depois. Vídeo com avatar é outro produto, e não é o nosso começo.",
+      "Não. O social.Ai faz post estático: carrossel, citação, lista, dado, antes e depois. Vídeo com avatar fica para depois.",
     ],
     [
       "A IA vai inventar coisas sobre a minha empresa?",
@@ -383,7 +383,7 @@ export function Faq() {
     ],
     [
       "E se meu site for todo em JavaScript ou bloquear robôs?",
-      "O leitor usa o que conseguir e avisa o que faltou. Você pode ajustar a cor principal e o modelo de cada post no painel, e subir um print do seu Instagram para puxar as cores de lá.",
+      "O leitor usa o que conseguir e avisa o que faltou. Você pode ajustar a cor principal e o modelo de cada post no painel, e escolher um print do seu Instagram para puxar as cores de lá (a imagem não sai do seu navegador).",
     ],
     [
       "Posso usar os posts comercialmente?",
@@ -399,7 +399,7 @@ export function Faq() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:py-28 lg:grid-cols-[1fr_1.6fr]">
         <div>
           <p className="retranca text-pauta">Perguntas</p>
-          <h2 className="mt-3 font-serif text-4xl leading-[1.05] sm:text-6xl">O que os founders perguntam.</h2>
+          <h2 className="mt-3 font-serif text-4xl leading-[1.05] sm:text-6xl">Antes de colar o seu site.</h2>
         </div>
         <div className="divide-y divide-tinta/15 border-y border-tinta/15">
           {perguntas.map(([q, r]) => (

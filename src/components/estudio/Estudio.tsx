@@ -145,7 +145,7 @@ export function Estudio({
                   )}
                   {fase === "pronto" && analise && (
                     <a href="#resultado" className="retranca mt-5 inline-block text-pauta underline underline-offset-4">
-                      ↓ ver a pauta de {analise.brand.nome}
+                      ↓ ver a pauta gerada
                     </a>
                   )}
                 </>

@@ -42,10 +42,10 @@ API base: {{BASE_URL}}
 - Antes do primeiro download, peça o e-mail num modal e envie POST {{BASE_URL}}/api/leads com {"email": <email>, "url": <url analisada>, "empresa": brand.nome, "analise_id": id, "origem": "download"}.
 - No fim do resultado, um formulário "Ajuda a gente a entender sua rotina?" com 5 perguntas de múltipla escolha e envio para POST {{BASE_URL}}/api/validacao com {"analise_id": id, "email": <se tiver>, "respostas": {"quem_cuida", "horas_semana", "dor", "usaria", "pagaria"}}. Perguntas e opções:
   1. quem_cuida: "Quem cuida do marketing da sua empresa hoje?" opções "Eu mesmo, sozinho", "Alguém do time, no tempo que sobra", "Freelancer ou agência", "Ninguém, está parado"
-  2. horas_semana: "Quantas horas por semana isso te toma?" opções "Menos de 1 hora", "De 1 a 3 horas", "De 3 a 6 horas", "Mais de 6 horas"
+  2. horas_semana: "Quantas horas por semana isso te toma?" opções "Menos de 1 hora", "De 1 a 3 horas", "De 4 a 6 horas", "Mais de 6 horas"
   3. dor: "De 1 a 5, quanto te incomoda não postar com constância?" opções "1" a "5"
-  4. usaria: "Você postaria os posts que o social.Ai gerou para você?" opções "Sim, do jeito que estão", "Sim, com pequenos ajustes", "Só alguns", "Não"
-  5. pagaria: "Quanto pagaria por mês para ter isso toda semana?" opções "Nada", "Até R$ 50", "De R$ 50 a R$ 150", "De R$ 150 a R$ 400", "Mais de R$ 400"
+  4. usaria: "Você publicaria os posts que o social.Ai gerou para você?" opções "Sim, do jeito que estão", "Sim, com pequenos ajustes", "Só alguns", "Não"
+  5. pagaria: "Quanto pagaria por mês para ter isso toda semana?" opções "Nada", "Até R$ 50", "De R$ 51 a R$ 150", "De R$ 151 a R$ 400", "Mais de R$ 400"
 
 4) Visual
 - Estilo editorial de redação de jornal: fundo creme (#f4efe6), texto quase preto (#16130f), destaque vermelho-alaranjado (#ff4a1c) e um verde-limão de apoio (#d7f25c).

@@ -261,6 +261,13 @@ function Editor({ item, onCancelar, onSalvar }: { item: ViralItem; onCancelar: (
           onChange={(e) => set("metricas", { ...v.metricas, observacao: e.target.value })}
         />
       </fieldset>
+      <textarea
+        className={campo}
+        rows={2}
+        placeholder="Notas (original em inglês, se é paráfrase, de onde veio o gancho)"
+        value={v.notas_curadoria ?? ""}
+        onChange={(e) => set("notas_curadoria", e.target.value || undefined)}
+      />
       <label className="flex items-center gap-2 text-sm">
         <input type="checkbox" checked={v.status === "verificado"} onChange={(e) => set("status", e.target.checked ? "verificado" : "a verificar")} />
         Abri a fonte e ela confirma o gancho e o formato

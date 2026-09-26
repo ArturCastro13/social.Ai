@@ -61,7 +61,7 @@ export function Formulario({
     e.preventDefault();
     const u = d.url.trim();
     if (!/\.[a-z]{2,}/i.test(u)) {
-      setErroUrl("Coloca o endereço do site, tipo suaempresa.com.br");
+      setErroUrl("Coloque o endereço do site, por exemplo suaempresa.com.br.");
       return;
     }
     setErroUrl("");

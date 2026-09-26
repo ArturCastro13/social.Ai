@@ -4,7 +4,7 @@
   "nicho": "ecommerce-dtc",
   "resumo_negocio": "A Sallve é uma marca brasileira de cuidados com a pele que vende direto ao consumidor pelo site e também em lojas e farmácias. Constrói as fórmulas junto com a comunidade e usa conteúdo sobre pele como porta de entrada para a compra.",
   "publico": "Pessoas que querem cuidar da pele sem se perder em rotina de dez passos, desconfiam de promessa milagrosa e decidem a compra lendo avaliação de quem já usou.",
-  "tom_de_voz": "Sincero, leve e acolhedor. Fala de pele como uma amiga que entende de ciência, em letra minúscula e sem julgamento.",
+  "tom_de_voz": "Fala de pele como uma amiga que entende de ciência: sincera, leve, em letra minúscula e sem julgamento.",
   "posicionamento": "Para quem quer uma rotina de pele simples e honesta, a Sallve cria fórmulas com ciência e com a própria comunidade, e explica tudo sem enrolação.",
   "pilares": [
     {
@@ -23,11 +23,11 @@
   "diagnostico": [
     {
       "titulo": "A comunidade está no site, mas não no feed",
-      "texto": "As avaliações da comunidade são o conteúdo mais persuasivo do site da Sallve. Nas marcas DTC mais fortes da nossa base, depoimentos viram série fixa de posts, com a fala da cliente em destaque."
+      "texto": "As avaliações da comunidade são o conteúdo mais persuasivo do site da Sallve. Na nossa base de DTC há marcas que transformam depoimentos em série fixa de posts, com a fala da cliente em destaque."
     },
     {
-      "titulo": "Opinião é o que faz marca DTC viralizar",
-      "texto": "Os virais do nicho vêm de marcas que tomam posição, brincam com crítica e falam como gente. A Sallve já tem a voz certa, conversas sinceras, e pode usá-la para provocar mais, por exemplo contra rotinas longas e promessas milagrosas."
+      "titulo": "Marca DTC com opinião chama atenção",
+      "texto": "Vários virais de DTC da base vêm de marcas que tomam posição, brincam com crítica e falam como gente. A Sallve já tem a voz certa, conversas sinceras, e pode usá-la para provocar mais, por exemplo contra rotinas longas e promessas milagrosas."
     },
     {
       "titulo": "Educação que dá para salvar",
@@ -43,7 +43,7 @@
     {
       "rede": "x",
       "frequencia_semanal": 3,
-      "foco": "Conversas sinceras e bem-humoradas sobre pele e beleza, respondendo a comunidade."
+      "foco": "Conversas sinceras e bem-humoradas sobre pele e beleza, respondendo à comunidade."
     },
     {
       "rede": "facebook",
@@ -85,7 +85,7 @@
         }
       ],
       "legendas": {
-        "instagram": "sua pele não precisa de 10 passos ✨\n\nlimpar, tratar, hidratar e proteger já resolvem muito. o segredo é escolher o que a sua pele está pedindo hoje e manter.\n\nsalva para montar a sua rotina e conta aqui qual passo você mais pula 👇",
+        "instagram": "sua pele não precisa de 10 passos ✨\n\nlimpar, tratar, hidratar e proteger já resolvem muito. o que funciona é escolher o que a sua pele está pedindo hoje e manter.\n\nsalva para montar a sua rotina e conta aqui qual passo você mais pula 👇",
         "linkedin": "Um dos erros mais comuns de quem começa a cuidar da pele é achar que precisa de dez produtos.\n\nQuatro passos resolvem a maior parte: limpar, tratar, hidratar e proteger.\n\nNa Sallve, a gente prefere uma rotina simples que a pessoa mantém a uma rotina perfeita que dura uma semana.",
         "x": "sua pele não precisa de 10 passos. limpar, tratar, hidratar e proteger. o resto é constância.",
         "facebook": "Sua pele não precisa de 10 passos. Uma rotina simples com limpar, tratar, hidratar e proteger já faz muita diferença. Salve para montar a sua."
@@ -97,14 +97,14 @@
         "sallve"
       ],
       "padrao_inspirador": "carrossel--erro-comum",
-      "por_que": "Desmonta uma crença comum com um passo a passo simples, o carrossel mais salvo em beleza."
+      "por_que": "Segue o padrão carrossel com gancho de erro comum: desmonta uma crença comum com um passo a passo simples e salvável."
     },
     {
       "id": "sallve-p2",
       "rede_principal": "instagram",
       "formato": "citacao",
       "template": "citacao",
-      "gancho": "o creme noturno devolve saúde à pele",
+      "gancho": "\"o creme noturno devolve saúde à pele\", disse uma cliente",
       "slides": [
         {
           "titulo": "avaliação da comunidade sallve",
@@ -123,7 +123,7 @@
         "sallve"
       ],
       "padrao_inspirador": "citacao--contraintuitivo",
-      "por_que": "Depoimento real de cliente em destaque é prova social, o formato que mais converte em DTC."
+      "por_que": "Segue o padrão citação: um depoimento real, tirado das avaliações do site, em destaque como prova social."
     },
     {
       "id": "sallve-p3",
@@ -148,7 +148,7 @@
         "sallve"
       ],
       "padrao_inspirador": "print-tweet--polemica",
-      "por_que": "Opinião com posição clara contra o mercado, o tipo de post que marcas DTC fortes usam para viralizar."
+      "por_que": "Segue o padrão print de tweet com polêmica: uma posição clara contra promessas milagrosas do mercado."
     },
     {
       "id": "sallve-p4",
@@ -186,7 +186,7 @@
         "instagram": "marca quantos você sentiu essa semana 👇\n\ncada item pede um cuidado diferente. no site da sallve tem ajuda para descobrir o que a sua pele está pedindo e montar a rotina ideal.",
         "linkedin": "Um formato simples que funciona muito em marcas de beleza: perguntar antes de vender.\n\nO que a sua pele precisa hoje? A resposta muda a rotina, e a rotina certa muda a relação com a marca.",
         "x": "o que a sua pele precisa hoje? repuxando, brilhando, manchinha, cara de cansada. cada uma pede um cuidado diferente.",
-        "facebook": "O que a sua pele precisa hoje? Marque quantos sinais você sentiu essa semana e descubra a rotina ideal no site da Sallve."
+        "facebook": "O que a sua pele precisa hoje? Marque quantos sinais você sentiu essa semana e encontre a rotina ideal no site da Sallve."
       },
       "hashtags": [
         "skincare",
@@ -194,7 +194,7 @@
         "sallve"
       ],
       "padrao_inspirador": "lista--pergunta",
-      "por_que": "Checklist de autodiagnóstico gera comentário e leva para a ferramenta de rotina do site."
+      "por_que": "Segue o padrão lista com gancho de pergunta: um autodiagnóstico que gera comentário e leva para a ferramenta de rotina do site."
     },
     {
       "id": "sallve-p5",
@@ -224,7 +224,7 @@
         "sallve"
       ],
       "padrao_inspirador": "antes-depois--contraintuitivo",
-      "por_que": "Antes e depois de comportamento, não de rosto: identificação imediata sem promessa de resultado."
+      "por_que": "Segue o padrão antes e depois: mostra mudança de comportamento, não de rosto, sem prometer resultado."
     },
     {
       "id": "sallve-p6",
@@ -249,7 +249,7 @@
         "sallve"
       ],
       "padrao_inspirador": "bastidor-founder--historia-pessoal",
-      "por_que": "Bastidor do processo de criação reforça o diferencial de cocriação, que o nicho premia com engajamento."
+      "por_que": "Segue o padrão bastidor do founder: mostra o processo de criação com a comunidade, o diferencial da marca."
     }
   ],
   "calendario": [
@@ -435,12 +435,12 @@
     "avisos": [
       "O site usa owners-wide, que não está no Google Fonts. Sugeri Space Grotesk e Inter como alternativa parecida."
     ],
-    "lidoEm": "2026-09-26T04:26:56.963Z"
+    "lidoEm": "2026-09-26T04:57:50.333Z"
   },
   "origem": "demo",
   "provedor": "pré-processado",
   "avisos": [
     "O site usa owners-wide, que não está no Google Fonts. Sugeri Space Grotesk e Inter como alternativa parecida."
   ],
-  "criadoEm": "2026-09-26T04:26:56.963Z"
+  "criadoEm": "2026-09-26T04:57:50.333Z"
 }

@@ -1,28 +1,64 @@
 {
   "url": "https://www.cora.com.br/",
-  "handles": { "instagram": "@cora.contapj", "linkedin": "@cora-contapj", "facebook": "@cora.contapj" },
+  "handles": {
+    "instagram": "@cora.contapj",
+    "linkedin": "@cora-contapj",
+    "facebook": "@cora.contapj"
+  },
   "analise": {
     "nicho": "fintech",
     "resumo_negocio": "A Cora é uma conta digital PJ sem mensalidade nem taxa de manutenção, com cartão sem anuidade, Pix ilimitado, emissão de boletos e réguas de cobrança automáticas. Ganha dinheiro com serviços financeiros para pequenas empresas, como antecipação de vendas no boleto.",
     "publico": "Donos de pequenas empresas e prestadores de serviço PJ que cuidam do financeiro sozinhos, perdem tempo cobrando cliente e não aguentam mais pagar tarifa de banco para movimentar o próprio dinheiro.",
-    "tom_de_voz": "Corajoso, próximo e direto. Fala com o empreendedor de igual para igual, como quem também já passou aperto no fim do mês.",
+    "tom_de_voz": "Fala com o empreendedor de igual para igual, com coragem e sem enrolação, como quem também já passou aperto no fim do mês.",
     "posicionamento": "Para quem empreende sem departamento financeiro, a Cora é a conta PJ que cobra, recebe e organiza o dinheiro sem cobrar tarifa por isso.",
     "pilares": [
-      { "nome": "Dinheiro de PJ sem mistério", "descricao": "Explicar em poucos slides o que todo dono de empresa precisa saber sobre cobrança, boleto, Pix e fluxo de caixa." },
-      { "nome": "A vida real de quem empreende", "descricao": "Situações que o pequeno empresário reconhece na hora: cliente que atrasa, planilha que não fecha, sócio que gasta sem avisar." },
-      { "nome": "Sem taxa escondida", "descricao": "Comparações honestas com o banco tradicional, sempre com fatos que a própria Cora pode provar." }
+      {
+        "nome": "Dinheiro de PJ sem mistério",
+        "descricao": "Explicar em poucos slides o que todo dono de empresa precisa saber sobre cobrança, boleto, Pix e fluxo de caixa."
+      },
+      {
+        "nome": "A vida real de quem empreende",
+        "descricao": "Situações que o pequeno empresário reconhece na hora: cliente que atrasa, planilha que não fecha, sócio que gasta sem avisar."
+      },
+      {
+        "nome": "Sem taxa escondida",
+        "descricao": "Comparações honestas com o banco tradicional, sempre com fatos que a própria Cora pode provar."
+      }
     ],
     "diagnostico": [
-      { "titulo": "O nicho vence com contraste, e a Cora ainda fala baixo", "texto": "Nas fintechs que mais engajam na nossa base, o post coloca o banco tradicional como antagonista e mostra a diferença em uma imagem. A Cora tem o argumento perfeito para isso (sem mensalidade, sem manutenção, Pix ilimitado), mas o site apresenta como lista de benefícios, não como provocação."
+      {
+        "titulo": "O nicho vence com contraste, e a Cora ainda fala baixo",
+        "texto": "Na nossa base, vários virais de fintech colocam o banco tradicional como antagonista e mostram a diferença numa imagem só. A Cora tem o argumento perfeito para isso (sem mensalidade, sem manutenção, Pix ilimitado), mas o site apresenta como lista de benefícios, não como provocação."
       },
-      { "titulo": "Cobrança é a dor mais forte e quase não aparece como conteúdo", "texto": "Réguas de cobrança automáticas e controle de boletos vencidos resolvem a dor que mais tira o sono de quem é PJ. Carrosséis educativos sobre como cobrar sem constranger o cliente são o tipo de post que o nicho salva e compartilha." },
-      { "titulo": "Falta o rosto de quem constrói a Cora", "texto": "Os posts de founders de fintech no LinkedIn superam as páginas das marcas com o mesmo conteúdo. A Cora tem uma causa clara, o empreendedor, e pode ganhar muita confiança com bastidores de decisões do time." },
-      { "titulo": "Prova social pronta para virar post", "texto": "O número de mais de 1,8 milhão de empresas que já confiaram na Cora está no site e rende um post de dado de impacto forte. Hoje ele aparece só como selo." }
+      {
+        "titulo": "Cobrança é uma dor forte e quase não aparece como conteúdo",
+        "texto": "Réguas de cobrança automáticas e controle de boletos vencidos resolvem uma dor que todo PJ conhece. Carrosséis educativos sobre como cobrar sem constranger o cliente seguem um padrão que aparece várias vezes na base de fintech: ensinar algo útil em poucos slides."
+      },
+      {
+        "titulo": "Falta o rosto de quem constrói a Cora",
+        "texto": "Na base, parte dos posts de fintech que funcionam vem do perfil pessoal de founders e executivos, não da página da marca. A Cora tem uma causa clara, o empreendedor, e pode ganhar confiança com bastidores de decisões do time."
+      },
+      {
+        "titulo": "Prova social pronta para virar post",
+        "texto": "O número de mais de 1,8 milhão de empresas que já confiaram na Cora está no site e rende um post de dado de impacto forte. Hoje ele aparece só como selo."
+      }
     ],
     "estrategia": [
-      { "rede": "instagram", "frequencia_semanal": 3, "foco": "Carrosséis educativos sobre cobrança e financeiro de PJ, mais antes e depois contra o banco tradicional. Sempre com o rosa da marca na capa." },
-      { "rede": "linkedin", "frequencia_semanal": 2, "foco": "Voz do time e dos founders: bastidores de decisões, opinião sobre o mercado de pequenas empresas e aprendizados com clientes." },
-      { "rede": "facebook", "frequencia_semanal": 2, "foco": "Reaproveitar os posts que mais salvarem no Instagram, com legenda um pouco mais explicada para o público mais velho de pequenos negócios." }
+      {
+        "rede": "instagram",
+        "frequencia_semanal": 3,
+        "foco": "Carrosséis educativos sobre cobrança e financeiro de PJ, mais antes e depois contra o banco tradicional. Sempre com o rosa da marca na capa."
+      },
+      {
+        "rede": "linkedin",
+        "frequencia_semanal": 2,
+        "foco": "Voz do time e dos founders: bastidores de decisões, opinião sobre o mercado de pequenas empresas e aprendizados com clientes."
+      },
+      {
+        "rede": "facebook",
+        "frequencia_semanal": 2,
+        "foco": "Reaproveitar os posts que mais salvarem no Instagram, com legenda um pouco mais explicada para quem chega pelo Facebook."
+      }
     ],
     "posts": [
       {
@@ -31,22 +67,45 @@
         "template": "capa-gancho",
         "gancho": "Como cobrar cliente atrasado sem virar o chato",
         "slides": [
-          { "titulo": "Como cobrar cliente atrasado sem virar o chato", "texto": "4 passos que funcionam para qualquer PJ" },
-          { "titulo": "1. Combine antes", "texto": "Data de vencimento, multa e juros no primeiro contato. Quem combina antes não precisa brigar depois." },
-          { "titulo": "2. Lembre antes de vencer", "texto": "Um aviso gentil dois dias antes resolve boa parte dos atrasos. Ninguém esquece de propósito." },
-          { "titulo": "3. Automatize o lembrete", "texto": "Régua de cobrança automática manda os avisos por você. Você para de ser o cobrador e volta a ser o dono." },
-          { "titulo": "4. Facilite o pagamento", "texto": "Boleto com desconto para quem paga em dia e Pix na hora. Quanto menos atrito, mais rápido o dinheiro entra." },
-          { "titulo": "A Cora faz os passos 3 e 4 por você", "texto": "Boletos com multa, juros e desconto e réguas de cobrança direto no app. Salva esse post para a próxima cobrança." }
+          {
+            "titulo": "Como cobrar cliente atrasado sem virar o chato",
+            "texto": "4 passos que funcionam para qualquer PJ"
+          },
+          {
+            "titulo": "1. Combine antes",
+            "texto": "Data de vencimento, multa e juros no primeiro contato. Quem combina antes não precisa brigar depois."
+          },
+          {
+            "titulo": "2. Lembre antes de vencer",
+            "texto": "Um aviso gentil dois dias antes resolve boa parte dos atrasos. Ninguém esquece de propósito."
+          },
+          {
+            "titulo": "3. Automatize o lembrete",
+            "texto": "Régua de cobrança automática manda os avisos por você. Você para de ser o cobrador e volta a ser o dono."
+          },
+          {
+            "titulo": "4. Facilite o pagamento",
+            "texto": "Boleto com desconto para quem paga em dia e Pix na hora. Quanto menos atrito, mais rápido o dinheiro entra."
+          },
+          {
+            "titulo": "A Cora faz os passos 3 e 4 por você",
+            "texto": "Boletos com multa, juros e desconto e réguas de cobrança direto no app. Salva esse post para a próxima cobrança."
+          }
         ],
         "legendas": {
-          "instagram": "Cobrar cliente não precisa ser constrangedor.\n\nNa maioria das vezes o atraso é esquecimento, não má-fé. O segredo é combinar antes, lembrar antes e deixar o pagamento fácil.\n\nNa Cora dá para configurar a régua de cobrança uma vez e deixar os lembretes rodando sozinhos.\n\nSalva para a próxima vez que alguém atrasar 📌",
+          "instagram": "Cobrar cliente não precisa ser constrangedor.\n\nNa maioria das vezes o atraso é esquecimento, não má-fé. O que funciona é combinar antes, lembrar antes e deixar o pagamento fácil.\n\nNa Cora dá para configurar a régua de cobrança uma vez e deixar os lembretes rodando sozinhos.\n\nSalva para a próxima vez que alguém atrasar 📌",
           "linkedin": "Cobrar cliente é a parte que ninguém ensina quando você abre CNPJ.\n\nO que funciona na prática:\n1. Combinar multa e juros antes de fechar\n2. Lembrar dois dias antes do vencimento\n3. Automatizar o lembrete para não depender da sua memória\n4. Dar desconto para quem paga em dia\n\nNa Cora, os passos 3 e 4 ficam no app. Qual desses você ainda faz na mão?",
-          "x": "cobrar cliente atrasado é 80% combinar antes e 20% lembrar antes. o resto é régua de cobrança automática fazendo o trabalho chato por você.",
+          "x": "cobrar cliente atrasado é, antes de tudo, combinar antes e lembrar antes. o resto a régua de cobrança automática faz por você.",
           "facebook": "Você também fica sem graça na hora de cobrar cliente?\n\nSeparamos 4 passos simples para cobrar sem virar o chato: combinar antes, lembrar antes do vencimento, automatizar o lembrete e facilitar o pagamento.\n\nNa Cora você faz tudo isso direto no app, sem pagar mensalidade."
         },
-        "hashtags": ["contapj", "empreendedorismo", "financeiro", "cora"],
+        "hashtags": [
+          "contapj",
+          "empreendedorismo",
+          "financeiro",
+          "cora"
+        ],
         "padrao_inspirador": "carrossel--erro-comum",
-        "por_que": "Ataca a dor mais emocional do PJ com um passo a passo salvável, o formato mais compartilhado de fintech na base."
+        "por_que": "Segue o padrão carrossel com gancho de erro comum da base: ensina um passo a passo salvável sobre uma dor que todo PJ reconhece."
       },
       {
         "rede_principal": "instagram",
@@ -54,8 +113,14 @@
         "template": "antes-depois",
         "gancho": "Seu banco cobra para você usar o seu dinheiro",
         "slides": [
-          { "titulo": "Banco tradicional", "texto": "Mensalidade, taxa de manutenção e tarifa para cada transferência." },
-          { "titulo": "Cora", "texto": "Sem mensalidade, sem manutenção e Pix ilimitado e gratuito." }
+          {
+            "titulo": "Banco tradicional",
+            "texto": "Mensalidade, taxa de manutenção e tarifa para cada transferência."
+          },
+          {
+            "titulo": "Cora",
+            "texto": "Sem mensalidade, sem manutenção e Pix ilimitado e gratuito."
+          }
         ],
         "legendas": {
           "instagram": "Faz a conta de quanto sua empresa pagou de tarifa no último ano.\n\nNa Cora não tem mensalidade, não tem taxa de manutenção e o Pix é ilimitado e gratuito. O dinheiro que ia para tarifa fica no seu negócio.\n\nLink na bio para abrir sua conta PJ 💗",
@@ -63,9 +128,13 @@
           "x": "pagar tarifa para movimentar o dinheiro da sua própria empresa ainda é normal pra muita gente. não deveria ser.",
           "facebook": "Antes: mensalidade, taxa de manutenção e tarifa em cada transferência.\nDepois: conta PJ sem mensalidade, sem manutenção e com Pix ilimitado.\n\nConheça a Cora."
         },
-        "hashtags": ["contapj", "semtaxas", "cora"],
+        "hashtags": [
+          "contapj",
+          "semtaxas",
+          "cora"
+        ],
         "padrao_inspirador": "antes-depois--contraintuitivo",
-        "por_que": "Contraste direto com o banco tradicional, o antagonista que mais gera engajamento em fintech."
+        "por_que": "Segue o padrão antes e depois com gancho contraintuitivo: coloca o banco tradicional como antagonista, um contraste que aparece em vários virais de fintech da base."
       },
       {
         "rede_principal": "linkedin",
@@ -73,15 +142,22 @@
         "template": "dado-impacto",
         "gancho": "1,8 milhão de empresas já confiaram na Cora",
         "slides": [
-          { "titulo": "1,8 mi", "texto": "de empresas já confiaram na Cora para cuidar do dinheiro do negócio." }
+          {
+            "titulo": "1,8 mi",
+            "texto": "de empresas já confiaram na Cora para cuidar do dinheiro do negócio."
+          }
         ],
         "legendas": {
-          "instagram": "Mais de 1,8 milhão de empresas já confiaram na Cora.\n\nCada uma delas é alguém que decidiu fazer acontecer. Obrigado por acreditar com a gente 💗",
-          "linkedin": "Mais de 1,8 milhão de empresas já confiaram na Cora.\n\nPor trás desse número tem salão de beleza, estúdio de design, loja de bairro, consultoria de uma pessoa só. Gente que abriu CNPJ com coragem e precisa de um banco que não atrapalhe.\n\nÉ para essas empresas que a gente acorda todo dia.",
+          "instagram": "Mais de 1,8 milhão de empresas já confiaram na Cora.\n\nCada uma delas é alguém que decidiu fazer acontecer. Obrigado por construir isso com a gente 💗",
+          "linkedin": "Mais de 1,8 milhão de empresas já confiaram na Cora.\n\nCada uma delas é alguém que abriu um CNPJ com coragem e precisa de um banco que não atrapalhe.\n\nObrigado por construir isso com a gente.",
           "x": "1,8 milhão de empresas já confiaram na Cora. cada uma é alguém que decidiu fazer acontecer.",
           "facebook": "Mais de 1,8 milhão de empresas já confiaram na Cora. Obrigado a cada empreendedor que faz parte dessa história."
         },
-        "hashtags": ["empreendedorismo", "pequenasempresas", "cora"],
+        "hashtags": [
+          "empreendedorismo",
+          "pequenasempresas",
+          "cora"
+        ],
         "padrao_inspirador": "dado-impacto--numero",
         "por_que": "Número real do próprio site em tamanho gigante: prova social que se lê em um segundo no feed."
       },
@@ -91,17 +167,24 @@
         "template": "bastidor",
         "gancho": "A gente não cobra mensalidade. E não é promoção.",
         "slides": [
-          { "titulo": "A gente não cobra mensalidade. E não é promoção.", "texto": "É uma decisão sobre para quem a Cora existe: para quem está começando e não pode perder dinheiro com tarifa." }
+          {
+            "titulo": "A gente não cobra mensalidade. E não é promoção.",
+            "texto": "É uma decisão sobre para quem a Cora existe: para quem está começando e não pode perder dinheiro com tarifa."
+          }
         ],
         "legendas": {
           "instagram": "Não cobrar mensalidade não é promoção de lançamento.\n\nÉ decisão. A Cora existe para quem está construindo a empresa com coragem e não pode perder dinheiro com tarifa.",
-          "linkedin": "Toda vez que alguém descobre que a Cora não cobra mensalidade, a pergunta é a mesma: até quando?\n\nNão é promoção. É uma decisão sobre para quem a gente constrói.\n\nQuem está começando uma empresa já tem custo demais. Tarifa para movimentar o próprio dinheiro não deveria ser um deles.\n\nE você, qual custo bancário mais te incomoda hoje?",
-          "x": "\"até quando a Cora vai ser sem mensalidade?\" não é promoção. é pra quem a gente constrói.",
+          "linkedin": "Não cobrar mensalidade não é promoção.\n\nÉ uma decisão sobre para quem a gente constrói.\n\nQuem está começando uma empresa já tem custo demais. Tarifa para movimentar o próprio dinheiro não deveria ser um deles.\n\nE você, qual custo bancário mais te incomoda hoje?",
+          "x": "não cobrar mensalidade não é promoção. é uma decisão sobre pra quem a gente constrói.",
           "facebook": "Não cobrar mensalidade não é promoção. É uma escolha: quem está começando uma empresa já tem custo demais."
         },
-        "hashtags": ["bastidores", "fintech", "cora"],
+        "hashtags": [
+          "bastidores",
+          "fintech",
+          "cora"
+        ],
         "padrao_inspirador": "bastidor-founder--historia-pessoal",
-        "por_que": "Bastidor com opinião clara gera conversa no LinkedIn e humaniza uma decisão de negócio."
+        "por_que": "Segue o padrão bastidor do founder com história pessoal: transforma uma decisão de negócio em opinião clara, o que costuma gerar conversa no LinkedIn."
       },
       {
         "rede_principal": "instagram",
@@ -109,12 +192,30 @@
         "template": "lista",
         "gancho": "5 coisas que sua conta PJ deveria fazer sozinha",
         "slides": [
-          { "titulo": "5 coisas que sua conta PJ deveria fazer sozinha", "texto": "" },
-          { "titulo": "Lembrar cliente do boleto", "texto": "Réguas de cobrança automáticas" },
-          { "titulo": "Aplicar multa e juros", "texto": "Direto no boleto registrado" },
-          { "titulo": "Mostrar o saldo real", "texto": "Entradas e saídas em tempo real" },
-          { "titulo": "Separar gastos dos sócios", "texto": "Cartões virtuais para cada um" },
-          { "titulo": "Receber na hora", "texto": "Pix ilimitado e gratuito" }
+          {
+            "titulo": "5 coisas que sua conta PJ deveria fazer sozinha",
+            "texto": ""
+          },
+          {
+            "titulo": "Lembrar cliente do boleto",
+            "texto": "Réguas de cobrança automáticas"
+          },
+          {
+            "titulo": "Aplicar multa e juros",
+            "texto": "Direto no boleto registrado"
+          },
+          {
+            "titulo": "Mostrar o saldo real",
+            "texto": "Entradas e saídas em tempo real"
+          },
+          {
+            "titulo": "Separar gastos dos sócios",
+            "texto": "Cartões virtuais para cada um"
+          },
+          {
+            "titulo": "Receber na hora",
+            "texto": "Pix ilimitado e gratuito"
+          }
         ],
         "legendas": {
           "instagram": "Se você ainda faz alguma dessas coisas na mão, sua conta PJ está te dando trabalho.\n\nLembrar cliente, aplicar multa, olhar saldo, separar gastos dos sócios e receber na hora. Tudo isso a Cora faz direto no app.\n\nQual dessas você mais precisa? Conta aqui 👇",
@@ -122,9 +223,13 @@
           "x": "sua conta PJ deveria: lembrar o cliente do boleto, aplicar multa sozinha, mostrar saldo real e separar gasto de sócio. se não faz, tá te dando trabalho.",
           "facebook": "5 coisas que sua conta PJ deveria fazer sozinha: lembrar o cliente do boleto, aplicar multa e juros, mostrar o saldo real, separar gastos dos sócios e receber na hora. A Cora faz."
         },
-        "hashtags": ["contapj", "gestaofinanceira", "cora"],
+        "hashtags": [
+          "contapj",
+          "gestaofinanceira",
+          "cora"
+        ],
         "padrao_inspirador": "lista--promessa",
-        "por_que": "Lista curta e concreta que o dono de empresa usa como checklist, alto potencial de salvamento."
+        "por_que": "Segue o padrão lista com gancho de promessa: itens curtos e concretos que o dono de empresa usa como checklist e tende a salvar."
       },
       {
         "rede_principal": "facebook",
@@ -132,7 +237,10 @@
         "template": "citacao",
         "gancho": "Empreender já exige coragem. Seu banco não precisa exigir paciência.",
         "slides": [
-          { "titulo": "Cora", "texto": "Empreender já exige coragem. Seu banco não precisa exigir paciência." }
+          {
+            "titulo": "Cora",
+            "texto": "Empreender já exige coragem. Seu banco não precisa exigir paciência."
+          }
         ],
         "legendas": {
           "instagram": "Empreender já exige coragem. Seu banco não precisa exigir paciência 💗",
@@ -140,9 +248,12 @@
           "x": "empreender já exige coragem. seu banco não precisa exigir paciência.",
           "facebook": "Empreender já exige coragem. Seu banco não precisa exigir paciência.\n\nConta PJ sem burocracia e sem taxas escondidas. Conheça a Cora."
         },
-        "hashtags": ["empreendedorismo", "cora"],
+        "hashtags": [
+          "empreendedorismo",
+          "cora"
+        ],
         "padrao_inspirador": "citacao--contraintuitivo",
-        "por_que": "Frase curta com tensão entre duas ideias, formato de citação que mais circula no nicho."
+        "por_que": "Segue o padrão citação com gancho contraintuitivo: uma frase curta com tensão entre duas ideias, fácil de concordar e compartilhar."
       },
       {
         "rede_principal": "linkedin",
@@ -150,7 +261,10 @@
         "template": "print-x",
         "gancho": "O financeiro da pequena empresa é o dono às 23h com uma planilha aberta",
         "slides": [
-          { "titulo": "", "texto": "O departamento financeiro da maioria das pequenas empresas é o próprio dono, às 23h, com uma planilha aberta e três boletos vencidos. Ferramenta boa é a que devolve essa noite para ele." }
+          {
+            "titulo": "",
+            "texto": "O departamento financeiro da maioria das pequenas empresas é o próprio dono, às 23h, com uma planilha aberta e três boletos vencidos. Ferramenta boa é a que devolve essa noite para ele."
+          }
         ],
         "legendas": {
           "instagram": "Se você é o financeiro da sua empresa às 23h, esse post é para você.\n\nA Cora mostra entradas, saídas e boletos vencidos em tempo real, direto no app. Para você fechar a planilha mais cedo.",
@@ -158,9 +272,12 @@
           "x": "o departamento financeiro da maioria das pequenas empresas é o dono, às 23h, com uma planilha aberta e três boletos vencidos.",
           "facebook": "O financeiro da pequena empresa costuma ser o próprio dono, tarde da noite, com uma planilha aberta. A Cora existe para devolver essa noite para você."
         },
-        "hashtags": ["empreendedorismo", "pequenasempresas"],
+        "hashtags": [
+          "empreendedorismo",
+          "pequenasempresas"
+        ],
         "padrao_inspirador": "print-tweet--polemica",
-        "por_que": "Observação afiada no formato de print de tweet, que gera identificação e comentário no LinkedIn."
+        "por_que": "Segue o padrão print de tweet com polêmica: uma observação afiada que gera identificação e comentário."
       },
       {
         "rede_principal": "instagram",
@@ -168,23 +285,48 @@
         "template": "checklist",
         "gancho": "Checklist antes de escolher sua conta PJ",
         "slides": [
-          { "titulo": "Checklist antes de escolher sua conta PJ", "texto": "" },
-          { "titulo": "Tem mensalidade ou taxa de manutenção?", "texto": "" },
-          { "titulo": "O Pix é ilimitado e gratuito?", "texto": "" },
-          { "titulo": "O cartão cobra anuidade?", "texto": "" },
-          { "titulo": "Dá para emitir boleto com multa e juros?", "texto": "" },
-          { "titulo": "Tem cobrança automática?", "texto": "" },
-          { "titulo": "Mostra o saldo em tempo real?", "texto": "" }
+          {
+            "titulo": "Checklist antes de escolher sua conta PJ",
+            "texto": ""
+          },
+          {
+            "titulo": "Tem mensalidade ou taxa de manutenção?",
+            "texto": ""
+          },
+          {
+            "titulo": "O Pix é ilimitado e gratuito?",
+            "texto": ""
+          },
+          {
+            "titulo": "O cartão cobra anuidade?",
+            "texto": ""
+          },
+          {
+            "titulo": "Dá para emitir boleto com multa e juros?",
+            "texto": ""
+          },
+          {
+            "titulo": "Tem cobrança automática?",
+            "texto": ""
+          },
+          {
+            "titulo": "Mostra o saldo em tempo real?",
+            "texto": ""
+          }
         ],
         "legendas": {
           "instagram": "Antes de abrir conta PJ em qualquer lugar, passa por esse checklist.\n\nSalva e manda para aquele amigo que acabou de abrir CNPJ 📌",
-          "linkedin": "Para quem acabou de abrir CNPJ: 6 perguntas antes de escolher a conta PJ.\n\nTem mensalidade? O Pix é ilimitado? O cartão cobra anuidade? Emite boleto com multa e juros? Tem cobrança automática? Mostra saldo em tempo real?\n\nNa Cora a resposta certa é sim para todas.",
+          "linkedin": "Para quem acabou de abrir CNPJ: 6 perguntas antes de escolher a conta PJ.\n\nTem mensalidade? O Pix é ilimitado? O cartão cobra anuidade? Emite boleto com multa e juros? Tem cobrança automática? Mostra saldo em tempo real?\n\nNa Cora: sem mensalidade, sem anuidade, e sim para todo o resto.",
           "x": "antes de escolher conta PJ pergunte: tem mensalidade? pix é ilimitado? cartão tem anuidade? tem cobrança automática?",
           "facebook": "Vai abrir conta PJ? Salva esse checklist com 6 perguntas para fazer antes de escolher."
         },
-        "hashtags": ["contapj", "mei", "cora"],
+        "hashtags": [
+          "contapj",
+          "mei",
+          "cora"
+        ],
         "padrao_inspirador": "lista--pergunta",
-        "por_que": "Checklist de decisão é conteúdo útil de topo de funil e ainda posiciona a Cora contra a concorrência."
+        "por_que": "Segue o padrão lista com gancho de pergunta: um checklist de decisão útil para quem está escolhendo conta, que ainda posiciona a Cora contra a concorrência."
       }
     ]
   }

@@ -117,7 +117,7 @@ export function EntrevistasAdmin() {
           <Numero valor={n?.dorMedia == null ? "–" : fmt(n.dorMedia, 1)} rotulo="nota média de dor (1 a 5)" />
           <Numero valor={fmt(n?.pagariamAlgo ?? 0)} rotulo="pagariam alguma coisa" />
           <Numero valor={fmt(n?.querTestar ?? 0)} rotulo="quiseram testar na hora" />
-          <Numero valor={fmt(n?.formulario.total ?? 0)} rotulo="respostas do formulário do site" meta={n?.formulario.total ? `${n.formulario.postariam} postariam os posts` : ""} />
+          <Numero valor={fmt(n?.formulario.total ?? 0)} rotulo="respostas do formulário do site" meta={n?.formulario.total ? `${n.formulario.postariam} publicariam os posts` : ""} />
         </div>
         {n && Object.keys(n.jaTentou).length > 0 && (
           <div className="mt-8 border-t border-papel/15 pt-5">
@@ -235,7 +235,7 @@ export function EntrevistasAdmin() {
               onClick={() => set("quer_testar", !f.quer_testar)}
               className={`h-11 border px-4 font-semibold ${f.quer_testar ? "border-salvia bg-salvia text-papel" : "border-tinta/25"}`}
             >
-              {f.quer_testar ? "Sim, testou ✓" : "Não / não perguntei"}
+              {f.quer_testar ? "Sim, quis testar ✓" : "Não / não perguntei"}
             </button>
           </Pergunta>
         </div>

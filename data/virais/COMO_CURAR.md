@@ -1,6 +1,6 @@
-# Como curar a base de virais em 3 minutos
+# Como curar a base de virais
 
-A base é o que sustenta a frase "a gente analisa o que viraliza no seu nicho". Cada item precisa ser defensável na frente do júri, então a regra de ouro é: se você não viu, não escreve.
+A base é o que sustenta a frase "a gente analisa o que viraliza no seu nicho". Cada item precisa ser defensável na frente do júri, então a regra é: se você não viu, não escreve.
 
 ## O caminho rápido: /admin/virais
 
