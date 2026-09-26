@@ -9,13 +9,21 @@ export * from "./constantes";
 const regua = z.coerce.number().min(0).max(1);
 const respostaFounder = z.string().trim().max(600, "Cada resposta pode ter até 600 caracteres.").optional();
 
-/** "O que só você sabe": três respostas curtas do founder, por texto ou áudio. Vira a primeira fonte de tema. */
+/**
+ * "O que só você sabe": respostas curtas do founder, por texto ou áudio. Vira a primeira fonte de tema.
+ * As três perguntas da tela são problema_cliente, objecao_cliente e diferencial. crenca_contraria e
+ * historia são da versão anterior da tela: continuam aceitas (preferências salvas no navegador) e usadas.
+ */
 export const conhecimentoFounderSchema = z.object({
-  /** A objeção ou dúvida que o founder mais ouve do cliente. */
+  /** O problema que a empresa resolve para o cliente, com as palavras do founder. */
+  problema_cliente: respostaFounder,
+  /** A dúvida ou objeção que mais aparece antes de alguém comprar. */
   objecao_cliente: respostaFounder,
-  /** O que o mercado acredita e o founder acha errado. */
+  /** Por que o cliente escolhe a empresa e não outra opção. */
+  diferencial: respostaFounder,
+  /** Versão anterior: o que o mercado acredita e o founder acha errado. */
   crenca_contraria: respostaFounder,
-  /** Um momento da empresa que mudou como o founder enxerga o problema. */
+  /** Versão anterior: um momento que mudou como o founder enxerga o problema. */
   historia: respostaFounder,
 });
 export type ConhecimentoFounder = z.infer<typeof conhecimentoFounderSchema>;
@@ -58,6 +66,8 @@ export const preferenciasSchema = z.object({
     .max(3)
     .default([]),
   conhecimento_founder: conhecimentoFounderSchema.optional(),
+  /** Objetivo escrito pelo founder, além (ou no lugar) dos botões de objetivo. */
+  objetivo_livre: z.string().trim().max(200, "O objetivo pode ter até 200 caracteres.").optional(),
   /** Para onde mandar quem gostar do post (agendamento, WhatsApp, cadastro). Posts de gerar_clientes terminam com esse link e UTM. */
   link_destino: z.string().trim().max(500).url("O link de destino precisa ser um endereço completo, com https://.").optional(),
   /** Concorrentes ou perfis que o founder acompanha (até 3 links). Só o motor usa, para achar ganchos e brechas; não aparece no resultado. */
@@ -151,6 +161,27 @@ export interface Aprendizados {
   ajuste: string;
 }
 
+export interface BenchmarkConcorrente {
+  url: string;
+  nome: string;
+  /** Formatos que aparecem no que foi lido (carrossel, vídeo curto, bastidor...). */
+  formatos: string[];
+  /** Tipos de gancho ou ângulos que eles usam. */
+  angulos: string[];
+  /** Uma frase: o que dá para aproveitar ou onde está a brecha. */
+  oportunidade: string;
+}
+
+/** Resposta de POST /api/concorrentes: sugestões para a tela de ajustes. */
+export interface SugestaoConcorrente {
+  nome: string;
+  url: string;
+  /** Por que parece concorrente ou referência. */
+  motivo: string;
+  /** "ia": sugerido pela IA a partir do site e do segmento. "base_nicho": perfil de referência da base curada. */
+  fonte: "ia" | "base_nicho";
+}
+
 /** Campos extras que o motor novo adiciona à análise. */
 export interface ExtrasAnalise {
   contexto_inferido?: { nicho: string; publico: string; tom_resumo: string; objetivos: string[]; confianca: "alta" | "media" | "baixa" };
@@ -164,13 +195,20 @@ export interface ExtrasAnalise {
   sem_site?: boolean;
   /** Ausente quando nenhum post publicado tem alcance informado. */
   aprendizados?: Aprendizados;
+  /**
+   * O que os concorrentes informados fazem, lido da página pública deles na mesma chamada de IA.
+   * Sem número de desempenho: as redes não liberam esses dados. A aba de resultados marca isso.
+   */
+  benchmark_concorrentes?: BenchmarkConcorrente[];
 }
+
+export const CHAVES_CONHECIMENTO = ["problema_cliente", "objecao_cliente", "diferencial", "crenca_contraria", "historia"] as const;
 
 /** Só as respostas preenchidas; null quando o founder pulou as três. */
 export function conhecimentoPreenchido(c?: ConhecimentoFounder | null): ConhecimentoFounder | null {
   if (!c) return null;
   const out: ConhecimentoFounder = {};
-  for (const k of ["objecao_cliente", "crenca_contraria", "historia"] as const) {
+  for (const k of CHAVES_CONHECIMENTO) {
     const v = c[k]?.trim();
     if (v) out[k] = v;
   }

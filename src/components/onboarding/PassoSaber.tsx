@@ -7,7 +7,7 @@ import { BotaoGravar } from "./ui";
 import { useDitado } from "./useDitado";
 
 export type Saber = Required<{ [K in keyof ConhecimentoFounder]: string }>;
-export const SABER_VAZIO: Saber = { objecao_cliente: "", crenca_contraria: "", historia: "" };
+export const SABER_VAZIO: Saber = { problema_cliente: "", objecao_cliente: "", diferencial: "", crenca_contraria: "", historia: "" };
 
 const LIMITE = 600;
 const CAMPO =
