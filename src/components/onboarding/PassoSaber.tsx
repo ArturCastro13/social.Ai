@@ -14,8 +14,9 @@ const CAMPO =
   "mt-3 w-full rounded-2xl border border-tinta/20 bg-white px-4 py-3 text-base leading-relaxed outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus-visible:outline-none";
 
 /**
- * Passo "O que só você sabe": três perguntas curtas, por texto ou voz. É o que nenhuma IA genérica
- * tira do site. Nada é obrigatório e o "Pular por agora" fica sempre à vista.
+ * Passo "O que só você sabe": três perguntas diretas sobre o negócio (problema, dúvida antes da compra
+ * e diferencial), por texto ou voz. Nada é obrigatório e o "Pular por agora" fica sempre à vista.
+ * As chaves antigas (crenca_contraria, historia) continuam no estado, mas não aparecem aqui.
  */
 export function PassoSaber({
   saber,
@@ -24,6 +25,7 @@ export function PassoSaber({
   lendo,
   espera,
   onVoltar,
+  semSite,
 }: {
   saber: Saber;
   onChange: (s: Saber) => void;
@@ -35,6 +37,7 @@ export function PassoSaber({
   espera?: string | null;
   /** Volta para a tela anterior (caminho sem site). */
   onVoltar?: () => void;
+  semSite?: boolean;
 }) {
   const voz = useDitado(60);
   const atual = useRef(saber);
@@ -58,8 +61,11 @@ export function PassoSaber({
         </button>
       )}
       <p className="text-sm font-medium text-pauta-escura">Passo principal</p>
-      <h1 className="mt-2 text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl">O que só você sabe</h1>
-      <p className="mt-3 text-lg leading-relaxed text-tinta-2">Isso é o que o ChatGPT não sabe sobre a sua empresa. Uma ou duas linhas bastam{voz.temVoz ? ", e dá para responder falando" : ""}.</p>
+      <h1 className="mt-2 text-balance font-display text-3xl font-semibold leading-[1.1] tracking-[-0.03em] sm:text-4xl">Três perguntas sobre o seu negócio</h1>
+      <p className="mt-3 text-lg leading-relaxed text-tinta-2">
+        {semSite ? "Isso é o que nenhuma IA acha sozinha." : "Isso é o que nenhuma IA acha no seu site."} Uma ou duas linhas bastam
+        {voz.temVoz ? ", e dá para responder falando" : ""}.
+      </p>
       {(espera || lendo) && (
         <p className="mt-2 text-sm text-tinta-3" role="status" aria-live="polite">
           {espera ?? `Enquanto isso, a gente lê ${lendo}.`} <span className="inline-block animate-pisca text-pauta">▍</span>

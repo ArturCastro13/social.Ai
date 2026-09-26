@@ -9,9 +9,10 @@ import {
   fraseDoTom,
   lerEmpresaSalva,
   lerPreferenciasSalvas,
-  normalizarConcorrentes,
   normalizarLink,
   PERFIS,
+  PERGUNTAS_FOUNDER,
+  saberSalvo,
   salvarEmpresa,
   salvarPreferencias,
   sugestoesPadrao,
@@ -25,7 +26,8 @@ import { NICHOS, type BrandProfile } from "@/lib/types";
 import { PassoSaber, SABER_VAZIO, type Saber } from "./PassoSaber";
 import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
 import { EMPRESA_VAZIA, empresaParaMarca, TelaSemSite, type Empresa } from "./TelaSemSite";
-import { CampoConcorrentes, Chip } from "./ui";
+import { CampoConcorrentes, useConcorrentes } from "./Concorrentes";
+import { Chip } from "./ui";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
 
@@ -111,7 +113,8 @@ export function TelaAjustes({
   // Passo "O que só você sabe" vem antes dos ajustes e aproveita o tempo de leitura do site.
   const [passo, setPasso] = useState<"empresa" | "saber" | "ajustes">(semSite ? "empresa" : "saber");
   const [empresa, setEmpresa] = useState<Empresa>(EMPRESA_VAZIA);
-  const [concorrentes, setConcorrentes] = useState<string[]>(["", "", ""]);
+  const concorrentes = useConcorrentes();
+  const [objetivoLivre, setObjetivoLivre] = useState("");
   const execucao = useRef(0);
   const [saber, setSaber] = useState<Saber>(SABER_VAZIO);
   const [usarSaber, setUsarSaber] = useState(true);
@@ -159,7 +162,12 @@ export function TelaAjustes({
     if (publicoInformado.trim()) s = { ...s, publico_alvo: publicoInformado.trim().slice(0, 300) };
     setBrand(b);
     setSugestao(s);
-    const salvas = lerPreferenciasSalvas(pronta ? pronta.dominio : dominioDe(dados.url));
+    const salvasAntes = lerPreferenciasSalvas(pronta ? pronta.dominio : dominioDe(dados.url));
+    // Links salvos entram antes da busca, para a busca não marcar nada por cima da escolha antiga.
+    concorrentes.restaurar(salvasAntes?.concorrentes ?? []);
+    // Sem site, a busca já saiu da tela da empresa. Com site, sai agora e não trava a tela.
+    if (!pronta && b) concorrentes.buscar(b, s.publico_alvo);
+    const salvas = salvasAntes;
     if (salvas) {
       setDaUltimaVez(true);
       if (!dados.perfil && salvas.perfil_alvo) setPerfil(salvas.perfil_alvo);
@@ -177,10 +185,10 @@ export function TelaAjustes({
       }
       const cf = salvas.conhecimento_founder;
       // Só preenche se a pessoa ainda não começou a escrever enquanto o site carregava.
-      if (cf) setSaber((atual) => (Object.values(atual).some((v) => v.trim()) ? atual : { ...SABER_VAZIO, ...cf }));
+      // Respostas antigas (com as perguntas da versão anterior) ficam guardadas, mas a tela mostra só as três novas.
+      if (cf) setSaber((atual) => (Object.values(atual).some((v) => v.trim()) ? atual : { ...SABER_VAZIO, ...saberSalvo(cf) }));
       setLink(salvas.link_destino ?? "");
-      const conc = salvas.concorrentes ?? [];
-      if (conc.length) setConcorrentes((atual) => (atual.some((v) => v.trim()) ? atual : [...conc, "", "", ""].slice(0, 3)));
+      setObjetivoLivre(salvas.objetivo_livre ?? "");
       const insp = salvas.inspiracoes.map((i) => i.url).slice(0, 3);
       setTurbo({
         inspiracoes: [...insp, "", "", ""].slice(0, 3),
@@ -254,12 +262,15 @@ export function TelaAjustes({
       .map((url) => ({ url, tipo: tipoDaInspiracao(url) }));
     const conhecimento = usarSaber
       ? conhecimentoPreenchido({
+          problema_cliente: saber.problema_cliente.slice(0, 600),
           objecao_cliente: saber.objecao_cliente.slice(0, 600),
+          diferencial: saber.diferencial.slice(0, 600),
           crenca_contraria: saber.crenca_contraria.slice(0, 600),
           historia: saber.historia.slice(0, 600),
         })
       : null;
     const destino = normalizarLink(link);
+    const objetivoEscrito = objetivoLivre.trim().slice(0, 200);
     return {
       perfil_alvo: perfil,
       ...(publico.trim() ? { publico_alvo: publico.trim().slice(0, 300) } : {}),
@@ -270,6 +281,7 @@ export function TelaAjustes({
         ...(turbo.fala.trim() ? { transcricao_audio: turbo.fala.trim().slice(0, 6000) } : {}),
       },
       objetivos,
+      ...(objetivoEscrito ? { objetivo_livre: objetivoEscrito } : {}),
       tom_de_voz: tom,
       formatos_permitidos: formatos,
       frequencia_escolhida: frequencia,
@@ -277,7 +289,7 @@ export function TelaAjustes({
       inspiracoes,
       ...(turbo.brandBook.trim() ? { brand_book_texto: turbo.brandBook.trim().slice(0, 20000) } : {}),
       noticias: [],
-      concorrentes: normalizarConcorrentes(concorrentes),
+      concorrentes: concorrentes.finais(),
     };
   }
 
@@ -333,7 +345,6 @@ export function TelaAjustes({
         founder={founder}
         onFounder={setFounder}
         concorrentes={concorrentes}
-        onConcorrentes={setConcorrentes}
         onContinuar={confirmarEmpresa}
       />
     );
@@ -348,6 +359,7 @@ export function TelaAjustes({
         onChange={setSaber}
         lendo={carregando && !semSite ? dominio : null}
         espera={carregando && semSite ? `Enquanto isso, a gente prepara as sugestões para ${nomeEmpresa}.` : null}
+        semSite={semSite}
         onVoltar={semSite ? () => irPara("empresa") : undefined}
         onContinuar={(usar) => {
           setUsarSaber(usar);
@@ -358,7 +370,7 @@ export function TelaAjustes({
     );
   }
 
-  const respondidas = usarSaber ? Object.values(saber).filter((v) => v.trim()).length : 0;
+  const respondidas = usarSaber ? PERGUNTAS_FOUNDER.filter((p) => saber[p.id].trim()).length : 0;
   const linkInvalido = link.trim() !== "" && !normalizarLink(link);
 
   if (carregando) {
@@ -422,7 +434,7 @@ export function TelaAjustes({
 
       <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-tinta/10 bg-white px-4 py-3 text-sm text-tinta-2">
         <span>
-          <strong className="text-tinta">O que só você sabe:</strong>{" "}
+          <strong className="text-tinta">Sobre o seu negócio:</strong>{" "}
           {respondidas ? `${respondidas} de 3 respondidas, e elas viram assunto de post.` : `pulado por agora. Os posts saem só do ${semSite ? "que você contou" : "site"}.`}
         </span>
         <button
@@ -487,7 +499,7 @@ export function TelaAjustes({
         </div>
 
         {/* Sem site, os concorrentes já foram pedidos na tela da empresa. */}
-        {!semSite && <CampoConcorrentes valores={concorrentes} onChange={setConcorrentes} titulo={SUBTITULO} />}
+        {!semSite && <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />}
 
         <fieldset>
           <legend className={SUBTITULO}>Quem assina os posts</legend>
@@ -521,6 +533,18 @@ export function TelaAjustes({
               </Chip>
             ))}
           </div>
+          <label htmlFor="ajuste-objetivo-livre" className="mt-4 block text-sm text-tinta-2">
+            Ou escreva com as suas palavras <span className="text-tinta-3">(opcional)</span>
+          </label>
+          <input
+            id="ajuste-objetivo-livre"
+            value={objetivoLivre}
+            onChange={(e) => setObjetivoLivre(e.target.value)}
+            maxLength={200}
+            autoComplete="off"
+            placeholder="Ex.: fechar 10 clínicas novas até dezembro"
+            className="mt-1 h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3 focus:border-tinta"
+          />
         </fieldset>
 
         <fieldset>

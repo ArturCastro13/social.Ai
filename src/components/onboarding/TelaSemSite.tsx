@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import type { EmpresaSemSite } from "@/lib/brand/sem-site";
+import { useEffect, useState } from "react";
+import { brandSemSite, type EmpresaSemSite } from "@/lib/brand/sem-site";
 import type { RedeArroba } from "@/lib/client/onboarding";
 import { NICHOS, type Nicho } from "@/lib/types";
 import { CampoPrint } from "./AjustesRedes";
-import { CampoArroba, CampoConcorrentes, Chip } from "./ui";
+import { CampoConcorrentes, type ControleConcorrentes } from "./Concorrentes";
+import { CampoArroba, Chip } from "./ui";
 
 export type RedeEmpresa = "instagram" | "linkedin" | "x" | "facebook";
 
@@ -69,18 +70,27 @@ export function TelaSemSite({
   founder,
   onFounder,
   concorrentes,
-  onConcorrentes,
   onContinuar,
 }: {
   empresa: Empresa;
   onChange: (e: Empresa) => void;
   founder: { valor: string; rede: RedeArroba };
   onFounder: (f: { valor: string; rede: RedeArroba }) => void;
-  concorrentes: string[];
-  onConcorrentes: (c: string[]) => void;
+  concorrentes: ControleConcorrentes;
   onContinuar: () => void;
 }) {
   const [erros, setErros] = useState<{ nome?: string; descricao?: string }>({});
+
+  // Com nome e descrição, pede sugestões de concorrentes. Espera a pessoa parar de digitar.
+  const { buscar } = concorrentes;
+  const nome = empresa.nome.trim();
+  const descricao = empresa.descricao.trim();
+  const { nicho, publico } = empresa;
+  useEffect(() => {
+    if (!nome || descricao.length < 20) return;
+    const t = setTimeout(() => buscar(brandSemSite({ nome, descricao, nicho: nicho ?? undefined, publico }), publico), 1200);
+    return () => clearTimeout(t);
+  }, [buscar, nome, descricao, nicho, publico]);
 
   function continuar(ev: React.FormEvent) {
     ev.preventDefault();
@@ -266,7 +276,7 @@ export function TelaSemSite({
         </div>
 
         <div className="border-t border-tinta/10 pt-6">
-          <CampoConcorrentes valores={concorrentes} onChange={onConcorrentes} titulo={SUBTITULO} />
+          <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />
         </div>
       </div>
 

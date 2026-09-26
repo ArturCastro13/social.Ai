@@ -104,15 +104,15 @@ export function Video() {
 }
 
 const PERGUNTAS_FOUNDER = [
-  "Qual a objeção que você mais ouve do seu cliente?",
-  "O que o seu mercado acredita que você acha errado?",
-  "Um momento da empresa que mudou como você vê o problema.",
+  "Qual problema você resolve para o seu cliente?",
+  "Qual dúvida mais aparece antes de alguém comprar?",
+  "Por que o cliente escolhe vocês e não outra opção?",
 ];
 
 function CartaoPerguntas() {
   return (
     <div className={`${CARTAO} p-7 sm:p-9`}>
-      <p className="text-sm text-tinta-3">O que só você sabe</p>
+      <p className="text-sm text-tinta-3">Três perguntas sobre o seu negócio</p>
       <ol className="mt-5 divide-y divide-tinta/10">
         {PERGUNTAS_FOUNDER.map((q, i) => (
           <li key={q} style={{ "--atraso": `${i * 110}ms` } as CSSProperties} className="entrada py-4 first:pt-0 last:pb-0">
@@ -123,7 +123,7 @@ function CartaoPerguntas() {
             {i === 0 && (
               <div className="mt-3 rounded-2xl bg-papel-2 px-4 py-3">
                 <p className="text-xs text-tinta-3">Exemplo de resposta</p>
-                <p className="mt-1 font-serif text-lg italic leading-snug">&ldquo;Todo mundo acha que trocar de sistema vai parar a operação por um mês.&rdquo;</p>
+                <p className="mt-1 font-serif text-lg italic leading-snug">&ldquo;A clínica perde paciente porque ninguém responde o WhatsApp depois das seis da tarde.&rdquo;</p>
               </div>
             )}
           </li>
@@ -203,8 +203,8 @@ export function ComoFunciona({
           <Passos
             abas={[
               {
-                titulo: "Cole o site e conte o que só você sabe",
-                texto: "O site dá a marca. Três perguntas, não quarenta, dão o assunto. Dá para responder por áudio.",
+                titulo: "Cole o site e responda três perguntas",
+                texto: "O site dá a marca. As perguntas dão o que o site não conta: o problema, a dúvida e o motivo da escolha. Dá para responder por áudio.",
                 painel: <CartaoPerguntas />,
               },
               {

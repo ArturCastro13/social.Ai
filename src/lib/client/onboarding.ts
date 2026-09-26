@@ -1,5 +1,6 @@
 // Apoio do onboarding em camadas (telas 1, 2 e 3). Tudo aqui roda no navegador e não chama IA.
-import type { FormatoMotor, Frequencia, ObjetivoId, Preferencias, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
+import type { ConhecimentoFounder, FormatoMotor, Frequencia, ObjetivoId, Preferencias, SugestaoConcorrente, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
+import type { BrandProfile } from "@/lib/types";
 
 export type PerfilAlvo = Preferencias["perfil_alvo"];
 export type RedeArroba = "instagram" | "linkedin" | "x";
@@ -26,21 +27,21 @@ export function detectarRede(valor: string): RedeArroba | null {
 }
 
 /** As três perguntas do passo "O que só você sabe", na ordem da tela. */
-export const PERGUNTAS_FOUNDER: { id: "objecao_cliente" | "crenca_contraria" | "historia"; pergunta: string; exemplo: string }[] = [
+export const PERGUNTAS_FOUNDER: { id: "problema_cliente" | "objecao_cliente" | "diferencial"; pergunta: string; exemplo: string }[] = [
+  {
+    id: "problema_cliente",
+    pergunta: "Qual problema você resolve para o seu cliente?",
+    exemplo: "Ex.: Dono de loja perde venda porque demora para responder no WhatsApp.",
+  },
   {
     id: "objecao_cliente",
-    pergunta: "Qual a objeção ou dúvida que você mais ouve do seu cliente?",
-    exemplo: "Ex.: Todo mundo pergunta se precisa trocar de banco para usar.",
+    pergunta: "Qual dúvida mais aparece antes de alguém comprar?",
+    exemplo: "Ex.: Se precisa trocar de sistema para usar.",
   },
   {
-    id: "crenca_contraria",
-    pergunta: "O que o seu mercado acredita que você acha errado?",
-    exemplo: "Ex.: Que PME não liga para gestão financeira. Liga, só não tem tempo.",
-  },
-  {
-    id: "historia",
-    pergunta: "Conta um momento da empresa que mudou como você enxerga o problema.",
-    exemplo: "Ex.: Um cliente fechou as portas com dinheiro para receber. Ali entendi que...",
+    id: "diferencial",
+    pergunta: "Por que o cliente escolhe vocês e não outra opção?",
+    exemplo: "Ex.: A gente configura tudo em um dia, sem precisar de TI.",
   },
 ];
 
@@ -134,6 +135,56 @@ export function normalizarConcorrentes(links: string[]): string[] {
     if (u && u.length <= 500) vistos.add(u);
   }
   return [...vistos].slice(0, 3);
+}
+
+/**
+ * Sugestões de concorrentes do POST /api/concorrentes. Qualquer falha (rota ausente, tempo esgotado,
+ * resposta estranha) vira lista vazia: os campos manuais continuam valendo.
+ */
+export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: string, sinal?: AbortSignal): Promise<SugestaoConcorrente[]> {
+  // Controlador próprio em vez de AbortSignal.any, que falta em iPhone mais antigo.
+  const ctrl = new AbortController();
+  const parar = () => ctrl.abort();
+  const relogio = setTimeout(parar, 20000);
+  sinal?.addEventListener("abort", parar);
+  let corpo: { sugestoes?: unknown };
+  try {
+    const res = await fetch("/api/concorrentes", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ brand, publico: publico.trim().slice(0, 300) || undefined }),
+      signal: ctrl.signal,
+    });
+    if (!res.ok) throw new Error(String(res.status));
+    corpo = (await res.json()) as { sugestoes?: unknown };
+  } finally {
+    clearTimeout(relogio);
+    sinal?.removeEventListener("abort", parar);
+  }
+  const vistos = new Set<string>();
+  const out: SugestaoConcorrente[] = [];
+  for (const s of Array.isArray(corpo?.sugestoes) ? corpo.sugestoes : []) {
+    if (!s || typeof s !== "object") continue;
+    const { nome, url, motivo, fonte } = s as Partial<SugestaoConcorrente>;
+    const link = typeof url === "string" ? normalizarLink(url) : null;
+    if (!link || link.length > 500 || vistos.has(link) || typeof nome !== "string" || !nome.trim()) continue;
+    vistos.add(link);
+    out.push({
+      nome: nome.trim().slice(0, 80),
+      url: link,
+      motivo: typeof motivo === "string" ? motivo.trim().slice(0, 200) : "",
+      fonte: fonte === "base_nicho" ? "base_nicho" : "ia",
+    });
+  }
+  return out.slice(0, 6);
+}
+
+/** Respostas salvas, só com texto. Chaves antigas (crenca_contraria, historia) ficam guardadas e seguem para o motor. */
+export function saberSalvo(cf: ConhecimentoFounder | undefined): Partial<Record<keyof ConhecimentoFounder, string>> {
+  const out: Partial<Record<keyof ConhecimentoFounder, string>> = {};
+  if (!cf || typeof cf !== "object") return out;
+  for (const [k, v] of Object.entries(cf)) if (typeof v === "string") out[k as keyof ConhecimentoFounder] = v.slice(0, 600);
+  return out;
 }
 
 // ---------- Memória local por domínio ----------
