@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { adminOk, erro, json, lerJson, options } from "@/lib/http";
+import { adminOk, erro, json, lerJson, MSG_SENHA, options } from "@/lib/http";
 import { store } from "@/lib/store";
 import { PERGUNTAS_VALIDACAO } from "@/lib/validacao";
 
@@ -28,6 +28,6 @@ export async function POST(req: Request) {
 
 /** Respostas agregadas, usadas no painel de entrevistas do time. */
 export async function GET(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   return json(await store.listarValidacoes());
 }

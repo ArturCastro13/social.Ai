@@ -30,6 +30,7 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
   const [email, setEmail] = useState<string | null>(() => (typeof window === "undefined" ? null : emailSalvo()));
   const [gate, setGate] = useState<null | (() => void)>(null);
   const [zip, setZip] = useState<{ feito: number; total: number } | null>(null);
+  const [aviso, setAviso] = useState("");
   const b = analise.brand;
   const nicho = NICHOS.find((n) => n.id === analise.nicho)?.nome ?? analise.nicho;
 
@@ -57,7 +58,12 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
 
   function baixarUma(url: string, nome: string) {
     comEmail(async () => {
-      const res = await fetch(url);
+      setAviso("");
+      const res = await fetch(url).catch(() => null);
+      if (!res?.ok) {
+        setAviso("Não deu para baixar essa arte agora. Tente de novo em instantes.");
+        return;
+      }
       const blob = await res.blob();
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
@@ -70,8 +76,12 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
   function baixarTudo() {
     comEmail(async () => {
       setZip({ feito: 0, total: 1 });
+      setAviso("");
       try {
-        await baixarZip(analise, pers, (feito, total) => setZip({ feito, total }));
+        const r = await baixarZip(analise, pers, (feito, total) => setZip({ feito, total }));
+        if (r.falhas) setAviso(`${r.falhas} de ${r.total} imagens não vieram; o ZIP foi baixado com as demais.`);
+      } catch (e) {
+        setAviso((e as Error).message);
       } finally {
         setZip(null);
       }
@@ -235,6 +245,11 @@ export function Painel({ analise, onNova }: { analise: Analise; onNova: () => vo
               {zip ? `Montando o ZIP ${Math.round((zip.feito / Math.max(zip.total, 1)) * 100)}%` : "Baixar tudo em ZIP"}
             </button>
           </div>
+          {aviso && (
+            <p className="mt-4 border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm" role="alert">
+              {aviso}
+            </p>
+          )}
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {analise.posts.map((p, i) => (
               <div key={p.id} id={`post-${p.id}`} className="scroll-mt-6">

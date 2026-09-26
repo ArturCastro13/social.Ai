@@ -37,10 +37,24 @@ describe("motor", () => {
   });
   it("calendário respeita um post por dia e a frequência da rede", () => {
     const posts = Array.from({ length: 8 }, (_, i) => ({ id: `p${i}`, rede_principal: i % 2 ? "linkedin" : "instagram" }) as PostGerado);
-    const cal = montarCalendario(posts, [{ rede: "linkedin", frequencia_semanal: 2, foco: "" }, { rede: "instagram", frequencia_semanal: 3, foco: "" }], new Date("2026-09-26T12:00:00"));
+    const cal = montarCalendario(posts, [{ rede: "linkedin", frequencia_semanal: 2, foco: "" }, { rede: "instagram", frequencia_semanal: 3, foco: "" }], new Date("2026-09-26T15:00:00Z"));
     expect(cal).toHaveLength(8);
     expect(new Set(cal.map((c) => c.data)).size).toBe(8);
     expect(cal[0].data >= "2026-09-27").toBe(true);
+    // Frequência respeitada por semana de calendário (segunda a domingo)
+    const porSemana = new Map<string, number>();
+    for (const c of cal.filter((c) => c.rede === "linkedin")) {
+      const d = new Date(c.data + "T00:00:00Z");
+      const seg = new Date(d.getTime() - ((d.getUTCDay() + 6) % 7) * 86400000).toISOString().slice(0, 10);
+      porSemana.set(seg, (porSemana.get(seg) ?? 0) + 1);
+    }
+    expect(Math.max(...porSemana.values())).toBeLessThanOrEqual(2);
+  });
+  it("usa o dia de São Paulo mesmo com o servidor em UTC", () => {
+    // 23h de sexta em Brasília já é sábado em UTC: o calendário deve começar no sábado, não no domingo.
+    const posts = [{ id: "p0", rede_principal: "x" }] as PostGerado[];
+    const cal = montarCalendario(posts, [{ rede: "x", frequencia_semanal: 5, foco: "" }], new Date("2026-09-26T02:00:00Z"));
+    expect(cal[0].data).toBe("2026-09-28");
   });
   it("demos são válidos e acham pelo domínio", () => {
     expect(DEMOS).toHaveLength(3);

@@ -72,9 +72,21 @@ export function finalizar(
 export interface AnalisarOpcoes {
   quantidade: number;
   email?: string | null;
-  identificador: string; // e-mail ou IP, para o limite da demo
+  /** Chaves de uso para o limite da demo (e-mail e IP); todas precisam estar abaixo do limite. */
+  identificadores: string[];
   forcarNovo?: boolean;
 }
+
+// Teto global por instância, para nenhum script esgotar a cota da IA numa noite.
+const usoGlobal = { dia: "", total: 0 };
+function dentroDoTetoGlobal(): boolean {
+  const hoje = new Date().toISOString().slice(0, 10);
+  if (usoGlobal.dia !== hoje) Object.assign(usoGlobal, { dia: hoje, total: 0 });
+  return usoGlobal.total < Number(process.env.LIMITE_GLOBAL_DIA || 300);
+}
+
+/** Tempo máximo somado das chamadas de IA, abaixo do maxDuration da rota, para sobrar tempo ao motor local. */
+const PRAZO_IA_MS = 85_000;
 
 /**
  * Fluxo do motor: demo pré-processada, cache por URL, uma chamada de IA, e motor local como rede de segurança.
@@ -95,7 +107,10 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       posts,
       calendario: montarCalendario(posts, demo.estrategia),
       origem: "demo",
-      avisos: ["Exemplo pré-processado do modo demo, gerado a partir do site público da empresa."],
+      avisos: [
+        "Exemplo pré-processado do modo demo, gerado a partir do site público da empresa.",
+        ...(demo.posts.length < quantidade ? [`Este exemplo tem ${demo.posts.length} posts prontos; mostramos todos.`] : []),
+      ],
     };
   }
 
@@ -103,7 +118,15 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   if (!op.forcarNovo) {
     try {
       const c = await store.buscarCache(urlChave, quantidade);
-      if (c) return { ...c, origem: "cache" };
+      if (c) {
+        // Datas novas a partir de hoje e a marca como está agora (paleta ou @ podem ter mudado).
+        return {
+          ...c,
+          brand: { ...c.brand, paleta: brand.paleta, handles: brand.handles, fontes: brand.fontes },
+          calendario: montarCalendario(c.posts, c.estrategia),
+          origem: "cache",
+        };
+      }
     } catch {
       /* cache indisponível não impede a análise */
     }
@@ -120,17 +143,22 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     const limite = Number(process.env.LIMITE_ANALISES_POR_EMAIL || 3);
     let usados = 0;
     try {
-      usados = await store.contarUso(op.identificador);
+      usados = Math.max(0, ...(await Promise.all(op.identificadores.map((k) => store.contarUso(k)))));
     } catch {
       /* sem contagem, segue */
     }
-    if (usados >= limite) {
-      avisos.push(`Limite de ${limite} análises com IA na demo atingido para este acesso. Esta versão foi montada pelo motor local, sem IA.`);
+    if (usados >= limite || !dentroDoTetoGlobal()) {
+      avisos.push(`Limite de análises com IA da demo atingido para este acesso. Esta versão foi montada pelo motor local, sem IA.`);
     } else {
+      // Registra antes de chamar: requisições em paralelo não furam o limite.
+      usoGlobal.total++;
+      await Promise.all(op.identificadores.map((k) => store.registrarUso(k, brand.url).catch(() => undefined)));
+      const inicio = Date.now();
       const contexto = await contextoViralDoNicho(palpite, 10);
       const prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand) });
       let erroAnterior = "";
-      for (let tentativa = 0; tentativa < 2 && !saida; tentativa++) {
+      // Segunda tentativa só se a primeira falhou rápido o bastante para caber no prazo.
+      for (let tentativa = 0; tentativa < 2 && !saida && Date.now() - inicio < PRAZO_IA_MS / 2; tentativa++) {
         try {
           const txt = await llm.gerar(
             SISTEMA,
@@ -148,13 +176,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
           if (/HTTP (401|403|429)/.test(erroAnterior)) break; // chave inválida ou sem cota: não adianta repetir
         }
       }
-      if (saida) {
-        try {
-          await store.registrarUso(op.identificador, brand.url);
-        } catch {
-          /* ignora */
-        }
-      } else {
+      if (!saida) {
         console.error("[analyze] IA falhou:", erroAnterior);
         avisos.push("A IA não respondeu direito desta vez. Esta versão foi montada pelo motor local, sem IA; tente de novo em instantes para a versão completa.");
       }
@@ -170,8 +192,8 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   const analise = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos);
   try {
     // Só análises feitas pela IA entram no cache; as do motor local são baratas e podem melhorar depois.
-    if (provedor) await store.salvarAnalise(analise, urlChave, op.email);
-    else await store.salvarAnalise(analise, `local:${urlChave}`, op.email);
+    if (provedor) await store.salvarAnalise(analise, urlChave, op.email, quantidade);
+    else await store.salvarAnalise(analise, `local:${urlChave}`, op.email, quantidade);
   } catch (e) {
     console.error("[analyze] não salvou:", (e as Error).message);
   }

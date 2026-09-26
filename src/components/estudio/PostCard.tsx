@@ -42,8 +42,11 @@ export function PostCard({
   const [rede, setRede] = useState<Rede>(post.rede_principal);
   const [copiado, setCopiado] = useState(false);
   const [carregandoArte, setCarregandoArte] = useState(true);
+  const [erroArte, setErroArte] = useState(false);
+  const [tentativa, setTentativa] = useState(0);
   const s = Math.min(slide, total - 1);
-  const src = urlArte(analise, post, { ...pers, slide: s, tamanho: "feed" });
+  const base = urlArte(analise, post, { ...pers, slide: s, tamanho: "feed" });
+  const src = tentativa ? `${base}&r=${tentativa}` : base;
   const pal = analise.brand.paleta;
   const cores = [...new Set([pal.primaria, pal.secundaria, pal.destaque].map((c) => c.toLowerCase()))];
   const corAtual = (pers.cor ?? pal.primaria).toLowerCase();
@@ -79,9 +82,32 @@ export function PostCard({
           src={src}
           alt={`Arte do post: ${post.gancho}`}
           loading="lazy"
-          onLoad={() => setCarregandoArte(false)}
+          onLoad={() => {
+            setCarregandoArte(false);
+            setErroArte(false);
+          }}
+          onError={() => {
+            setCarregandoArte(false);
+            setErroArte(true);
+          }}
           className="h-full w-full object-cover"
         />
+        {erroArte && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-papel-2 p-6 text-center">
+            <p className="text-sm text-tinta-2">Não deu para desenhar esta arte agora.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setErroArte(false);
+                setCarregandoArte(true);
+                setTentativa((t) => t + 1);
+              }}
+              className="border border-tinta px-3 py-1.5 text-sm font-semibold hover:bg-tinta hover:text-papel"
+            >
+              Tentar de novo
+            </button>
+          </div>
+        )}
         {total > 1 && (
           <>
             <button
@@ -191,7 +217,7 @@ export function PostCard({
           </button>
           <button
             type="button"
-            onClick={() => onBaixar(src, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)}
+            onClick={() => onBaixar(base, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)}
             className="h-10 bg-tinta text-sm font-semibold text-papel transition hover:bg-pauta"
           >
             Baixar arte

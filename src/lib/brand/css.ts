@@ -1,5 +1,8 @@
 import { isNeutral, parseColor } from "@/lib/color";
 
+/** CSS enorme (de propósito ou não) não pode travar o servidor. */
+const LIMITE_CSS = 400_000;
+
 const COLOR_RE =
   /#[0-9a-fA-F]{3,8}\b|(?:rgba?|hsla?|oklch|oklab)\([^()]*\)/g;
 
@@ -15,7 +18,8 @@ export interface CssColorCount {
 }
 
 /** Conta cores de um CSS, dando peso extra a variáveis com nome de marca. */
-export function extractColorsFromCss(css: string): Map<string, number> {
+export function extractColorsFromCss(cssBruto: string): Map<string, number> {
+  const css = cssBruto.slice(0, LIMITE_CSS);
   const counts = new Map<string, number>();
   const add = (hex: string | null, w: number) => {
     if (!hex) return;
@@ -23,7 +27,7 @@ export function extractColorsFromCss(css: string): Map<string, number> {
   };
 
   // Declarações de variáveis: --nome: valor;
-  const varRe = /(--[\w-]+)\s*:\s*([^;}{]+)/g;
+  const varRe = /(--[\w-]{1,80})\s*:\s*([^;}{]{1,300})/g;
   let m: RegExpExecArray | null;
   const seenInVars = new Set<number>();
   while ((m = varRe.exec(css))) {
@@ -41,7 +45,7 @@ export function extractColorsFromCss(css: string): Map<string, number> {
   }
 
   // Uso real em propriedades (color, background, border, fill...)
-  const propRe = /(?:^|[;{\s])((?:background(?:-color)?|color|border(?:-[a-z]+)?-?color?|fill|stroke|outline-color|box-shadow))\s*:\s*([^;}{]+)/g;
+  const propRe = /(?:^|[;{\s])((?:background(?:-color)?|color|border(?:-[a-z]+)?-?color?|fill|stroke|outline-color|box-shadow))\s*:\s*([^;}{]{1,300})/g;
   while ((m = propRe.exec(css))) {
     const [, prop, value] = m;
     const w = prop.startsWith("background") ? 3 : prop === "color" ? 2 : 1;
@@ -87,7 +91,8 @@ export function isUsefulFont(name: string): boolean {
 }
 
 /** Fontes declaradas no CSS, contadas por uso. Nomes do next/font (__Inter_abc) são limpos. */
-export function extractFontsFromCss(css: string): Map<string, number> {
+export function extractFontsFromCss(cssBruto: string): Map<string, number> {
+  const css = cssBruto.slice(0, LIMITE_CSS);
   const counts = new Map<string, number>();
   const add = (raw: string, w: number) => {
     let name = raw.trim().replace(/^['"]|['"]$/g, "").trim();
@@ -96,16 +101,16 @@ export function extractFontsFromCss(css: string): Map<string, number> {
     if (!isUsefulFont(name)) return;
     counts.set(name, (counts.get(name) ?? 0) + w);
   };
-  const faceRe = /@font-face\s*{[^}]*font-family\s*:\s*([^;}]+)/g;
+  const faceRe = /@font-face\s*{[^}]{0,2000}?font-family\s*:\s*([^;}]{1,200})/g;
   let m: RegExpExecArray | null;
   while ((m = faceRe.exec(css))) add(m[1], 1);
-  const famRe = /font-family\s*:\s*([^;}]+)/g;
+  const famRe = /font-family\s*:\s*([^;}]{1,300})/g;
   while ((m = famRe.exec(css))) {
     const first = m[1].split(",")[0];
     add(first, 3);
   }
   // Variáveis de fonte comuns: --font-sans: "Inter", ...
-  const varRe = /--[\w-]*font(?:-family|-sans|-serif|-heading|-body|-display|-title|-primary|-secondary)?\s*:\s*([^;}]+)/g;
+  const varRe = /--[\w-]*font(?:-family|-sans|-serif|-heading|-body|-display|-title|-primary|-secondary)?\s*:\s*([^;}]{1,300})/g;
   while ((m = varRe.exec(css))) add(m[1].split(",")[0], 2);
   return counts;
 }

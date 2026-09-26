@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 
 // CORS aberto: a interface recriada na Adapta chama esta API de outro domínio.
@@ -27,9 +28,18 @@ export async function lerJson<T = unknown>(req: Request): Promise<T | null> {
   }
 }
 
-/** Páginas /admin: se ADMIN_PASSWORD estiver definido, exige o header x-admin-password. */
+/**
+ * Páginas /admin: exigem o header x-admin-password igual a ADMIN_PASSWORD.
+ * Sem senha configurada, só ficam abertas em desenvolvimento local; em produção ficam fechadas.
+ */
 export function adminOk(req: Request): boolean {
   const senha = process.env.ADMIN_PASSWORD;
-  if (!senha) return true;
-  return req.headers.get("x-admin-password") === senha;
+  if (!senha) return !process.env.VERCEL && process.env.NODE_ENV !== "production";
+  const enviada = Buffer.from(req.headers.get("x-admin-password") ?? "");
+  const esperada = Buffer.from(senha);
+  return enviada.length === esperada.length && timingSafeEqual(enviada, esperada);
 }
+
+export const MSG_SENHA = process.env.ADMIN_PASSWORD
+  ? "Senha de admin incorreta. Digite a senha no campo do topo."
+  : "Área do time fechada: defina ADMIN_PASSWORD na Vercel (veja DEPLOY.md).";

@@ -1,6 +1,6 @@
 # social.Ai: especificação do produto e da API
 
-Base de produção: `{{BASE_URL}}`
+Base de produção: `https://social-ai-beige.vercel.app`
 
 ## O produto em um parágrafo
 
@@ -159,7 +159,7 @@ Devolve o PNG da arte. Parâmetros de consulta, todos opcionais:
 | `foto` | URL de uma foto para o template `bastidor` | nenhuma |
 | `d` | base64url de `{ "post": PostGerado sem legendas, "brand": perfil mínimo }` | usado quando a análise não está salva |
 
-Exemplos: `{{BASE_URL}}/api/render/cora-p1?slide=2`, `{{BASE_URL}}/api/render/pipefy-p3?tamanho=x`, `{{BASE_URL}}/api/render/sallve-p1?template=citacao&cor=%23111111`.
+Exemplos: `https://social-ai-beige.vercel.app/api/render/cora-p1?slide=2`, `https://social-ai-beige.vercel.app/api/render/pipefy-p3?tamanho=x`, `https://social-ai-beige.vercel.app/api/render/sallve-p1?template=citacao&cor=%23111111`.
 
 O contraste é garantido automaticamente: todo par texto e fundo passa por checagem WCAG e é ajustado se não passar. Fontes da marca vêm do Google Fonts; sem internet, usa as fontes embutidas.
 

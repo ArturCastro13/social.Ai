@@ -41,7 +41,7 @@ export interface Store {
   tipo: "supabase" | "local";
   buscarAnalise(id: string): Promise<Analise | null>;
   buscarCache(urlChave: string, nPosts: number, maxIdadeHoras?: number): Promise<Analise | null>;
-  salvarAnalise(a: Analise, urlChave: string, email?: string | null): Promise<void>;
+  salvarAnalise(a: Analise, urlChave: string, email?: string | null, nPosts?: number): Promise<void>;
   contarUso(email: string): Promise<number>;
   registrarUso(email: string, url: string): Promise<void>;
   salvarLead(l: Lead): Promise<void>;
@@ -80,8 +80,8 @@ function supabaseStore(client: SupabaseClient): Store {
       const row = ok(r)?.[0];
       return row ? (row.dados as Analise) : null;
     },
-    async salvarAnalise(a, urlChave, email) {
-      ok(await client.from("analises").upsert({ id: a.id, url_chave: urlChave, n_posts: a.posts.length, dados: a, email: email ?? null }));
+    async salvarAnalise(a, urlChave, email, nPosts) {
+      ok(await client.from("analises").upsert({ id: a.id, url_chave: urlChave, n_posts: nPosts ?? a.posts.length, dados: a, email: email ?? null }));
     },
     async contarUso(email) {
       const r = await client.from("uso").select("id", { count: "exact", head: true }).eq("email", email.toLowerCase());
@@ -161,9 +161,9 @@ function localStore(): Store {
         .sort((a, b) => b.criado_em.localeCompare(a.criado_em))[0];
       return r?.dados ?? null;
     },
-    async salvarAnalise(a, urlChave, email) {
+    async salvarAnalise(a, urlChave, email, nPosts) {
       const todos = (await ler<Registro>("analises")).filter((r) => r.id !== a.id);
-      todos.push({ id: a.id, url_chave: urlChave, n_posts: a.posts.length, dados: a, email: email ?? null, criado_em: agora() });
+      todos.push({ id: a.id, url_chave: urlChave, n_posts: nPosts ?? a.posts.length, dados: a, email: email ?? null, criado_em: agora() });
       await gravar("analises", todos.slice(-200));
     },
     async contarUso(email) {

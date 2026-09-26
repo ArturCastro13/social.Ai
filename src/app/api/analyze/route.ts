@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { readBrand } from "@/lib/brand";
 import { analisar, LIMITE_POSTS } from "@/lib/engine";
-import { erro, json, lerJson, options } from "@/lib/http";
+import { adminOk, erro, json, lerJson, options } from "@/lib/http";
 import type { BrandProfile } from "@/lib/types";
 
 export const maxDuration = 120;
@@ -22,6 +22,20 @@ const Entrada = z
   })
   .refine((d) => d.brand || d.url, { message: "Envie brand (de /api/brand) ou url." });
 
+// O perfil de marca pode vir de outra interface (ex.: a recriada na Adapta). Confere o mínimo que o motor usa.
+const hex = z.string().regex(/^#[0-9a-fA-F]{6}$/);
+const BrandMinimo = z.object({
+  url: z.string().url(),
+  dominio: z.string().min(3),
+  nome: z.string().min(1).max(120),
+  headings: z.object({ h1: z.array(z.string()), h2: z.array(z.string()) }),
+  paragrafos: z.array(z.string()),
+  handles: z.record(z.string(), z.string().optional()),
+  paleta: z.object({ primaria: hex, secundaria: hex, destaque: hex, fundo: hex, texto: hex }),
+  fontes: z.object({ titulo: z.string(), corpo: z.string() }),
+  avisos: z.array(z.string()),
+});
+
 export const OPTIONS = options;
 
 export async function POST(req: Request) {
@@ -34,24 +48,35 @@ export async function POST(req: Request) {
   const d = body.data;
   let brand: BrandProfile;
   try {
-    brand =
-      d.brand && typeof d.brand.url === "string" && d.brand.paleta
-        ? (d.brand as unknown as BrandProfile)
-        : await readBrand({ url: d.url ?? String(d.brand?.url ?? ""), instagram: d.instagram, linkedin: d.linkedin, x: d.x, facebook: d.facebook });
+    const recebido = d.brand ? BrandMinimo.safeParse(d.brand) : null;
+    if (recebido?.success) brand = { ...(d.brand as unknown as BrandProfile), ...recebido.data } as BrandProfile;
+    else {
+      const url = d.url ?? (typeof d.brand?.url === "string" ? d.brand.url : "");
+      if (!url) return erro("O objeto brand veio incompleto. Envie o resultado de /api/brand ou só a url.", 400);
+      brand = await readBrand({ url, instagram: d.instagram, linkedin: d.linkedin, x: d.x, facebook: d.facebook });
+    }
   } catch (e) {
     return erro("Não entendi esse endereço. Tente algo como suaempresa.com.br.", 422, { motivo: (e as Error).message });
   }
   // @ digitados agora têm prioridade sobre os do perfil lido antes.
+  brand = { ...brand, handles: { ...brand.handles } };
   for (const k of ["instagram", "linkedin", "x", "facebook"] as const) {
     if (d[k]) brand.handles[k] = "@" + d[k]!.replace(/^@/, "").trim();
   }
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  const analise = await analisar(brand, {
-    quantidade: d.quantidade,
-    email: d.email ?? null,
-    identificador: d.email?.toLowerCase() ?? `ip:${ip}`,
-    forcarNovo: d.forcarNovo,
-  });
+  const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  let analise;
+  try {
+    analise = await analisar(brand, {
+      quantidade: d.quantidade,
+      email: d.email ?? null,
+      identificadores: [`ip:${ip}`, ...(d.email ? [d.email.toLowerCase()] : [])],
+      // Ignorar o cache custa uma chamada de IA: só o time pode pedir.
+      forcarNovo: d.forcarNovo && adminOk(req),
+    });
+  } catch (e) {
+    console.error("[analyze]", (e as Error).message);
+    return erro("O motor tropeçou nesta análise. Tente de novo ou use um dos exemplos.", 500);
+  }
   return json(analise);
 }

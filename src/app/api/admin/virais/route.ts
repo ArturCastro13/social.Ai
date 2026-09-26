@@ -1,4 +1,4 @@
-import { adminOk, erro, json, lerJson, options } from "@/lib/http";
+import { adminOk, erro, json, lerJson, MSG_SENHA, options } from "@/lib/http";
 import { store } from "@/lib/store";
 import { todosOsVirais } from "@/lib/virais";
 import { construirCatalogo } from "@/lib/virais/catalogo";
@@ -7,13 +7,13 @@ import { viralItemSchema } from "@/lib/virais/schema";
 export const OPTIONS = options;
 
 export async function GET(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   const itens = await todosOsVirais();
   return json({ armazenamento: store.tipo, itens, catalogo: construirCatalogo(itens) });
 }
 
 export async function POST(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   const body = await lerJson(req);
   const r = viralItemSchema.safeParse(body);
   if (!r.success) {

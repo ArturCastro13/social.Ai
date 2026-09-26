@@ -25,7 +25,7 @@ class GeminiLLM implements LLM {
         contents: [{ role: "user", parts: [{ text: prompt }] }],
         generationConfig: { responseMimeType: "application/json", temperature: 0.8, maxOutputTokens: 16000 },
       }),
-      signal: AbortSignal.timeout(90_000),
+      signal: AbortSignal.timeout(80_000),
     });
     if (!res.ok) throw new Error(`Gemini HTTP ${res.status}: ${(await res.text()).slice(0, 300)}`);
     const data = (await res.json()) as { candidates?: { content?: { parts?: { text?: string }[] } }[] };
@@ -42,13 +42,13 @@ class ClaudeLLM implements LLM {
     chave: string,
     private modelo = process.env.ANTHROPIC_MODEL || "claude-opus-5",
   ) {
-    this.client = new Anthropic({ apiKey: chave, timeout: 120_000, maxRetries: 1 });
+    this.client = new Anthropic({ apiKey: chave, timeout: 80_000, maxRetries: 0 });
     this.nome = `claude:${this.modelo}`;
   }
   async gerar(sistema: string, prompt: string): Promise<string> {
     const stream = this.client.messages.stream({
       model: this.modelo,
-      max_tokens: 32000,
+      max_tokens: 16000,
       system: sistema,
       messages: [{ role: "user", content: prompt }],
     });

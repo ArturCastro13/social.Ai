@@ -99,6 +99,13 @@ describe("rede e fontes", () => {
     expect(isPrivateHost("10.2.3.4")).toBe(true);
     expect(isPrivateHost("fcbarcelona.com")).toBe(false);
     expect(isPrivateHost("nubank.com.br")).toBe(false);
+    // Casos que furavam a primeira versão do filtro
+    expect(isPrivateHost("localhost.")).toBe(true);
+    expect(isPrivateHost("[::ffff:127.0.0.1]")).toBe(true);
+    expect(isPrivateHost("[::ffff:7f00:1]")).toBe(true);
+    expect(isPrivateHost("198.18.0.5")).toBe(true);
+    expect(isPrivateHost("servidor.internal.")).toBe(true);
+    expect(() => normalizeUrl("http://localhost.:3000/")).toThrow();
   });
   it("normaliza URL digitada", () => {
     expect(normalizeUrl("nubank.com.br")).toBe("https://nubank.com.br/");

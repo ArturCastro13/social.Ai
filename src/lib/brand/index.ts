@@ -22,7 +22,8 @@ const handle = (s?: string) => {
 async function vibrantFrom(url: string): Promise<string[]> {
   if (/\.svg(\?|$)/i.test(url) || url.startsWith("data:")) return [];
   const { body, contentType } = await fetchLimited(url, { timeoutMs: 5000, maxBytes: 4_000_000, accept: "image/*" });
-  if (contentType.includes("svg") || body.length < 100) return [];
+  // Imagem pesada demais pode estourar memória ao decodificar; para cor, um logo leve basta.
+  if (contentType.includes("svg") || body.length < 100 || body.length > 2_500_000) return [];
   const { Vibrant } = await import("node-vibrant/node");
   const p = await Vibrant.from(body).getPalette();
   return [p.Vibrant, p.DarkVibrant, p.LightVibrant, p.Muted]
@@ -53,7 +54,10 @@ function montarPaleta(pesos: Map<string, { peso: number; fonte: BrandColor["font
   // Secundária e destaque: cores com corpo (tons pastel quase brancos servem de fundo, não de destaque).
   const comCorpo = distintas.filter((c) => c.hex !== primaria && luminance(c.hex) > 0.02 && luminance(c.hex) < 0.7);
   const secundaria =
-    comCorpo.find((c) => Math.abs(hue(c.hex) - hue(primaria)) > 25)?.hex ??
+    comCorpo.find((c) => {
+      const d = Math.abs(hue(c.hex) - hue(primaria));
+      return Math.min(d, 360 - d) > 25;
+    })?.hex ??
     comCorpo[0]?.hex ??
     shade(primaria, luminance(primaria) > 0.4 ? -0.25 : -0.12);
   const destaque =

@@ -1,7 +1,7 @@
 import { randomBytes } from "node:crypto";
 import { z } from "zod";
 import { calcularNumeros } from "@/lib/entrevistas";
-import { adminOk, erro, json, lerJson, options } from "@/lib/http";
+import { adminOk, erro, json, lerJson, MSG_SENHA, options } from "@/lib/http";
 import { store } from "@/lib/store";
 
 export const OPTIONS = options;
@@ -29,12 +29,12 @@ async function painel() {
 }
 
 export async function GET(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   return json(await painel());
 }
 
 export async function POST(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   const body = Entrada.safeParse(await lerJson(req));
   if (!body.success) return erro("Entrevista inválida.", 400, { detalhes: body.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`) });
   const e = { ...body.data, id: body.data.id ?? randomBytes(5).toString("hex"), quer_testar: body.data.quer_testar ?? false };
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  if (!adminOk(req)) return erro("Senha de admin incorreta.", 401);
+  if (!adminOk(req)) return erro(MSG_SENHA, 401);
   const id = new URL(req.url).searchParams.get("id");
   if (!id) return erro("Informe o id.", 400);
   await store.removerEntrevista(id);

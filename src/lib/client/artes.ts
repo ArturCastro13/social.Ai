@@ -1,3 +1,4 @@
+import { adaptarSlides } from "@/lib/render/adaptar";
 import type { Analise, BrandProfile, PostGerado, Rede, TemplateId } from "@/lib/types";
 
 export interface Personalizacao {
@@ -27,8 +28,11 @@ function base64url(s: string) {
   return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
 }
 
+/** Quantas imagens o post gera com o template escolhido (se o template mudou, conta os slides readaptados). */
 export function totalSlides(post: PostGerado, template: TemplateId) {
-  return template === "capa-gancho" ? Math.max(1, post.slides.length) : 1;
+  if (template !== "capa-gancho") return 1;
+  const slides = template === post.template ? post.slides : adaptarSlides(post, template);
+  return Math.max(1, slides.length);
 }
 
 /**
@@ -107,16 +111,23 @@ export async function baixarZip(
   });
 
   let feito = 0;
+  let falhas = 0;
   const fila = [...tarefas];
   const trabalhadores = Array.from({ length: 4 }, async () => {
     while (fila.length) {
       const t = fila.shift()!;
-      const res = await fetch(t.url);
-      if (res.ok) zip.file(`${t.pasta}/${t.arquivo}`, await res.blob());
+      try {
+        const res = await fetch(t.url);
+        if (!res.ok) throw new Error(String(res.status));
+        zip.file(`${t.pasta}/${t.arquivo}`, await res.blob());
+      } catch {
+        falhas++;
+      }
       onProgresso?.(++feito, tarefas.length);
     }
   });
   await Promise.all(trabalhadores);
+  if (falhas === tarefas.length) throw new Error("Não conseguimos baixar as artes agora. Confira a internet e tente de novo.");
 
   const calendario = [
     "data,dia,horario,rede,post",
@@ -133,4 +144,5 @@ export async function baixarZip(
   a.download = `social-ai-${nomeArquivo(analise.brand.nome)}.zip`;
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  return { falhas, total: tarefas.length };
 }

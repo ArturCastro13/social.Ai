@@ -23,42 +23,50 @@ const JANELAS: Record<Rede, { dias: number[]; horario: string }[]> = {
   ],
 };
 
-const iso = (d: Date) =>
-  `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const DIA_MS = 86_400_000;
+
+/** Data de hoje em São Paulo, representada como meia-noite UTC (o servidor da Vercel roda em UTC). */
+export function hojeEmSaoPaulo(agora = new Date()): Date {
+  const [a, m, d] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit" })
+    .format(agora)
+    .split("-")
+    .map(Number);
+  return new Date(Date.UTC(a, m - 1, d));
+}
+
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+
+/** Segunda-feira da semana da data (mesma regra que o painel usa para agrupar). */
+function segundaDa(d: Date): string {
+  return iso(new Date(d.getTime() - ((d.getUTCDay() + 6) % 7) * DIA_MS));
+}
 
 /**
- * Distribui os posts nas próximas semanas, começando no próximo dia útil,
- * respeitando a frequência semanal da estratégia de cada rede.
+ * Distribui os posts nas próximas semanas, a partir de amanhã (horário de Brasília),
+ * respeitando a frequência semanal de cada rede e no máximo um post por dia.
  */
-export function montarCalendario(posts: PostGerado[], estrategia: EstrategiaRede[], inicio = new Date()): CalendarioItem[] {
+export function montarCalendario(posts: PostGerado[], estrategia: EstrategiaRede[], agora = new Date()): CalendarioItem[] {
   const freq = new Map<Rede, number>(estrategia.map((e) => [e.rede, Math.max(1, Math.round(e.frequencia_semanal))]));
   const usadosPorSemana = new Map<string, number>();
   const ocupados = new Set<string>();
   const itens: CalendarioItem[] = [];
-
-  const base = new Date(inicio);
-  base.setHours(12, 0, 0, 0);
-  base.setDate(base.getDate() + 1);
+  const amanha = new Date(hojeEmSaoPaulo(agora).getTime() + DIA_MS);
 
   for (const post of posts) {
     const rede = post.rede_principal;
     const limite = freq.get(rede) ?? 2;
-    const janelas = JANELAS[rede];
-    let achou = false;
-    for (let offset = 0; offset < 120 && !achou; offset++) {
-      const dia = new Date(base);
-      dia.setDate(base.getDate() + offset);
-      const semana = `${rede}:${Math.floor(offset / 7)}`;
-      if ((usadosPorSemana.get(semana) ?? 0) >= limite) continue;
-      const janela = janelas.find((j) => j.dias.includes(dia.getDay()));
-      if (!janela) continue;
+    const janelas = JANELAS[rede] ?? JANELAS.instagram;
+    for (let offset = 0; offset < 180; offset++) {
+      const dia = new Date(amanha.getTime() + offset * DIA_MS);
       const chave = iso(dia);
-      // No máximo um post por dia no total, para não canibalizar alcance.
-      if (ocupados.has(chave)) continue;
+      const semana = `${rede}:${segundaDa(dia)}`;
+      if ((usadosPorSemana.get(semana) ?? 0) >= limite || ocupados.has(chave)) continue;
+      const janela = janelas.find((j) => j.dias.includes(dia.getUTCDay()));
+      if (!janela) continue;
       ocupados.add(chave);
       usadosPorSemana.set(semana, (usadosPorSemana.get(semana) ?? 0) + 1);
-      itens.push({ data: chave, dia_semana: DIAS[dia.getDay()], horario: janela.horario, rede, post_id: post.id });
-      achou = true;
+      itens.push({ data: chave, dia_semana: DIAS[dia.getUTCDay()], horario: janela.horario, rede, post_id: post.id });
+      break;
     }
   }
   return itens.sort((a, b) => (a.data + a.horario).localeCompare(b.data + b.horario));

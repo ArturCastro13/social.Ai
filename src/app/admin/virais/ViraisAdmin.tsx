@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SenhaAdmin } from "@/components/admin/AdminShell";
+import { AvisoTemporario, SenhaAdmin } from "@/components/admin/AdminShell";
 import { useAdmin } from "@/components/admin/useAdmin";
 import { NICHOS, type Nicho, type PadraoViral, type ViralItem } from "@/lib/types";
 
@@ -129,6 +129,7 @@ export function ViraisAdmin() {
           </div>
         </div>
 
+        <AvisoTemporario armazenamento={armazenamento} />
         {msg && (
           <p className={`mt-4 border-l-4 px-3 py-2 text-sm ${msg.tipo === "ok" ? "border-salvia bg-salvia/10" : "border-pauta bg-pauta/10"}`}>{msg.texto}</p>
         )}

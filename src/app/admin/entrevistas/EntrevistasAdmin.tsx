@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { SenhaAdmin } from "@/components/admin/AdminShell";
+import { AvisoTemporario, SenhaAdmin } from "@/components/admin/AdminShell";
 import { useAdmin } from "@/components/admin/useAdmin";
 import { JA_TENTOU, QUEM_CUIDA, type NumerosPitch } from "@/lib/entrevistas";
 import type { Entrevista } from "@/lib/store";
@@ -105,6 +105,9 @@ export function EntrevistasAdmin() {
         </p>
         <SenhaAdmin senha={senha} setSenha={setSenha} />
       </div>
+
+      <AvisoTemporario armazenamento={dados?.armazenamento ?? ""} />
+      {msg && !dados && <p className="border-l-4 border-pauta bg-pauta/10 px-3 py-2 text-sm">{msg}</p>}
 
       {/* Números do pitch */}
       <section className="border-2 border-tinta bg-tinta p-5 text-papel sm:p-8">

@@ -2,7 +2,7 @@
 
 Dois prompts prontos. O primeiro recria a interface do social.Ai dentro do Adapta One usando o **Skip** (o construtor de apps da Adapta), chamando a nossa API na Vercel. O segundo gera os slides do pitch no módulo **Apresentações ONE 27**.
 
-Antes de colar, confira se `{{BASE_URL}}` abaixo é o endereço atual do deploy. A API tem CORS aberto, então o app da Adapta pode chamar direto do navegador. Se o Skip preferir chamar por backend, use uma Edge Function como proxy; não há chave para esconder, a nossa API é pública.
+O endereço abaixo é o deploy de produção atual (https://social-ai-beige.vercel.app). Se mudar, troque em todos os lugares. A API tem CORS aberto, então o app da Adapta pode chamar direto do navegador. Se o Skip preferir chamar por backend, use uma Edge Function como proxy; não há chave para esconder, a nossa API é pública.
 
 ---
 
@@ -11,7 +11,7 @@ Antes de colar, confira se `{{BASE_URL}}` abaixo é o endereço atual do deploy.
 ```
 Crie um app web de uma página chamado "social.Ai", em português do Brasil, que é a interface de um CMO de IA para founders de startup. O app NÃO tem lógica de IA própria: ele só chama a API pública abaixo e mostra os resultados. Não invente dados; tudo que aparece na tela vem das respostas da API.
 
-API base: {{BASE_URL}}
+API base: https://social-ai-beige.vercel.app
 
 1) Tela inicial
 - Título grande: "Você fundou uma startup, não uma agência de marketing."
@@ -22,8 +22,8 @@ API base: {{BASE_URL}}
 
 2) Ao clicar em gerar
 - Mostre uma tela de progresso com estas etapas, marcando cada uma como concluída conforme avança: "Lendo o site", "Tirando paleta, fontes e logo", "Descobrindo nicho e público", "Comparando com a base de virais", "Escrevendo estratégia e posts", "Diagramando as artes".
-- Passo A: POST {{BASE_URL}}/api/brand com JSON {"url": <url>, "instagram": <opcional>, "linkedin": <opcional>, "x": <opcional>, "facebook": <opcional>}. Quando responder, mostre na tela de progresso as cores de "paleta.primaria", "paleta.secundaria", "paleta.destaque" e o nome em "nome".
-- Passo B: POST {{BASE_URL}}/api/analyze com JSON {"brand": <resposta inteira do passo A>, "quantidade": <número escolhido>}. A resposta traz a análise completa.
+- Passo A: POST https://social-ai-beige.vercel.app/api/brand com JSON {"url": <url>, "instagram": <opcional>, "linkedin": <opcional>, "x": <opcional>, "facebook": <opcional>}. Quando responder, mostre na tela de progresso as cores de "paleta.primaria", "paleta.secundaria", "paleta.destaque" e o nome em "nome".
+- Passo B: POST https://social-ai-beige.vercel.app/api/analyze com JSON {"brand": <resposta inteira do passo A>, "quantidade": <número escolhido>}. A resposta traz a análise completa.
 - Se qualquer chamada devolver erro, mostre o texto do campo "erro" da resposta e volte para o formulário.
 
 3) Tela de resultado (use os campos da resposta do /api/analyze)
@@ -32,15 +32,15 @@ API base: {{BASE_URL}}
 - Seção Estratégia: os 3 "pilares" em cartões (nome e descricao) e a lista "estrategia" (rede, frequencia_semanal por semana, foco).
 - Seção Calendário: a lista "calendario" agrupada por semana, cada linha com data (formato dd/mm), dia_semana, horario, rede e o "gancho" do post cujo "id" é igual ao "post_id".
 - Seção Posts: uma grade de cartões, um por item de "posts". Em cada cartão:
-  - a imagem da arte: <img src="{{BASE_URL}}/api/render/{post.id}?tamanho=feed">. Se post.template for "capa-gancho", é um carrossel: mostre setas para trocar o slide usando o parâmetro &slide=0, 1, 2... até post.slides.length - 1.
+  - a imagem da arte: <img src="https://social-ai-beige.vercel.app/api/render/{post.id}?tamanho=feed">. Se post.template for "capa-gancho", é um carrossel: mostre setas para trocar o slide usando o parâmetro &slide=0, 1, 2... até post.slides.length - 1.
   - IMPORTANTE: se a análise NÃO for de origem "demo", acrescente à URL da imagem o parâmetro d, que é o base64url (base64 com - no lugar de +, _ no lugar de / e sem =) do JSON {"post": <o post sem o campo legendas>, "brand": {"nome", "dominio", "url", "logo", "handles", "paleta", "fontes"} da análise}. Isso permite desenhar a arte mesmo quando a análise não ficou salva no servidor.
   - bolinhas de cor com paleta.primaria, paleta.secundaria e paleta.destaque; ao clicar, recarregue a imagem com &cor=<hex com # codificado como %23>.
   - um seletor de modelo com as opções capa-gancho, lista, citacao, dado-impacto, print-x, bastidor, antes-depois, checklist; ao trocar, recarregue a imagem com &template=<valor>.
   - o "gancho" como título, abas Instagram, LinkedIn, X e Facebook mostrando o texto de post.legendas[rede], com botão "Copiar legenda".
   - uma linha "Por que funciona:" com post.por_que.
   - botão "Baixar arte" que abre a URL da imagem em nova aba.
-- Antes do primeiro download, peça o e-mail num modal e envie POST {{BASE_URL}}/api/leads com {"email": <email>, "url": <url analisada>, "empresa": brand.nome, "analise_id": id, "origem": "download"}.
-- No fim do resultado, um formulário "Ajuda a gente a entender sua rotina?" com 5 perguntas de múltipla escolha e envio para POST {{BASE_URL}}/api/validacao com {"analise_id": id, "email": <se tiver>, "respostas": {"quem_cuida", "horas_semana", "dor", "usaria", "pagaria"}}. Perguntas e opções:
+- Antes do primeiro download, peça o e-mail num modal e envie POST https://social-ai-beige.vercel.app/api/leads com {"email": <email>, "url": <url analisada>, "empresa": brand.nome, "analise_id": id, "origem": "download"}.
+- No fim do resultado, um formulário "Ajuda a gente a entender sua rotina?" com 5 perguntas de múltipla escolha e envio para POST https://social-ai-beige.vercel.app/api/validacao com {"analise_id": id, "email": <se tiver>, "respostas": {"quem_cuida", "horas_semana", "dor", "usaria", "pagaria"}}. Perguntas e opções:
   1. quem_cuida: "Quem cuida do marketing da sua empresa hoje?" opções "Eu mesmo, sozinho", "Alguém do time, no tempo que sobra", "Freelancer ou agência", "Ninguém, está parado"
   2. horas_semana: "Quantas horas por semana isso te toma?" opções "Menos de 1 hora", "De 1 a 3 horas", "De 4 a 6 horas", "Mais de 6 horas"
   3. dor: "De 1 a 5, quanto te incomoda não postar com constância?" opções "1" a "5"
@@ -76,5 +76,5 @@ Slide 6, diferencial: tabela simples comparando social.Ai, Doxa e social media f
 
 Slide 7, validação e modelo: título "Validado hoje, no corredor." Espaço para três números que vou preencher (founders ouvidos, quantos cuidam do marketing sozinhos, quanto pagariam por mês). Abaixo: "Assinatura mensal a partir de R$ 49 (hipótese em teste)".
 
-Slide 8, próximo passo: "Hoje: post estático. Depois: vídeo, agendamento e publicação direta." Rodapé com o endereço {{BASE_URL}}.
+Slide 8, próximo passo: "Hoje: post estático. Depois: vídeo, agendamento e publicação direta." Rodapé com o endereço https://social-ai-beige.vercel.app.
 ```

@@ -8,6 +8,19 @@ import { Painel } from "./Painel";
 
 const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+/** Lê JSON da API; se vier HTML (timeout da plataforma) ou erro, vira uma mensagem legível. */
+async function lerResposta(res: Response, mensagemPadrao: string) {
+  const txt = await res.text();
+  let dados: { erro?: string } | null = null;
+  try {
+    dados = JSON.parse(txt);
+  } catch {
+    throw new Error(mensagemPadrao);
+  }
+  if (!res.ok) throw new Error(dados?.erro ?? mensagemPadrao);
+  return dados as never;
+}
+
 function etapasIniciais(dominio: string, quantidade: number, totalVirais: number): Etapa[] {
   return [
     { id: "abrir", texto: `Abrindo ${dominio} e lendo o que a empresa diz sobre si`, estado: "andando" },
@@ -60,8 +73,7 @@ export function Estudio({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ url: d.url, ...handles, paletaInstagram: d.paletaInstagram.length ? d.paletaInstagram : undefined }),
       });
-      const b = await rb.json();
-      if (!rb.ok) throw new Error(b.erro ?? "Não consegui ler esse site.");
+      const b = await lerResposta(rb, "Não consegui ler esse site.");
       if (!vivo()) return;
       marcar("abrir", "feito");
       marcar("paleta", "andando");
@@ -92,8 +104,7 @@ export function Estudio({
         body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade, email }),
       });
       clearInterval(timer);
-      const a = await ra.json();
-      if (!ra.ok) throw new Error(a.erro ?? "O motor não respondeu.");
+      const a = await lerResposta(ra, "O motor demorou demais para responder. Tente de novo ou use um dos exemplos.");
       if (!vivo()) return;
       for (const id of avancos) marcar(id, "feito");
       marcar("artes", "andando");
@@ -107,7 +118,7 @@ export function Estudio({
       requestAnimationFrame(() => document.getElementById("resultado")?.scrollIntoView({ behavior: "smooth" }));
     } catch (e) {
       if (!vivo()) return;
-      setErro((e as Error).message);
+      setErro(e instanceof TypeError ? "Sem conexão com o servidor. Confira a internet e tente de novo." : (e as Error).message);
       setFase("form");
     }
   }

@@ -2,7 +2,7 @@
 
 Tempo total: 3:00. Um apresenta, outro opera a demo no notebook já com a página aberta, o terceiro cuida do cronômetro e segura o plano B.
 
-Antes de subir: página aberta em `{{BASE_URL}}`, zoom do navegador em 110%, o site de uma startup do hackathon já escolhido (e testado uma vez nos bastidores), e a aba `/admin/entrevistas` aberta para pegar os números finais. Se a internet estiver ruim, `DEMO_MODE=1` no deploy e usar o exemplo da Cora.
+Antes de subir: página aberta em `https://social-ai-beige.vercel.app`, zoom do navegador em 110%, o site de uma startup do hackathon já escolhido (e testado uma vez nos bastidores), e a aba `/admin/entrevistas` aberta para pegar os números finais. Se a internet estiver ruim, `DEMO_MODE=1` no deploy e usar o exemplo da Cora.
 
 ---
 

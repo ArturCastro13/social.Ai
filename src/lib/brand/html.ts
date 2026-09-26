@@ -137,7 +137,7 @@ export function extractFromHtml(html: string, pageUrl: string): HtmlExtract {
     else if (!stylesheets.includes(full)) stylesheets.push(full);
   });
   // @import de Google Fonts dentro de <style>
-  for (const m of inlineCss.matchAll(/@import\s+url\(['"]?([^'")]+fonts\.googleapis\.com[^'")]+)/g)) {
+  for (const m of inlineCss.slice(0, 400_000).matchAll(/@import\s+url\(['"]?(https?:\/\/fonts\.googleapis\.com[^'")]{0,500})/g)) {
     googleFonts.push(...fontsFromGoogleUrl(m[1]));
   }
 
