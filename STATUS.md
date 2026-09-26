@@ -8,7 +8,7 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 
 1. **Ligar a IA.** Hoje a produção roda sem chave: Cora, Pipefy e Sallve respondem com as análises pré-processadas e qualquer outro site passa pelo motor local, que é honesto mas genérico. Com `GEMINI_API_KEY` a estratégia e os posts passam a ser escritos pela IA. São cinco minutos; os comandos estão em `DEPLOY.md`. Depois disso, rodar 3 sites de startups presentes no evento e ler os posts gerados com olho crítico.
 2. **Ligar o Supabase.** Sem ele, leads, entrevistas e respostas do formulário ficam em `/tmp` da Vercel e se perdem a cada deploy. Como as entrevistas de hoje viram os números do pitch, isso não pode ficar para depois. Passo a passo em `DEPLOY.md`.
-3. **Definir `ADMIN_PASSWORD`**, porque hoje `/admin/virais` e `/admin/entrevistas` estão abertos.
+3. **Definir `ADMIN_PASSWORD`.** Por segurança, `/admin/virais` e `/admin/entrevistas` ficam **fechados em produção** até existir a senha (localmente, com `npm run dev`, abrem sem senha). Sem isso, ninguém registra entrevista pelo celular. Comando em `DEPLOY.md`; depois é só digitar a senha no campo do topo das páginas admin.
 4. **Começar as entrevistas** com `validacao/ROTEIRO_ENTREVISTA.md` e registrar em `/admin/entrevistas` pelo celular. Meta: 10 founders.
 5. **Ler o regulamento** para confirmar o que precisa rodar dentro da Adapta e usar `ADAPTA_PROMPT.md`.
 
@@ -28,7 +28,11 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 
 **Documentos.** `SPEC.md` (contratos da API com exemplos reais), `ADAPTA_PROMPT.md` (prompt para o Skip recriar a interface chamando nossa API, e prompt para o Apresentações ONE 27 gerar os slides), `PITCH.md` (roteiro de 3 minutos com perguntas prováveis do júri), `PLANO.md`, `NOMES.md` (5 nomes com domínio .com.br e .ai checados de verdade), `DEPLOY.md`.
 
-**Verificação.** Build de produção, lint, `tsc` e 31 testes passando. Fluxo completo testado em produção com 3 sites fora do demo (RD Station, Conta Azul e Alice).
+**Verificação.** Build de produção, lint, `tsc` e 32 testes passando. Fluxo completo testado em produção com 3 sites fora do demo (RD Station, Conta Azul e Alice) e pelo navegador, em desktop e celular.
+
+**Auditorias da última fase.** Duas revisões independentes rodaram no fim da noite:
+- *Copy*: tirei afirmações sem base (superlativos como "o formato que mais converte", uma anedota inventada nas legendas da Cora, um "80/20" sem fonte, o selo "mais pedido" nos planos), corrigi artigos, crase e anglicismos, e reforcei o prompt da IA para não repetir esses vícios.
+- *Código e segurança*: corrigi SSRF no leitor de sites e na rota de arte (DNS checado, redirects checados salto a salto, IPv4 mapeado em IPv6), rotas admin abertas, falhas do Satori derrubando a conexão, regex que travava com CSS gigante, custo de IA sem teto (limite por e-mail e por IP registrado antes da chamada, teto diário, prazo total), calendário em UTC e o carrossel que não contava os slides ao trocar de modelo.
 
 ## O que ficou pendente
 
@@ -38,6 +42,7 @@ Produção: **https://social-ai-beige.vercel.app** · Repositório: https://gith
 - **O motor local escreve texto genérico** para sites fora do demo quando não há IA. Serve de rede de segurança, não é o produto.
 - **Sem Supabase, uma análise feita em produção pode não ser encontrada** por `GET /api/analise/{id}` depois. A interface não depende disso: as artes vão com os dados do post na própria URL.
 - **Domínio próprio.** Nenhum nome de `NOMES.md` foi comprado.
+- **Riscos residuais conhecidos:** a checagem de DNS contra SSRF acontece antes do fetch (um ataque de DNS rebinding ainda seria possível em tese); `/api/leads` não tem limite de taxa; sem Supabase, os limites de uso da IA valem por instância da Vercel. Nada disso afeta a demo, mas fica anotado para depois do hackathon.
 
 ## Decisões que tomei sozinho durante a noite
 
