@@ -16,8 +16,9 @@ import {
   type RedeArroba,
 } from "@/lib/client/onboarding";
 import { FORMATOS_MOTOR, FREQUENCIAS, OBJETIVOS, REGUAS_TOM, type FormatoMotor, type Frequencia, type ObjetivoId } from "@/lib/motor/constantes";
-import type { Preferencias, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
+import { conhecimentoPreenchido, type Preferencias, type SugestoesOnboarding, type TomDeVoz } from "@/lib/motor/contrato";
 import { NICHOS, type BrandProfile } from "@/lib/types";
+import { PassoSaber, SABER_VAZIO, type Saber } from "./PassoSaber";
 import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
 import { Chip } from "./ui";
 
@@ -100,6 +101,11 @@ export function TelaAjustes({
   const [abrirTurbo, setAbrirTurbo] = useState(false);
   const [turbo, setTurbo] = useState<Turbo>(TURBO_VAZIO);
   const turboRef = useRef<HTMLDivElement>(null);
+  // Passo "O que só você sabe" vem antes dos ajustes e aproveita o tempo de leitura do site.
+  const [passo, setPasso] = useState<"saber" | "ajustes">("saber");
+  const [saber, setSaber] = useState<Saber>(SABER_VAZIO);
+  const [usarSaber, setUsarSaber] = useState(true);
+  const [link, setLink] = useState("");
 
   function aplicarSugestao(s: SugestoesOnboarding) {
     setPublico(s.publico_alvo);
@@ -149,6 +155,10 @@ export function TelaAjustes({
           const rede = (["linkedin", "instagram", "x"] as const).find((r) => f[r]);
           if (rede) setFounder({ valor: f[rede] ?? "", rede });
         }
+        const cf = salvas.conhecimento_founder;
+        // Só preenche se a pessoa ainda não começou a escrever enquanto o site carregava.
+        if (cf) setSaber((atual) => (Object.values(atual).some((v) => v.trim()) ? atual : { ...SABER_VAZIO, ...cf }));
+        setLink(salvas.link_destino ?? "");
         const insp = salvas.inspiracoes.map((i) => i.url).slice(0, 3);
         setTurbo({
           inspiracoes: [...insp, "", "", ""].slice(0, 3),
@@ -187,9 +197,19 @@ export function TelaAjustes({
       .filter((u): u is string => !!u)
       .slice(0, 3)
       .map((url) => ({ url, tipo: tipoDaInspiracao(url) }));
+    const conhecimento = usarSaber
+      ? conhecimentoPreenchido({
+          objecao_cliente: saber.objecao_cliente.slice(0, 600),
+          crenca_contraria: saber.crenca_contraria.slice(0, 600),
+          historia: saber.historia.slice(0, 600),
+        })
+      : null;
+    const destino = normalizarLink(link);
     return {
       perfil_alvo: perfil,
       ...(publico.trim() ? { publico_alvo: publico.trim().slice(0, 300) } : {}),
+      ...(conhecimento ? { conhecimento_founder: conhecimento } : {}),
+      ...(destino ? { link_destino: destino.slice(0, 500) } : {}),
       founder: {
         ...(arroba ? { [founder.rede]: arroba } : {}),
         ...(turbo.fala.trim() ? { transcricao_audio: turbo.fala.trim().slice(0, 6000) } : {}),
@@ -227,6 +247,24 @@ export function TelaAjustes({
     setAbrirTurbo((v) => !v);
     if (!abrirTurbo) requestAnimationFrame(() => turboRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }));
   }
+
+  if (passo === "saber") {
+    return (
+      <PassoSaber
+        saber={saber}
+        onChange={setSaber}
+        lendo={carregando ? dominio : null}
+        onContinuar={(usar) => {
+          setUsarSaber(usar);
+          setPasso("ajustes");
+          window.scrollTo({ top: 0 });
+        }}
+      />
+    );
+  }
+
+  const respondidas = usarSaber ? Object.values(saber).filter((v) => v.trim()).length : 0;
+  const linkInvalido = link.trim() !== "" && !normalizarLink(link);
 
   if (carregando) {
     return (
@@ -286,6 +324,23 @@ export function TelaAjustes({
         </p>
       )}
 
+      <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-tinta/10 bg-white px-4 py-3 text-sm text-tinta-2">
+        <span>
+          <strong className="text-tinta">O que só você sabe:</strong>{" "}
+          {respondidas ? `${respondidas} de 3 respondidas, e elas viram assunto de post.` : "pulado por agora. Os posts saem só do site."}
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            setPasso("saber");
+            window.scrollTo({ top: 0 });
+          }}
+          className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
+        >
+          {respondidas ? "editar" : "responder agora"}
+        </button>
+      </p>
+
       <div className="mt-8 space-y-8 rounded-3xl border border-tinta/10 bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] sm:p-8">
         <div>
           <label htmlFor="ajuste-publico" className={`block ${SUBTITULO}`}>
@@ -301,6 +356,26 @@ export function TelaAjustes({
             autoComplete="off"
             className="mt-3 h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3 focus:border-tinta"
           />
+        </div>
+
+        <div>
+          <label htmlFor="ajuste-link" className={`block ${SUBTITULO}`}>
+            Para onde você quer mandar quem gostar do post? <span className="font-sans text-sm font-normal text-tinta-3">(opcional)</span>
+          </label>
+          <p className="mt-1 text-sm text-tinta-3">Link de agendamento, WhatsApp ou página de cadastro. Entra no fim dos posts feitos para gerar cliente.</p>
+          <input
+            id="ajuste-link"
+            inputMode="url"
+            autoCapitalize="none"
+            spellCheck={false}
+            value={link}
+            onChange={(e) => setLink(e.target.value)}
+            maxLength={500}
+            placeholder="wa.me/5511999999999 ou calendly.com/seu-nome"
+            aria-invalid={linkInvalido}
+            className="mt-3 h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3 focus:border-tinta"
+          />
+          {linkInvalido && <p className="mt-1 pl-4 text-xs text-pauta-escura">Esse não parece um link. Ele vai ficar de fora.</p>}
         </div>
 
         <fieldset>

@@ -81,3 +81,34 @@ export function CampoArroba({
     </div>
   );
 }
+
+/** Botão de gravar voz de um campo. Mostra o relógio enquanto grava. */
+export function BotaoGravar({
+  gravando,
+  relogio,
+  temTexto,
+  onClick,
+  rotulo,
+}: {
+  gravando: boolean;
+  relogio: string;
+  temTexto: boolean;
+  onClick: () => void;
+  /** Nome do campo, para leitor de tela. */
+  rotulo: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={gravando}
+      aria-label={gravando ? `Parar de gravar ${rotulo}` : `Gravar ${rotulo}`}
+      className={`inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-3.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta ${
+        gravando ? "bg-tinta text-papel" : "border border-tinta/20 bg-white hover:border-tinta"
+      }`}
+    >
+      <span className={`h-2.5 w-2.5 rounded-full bg-pauta ${gravando ? "animate-pisca" : ""}`} aria-hidden />
+      {gravando ? `Parar ${relogio}` : temTexto ? "Gravar mais" : "Gravar"}
+    </button>
+  );
+}

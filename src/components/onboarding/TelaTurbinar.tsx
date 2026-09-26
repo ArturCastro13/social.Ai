@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import { normalizarLink } from "@/lib/client/onboarding";
+import { BotaoGravar } from "./ui";
+import { useDitado } from "./useDitado";
 
 export interface Turbo {
   inspiracoes: string[];
@@ -12,114 +14,22 @@ export interface Turbo {
 
 export const TURBO_VAZIO: Turbo = { inspiracoes: ["", "", ""], brandBook: "", fala: "", proibicoes: [] };
 
-const LIMITE_FALA_S = 60;
 const CAMPO =
   "w-full rounded-2xl border border-tinta/20 bg-white px-4 py-3 text-base leading-relaxed outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus-visible:outline-none";
 const LINHA = "h-11 w-full min-w-0 rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors placeholder:text-tinta-3/70 focus:border-tinta focus-visible:outline-none";
 
-// Web Speech API: o TypeScript não traz o construtor, então descrevemos só o que usamos.
-interface Reconhecedor {
-  lang: string;
-  continuous: boolean;
-  interimResults: boolean;
-  start(): void;
-  stop(): void;
-  abort(): void;
-  onresult: ((e: { resultIndex: number; results: SpeechRecognitionResultList }) => void) | null;
-  onend: (() => void) | null;
-  onerror: ((e: { error: string }) => void) | null;
-}
-type ConstrutorReconhecedor = new () => Reconhecedor;
-
-function construtorDeVoz(): ConstrutorReconhecedor | null {
-  if (typeof window === "undefined") return null;
-  const w = window as unknown as { SpeechRecognition?: ConstrutorReconhecedor; webkitSpeechRecognition?: ConstrutorReconhecedor };
-  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
-}
-const semAssinatura = () => () => {};
-
 /** Tela 3, opcional: cada item é um gesto só. Tudo fica editável antes de gerar. */
 export function TelaTurbinar({ turbo, onChange }: { turbo: Turbo; onChange: (t: Turbo) => void }) {
-  const temVoz = useSyncExternalStore(semAssinatura, () => !!construtorDeVoz(), () => false);
-  const [gravando, setGravando] = useState(false);
-  const [segundos, setSegundos] = useState(0);
-  const [avisoVoz, setAvisoVoz] = useState("");
+  const voz = useDitado(60);
+  const gravando = voz.gravando === "fala";
   const [novaProibicao, setNovaProibicao] = useState("");
-  const rec = useRef<Reconhecedor | null>(null);
-  const querGravar = useRef(false);
-  const inicio = useRef(0);
   const turboAtual = useRef(turbo);
   useEffect(() => {
     turboAtual.current = turbo;
   }, [turbo]);
 
-  // Relógio da gravação: para sozinho no limite de um minuto.
-  useEffect(() => {
-    if (!gravando) return;
-    const t = setInterval(() => {
-      const s = Math.floor((Date.now() - inicio.current) / 1000);
-      setSegundos(s);
-      if (s >= LIMITE_FALA_S) parar();
-    }, 250);
-    return () => clearInterval(t);
-  }, [gravando]);
-
-  useEffect(() => () => rec.current?.abort(), []);
-
-  function parar() {
-    querGravar.current = false;
-    rec.current?.stop();
-    setGravando(false);
-  }
-
   function gravar() {
-    const Ctor = construtorDeVoz();
-    if (!Ctor) return;
-    setAvisoVoz("");
-    const base = turboAtual.current.fala.trim();
-    let finais = "";
-    const r = new Ctor();
-    r.lang = "pt-BR";
-    r.continuous = true;
-    r.interimResults = true;
-    r.onresult = (e) => {
-      let parcial = "";
-      for (let i = e.resultIndex; i < e.results.length; i++) {
-        const res = e.results[i];
-        if (res.isFinal) finais += res[0].transcript.trim() + " ";
-        else parcial += res[0].transcript;
-      }
-      const texto = [base, (finais + parcial).trim()].filter(Boolean).join(base ? "\n" : "");
-      onChange({ ...turboAtual.current, fala: texto.slice(0, 6000) });
-    };
-    r.onerror = (e) => {
-      if (e.error === "not-allowed" || e.error === "service-not-allowed") setAvisoVoz("O navegador não liberou o microfone. Dá para escrever no campo que funciona igual.");
-      else if (e.error !== "no-speech" && e.error !== "aborted") setAvisoVoz("A gravação parou. Você pode gravar de novo ou completar escrevendo.");
-      if (e.error !== "no-speech") querGravar.current = false;
-    };
-    // O Chrome encerra sozinho depois de um silêncio; se ainda cabe tempo, volta a ouvir.
-    r.onend = () => {
-      if (querGravar.current && Date.now() - inicio.current < LIMITE_FALA_S * 1000) {
-        try {
-          r.start();
-          return;
-        } catch {
-          /* já estava ouvindo */
-        }
-      }
-      querGravar.current = false;
-      setGravando(false);
-    };
-    rec.current = r;
-    querGravar.current = true;
-    inicio.current = Date.now();
-    setSegundos(0);
-    try {
-      r.start();
-      setGravando(true);
-    } catch {
-      setAvisoVoz("Não deu para começar a gravar. Escreve no campo que funciona igual.");
-    }
+    voz.gravar("fala", turboAtual.current.fala, (fala) => onChange({ ...turboAtual.current, fala }), 6000);
   }
 
   function adicionarProibicao() {
@@ -133,8 +43,6 @@ export function TelaTurbinar({ turbo, onChange }: { turbo: Turbo; onChange: (t: 
     onChange({ ...turbo, proibicoes: lista.slice(0, 10) });
     setNovaProibicao("");
   }
-
-  const relogio = `${Math.floor(segundos / 60)}:${String(segundos % 60).padStart(2, "0")}`;
 
   return (
     <div id="turbinar" className="animate-subir scroll-mt-24 space-y-8 rounded-3xl border border-tinta/10 bg-white p-5 sm:p-8">
@@ -196,23 +104,11 @@ export function TelaTurbinar({ turbo, onChange }: { turbo: Turbo; onChange: (t: 
           <label htmlFor="fala" className="font-semibold">
             Fale 1 minuto
           </label>
-          {temVoz && (
-            <button
-              type="button"
-              onClick={gravando ? parar : gravar}
-              aria-pressed={gravando}
-              className={`inline-flex h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta ${
-                gravando ? "bg-tinta text-papel" : "border border-tinta/20 bg-white hover:border-tinta"
-              }`}
-            >
-              <span className={`h-2.5 w-2.5 rounded-full bg-pauta ${gravando ? "animate-pisca" : ""}`} aria-hidden />
-              {gravando ? `Parar ${relogio}` : turbo.fala ? "Gravar mais" : "Gravar"}
-            </button>
-          )}
+          {voz.temVoz && <BotaoGravar gravando={gravando} relogio={voz.relogio} temTexto={!!turbo.fala} onClick={gravando ? voz.parar : gravar} rotulo="a fala" />}
         </div>
         <p className="mt-1 text-sm text-tinta-3">
           Conta sobre a empresa como contaria num café: por que começou, para quem é, o que ninguém sabe.{" "}
-          {temVoz ? "O áudio vira texto aqui mesmo e você pode corrigir." : "Seu navegador não grava por aqui, então escreve do seu jeito que funciona igual."}
+          {voz.temVoz ? "O áudio vira texto aqui mesmo e você pode corrigir." : "Seu navegador não grava por aqui, então escreve do seu jeito que funciona igual."}
         </p>
         <textarea
           id="fala"
@@ -226,9 +122,9 @@ export function TelaTurbinar({ turbo, onChange }: { turbo: Turbo; onChange: (t: 
         <p className="sr-only" aria-live="polite">
           {gravando ? "Gravando" : ""}
         </p>
-        {avisoVoz && (
+        {voz.aviso?.id === "fala" && (
           <p className="mt-2 text-sm text-pauta-escura" role="alert">
-            {avisoVoz}
+            {voz.aviso.texto}
           </p>
         )}
       </div>

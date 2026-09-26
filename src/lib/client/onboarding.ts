@@ -25,6 +25,25 @@ export function detectarRede(valor: string): RedeArroba | null {
   return null;
 }
 
+/** As três perguntas do passo "O que só você sabe", na ordem da tela. */
+export const PERGUNTAS_FOUNDER: { id: "objecao_cliente" | "crenca_contraria" | "historia"; pergunta: string; exemplo: string }[] = [
+  {
+    id: "objecao_cliente",
+    pergunta: "Qual a objeção ou dúvida que você mais ouve do seu cliente?",
+    exemplo: "Ex.: Todo mundo pergunta se precisa trocar de banco para usar.",
+  },
+  {
+    id: "crenca_contraria",
+    pergunta: "O que o seu mercado acredita que você acha errado?",
+    exemplo: "Ex.: Que PME não liga para gestão financeira. Liga, só não tem tempo.",
+  },
+  {
+    id: "historia",
+    pergunta: "Conta um momento da empresa que mudou como você enxerga o problema.",
+    exemplo: "Ex.: Um cliente fechou as portas com dinheiro para receber. Ali entendi que...",
+  },
+];
+
 export const PERFIS_VALIDOS = PERFIS.map((p) => p.id);
 
 /** O que a tela 2 mostra quando /api/inferir não responde. */
