@@ -153,6 +153,82 @@ body {
   to { transform: scaleX(1); }
 }
 
+/* "Como funciona" da lista de espera: o passo ativo acende enquanto a pessoa rola (data-estado vem do componente). */
+.passo-linha {
+  transform: scaleY(0);
+}
+.passo[data-estado="fixo"] .passo-linha {
+  transform: none !important;
+}
+.passo-numero {
+  border-color: color-mix(in srgb, var(--color-tinta) 18%, transparent);
+  background: #fff;
+  color: var(--color-tinta-3);
+  transition: background-color 400ms, border-color 400ms, color 400ms, box-shadow 400ms;
+}
+.passo[data-estado="ativo"] .passo-numero,
+.passo[data-estado="fixo"] .passo-numero {
+  border-color: var(--color-pauta);
+  background: var(--color-pauta);
+  color: #fff;
+}
+.passo[data-estado="ativo"] .passo-numero {
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-pauta) 16%, transparent);
+}
+.passo[data-estado="feito"] .passo-numero {
+  border-color: var(--color-pauta);
+  color: var(--color-pauta-escura);
+}
+.passo-titulo,
+.passo-texto {
+  transition: opacity 400ms;
+}
+.passo[data-estado="proximo"] .passo-titulo {
+  opacity: 0.35;
+}
+.passo[data-estado="proximo"] .passo-texto {
+  opacity: 0.4;
+}
+.passo[data-estado="feito"] .passo-texto {
+  opacity: 0.75;
+}
+/* Peças do cartão: esperam apagadas e entram em sequência quando o passo acende. */
+.visual-passo {
+  transition: opacity 500ms, transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.passo[data-estado="proximo"] .visual-passo {
+  opacity: 0.45;
+  transform: translateY(10px) scale(0.98);
+}
+.visual-passo .peca,
+.visual-passo .barra,
+.visual-passo .traco {
+  transition: opacity 450ms, transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 80ms + 120ms);
+}
+[data-estado="proximo"] .visual-passo .peca {
+  opacity: 0;
+  transform: translateY(8px);
+}
+[data-estado="proximo"] .visual-passo .barra {
+  transform: scaleY(0.12);
+}
+[data-estado="proximo"] .visual-passo .traco {
+  transform: scaleX(0);
+}
+[data-estado="proximo"] .visual-passo * {
+  transition-delay: 0ms;
+}
+/* Painel fixo do computador: troca o passo com um fade, todos empilhados no mesmo lugar (sem pular a página). */
+.painel-passo {
+  transition: opacity 450ms, transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.painel-passo[data-estado="proximo"] {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
 /* Botões respondem ao toque. */
 .tocavel {
   transition: transform 160ms cubic-bezier(0.2, 0.7, 0.1, 1), background-color 200ms, border-color 200ms, box-shadow 200ms;
@@ -185,6 +261,14 @@ body {
   .cena-video {
     transform: none;
     border-radius: 28px;
+  }
+  .passo-numero,
+  .passo-titulo,
+  .passo-texto,
+  .visual-passo,
+  .visual-passo *,
+  .painel-passo {
+    transition: none !important;
   }
   .tocavel:hover,
   .tocavel:active,
