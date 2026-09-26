@@ -50,12 +50,14 @@ function montarPaleta(pesos: Map<string, { peso: number; fonte: BrandColor["font
     return l > 0.03 && l < 0.75 && c.peso >= topo * 0.45;
   });
   const primaria = viva?.hex ?? distintas[0]?.hex ?? neutros.find((n) => luminance(n) < 0.2) ?? "#4f46e5";
+  // Secundária e destaque: cores com corpo (tons pastel quase brancos servem de fundo, não de destaque).
+  const comCorpo = distintas.filter((c) => c.hex !== primaria && luminance(c.hex) > 0.02 && luminance(c.hex) < 0.7);
   const secundaria =
-    distintas.find((c) => c.hex !== primaria && Math.abs(hue(c.hex) - hue(primaria)) > 25)?.hex ??
-    distintas[1]?.hex ??
-    shade(primaria, luminance(primaria) > 0.4 ? -0.25 : 0.2);
+    comCorpo.find((c) => Math.abs(hue(c.hex) - hue(primaria)) > 25)?.hex ??
+    comCorpo[0]?.hex ??
+    shade(primaria, luminance(primaria) > 0.4 ? -0.25 : -0.12);
   const destaque =
-    distintas.find((c) => c.hex !== primaria && c.hex !== secundaria)?.hex ?? shade(secundaria, 0.15);
+    comCorpo.find((c) => c.hex !== secundaria)?.hex ?? shade(primaria, luminance(primaria) > 0.4 ? -0.35 : 0.22);
 
   // Fundo e texto: neutros do site, desde que contrastem entre si.
   const escuros = neutros.filter((n) => luminance(n) < 0.08);

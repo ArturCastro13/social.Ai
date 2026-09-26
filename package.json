@@ -12,6 +12,7 @@
     "demo:gerar": "tsx scripts/gerar-demo.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@supabase/supabase-js": "^2.117.2",
     "cheerio": "^1.2.0",
     "jszip": "^3.10.2",

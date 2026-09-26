@@ -1,0 +1,190 @@
+{
+  "url": "https://www.pipefy.com/pt-br/",
+  "handles": { "instagram": "@pipefybr", "linkedin": "@pipefy", "x": "@pipefy", "facebook": "@pipefy" },
+  "analise": {
+    "nicho": "saas-b2b",
+    "resumo_negocio": "A Pipefy é uma plataforma no-code de orquestração e automação de processos com agentes de IA. Empresas usam para digitalizar fluxos de trabalho de áreas como financeiro, compras e RH, com governança, e pagam por assinatura da plataforma.",
+    "publico": "Líderes de operação, financeiro, compras e RH em empresas médias e grandes que vivem apagando incêndio de processo manual, dependem de TI para qualquer mudança e precisam mostrar eficiência rápido.",
+    "tom_de_voz": "Confiante, prático e sem hype. Fala de IA como ferramenta de trabalho, não como mágica, e sempre amarra a tecnologia a um resultado de operação.",
+    "posicionamento": "Para times de operação que não podem esperar a fila de TI, a Pipefy coloca agentes de IA e automação no-code para rodar processos com controle, em dias e não em meses.",
+    "pilares": [
+      { "nome": "IA com controle", "descricao": "Mostrar como agentes de IA trabalham dentro de regras, com aprovação humana e governança, desmontando o medo de perder o controle." },
+      { "nome": "O custo do processo manual", "descricao": "Quantificar e ilustrar o retrabalho, o e-mail perdido e a planilha paralela que todo gestor conhece." },
+      { "nome": "Operação de verdade", "descricao": "Casos e bastidores de processos reais de financeiro, compras e RH, com o antes e o depois do fluxo." }
+    ],
+    "diagnostico": [
+      { "titulo": "O site fala de plataforma, o nicho fala de dor", "texto": "Os posts de SaaS B2B que mais engajam na nossa base abrem com uma consequência para o negócio, como horas perdidas ou erro evitado. O site da Pipefy abre com AI Agents, workflows e no-code, que são o como. O gestor precisa se reconhecer antes de se interessar pela ferramenta." },
+      { "titulo": "IA gera curiosidade e medo na mesma medida", "texto": "Todo mundo quer usar agentes de IA, e todo mundo tem medo de perder o controle. A frase do próprio site, IA com controle, é um pilar de conteúdo pronto e ainda pouco explorado em formato de post." },
+      { "titulo": "Reconhecimento do Gartner rende mais como história", "texto": "O reconhecimento pelo Gartner na construção de agentes no-code aparece como selo. Contado como bastidor, com o que o time fez para chegar lá, ele vira prova social com rosto." },
+      { "titulo": "Falta uma série fixa", "texto": "SaaS que crescem no LinkedIn têm uma série reconhecível, como um processo automatizado por semana. A Pipefy tem modelos prontos para vários times e pode transformar cada um em um carrossel." }
+    ],
+    "estrategia": [
+      { "rede": "linkedin", "frequencia_semanal": 3, "foco": "Canal principal. Carrosséis de antes e depois de processos, opinião sobre IA no trabalho e bastidores do time. Posts de liderança em primeira pessoa." },
+      { "rede": "instagram", "frequencia_semanal": 2, "foco": "Conteúdo leve sobre a rotina de operação: memes de processo, listas e dicas rápidas para gestores." },
+      { "rede": "x", "frequencia_semanal": 3, "foco": "Opiniões curtas sobre IA, automação e no-code, conversando com a comunidade de produto e operações." },
+      { "rede": "facebook", "frequencia_semanal": 1, "foco": "Republicar os carrosséis de melhor desempenho do LinkedIn." }
+    ],
+    "posts": [
+      {
+        "rede_principal": "linkedin",
+        "formato": "carrossel",
+        "template": "capa-gancho",
+        "gancho": "Seu processo mais caro é o que ninguém desenhou",
+        "slides": [
+          { "titulo": "Seu processo mais caro é o que ninguém desenhou", "texto": "Como achar e automatizar o fluxo que vive no e-mail" },
+          { "titulo": "1. Siga um pedido do começo ao fim", "texto": "Escolha uma solicitação comum, como uma compra, e anote cada pessoa e cada ferramenta por onde ela passa." },
+          { "titulo": "2. Conte as esperas", "texto": "O problema quase nunca é o trabalho. É o tempo parado esperando alguém responder um e-mail." },
+          { "titulo": "3. Separe regra de decisão", "texto": "O que segue regra pode ser automatizado. O que exige julgamento continua com uma pessoa, com contexto na mão." },
+          { "titulo": "4. Coloque um agente nas regras", "texto": "Agentes de IA cuidam da triagem, dos dados e dos lembretes. O time só aprova o que importa." },
+          { "titulo": "Na Pipefy isso começa em minutos", "texto": "Workflows no-code e AI Agents com controle. Qual processo você mapearia primeiro?" }
+        ],
+        "legendas": {
+          "instagram": "O processo que mais custa na sua empresa provavelmente não está desenhado em lugar nenhum. Ele vive no e-mail.\n\n4 passos para achar e automatizar esse fluxo. Salva para mostrar para o time 📌",
+          "linkedin": "O processo mais caro da sua empresa provavelmente não está em nenhum fluxograma. Ele vive no e-mail, no WhatsApp e na planilha paralela.\n\nUm jeito simples de achar:\n1. Siga um pedido do começo ao fim\n2. Conte o tempo parado, não o tempo trabalhado\n3. Separe o que é regra do que é decisão\n4. Coloque um agente de IA nas regras e deixe as decisões com o time\n\nQual processo você mapearia primeiro?",
+          "x": "o processo mais caro da sua empresa não está em nenhum fluxograma. ele vive no email e na planilha paralela. comece seguindo um pedido do início ao fim e contando as esperas.",
+          "facebook": "Onde está o processo mais caro da sua empresa? Quase sempre no e-mail. Veja 4 passos para achar e automatizar esse fluxo com a Pipefy."
+        },
+        "hashtags": ["automacao", "processos", "ia", "pipefy"],
+        "padrao_inspirador": "carrossel--erro-comum",
+        "por_que": "Abre com a dor escondida da operação e ensina o método antes de citar o produto, o padrão dos carrosséis B2B mais salvos."
+      },
+      {
+        "rede_principal": "linkedin",
+        "formato": "antes-depois",
+        "template": "antes-depois",
+        "gancho": "O mesmo pedido de compra, antes e depois",
+        "slides": [
+          { "titulo": "Antes", "texto": "E-mail, planilha, três aprovações perdidas na caixa de entrada e ninguém sabe onde o pedido parou." },
+          { "titulo": "Depois", "texto": "Um fluxo único, com agente de IA fazendo a triagem e cada aprovador sabendo o que é com ele." }
+        ],
+        "legendas": {
+          "instagram": "O mesmo pedido de compra. Dois jeitos de trabalhar.\n\nQual deles é o da sua empresa hoje? 👇",
+          "linkedin": "O mesmo pedido de compra, antes e depois.\n\nAntes: e-mail, planilha, três aprovações perdidas e a pergunta de sempre, onde está meu pedido.\n\nDepois: um fluxo só, um agente de IA fazendo a triagem e cada aprovador sabendo exatamente o que é com ele.\n\nA tecnologia é a parte fácil. A parte difícil é decidir parar de trabalhar do jeito antigo.",
+          "x": "pedido de compra antes: email, planilha, 3 aprovações perdidas. depois: um fluxo, um agente de IA na triagem e cada aprovador sabendo o que é com ele.",
+          "facebook": "Antes: e-mail, planilha e aprovações perdidas. Depois: um fluxo único com IA fazendo a triagem. Veja como a Pipefy organiza processos de compras."
+        },
+        "hashtags": ["compras", "automacao", "pipefy"],
+        "padrao_inspirador": "antes-depois--prova-social",
+        "por_que": "O antes e depois deixa a transformação visível em um segundo e todo gestor reconhece o cenário de antes."
+      },
+      {
+        "rede_principal": "x",
+        "formato": "print-tweet",
+        "template": "print-x",
+        "gancho": "IA sem controle é só um estagiário muito rápido",
+        "slides": [
+          { "titulo": "", "texto": "agente de IA sem regra, sem aprovação e sem histórico não é automação. é um estagiário muito rápido que ninguém está supervisionando." }
+        ],
+        "legendas": {
+          "instagram": "IA sem controle é só um estagiário muito rápido que ninguém supervisiona.\n\nNa Pipefy os agentes trabalham dentro do processo, com regra, aprovação e histórico.",
+          "linkedin": "Agente de IA sem regra, sem aprovação e sem histórico não é automação.\n\nÉ um estagiário muito rápido que ninguém está supervisionando.\n\nO ganho real da IA na operação vem quando ela trabalha dentro de um processo com governança. Por isso a gente fala tanto em IA com controle.",
+          "x": "agente de IA sem regra, sem aprovação e sem histórico não é automação. é um estagiário muito rápido que ninguém está supervisionando.",
+          "facebook": "IA sem controle é só um estagiário muito rápido. Na Pipefy, os agentes trabalham com regra, aprovação e histórico."
+        },
+        "hashtags": ["ia", "governanca"],
+        "padrao_inspirador": "print-tweet--polemica",
+        "por_que": "Opinião afiada com analogia fácil de repetir, o tipo de post que circula como print no nicho."
+      },
+      {
+        "rede_principal": "linkedin",
+        "formato": "dado-impacto",
+        "template": "dado-impacto",
+        "gancho": "5 minutos para começar",
+        "slides": [
+          { "titulo": "5 min", "texto": "para começar a automatizar um processo com AI Agents, workflows e no-code na Pipefy." }
+        ],
+        "legendas": {
+          "instagram": "5 minutos. É o tempo para começar a automatizar um processo na Pipefy, sem esperar a fila de TI.",
+          "linkedin": "Quanto tempo leva para tirar um processo do e-mail?\n\nNa Pipefy, começar leva 5 minutos: AI Agents, workflows e no-code, sem depender da fila de TI.\n\nO resto é decidir qual processo vem primeiro.",
+          "x": "5 minutos pra começar a automatizar um processo. o difícil nunca foi a ferramenta, é escolher qual processo vem primeiro.",
+          "facebook": "Começar a automatizar um processo na Pipefy leva 5 minutos. Sem fila de TI."
+        },
+        "hashtags": ["nocode", "automacao", "pipefy"],
+        "padrao_inspirador": "dado-impacto--numero",
+        "por_que": "Número curto e concreto que aparece no próprio site, lido em um segundo no feed."
+      },
+      {
+        "rede_principal": "linkedin",
+        "formato": "bastidor-founder",
+        "template": "bastidor",
+        "gancho": "O que aprendemos construindo agentes que as empresas confiam",
+        "slides": [
+          { "titulo": "Confiança vem antes da automação.", "texto": "Construindo agentes no-code, aprendemos que as empresas só entregam um processo para a IA quando conseguem ver, aprovar e auditar cada passo." }
+        ],
+        "legendas": {
+          "instagram": "Confiança vem antes da automação. É o que aprendemos construindo agentes de IA para processos de empresas.",
+          "linkedin": "A maior lição de construir agentes de IA para processos de empresa não foi técnica.\n\nFoi entender que ninguém entrega um processo para a IA sem conseguir ver, aprovar e auditar cada passo.\n\nPor isso a Pipefy trata governança como produto, não como detalhe. É também um dos motivos de sermos reconhecidos pelo Gartner na construção de agentes no-code.\n\nO que faria você confiar um processo inteiro a um agente?",
+          "x": "construindo agentes de IA pra empresas: ninguém entrega um processo pra IA sem conseguir ver, aprovar e auditar cada passo. governança é produto.",
+          "facebook": "Confiança vem antes da automação. Na Pipefy, cada passo de um agente de IA pode ser visto, aprovado e auditado."
+        },
+        "hashtags": ["ia", "lideranca", "pipefy"],
+        "padrao_inspirador": "bastidor-founder--historia-pessoal",
+        "por_que": "Transforma o selo do Gartner em aprendizado contado em primeira pessoa, formato que supera posts institucionais no LinkedIn."
+      },
+      {
+        "rede_principal": "instagram",
+        "formato": "lista",
+        "template": "lista",
+        "gancho": "5 sinais de que seu processo pede automação",
+        "slides": [
+          { "titulo": "5 sinais de que seu processo pede automação", "texto": "" },
+          { "titulo": "Alguém pergunta onde está", "texto": "Toda semana, sobre o mesmo pedido" },
+          { "titulo": "Existe uma planilha paralela", "texto": "E só uma pessoa sabe atualizar" },
+          { "titulo": "Aprovação por e-mail", "texto": "Que some na caixa de entrada" },
+          { "titulo": "Retrabalho no fim do mês", "texto": "Para corrigir dado digitado errado" },
+          { "titulo": "Mudar o fluxo depende da TI", "texto": "E entra numa fila de meses" }
+        ],
+        "legendas": {
+          "instagram": "Se você marcou 3 ou mais, esse processo está te custando caro 👀\n\nSalva e manda para quem vive apagando incêndio de operação.",
+          "linkedin": "5 sinais de que um processo pede automação:\n\n1. Toda semana alguém pergunta onde está o pedido\n2. Existe uma planilha paralela que só uma pessoa entende\n3. Aprovação acontece por e-mail\n4. O fim do mês é dedicado a corrigir dado\n5. Qualquer mudança no fluxo vira fila na TI\n\nQuantos você marcou?",
+          "x": "5 sinais de que seu processo pede automação: perguntam onde está o pedido, existe planilha paralela, aprovação por email, retrabalho no fim do mês, qualquer mudança vira fila na TI.",
+          "facebook": "5 sinais de que seu processo pede automação. Quantos você reconhece na sua empresa?"
+        },
+        "hashtags": ["gestao", "processos", "pipefy"],
+        "padrao_inspirador": "lista--promessa",
+        "por_que": "Lista de autodiagnóstico gera identificação e comentário com o número de sinais marcados."
+      },
+      {
+        "rede_principal": "linkedin",
+        "formato": "citacao",
+        "template": "citacao",
+        "gancho": "Automação boa é a que faz o time confiar no processo de novo",
+        "slides": [
+          { "titulo": "Pipefy", "texto": "Automação boa não é a que faz mais coisas. É a que faz o time confiar no processo de novo." }
+        ],
+        "legendas": {
+          "instagram": "Automação boa não é a que faz mais coisas. É a que faz o time confiar no processo de novo.",
+          "linkedin": "Automação boa não é a que faz mais coisas.\n\nÉ a que faz o time confiar no processo de novo: saber onde cada pedido está, quem precisa agir e por quê.\n\nEscala, governança e resultados em dias, não meses.",
+          "x": "automação boa não é a que faz mais coisas. é a que faz o time confiar no processo de novo.",
+          "facebook": "Automação boa é a que faz o time confiar no processo de novo. Conheça a Pipefy."
+        },
+        "hashtags": ["automacao", "pipefy"],
+        "padrao_inspirador": "citacao--contraintuitivo",
+        "por_que": "Frase contraintuitiva e curta, fácil de concordar e compartilhar no LinkedIn."
+      },
+      {
+        "rede_principal": "instagram",
+        "formato": "lista",
+        "template": "checklist",
+        "gancho": "Antes de colocar IA num processo, confira",
+        "slides": [
+          { "titulo": "Antes de colocar IA num processo, confira", "texto": "" },
+          { "titulo": "O fluxo está desenhado do começo ao fim", "texto": "" },
+          { "titulo": "Cada etapa tem um dono", "texto": "" },
+          { "titulo": "As regras estão escritas", "texto": "" },
+          { "titulo": "Existe um ponto de aprovação humana", "texto": "" },
+          { "titulo": "Dá para auditar o que foi feito", "texto": "" }
+        ],
+        "legendas": {
+          "instagram": "IA em processo bagunçado só deixa a bagunça mais rápida.\n\nConfira esses 5 pontos antes de colocar um agente para trabalhar 📌",
+          "linkedin": "IA em processo bagunçado só deixa a bagunça mais rápida.\n\nAntes de colocar um agente para trabalhar, confira: o fluxo está desenhado, cada etapa tem dono, as regras estão escritas, existe aprovação humana e dá para auditar.\n\nFaltou algum?",
+          "x": "IA em processo bagunçado só deixa a bagunça mais rápida. desenhe o fluxo, dê dono para cada etapa, escreva as regras, depois chame o agente.",
+          "facebook": "Checklist rápido antes de colocar IA em um processo da sua empresa."
+        },
+        "hashtags": ["ia", "processos", "pipefy"],
+        "padrao_inspirador": "lista--pergunta",
+        "por_que": "Checklist prático posiciona a marca como quem entende de IA responsável, pilar central da Pipefy."
+      }
+    ]
+  }
+}

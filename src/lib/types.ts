@@ -181,7 +181,9 @@ export interface Analise {
   posts: PostGerado[];
   calendario: CalendarioItem[];
   brand: BrandProfile;
-  origem: "ia" | "demo" | "cache";
+  /** ia: escrita pelo LLM agora. cache: análise repetida da mesma URL. demo: exemplo pré-processado. local: motor de regras sem IA. */
+  origem: "ia" | "demo" | "cache" | "local";
   provedor: string | null;
+  avisos: string[];
   criadoEm: string;
 }

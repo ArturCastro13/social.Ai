@@ -142,6 +142,9 @@ export function extractFromHtml(html: string, pageUrl: string): HtmlExtract {
   }
 
   $("script, noscript, svg, style").remove();
+  // Elementos inline colados ("Mais de<b>1,8 milhão</b>de") viram palavras grudadas no .text(). Separa com espaço.
+  $("br").replaceWith(" ");
+  $("span, strong, b, em, i, a, small, sup, sub, div, p, li, button, label").prepend(" ").append(" ");
   const h1 = uniq($("h1").map((_, el) => $(el).text()).get(), 5);
   const h2 = uniq($("h2").map((_, el) => $(el).text()).get(), 10);
   const paragrafos = uniq(
