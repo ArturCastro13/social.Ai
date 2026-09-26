@@ -1,0 +1,494 @@
+[
+  {
+    "id": "edtech-01",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Quando eu fazia faculdade eu também falava mal dela. Que erro!",
+    "estrutura": [
+      "Slide 1: frase de abertura em destaque, admitindo uma opinião antiga do próprio founder",
+      "Slide 2: a crença popular que o post contraria (curso rápido ensina mais que 4 anos de faculdade)",
+      "Slide 3: o argumento central: faculdade forma pensamento crítico, investigação e síntese, não a tecnologia da moda",
+      "Slide 4: prova de bastidor: a própria edtech nasceu dentro do ambiente acadêmico",
+      "Slide 5: fechamento equilibrado e pergunta para os comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "cor sólida clara com aspas grandes e foto pequena do founder",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Um founder de edtech de cursos livres defendendo a faculdade quebra a expectativa do público. A confissão em primeira pessoa (\"Que erro!\") gera identificação e o tema divide opiniões, o que puxa comentários.",
+    "autor_ou_marca": "Paulo Silveira (Alura)",
+    "link_fonte": "https://pt.linkedin.com/posts/paulosilveira_carreiradev-tecnologia-faculdade-activity-7018579773765369857-R1q_",
+    "metricas": {
+      "curtidas": 7098,
+      "comentarios": 302,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Compartilhamentos e visualizações a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Citação literal do gancho, conferida na página pública. Post em texto; aqui adaptado para formato citação estático."
+  },
+  {
+    "id": "edtech-02",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Eu estava errado sobre xadrez. Dois anos atrás, quando o time propôs colocar xadrez no Duolingo, eu disse não.",
+    "estrutura": [
+      "Slide 1: confissão do CEO em letra grande: \"Eu estava errado sobre X\"",
+      "Slide 2: o motivo do não na época (medo de virar app de jogo e perder a missão educacional)",
+      "Slide 3: o gatilho da mudança de opinião (conversa com um ministro da Educação)",
+      "Slide 4: o resultado: virou o curso que mais cresce",
+      "Slide 5: lição de liderança: revisitar as próprias certezas"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do founder em ambiente de trabalho com faixa de texto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "CEO admitindo erro é raro e humaniza a marca. O post junta vulnerabilidade, bastidor de decisão de produto e um resultado concreto, fechando com uma lição aplicável para outros líderes.",
+    "autor_ou_marca": "Luis von Ahn (Duolingo)",
+    "link_fonte": "https://www.linkedin.com/posts/luis-von-ahn-duolingo_i-was-wrong-about-chess-two-years-ago-activity-7391111925235081216-I6Nt",
+    "metricas": {
+      "curtidas": 7120,
+      "comentarios": 396,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês: \"I was wrong about chess. Two years ago, when our team pitched adding chess to Duolingo, I said no.\""
+  },
+  {
+    "id": "edtech-03",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "antes-depois",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Quando começamos o Duolingo English Test, todo mundo respondeu igual: \"O TOEFL domina há mais de 50 anos. Vocês são uma empresa pequena. Não sejam burros.\"",
+    "estrutura": [
+      "Slide 1: ANTES: a frase de descrédito que o founder ouviu",
+      "Slide 2: a dor pessoal que motivou o produto (ter que viajar para fazer prova de inglês na adolescência)",
+      "Slide 3: a linha do tempo curta (início em 2013, lançamento em 2016)",
+      "Slide 4: DEPOIS: aceito por 99 das 100 melhores universidades dos EUA e mais de 6 mil programas",
+      "Slide 5: fechamento sobre enfrentar um incumbente gigante"
+    ],
+    "padrao_visual": {
+      "fundo": "divisão em duas metades: cinza no antes, cor da marca no depois",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Narrativa de azarão contra incumbente com prova social forte no final. A frase de descrédito no início cria tensão e o número de universidades resolve a história.",
+    "autor_ou_marca": "Luis von Ahn (Duolingo)",
+    "link_fonte": "https://www.linkedin.com/posts/luis-von-ahn-duolingo_when-we-started-working-on-the-duolingo-english-activity-7351234237276045313-qKz1",
+    "metricas": {
+      "curtidas": 6961,
+      "comentarios": 261,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês: \"When we started working on the Duolingo English Test, basically everyone had the same response: 'TOEFL has dominated for 50+ years. You're a tiny company. Don't be stupid.'\""
+  },
+  {
+    "id": "edtech-04",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Abaixo está um e-mail interno do nosso CEO: vamos nos tornar AI-first.",
+    "estrutura": [
+      "Bloco 1: frase curta anunciando uma mudança estratégica radical",
+      "Bloco 2: print do e-mail interno do CEO, na íntegra",
+      "Bloco 3: comparação com uma aposta histórica da empresa (mobile em 2012)",
+      "Bloco 4: promessa de cuidado com o time"
+    ],
+    "padrao_visual": {
+      "fundo": "print de e-mail em fundo branco com logo da marca",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Publicar um documento interno gera sensação de acesso exclusivo e o tema (IA substituindo trabalho humano) é altamente polarizador. Gerou muito alcance, mas com reação majoritariamente negativa: serve como referência de engajamento e também de risco de marca.",
+    "autor_ou_marca": "Duolingo (e-mail de Luis von Ahn)",
+    "link_fonte": "https://www.linkedin.com/posts/duolingo_below-is-an-all-hands-email-from-our-activity-7322560534824865792-l9vh",
+    "metricas": {
+      "curtidas": 5228,
+      "comentarios": 1083,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Repercussão negativa confirmada por PR Daily e Entrepreneur. Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês. Usar como padrão de alto engajamento com alerta: a proporção de comentários sobre reações é alta porque houve backlash. O próprio CEO depois admitiu que faltou contexto."
+  },
+  {
+    "id": "edtech-05",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Uma das coisas mais importantes que um líder pode fazer é dar clareza.",
+    "estrutura": [
+      "Bloco 1: princípio de liderança em uma frase",
+      "Bloco 2: reconhecimento de que a comunicação anterior não foi clara",
+      "Bloco 3: o esclarecimento objetivo (IA acelera o trabalho, contratações seguem no mesmo ritmo)",
+      "Bloco 4: ações concretas para o time (workshops, conselhos de orientação)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do founder com a frase principal sobreposta",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Post de correção de rota depois de uma crise. Abre com um princípio universal em vez de um pedido de desculpas, o que ganha leitura de quem não acompanhou a polêmica e ainda responde quem acompanhou.",
+    "autor_ou_marca": "Luis von Ahn (Duolingo)",
+    "link_fonte": "https://www.linkedin.com/posts/luis-von-ahn-duolingo_one-of-the-most-important-things-leaders-activity-7331386411670982658-jpfX",
+    "metricas": {
+      "curtidas": 2152,
+      "comentarios": 296,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês: \"One of the most important things leaders can do is provide clarity.\" Par natural do edtech-04."
+  },
+  {
+    "id": "edtech-06",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Uma coisa que eu sempre digo para o time: faça ser divertido. Lançamos hoje nossa retrospectiva do ano, e dá para ver suas estatísticas pessoais no app.",
+    "estrutura": [
+      "Slide 1: o princípio da empresa em uma frase (aprender tem que ser divertido)",
+      "Slide 2: print da retrospectiva pessoal do próprio CEO com os números dele",
+      "Slide 3: convite para o leitor abrir o app e ver os próprios números",
+      "Slide 4: pergunta para os comentários: qual foi o seu dado mais curioso?"
+    ],
+    "padrao_visual": {
+      "fundo": "cores vibrantes da marca com número pessoal gigante",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O founder usa o próprio dado de uso como vitrine do produto. Estatística pessoal desperta curiosidade e dá motivo para o leitor comparar e comentar com os seus números.",
+    "autor_ou_marca": "Luis von Ahn (Duolingo)",
+    "link_fonte": "https://www.linkedin.com/posts/luis-von-ahn-duolingo_duolingo-yearinreview-activity-7269384617202171904-8iJk",
+    "metricas": {
+      "curtidas": 4211,
+      "comentarios": 270,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês: \"One thing I always tell Duos is: make it fun. We launched our annual Year-in-Review today...\""
+  },
+  {
+    "id": "edtech-07",
+    "nicho": "edtech",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Com muito pesar, comunicamos o falecimento do Duo, no dia 11 de fevereiro de 2025.",
+    "estrutura": [
+      "Bloco 1: foto do mascote em preto e branco, estética de nota de falecimento",
+      "Bloco 2: texto formal de luto, sem nenhuma piada explícita",
+      "Bloco 3: pista de que haverá uma revelação (mistério em aberto)",
+      "Bloco 4: continuação dias depois com a volta do mascote e o convite para usar o app"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do mascote em preto e branco, fundo escuro",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quebra total do tom habitual de humor da marca: o público fica sem saber se é real. O mistério gera especulação, memes e respostas de outras marcas, virando assunto fora da bolha do app.",
+    "autor_ou_marca": "Duolingo Brasil",
+    "link_fonte": "https://www.meioemensagem.com.br/comunicacao/duolingo-anuncia-morte-de-mascote-em-acao-nas-redes-sociais",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto de abertura conforme reportagem do Meio & Mensagem, que descreve a imagem em preto e branco no Instagram e no X. Revelação da farsa em 24/02/2025 segundo a Folha Vitória. Nenhum número de engajamento do post foi encontrado nas fontes."
+  },
+  {
+    "id": "edtech-08",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "O ChatGPT pode ajudar a aprender programação?",
+    "estrutura": [
+      "Slide 1: a pergunta do momento em letras grandes",
+      "Slide 2: resposta honesta: a IA traz a informação otimizada, mas não traz direção",
+      "Slide 3: o que falta para aprender de verdade (trilha, comunidade, instrutor)",
+      "Slide 4: diferenciais da escola (fórum, comunidade com milhares de devs, acompanhamento de progresso)",
+      "Slide 5: chamada para a turma com prazo de inscrição"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo escuro estilo editor de código com destaque roxo",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega carona na dúvida mais comum do público no momento e responde sem negar a IA, reposicionando o curso como o que a IA não entrega. A pergunta no gancho convida o leitor a ter uma opinião.",
+    "autor_ou_marca": "Rocketseat",
+    "link_fonte": "https://pt.linkedin.com/posts/rocketseat_intelig%C3%AAnciaartificial-vaga-carreira-activity-7023993005682352130-xqQK",
+    "metricas": {
+      "curtidas": 399,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações lidas na página pública do post no LinkedIn (curtidas = total de reações). Comentários, compartilhamentos e visualizações a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho literal conferido. O post original é imagem única com texto longo; a divisão em carrossel é adaptação sugerida."
+  },
+  {
+    "id": "edtech-09",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Comemoramos muito na Rocketseat o nosso crescimento e sucesso em 2022! Dobramos de tamanho.",
+    "estrutura": [
+      "Slide 1: \"Dobramos de tamanho\" com o número em destaque",
+      "Slide 2: métrica principal do ano (novos alunos)",
+      "Slide 3: o que foi construído no período (novo produto pedagógico)",
+      "Slide 4: tração recente (novos alunos só no primeiro mês do ano)",
+      "Slide 5: próximo marco público (evento presencial com meta de participantes)"
+    ],
+    "padrao_visual": {
+      "fundo": "cor sólida da marca com número gigante centralizado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Retrospectiva com números concretos funciona como prova social e sinal de tração para alunos, talentos e investidores. O repost pelo cofundador amplia o alcance para a audiência pessoal dele.",
+    "autor_ou_marca": "Rocketseat (post de Rodrigo Terron repostado por Diego Schell Fernandes)",
+    "link_fonte": "https://www.linkedin.com/posts/diego-schell-fernandes_tecnologia-rocketseat-neverstoplearning-activity-7029041227790467072-K7Bi",
+    "metricas": {
+      "curtidas": 242,
+      "comentarios": 32,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do repost no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho literal conferido. Números citados no post: 14.500 novos alunos em 2022 e 1.500 em janeiro de 2023."
+  },
+  {
+    "id": "edtech-10",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Quero te convidar a entender mais de Inteligência Artificial e a enxergar como ela pode impactar, agora mesmo, o seu trabalho. E positivamente!",
+    "estrutura": [
+      "Slide 1: o convite com a promessa de impacto imediato no trabalho",
+      "Slide 2: o que é: imersão gratuita de 5 dias em parceria com uma big tech",
+      "Slide 3: lista de para quem é (vendas, finanças, marketing, desenvolvimento)",
+      "Slide 4: lista do que se aprende (técnicas de prompt, ferramenta prática)",
+      "Slide 5: quem ensina e data de início"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro com logos das parceiras e checklist",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Promessa concreta, gratuita e com prazo, vinda do founder em primeira pessoa. A lista de profissões amplia o público para além de devs e a parceria com marca grande empresta credibilidade.",
+    "autor_ou_marca": "Paulo Silveira (Alura)",
+    "link_fonte": "https://pt.linkedin.com/posts/paulosilveira_quero-te-convidar-a-entender-mais-de-intelig%C3%AAncia-activity-7191909151688581120-HUdX",
+    "metricas": {
+      "curtidas": 1237,
+      "comentarios": 40,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações). Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho literal conferido. Imersão de IA em parceria Alura, Google e FIAP."
+  },
+  {
+    "id": "edtech-11",
+    "nicho": "edtech",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Avise os professores da sua vida sobre isso. Estamos construindo isso para eles e acho que pode deixar a vida deles muito melhor.",
+    "estrutura": [
+      "Bloco 1: pedido direto de compartilhamento para um público específico (professores)",
+      "Bloco 2: promessa de benefício claro para esse público",
+      "Bloco 3: o que é o produto e em que fase está (teste com lista de espera)",
+      "Bloco 4: chamada para entrar na lista de espera"
+    ],
+    "padrao_visual": {
+      "fundo": "print da interface do produto com a frase principal por cima",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O gancho transforma o leitor em mensageiro: quem não é professor compartilha para quem é. A promessa é emocional e específica, e a lista de espera cria escassez.",
+    "autor_ou_marca": "Sal Khan (Khan Academy)",
+    "link_fonte": "https://lk.linkedin.com/posts/khanacademy_please-let-the-teachers-in-your-life-know-activity-7051750479118159872-nW5n",
+    "metricas": {
+      "curtidas": 1284,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações lidas na página pública do post no LinkedIn (curtidas = total de reações). Contagem de comentários divergente na página (58 visíveis, 59 no título), deixada para o time conferir."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho traduzido do original em inglês: \"Please let the teachers in your life know about this. We are building this for them and I think it could make their lives a lot better.\""
+  },
+  {
+    "id": "edtech-12",
+    "nicho": "edtech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Sua lição de espanhol está te esperando faz 3 dias. Eu também. Eu sei onde você mora.",
+    "estrutura": [
+      "Bloco 1: print de tweet curto na voz do mascote, tom passivo-agressivo",
+      "Bloco 2: referência à culpa de não estudar (sequência perdida, lembrete ignorado)",
+      "Bloco 3: sem chamada comercial explícita: o humor é a chamada"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tweet em fundo branco ou escuro, avatar do mascote",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Personifica a marca como um personagem com opinião e ameaça cômica, transformando a culpa de não estudar em meme. O público se reconhece e compartilha marcando amigos.",
+    "autor_ou_marca": null,
+    "link_fonte": null,
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão inspirado na voz do mascote do Duolingo descrita por Propmark, Exame e NoGood (memes de sequestro e lembretes insistentes), mas nenhum tweet específico foi aberto e conferido."
+  },
+  {
+    "id": "edtech-13",
+    "nicho": "edtech",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "5 erros que tiram pontos da sua redação do ENEM (e o terceiro quase todo mundo comete)",
+    "estrutura": [
+      "Slide 1: número de erros em destaque e promessa de revelar o mais comum",
+      "Slide 2: erro 1 com exemplo real de frase errada e a versão corrigida",
+      "Slide 3: erro 2 no mesmo formato errado versus certo",
+      "Slide 4: erro 3, o mais comum, com destaque visual diferente",
+      "Slide 5: erros 4 e 5 resumidos",
+      "Slide 6: checklist final para salvar",
+      "Slide 7: chamada: salve e mande para quem vai fazer a prova"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro com marcações em vermelho e verde estilo correção de professor",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Erro comum mais número ativa medo de perder pontos, e o carrossel com checklist final é altamente salvável. Conteúdo sazonal forte perto da prova.",
+    "autor_ou_marca": null,
+    "link_fonte": null,
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão comum em perfis de preparatórios para ENEM (Descomplica, Me Salva), mas nenhum post específico foi aberto e conferido."
+  },
+  {
+    "id": "edtech-14",
+    "nicho": "edtech",
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Há 1 ano eu era atendente de telemarketing. Hoje sou dev júnior. O que mudou foi isso:",
+    "estrutura": [
+      "Slide 1: foto do aluno com as duas profissões lado a lado (antes e depois)",
+      "Slide 2: o ponto de partida: rotina, salário e frustração",
+      "Slide 3: o momento da decisão de mudar de carreira",
+      "Slide 4: a rotina de estudo real (horas por dia, trilha seguida)",
+      "Slide 5: a primeira vaga conquistada",
+      "Slide 6: conselho do aluno para quem está começando"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do aluno, metade dessaturada no antes e colorida no depois",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transição de carreira é o desejo central do público de escolas de tecnologia. Um rosto real e uma jornada crível funcionam como prova social muito mais forte que depoimento genérico.",
+    "autor_ou_marca": null,
+    "link_fonte": null,
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão recorrente em posts de alunos de Rocketseat e Alura sobre transição de carreira, mas nenhum post específico foi conferido."
+  },
+  {
+    "id": "edtech-15",
+    "nicho": "edtech",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Você acertaria essa questão que derrubou metade dos candidatos no ENEM?",
+    "estrutura": [
+      "Slide 1: desafio direto ao leitor com a questão em destaque",
+      "Slide 2: enunciado completo e alternativas",
+      "Slide 3: pausa: \"comenta sua resposta antes de passar\"",
+      "Slide 4: resolução passo a passo",
+      "Slide 5: o truque para não errar questões parecidas",
+      "Slide 6: chamada para seguir e receber uma questão por semana"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo branco estilo prova impressa com cor da marca nos destaques",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O desafio mexe com o ego do leitor e o slide de pausa gera comentários antes da resposta, o que o algoritmo premia. O formato série cria hábito de voltar ao perfil.",
+    "autor_ou_marca": null,
+    "link_fonte": null,
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Não usar o dado \"metade dos candidatos\" sem fonte real da questão escolhida."
+  }
+]

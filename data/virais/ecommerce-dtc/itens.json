@@ -1,0 +1,496 @@
+[
+  {
+    "id": "ecommerce-dtc-01",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Há 13 anos nos falavam que era impossível... Hoje comemoramos inauguração do nosso novo centro de distribuição.",
+    "estrutura": [
+      "Bloco 1: gancho de desacreditação (\"diziam que era impossível\") com marco temporal",
+      "Bloco 2: anúncio do marco concreto (novo centro de distribuição, maior investimento do ano)",
+      "Bloco 3: dados operacionais do bastidor (tamanho multiplicado, automação, modalidades logísticas)",
+      "Bloco 4: lição sobre inovação de modelo de negócio, não só de produto",
+      "Bloco 5: agradecimento nominal ao time"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do bastidor (galpão, operação), sem design gráfico",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Combina arco de superação (\"era impossível\") com prova física e concreta do crescimento. O bastidor operacional dá credibilidade que anúncio de marca não tem, e o agradecimento ao time puxa comentários de parabéns.",
+    "autor_ou_marca": "Rony Meisler (Reserva)",
+    "link_fonte": "https://pt.linkedin.com/posts/ronymeisler_h%C3%A1-13-anos-nos-falavam-que-era-imposs%C3%ADvel-activity-6598349546269528064-Pcrn",
+    "metricas": {
+      "curtidas": 7558,
+      "comentarios": 454,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (reações totais contadas como curtidas). O título do resultado de busca exibia 469 comentários; mantido o número lido na página."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Abertura do post é citação literal. Comentários do post mencionam a foto original (pessoa sobre um palete), então o post tinha imagem de bastidor. Bom modelo para marco de operação/logística."
+  },
+  {
+    "id": "ecommerce-dtc-02",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Em tempos de pandemia multiplicaram-se os pedidos de parceria de empresas com as nossas marcas. Para melhor filtrá-los e respondê-los criamos o ReservaCorp.",
+    "estrutura": [
+      "Bloco 1: contexto do problema (excesso de pedidos de parceria)",
+      "Bloco 2: nome da solução criada",
+      "Bloco 3: passo 1, cadastro da empresa via link",
+      "Bloco 4: passo 2, análise pelo time de parcerias",
+      "Bloco 5: passo 3, benefício para colaboradores (desconto e frete grátis)"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro; em versão estática, card com os 3 passos numerados sobre fundo da cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma um anúncio comercial em processo simples de 3 passos numerados, com benefício claro para quem lê. Fácil de escanear e com chamada para ação direta.",
+    "autor_ou_marca": "Rony Meisler (Reserva)",
+    "link_fonte": "https://pt.linkedin.com/posts/ronymeisler_em-tempos-de-pandemia-multiplicaram-se-os-activity-6673776829494652928-Hycv",
+    "metricas": {
+      "curtidas": 997,
+      "comentarios": 51,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (reações totais contadas como curtidas)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Abertura é citação literal (acentuação de \"filtrá-los\" normalizada). Post original é texto sem imagem; o formato lista foi adaptado para estático."
+  },
+  {
+    "id": "ecommerce-dtc-03",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Patrocinamos esse podcast há 5 anos. Mas só agora sentei na cadeira como fundador, e o convite veio por relevância, não por contrato.",
+    "estrutura": [
+      "Bloco 1: contraste entre marca patrocinadora e fundador convidado",
+      "Bloco 2: por que isso marca a trajetória (convite por relevância)",
+      "Bloco 3: o que foi contado pela primeira vez (decisões difíceis, bastidores)",
+      "Bloco 4: lição: crescer exigiu mais coragem do que certeza",
+      "Bloco 5: chamada para assistir o episódio"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do founder no estúdio do podcast",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Cria curiosidade com um contraste inesperado (anos de patrocínio versus primeira vez como convidado) e promete bastidores que não aparecem na propaganda, algo que o público de DTC busca.",
+    "autor_ou_marca": "Yuri Gricheno (Insider Store)",
+    "link_fonte": "https://br.linkedin.com/in/yuri-gricheno",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho parafraseado a partir do resumo do post visto no perfil público (não é citação literal palavra por palavra). A URL individual do post não foi encontrada; fonte é o perfil, onde o post aparece na atividade recente (pode sair da vitrine com o tempo)."
+  },
+  {
+    "id": "ecommerce-dtc-04",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Nossa IA própria no WhatsApp gerou R$ 400 mil em receita em 4 meses, com retorno de cerca de 200x sobre o custo de tecnologia.",
+    "estrutura": [
+      "Slide 1: número grande (R$ 400 mil) e período",
+      "Slide 2: o que foi construído (IA própria de atendimento e venda no WhatsApp)",
+      "Slide 3: segundo número: ROI de cerca de 200x sobre o custo",
+      "Slide 4: tese do founder (receita por colaborador entre as maiores do varejo de moda)",
+      "Slide 5: pergunta para a audiência sobre uso de IA em vendas"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo sólido escuro com número em destaque na cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número concreto de receita e ROI em tema quente (IA aplicada a vendas) gera autoridade e curiosidade imediata. O dado é específico demais para parecer marketing genérico.",
+    "autor_ou_marca": "Yuri Gricheno (Insider Store)",
+    "link_fonte": "https://br.linkedin.com/in/yuri-gricheno",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Números (R$ 400 mil entre março e junho de 2026, cerca de 200x de ROI) lidos no resumo do post no perfil público. Gancho é paráfrase, não citação literal. Estrutura em slides é adaptação para carrossel/estático."
+  },
+  {
+    "id": "ecommerce-dtc-05",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "antes-depois",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Em 2023, mulheres eram 15% das nossas vendas. Em 2026, viraram maioria da receita pela primeira vez na história da marca.",
+    "estrutura": [
+      "Slide 1: antes (15% em 2023) ao lado do depois (quase 50% e maioria da receita em 2026)",
+      "Slide 2: por que isso surpreende (marca nasceu associada ao público masculino)",
+      "Slide 3: o que mudou no produto e na comunicação",
+      "Slide 4: aprendizado para outras marcas DTC",
+      "Slide 5: chamada para comentar"
+    ],
+    "padrao_visual": {
+      "fundo": "duas colunas lado a lado, cores contrastantes para antes e depois",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Antes e depois com dois números simples conta uma virada de público inesperada. O contraste com a percepção de marca gera curiosidade e debate.",
+    "autor_ou_marca": "Yuri Gricheno (Insider Store)",
+    "link_fonte": "https://br.linkedin.com/in/yuri-gricheno",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Dados (15% em 2023, quase 50% em 2026, maioria da receita desde janeiro de 2026) lidos no resumo do post no perfil público. Gancho é paráfrase. Slides 2 e 3 são sugestão de desenvolvimento, não conteúdo do post original."
+  },
+  {
+    "id": "ecommerce-dtc-06",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A melhor aula que já tive não foi sobre negócios. Foram 11 lições sobre vida que ouvi em Harvard.",
+    "estrutura": [
+      "Slide 1: gancho \"a melhor aula que já tive\" com contexto (Harvard, grupo de empreendedores)",
+      "Slide 2: quebra de expectativa: foco em vida, não em frameworks",
+      "Slides 3 a 6: lições numeradas, uma ou duas por slide",
+      "Slide 7: lição de destaque: relacionamentos acima de conquistas",
+      "Slide 8: pergunta: qual lição mais bateu em você?"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro, número da lição grande e frase curta",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista numerada com autoridade emprestada (Harvard) e quebra de expectativa (vida em vez de negócio). Salvável e fácil de consumir.",
+    "autor_ou_marca": "Yuri Gricheno (Insider Store)",
+    "link_fonte": "https://www.linkedin.com/posts/yuri-gricheno_the-best-lecture-ive-ever-had-being-activity-7368236189155360768-3Owt",
+    "metricas": {
+      "curtidas": 439,
+      "comentarios": 22,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post no LinkedIn (reações totais contadas como curtidas)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post original em inglês (\"The best lecture I've ever had\"), texto com 11 lições numeradas; gancho traduzido e adaptado. Desempenho modesto em números absolutos, mas acima da média para um perfil com cerca de 16 mil seguidores."
+  },
+  {
+    "id": "ecommerce-dtc-07",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "\"Demitam o cara do marketing.\" Esse foi um dos comentários que recebemos. Então transformamos os haters num álbum.",
+    "estrutura": [
+      "Slide 1: print de comentário negativo real sobre a marca",
+      "Slide 2: mais prints de comentários de ódio, em sequência",
+      "Slide 3: virada: a marca abraça a crítica com humor",
+      "Slide 4: o produto criado a partir disso (álbum, camiseta, edição limitada)",
+      "Slide 5: chamada para ouvir ou comprar"
+    ],
+    "padrao_visual": {
+      "fundo": "prints de comentários sobre fundo preto, estética de heavy metal",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa a crítica como prova de que a marca é diferente. Quem odeia vira combustível, quem gosta se sente parte do grupo, e o humor torna o conteúdo altamente compartilhável.",
+    "autor_ou_marca": "Liquid Death",
+    "link_fonte": "https://www.marketingdive.com/news/liquid-death-water-riffs-on-haters-comments-with-metal-album/577172/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fonte confirma a campanha \"Greatest Hates\" (maio de 2020), com faixas como \"Fire Your Marketing Guy\" feitas a partir de comentários negativos recebidos online. Gancho em português é adaptação de exemplo, não citação literal de post. Formato em prints é a tradução estática da ideia."
+  },
+  {
+    "id": "ecommerce-dtc-08",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Eu odiei totalmente aquele comercial da marca.",
+    "estrutura": [
+      "Bloco 1: frase de ódio ao próprio anúncio estampada em camiseta ou peça",
+      "Bloco 2: foto do produto (camiseta) com o CEO ou o público usando",
+      "Bloco 3: legenda curta convidando os haters a pegarem a sua"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto simples com tipografia grande",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Antecipa a crítica e a transforma em produto. A autoironia desarma o público e gera sensação de escassez quando o item esgota.",
+    "autor_ou_marca": "Oatly",
+    "link_fonte": "https://www.foxnews.com/food-drink/oatlys-super-bowl-commercial-shirt-haters-out-stock-24-hours.print",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fonte confirma a camiseta \"I Totally Hated That Oatly Commercial\" após o comercial do Super Bowl de 2021, esgotada em menos de 24 horas. Gancho é tradução da frase da camiseta. Métricas de post social não encontradas."
+  },
+  {
+    "id": "ecommerce-dtc-09",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Aos 19 anos eu entregava pizza de dia e costurava roupa na garagem dos meus pais à noite.",
+    "estrutura": [
+      "Slide 1: gancho com idade e cena da garagem",
+      "Slide 2: a dor: não achava a roupa de treino que queria usar",
+      "Slide 3: máquina de costura, serigrafia e nenhum orçamento de marketing",
+      "Slide 4: a aposta: mandar produto de graça para criadores de conteúdo de fitness",
+      "Slide 5: o momento de virada: esvaziou a conta para ir a uma feira e vendeu 30 mil libras em 30 minutos",
+      "Slide 6: onde a marca está hoje",
+      "Slide 7: lição para quem está começando"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos antigas e granuladas do início, alternando com slides de texto",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Arco clássico de origem humilde com detalhes concretos (idade, garagem, pizza) e um número de virada memorável. Gera identificação em quem está começando.",
+    "autor_ou_marca": "Gymshark (Ben Francis)",
+    "link_fonte": "https://row.gymshark.com/blog/article/the-official-gymshark-story",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Fatos (19 anos, entregava pizza, máquina de costura, envio a influenciadores, BodyPower 2013 de 300 libras por dia para 30 mil libras em 30 minutos) confirmados na história oficial da marca. Não foi aberto um post social específico com esse gancho: é gancho de exemplo no padrão, não citação literal."
+  },
+  {
+    "id": "ecommerce-dtc-10",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Se você pudesse criar o hidratante perfeito para a sua pele, o que ele teria?",
+    "estrutura": [
+      "Slide 1: pergunta direta para a comunidade",
+      "Slide 2: opções de resposta (tipo de pele, preocupação principal, textura)",
+      "Slide 3: convite para responder o questionário no link",
+      "Slide 4: promessa: o produto vai nascer das respostas",
+      "Slide 5 (post posterior): resultado da pesquisa e o produto criado"
+    ],
+    "padrao_visual": {
+      "fundo": "cores claras e suaves, tipografia amigável, sem modelo",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma seguidor em cocriador. A pergunta gera comentários e respostas, e o público passa a ter sensação de posse sobre o produto antes do lançamento.",
+    "autor_ou_marca": "Sallve",
+    "link_fonte": "https://consumidormoderno.com.br/sallve-collab-publico/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Fonte confirma a estratégia: questionário personalizado com mais de 10 mil respostas que originou o primeiro produto (hidratante antioxidante). O post específico não foi aberto: gancho de exemplo no padrão, não citação literal. Reportagem da Exame (exame.com/marketing/comunidade-da-sallve-e-espelho-da-marca-diz-julia-petit) complementa."
+  },
+  {
+    "id": "ecommerce-dtc-11",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A prateleira dela diz tudo. Mostre a sua com a nossa hashtag.",
+    "estrutura": [
+      "Bloco 1: foto real de cliente (prateleira de banheiro ou selfie com o produto) repostada pela marca",
+      "Bloco 2: crédito ao cliente em destaque",
+      "Bloco 3: legenda com a rotina contada pela própria cliente",
+      "Bloco 4: convite para marcar a marca e ser repostado"
+    ],
+    "padrao_visual": {
+      "fundo": "foto espontânea de cliente, tons rosados e claros",
+      "contraste": "baixo",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Conteúdo gerado pelo cliente é prova social autêntica, e ser repostado vira moeda social, o que incentiva mais gente a postar e marcar a marca.",
+    "autor_ou_marca": "Glossier",
+    "link_fonte": "https://www.privy.com/blog/glossier",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fonte confirma o padrão de repostar conteúdo de clientes e o uso de perguntas abertas no Instagram; a origem é a coluna Top Shelf do Into The Gloss (#ITGTopShelfie). Gancho é exemplo no padrão, não citação literal."
+  },
+  {
+    "id": "ecommerce-dtc-12",
+    "nicho": "ecommerce-dtc",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Esse é o corpo de quem treina. Todos eles.",
+    "estrutura": [
+      "Bloco 1: foto real de embaixadora ou cliente fora do padrão tradicional das campanhas",
+      "Bloco 2: frase curta de representatividade",
+      "Bloco 3: legenda convidando a comunidade a se ver na marca"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de pessoa real em treino, luz natural",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Representatividade gera identificação e comentários de apoio, que aumentam o alcance. Segundo o estudo de caso, o post de positividade corporal da conta feminina quase dobrou a média de curtidas.",
+    "autor_ou_marca": "Gymshark",
+    "link_fonte": "https://www.giraffesocialmedia.co.uk/gymshark-social-media-case-study/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Fonte afirma que o post de positividade corporal com embaixadora quase dobrou a média de curtidas (média citada da conta Gymshark Women: 35 mil), mas não traz o post, a imagem nem a legenda, e não dá o número exato do post. Gancho de exemplo no padrão, não citação literal."
+  },
+  {
+    "id": "ecommerce-dtc-13",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Fomos processados por dizer o que pensamos do nosso produto. Então publicamos o processo inteiro.",
+    "estrutura": [
+      "Slide 1: frase de impacto em citação grande",
+      "Slide 2: contexto: quem processou e por quê",
+      "Slide 3: a decisão contraintuitiva de expor o caso em vez de esconder",
+      "Slide 4: o que aconteceu com a marca depois",
+      "Slide 5: lição sobre posicionamento e coragem"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo liso com citação em tipografia grande e irreverente",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma uma crise em narrativa de marca pequena contra gigante. O leitor toma partido e compartilha.",
+    "autor_ou_marca": "Oatly",
+    "link_fonte": "https://www.researchgate.net/publication/368497661_Analysis_of_Advertisement_Strategies_and_Effectiveness_Oatly_as_a_Case_Study",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Caso do processo movido pela associação de laticínios sueca contra o slogan \"It's like milk but made for humans\" (2014/2015), que a Oatly teria publicado. Informação vista apenas em resumo de busca; fonte não foi aberta e o aumento de vendas citado lá não foi confirmado. Gancho de exemplo no padrão, não citação literal."
+  },
+  {
+    "id": "ecommerce-dtc-14",
+    "nicho": "ecommerce-dtc",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "O erro que quase quebrou nossa marca: crescer o estoque antes de crescer a recompra.",
+    "estrutura": [
+      "Slide 1: gancho com o erro nomeado",
+      "Slide 2: o que parecia certo na época (lançamento, mídia paga, estoque alto)",
+      "Slide 3: o sinal que ignoramos (recompra baixa, CAC subindo)",
+      "Slide 4: o custo real do erro em caixa",
+      "Slide 5: o que mudamos",
+      "Slide 6: checklist para outras marcas DTC evitarem o mesmo"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo sólido com destaque em vermelho no erro, slides de texto curto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Vulnerabilidade de founder com aprendizado prático aplicável. Erros concretos geram mais salvamentos e comentários do que histórias só de sucesso.",
+    "autor_ou_marca": null,
+    "link_fonte": null,
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão recorrente em founders de DTC no LinkedIn, sem fonte específica aberta nesta curadoria."
+  },
+  {
+    "id": "ecommerce-dtc-15",
+    "nicho": "ecommerce-dtc",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Analisei 50 páginas de produto de marcas DTC que vendem bem. 7 coisas que todas têm em comum:",
+    "estrutura": [
+      "Slide 1: print do tweet com o gancho numérico",
+      "Slide 2: item 1 com exemplo visual de página real",
+      "Slide 3: item 2 e item 3",
+      "Slide 4: item 4 e item 5",
+      "Slide 5: item 6 e item 7",
+      "Slide 6: chamada para salvar e seguir"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tweet em fundo branco, depois slides com capturas de tela anotadas",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Promete síntese de muita pesquisa em poucos itens acionáveis. É o formato de thread que operadores de DTC como Nik Sharma popularizaram: uma dica pequena quebrada em passos práticos com exemplos reais.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.privy.com/blog/nik-sharmas-playbook-for-launching-a-dtc-brand",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão de thread de Nik Sharma descrito em resultados de busca (Shopify, ecorn.agency); a página linkada não foi aberta nesta curadoria."
+  }
+]

@@ -1,0 +1,501 @@
+[
+  {
+    "id": "saas-b2b-01",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Voltei do maior evento de SaaS do mundo.",
+    "estrutura": [
+      "Bloco 1: gancho de retorno de viagem, com cena pessoal (cerveja na orla de San Francisco escrevendo o texto)",
+      "Bloco 2: promessa de visão sem filtro comparando Brasil e Estados Unidos",
+      "Bloco 3: observação 1, métricas de sucesso diferentes (status x domínio de mercado)",
+      "Bloco 4: observações 2 e 3, postura de networking e cultura de trabalho",
+      "Bloco 5: observações 4 e 5, impacto real da IA e velocidade de produto",
+      "Bloco 6: fechamento opinativo que convida o leitor a concordar ou discordar"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do founder no evento ou na cidade, sem design",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Combina bastidor pessoal (viagem, cena concreta) com opinião comparativa Brasil x EUA, tema que provoca identificação e discordância entre founders brasileiros, o que gera muitos comentários.",
+    "autor_ou_marca": "Matheus Weigand (Getdemo, Salesbud, SaaS BR Club)",
+    "link_fonte": "https://pt.linkedin.com/posts/matheus-weigand_voltei-do-maior-evento-de-saas-do-mundo-activity-7331272116668911617-vAhD",
+    "metricas": {
+      "curtidas": 898,
+      "comentarios": 319,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn (curtidas = total de reações); demais campos a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho retirado do slug da URL do post; texto completo em português no LinkedIn. Caso brasileiro forte para o padrão 'aprendizados de viagem/evento'."
+  },
+  {
+    "id": "saas-b2b-02",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Vou criar a maior comunidade de SaaS B2B do Brasil. Quem quiser entrar, comenta \"SaaS BR Club\".",
+    "estrutura": [
+      "Bloco 1: promessa ambiciosa em uma frase (a maior comunidade do nicho)",
+      "Bloco 2: para quem é a comunidade e o que a pessoa ganha",
+      "Bloco 3: CTA de comentário com palavra-chave exata",
+      "Bloco 4: imagem única com o nome da comunidade em destaque"
+    ],
+    "padrao_visual": {
+      "fundo": "cor sólida da marca com nome da comunidade em letras grandes",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "CTA de comentar palavra-chave transforma cada interessado em comentário, o que o algoritmo do LinkedIn premia com mais alcance; a promessa grande e o senso de pertencimento a um grupo de founders ampliam a adesão.",
+    "autor_ou_marca": "Matheus Weigand (SaaS BR Club)",
+    "link_fonte": "https://microsaas.substack.com/p/como-um-empreendedor-construiu-3",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time. A fonte (newsletter Micro SaaS) cita cerca de 3.000 comentários, número aproximado, por isso não preenchido"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto do gancho conforme citado pela newsletter; post original no LinkedIn não localizado. Formato de imagem é sugestão de adaptação estática."
+  },
+  {
+    "id": "saas-b2b-03",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A nova moda dos SaaS B2B: o botão de \"faça um tour\".",
+    "estrutura": [
+      "Bloco 1: nomeia a tendência como 'nova moda' do mercado",
+      "Bloco 2: dado de impacto (aumento de conversão de MQL para reunião)",
+      "Bloco 3: lista das mudanças de mentalidade (produto aberto, educação em massa, comprador pesquisa sozinho)",
+      "Bloco 4: lista de empresas conhecidas que já adotaram (Omie, Meetime, TOTVS, Swile e outras)",
+      "Bloco 5: frase de fechamento de efeito"
+    ],
+    "padrao_visual": {
+      "fundo": "print do produto ou grade de logos das empresas citadas",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Enquadra o próprio produto como tendência de mercado e usa nomes de marcas brasileiras conhecidas como prova social, gerando curiosidade sem parecer anúncio.",
+    "autor_ou_marca": "Matheus Weigand (Getdemo)",
+    "link_fonte": "https://pt.linkedin.com/posts/matheus-weigand_a-nova-moda-dos-saas-b2b-bot%C3%A3o-de-fa%C3%A7a-activity-7354459651771445250-QKfV",
+    "metricas": {
+      "curtidas": 84,
+      "comentarios": 19,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn; desempenho moderado, incluído pelo padrão de conteúdo de produto disfarçado de tendência"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Bom exemplo de post de produto na regra '15 dias educativo, 4 dias produto' descrita pelo próprio founder."
+  },
+  {
+    "id": "saas-b2b-04",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Analisamos 304.174 e-mails. A resposta vai te surpreender.",
+    "estrutura": [
+      "Slide 1: número grande e específico da amostra analisada",
+      "Slide 2: a pergunta que a análise respondeu",
+      "Slide 3: o achado principal em uma frase",
+      "Slide 4: gráfico simples comparando o que funciona x o que não funciona",
+      "Slide 5: como aplicar amanhã",
+      "Slide 6: CTA para comentar ou salvar"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo escuro com número gigante em cor de destaque",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número exato e grande dá credibilidade de pesquisa proprietária; a promessa de surpresa cria lacuna de curiosidade. Dados do próprio produto viram conteúdo que só aquela empresa pode publicar.",
+    "autor_ou_marca": "Devin Reed (Gong)",
+    "link_fonte": "https://foundationinc.co/lab/gongs-linkedin-strategy",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": 275,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "275 comentários citados pela Foundation Inc; a mesma fonte fala em 1.200+ interações e alcance estimado de 25.000+ pessoas, valores aproximados não preenchidos"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original em inglês citado pela Foundation Inc ('Analyzed 304,174 emails... The answer WILL surprise you'). Post original era texto em cascata; formato dado-impacto é adaptação estática."
+  },
+  {
+    "id": "saas-b2b-05",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Pare de falar de preço cedo na call. Os dados mostram o contrário do que você aprendeu.",
+    "estrutura": [
+      "Slide 1: afirmação contraintuitiva sobre vendas com selo 'dados reais'",
+      "Slide 2: achado 1 com gráfico (momento de falar de preço)",
+      "Slide 3: achado 2 com gráfico (quantidade de perguntas com C-level)",
+      "Slide 4: achado 3 com gráfico",
+      "Slide 5: resumo do que fazer diferente",
+      "Slide 6: fonte dos dados e CTA para salvar"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro com gráficos de barra na cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Insights de dados simples e aplicáveis imediatamente, que contrariam o senso comum do vendedor, geram salvamentos e compartilhamentos; é o pilar do Gong Labs.",
+    "autor_ou_marca": "Gong (página da empresa)",
+    "link_fonte": "https://foundationinc.co/lab/gongs-linkedin-strategy",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Temas 'mencione preço mais tarde' e 'não faça perguntas demais ao C-level' citados pela Foundation Inc como posts de dados do Gong. Texto do gancho é exemplo no padrão, não citação literal. Estrutura de um achado por slide segue o 'benchmark data carousel' da Oktopost."
+  },
+  {
+    "id": "saas-b2b-06",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Tem um novo padrão de cold e-mail surgindo: a \"Ratoeira\".",
+    "estrutura": [
+      "Bloco 1: anuncia um padrão novo com nome próprio e memorável",
+      "Bloco 2: descreve a regra (1 a 2 frases, gatilho personalizado + pergunta de valor)",
+      "Bloco 3: exemplo real do e-mail em destaque, como citação",
+      "Bloco 4: por que funciona (resposta por impulso)",
+      "Bloco 5: convite para o leitor testar e comentar"
+    ],
+    "padrao_visual": {
+      "fundo": "card branco imitando um e-mail, com o texto do exemplo em destaque",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dar nome a um framework cria curiosidade e torna a ideia compartilhável; o exemplo pronto para copiar faz os leitores aplicarem nos comentários, gerando meta-engajamento.",
+    "autor_ou_marca": "Will Allred (Lavender)",
+    "link_fonte": "https://www.linkedin.com/posts/williamallred_seeing-a-new-cold-email-pattern-emerge-activity-6939542631848808448-MFmy",
+    "metricas": {
+      "curtidas": 284,
+      "comentarios": 87,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original 'Seeing a new cold email pattern emerge: The Mouse Trap'."
+  },
+  {
+    "id": "saas-b2b-07",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Quer saber como seus clientes te encontraram? Pergunte a eles.",
+    "estrutura": [
+      "Bloco 1: pergunta que todo time de marketing B2B faz",
+      "Bloco 2: resposta óbvia e provocativa (basta perguntar)",
+      "Bloco 3: passo 1, troque dropdown por campo de texto livre",
+      "Bloco 4: passo 2, torne o campo obrigatório",
+      "Bloco 5: passo 3, remova texto de sugestão",
+      "Bloco 6: prova (mais de 100 empresas B2B aplicaram)"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo sólido com lista numerada de 3 passos",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Desafia a confiança em software de atribuição com uma solução simples e acionável em 3 passos; tema polêmico entre marketing e vendas gera debate nos comentários.",
+    "autor_ou_marca": "Chris Walker (Refine Labs)",
+    "link_fonte": "https://www.linkedin.com/posts/chriswalker171_attribution-revenue-b2b-activity-7021126918821347328-R5CQ",
+    "metricas": {
+      "curtidas": 390,
+      "comentarios": 99,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original em inglês ('You want to know how your prospects found you...')."
+  },
+  {
+    "id": "saas-b2b-08",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "antes-depois",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Escrevi 214 posts no LinkedIn para um founder de SaaS B2B. O que mais funcionou foi contraste.",
+    "estrutura": [
+      "Slide 1: número de posts e resultado acumulado como credencial",
+      "Slide 2: a lição central (princípio do contraste)",
+      "Slide 3: antes x depois 1 (frase genérica x frase com dado)",
+      "Slide 4: antes x depois 2",
+      "Slide 5: antes x depois 3",
+      "Slide 6: os 3 tipos de contraste (dor x ganho, expectativa x realidade, status quo x visão)",
+      "Slide 7: CTA para salvar"
+    ],
+    "padrao_visual": {
+      "fundo": "tela dividida em duas colunas, 'antes' em cinza e 'depois' em cor de destaque",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Credencial numérica logo no gancho e exemplos lado a lado tornam a lição fácil de copiar; formato antes-depois é visualmente escaneável.",
+    "autor_ou_marca": "Samridhi Bhardwaj (ghostwriter de founder SaaS B2B)",
+    "link_fonte": "https://www.linkedin.com/posts/samridhi-bhardwaj-sb_i-wrote-214-linkedin-posts-for-b2b-saas-founder-activity-7290645507012460544-ZyJe",
+    "metricas": {
+      "curtidas": 2336,
+      "comentarios": 378,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original 'I wrote 214 LinkedIn posts for B2B SaaS Founder'. O post cita 11,7 milhões de impressões acumuladas nos 214 posts, não deste post."
+  },
+  {
+    "id": "saas-b2b-09",
+    "nicho": "saas-b2b",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Tem print de MRR falso demais por aqui.",
+    "estrutura": [
+      "Bloco 1: print do tweet curto com crítica direta a um comportamento do próprio nicho",
+      "Bloco 2: contexto de quem fala (anos para construir receita real)",
+      "Bloco 3: chamada implícita para o debate nas respostas"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tweet em fundo branco ou preto, com avatar e nome visíveis",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Crítica curta a uma prática que todos no ecossistema já perceberam valida uma dor coletiva; virou gatilho para o lançamento do TrustMRR em 48 horas.",
+    "autor_ou_marca": "Pieter Levels",
+    "link_fonte": "https://www.directorygems.com/case-study/trustmrr-com",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": 518000,
+      "observacao": "518 mil visualizações citadas pelo estudo de caso da DirectoryGems (fonte secundária); demais campos a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do trecho citado pela fonte ('There's so many fake MRR screenshots on here...'). Tweet original não aberto diretamente."
+  },
+  {
+    "id": "saas-b2b-10",
+    "nicho": "saas-b2b",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Batemos R$ 40 mil de MRR em 8 meses. Aqui está o playbook.",
+    "estrutura": [
+      "Slide 1: número de receita recorrente e prazo em destaque",
+      "Slide 2: print do painel de pagamentos como prova",
+      "Slide 3: o que fizemos no mês 1 a 3",
+      "Slide 4: o que fizemos no mês 4 a 8",
+      "Slide 5: o que não funcionou",
+      "Slide 6: métricas honestas (churn, CAC) e CTA para seguir a jornada"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tweet ou de dashboard de receita, fundo escuro",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "No build in public, um número de receita forte é o gancho que mais viraliza; mostrar churn e CAC junto evita a desconfiança de print falso.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://dev.to/threadotter/everyone-says-build-in-public-nobody-tells-you-what-to-post-when-youre-at-0-mrr-2o41",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão 'número de MRR como gancho' descrito em resultado de busca sobre build in public; artigo não aberto integralmente."
+  },
+  {
+    "id": "saas-b2b-11",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Já construí outras empresas. Mas estes resultados se destacam: fechamos 2025 com 1 milhão de horas economizadas.",
+    "estrutura": [
+      "Slide 1: frase pessoal de credibilidade do founder",
+      "Slide 2: métrica central gigante (1 milhão de horas economizadas)",
+      "Slide 3: grade de números de uso (automações, agentes de IA, países)",
+      "Slide 4: contexto estratégico (testar IA x operar com IA)",
+      "Slide 5: CTA de conversa"
+    ],
+    "padrao_visual": {
+      "fundo": "estilo 'retrospectiva do ano' com números grandes em blocos coloridos",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Retrospectiva anual com números agregados de uso funciona como prova social da plataforma sem parecer anúncio; formato 'wrapped' é familiar e compartilhável.",
+    "autor_ou_marca": "Alessio Alionço (Pipefy)",
+    "link_fonte": "https://www.linkedin.com/posts/alessioalionco_2025-wrapped-activity-7412851559321198592-kzTs",
+    "metricas": {
+      "curtidas": 151,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn; desempenho moderado"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Founder brasileiro de SaaS B2B. Adaptação em PT do gancho original em inglês ('I've built companies before. I've seen growth. But these results stand out.')."
+  },
+  {
+    "id": "saas-b2b-12",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Jogamos fora US$ 20 milhões em pipeline logo depois do nosso MAIOR trimestre.",
+    "estrutura": [
+      "Bloco 1: paradoxo (recorde de receita + decisão radical)",
+      "Bloco 2: o plano original de 10 anos",
+      "Bloco 3: o momento de virada (o plano cabia em 2 meses com IA)",
+      "Bloco 4: as ações (proteger comissão do time, reconstruir produto, captar, rebrand)",
+      "Bloco 5: frase de fechamento de mentalidade de guerra"
+    ],
+    "padrao_visual": {
+      "fundo": "foto dos cofundadores em ambiente de trabalho com frase do gancho sobreposta",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Decisão que parece irracional (descartar receita no melhor momento) cria tensão e curiosidade; o bastidor da decisão mostra coragem do founder.",
+    "autor_ou_marca": "Emir Atli (founder SaaS)",
+    "link_fonte": "https://www.linkedin.com/posts/emircatli_we-killed-20m-in-saas-pipeline-right-after-activity-7454575629150326784-5prV",
+    "metricas": {
+      "curtidas": 94,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "reações e comentários lidos na página pública do post no LinkedIn; desempenho moderado, incluído pela força do padrão de gancho"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original 'We killed $20M in SaaS pipeline right after our BIGGEST quarter'."
+  },
+  {
+    "id": "saas-b2b-13",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Se eu fosse CEO do LinkedIn, eis o que eu consertaria:",
+    "estrutura": [
+      "Slide 1: premissa 'se eu fosse CEO de [plataforma ou ferramenta famosa]'",
+      "Slide 2: problema 1 e a correção proposta",
+      "Slide 3: problema 2 e a correção proposta",
+      "Slide 4: problema 3 e a correção proposta",
+      "Slide 5: pergunta final: o que você mudaria?"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do autor com o texto do gancho em faixa, lista numerada nos slides seguintes",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Criticar uma plataforma que todos usam dá permissão para o público concordar ou acrescentar itens, e fechar com pergunta eleva a taxa de comentários. Adaptável para SaaS B2B criticando o CRM ou a ferramenta dominante da categoria.",
+    "autor_ou_marca": "Jasmin Alić",
+    "link_fonte": "https://captureflow.ai/playbooks/jasmin-alic",
+    "metricas": {
+      "curtidas": 3526,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "3.526 reações citadas pelo playbook da CaptureFlow (fonte secundária); demais campos a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Autor é coach de LinkedIn, não founder de SaaS; incluído como padrão de gancho adaptável. Adaptação em PT do gancho original 'If I was CEO of LinkedIn, here's what I'd fix:'."
+  },
+  {
+    "id": "saas-b2b-14",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O processo de 6 passos que usamos para aprovar conteúdo numa empresa B2B de 900 pessoas.",
+    "estrutura": [
+      "Slide 1: capa com a promessa e indicador de 'deslize'",
+      "Slide 2: passo 1 com uma ideia só e menos de 60 palavras",
+      "Slide 3: passos 2 e 3",
+      "Slide 4: passos 4 e 5",
+      "Slide 5: passo 6 e o resultado obtido",
+      "Slide 6: resumo em uma frase e CTA único"
+    ],
+    "padrao_visual": {
+      "fundo": "formato retrato 4:5, fundo sólido, barra de progresso ou número do slide em cada página",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Carrossel de processo é o formato mais salvo em B2B segundo a Oktopost; a promessa de um processo pronto e o contexto de empresa grande dão credibilidade, e cada slide entrega progresso, aumentando tempo de permanência.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.oktopost.com/blog/linkedin-carousel-pdf-best-practices/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time. A fonte cita benchmark geral de carrosséis B2B (mediana de 5,72% de engajamento, top 10% com 22,45%), não métrica deste post"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho de exemplo citado pela Oktopost como modelo, não post real de pessoa identificada. Estrutura segue as recomendações do artigo."
+  },
+  {
+    "id": "saas-b2b-15",
+    "nicho": "saas-b2b",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Saber usar o ChatGPT não é suficiente. Estas são as 12 habilidades de IA que vão importar nos próximos anos.",
+    "estrutura": [
+      "Bloco 1: gancho que derruba uma crença confortável (usar ChatGPT basta)",
+      "Bloco 2: infográfico em grade com 12 caixas, cada uma com uma habilidade e logos de ferramentas",
+      "Bloco 3: frase de fechamento medo + esperança (a IA não vai te substituir, alguém usando IA pode)",
+      "Bloco 4: CTA duplo (compartilhe com seu time + siga para mais)"
+    ],
+    "padrao_visual": {
+      "fundo": "infográfico em grade 3x4 com logos, fundo claro e cores de destaque por categoria",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Infográfico denso e de referência é salvo e repostado; apontar um erro comum gera sensação de urgência, e o CTA de compartilhar puxa distribuição.",
+    "autor_ou_marca": "Andrew Bolis",
+    "link_fonte": "https://gracker.ai/blog/viral-linkedin-b2b-post-anatomy",
+    "metricas": {
+      "curtidas": 1847,
+      "comentarios": 321,
+      "compartilhamentos": 285,
+      "visualizacoes": null,
+      "observacao": "números citados pela análise da Gracker AI (fonte secundária)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Adaptação em PT do gancho original 'AI skills will be crucial for years to come. Knowing how to use ChatGPT isn't enough.' Autor é criador de conteúdo B2B, não founder de SaaS."
+  }
+]

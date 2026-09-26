@@ -1,0 +1,464 @@
+[
+  {
+    "id": "healthtech-01",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Sua healthtech não é uma empresa de tecnologia. E tratar ela como uma vai matar o seu negócio.",
+    "estrutura": [
+      "Bloco 1: frase de choque que nega a identidade que o founder acredita ter",
+      "Bloco 2: diagnóstico: founders vindos de SaaS, fintech ou IA falham porque acham que saúde funciona como os outros setores",
+      "Bloco 3: lista curta do que muda na saúde: venda para instituições lentas, confiança é tudo, adoção clínica é difícil, 'nice to have' não sobrevive",
+      "Bloco 4: como sobreviver: agir como empresa de saúde, resolver problema crítico, validar com evidência clínica",
+      "Bloco 5: frase de fechamento: saúde não é lugar para atalhos nem crescimento a qualquer custo"
+    ],
+    "padrao_visual": {
+      "fundo": "cor sólida escura com frase em tipografia grande e clara",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contradiz a autoimagem do público (founders de tech) logo na primeira linha, gera identificação e discordância ao mesmo tempo, e entrega uma lista prática que justifica salvar e comentar.",
+    "autor_ou_marca": "Kevin McDonnell",
+    "link_fonte": "https://www.linkedin.com/posts/kevinmcdonnell_your-healthtech-startup-is-not-a-tech-company-activity-7322280887641935872-yHBe",
+    "metricas": {
+      "curtidas": 2480,
+      "comentarios": 306,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (2.480) e comentários (306) lidos na página pública do post no LinkedIn em 26/09/2026. 'curtidas' corresponde ao total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post original em inglês ('Your HealthTech startup is not a tech company. And treating it like one will kill it.'). O texto_gancho é tradução livre. Formato original é texto com lista; aqui adaptado para citação em imagem."
+  },
+  {
+    "id": "healthtech-02",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Chego em casa e meu filho de 12 anos com febre, vômito e diarreia.",
+    "estrutura": [
+      "Abertura: cena doméstica de urgência que qualquer pai ou mãe reconhece",
+      "Passo 1: abri o app do plano, perfil do filho, botão de atendimento imediato",
+      "Passo 2: em cerca de 30 segundos uma enfermeira (não bot) entrou no chat",
+      "Passo 3: cinco minutos depois, videochamada com pediatra na tela do app",
+      "Passos seguintes: jornada numerada até a resolução, com vídeo gravado da tela",
+      "Fechamento: reflexão sobre como o cuidado em saúde mudou"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tela do app ou foto real do momento, sem produção",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Relato de cliente em primeira pessoa, com tempos concretos (30 segundos, 5 minutos), prova o produto sem parecer anúncio. O fundador amplifica compartilhando, o que empresta credibilidade de terceiro.",
+    "autor_ou_marca": "Guilherme Azevedo (post compartilhado por André Florence, CEO da Alice)",
+    "link_fonte": "https://www.linkedin.com/posts/andreflorence_alice-agora-activity-7187200919476813824-1rgB",
+    "metricas": {
+      "curtidas": 64,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (64) e comentários (1) lidos na página pública do compartilhamento no LinkedIn em 26/09/2026. Números do compartilhamento, não necessariamente do post original."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Engajamento modesto, mas é o melhor exemplo brasileiro encontrado do padrão 'jornada do paciente em passos numerados' amplificado pelo founder. Texto_gancho é citação literal da primeira linha."
+  },
+  {
+    "id": "healthtech-03",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "De 48 minutos para 36 segundos.",
+    "estrutura": [
+      "Slide 1: dois números gigantes lado a lado (antes e depois do tempo de espera)",
+      "Slide 2: contexto: clínicas perdem receita com ligação não atendida e consulta não confirmada",
+      "Slide 3: o que mudou: IA conversacional no WhatsApp e telefone",
+      "Slide 4: segundo dado de prova: 70% dos atendimentos resolvidos sem intervenção humana",
+      "Slide 5: fala do CEO sobre impacto no negócio e CTA"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro com números em destaque na cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contraste numérico extremo entende-se em menos de um segundo, e o dado é operacional (tempo de espera), algo que gestor de clínica sente no bolso.",
+    "autor_ou_marca": "Carecode (Thomaz Srougi, fundador do dr.consulta)",
+    "link_fonte": "https://medicinasa.com.br/carecode-edicao34/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fonte aberta é matéria da Medicina S/A com o título 'De 48 minutos para 36 segundos: como clínicas estão recuperando consultas perdidas e aumentando receita'. O mesmo gancho foi usado em post da revista no Facebook. Os números (48 min, 36 s, 70%) são do case publicado, não métricas de engajamento."
+  },
+  {
+    "id": "healthtech-04",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "\"A próxima moda das startups são as healthtechs\", diz sócio da Redpoint eventures.",
+    "estrutura": [
+      "Bloco 1: manchete de veículo de imprensa como gancho (autoridade externa)",
+      "Bloco 2: comentário pessoal do autor sobre por que a tese faz sentido agora",
+      "Bloco 3: menção com marcação das startups do portfólio (Sami, Vittude, Memed, Gympass, Prontmed, Gesto)",
+      "Bloco 4: fechamento humano: cuide da saúde física e mental"
+    ],
+    "padrao_visual": {
+      "fundo": "card de link da matéria com foto e título do veículo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Usa selo de imprensa como prova social, marca várias empresas (cada uma repercute para sua rede) e surfa um momento de mercado (pandemia acelerando saúde digital).",
+    "autor_ou_marca": "Romero Rodrigues (Redpoint eventures)",
+    "link_fonte": "https://br.linkedin.com/posts/romero_a-pr%C3%B3xima-moda-das-startups-s%C3%A3o-as-healthtechs-activity-6681237040870240256-PLrm",
+    "metricas": {
+      "curtidas": 1403,
+      "comentarios": 135,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (1.403) e comentários (135) lidos na página pública do post no LinkedIn em 26/09/2026. O título indexado no buscador mostrava 139 comentários; usado o número da página aberta."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Autor é investidor, não founder de healthtech, mas o post impulsionou várias healthtechs brasileiras marcadas. Útil como padrão 'manchete + marcação de ecossistema'."
+  },
+  {
+    "id": "healthtech-05",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Telemedicina resolve 88% das queixas sem precisar de consulta presencial.",
+    "estrutura": [
+      "Slide 1: número grande (88%) com a frase do achado",
+      "Slide 2: base do estudo: 2,5 milhões de pacientes analisados",
+      "Slide 3: segundo dado: 80% de economia",
+      "Slide 4: crédito ao time (diretor médico que idealizou o levantamento)",
+      "Slide 5: selo de imprensa (coluna no O Globo) e convite para debate"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com números na cor da marca e ícones simples de saúde",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dado proprietário com amostra grande dá autoridade clínica, o crédito público ao time humaniza o founder e a menção à imprensa funciona como prova social.",
+    "autor_ou_marca": "Guilherme Weigert (CEO e cofundador da Conexa Saúde)",
+    "link_fonte": "https://pt.linkedin.com/posts/guilhermeweigert_pesquisa-telemedicina-resolve-88-das-queixas-activity-7039232379013480448-zS3D",
+    "metricas": {
+      "curtidas": 88,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (88) lidas na página pública do post no LinkedIn em 26/09/2026. Página mostrava 7 comentários visíveis com opção de ver mais, por isso o total de comentários ficou null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "O gancho vem do título do post ('Pesquisa: Telemedicina resolve 88% das queixas de pacientes sem...'). Original é texto com link de matéria; aqui adaptado para carrossel de dados."
+  },
+  {
+    "id": "healthtech-06",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Como você faz para manter o equilíbrio entre vida pessoal e profissional?",
+    "estrutura": [
+      "Bloco 1: pergunta direta ao leitor",
+      "Bloco 2: bastidor: como a própria founder organiza a semana",
+      "Bloco 3: detalhe concreto: agenda colorida com horas para corrida, terapia, exercício e pessoas queridas",
+      "Bloco 4: fechamento devolvendo a pergunta para os comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "print da agenda da founder com blocos coloridos",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pergunta universal abre espaço para comentário, e o bastidor real (agenda) prova que a founder de uma empresa de saúde mental pratica o que vende.",
+    "autor_ou_marca": "Tatiana Pimenta (CEO e fundadora da Vittude)",
+    "link_fonte": "https://pt.linkedin.com/posts/tatianapimenta_sa%C3%BAdemental-equilibriovidatrabalho-linkedintopvoice-activity-7105532750002073600-wCgO",
+    "metricas": {
+      "curtidas": 88,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (88) lidas na página pública do post no LinkedIn em 26/09/2026. Havia 6 comentários visíveis com opção de ver mais, então o total ficou null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto_gancho é a primeira linha literal. A sugestão de usar o print da agenda como imagem é adaptação; o post original é só texto."
+  },
+  {
+    "id": "healthtech-07",
+    "nicho": "healthtech",
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Por trás de cada número da Alice há uma história.",
+    "estrutura": [
+      "Slide 1: frase-conceito sobre número e história",
+      "Slide 2: o número: 76% dos membros melhoraram o índice de qualidade de vida em 90 dias",
+      "Slide 3: o antes: membro real e o desafio de saúde que enfrentava",
+      "Slide 4: o depois: conquista pessoal (ex.: voltar a fazer rapel meses após a cirurgia)",
+      "Slide 5: frase do membro: 'eu sinto que eu não sou um número na carteirinha'",
+      "Slide 6: assinatura da marca"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do membro com overlay de número grande",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Combina dado agregado (credibilidade) com rosto e história individual (emoção). O antes e depois de um membro real é mais crível que qualquer promessa de plano de saúde.",
+    "autor_ou_marca": "Alice",
+    "link_fonte": "https://www.abcdacomunicacao.com.br/gestora-de-saude-alice-completa-1-ano-e-celebra-conquistas-pessoais-de-membros-em-campanha/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "A fonte confirma o conceito da campanha de 1 ano, o dado de 76% e o depoimento de Felipe Santana. A campanha original é em vídeo; aqui adaptada para carrossel estático. Desempenho do post no Instagram não verificado."
+  },
+  {
+    "id": "healthtech-08",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Ela chegou até nós depois de 3 anos sem diagnóstico. Hoje ela corre 5 km.",
+    "estrutura": [
+      "Slide 1: resultado de um paciente em uma frase (com autorização)",
+      "Slide 2: o problema: quanto tempo e quantas portas até chegar à solução",
+      "Slide 3: o momento de virada no cuidado",
+      "Slide 4: o que o time aprendeu com esse caso",
+      "Slide 5: o que isso muda no produto ou no sistema de saúde",
+      "Slide 6: pergunta para a audiência"
+    ],
+    "padrao_visual": {
+      "fundo": "tons claros e acolhedores, sem foto do paciente ou com foto autorizada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Estudo da 5W Public Relations com 50 founders de health tech aponta a 'história de paciente' contada pelo founder como o formato com 2,9 vezes mais compartilhamentos que os demais.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.prnewswire.com/news-releases/health-tech-founders-outperform-their-own-brands-on-linkedin-302776482.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. A fonte confirma o formato (Patient Story, 2,9x reposts), não este gancho específico. Atenção a LGPD e sigilo: sempre com consentimento do paciente."
+  },
+  {
+    "id": "healthtech-09",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Gastamos 8 meses construindo uma funcionalidade que nenhum médico usou. Esse foi o erro.",
+    "estrutura": [
+      "Bloco 1: confissão direta do erro, com número",
+      "Bloco 2: por que parecia uma boa ideia na época",
+      "Bloco 3: o sinal que ignoramos",
+      "Bloco 4: a decisão difícil que tomamos depois",
+      "Bloco 5: a lição para outros founders de saúde"
+    ],
+    "padrao_visual": {
+      "fundo": "foto espontânea do founder no escritório ou texto sobre fundo neutro",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Segundo o estudo da 5W Public Relations, a 'confissão do founder' (decisão difícil, produto que falhou, lição aprendida) teve a maior taxa de comentários entre os formatos analisados, com média de 187 comentários nos posts do decil superior.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.prnewswire.com/news-releases/health-tech-founders-outperform-their-own-brands-on-linkedin-302776482.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Os 187 comentários são média do estudo, não métrica deste item."
+  },
+  {
+    "id": "healthtech-10",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Estamos contratando alguém que quer consertar a saúde, não só escrever código.",
+    "estrutura": [
+      "Bloco 1: frase de missão como título da vaga",
+      "Bloco 2: o problema real que a pessoa vai resolver (com um dado do setor)",
+      "Bloco 3: por que agora e o que o time já conquistou",
+      "Bloco 4: chamada para indicar ou se candidatar nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do time real com faixa de texto 'estamos contratando'",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O estudo da 5W Public Relations mostra que o post de contratação publicado pelo founder converteu 6,2 vezes mais que a vaga publicada pela página da empresa. Missão forte atrai candidatos e também reforça a marca.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.prnewswire.com/news-releases/health-tech-founders-outperform-their-own-brands-on-linkedin-302776482.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Fonte confirma o formato Hiring Post e a taxa de 6,2x."
+  },
+  {
+    "id": "healthtech-11",
+    "nicho": "healthtech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Opinião impopular: o maior problema da saúde no Brasil não é falta de médico. É falta de coordenação.",
+    "estrutura": [
+      "Bloco 1: print do tweet com a opinião em uma linha",
+      "Bloco 2: legenda com 2 ou 3 argumentos curtos que sustentam a tese",
+      "Bloco 3: um dado do setor como âncora",
+      "Bloco 4: pergunta aberta: concorda ou discorda?"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tweet em fundo branco ou escuro, centralizado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A 'opinião contrária' aparece no estudo da 5W Public Relations como formato de alto alcance, porém com variância grande: divide opiniões, e isso gera comentários, mas exige argumento sólido.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.prnewswire.com/news-releases/health-tech-founders-outperform-their-own-brands-on-linkedin-302776482.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Estudo mediu LinkedIn; adaptado para print de post do X, formato comum de reaproveitamento no Instagram e LinkedIn."
+  },
+  {
+    "id": "healthtech-12",
+    "nicho": "healthtech",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Você provavelmente acredita em pelo menos um desses mitos sobre check-up.",
+    "estrutura": [
+      "Slide 1: gancho provocando o leitor a se testar",
+      "Slide 2: mito 1 riscado e o fato ao lado, validado por médico do time",
+      "Slide 3: mito 2 e fato",
+      "Slide 4: mito 3 e fato",
+      "Slide 5: o que fazer na prática (checklist curto)",
+      "Slide 6: quem revisou o conteúdo (nome e CRM) e CTA para salvar"
+    ],
+    "padrao_visual": {
+      "fundo": "cor clara da marca com marcação vermelha em 'mito' e verde em 'fato'",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O 'reenquadramento clínico' (explicar um tema de saúde pela ótica do especialista) gerou 3,4 vezes mais engajamento nas contas dos founders do que nas versões das marcas, segundo a 5W. O formato mito e fato é salvo e compartilhado por ser útil.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.prnewswire.com/news-releases/health-tech-founders-outperform-their-own-brands-on-linkedin-302776482.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. A fonte fala de 'Clinical Reframe' no LinkedIn; a adaptação para mito e fato no Instagram é inferência de curadoria. Conteúdo de saúde deve ter revisão médica."
+  },
+  {
+    "id": "healthtech-13",
+    "nicho": "healthtech",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Muita healthtech acha que o primeiro piloto no hospital é onde ela prova valor. É o contrário.",
+    "estrutura": [
+      "Bloco 1: crença comum do founder exposta",
+      "Bloco 2: a virada: o valor precisa estar provado antes do piloto",
+      "Bloco 3: como provar ROI antes (dados, desfecho, custo evitado)",
+      "Bloco 4: resumo em uma frase para salvar"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo sólido com frase grande e aspas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Inverte uma crença que quase todo founder B2B de saúde tem, criando o impulso de ler o resto para entender 'o contrário'. Tema prático (ROI e piloto) que conversa com dor real.",
+    "autor_ou_marca": "Sabrina Runbeck (PulsePoint Path)",
+    "link_fonte": "https://www.linkedin.com/in/sabrinarunbeck/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Ideia vista em trecho de resultado de busca atribuído ao perfil da autora (conteúdo 'How HealthTech Founders Prove Chronic Care ROI Before First Hospital Pilot'). Não abri o post específico, então o gancho é tradução livre do trecho e precisa ser conferido."
+  },
+  {
+    "id": "healthtech-14",
+    "nicho": "healthtech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Explicando o sistema de saúde brasileiro para um estrangeiro em 3 memes.",
+    "estrutura": [
+      "Slide 1: título com promessa leve e divertida",
+      "Slide 2: meme 1 sobre um absurdo real do setor (ex.: autorização de exame)",
+      "Slide 3: meme 2 sobre outro ponto de fricção",
+      "Slide 4: meme 3 fechando o raciocínio",
+      "Slide 5: explicação séria em 3 linhas do que está por trás",
+      "Slide 6: CTA para a newsletter ou produto"
+    ],
+    "padrao_visual": {
+      "fundo": "prints de memes em moldura de tweet",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Humor torna um setor burocrático compartilhável. Nikhil Krishnan construiu a Out-Of-Pocket (newsletter, comunidade e fundo) usando memes para explicar o sistema de saúde americano.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://www.crainsnewyork.com/health-care/out-of-pocket-nikhil-krishnan-uses-memes-humor-explain-health-industry-trends/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. A fonte foi encontrada via busca (título confirma o uso de memes e humor), mas a página retornou bloqueio ao abrir. Não há post específico com métrica verificada."
+  }
+]

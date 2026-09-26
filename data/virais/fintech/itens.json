@@ -1,0 +1,494 @@
+[
+  {
+    "id": "fintech-01",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Dizem que fintech paga menos imposto que banco. Os números dizem o contrário.",
+    "estrutura": [
+      "Bloco 1: gancho que confronta uma narrativa do setor tradicional",
+      "Bloco 2: gráfico comparativo de alíquota efetiva de IR (Nubank 31% contra Santander 9,6%, Itaú 14,2%, Bradesco 8,4%)",
+      "Bloco 3: indicadores de impacto social (28 milhões de primeiras contas, 29 milhões de primeiros cartões)",
+      "Bloco 4: queda da concentração bancária de 81% para 71% em oito anos",
+      "Bloco 5: fechamento defendendo competição, inclusão e tarifas menores"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com gráfico de barras, barra da marca em destaque na cor roxa",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Founder entra num debate público já quente (Febraban contra fintechs) com dado verificável em gráfico simples. A polêmica gera comentários e a comparação direta com concorrentes nomeados vira pauta de imprensa, ampliando o alcance muito além da rede de seguidores.",
+    "autor_ou_marca": "David Vélez (Nubank)",
+    "link_fonte": "https://www.terra.com.br/economia/fundador-do-nubank-rebate-falsas-narrativas-e-diz-que-fintech-paga-mais-imposto-do-que-banco,a75fec8611b9ade3b87cc62814ae92b4pzczbkst.html",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/11/2025 no LinkedIn. A matéria do Terra confirma o gráfico de alíquotas e os indicadores citados. O texto_gancho é paráfrase do argumento, não citação literal; a expressão \"falsas narrativas\" é literal segundo a fonte. A Febraban respondeu com nota oficial, o que mostra o potencial de repercussão (e de risco) do formato."
+  },
+  {
+    "id": "fintech-02",
+    "nicho": "fintech",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "O fundador do Nubank respondeu à Febraban. E não foi com meias palavras.",
+    "estrutura": [
+      "Bloco 1: título curto em fonte grande resumindo o embate (fintech contra bancões)",
+      "Bloco 2: foto ou print do post original do founder no LinkedIn",
+      "Bloco 3: legenda contextualizando o round anterior da disputa",
+      "Bloco 4: trecho entre aspas da fala do founder na legenda"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do founder com tarja escura e título em branco",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Mostra o efeito de segunda onda: o post de LinkedIn do founder vira conteúdo de Instagram para veículos de negócios. Para uma startup, a lição é escrever posts com uma frase forte e um dado citável, porque é isso que outros perfis recortam e redistribuem.",
+    "autor_ou_marca": "Pipeline Valor (@pipelinevalor), repercutindo David Vélez",
+    "link_fonte": "https://www.instagram.com/p/DRhw9hAAnYX/",
+    "metricas": {
+      "curtidas": 841,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "841 curtidas lidas na página pública do post no Instagram em 26/09/2026. Demais campos a preencher pelo time."
+    },
+    "status": "verificado",
+    "notas_curadoria": "O texto_gancho é gancho de exemplo no padrão, não citação literal da legenda. Útil como referência de como o conteúdo do founder é reembalado por mídia especializada."
+  },
+  {
+    "id": "fintech-03",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Fomos eleitos a marca de banco número 1 do mundo. E não foi por causa de anúncio.",
+    "estrutura": [
+      "Bloco 1: anúncio do ranking com a posição em destaque (#1)",
+      "Bloco 2: quem fez o ranking e a metodologia em uma frase (The Banker com Kantar BrandZ)",
+      "Bloco 3: o que o reconhecimento valida na filosofia da empresa (foco no cliente)",
+      "Bloco 4: agradecimento às comunidades de cada país",
+      "Bloco 5: fechamento com a missão (serviço financeiro justo, simples e humano)"
+    ],
+    "padrao_visual": {
+      "fundo": "arte da premiação com selo e cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Prova social de terceiro com autoridade (ranking global) transforma autopromoção em notícia. Atribuir o mérito ao cliente e à cultura, e não ao marketing, convida comentários de profissionais querendo entender a fórmula.",
+    "autor_ou_marca": "Cristina Junqueira (Nubank)",
+    "link_fonte": "https://www.linkedin.com/posts/crisjunqueira_nubank-has-been-ranked-1-in-the-world-in-activity-7382125903511699456-rVKG",
+    "metricas": {
+      "curtidas": 1323,
+      "comentarios": 34,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.323 reações (total de reações do LinkedIn, registrado em curtidas) e 34 comentários lidos na página pública do post em 26/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "O post original é em inglês. O texto_gancho é adaptação em português no padrão, não citação literal."
+  },
+  {
+    "id": "fintech-04",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "\"Somos 100 milhões e isso impressiona, é verdade. Mas não podemos esquecer que isso representa apenas 1.25% da população mundial.\"",
+    "estrutura": [
+      "Slide 1: citação do founder em fonte grande, com nome e cargo",
+      "Slide 2: o marco (100 milhões de clientes) e quanto tempo levou",
+      "Slide 3: a virada: o número grande visto como pequeno (1,25% do mundo)",
+      "Slide 4: a tese por trás (jogo infinito, valor de longo prazo)",
+      "Slide 5: CTA para comentar qual é o próximo marco"
+    ],
+    "padrao_visual": {
+      "fundo": "cor sólida da marca com aspas gigantes e foto recortada do founder",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pega uma conquista que seria só comemorativa e inverte a leitura: o número enorme vira ponto de partida. A inversão gera curiosidade e posiciona a empresa como ambiciosa sem soar arrogante.",
+    "autor_ou_marca": "David Vélez (Nubank)",
+    "link_fonte": "https://nu.com/pt/sala-de-imprensa/100m-pt-br/david-velez-100-milhoes-de-clientes-sao-so-o-comeco-de-um-jogo-infinito",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Citação literal confirmada na sala de imprensa do Nu (maio de 2024). A fala foi feita em evento, não em post; o item registra o padrão de citação-card que qualquer fintech pode replicar com a fala do próprio founder. Outra fala no mesmo tom, confirmada pelo Finsiders: \"Parece que 100 milhões de clientes é muito, mas é pouco\"."
+  },
+  {
+    "id": "fintech-05",
+    "nicho": "fintech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Acabar com o cargo de gestor de pessoas foi a melhor decisão que tomei na empresa em anos.",
+    "estrutura": [
+      "Bloco 1: afirmação contraintuitiva em primeira pessoa",
+      "Bloco 2: lista numerada do que muda na prática (roadmap único, founder como editor do que é lançado)",
+      "Bloco 3: item polêmico (eliminar gestores que não executam)",
+      "Bloco 4: resultados em números para sustentar a tese"
+    ],
+    "padrao_visual": {
+      "fundo": "print do tweet em fundo branco, avatar do founder visível",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Surfou o debate de \"founder mode\" no momento em que estava em alta e trouxe uma decisão concreta e controversa, com resultados. Opinião forte com prova gera citação, reposts e respostas discordando.",
+    "autor_ou_marca": "Pedro Franceschi (Brex)",
+    "link_fonte": "https://x.com/pedroh96/status/1830306600953041288",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "O X bloqueou a leitura direta (HTTP 402). O início do tweet aparece no título indexado pela busca e a decisão de eliminar gestores de pessoas é confirmada pela Startup Archive, mas os resultados numéricos não foram lidos na fonte. O texto_gancho é adaptação em português, não citação literal. Founder brasileiro, o que ajuda como referência local."
+  },
+  {
+    "id": "fintech-06",
+    "nicho": "fintech",
+    "rede": "x",
+    "formato": "antes-depois",
+    "tipo_gancho": "numero",
+    "texto_gancho": "No começo do ano fizemos mudanças duras na empresa. Dez meses depois, estes são os números.",
+    "estrutura": [
+      "Slide 1: gancho de retrospectiva com prazo definido (dez meses depois)",
+      "Slide 2: o antes: o problema e as decisões difíceis tomadas",
+      "Slide 3: o depois: métricas de crescimento",
+      "Slide 4: o depois: métricas de eficiência (queima de caixa)",
+      "Slide 5: o que aprendemos e o que vem a seguir"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo escuro com números grandes em cor de destaque, lado a lado antes e depois",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fecha o ciclo de uma decisão polêmica anunciada antes, criando uma narrativa em capítulos. O público que acompanhou o primeiro post volta para ver se deu certo, e o formato antes e depois é fácil de entender em segundos.",
+    "autor_ou_marca": "Pedro Franceschi (Brex)",
+    "link_fonte": "https://x.com/pedroh96/status/1864732942469361743",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Fio (thread) de dezembro de 2024. O texto de abertura aparece no título indexado pela busca, mas o X bloqueou a leitura direta. O texto_gancho é adaptação em português. Conferir os números do fio antes de usar como referência de dado."
+  },
+  {
+    "id": "fintech-07",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Comecei a programar aos 9 anos. Depois de anos construindo produto, estes são os 4 princípios que levo para qualquer lançamento.",
+    "estrutura": [
+      "Bloco 1: abertura pessoal (trajetória desde a infância até fundar a empresa)",
+      "Bloco 2: princípio 1: abrace o desconforto, processo não pode travar a inovação",
+      "Bloco 3: princípio 2: proteja ideias ainda frágeis de avaliação precoce",
+      "Bloco 4: princípio 3: simplifique (decisões emocionais por razões lógicas)",
+      "Bloco 5: princípio 4: foco total ou não comece",
+      "Bloco 6: fechamento creditando time e clientes pelo resultado"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro ou carrossel com fundo claro e numeração grande por princípio",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Mistura história pessoal (credibilidade e empatia) com lista numerada fácil de salvar. Princípios de construção de produto atraem founders e profissionais de tecnologia, público que mais interage no LinkedIn.",
+    "autor_ou_marca": "Pedro Franceschi (Brex)",
+    "link_fonte": "https://www.linkedin.com/posts/pfranceschi_when-building-brex-30-we-set-a-clear-bar-activity-7213573656633872384-lPZ1",
+    "metricas": {
+      "curtidas": 772,
+      "comentarios": 12,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "772 reações (total de reações do LinkedIn, registrado em curtidas) e 12 comentários lidos na página pública do post em 26/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post original em inglês. O texto_gancho resume a abertura em português, não é citação literal."
+  },
+  {
+    "id": "fintech-08",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Batemos 10 milhões de clientes. Mas esse número não vem sozinho.",
+    "estrutura": [
+      "Bloco 1: marco de clientes em número grande",
+      "Bloco 2: o que cresceu junto (depósitos, seguros, investimentos)",
+      "Bloco 3: meta para o próximo ano (dobrar a base)",
+      "Bloco 4: link para matéria de veículo econômico como validação externa"
+    ],
+    "padrao_visual": {
+      "fundo": "card de matéria com o número em destaque e cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número redondo de marco é o gancho mais simples do nicho e funciona bem em post de CEO. O cuidado: os comentários mostraram reclamações de atendimento, então o marco atrai tanto parabéns quanto clientes insatisfeitos. Vale preparar resposta antes de publicar.",
+    "autor_ou_marca": "João Vitor Menin (Inter)",
+    "link_fonte": "https://pt.linkedin.com/posts/jo%C3%A3ovitormenin_banco-inter-bate-10-milh%C3%B5es-de-clientes-e-activity-6780261078010998784-yDSU",
+    "metricas": {
+      "curtidas": 392,
+      "comentarios": 16,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "392 reações (total de reações do LinkedIn, registrado em curtidas) e 16 comentários lidos na página pública do post em 26/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "O texto_gancho é paráfrase da ideia central do post, não citação literal. Engajamento moderado; incluído mais como padrão de marco do que como caso de alto desempenho."
+  },
+  {
+    "id": "fintech-09",
+    "nicho": "fintech",
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Qual foi o único banco tradicional que você teve prazer em usar?",
+    "estrutura": [
+      "Bloco 1: foto de um banco de madeira (objeto físico) em ambiente de trabalho",
+      "Bloco 2: pergunta com duplo sentido na arte",
+      "Bloco 3: legenda com a virada: o único banco tradicional que a marca apoia é esse",
+      "Bloco 4: CTA para trocar a burocracia pela conta digital"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real e clara do objeto com logo discreto da marca",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Trocadilho visual (banco de sentar contra banco tradicional) provoca o concorrente com humor, sem ataque direto. Objeto físico entregue a clientes gera fotos espontâneas e conteúdo orgânico.",
+    "autor_ou_marca": "Nubank",
+    "link_fonte": "https://canaltech.com.br/publicidade/nova-campanha-nubank-tira-sarro-bancos-tradicionais-146245/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "A Canaltech confirma a campanha com bancos de madeira entregues a 30 clientes e veiculada no Instagram e YouTube. O texto_gancho é gancho de exemplo no padrão, não citação literal."
+  },
+  {
+    "id": "fintech-10",
+    "nicho": "fintech",
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Seu ano em números: descubra qual foi a sua era financeira.",
+    "estrutura": [
+      "Slide 1: abertura cinematográfica anunciando a retrospectiva pessoal",
+      "Slide 2: total do ano em um número grande",
+      "Slide 3: lugar onde mais gastou, com piada personalizada sobre o estabelecimento",
+      "Slide 4: revelação da sua era (rótulo divertido que define o ano)",
+      "Slide 5: tela final pronta para compartilhar nos stories"
+    ],
+    "padrao_visual": {
+      "fundo": "cores vibrantes e gradientes, tipografia enorme, estética de retrospectiva",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma dado financeiro do cliente em identidade (\"main character energy\"). O cliente compartilha porque fala dele, não da marca, e cada compartilhamento é distribuição gratuita. Rótulos engraçados (ex.: \"the Arboss\" para quem mais comprou na Argos) são o gatilho de compartilhamento.",
+    "autor_ou_marca": "Monzo",
+    "link_fonte": "https://monzo.com/blog/how-we-wrote-5-million-years-in-monzo",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "O blog da Monzo confirma 5 milhões de clientes com conteúdo personalizado, mais de 1 milhão de visualizações da experiência no app, 120 piadas por estabelecimento e 192 eras. Esses números são do recurso no app, não de um post, por isso não entram em metricas. O texto_gancho é gancho de exemplo no padrão. Adaptável para uma fintech brasileira como retrospectiva estática em carrossel."
+  },
+  {
+    "id": "fintech-11",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "US$ 1,4 trilhão processados em um ano. 40% a mais que no ano anterior.",
+    "estrutura": [
+      "Slide 1: número-âncora gigante (volume total processado)",
+      "Slide 2: crescimento ano contra ano",
+      "Slide 3: comparação com referência externa (clientes crescem 7x mais rápido que a média do S&P 500)",
+      "Slide 4: prova social de base de clientes (80% da Forbes Cloud 100, 78% da Forbes AI 50)",
+      "Slide 5: apostas para o próximo ano (stablecoins, pagamentos por agentes de IA)",
+      "Slide 6: CTA para ler a carta completa"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro minimalista, números em fonte grande e cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A carta anual dos founders vira evento recorrente que a comunidade espera. Quebrar a carta em um número por slide deixa cada dado compartilhável isoladamente e reforça autoridade de infraestrutura.",
+    "autor_ou_marca": "Patrick e John Collison (Stripe)",
+    "link_fonte": "https://www.fintechbrainfood.com/p/stripe-john-qa",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Números confirmados no Fintech Brainfood (carta anual de 2024). O anúncio no X foi um tweet curto de Patrick Collison com link (https://x.com/patrickc/status/1895097871369937250). O carrossel é a adaptação sugerida do padrão; o texto_gancho resume os dados, não é citação literal."
+  },
+  {
+    "id": "fintech-12",
+    "nicho": "fintech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Hoje captamos mais uma rodada. No último ano, nossa receita dobrou e crescemos 10x mais rápido que a mediana do SaaS de capital aberto.",
+    "estrutura": [
+      "Bloco 1: anúncio factual da rodada (valor e avaliação)",
+      "Bloco 2: prova de tração em uma linha (receita dobrou, comparação com benchmark)",
+      "Bloco 3: frase de efeito sobre a visão do produto",
+      "Bloco 4: vídeo ou imagem anexada"
+    ],
+    "padrao_visual": {
+      "fundo": "print do tweet em fundo branco ou escuro, avatar do founder",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Anúncio de rodada curto, sem jargão, com um benchmark que qualquer investidor entende. A frase de efeito final dá algo para citar, e o print do tweet funciona bem reaproveitado no LinkedIn e Instagram.",
+    "autor_ou_marca": "Eric Glyman (Ramp)",
+    "link_fonte": "https://x.com/eglyman/status/1990465500137320477",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "O texto do tweet aparece no título indexado pela busca (US$ 300M a US$ 32B de avaliação, receita acima de US$ 1B), mas o X não pôde ser aberto diretamente. O texto_gancho é adaptação em português, não citação literal."
+  },
+  {
+    "id": "fintech-13",
+    "nicho": "fintech",
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Reclamei do meu banco às 23h. Em 2 minutos, eles responderam. Com meme.",
+    "estrutura": [
+      "Bloco 1: print da reclamação pública do cliente",
+      "Bloco 2: print da resposta rápida e bem-humorada da marca",
+      "Bloco 3: texto curto destacando o tempo de resposta",
+      "Bloco 4: CTA leve (\"vem pro time\")"
+    ],
+    "padrao_visual": {
+      "fundo": "prints empilhados de conversa no X sobre fundo na cor da marca",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Atendimento rápido e humano em público vira prova social: o cliente satisfeito divulga pela marca. O tom de pessoa (não de SAC) é o que faz o print circular.",
+    "autor_ou_marca": "Nubank",
+    "link_fonte": "https://blog.devrocket.com.br/como-o-nubank-construiu-uma-base-de-fas-nas-redes-sociais",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "a verificar",
+    "notas_curadoria": "O artigo cita um caso de 2020 em que o Nubank respondeu uma reclamação viral em menos de 2 minutos, mas sem link para o tweet original, e a fonte é um blog secundário. Exemplo real de resposta no tom da marca: https://x.com/nubank/status/1121575893573472256 (\"Vem todo mundo pro time roxinho!\", visto só no título indexado). O texto_gancho é gancho de exemplo no padrão, não citação literal. Contraponto: em nov/2025 a resposta pública do CEO a uma crise interna foi mal recebida (bringmedata.com.br), então tom de humor exige leitura de contexto."
+  },
+  {
+    "id": "fintech-14",
+    "nicho": "fintech",
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "A nova regra do Banco Central começa a valer. 7 erros que empresas vão cometer no primeiro mês.",
+    "estrutura": [
+      "Slide 1: gancho com a mudança regulatória e o número de erros",
+      "Slide 2: o que muda, em uma frase e um ícone",
+      "Slide 3: erros 1 e 2, cada um com a correção",
+      "Slide 4: erros 3 e 4, cada um com a correção",
+      "Slide 5: erros 5 a 7 em formato checklist",
+      "Slide 6: prazo e quem é afetado",
+      "Slide 7: CTA para salvar e compartilhar com o financeiro"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo claro com blocos de cor da marca, ícones simples e numeração grande",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Regulação é complexa e afeta dinheiro de empresas, então um explicativo visual passo a passo é salvo e repassado para colegas. Carrossel é o formato de maior engajamento médio no LinkedIn segundo o levantamento citado.",
+    "autor_ou_marca": null,
+    "link_fonte": "https://chatterbubble.co/resources/linkedin-marketing-for-fintech-companies-2026",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Padrão, não post específico. A fonte (Chatterbubble, maio de 2026) recomenda carrossel explicativo de mudança regulatória em cerca de 10 slides e afirma que carrosséis têm 6,60% de engajamento médio no LinkedIn (278% acima de vídeo, 303% acima de imagem). A mesma fonte sugere mix de 70% educacional, 20% prova social e 10% produto. O texto_gancho é gancho de exemplo no padrão, não citação literal; para o Brasil, adaptar a temas como Pix Automático ou open finance."
+  },
+  {
+    "id": "fintech-15",
+    "nicho": "fintech",
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Toquei o sino da bolsa de Nova York grávida de oito meses. Hoje, no Dia das Mães, conto uma novidade.",
+    "estrutura": [
+      "Slide 1: foto pessoal da founder com a família ou em momento marcante",
+      "Slide 2: memória de bastidor (IPO grávida, capa de revista)",
+      "Slide 3: o anúncio pessoal em si",
+      "Slide 4: reflexão sobre carreira e maternidade"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real, luz natural, sem arte gráfica pesada",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Humaniza a fintech pelo rosto da founder e toca num tema de identificação ampla (carreira e maternidade). Data comemorativa aumenta o alcance e a imprensa de negócios repercute o anúncio.",
+    "autor_ou_marca": "Cristina Junqueira (Nubank)",
+    "link_fonte": "https://exame.com/insight/no-dia-das-maes-fundadora-do-nubank-anuncia-gravidez-de-seu-quarto-filho/p",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "a preencher pelo time"
+    },
+    "status": "verificado",
+    "notas_curadoria": "A Exame confirma o anúncio da gravidez do quarto filho no Instagram (@junqueira.cristina) no Dia das Mães de 2024, com o post incorporado. O IPO na NYSE aos oito meses de gestação (dez/2021) é fato amplamente noticiado. O texto_gancho é gancho de exemplo no padrão, não citação literal do post."
+  }
+]
