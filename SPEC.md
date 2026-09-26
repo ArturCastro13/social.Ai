@@ -150,6 +150,55 @@ Saída (resumida, exemplo real do modo demo):
 
 `origem` pode ser `ia` (escrita agora pelo LLM), `cache`, `demo` ou `local` (motor de regras). Formatos: `carrossel`, `imagem-unica`, `print-tweet`, `citacao`, `lista`, `antes-depois`, `dado-impacto`, `bastidor-founder`. Templates: `capa-gancho`, `lista`, `citacao`, `dado-impacto`, `print-x`, `bastidor`, `antes-depois`, `checklist`.
 
+#### Campo opcional `preferencias` (motor de posts)
+
+`POST /api/analyze` aceita `preferencias`, o resultado das telas 1 a 3 do onboarding em camadas. Schema em `src/lib/motor/contrato.ts` (`preferenciasSchema`); tudo é opcional e tem padrão:
+
+```json
+{
+  "preferencias": {
+    "perfil_alvo": "founder | empresa | ambos",
+    "founder": { "nome": "", "instagram": "", "linkedin": "", "x": "", "transcricao_audio": "" },
+    "objetivos": ["autoridade_founder", "gerar_clientes"],
+    "tom_de_voz": { "formal_descontraido": 0.5, "tecnico_simples": 0.5, "serio_humor": 0.3, "cauteloso_provocador": 0.4 },
+    "formatos_permitidos": ["estatico", "carrossel", "noticia_comentada", "print_de_tweet", "citacao", "dado_de_impacto", "bastidor"],
+    "frequencia_escolhida": "leve | constante | intenso",
+    "proibicoes": ["nada de política"],
+    "inspiracoes": [{ "url": "https://...", "tipo": "post | perfil | video" }],
+    "brand_book_texto": "",
+    "noticias": [{ "titulo": "", "resumo": "", "url": "https://...", "data": "2026-09-20" }]
+  }
+}
+```
+
+Se vier inválido, a rota responde 400 com `erro` em português e `detalhes` no formato `preferencias.campo: motivo`. Os @ do founder vão só para o contexto do motor, não para `brand.handles`.
+
+Com preferências e IA configurada, o motor monta o objeto CONTEXTO da Parte 2 de `PROMPT_MOTOR_POSTS.md` (`src/lib/motor/contexto.ts`: site lido sem IA, base curada do nicho, histórico de decisões e métricas digitadas, og:title e og:description das inspirações lidos em até 4 s cada) e usa o system prompt da Parte 3 (`src/lib/llm/prompt-motor.ts`). Horários de audiência e benchmarks saem sempre como `nao_disponivel`: nada é inventado. A saída do modelo passa por um schema tolerante e é convertida para o formato de sempre (`src/lib/motor/saida.ts`). Sem IA, o motor local gera candidatos a mais e filtra por formato permitido, proibições e perfil (`src/lib/motor/local-filtros.ts`). A chave de cache inclui um hash das preferências. Sem `preferencias`, o fluxo é idêntico ao anterior; o modo demo responde igual.
+
+Campos extras na saída (todos opcionais; demo e cache antigos não têm):
+
+- Em cada post: `trilho` (`founder` ou `empresa`), `objetivo`, `formato_motor` (id do motor), `padrao_referencia` `{ nome, fonte_url }`, `chamada_final`, `precisa_revisao` (lista do que conferir antes de publicar).
+- Na análise: `contexto_inferido` `{ nicho, publico, tom_resumo, objetivos, confianca }`, `por_rede` `[{ rede, papel }]`, `comentario_frequencia`, `o_que_aprendi`, `perfil_alvo`.
+- Em cada item do calendário: `fonte` (`sua audiência`, `hipótese do nicho` ou `teste`) quando o calendário veio do modelo. Se os slots do modelo não forem coerentes, o calendário é montado pelas janelas de sempre.
+
+### POST /api/inferir
+
+Preenche a tela 2 do onboarding a partir do site, sem IA. Entrada: `{ "brand": { "...": "objeto de /api/brand" } }` ou `{ "url": "cora.com.br" }`. Saída (`SugestoesOnboarding`, exemplo real para a Cora):
+
+```json
+{
+  "nicho": "fintech",
+  "objetivos": ["gerar_clientes", "autoridade_founder"],
+  "tom_de_voz": { "formal_descontraido": 0.74, "tecnico_simples": 0.75, "serio_humor": 0.26, "cauteloso_provocador": 0.36 },
+  "exemplo_tom": "Olha o que mudou quando a gente simplificou esse processo.",
+  "formatos": ["carrossel", "citacao", "dado_de_impacto", "bastidor"],
+  "frequencia": "constante",
+  "porque_frequencia": "5 posts por semana dão constância para o algoritmo e ainda cabem na rotina de um founder."
+}
+```
+
+`nicho` usa os ids do app (`saas-b2b`, `fintech`, `healthtech`, `edtech`, `ecommerce-dtc`). Objetivos por palavras do site (vagas, lançamento, B2B), no máximo 2. Réguas de tom pelo uso de "você", informalidade, exclamações e jargão técnico. Formatos pela base curada do nicho, com carrossel sempre e dado de impacto só se o site tiver número real. Frequência `constante`, ou `leve` quando o foco é autoridade e o site é enxuto. Erros: 400 para entrada inválida, 422 para endereço que não dá para ler.
+
 ### GET /api/analise/{id}
 
 Devolve uma análise salva (ou uma das demos, com `demo-cora`, `demo-pipefy`, `demo-sallve`). `404` se não existir; sem Supabase, análises feitas em produção podem expirar.

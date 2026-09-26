@@ -1,10 +1,14 @@
 import type { DadosFormulario } from "@/components/estudio/Formulario";
+import { PERFIS_VALIDOS, REDES_ARROBA, type PerfilAlvo, type RedeArroba } from "@/lib/client/onboarding";
 
 const REDES = ["instagram", "linkedin", "x", "facebook"] as const;
 const QUANTIDADES = [3, 6, 9, 12];
 
-/** Monta o endereço da página do app com o site, as redes e as preferências do formulário. */
-export function urlDoApp(d: Partial<DadosFormulario> & { url: string }): string {
+/**
+ * Monta o endereço da página do app com o site, as redes e as preferências do formulário.
+ * `direto` pula a tela de ajustes e gera na hora (usado nos exemplos prontos).
+ */
+export function urlDoApp(d: Partial<DadosFormulario> & { url: string }, direto = false): string {
   const q = new URLSearchParams({ url: d.url.trim() });
   for (const r of REDES) {
     const v = d[r]?.trim();
@@ -12,6 +16,12 @@ export function urlDoApp(d: Partial<DadosFormulario> & { url: string }): string 
   }
   if (d.quantidade && d.quantidade !== 6) q.set("n", String(d.quantidade));
   if (d.paletaInstagram?.length) q.set("cores", d.paletaInstagram.map((c) => c.replace("#", "")).join(","));
+  if (d.perfil) q.set("para", d.perfil);
+  if (d.founder?.trim()) {
+    q.set("founder", d.founder.trim());
+    if (d.redeFounder) q.set("frede", d.redeFounder);
+  }
+  if (direto) q.set("ir", "1");
   return `/app?${q.toString()}`;
 }
 
@@ -28,6 +38,8 @@ export function dadosDaBusca(b: Busca): DadosFormulario | null {
     .filter((c) => /^[0-9a-f]{6}$/i.test(c))
     .slice(0, 5)
     .map((c) => `#${c.toLowerCase()}`);
+  const para = um(b.para) as PerfilAlvo;
+  const frede = um(b.frede) as RedeArroba;
   return {
     url,
     instagram: um(b.instagram),
@@ -36,5 +48,11 @@ export function dadosDaBusca(b: Busca): DadosFormulario | null {
     facebook: um(b.facebook),
     quantidade: QUANTIDADES.includes(n) ? n : 6,
     paletaInstagram: cores,
+    perfil: PERFIS_VALIDOS.includes(para) ? para : undefined,
+    founder: um(b.founder).trim() || undefined,
+    redeFounder: REDES_ARROBA.some((r) => r.id === frede) ? frede : undefined,
   };
 }
+
+/** Veio de um exemplo pronto: gera direto, sem a tela de ajustes. */
+export const diretoDaBusca = (b: Busca) => um(b.ir) === "1";

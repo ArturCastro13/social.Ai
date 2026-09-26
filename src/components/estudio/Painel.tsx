@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { baixarZip, type Personalizacao } from "@/lib/client/artes";
+import type { ExtrasAnalise, ExtrasPost } from "@/lib/motor/contrato";
 import { NICHOS, type Analise, type Rede } from "@/lib/types";
 import { IdeiasEMetricas } from "./IdeiasEMetricas";
 import { PostCard } from "./PostCard";
@@ -16,6 +17,12 @@ const ORIGEM: Record<Analise["origem"], { rotulo: string; classe: string }> = {
   local: { rotulo: "Motor local, sem IA", classe: "bg-papel-2 text-tinta" },
 };
 
+const CONFIANCA: Record<NonNullable<ExtrasAnalise["contexto_inferido"]>["confianca"], string> = {
+  alta: "Confiança alta na leitura do site",
+  media: "Confiança média na leitura do site",
+  baixa: "Confiança baixa: o site disse pouco, vale revisar",
+};
+
 const TITULO_SECAO = "font-display text-3xl font-semibold tracking-[-0.02em] sm:text-4xl";
 const CHIP = "inline-flex items-center rounded-full px-3 py-1 text-xs font-medium";
 
@@ -24,6 +31,9 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
   const [zip, setZip] = useState<{ feito: number; total: number } | null>(null);
   const [aviso, setAviso] = useState("");
   const b = analise.brand;
+  // Campos novos do motor chegam opcionais; análises antigas (demo, cache) seguem sem eles.
+  const extras = analise as Analise & ExtrasAnalise;
+  const paraRevisar = analise.posts.filter((p) => ((p as ExtrasPost).precisa_revisao ?? []).length > 0).length;
   const nicho = NICHOS.find((n) => n.id === analise.nicho)?.nome ?? analise.nicho;
 
   const semanas = useMemo(() => {
@@ -79,6 +89,11 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
           <span className={`${CHIP} ${ORIGEM[analise.origem].classe}`}>{ORIGEM[analise.origem].rotulo}</span>
           <span className={`${CHIP} border border-tinta/10 bg-white text-tinta-2`}>Nicho: {nicho}</span>
           <span className={`${CHIP} border border-tinta/10 bg-white text-tinta-2`}>{analise.posts.length} posts</span>
+          {paraRevisar > 0 && (
+            <a href="#posts" className={`${CHIP} border border-pauta/40 bg-pauta/5 text-pauta-escura hover:border-pauta`}>
+              {paraRevisar} {paraRevisar === 1 ? "post pede" : "posts pedem"} um dado seu
+            </a>
+          )}
           {onNova && (
           <button
             type="button"
@@ -163,6 +178,21 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
       <div id="estrategia" className="order-3 scroll-mt-28 border-t border-tinta/10">
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h3 className={TITULO_SECAO}>Estratégia</h3>
+          {(extras.o_que_aprendi || extras.contexto_inferido) && (
+            <div className="mt-6 max-w-3xl rounded-3xl border border-tinta/10 bg-white p-6">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-sm font-medium text-tinta-3">O que aprendi com você</p>
+                {extras.contexto_inferido && (
+                  <span
+                    className={`${CHIP} ${extras.contexto_inferido.confianca === "baixa" ? "border border-pauta/40 bg-pauta/5 text-pauta-escura" : "bg-papel text-tinta-2"}`}
+                  >
+                    {CONFIANCA[extras.contexto_inferido.confianca] ?? extras.contexto_inferido.confianca}
+                  </span>
+                )}
+              </div>
+              {extras.o_que_aprendi && <p className="mt-2 leading-relaxed text-tinta">{extras.o_que_aprendi}</p>}
+            </div>
+          )}
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {analise.pilares.map((p, i) => (
               <div key={p.nome} className="rounded-3xl border border-tinta/10 bg-white p-6">
@@ -192,6 +222,7 @@ export function Painel({ analise, onNova, ideiasPrimeiro = false }: { analise: A
         <div className="mx-auto max-w-6xl px-4 py-14">
           <h3 className={TITULO_SECAO}>Calendário</h3>
           <p className="mt-2 text-tinta-2">As próximas semanas, já decididas.</p>
+          {extras.comentario_frequencia && <p className="mt-3 max-w-3xl text-sm leading-relaxed text-tinta-2">{extras.comentario_frequencia}</p>}
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {semanas.map((s) => (
               <div key={s.titulo} className="rounded-3xl bg-white p-5 shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)]">

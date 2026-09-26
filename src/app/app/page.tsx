@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AppMvp } from "@/components/app/AppMvp";
-import { dadosDaBusca } from "@/lib/client/parametros";
+import { dadosDaBusca, diretoDaBusca } from "@/lib/client/parametros";
 import { DEMOS } from "@/lib/engine/demo";
 import { itensDoArquivo } from "@/lib/virais";
 
@@ -10,10 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default async function PaginaApp({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
-  const dados = dadosDaBusca(await searchParams);
+  const busca = await searchParams;
+  const dados = dadosDaBusca(busca);
   return (
     <AppMvp
       dados={dados}
+      direto={diretoDaBusca(busca)}
       totalVirais={itensDoArquivo().length}
       exemplos={DEMOS.map((d) => ({ nome: d.brand.nome, dominio: d.brand.dominio }))}
     />

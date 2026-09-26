@@ -1,0 +1,80 @@
+// Contrato entre o onboarding em camadas (interface) e o motor de posts (/api).
+// Fonte: PROMPT_MOTOR_POSTS.md. Tudo aqui é opcional para o motor: ele funciona só com a leitura do site.
+import { z } from "zod";
+
+import { FORMATOS_MOTOR, OBJETIVOS, type FormatoMotor, type Frequencia, type ObjetivoId } from "./constantes";
+
+export * from "./constantes";
+
+const regua = z.coerce.number().min(0).max(1);
+const arroba = z.string().trim().max(200).optional();
+
+export const tomDeVozSchema = z.object({
+  formal_descontraido: regua.default(0.5),
+  tecnico_simples: regua.default(0.5),
+  serio_humor: regua.default(0.3),
+  cauteloso_provocador: regua.default(0.4),
+});
+export type TomDeVoz = z.infer<typeof tomDeVozSchema>;
+
+/** O que a interface manda em POST /api/analyze no campo `preferencias` (telas 1, 2 e 3). */
+export const preferenciasSchema = z.object({
+  perfil_alvo: z.enum(["founder", "empresa", "ambos"]).default("empresa"),
+  founder: z
+    .object({
+      nome: z.string().trim().max(120).optional(),
+      instagram: arroba,
+      linkedin: arroba,
+      x: arroba,
+      /** Texto do "Fale 1 minuto" (transcrito no navegador) ou digitado. */
+      transcricao_audio: z.string().trim().max(6000).optional(),
+    })
+    .default({}),
+  objetivos: z.array(z.enum(OBJETIVOS.map((o) => o.id) as [ObjetivoId, ...ObjetivoId[]])).max(2).default([]),
+  tom_de_voz: tomDeVozSchema.optional(),
+  formatos_permitidos: z.array(z.enum(FORMATOS_MOTOR.map((f) => f.id) as [FormatoMotor, ...FormatoMotor[]])).default([]),
+  frequencia_escolhida: z.enum(["leve", "constante", "intenso"]).optional(),
+  proibicoes: z.array(z.string().trim().min(1).max(200)).max(10).default([]),
+  inspiracoes: z
+    .array(z.object({ url: z.string().trim().url().max(500), tipo: z.enum(["post", "perfil", "video"]).default("post") }))
+    .max(3)
+    .default([]),
+  /** Texto extraído do brand book (PDF lido no navegador) ou colado. */
+  brand_book_texto: z.string().trim().max(20000).optional(),
+  noticias: z
+    .array(z.object({ titulo: z.string().trim().max(300), resumo: z.string().trim().max(1000).default(""), url: z.string().trim().url(), data: z.string().trim().max(40) }))
+    .max(10)
+    .default([]),
+});
+export type Preferencias = z.infer<typeof preferenciasSchema>;
+
+/** Resposta de POST /api/inferir: o que a tela 2 mostra já preenchido, inferido do site sem IA. */
+export interface SugestoesOnboarding {
+  nicho: string;
+  objetivos: ObjetivoId[];
+  tom_de_voz: TomDeVoz;
+  /** Frase de exemplo escrita no tom inferido (a interface também pode gerar a própria ao mexer nas réguas). */
+  exemplo_tom: string;
+  formatos: FormatoMotor[];
+  frequencia: Frequencia;
+  porque_frequencia: string;
+}
+
+/** Campos extras que o motor novo adiciona a cada post (todos opcionais para não quebrar demo e cache antigos). */
+export interface ExtrasPost {
+  trilho?: "founder" | "empresa";
+  objetivo?: string;
+  formato_motor?: FormatoMotor;
+  padrao_referencia?: { nome: string; fonte_url: string };
+  chamada_final?: string;
+  precisa_revisao?: string[];
+}
+
+/** Campos extras que o motor novo adiciona à análise. */
+export interface ExtrasAnalise {
+  contexto_inferido?: { nicho: string; publico: string; tom_resumo: string; objetivos: string[]; confianca: "alta" | "media" | "baixa" };
+  por_rede?: { rede: string; papel: string }[];
+  comentario_frequencia?: string;
+  o_que_aprendi?: string;
+  perfil_alvo?: Preferencias["perfil_alvo"];
+}

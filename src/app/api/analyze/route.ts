@@ -2,6 +2,7 @@ import { z } from "zod";
 import { readBrand } from "@/lib/brand";
 import { analisar, LIMITE_POSTS } from "@/lib/engine";
 import { adminOk, erro, json, lerJson, options } from "@/lib/http";
+import { preferenciasSchema } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 
 export const maxDuration = 120;
@@ -19,6 +20,8 @@ const Entrada = z
     quantidade: z.coerce.number().int().min(1).max(LIMITE_POSTS).default(6),
     email: z.string().email().max(200).optional(),
     forcarNovo: z.boolean().optional(),
+    // Onboarding em camadas (src/lib/motor/contrato.ts). Validado à parte para a mensagem de erro ser clara.
+    preferencias: z.unknown().optional(),
   })
   .refine((d) => d.brand || d.url, { message: "Envie brand (de /api/brand) ou url." });
 
@@ -46,6 +49,16 @@ export async function POST(req: Request) {
     });
   }
   const d = body.data;
+  let preferencias;
+  if (d.preferencias !== undefined && d.preferencias !== null) {
+    const p = preferenciasSchema.safeParse(d.preferencias);
+    if (!p.success) {
+      return erro("As preferências vieram em um formato que o motor não entende. Confira os campos abaixo e tente de novo.", 400, {
+        detalhes: p.error.issues.map((i) => `preferencias.${i.path.join(".") || "(raiz)"}: ${i.message}`),
+      });
+    }
+    preferencias = p.data;
+  }
   let brand: BrandProfile;
   try {
     const recebido = d.brand ? BrandMinimo.safeParse(d.brand) : null;
@@ -73,6 +86,8 @@ export async function POST(req: Request) {
       identificadores: [`ip:${ip}`, ...(d.email ? [d.email.toLowerCase()] : [])],
       // Ignorar o cache custa uma chamada de IA: só o time pode pedir.
       forcarNovo: d.forcarNovo && adminOk(req),
+      // Os @ do founder vão só no contexto do motor, não nos handles da marca.
+      preferencias,
     });
   } catch (e) {
     console.error("[analyze]", (e as Error).message);

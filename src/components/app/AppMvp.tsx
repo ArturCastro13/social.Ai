@@ -7,6 +7,9 @@ import { Carregando } from "@/components/estudio/Carregando";
 import { Formulario, type DadosFormulario } from "@/components/estudio/Formulario";
 import { Painel } from "@/components/estudio/Painel";
 import { useGeracao } from "@/components/estudio/useGeracao";
+import { TelaAjustes } from "@/components/onboarding/TelaAjustes";
+import type { Preferencias } from "@/lib/motor/contrato";
+import type { BrandProfile } from "@/lib/types";
 import { urlDoApp } from "@/lib/client/parametros";
 
 const SECOES = [
@@ -17,27 +20,41 @@ const SECOES = [
   { id: "posts", nome: "Posts" },
 ];
 
-/** Página do MVP: recebe o site e as redes pela URL, gera as ideias e mostra tudo numa tela só. */
+/**
+ * Página do MVP em camadas: tela 1 (site, para quem, @), tela 2 (ajustes já preenchidos, com a tela 3 opcional)
+ * e o resultado. Com `direto` (exemplos prontos), pula a tela 2 e gera na hora, como antes.
+ */
 export function AppMvp({
   dados,
+  direto = false,
   totalVirais,
   exemplos,
 }: {
   dados: DadosFormulario | null;
+  direto?: boolean;
   totalVirais: number;
   exemplos: { nome: string; dominio: string }[];
 }) {
   const router = useRouter();
   const g = useGeracao(totalVirais);
   const [indo, setIndo] = useState(false);
-  const chave = dados ? JSON.stringify(dados) : "";
+  const [ultimas, setUltimas] = useState<{ chave?: string; preferencias?: Preferencias; brand?: BrandProfile | null }>({});
+  const chave = dados ? JSON.stringify(dados) + (direto ? ":direto" : "") : "";
 
-  // Começa a gerar assim que a página abre com um site na URL (e de novo se o site mudar).
+  // Exemplo pronto gera assim que a página abre; site novo volta para a tela de ajustes.
   useEffect(() => {
-    if (dados) g.gerar(dados);
+    if (dados && direto) g.gerar(dados);
+    else g.reiniciar();
     // A chave resume os dados; `g.gerar` muda a cada render e não deve disparar outra geração.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chave]);
+
+  function gerarComAjustes(preferencias: Preferencias, brand: BrandProfile | null) {
+    if (!dados) return;
+    setUltimas({ chave, preferencias, brand });
+    window.scrollTo({ top: 0 });
+    g.gerar(dados, { preferencias, brand });
+  }
 
   function ir(d: DadosFormulario) {
     setIndo(true);
@@ -88,7 +105,7 @@ export function AppMvp({
         {!dados && (
           <section className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24">
             <h1 className="font-display text-[2.4rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl">Cole o site da sua startup.</h1>
-            <p className="mt-4 text-lg leading-relaxed text-tinta-2">Com as redes, as ideias saem mais parecidas com o que você já posta. Leva cerca de um minuto.</p>
+            <p className="mt-4 text-lg leading-relaxed text-tinta-2">A gente lê o site e te mostra o que entendeu. Você só corrige o que estiver errado.</p>
             <div className="mt-10">
               <Formulario onEnviar={ir} ocupado={indo} />
             </div>
@@ -96,7 +113,7 @@ export function AppMvp({
               ver exemplo:{" "}
               {exemplos.map((ex, i) => (
                 <Fragment key={ex.dominio}>
-                  <Link href={urlDoApp({ url: ex.dominio })} className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta">
+                  <Link href={urlDoApp({ url: ex.dominio }, true)} className="underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta">
                     {ex.nome}
                   </Link>
                   {i < exemplos.length - 1 ? ", " : ""}
@@ -106,7 +123,13 @@ export function AppMvp({
           </section>
         )}
 
-        {dados && (g.fase === "trabalhando" || g.fase === "parado") && (
+        {dados && !direto && g.fase === "parado" && (
+          <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
+            <TelaAjustes key={chave} dados={dados} onGerar={gerarComAjustes} />
+          </section>
+        )}
+
+        {dados && (g.fase === "trabalhando" || (direto && g.fase === "parado")) && (
           <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20">
             <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Preparando as ideias de hoje</h1>
             <p className="mt-3 text-tinta-2">Estamos lendo a sua marca e o seu nicho. Não feche esta página.</p>
@@ -125,7 +148,7 @@ export function AppMvp({
             <div className="mt-8 flex flex-wrap gap-3">
               <button
                 type="button"
-                onClick={() => g.gerar(dados)}
+                onClick={() => g.gerar(dados, ultimas.chave === chave ? ultimas : {})}
                 className="inline-flex h-12 items-center rounded-full bg-pauta px-6 font-semibold text-white transition-colors hover:bg-pauta-escura"
               >
                 Tentar de novo

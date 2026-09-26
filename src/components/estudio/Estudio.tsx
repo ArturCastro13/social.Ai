@@ -37,7 +37,7 @@ export function Estudio({
   }
 
   function exemplo(dominio: string) {
-    router.push(urlDoApp({ url: dominio }));
+    router.push(urlDoApp({ url: dominio }, true));
   }
 
   return (

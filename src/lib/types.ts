@@ -1,4 +1,5 @@
 // Contratos compartilhados entre motor (/api), base de virais e interface.
+import type { ExtrasAnalise, ExtrasPost } from "@/lib/motor/contrato";
 
 export type Nicho = "saas-b2b" | "fintech" | "healthtech" | "edtech" | "ecommerce-dtc";
 
@@ -140,7 +141,8 @@ export type TemplateId =
   | "antes-depois"
   | "checklist";
 
-export interface PostGerado {
+/** Campos de ExtrasPost são opcionais: demo e cache antigos continuam válidos. */
+export interface PostGerado extends ExtrasPost {
   id: string;
   rede_principal: Rede;
   formato: Formato;
@@ -165,9 +167,12 @@ export interface CalendarioItem {
   horario: string; // HH:mm
   rede: Rede;
   post_id: string;
+  /** Motor novo: de onde veio o horário ("sua audiência", "hipótese do nicho" ou "teste"). */
+  fonte?: string;
 }
 
-export interface Analise {
+/** Campos de ExtrasAnalise são opcionais: demo e cache antigos continuam válidos. */
+export interface Analise extends ExtrasAnalise {
   id: string;
   url: string;
   nicho: Nicho;

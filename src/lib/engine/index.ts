@@ -1,5 +1,5 @@
-import { randomBytes } from "node:crypto";
-import type { Analise, BrandProfile, PostGerado, Rede } from "@/lib/types";
+import { createHash, randomBytes } from "node:crypto";
+import type { Analise, BrandProfile, Nicho, PostGerado, Rede } from "@/lib/types";
 import { provedorConfigurado } from "@/lib/llm";
 import { nomeDoPerfil } from "@/lib/brand/nome";
 import { resumirPreferencias, textoPreferencias } from "@/lib/feedback";
@@ -11,6 +11,11 @@ import { analiseLocal } from "./local";
 import { palpiteNicho } from "./nicho";
 import { analiseIASchema, extrairJson, semTravessao, templateValido, type AnaliseIA } from "./schema";
 import { demoPorDominio } from "./demo";
+import type { Preferencias } from "@/lib/motor/contrato";
+import { extrairInspiracoes, montarContexto, redesDoMotor } from "@/lib/motor/contexto";
+import { filtrarLocal } from "@/lib/motor/local-filtros";
+import { aplicarExtras, saidaMotorSchema, saidaParaAnaliseIA, type ResultadoMotor } from "@/lib/motor/saida";
+import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
 
 export const LIMITE_POSTS = 12;
 
@@ -21,6 +26,28 @@ export function novoId(): string {
 export function chaveUrl(url: string): string {
   const u = new URL(url);
   return (u.hostname.replace(/^www\./, "") + u.pathname.replace(/\/+$/, "")).toLowerCase();
+}
+
+/** Hash curto e estável das preferências: a mesma escolha dá a mesma chave, em qualquer ordem de campos. */
+export function hashPreferencias(p: Preferencias): string {
+  const ordenar = (v: unknown): unknown =>
+    Array.isArray(v)
+      ? v.map(ordenar)
+      : v && typeof v === "object"
+        ? Object.fromEntries(
+            Object.entries(v as Record<string, unknown>)
+              .filter(([, x]) => x !== undefined)
+              .sort(([a], [b]) => a.localeCompare(b))
+              .map(([k, x]) => [k, ordenar(x)]),
+          )
+        : v;
+  return createHash("sha256").update(JSON.stringify(ordenar(p))).digest("base64url").slice(0, 12);
+}
+
+/** Chave do cache: a URL e, quando houver, o hash das preferências (preferências diferentes = análise diferente). */
+export function chaveCache(url: string, preferencias?: Preferencias | null): string {
+  const base = chaveUrl(url);
+  return preferencias ? `${base}#m:${hashPreferencias(preferencias)}` : base;
 }
 
 function redesAtivas(b: BrandProfile): Rede[] {
@@ -78,6 +105,8 @@ export interface AnalisarOpcoes {
   /** Chaves de uso para o limite da demo (e-mail e IP); todas precisam estar abaixo do limite. */
   identificadores: string[];
   forcarNovo?: boolean;
+  /** Onboarding em camadas. Com preferências, o motor novo (PROMPT_MOTOR_POSTS.md) entra no lugar do prompt antigo. */
+  preferencias?: Preferencias;
 }
 
 // Teto global por instância, para nenhum script esgotar a cota da IA numa noite.
@@ -97,7 +126,8 @@ const PRAZO_IA_MS = 85_000;
  */
 export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise<Analise> {
   const quantidade = Math.min(LIMITE_POSTS, Math.max(1, Math.round(op.quantidade)));
-  const urlChave = chaveUrl(brand.url);
+  const pref = op.preferencias ?? null;
+  const urlChave = chaveCache(brand.url, pref);
   const llm = provedorConfigurado();
 
   // 1. Empresas de exemplo: resposta instantânea e idêntica em qualquer cenário de palco.
@@ -140,6 +170,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   const id = novoId();
 
   let saida: AnaliseIA | null = null;
+  let motor: ResultadoMotor | null = null;
   let provedor: string | null = null;
 
   if (llm) {
@@ -158,28 +189,56 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       await Promise.all(op.identificadores.map((k) => store.registrarUso(k, brand.url).catch(() => undefined)));
       const inicio = Date.now();
       const contexto = await contextoViralDoNicho(palpite, 10);
-      let preferencias = "";
-      try {
-        const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
-        preferencias = textoPreferencias(resumirPreferencias(decisoes, resultados));
-      } catch {
-        /* sem histórico, segue */
+      let sistema = SISTEMA;
+      let prompt: string;
+      // Interpreta a resposta: devolve a saída pronta ou a mensagem de erro para a nova tentativa.
+      let interpretar: (txt: string) => { saida: AnaliseIA; motor?: ResultadoMotor } | { erro: string };
+      const erroZod = (issues: { path: PropertyKey[]; message: string }[]) =>
+        issues.slice(0, 4).map((i) => `${i.path.map(String).join(".")}: ${i.message}`).join("; ");
+
+      if (pref) {
+        const redes = redesDoMotor(brand, pref);
+        const ctx = await contextoDoMotor(brand, pref, { palpite, quantidade, redes, referencias: contexto });
+        sistema = SISTEMA_MOTOR;
+        prompt = montarPromptMotor(ctx);
+        interpretar = (txt) => {
+          const bruto = saidaMotorSchema.safeParse(extrairJson(txt));
+          if (!bruto.success) return { erro: erroZod(bruto.error.issues) };
+          const r = saidaParaAnaliseIA(bruto.data, { brand, palpite, quantidade, redes, preferencias: pref, padroes: contexto.map((c) => c.padrao) });
+          const v = analiseIASchema.safeParse(r.analise);
+          if (!v.success) return { erro: erroZod(v.error.issues) };
+          return { saida: v.data, motor: { ...r, analise: v.data } };
+        };
+      } else {
+        let preferencias = "";
+        try {
+          const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
+          preferencias = textoPreferencias(resumirPreferencias(decisoes, resultados));
+        } catch {
+          /* sem histórico, segue */
+        }
+        prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand), preferencias });
+        interpretar = (txt) => {
+          const parsed = analiseIASchema.safeParse(extrairJson(txt));
+          if (!parsed.success) return { erro: erroZod(parsed.error.issues) };
+          return { saida: { ...parsed.data, posts: parsed.data.posts.slice(0, quantidade) } };
+        };
       }
-      const prompt = montarPrompt({ brand, palpite, padroes: contexto, quantidade, redes: redesAtivas(brand), preferencias });
       let erroAnterior = "";
       // Segunda tentativa só se a primeira falhou rápido o bastante para caber no prazo.
       for (let tentativa = 0; tentativa < 2 && !saida && Date.now() - inicio < PRAZO_IA_MS / 2; tentativa++) {
         try {
           const txt = await llm.gerar(
-            SISTEMA,
+            sistema,
             erroAnterior ? `${prompt}\n\nA resposta anterior veio inválida (${erroAnterior}). Corrija e devolva só o JSON.` : prompt,
           );
-          const parsed = analiseIASchema.safeParse(extrairJson(txt));
-          if (parsed.success) {
-            saida = { ...parsed.data, posts: parsed.data.posts.slice(0, quantidade) };
+          const r = interpretar(txt);
+          if ("saida" in r) {
+            saida = r.saida;
+            motor = r.motor ?? null;
             provedor = llm.nome;
           } else {
-            erroAnterior = parsed.error.issues.slice(0, 4).map((i) => `${i.path.join(".")}: ${i.message}`).join("; ");
+            erroAnterior = r.erro;
           }
         } catch (e) {
           erroAnterior = (e as Error).message.slice(0, 200);
@@ -195,11 +254,19 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
 
   if (!saida) {
     const contexto = await contextoViralDoNicho(palpite, 10);
-    saida = analiseLocal(brand, palpite, contexto.map((c) => c.padrao), quantidade, redesAtivas(brand));
+    if (pref) {
+      // Gera candidatos a mais para sobrar post depois dos filtros de formato e proibição.
+      const bruto = analiseLocal(brand, palpite, contexto.map((c) => c.padrao), Math.min(36, quantidade * 3), redesDoMotor(brand, pref));
+      motor = filtrarLocal(bruto, pref, { quantidade, marca: nomeDoPerfil(brand) });
+      saida = motor.analise;
+    } else {
+      saida = analiseLocal(brand, palpite, contexto.map((c) => c.padrao), quantidade, redesAtivas(brand));
+    }
     if (!llm) avisos.push("Modo demo: sem chave de IA configurada, a estratégia foi montada pelo motor local a partir do texto do site.");
   }
 
-  const analise = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos);
+  const base = finalizar(id, brand, saida, provedor ? "ia" : "local", provedor, avisos);
+  const analise = motor ? aplicarExtras(base, motor) : base;
   try {
     // Só análises feitas pela IA entram no cache; as do motor local são baratas e podem melhorar depois.
     if (provedor) await store.salvarAnalise(analise, urlChave, op.email, quantidade);
@@ -208,4 +275,34 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     console.error("[analyze] não salvou:", (e as Error).message);
   }
   return analise;
+}
+
+/** Busca o que o CONTEXTO do motor precisa fora do brand: histórico do founder, posts anteriores e inspirações. */
+async function contextoDoMotor(
+  brand: BrandProfile,
+  pref: Preferencias,
+  x: { palpite: Nicho; quantidade: number; redes: Rede[]; referencias: Awaited<ReturnType<typeof contextoViralDoNicho>> },
+) {
+  const [historico, inspiracoesExtraidas] = await Promise.all([
+    (async () => {
+      try {
+        const [decisoes, resultados] = await Promise.all([store.listarDecisoes(brand.dominio), store.listarResultados(brand.dominio)]);
+        // Ganchos e redes das decisões vêm das análises em que os posts nasceram (no máximo 5 leituras).
+        const ids = [...new Set([...decisoes, ...resultados].map((d) => d.analise_id))].slice(-5);
+        const analises = await Promise.all(ids.map((i) => store.buscarAnalise(i).catch(() => null)));
+        return { decisoes, resultados, postsAnteriores: analises.flatMap((a) => a?.posts ?? []) };
+      } catch {
+        return { decisoes: [], resultados: [], postsAnteriores: [] };
+      }
+    })(),
+    extrairInspiracoes(pref.inspiracoes),
+  ]);
+  return montarContexto(brand, pref, {
+    nicho: x.palpite,
+    quantidade: x.quantidade,
+    redes: x.redes,
+    referencias: x.referencias,
+    inspiracoesExtraidas,
+    ...historico,
+  });
 }

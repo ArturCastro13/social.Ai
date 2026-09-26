@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
+import type { ExtrasPost } from "@/lib/motor/contrato";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
 
 export const NOMES_TEMPLATE: Record<TemplateId, string> = {
@@ -18,6 +19,19 @@ export const NOMES_TEMPLATE: Record<TemplateId, string> = {
 
 const NOMES_REDE: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };
 const ORDEM_REDES: Rede[] = ["instagram", "linkedin", "x", "facebook"];
+
+/** Destaca os [PREENCHER: ...] na legenda, para a pessoa ver onde falta um dado dela. */
+function comLacunas(texto: string) {
+  return texto.split(/(\[PREENCHER:[^\]]*\])/g).map((parte, i) =>
+    /^\[PREENCHER:/.test(parte) ? (
+      <mark key={i} className="rounded bg-limao/70 px-0.5 text-tinta">
+        {parte}
+      </mark>
+    ) : (
+      parte
+    ),
+  );
+}
 
 export function PostCard({
   analise,
@@ -50,6 +64,8 @@ export function PostCard({
   const pal = analise.brand.paleta;
   const cores = [...new Set([pal.primaria, pal.secundaria, pal.destaque].map((c) => c.toLowerCase()))];
   const corAtual = (pers.cor ?? pal.primaria).toLowerCase();
+  const extra = post as PostGerado & ExtrasPost;
+  const revisar = extra.precisa_revisao ?? [];
 
   async function copiar() {
     const texto = post.legendas[rede] + (rede !== "linkedin" && post.hashtags.length && !post.legendas[rede].includes("#") ? "\n\n" + post.hashtags.map((h) => "#" + h).join(" ") : "");
@@ -67,6 +83,11 @@ export function PostCard({
       <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
         <p className="text-xs text-tinta-3">
           <span className="font-semibold text-tinta">Post {indice + 1}</span> · {NOMES_REDE[post.rede_principal]} · {NOMES_TEMPLATE[template]}
+          {extra.trilho && (
+            <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${extra.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
+              {extra.trilho === "founder" ? "Founder" : "Empresa"}
+            </span>
+          )}
         </p>
         {agenda && (
           <p className="shrink-0 rounded-full bg-papel px-2.5 py-1 text-xs font-medium tabular-nums text-tinta-2">
@@ -208,9 +229,36 @@ export function PostCard({
             </button>
           ))}
         </div>
-        <p className="mt-3 max-h-40 flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-tinta-2">{post.legendas[rede]}</p>
+        <p className="mt-3 max-h-40 flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-tinta-2">{comLacunas(post.legendas[rede])}</p>
+        {revisar.length > 0 && (
+          <div className="mt-3 rounded-2xl border border-pauta/40 bg-pauta/5 px-3 py-2 text-xs leading-relaxed text-tinta-2">
+            <p className="font-semibold text-pauta-escura">Precisa revisar antes de postar</p>
+            <ul className="mt-1 space-y-0.5">
+              {revisar.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+          </div>
+        )}
         <p className="mt-3 rounded-2xl bg-papel px-3 py-2 text-xs leading-relaxed text-tinta-2">
           <strong className="text-tinta">Por que funciona:</strong> {post.por_que}
+          {extra.padrao_referencia?.nome && (
+            <span className="mt-1 block">
+              Padrão de referência:{" "}
+              {/^https?:\/\//.test(extra.padrao_referencia.fonte_url) ? (
+                <a
+                  href={extra.padrao_referencia.fonte_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-tinta underline decoration-tinta/30 underline-offset-2 hover:decoration-tinta"
+                >
+                  {extra.padrao_referencia.nome}
+                </a>
+              ) : (
+                <span className="font-medium text-tinta">{extra.padrao_referencia.nome}</span>
+              )}
+            </span>
+          )}
         </p>
         <div className="mt-4 grid grid-cols-2 gap-2">
           <button type="button" onClick={copiar} className="h-10 rounded-full border border-tinta/20 text-sm font-semibold transition hover:border-tinta/40 hover:bg-papel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta">

@@ -1,6 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { CampoArroba, Chip } from "@/components/onboarding/ui";
+import { PERFIS, type PerfilAlvo, type RedeArroba } from "@/lib/client/onboarding";
 
 export interface DadosFormulario {
   url: string;
@@ -10,19 +12,21 @@ export interface DadosFormulario {
   facebook: string;
   quantidade: number;
   paletaInstagram: string[];
+  /** Tela 1: para quem é o conteúdo. Sem valor, a tela 2 assume "a empresa". */
+  perfil?: PerfilAlvo;
+  /** @ ou link do founder, com a rede detectada ou escolhida. */
+  founder?: string;
+  redeFounder?: RedeArroba;
 }
 
 const QUANTIDADES = [3, 6, 9, 12];
 
-const REDES: { k: "instagram" | "linkedin" | "x" | "facebook"; rotulo: string; ph: string }[] = [
-  { k: "instagram", rotulo: "Instagram", ph: "@suamarca" },
-  { k: "linkedin", rotulo: "LinkedIn", ph: "linkedin.com/company/..." },
-  { k: "x", rotulo: "X", ph: "@suamarca" },
-  { k: "facebook", rotulo: "Facebook", ph: "facebook.com/..." },
-];
-
+/** Tela 1 do onboarding: site, para quem é e os @. O resto a gente tira do site na tela seguinte. */
 export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulario) => void; ocupado: boolean }) {
   const [d, setD] = useState<DadosFormulario>({ url: "", instagram: "", linkedin: "", x: "", facebook: "", quantidade: 6, paletaInstagram: [] });
+  const [perfil, setPerfil] = useState<PerfilAlvo>("empresa");
+  const [empresa, setEmpresa] = useState<{ valor: string; rede: RedeArroba }>({ valor: "", rede: "instagram" });
+  const [founder, setFounder] = useState<{ valor: string; rede: RedeArroba }>({ valor: "", rede: "linkedin" });
   const [abrirRedes, setAbrirRedes] = useState(false);
   const [lendoPrint, setLendoPrint] = useState(false);
   const [erroUrl, setErroUrl] = useState("");
@@ -55,7 +59,17 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
       return;
     }
     setErroUrl("");
-    onEnviar({ ...d, url: u });
+    const arrobaEmpresa = empresa.valor.trim();
+    onEnviar({
+      ...d,
+      url: u,
+      instagram: empresa.rede === "instagram" ? arrobaEmpresa : "",
+      linkedin: empresa.rede === "linkedin" ? arrobaEmpresa : "",
+      x: empresa.rede === "x" ? arrobaEmpresa : "",
+      perfil,
+      founder: founder.valor.trim() || undefined,
+      redeFounder: founder.valor.trim() ? founder.rede : undefined,
+    });
   }
 
   return (
@@ -82,7 +96,7 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
           disabled={ocupado}
           className="h-14 shrink-0 rounded-full bg-pauta px-7 text-lg font-semibold text-white transition-colors hover:bg-pauta-escura disabled:opacity-60"
         >
-          {ocupado ? "Gerando..." : "Gerar posts"}
+          {ocupado ? "Abrindo..." : "Ler meu site"}
         </button>
       </div>
       {erroUrl && (
@@ -91,63 +105,69 @@ export function Formulario({ onEnviar, ocupado }: { onEnviar: (d: DadosFormulari
         </p>
       )}
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        {REDES.slice(0, 2).map((r) => (
-          <label key={r.k} className="block">
-            <span className="text-sm text-tinta-2">{r.rotulo} (opcional)</span>
-            <input
-              value={d[r.k]}
-              onChange={(e) => setD({ ...d, [r.k]: e.target.value })}
-              placeholder={r.ph}
-              autoCapitalize="none"
-              spellCheck={false}
-              className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
-            />
-          </label>
-        ))}
-      </div>
-
-      <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm">
-        <fieldset className="flex items-center gap-1.5">
-          <legend className="sr-only">Quantidade de posts</legend>
-          <span className="mr-1.5 text-tinta-2">Posts</span>
-          {QUANTIDADES.map((q) => (
-            <button
-              type="button"
-              key={q}
-              onClick={() => setD({ ...d, quantidade: q })}
-              aria-pressed={d.quantidade === q}
-              className={`h-9 w-10 border tabular-nums transition-colors ${d.quantidade === q ? "border-tinta bg-tinta text-papel" : "border-tinta/20 hover:border-tinta"}`}
-            >
-              {q}
-            </button>
+      <fieldset className="mt-6">
+        <legend className="text-sm font-medium text-tinta-2">Esse conteúdo é para quem?</legend>
+        <div className="mt-2 flex flex-wrap gap-2">
+          {PERFIS.map((p) => (
+            <Chip key={p.id} ativo={perfil === p.id} onClick={() => setPerfil(p.id)}>
+              {p.nome}
+            </Chip>
           ))}
-        </fieldset>
+        </div>
+      </fieldset>
+
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <CampoArroba id="arroba-empresa" rotulo="@ da empresa" valor={empresa.valor} rede={empresa.rede} onChange={(valor, rede) => setEmpresa({ valor, rede })} />
+        <CampoArroba
+          id="arroba-founder"
+          rotulo="@ do founder"
+          valor={founder.valor}
+          rede={founder.rede}
+          onChange={(valor, rede) => setFounder({ valor, rede })}
+          placeholder="@voce ou link do perfil"
+        />
+      </div>
+      <p className="mt-2 text-sm text-tinta-3">Quanto mais @ você colocar, mais a pauta se parece com você.</p>
+
+      <div className="mt-4 text-sm">
         <button
           type="button"
           onClick={() => setAbrirRedes((v) => !v)}
           aria-expanded={abrirRedes}
           className="text-tinta-2 underline decoration-tinta/30 underline-offset-4 hover:text-tinta hover:decoration-tinta"
         >
-          {abrirRedes ? "Menos opções" : "Mais redes (X, Facebook, print do Instagram)"}
+          {abrirRedes ? "Menos opções" : "Mais opções (quantidade, Facebook, print do Instagram)"}
         </button>
       </div>
 
       {abrirRedes && (
         <div className="mt-5 grid gap-3 border-t border-tinta/10 pt-5 sm:grid-cols-2">
-          {REDES.slice(2).map((r) => (
-            <label key={r.k} className="block">
-              <span className="text-sm text-tinta-2">{r.rotulo}</span>
-              <input
-                value={d[r.k]}
-                onChange={(e) => setD({ ...d, [r.k]: e.target.value })}
-                placeholder={r.ph}
-                autoCapitalize="none"
-                spellCheck={false}
-                className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
-              />
-            </label>
-          ))}
+          <fieldset className="flex items-center gap-1.5 text-sm sm:col-span-2">
+            <legend className="sr-only">Quantidade de posts</legend>
+            <span className="mr-1.5 text-tinta-2">Posts</span>
+            {QUANTIDADES.map((q) => (
+              <button
+                type="button"
+                key={q}
+                onClick={() => setD({ ...d, quantidade: q })}
+                aria-pressed={d.quantidade === q}
+                className={`h-9 w-10 border tabular-nums transition-colors ${d.quantidade === q ? "border-tinta bg-tinta text-papel" : "border-tinta/20 hover:border-tinta"}`}
+              >
+                {q}
+              </button>
+            ))}
+          </fieldset>
+          <label className="block sm:col-span-2">
+            <span className="text-sm text-tinta-2">Facebook da empresa</span>
+            <input
+              value={d.facebook}
+              onChange={(e) => setD({ ...d, facebook: e.target.value })}
+              placeholder="facebook.com/..."
+              autoCapitalize="none"
+              spellCheck={false}
+              className="mt-1 h-11 w-full rounded-full border border-tinta/20 bg-white px-4 text-base outline-none transition-colors focus:border-tinta focus-visible:outline-none"
+            />
+          </label>
           <div className="sm:col-span-2">
             <input
               ref={inputArquivo}

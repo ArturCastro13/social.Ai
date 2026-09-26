@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import type { Preferencias } from "@/lib/motor/contrato";
 import type { Analise, BrandProfile } from "@/lib/types";
 import type { Etapa } from "./Carregando";
 import type { DadosFormulario } from "./Formulario";
@@ -34,6 +35,13 @@ function etapasIniciais(dominio: string, quantidade: number, totalVirais: number
   ];
 }
 
+export interface OpcoesGeracao {
+  /** Escolhas das telas 2 e 3. Sem elas, o motor segue só com a leitura do site, como antes. */
+  preferencias?: Preferencias;
+  /** Marca já lida na tela 2, para não abrir o site duas vezes. */
+  brand?: BrandProfile | null;
+}
+
 /** Lê a marca e gera a análise, mostrando as etapas reais enquanto espera. */
 export function useGeracao(totalVirais: number) {
   const [fase, setFase] = useState<"parado" | "trabalhando" | "pronto" | "erro">("parado");
@@ -46,7 +54,17 @@ export function useGeracao(totalVirais: number) {
 
   const marcar = (id: string, estado: Etapa["estado"]) => setEtapas((es) => es.map((e) => (e.id === id ? { ...e, estado } : e)));
 
-  async function gerar(d: DadosFormulario) {
+  /** Volta ao estado inicial (quando a pessoa troca de site sem sair da página). */
+  function reiniciar() {
+    execucao.current++;
+    setFase("parado");
+    setEtapas([]);
+    setBrand(null);
+    setAnalise(null);
+    setErro("");
+  }
+
+  async function gerar(d: DadosFormulario, opcoes: OpcoesGeracao = {}) {
     const minha = ++execucao.current;
     const vivo = () => execucao.current === minha;
     const dom = dominioDe(d.url);
@@ -60,12 +78,18 @@ export function useGeracao(totalVirais: number) {
 
     try {
       const handles = { instagram: d.instagram || undefined, linkedin: d.linkedin || undefined, x: d.x || undefined, facebook: d.facebook || undefined };
-      const rb = await fetch("/api/brand", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ url: d.url, ...handles, paletaInstagram: d.paletaInstagram.length ? d.paletaInstagram : undefined }),
-      });
-      const b = await lerResposta(rb, "Não consegui ler esse site.");
+      let b: BrandProfile;
+      if (opcoes.brand) {
+        b = opcoes.brand;
+        await espera(350);
+      } else {
+        const rb = await fetch("/api/brand", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ url: d.url, ...handles, paletaInstagram: d.paletaInstagram.length ? d.paletaInstagram : undefined }),
+        });
+        b = await lerResposta(rb, "Não consegui ler esse site.");
+      }
       if (!vivo()) return;
       marcar("abrir", "feito");
       marcar("paleta", "andando");
@@ -89,7 +113,7 @@ export function useGeracao(totalVirais: number) {
         ra = await fetch("/api/analyze", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade }),
+          body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade, ...(opcoes.preferencias ? { preferencias: opcoes.preferencias } : {}) }),
         });
       } finally {
         clearInterval(timer);
@@ -112,5 +136,5 @@ export function useGeracao(totalVirais: number) {
     }
   }
 
-  return { fase, etapas, brand, analise, dominio, erro, gerar };
+  return { fase, etapas, brand, analise, dominio, erro, gerar, reiniciar };
 }
