@@ -2,10 +2,13 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
-import { totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
-import { OBJETIVOS } from "@/lib/motor/constantes";
+import { LIMITES_EDICAO, postEditado, temEdicao, totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
-import { NOMES_REDE, SELO_FOUNDER, ehLink, nomeDoPadrao, rotuloOrigem } from "./rotulos";
+import { urlCanva } from "./canva";
+import { AprovarRecusar, JaPostei, Recusado } from "./JaPostei";
+import { BOTAO_SECUNDARIO, CaixaRevisar, SeloFounder, TresLinhas, comLacunas } from "./Partes";
+import { NOMES_REDE, diaCurto, nomeDoPadrao } from "./rotulos";
+import type { Escolha, Postado } from "./useFeedback";
 
 export const NOMES_TEMPLATE: Record<TemplateId, string> = {
   "capa-gancho": "Carrossel com capa",
@@ -19,89 +22,42 @@ export const NOMES_TEMPLATE: Record<TemplateId, string> = {
 };
 
 const ORDEM_REDES: Rede[] = ["instagram", "linkedin", "x", "facebook"];
+const CAMPO =
+  "w-full rounded-xl border border-tinta/15 bg-white px-3 py-2 text-sm leading-snug text-tinta focus-visible:border-tinta/40 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-pauta";
 
-function nomeObjetivo(id: string | undefined) {
-  return OBJETIVOS.find((o) => o.id === id)?.nome;
-}
-
-/**
- * Três linhas fixas, sempre na mesma ordem: para quem, por que funciona e de onde veio o tema.
- * Demo e cache antigos não têm os campos novos; cada linha tem um fallback ou some sozinha.
- */
-function TresLinhas({ post }: { post: PostGerado }) {
-  const e = post.enderecamento;
-  const objetivo = nomeObjetivo(e?.objetivo);
-  const padrao = post.padrao_referencia?.nome?.trim() || nomeDoPadrao(post.padrao_inspirador);
-  const fonte = post.padrao_referencia?.fonte_url;
-  return (
-    <dl className="grid grid-cols-[6.5rem_1fr] gap-x-2 gap-y-1 border-b border-tinta/10 bg-papel px-4 py-2.5 text-xs leading-snug text-tinta-2">
-      {e?.publico && (
-        <>
-          <dt className="text-tinta-3">Para quem</dt>
-          <dd className="min-w-0">
-            <span className="flex items-start justify-between gap-2">
-              <strong className="line-clamp-2 font-semibold text-tinta">{e.publico}</strong>
-              {objetivo && <span className="shrink-0 rounded-full bg-tinta px-2 py-0.5 text-[11px] font-semibold text-papel">{objetivo}</span>}
-            </span>
-            {e.acao_esperada && <span className="mt-0.5 line-clamp-1 block" title={e.acao_esperada}>depois de ler: {e.acao_esperada}</span>}
-          </dd>
-        </>
-      )}
-      {padrao && (
-        <>
-          <dt className="text-tinta-3">Por que funciona</dt>
-          <dd className="min-w-0">
-            {ehLink(fonte) ? (
-              <a
-                href={fonte}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-tinta underline decoration-tinta/30 underline-offset-2 hover:decoration-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
-              >
-                {padrao}
-              </a>
-            ) : (
-              <span className="font-medium text-tinta">{padrao}</span>
-            )}
-          </dd>
-        </>
-      )}
-      <dt className="text-tinta-3">Veio de</dt>
-      <dd className={post.origem_tema === "founder" ? "font-semibold text-salvia" : "text-tinta"}>{rotuloOrigem(post.origem_tema)}</dd>
-    </dl>
-  );
-}
-
-/** Destaca os [PREENCHER: ...] na legenda, para a pessoa ver onde falta um dado dela. */
-function comLacunas(texto: string) {
-  return texto.split(/(\[PREENCHER:[^\]]*\])/g).map((parte, i) =>
-    /^\[PREENCHER:/.test(parte) ? (
-      <mark key={i} className="rounded bg-limao/70 px-0.5 text-tinta">
-        {parte}
-      </mark>
-    ) : (
-      parte
-    ),
-  );
+interface Rascunho {
+  gancho: string;
+  slides: { titulo: string; texto: string }[];
+  legendas: Partial<Record<Rede, string>>;
 }
 
 export function PostCard({
   analise,
-  post,
+  post: original,
   indice,
   pers,
   onPers,
   onBaixar,
   agenda,
+  decisao,
+  onDecidir,
+  resultado,
+  onResultado,
 }: {
   analise: Analise;
   post: PostGerado;
   indice: number;
   pers: Personalizacao;
   onPers: (p: Personalizacao) => void;
-  onBaixar: (url: string, nome: string) => void;
+  onBaixar: (url: string, nome: string) => void | Promise<void>;
   agenda?: { data: string; dia_semana: string; horario: string };
+  decisao?: Escolha;
+  onDecidir?: (escolha: Escolha | null) => void;
+  resultado?: Postado;
+  onResultado?: (v: Postado) => void;
 }) {
+  const post = postEditado(original, pers);
+  const editado = temEdicao(pers);
   const template = pers.template ?? post.template;
   const total = totalSlides(post, template);
   const [slide, setSlide] = useState(0);
@@ -110,13 +66,22 @@ export function PostCard({
   const [carregandoArte, setCarregandoArte] = useState(true);
   const [erroArte, setErroArte] = useState(false);
   const [tentativa, setTentativa] = useState(0);
+  const [rascunho, setRascunho] = useState<Rascunho | null>(null);
+  const [avisoCanva, setAvisoCanva] = useState(false);
   const s = Math.min(slide, total - 1);
-  const base = urlArte(analise, post, { ...pers, slide: s, tamanho: "feed" });
+  const base = urlArte(analise, original, { ...pers, slide: s, tamanho: "feed" });
   const src = tentativa ? `${base}&r=${tentativa}` : base;
   const pal = analise.brand.paleta;
   const cores = [...new Set([pal.primaria, pal.secundaria, pal.destaque].map((c) => c.toLowerCase()))];
   const corAtual = (pers.cor ?? pal.primaria).toLowerCase();
   const revisar = post.precisa_revisao ?? [];
+  const aprovado = decisao === "aprovado";
+  const personalizado = editado || !!pers.cor || !!pers.template;
+
+  function novaArte(p: Personalizacao) {
+    setCarregandoArte(true);
+    onPers(p);
+  }
 
   async function copiar() {
     const texto = post.legendas[rede] + (rede !== "linkedin" && post.hashtags.length && !post.legendas[rede].includes("#") ? "\n\n" + post.hashtags.map((h) => "#" + h).join(" ") : "");
@@ -129,30 +94,78 @@ export function PostCard({
     }
   }
 
-  return (
-    <article className="group flex flex-col overflow-hidden rounded-3xl border border-tinta/10 bg-white transition hover:shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)]" style={{ animation: `subir .6s ${Math.min(indice, 8) * 0.06}s both` }}>
-      <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
-        <p className="text-xs text-tinta-3">
-          <span className="font-semibold text-tinta">Post {indice + 1}</span> · {NOMES_REDE[post.rede_principal]} · {NOMES_TEMPLATE[template]}
-          {post.trilho && (
-            <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${post.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
-              {post.trilho === "founder" ? "Founder" : "Empresa"}
-            </span>
-          )}
-          {post.origem_tema === "founder" && (
-            <span className="ml-1.5 inline-flex rounded-full bg-salvia px-2 py-0.5 text-[11px] font-semibold text-papel" title="Este post nasceu do que você contou">
-              {SELO_FOUNDER}
-            </span>
-          )}
-        </p>
-        {agenda && (
-          <p className="shrink-0 rounded-full bg-papel px-2.5 py-1 text-xs font-medium tabular-nums text-tinta-2">
-            {agenda.data.slice(8, 10)}/{agenda.data.slice(5, 7)} · {agenda.horario}
-          </p>
-        )}
-      </header>
+  async function paraCanva() {
+    // Abre a aba antes do download: depois de um await o navegador bloquearia a janela nova.
+    window.open(urlCanva(post.rede_principal), "_blank", "noopener,noreferrer");
+    setAvisoCanva(true);
+    for (let k = 0; k < total; k++) {
+      await onBaixar(urlArte(analise, original, { ...pers, slide: k, tamanho: "feed" }), `${post.id}${total > 1 ? `-slide-${k + 1}` : ""}.png`);
+    }
+  }
 
-      <TresLinhas post={post} />
+  function salvarEdicao() {
+    if (!rascunho) return;
+    const legendas = { ...pers.edicao?.legendas };
+    for (const [r, t] of Object.entries(rascunho.legendas) as [Rede, string][]) {
+      if (t === original.legendas[r]) delete legendas[r];
+      else legendas[r] = t;
+    }
+    const mudouGancho = rascunho.gancho !== original.gancho;
+    const mudouSlides = JSON.stringify(rascunho.slides) !== JSON.stringify(original.slides);
+    const edicao = {
+      ...(mudouGancho ? { gancho: rascunho.gancho } : {}),
+      ...(mudouSlides ? { slides: rascunho.slides } : {}),
+      ...(Object.keys(legendas).length ? { legendas } : {}),
+    };
+    const novo = { ...pers, edicao: Object.keys(edicao).length ? edicao : null };
+    // Só mostra o carregando quando a URL da arte muda (legenda não entra na arte).
+    if (urlArte(analise, original, { ...novo, slide: s, tamanho: "feed" }) !== base) setCarregandoArte(true);
+    onPers(novo);
+    setRascunho(null);
+  }
+
+  const cabecalho = (
+    <header className="flex items-center justify-between gap-3 border-b border-tinta/10 px-4 py-2.5">
+      <p className="min-w-0 text-xs text-tinta-3">
+        <span className="font-semibold text-tinta">Post {indice + 1}</span> · {NOMES_REDE[post.rede_principal]} · {NOMES_TEMPLATE[template]}
+        {post.trilho && (
+          <span className={`ml-2 inline-flex rounded-full px-2 py-0.5 text-[11px] font-semibold ${post.trilho === "founder" ? "bg-salvia/10 text-salvia" : "bg-papel-2 text-tinta-2"}`}>
+            {post.trilho === "founder" ? "Founder" : "Empresa"}
+          </span>
+        )}
+        {post.origem_tema === "founder" && <SeloFounder className="ml-1.5" />}
+        {editado && <span className="ml-1.5 inline-flex rounded-full bg-limao/60 px-2 py-0.5 text-[11px] font-semibold text-tinta">editado</span>}
+      </p>
+      {agenda && (
+        <p className="shrink-0 rounded-full bg-tinta px-2.5 py-1 text-xs font-semibold tabular-nums text-papel">
+          Postar {diaCurto(agenda.data)} · {agenda.horario}
+        </p>
+      )}
+    </header>
+  );
+
+  if (decisao === "pulado") {
+    return (
+      <article className="flex flex-col overflow-hidden rounded-3xl border border-dashed border-tinta/20 bg-papel/60">
+        {cabecalho}
+        <Recusado titulo={post.gancho} onDesfazer={() => onDecidir?.(null)} />
+      </article>
+    );
+  }
+
+  return (
+    <article
+      className={`group flex flex-col overflow-hidden rounded-3xl border bg-white transition hover:shadow-[0_30px_60px_-40px_rgba(22,19,15,.35)] ${aprovado ? "border-aprovado ring-2 ring-aprovado/60" : "border-tinta/10"}`}
+      style={{ animation: `subir .6s ${Math.min(indice, 8) * 0.06}s both` }}
+    >
+      {cabecalho}
+
+      <TresLinhas
+        enderecamento={post.enderecamento}
+        padrao={post.padrao_referencia?.nome?.trim() || nomeDoPadrao(post.padrao_inspirador)}
+        fonte={post.padrao_referencia?.fonte_url}
+        origem={post.origem_tema}
+      />
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}
@@ -222,55 +235,6 @@ export function PostCard({
         )}
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 border-b border-tinta/10 px-4 py-3">
-        <div className="flex items-center gap-1.5" role="radiogroup" aria-label="Cor principal">
-          {cores.map((c) => (
-            <button
-              key={c}
-              type="button"
-              role="radio"
-              aria-checked={corAtual === c}
-              aria-label={`Usar a cor ${c}`}
-              onClick={() => {
-                setCarregandoArte(true);
-                onPers({ ...pers, cor: c });
-              }}
-              className={`h-7 w-7 rounded-full border-2 transition ${corAtual === c ? "border-tinta scale-110" : "border-white shadow-[0_0_0_1px_rgba(0,0,0,.15)]"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta`}
-              style={{ background: c }}
-            />
-          ))}
-          <label className="relative h-7 w-7 cursor-pointer overflow-hidden rounded-full border border-dashed border-tinta/40 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-pauta" title="Outra cor">
-            <span className="absolute inset-0 flex items-center justify-center text-xs text-tinta-2">+</span>
-            <input
-              type="color"
-              value={corAtual}
-              onChange={(e) => {
-                setCarregandoArte(true);
-                onPers({ ...pers, cor: e.target.value });
-              }}
-              aria-label="Escolher outra cor"
-              className="absolute inset-0 cursor-pointer opacity-0"
-            />
-          </label>
-        </div>
-        <select
-          value={template}
-          onChange={(e) => {
-            setSlide(0);
-            setCarregandoArte(true);
-            onPers({ ...pers, template: e.target.value as TemplateId });
-          }}
-          aria-label="Modelo da arte"
-          className="ml-auto h-9 rounded-full border border-tinta/15 bg-papel px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
-        >
-          {(Object.keys(NOMES_TEMPLATE) as TemplateId[]).map((t) => (
-            <option key={t} value={t}>
-              {NOMES_TEMPLATE[t]}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
         <h3 className="font-display text-xl font-semibold leading-snug tracking-[-0.01em]">{post.gancho}</h3>
         <div className="mt-3 flex gap-1 border-b border-tinta/10" role="tablist" aria-label="Legenda por rede">
@@ -287,17 +251,115 @@ export function PostCard({
             </button>
           ))}
         </div>
-        <p className="mt-3 max-h-40 flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-tinta-2">{comLacunas(post.legendas[rede])}</p>
-        {revisar.length > 0 && (
-          <div className="mt-3 rounded-2xl border border-pauta/40 bg-pauta/5 px-3 py-2 text-xs leading-relaxed text-tinta-2">
-            <p className="font-semibold text-pauta-escura">Precisa revisar antes de postar</p>
-            <ul className="mt-1 space-y-0.5">
-              {revisar.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
+
+        {rascunho ? (
+          <div className="mt-3 space-y-3 rounded-2xl bg-papel p-3" role="group" aria-label="Customizar post">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-1.5" role="radiogroup" aria-label="Cor principal">
+                {cores.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    role="radio"
+                    aria-checked={corAtual === c}
+                    aria-label={`Usar a cor ${c}`}
+                    onClick={() => novaArte({ ...pers, cor: c })}
+                    className={`h-7 w-7 rounded-full border-2 transition ${corAtual === c ? "scale-110 border-tinta" : "border-white shadow-[0_0_0_1px_rgba(0,0,0,.15)]"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta`}
+                    style={{ background: c }}
+                  />
+                ))}
+                <label className="relative h-7 w-7 cursor-pointer overflow-hidden rounded-full border border-dashed border-tinta/40 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-pauta" title="Outra cor">
+                  <span className="absolute inset-0 flex items-center justify-center text-xs text-tinta-2">+</span>
+                  <input
+                    type="color"
+                    value={corAtual}
+                    onChange={(e) => novaArte({ ...pers, cor: e.target.value })}
+                    aria-label="Escolher outra cor"
+                    className="absolute inset-0 cursor-pointer opacity-0"
+                  />
+                </label>
+              </div>
+              <select
+                value={template}
+                onChange={(e) => {
+                  setSlide(0);
+                  novaArte({ ...pers, template: e.target.value as TemplateId });
+                }}
+                aria-label="Modelo da arte"
+                className="ml-auto h-9 rounded-full border border-tinta/15 bg-white px-3 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+              >
+                {(Object.keys(NOMES_TEMPLATE) as TemplateId[]).map((t) => (
+                  <option key={t} value={t}>
+                    {NOMES_TEMPLATE[t]}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <label className="block text-xs font-medium text-tinta-3">
+              Gancho
+              <input value={rascunho.gancho} maxLength={LIMITES_EDICAO.gancho} onChange={(e) => setRascunho({ ...rascunho, gancho: e.target.value })} className={`${CAMPO} mt-1`} />
+            </label>
+            {rascunho.slides.map((sl, k) => (
+              <fieldset key={k} className="space-y-1.5">
+                <legend className="text-xs font-medium text-tinta-3">{rascunho.slides.length > 1 ? `Slide ${k + 1}` : "Texto da arte"}</legend>
+                <input
+                  aria-label={`Título do slide ${k + 1}`}
+                  value={sl.titulo}
+                  maxLength={LIMITES_EDICAO.titulo}
+                  onChange={(e) => setRascunho({ ...rascunho, slides: rascunho.slides.map((x, j) => (j === k ? { ...x, titulo: e.target.value } : x)) })}
+                  className={CAMPO}
+                />
+                <textarea
+                  aria-label={`Texto do slide ${k + 1}`}
+                  value={sl.texto}
+                  rows={2}
+                  maxLength={LIMITES_EDICAO.texto}
+                  onChange={(e) => setRascunho({ ...rascunho, slides: rascunho.slides.map((x, j) => (j === k ? { ...x, texto: e.target.value } : x)) })}
+                  className={CAMPO}
+                />
+              </fieldset>
+            ))}
+            <label className="block text-xs font-medium text-tinta-3">
+              Legenda do {NOMES_REDE[rede]}
+              <textarea
+                value={rascunho.legendas[rede] ?? post.legendas[rede]}
+                rows={6}
+                onChange={(e) => setRascunho({ ...rascunho, legendas: { ...rascunho.legendas, [rede]: e.target.value } })}
+                className={`${CAMPO} mt-1`}
+              />
+            </label>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={salvarEdicao}
+                className="h-10 rounded-full bg-tinta px-4 text-sm font-semibold text-papel transition hover:bg-tinta-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+              >
+                Salvar
+              </button>
+              <button type="button" onClick={() => setRascunho(null)} className={BOTAO_SECUNDARIO}>
+                Cancelar
+              </button>
+              {personalizado && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSlide(0);
+                    setCarregandoArte(true);
+                    onPers({});
+                    setRascunho(null);
+                  }}
+                  className="ml-auto text-xs font-semibold text-tinta-2 underline decoration-tinta/30 underline-offset-2 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+                >
+                  Voltar ao original
+                </button>
+              )}
+            </div>
           </div>
+        ) : (
+          <p className="mt-3 max-h-40 flex-1 overflow-y-auto whitespace-pre-line text-sm leading-relaxed text-tinta-2">{comLacunas(post.legendas[rede])}</p>
         )}
+
+        <CaixaRevisar itens={revisar} />
         {post.por_que && (
           <details className="group/porque mt-3 rounded-2xl bg-papel px-3 py-2 text-xs leading-relaxed text-tinta-2">
             <summary className="cursor-pointer list-none font-semibold text-tinta [&::-webkit-details-marker]:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta">
@@ -306,18 +368,33 @@ export function PostCard({
             <p className="mt-1">{post.por_que}</p>
           </details>
         )}
-        <div className="mt-4 grid grid-cols-2 gap-2">
-          <button type="button" onClick={copiar} className="h-10 rounded-full border border-tinta/20 text-sm font-semibold transition hover:border-tinta/40 hover:bg-papel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta">
-            {copiado ? <span className="text-aprovado">Copiado ✓</span> : "Copiar legenda"}
-          </button>
+
+        {onDecidir && <AprovarRecusar decisao={decisao} onDecidir={onDecidir} />}
+        {aprovado && onResultado && <JaPostei atual={resultado} onSalvar={onResultado} />}
+        <div className="mt-2 grid grid-cols-2 gap-2">
           <button
             type="button"
-            onClick={() => onBaixar(base, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)}
-            className="h-10 rounded-full bg-tinta text-sm font-semibold text-papel transition hover:bg-tinta-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+            aria-expanded={!!rascunho}
+            onClick={() => setRascunho(rascunho ? null : { gancho: post.gancho, slides: post.slides.map((x) => ({ ...x })), legendas: {} })}
+            className={BOTAO_SECUNDARIO}
           >
+            Customizar
+          </button>
+          <button type="button" onClick={paraCanva} className={BOTAO_SECUNDARIO} title="Baixa a arte e abre o Canva em outra aba">
+            Editar no Canva
+          </button>
+          <button type="button" onClick={copiar} className={BOTAO_SECUNDARIO}>
+            {copiado ? <span className="text-aprovado">Copiado ✓</span> : "Copiar legenda"}
+          </button>
+          <button type="button" onClick={() => onBaixar(base, `${post.id}${total > 1 ? `-slide-${s + 1}` : ""}.png`)} className={BOTAO_SECUNDARIO}>
             Baixar arte
           </button>
         </div>
+        {avisoCanva && (
+          <p className="mt-2 text-xs leading-snug text-tinta-2" role="status">
+            A arte foi baixada. No Canva, arraste o arquivo para editar.
+          </p>
+        )}
       </div>
     </article>
   );

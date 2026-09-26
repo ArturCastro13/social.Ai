@@ -42,3 +42,34 @@ export function nomeDoPadrao(id: string | undefined): string | undefined {
 export function ehLink(url: string | undefined): url is string {
   return !!url && /^https?:\/\//i.test(url);
 }
+
+/** Redes dos roteiros de vídeo (o contrato inclui TikTok e YouTube, que não têm post estático). */
+export const NOMES_REDE_VIDEO: Record<"instagram" | "linkedin" | "tiktok" | "youtube", string> = {
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  tiktok: "TikTok",
+  youtube: "YouTube",
+};
+
+/** 45 vira "45s"; 90 vira "1min30s". */
+export function duracaoVideo(seg: number | undefined): string {
+  const s = Math.max(0, Math.round(Number(seg) || 0));
+  if (!s) return "";
+  if (s < 60) return `${s}s`;
+  const m = Math.floor(s / 60);
+  const r = s % 60;
+  return r ? `${m}min${String(r).padStart(2, "0")}s` : `${m}min`;
+}
+
+/** "2026-09-28" vira "28/09". */
+export function ddmm(iso: string): string {
+  return `${iso.slice(8, 10)}/${iso.slice(5, 7)}`;
+}
+
+const DIAS_CURTOS = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
+
+/** "2026-09-28" vira "seg 28/09" (dia da semana calculado da data, não do texto do motor). */
+export function diaCurto(iso: string): string {
+  const d = new Date(iso + "T12:00:00");
+  return Number.isNaN(d.getTime()) ? iso : `${DIAS_CURTOS[d.getDay()]} ${ddmm(iso)}`;
+}

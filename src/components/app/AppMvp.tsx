@@ -5,20 +5,13 @@ import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { Carregando } from "@/components/estudio/Carregando";
 import { Formulario, type DadosFormulario } from "@/components/estudio/Formulario";
-import { Painel } from "@/components/estudio/Painel";
+import { Painel, secoesResultado } from "@/components/estudio/Painel";
 import { useGeracao } from "@/components/estudio/useGeracao";
 import { TelaAjustes } from "@/components/onboarding/TelaAjustes";
 import type { Preferencias } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 import { urlDoApp } from "@/lib/client/parametros";
 
-const SECOES = [
-  { id: "semana", nome: "Semana" },
-  { id: "posts", nome: "Posts" },
-  { id: "ideias", nome: "Ideias" },
-  { id: "metricas", nome: "Métricas" },
-  { id: "analise", nome: "Análise" },
-];
 
 /**
  * Página do MVP em camadas: tela 1 (site, para quem, @), tela 2 (ajustes já preenchidos, com a tela 3 opcional)
@@ -90,7 +83,7 @@ export function AppMvp({
         </div>
         {pronto && (
           <nav aria-label="Seções do resultado" className="mx-auto flex w-full max-w-6xl gap-1 overflow-x-auto px-4 pb-3 sm:px-6">
-            {SECOES.map((s) => (
+            {secoesResultado(g.analise!).map((s) => (
               <a
                 key={s.id}
                 href={`#${s.id}`}
