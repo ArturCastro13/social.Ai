@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { HOST_SEM_SITE } from "@/lib/brand/sem-site";
 import type { CSSProperties, ReactNode } from "react";
 import type { BrandProfile, PostGerado, TemplateId } from "@/lib/types";
 import type { Tema } from "./tema";
@@ -66,8 +67,16 @@ export function Kern({ t, fs }: { t: string; fs: number }) {
 const col = (extra: CSSProperties = {}): CSSProperties => ({ display: "flex", flexDirection: "column", ...extra });
 const row = (extra: CSSProperties = {}): CSSProperties => ({ display: "flex", flexDirection: "row", ...extra });
 
+/** Domínio para mostrar na arte. Marca sem site tem só um endereço interno, que nunca aparece. */
+function dominioVisivel(brand: BrandProfile): string {
+  return brand.dominio.includes(HOST_SEM_SITE) ? "" : brand.dominio;
+}
+
+/** @ da marca inventado a partir do nome, só quando não há @ nem domínio de verdade. */
+const arrobaDoNome = (brand: BrandProfile) => "@" + limpar(brand.nome).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+
 function handleDe(brand: BrandProfile, post: PostGerado) {
-  return brand.handles[post.rede_principal] ?? brand.handles.instagram ?? brand.handles.linkedin ?? brand.dominio;
+  return brand.handles[post.rede_principal] ?? brand.handles.instagram ?? brand.handles.linkedin ?? (dominioVisivel(brand) || limpar(brand.nome));
 }
 
 function Marca({ p, cor, fundoClaro, tamanho = 1 }: { p: ArteProps; cor: string; fundoClaro: boolean; tamanho?: number }) {
@@ -308,7 +317,7 @@ function PrintX(p: ArteProps) {
   const texto = limpar(post.slides[0]?.texto || post.gancho);
   const cartaoW = paisagem ? w * 0.62 : w - 150 * u;
   const fs = caber(texto, cartaoW - 120 * u, h * (paisagem ? 0.42 : 0.4), 58 * u, 30 * u, 1.32, 0.5);
-  const handle = brand.handles.x ?? brand.handles.instagram ?? "@" + brand.dominio.split(".")[0];
+  const handle = brand.handles.x ?? brand.handles.instagram ?? (dominioVisivel(brand) ? "@" + brand.dominio.split(".")[0] : arrobaDoNome(brand));
   return (
     <Moldura p={p} bg={tema.primaria} style={{ alignItems: "center", justifyContent: "center" }}>
       <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.25 }} />
@@ -328,8 +337,8 @@ function PrintX(p: ArteProps) {
           </div>
         </div>
         <div style={{ fontFamily: "Corpo", fontSize: fs, lineHeight: 1.32, color: "#0f1419" }}>{texto}</div>
-        <div style={{ height: 2 * u, background: "#eff3f4", width: "100%" }} />
-        <div style={{ fontFamily: "Corpo", fontSize: 28 * u, color: "#536471" }}>{brand.dominio}</div>
+        {dominioVisivel(brand) ? <div style={{ height: 2 * u, background: "#eff3f4", width: "100%" }} /> : null}
+        {dominioVisivel(brand) ? <div style={{ fontFamily: "Corpo", fontSize: 28 * u, color: "#536471" }}>{brand.dominio}</div> : null}
       </div>
     </Moldura>
   );
