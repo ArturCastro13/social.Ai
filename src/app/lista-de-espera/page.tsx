@@ -22,21 +22,18 @@ export default function ListaDeEspera() {
   return <div className="waitlist-page">
     <a href="#conteudo" className="sr-only focus:not-sr-only focus:p-4">Pular para o conteúdo</a>
     <header className="sticky top-0 z-40 border-b border-tinta/[0.06] bg-papel/95 backdrop-blur-md">
-      <div className={`${container} flex h-18 items-center justify-between gap-4`}>
-        <a href="#topo" aria-label="social.Ai início" className="font-display text-xl font-semibold tracking-tight">social.Ai</a>
-        <nav aria-label="Seções" className="hidden gap-7 text-sm text-tinta-2 md:flex"><a href="#como-funciona">Como funciona</a><a href="#exemplos-espera">Exemplos</a><a href="#perguntas">Perguntas</a></nav>
-        <a href="#inscricao" className="rounded-full bg-tinta px-4 py-3 text-sm font-medium text-papel">Entrar na lista</a>
+      <div className={`${container} flex h-16 items-center justify-between gap-4 sm:h-18`}>
+        <a href="#topo" aria-label="social.Ai início" className="inline-flex min-h-11 items-center font-display text-xl font-semibold tracking-tight">social.Ai</a>
+        <nav aria-label="Seções" className="hidden gap-7 text-sm text-tinta-2 md:flex">{[["#como-funciona", "Como funciona"], ["#exemplos-espera", "Exemplos"], ["#perguntas", "Perguntas"]].map(([href, texto]) => <a key={href} href={href} className="inline-flex min-h-11 items-center transition-colors hover:text-tinta">{texto}</a>)}</nav>
+        <a href="#inscricao" className="inline-flex min-h-11 items-center rounded-full bg-tinta px-5 text-sm font-medium text-papel transition-colors hover:bg-tinta-2">Entrar na lista</a>
       </div>
     </header>
     <main id="conteudo">
-      <section id="topo" className={`${container} grid items-center gap-10 pb-14 pt-9 sm:py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16`}>
-        <div>
-          <p className="mb-5 flex items-center gap-2 text-sm text-tinta-2"><span aria-hidden className="h-2 w-2 rounded-full bg-salvia" />Vem aí. Entre na lista de espera.</p>
-          <h1 className="font-display text-[2.6rem] font-semibold leading-[1.03] tracking-[-0.045em] sm:text-[3.6rem]">Você sabe o que o seu cliente precisa ouvir.<em className="mt-2 block font-serif text-[1.13em] font-normal tracking-[-0.025em] text-pauta">Falta tempo para postar.</em></h1>
-          <p className="mt-6 max-w-lg text-lg leading-relaxed text-tinta-2">As dúvidas dos clientes já rendem bons posts. Estamos criando o social.Ai para ajudar você a colocar essas ideias nas redes, <span className="sublinhado-pauta">com a cara da sua empresa.</span></p>
-          <FormularioEspera />
-        </div>
-        <div className="min-w-0 lg:rotate-2"><ExemplosEspera compacto /></div>
+      <section id="topo" className={`${container} pb-12 pt-6 sm:pb-20 sm:pt-16 sm:text-center lg:pt-20`}>
+        <p className="mb-3 flex items-center gap-2 text-sm text-tinta-2 sm:mb-5 sm:justify-center"><span aria-hidden className="h-2 w-2 rounded-full bg-salvia" />Vem aí. Entre na lista de espera.</p>
+        <h1 className="mx-auto max-w-4xl font-display text-[2.25rem] font-semibold leading-[1.04] tracking-[-0.045em] sm:text-[3.6rem] lg:text-[4.25rem]">Você sabe o que o seu cliente precisa ouvir.<em className="mt-1 block font-serif text-[1.1em] font-normal tracking-[-0.025em] text-pauta sm:mt-2">Falta tempo para postar.</em></h1>
+        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-tinta-2 sm:mt-6 sm:text-balance sm:text-lg">As dúvidas dos clientes já rendem bons posts. Estamos criando o social.Ai para ajudar você a colocar essas ideias nas redes, <span className="sublinhado-pauta">com a cara da sua empresa.</span></p>
+        <div className="mx-auto max-w-xl sm:text-left"><FormularioEspera /></div>
       </section>
       <section className={`${container} border-t border-tinta/10 py-14 sm:py-20`}>
         <div className="mb-9 grid gap-5 lg:grid-cols-2 lg:gap-16">
@@ -60,12 +57,12 @@ export default function ListaDeEspera() {
         <h2 className={`${heading} mb-8 max-w-2xl`}>Seu post não precisa<br />ter cara de qualquer marca.</h2>
         <ExemplosEspera />
       </section>
-      <section id="perguntas" className={`${container} grid scroll-mt-20 gap-8 border-t border-tinta/10 py-14 sm:py-20 lg:grid-cols-[0.8fr_1.2fr]`}>
+      <section id="perguntas" className={`${container} grid scroll-mt-20 gap-6 border-t border-tinta/10 py-14 sm:py-20 lg:grid-cols-[0.8fr_1.2fr]`}>
         <h2 className={heading}>Ficou alguma dúvida?</h2>
-        <div className="divide-y divide-tinta/15">{perguntas.map(([pergunta, resposta]) => <details key={pergunta} className="py-5 first:pt-0"><summary className="cursor-pointer text-lg font-medium">{pergunta}</summary><p className="mt-3 leading-relaxed text-tinta-2">{resposta}</p></details>)}</div>
+        <div className="divide-y divide-tinta/15 border-y border-tinta/15 lg:border-t-0">{perguntas.map(([pergunta, resposta]) => <details key={pergunta} className="group"><summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-4 text-lg font-medium [&::-webkit-details-marker]:hidden">{pergunta}<span aria-hidden className="relative h-4 w-4 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-4 before:-translate-y-1/2 before:bg-tinta after:absolute after:left-1/2 after:top-0 after:h-4 after:w-0.5 after:-translate-x-1/2 after:bg-tinta group-open:after:hidden" /></summary><p className="max-w-[65ch] pb-5 leading-relaxed text-tinta-2">{resposta}</p></details>)}</div>
       </section>
-      <section className={`${container} pb-14 sm:pb-20`}><div className="rounded-[28px] bg-[#ebe4d6] p-7 sm:p-12"><h2 className={`${heading} max-w-2xl`}>Seu próximo post já está na sua cabeça.</h2><p className="mt-4 text-lg text-tinta-2">Vamos ajudar a tirar do papel. Entre na lista para saber quando começar.</p><a href="#inscricao" className="mt-7 inline-flex min-h-13 items-center rounded-full bg-pauta px-7 font-semibold text-tinta hover:bg-pauta-escura hover:text-white">Quero entrar na lista</a></div></section>
+      <section className={`${container} pb-14 sm:pb-20`}><div className="rounded-[28px] bg-papel-2 p-6 sm:p-12"><h2 className={`${heading} max-w-2xl`}>Seu próximo post já está na sua cabeça.</h2><p className="mt-4 max-w-xl text-base leading-relaxed text-tinta-2 sm:text-lg">Vamos ajudar a tirar do papel. Entre na lista para saber quando começar.</p><a href="#inscricao" className="mt-6 inline-flex min-h-13 w-full items-center justify-center rounded-full bg-pauta px-7 text-[1.1875rem] font-bold text-white transition-colors hover:bg-pauta-escura sm:mt-7 sm:w-auto">Quero entrar na lista</a></div></section>
     </main>
-    <footer className={`${container} flex flex-wrap justify-between gap-3 border-t border-tinta/10 py-7 text-sm text-tinta-3`}><span className="font-display font-semibold text-tinta">social.Ai</span><span>Feito para quem está construindo um negócio.</span><a href="#topo">Voltar ao topo</a></footer>
+    <footer className={`${container} flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-t border-tinta/10 py-5 text-sm text-tinta-3 sm:py-7`}><span className="font-display font-semibold text-tinta">social.Ai</span><span>Feito para quem está construindo um negócio.</span><a href="#topo" className="inline-flex min-h-11 items-center underline-offset-4 hover:text-tinta hover:underline">Voltar ao topo</a></footer>
   </div>;
 }

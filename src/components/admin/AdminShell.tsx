@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { PortaoAdmin } from "./PortaoAdmin";
 
 export function AdminShell({ titulo, subtitulo, children }: { titulo: string; subtitulo: string; children: ReactNode }) {
   return (
@@ -17,27 +18,14 @@ export function AdminShell({ titulo, subtitulo, children }: { titulo: string; su
         </div>
       </header>
       <main className="mx-auto max-w-6xl px-4 pb-24 pt-8">
-        <p className="retranca text-pauta">Área interna do time</p>
-        <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{titulo}</h1>
-        <p className="mt-2 max-w-2xl text-tinta-2">{subtitulo}</p>
-        <div className="mt-8">{children}</div>
+        <PortaoAdmin>
+          <p className="retranca text-pauta">Área interna do time</p>
+          <h1 className="mt-2 font-serif text-4xl leading-tight sm:text-5xl">{titulo}</h1>
+          <p className="mt-2 max-w-2xl text-tinta-2">{subtitulo}</p>
+          <div className="mt-8">{children}</div>
+        </PortaoAdmin>
       </main>
     </div>
-  );
-}
-
-export function SenhaAdmin({ senha, setSenha }: { senha: string; setSenha: (s: string) => void }) {
-  return (
-    <label className="retranca flex items-center gap-2 text-tinta-3">
-      Senha
-      <input
-        type="password"
-        value={senha}
-        onChange={(e) => setSenha(e.target.value)}
-        placeholder="se houver"
-        className="w-28 border-b border-tinta/30 bg-transparent px-1 py-1 font-mono text-sm normal-case tracking-normal text-tinta outline-none focus:border-pauta"
-      />
-    </label>
   );
 }
 

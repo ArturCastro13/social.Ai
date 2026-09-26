@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AvisoTemporario, SenhaAdmin } from "@/components/admin/AdminShell";
+import { AvisoTemporario } from "@/components/admin/AdminShell";
 import { useAdmin } from "@/components/admin/useAdmin";
 import { JA_TENTOU, QUEM_CUIDA, type NumerosPitch } from "@/lib/entrevistas";
 import type { Entrevista } from "@/lib/store";
@@ -26,7 +26,7 @@ const fmt = (n: number | null, casas = 0) => (n === null ? "–" : n.toLocaleStr
 const campo = "h-12 w-full border border-tinta/25 bg-white px-3 text-base outline-none focus:border-pauta";
 
 export function EntrevistasAdmin() {
-  const { senha, setSenha, adminFetch } = useAdmin();
+  const { adminFetch } = useAdmin();
   const [dados, setDados] = useState<{ entrevistas: Entrevista[]; numeros: NumerosPitch; armazenamento: string } | null>(null);
   const [f, setF] = useState<Entrevista>(vazia);
   const [msg, setMsg] = useState("");
@@ -103,7 +103,6 @@ export function EntrevistasAdmin() {
           {dados ? `${dados.entrevistas.length} entrevistas registradas` : "Carregando..."}
           {dados && <span className="retranca ml-2 text-tinta-3">salvando em: {dados.armazenamento === "local" ? "arquivo local" : "Supabase"}</span>}
         </p>
-        <SenhaAdmin senha={senha} setSenha={setSenha} />
       </div>
 
       <AvisoTemporario armazenamento={dados?.armazenamento ?? ""} />

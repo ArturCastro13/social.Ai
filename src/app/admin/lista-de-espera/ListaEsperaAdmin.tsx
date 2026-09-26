@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { SenhaAdmin } from "@/components/admin/AdminShell";
 import { useAdmin } from "@/components/admin/useAdmin";
 import { dataArquivo, montarCsv } from "@/lib/csv";
 import { COLUNAS_CSV, filtrarEspera, resumirEspera, type InscricaoEspera } from "@/lib/lista-espera";
@@ -14,7 +13,7 @@ const quando = (iso: string) => {
 };
 
 export function ListaEsperaAdmin() {
-  const { senha, setSenha, adminFetch } = useAdmin();
+  const { adminFetch } = useAdmin();
   const [dados, setDados] = useState<Dados | null>(null);
   const [msg, setMsg] = useState("");
   const [busca, setBusca] = useState("");
@@ -65,7 +64,6 @@ export function ListaEsperaAdmin() {
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-tinta-2">{dados ? `${dados.total} inscrições` : msg ? "" : "Carregando..."}</p>
-        <SenhaAdmin senha={senha} setSenha={setSenha} />
       </div>
 
       {dados && !dados.persistente && (

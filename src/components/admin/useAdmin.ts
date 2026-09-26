@@ -1,22 +1,22 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
-const CHAVE = "socialai_admin_senha";
+export const CHAVE_SENHA = "socialai_admin_senha";
+const CHAVE = CHAVE_SENHA;
 
 /** fetch com a senha de admin (guardada no navegador) no header. */
 export function useAdmin() {
-  const [senha, setSenhaState] = useState("");
-  useEffect(() => {
-    // Lido depois da hidratação para não divergir do HTML do servidor.
-    let salva = "";
+  // As páginas do admin só montam depois da tela de senha, que roda no navegador: dá para ler a senha salva
+  // já no primeiro render, sem uma primeira busca com senha vazia.
+  const [senha, setSenhaState] = useState(() => {
+    if (typeof window === "undefined") return "";
     try {
-      salva = localStorage.getItem(CHAVE) ?? "";
+      return localStorage.getItem(CHAVE) ?? "";
     } catch {
-      /* navegação privada */
+      return "";
     }
-    if (salva) queueMicrotask(() => setSenhaState(salva));
-  }, []);
+  });
   const setSenha = (s: string) => {
     setSenhaState(s);
     try {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AvisoTemporario, SenhaAdmin } from "@/components/admin/AdminShell";
+import { AvisoTemporario } from "@/components/admin/AdminShell";
 import { useAdmin } from "@/components/admin/useAdmin";
 import { NICHOS, type Nicho, type PadraoViral, type ViralItem } from "@/lib/types";
 
@@ -30,7 +30,7 @@ const campo =
   "w-full border border-tinta/20 bg-papel px-3 py-2 text-sm outline-none transition focus:border-pauta focus:bg-white";
 
 export function ViraisAdmin() {
-  const { senha, setSenha, adminFetch } = useAdmin();
+  const { adminFetch } = useAdmin();
   const [itens, setItens] = useState<ViralItem[]>([]);
   const [catalogo, setCatalogo] = useState<PadraoViral[]>([]);
   const [armazenamento, setArmazenamento] = useState("");
@@ -122,7 +122,6 @@ export function ViraisAdmin() {
             {armazenamento && <span className="retranca ml-2 text-tinta-3">salvando em: {armazenamento === "local" ? "arquivo do repositório" : "Supabase"}</span>}
           </p>
           <div className="flex items-center gap-4">
-            <SenhaAdmin senha={senha} setSenha={setSenha} />
             <button onClick={novo} className="bg-pauta px-4 py-2 text-sm font-semibold text-papel transition hover:bg-pauta-escura">
               + Novo item
             </button>
