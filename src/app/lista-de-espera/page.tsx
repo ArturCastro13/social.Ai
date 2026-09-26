@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { FormularioEspera } from "@/components/landing/FormularioEspera";
 import { ExemplosEspera } from "@/components/landing/ExemplosEspera";
 import { PassosEspera } from "@/components/landing/PassosEspera";
+import { VideoDemo } from "@/components/landing/VideoDemo";
 
 export const metadata: Metadata = {
   title: "social.Ai | Lista de espera",
@@ -42,7 +43,7 @@ export default function ListaDeEspera() {
           <h2 className={heading}>Falta tempo.<br /><span className="font-serif font-normal italic text-pauta">Não falta assunto.</span></h2>
           <p className="max-w-lg text-lg leading-relaxed text-tinta-2">A pergunta que chegou no WhatsApp. A objeção na reunião de vendas. A história de um cliente. <strong className="font-semibold text-tinta">O próximo post pode estar numa conversa de hoje.</strong></p>
         </div>
-        <figure><video src="/video/demo.mp4" poster="/video/demo-poster.jpg" controls playsInline muted preload="none" width={1280} height={720} aria-label="Demonstração do fluxo: leitura da marca e aprovação de sugestões de posts" className="w-full rounded-2xl border border-tinta/10 bg-white sm:rounded-[28px]" /><figcaption className="mt-4 text-sm leading-relaxed text-tinta-3">Dê o play: uma prévia do fluxo em 12 segundos. O produto ainda está em desenvolvimento.</figcaption></figure>
+        <figure><div className="overflow-hidden rounded-2xl border border-tinta/10 bg-white sm:rounded-[28px]"><VideoDemo /></div><figcaption className="mt-4 text-sm leading-relaxed text-tinta-3">Uma prévia do fluxo em 12 segundos. O produto ainda está em desenvolvimento.</figcaption></figure>
       </section>
       <section id="como-funciona" className="scroll-mt-20 bg-white">
         <div className={`${container} py-14 sm:py-20`}>

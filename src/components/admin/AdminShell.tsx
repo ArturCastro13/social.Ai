@@ -9,9 +9,10 @@ export function AdminShell({ titulo, subtitulo, children }: { titulo: string; su
           <Link href="/" className="font-serif text-2xl italic leading-none">
             social<span className="text-pauta">.</span>Ai
           </Link>
-          <nav className="retranca flex gap-4 text-tinta-3">
+          <nav className="retranca flex flex-wrap justify-end gap-x-4 gap-y-1 text-tinta-3">
             <Link href="/admin/virais" className="hover:text-pauta">Virais</Link>
             <Link href="/admin/entrevistas" className="hover:text-pauta">Entrevistas</Link>
+            <Link href="/admin/lista-de-espera" className="hover:text-pauta">Lista de espera</Link>
           </nav>
         </div>
       </header>

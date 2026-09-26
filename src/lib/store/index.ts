@@ -15,6 +15,12 @@ export interface Lead {
   origem?: string;
 }
 
+/** Lead como volta do banco: com a data de cadastro. */
+export type LeadSalvo = Lead & { criado_em: string };
+
+/** Teto de leitura de leads. Folga grande para a lista de espera; paginar se passar disso. */
+const MAX_LEADS = 5000;
+
 export interface RespostaValidacao {
   email?: string | null;
   analise_id?: string | null;
@@ -46,6 +52,8 @@ export interface Store {
   contarUso(email: string): Promise<number>;
   registrarUso(email: string, url: string): Promise<void>;
   salvarLead(l: Lead): Promise<void>;
+  /** Leads mais recentes primeiro. Com origem, só os daquela origem. */
+  listarLeads(origem?: string): Promise<LeadSalvo[]>;
   salvarValidacao(r: RespostaValidacao): Promise<void>;
   listarValidacoes(): Promise<(RespostaValidacao & { criado_em: string })[]>;
   listarEntrevistas(): Promise<Entrevista[]>;
@@ -98,6 +106,11 @@ function supabaseStore(client: SupabaseClient): Store {
     },
     async salvarLead(l) {
       ok(await client.from("leads").insert({ ...l, email: l.email.toLowerCase() }));
+    },
+    async listarLeads(origem) {
+      let q = client.from("leads").select("email, nome, empresa, url, analise_id, plano, origem, criado_em");
+      if (origem) q = q.eq("origem", origem);
+      return (ok(await q.order("criado_em", { ascending: false }).limit(MAX_LEADS)) ?? []) as LeadSalvo[];
     },
     async salvarValidacao(r) {
       ok(await client.from("validacao").insert(r));
@@ -205,6 +218,12 @@ function localStore(): Store {
       const todos = await ler<Lead & { criado_em: string }>("leads");
       todos.push({ ...l, email: l.email.toLowerCase(), criado_em: agora() });
       await gravar("leads", todos);
+    },
+    async listarLeads(origem) {
+      return (await ler<LeadSalvo>("leads"))
+        .filter((l) => !origem || l.origem === origem)
+        .sort((a, b) => (b.criado_em ?? "").localeCompare(a.criado_em ?? ""))
+        .slice(0, MAX_LEADS);
     },
     async salvarValidacao(r) {
       const todos = await ler<RespostaValidacao & { criado_em: string }>("validacao");
