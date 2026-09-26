@@ -16,6 +16,7 @@ export const extracaoSchema = z.object({
 });
 export const materialSchema = extracaoSchema.extend({
   id: z.string().min(1).max(80), nome: z.string().trim().min(1).max(160), origem: origemMaterialSchema,
+  texto_manual: z.string().trim().min(1).max(20_000).optional(),
 });
 export const materiaisSchema = z.array(materialSchema).max(MAX_MATERIAIS).refine(
   m => new Set(m.map(x => x.id)).size === m.length, "Há materiais repetidos.",
