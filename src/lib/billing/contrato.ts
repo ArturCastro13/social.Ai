@@ -23,7 +23,7 @@ export interface StripeGateway {
 export type CustomerRow = { workspaceId: string; idempotencyKey: string; customerId: string | null; firstRequestedAt: string; leaseToken: string | null; leaseUntil: string | null; recoveryRequired: boolean };
 export type AttemptRow = { id: string; workspaceId: string; draftId: string; draftVersion: number; customerId: string; idempotencyKey: string; firstRequestedAt: string; leaseToken: string | null; leaseUntil: string | null; sessionId: string | null; state: "pending" | "open" | "closed" | "operator_required"; frequencyState: "pending" | "ok" | "denied"; input: CheckoutInput };
 export type Claim<T> = { row: T; claimed: boolean; created: boolean };
-export type AttemptClaim = Claim<AttemptRow> & { draftCurrent: boolean };
+export type AttemptClaim = Claim<AttemptRow> & { draftCurrent: boolean; requestedCurrent: boolean };
 export interface BillingRepository {
   claimCustomer(scope: Scope, seed: { key: string; token: string }): Promise<Claim<CustomerRow>>;
   saveCustomer(scope: Scope, token: string, id: string): Promise<boolean>;

@@ -35,6 +35,25 @@ describe("checkout sandbox recuperável", () => {
     expect(h.sessions()).toHaveLength(1);
   });
 
+  it("troca Checkout aberto do rascunho A por um rascunho B válido", async () => {
+    const h = createBillingHarness();
+    const first = await h.start();
+    const otherDraftId = h.createDraft();
+    const second = await h.startDraft(otherDraftId);
+    expect(first.kind).toBe("checkout");
+    expect(second.kind).toBe("checkout");
+    expect(h.sessions().map(s => s.status)).toEqual(["expired", "open"]);
+    expect(h.getAttempt()?.draftId).toBe(otherDraftId);
+  });
+
+  it("rascunho B inexistente não expira Checkout A ainda válido", async () => {
+    const h = createBillingHarness();
+    const first = await h.start();
+    await expect(h.startDraft(crypto.randomUUID())).rejects.toMatchObject({ code: "invalid_draft" });
+    expect(h.sessions().map(s => s.status)).toEqual(["open"]);
+    expect(await h.start()).toEqual(first);
+  });
+
   it("não devolve URL de sessão que Stripe manteve aberta após tentar expirar", async () => {
     const h = createBillingHarness();
     await h.start();

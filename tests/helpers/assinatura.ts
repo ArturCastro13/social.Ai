@@ -38,7 +38,7 @@ export function createWorkspaceHarness() {
 export function createBillingHarness() {
   const scope: Scope = { userId: randomUUID(), workspaceId: randomUUID() };
   const draftId = randomUUID();
-  let draftVersion = 1;
+  const draftVersions = new Map<string, number>([[draftId, 1]]);
   let time = new Date("2026-09-27T12:00:00.000Z");
   let customer: CustomerRow | null = null;
   let attempt: AttemptRow | null = null;
@@ -74,14 +74,15 @@ export function createBillingHarness() {
       if (hold) return { operatorHold: true };
       let created = false;
       if (!attempt || attempt.state === "closed") {
-        if (id !== draftId || version !== draftVersion) return { invalidDraft: true };
+        if (version !== draftVersions.get(id)) return { invalidDraft: true };
         attempt = { id: seed.id, workspaceId: scope.workspaceId, draftId: id, draftVersion: version, customerId, idempotencyKey: seed.key, firstRequestedAt: time.toISOString(), leaseToken: seed.token, leaseUntil: new Date(time.getTime() + 20_000).toISOString(), sessionId: null, state: "pending", frequencyState: "pending", input: seed.input };
         created = true;
       } else if (!attempt.leaseToken || new Date(attempt.leaseUntil ?? 0) < time) {
         attempt.leaseToken = seed.token;
         attempt.leaseUntil = new Date(time.getTime() + 20_000).toISOString();
       }
-      return { row: { ...attempt }, claimed: attempt.leaseToken === seed.token, created, draftCurrent: attempt.draftVersion === draftVersion };
+      return { row: { ...attempt }, claimed: attempt.leaseToken === seed.token, created,
+        draftCurrent: attempt.draftVersion === draftVersions.get(attempt.draftId), requestedCurrent: version === draftVersions.get(id) };
     },
     async markFrequency(_s, id, token, ok) { if (!attempt || attempt.id !== id || attempt.leaseToken !== token) return false; attempt.frequencyState = ok ? "ok" : "denied"; if (!ok) attempt.state = "closed"; return true; },
     async saveSession(_s, id, token, sessionId) { maybeFail("checkout_session"); if (!attempt || attempt.id !== id || attempt.leaseToken !== token) return false; attempt.sessionId = sessionId; attempt.state = "open"; return true; },
@@ -114,5 +115,8 @@ export function createBillingHarness() {
   };
   const start = createCheckoutService({ repository: repo, gateway, config, frequency: async () => { frequencyCount++; }, now: () => time, pause: async () => { await new Promise<void>(resolve => setTimeout(resolve, 1)); } });
   const portal = createPortalService(repo, gateway, config);
-  return { scope, draftId, start: (s: Scope = scope, version = draftVersion) => start(s, { draftId, draftVersion: version }), portal, sessions: () => [...remoteSessions.values()], failNextWrite: (name: string) => { failWrite = name; }, frequencyCount: () => frequencyCount, advanceHours: (hours: number) => { time = new Date(time.getTime() + hours * 3_600_000); }, changeDraft: () => { draftVersion++; }, keepSessionOpenOnExpire: () => { expireRemainsOpen = true; }, setSubscriptions: (rows: RemoteSubscription[]) => { remoteSubscriptions = rows; }, getAttempt: () => attempt, getCustomer: () => customer, tamperSession: (f: (s: RemoteCheckout) => void) => { for (const s of remoteSessions.values()) f(s); }, holdReason: () => hold };
+  return { scope, draftId, start: (s: Scope = scope, version = draftVersions.get(draftId) ?? 1) => start(s, { draftId, draftVersion: version }),
+    startDraft: (id: string, version = draftVersions.get(id) ?? 1) => start(scope, { draftId: id, draftVersion: version }),
+    createDraft: () => { const id = randomUUID(); draftVersions.set(id, 1); return id; },
+    portal, sessions: () => [...remoteSessions.values()], failNextWrite: (name: string) => { failWrite = name; }, frequencyCount: () => frequencyCount, advanceHours: (hours: number) => { time = new Date(time.getTime() + hours * 3_600_000); }, changeDraft: () => { draftVersions.set(draftId, (draftVersions.get(draftId) ?? 0) + 1); }, keepSessionOpenOnExpire: () => { expireRemainsOpen = true; }, setSubscriptions: (rows: RemoteSubscription[]) => { remoteSubscriptions = rows; }, getAttempt: () => attempt, getCustomer: () => customer, tamperSession: (f: (s: RemoteCheckout) => void) => { for (const s of remoteSessions.values()) f(s); }, holdReason: () => hold };
 }

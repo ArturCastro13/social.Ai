@@ -53,7 +53,7 @@ create function public.billing_checkout_step(
   p_customer_id text default null, p_session_id text default null,
   p_input jsonb default null, p_reason text default null
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
-declare c public.billing_customers%rowtype; a public.checkout_attempts%rowtype; is_new boolean := false; valid_draft boolean;
+declare c public.billing_customers%rowtype; a public.checkout_attempts%rowtype; is_new boolean := false; valid_draft boolean; valid_requested boolean;
 begin
   perform 1 from public.workspaces w where w.id = p_workspace_id and w.owner_user_id = p_actor_user_id for update;
   if not found then raise exception 'workspace unavailable' using errcode = '28000'; end if;
@@ -106,8 +106,14 @@ begin
         select 1 from public.drafts d where d.id=a.draft_id and d.workspace_id=p_workspace_id and d.version=a.draft_version
       ) into valid_draft;
     else valid_draft := false; end if;
+    perform 1 from public.drafts d where d.id=p_draft_id and d.workspace_id=p_workspace_id for update;
+    if found then
+      select public.draft_snapshot_usable(p_actor_user_id,p_draft_id,p_draft_version) and exists(
+        select 1 from public.drafts d where d.id=p_draft_id and d.workspace_id=p_workspace_id and d.version=p_draft_version
+      ) into valid_requested;
+    else valid_requested := false; end if;
     return pg_catalog.jsonb_build_object('row',pg_catalog.to_jsonb(a),'claimed',a.lease_token=p_token,'created',is_new,
-      'draft_current',coalesce(valid_draft,false));
+      'draft_current',coalesce(valid_draft,false),'requested_current',coalesce(valid_requested,false));
   elsif p_action = 'mark_frequency' then
     update public.checkout_attempts set frequency_state=case when p_reason='ok' then 'ok' else 'denied' end,
       state=case when p_reason='ok' then state else 'closed' end

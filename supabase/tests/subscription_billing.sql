@@ -23,6 +23,7 @@ do $$ declare r jsonb; w uuid := current_setting('test.billing_workspace')::uuid
   rival uuid := '22222222-2222-4222-8222-222222222222';
   attempt uuid := '33333333-3333-4333-8333-333333333333';
   draft uuid := current_setting('test.billing_draft')::uuid;
+  other_draft uuid;
   input jsonb;
 begin
   begin
@@ -62,6 +63,17 @@ begin
     p_draft_id=>draft,p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
   if r->>'claimed' <> 'true' or r->'row'->>'session_id' <> 'cs_test_owner' or r->'row'->>'idempotency_key' <> 'checkout-key'
   then raise exception 'same attempt recovery failed'; end if;
+  r := public.save_draft(actor,w,null,0,
+    '{"brand":null,"preferencias":{},"contexto":null,"personalizacoes":{}}'::jsonb);
+  other_draft := (r->'draft'->>'id')::uuid;
+  r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>rival,p_token=>rival,p_key=>'wrong-key',
+    p_draft_id=>other_draft,p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
+  if r->>'draft_current' <> 'true' or r->>'requested_current' <> 'true' or r->'row'->>'session_id' <> 'cs_test_owner'
+  then raise exception 'valid second draft not recognized'; end if;
+  r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>rival,p_token=>rival,p_key=>'wrong-key',
+    p_draft_id=>'55555555-5555-4555-8555-555555555555',p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
+  if r->>'draft_current' <> 'true' or r->>'requested_current' <> 'false' or r->'row'->>'session_id' <> 'cs_test_owner'
+  then raise exception 'invalid second draft affected first checkout'; end if;
   r := public.save_draft(actor,w,draft,1,
     '{"brand":null,"preferencias":{},"contexto":null,"personalizacoes":{}}'::jsonb);
   if r->>'status' <> 'ok' then raise exception 'draft update fixture failed'; end if;
