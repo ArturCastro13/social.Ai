@@ -24,6 +24,15 @@ describe("configuração de assinatura sandbox", () => {
     expect(() => stripeTestConfig()).toThrow();
   });
 
+  it("aceita chave restrita de sandbox", () => {
+    vi.stubEnv("BILLING_MODE", "test");
+    vi.stubEnv("STRIPE_SECRET_KEY", "rk_test_example");
+    vi.stubEnv("STRIPE_TEST_PRICE_ID", "price_test");
+    vi.stubEnv("STRIPE_WEBHOOK_SECRET", "whsec_example");
+    vi.stubEnv("APP_ORIGIN", "https://example.test");
+    expect(stripeTestConfig().secretKey).toBe("rk_test_example");
+  });
+
   it("recusa objeto Stripe sem livemode=false vindo da API", () => {
     expect(() => assertStripeTestObject({ livemode: true })).toThrow();
     expect(() => assertStripeTestObject({})).toThrow();

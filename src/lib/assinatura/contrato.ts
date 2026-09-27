@@ -20,7 +20,10 @@ export type DraftBody = {
   personalizacoes: Record<string, Personalizacao>;
 };
 export type Draft = { id: string; workspaceId: string; version: number; body: DraftBody };
-export type CheckoutResult = { attemptId: string; sessionId: string; url: string };
+export type CheckoutResult =
+  | { kind: "checkout"; attemptId: string; sessionId: string; url: string }
+  | { kind: "billing_state"; status: BillingStatus; portalAvailable: boolean }
+  | { kind: "operator_required"; reason: "duplicate_subscription" | "unknown_outcome" | "inconsistent_remote_state" };
 export type CheckoutStatus = {
   state: "pending" | "active" | "canceled" | "expired";
   draftId: string;

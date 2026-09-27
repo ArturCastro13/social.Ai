@@ -21,7 +21,7 @@ export function stripeTestConfig() {
   const secretKey = process.env.STRIPE_SECRET_KEY;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
   const priceId = process.env.STRIPE_TEST_PRICE_ID;
-  if (!secretKey?.startsWith("sk_test_") || !webhookSecret?.startsWith("whsec_") || !priceId?.startsWith("price_")) {
+  if (!secretKey || !/^(sk|rk)_test_/.test(secretKey) || !webhookSecret?.startsWith("whsec_") || !priceId?.startsWith("price_")) {
     throw new Error("Configuração Stripe sandbox incompleta ou inválida.");
   }
   return {
