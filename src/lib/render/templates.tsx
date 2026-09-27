@@ -321,86 +321,52 @@ const SOMBRA_TEXTO = "0 2px 18px rgba(0,0,0,0.35)";
 function CapaGancho(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
+  const paisagem = w / h > 1.3;
   const total = post.slides.length;
   const i = Math.min(p.slide, total - 1);
   const s = post.slides[i];
-  const contador = `${i + 1}/${total}`;
-  const areaW = w - 168 * u;
-
-  if (i === 0 && p.foto) {
-    const titulo = limpar(s.titulo || post.gancho);
-    const paisagem = w / h > 1.3;
-    const larguraTexto = paisagem ? w * 0.5 : areaW;
-    const fs = caber(titulo, larguraTexto, h * (paisagem ? 0.46 : 0.26), 124 * u, 50 * u);
-    const sub = limpar(s.texto);
-    const fsSub = caber(sub, larguraTexto * 0.92, h * 0.08, 38 * u, 26 * u, 1.3, 0.5);
-    const bloco = paisagem ? larguraTexto : alturaTexto(titulo, larguraTexto, fs, 1.02) + (sub ? alturaTexto(sub, larguraTexto * 0.92, fsSub, 1.3, 0.5) + 28 * u : 0) + 90 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
-        <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-          <Marca p={p} cor={tema.naEscuro} fundoClaro={false} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naEscuro }}>{contador}</div>
-        </div>
-        <div style={col({ gap: 28 * u, maxWidth: larguraTexto })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.02, color: tema.naEscuro, letterSpacing: -fs * 0.03, textShadow: SOMBRA_TEXTO }}><Kern t={titulo} fs={fs} /></div>
-          {sub ? (
-            <div style={{ fontFamily: "Corpo", fontSize: fsSub, lineHeight: 1.3, color: tema.naEscuro, maxWidth: larguraTexto * 0.92 }}>{sub}</div>
-          ) : null}
-          <div style={row({ alignItems: "center" })}>
-            <div style={row({ alignItems: "center", background: tema.primaria, color: tema.naPrimaria, borderRadius: 999, padding: `${14 * u}px ${30 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u })}>
-              Arraste para o lado →
-            </div>
-          </div>
-        </div>
-      </Moldura>
-    );
-  }
+  const areaW = w - (paisagem ? 120 : 168) * u;
+  const trilho = withAlpha(tema.tintaNoPapel, 0.12);
 
   if (i === 0) {
     const titulo = limpar(s.titulo || post.gancho);
-    const fs = caber(titulo, areaW, h * 0.5, 150 * u, 56 * u);
+    const sub = limpar(s.texto);
+    const f = p.foto ? faixaDaFoto(p, 0.5) : null;
+    const textoW = f?.paisagem ? w - f.w - 120 * u : areaW;
+    const fs = f ? caber(titulo, textoW, f.paisagem ? h * 0.42 : h * 0.22, 104 * u, 44 * u, 0.98) : caber(titulo, areaW, h * (paisagem ? 0.46 : 0.42), 150 * u, 56 * u, 0.98);
+    const fsSub = caber(sub, textoW * 0.92, h * (f ? 0.07 : 0.1), (f ? 34 : 40) * u, 24 * u, 1.3, 0.5);
     return (
-      <Moldura p={p} bg={tema.primaria}>
-        <div style={{ position: "absolute", right: -260 * u, bottom: -300 * u, width: 820 * u, height: 820 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.22 }} />
-        <div style={{ position: "absolute", right: 120 * u, bottom: 160 * u, width: 180 * u, height: 180 * u, borderRadius: 9999, border: `${6 * u}px solid ${tema.naPrimaria}`, opacity: 0.35 }} />
-        <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-          <Marca p={p} cor={tema.naPrimaria} fundoClaro={false} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naPrimaria, opacity: 0.8 }}>{contador}</div>
+      <Papel p={p} style={depoisDaFoto(p, f)}>
+        {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+        <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={f ? 0.85 : 1} />
+        <div style={col({ gap: (f ? 18 : 26) * u, maxWidth: textoW })}>
+          <TituloCreator texto={titulo} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} />
+          {sub ? <div style={{ fontFamily: "Corpo", fontSize: fsSub, lineHeight: 1.3, color: tema.mutedNoPapel, maxWidth: textoW * 0.92 }}>{sub}</div> : null}
         </div>
-        <div style={col({ gap: 32 * u })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.02, color: tema.naPrimaria, letterSpacing: -fs * 0.03 }}><Kern t={titulo} fs={fs} /></div>
-          {s.texto ? (
-            <div style={{ fontFamily: "Corpo", fontSize: 40 * u, lineHeight: 1.3, color: tema.naPrimaria, opacity: 0.88, maxWidth: areaW * 0.85 }}>{limpar(s.texto)}</div>
-          ) : null}
-        </div>
-        <div style={row({ alignItems: "center", gap: 16 * u })}>
-          <div style={row({ alignItems: "center", gap: 14 * u, background: tema.naPrimaria, color: tema.primaria, borderRadius: 999, padding: `${14 * u}px ${30 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u })}>
-            Arraste para o lado →
-          </div>
-        </div>
-      </Moldura>
+        <Progresso p={p} i={0} total={total} cor={tema.tintaNoPapel} trilho={trilho} />
+      </Papel>
     );
   }
 
   if (i === total - 1) {
     const titulo = limpar(s.titulo);
-    const fs = caber(titulo, areaW, h * 0.32, 104 * u, 48 * u);
+    const texto = limpar(s.texto);
+    const fs = caber(titulo, areaW, h * 0.3, 100 * u, 44 * u, 1.02);
+    const acao = dominioVisivel(p.brand) || handleDe(p.brand, post);
     return (
       <Moldura p={p} bg={tema.escuro}>
-        <div style={{ position: "absolute", left: -200 * u, top: -200 * u, width: 600 * u, height: 600 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.35 }} />
-        <div style={row({ justifyContent: "flex-end", fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naEscuro, opacity: 0.7 })}>{contador}</div>
-        <div style={col({ gap: 36 * u })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.05, color: tema.naEscuro, letterSpacing: -fs * 0.02 }}><Kern t={titulo} fs={fs} /></div>
-          <div style={{ fontFamily: "Corpo", fontSize: 42 * u, lineHeight: 1.35, color: tema.destaqueNoEscuro }}>{limpar(s.texto)}</div>
-        </div>
-        <div style={col({ gap: 20 * u })}>
-          <div style={{ height: 4 * u, width: "100%", background: tema.naEscuro, opacity: 0.2 }} />
-          <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-            <Marca p={p} cor={tema.naEscuro} fundoClaro={false} />
-            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naEscuro }}>{`Siga ${handleDe(p.brand, post)}`}</div>
+        <FaixaTopo p={p} largura={w} />
+        <Autor p={p} cor={tema.naEscuro} corSec={withAlpha(tema.naEscuro, 0.7)} tamanho={0.85} />
+        <div style={col({ gap: 28 * u })}>
+          <TituloCreator texto={titulo} fs={fs} cor={tema.naEscuro} marca={tema.escuro} lh={1.02} />
+          {texto ? (
+            <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.14, 38 * u, 26 * u, 1.35, 0.5), lineHeight: 1.35, color: withAlpha(tema.naEscuro, 0.78) }}>{texto}</div>
+          ) : null}
+          <div style={row({ alignItems: "center" })}>
+            <div style={row({ background: tema.primaria, color: tema.naPrimaria, borderRadius: 999, padding: `${16 * u}px ${34 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u })}>{acao}</div>
           </div>
         </div>
+        <Progresso p={p} i={i} total={total} cor={tema.naEscuro} trilho={withAlpha(tema.naEscuro, 0.18)} />
       </Moldura>
     );
   }
@@ -408,28 +374,18 @@ function CapaGancho(p: ArteProps) {
   const numeroSo = /^\d+[.)]?$/.test(s.titulo.trim());
   const tituloLimpo = limpar(s.titulo.replace(/^\d+[.)]\s*/, ""));
   const texto = limpar(s.texto);
-  const fsTexto = caber(texto, areaW, h * 0.34, 50 * u, 30 * u, 1.35, 0.5);
-  const fsTitulo = caber(tituloLimpo, areaW, h * 0.2, 76 * u, 40 * u);
+  const fsTitulo = caber(tituloLimpo, areaW, h * 0.2, 80 * u, 40 * u, 1.02);
+  const fsTexto = caber(texto, areaW, h * 0.3, 44 * u, 28 * u, 1.38, 0.5);
   return (
-    <Moldura p={p} bg={tema.claro}>
-      <div style={col({ gap: 22 * u })}>
-        <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.mutedNoClaro })}>
-          <div>{limpar(post.gancho).slice(0, 48)}</div>
-          <div>{contador}</div>
-        </div>
-        <div style={row({ width: "100%", height: 8 * u, background: tema.mutedNoClaro, opacity: 0.25, borderRadius: 99 })}>
-          <div style={{ width: `${((i + 1) / total) * 100}%`, height: "100%", background: tema.primariaNoClaro, borderRadius: 99 }} />
-        </div>
+    <Papel p={p}>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.75} />
+      <div style={col({ gap: 24 * u })}>
+        <div style={{ fontFamily: "Titulo", fontSize: (paisagem ? 110 : 150) * u, lineHeight: 0.85, color: tema.primariaNoPapel, letterSpacing: -6 * u }}>{String(i).padStart(2, "0")}</div>
+        {!numeroSo && tituloLimpo ? <TituloCreator texto={tituloLimpo} fs={fsTitulo} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.02} /> : null}
+        {texto ? <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.38, color: tema.mutedNoPapel }}>{texto}</div> : null}
       </div>
-      <div style={col({ gap: 34 * u })}>
-        <div style={{ fontFamily: "Titulo", fontSize: 180 * u, lineHeight: 0.9, color: tema.primariaNoClaro, letterSpacing: -6 * u }}>{String(i).padStart(2, "0")}</div>
-        {!numeroSo && tituloLimpo ? (
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fsTitulo, lineHeight: 1.05, color: tema.tintaNoClaro, letterSpacing: -1.5 * u }}><Kern t={tituloLimpo} fs={fsTitulo} /></div>
-        ) : null}
-        <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.35, color: numeroSo ? tema.tintaNoClaro : tema.mutedNoClaro }}>{texto}</div>
-      </div>
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <Progresso p={p} i={i} total={total} cor={tema.tintaNoPapel} trilho={trilho} />
+    </Papel>
   );
 }
 

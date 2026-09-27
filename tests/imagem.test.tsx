@@ -294,8 +294,10 @@ describe("templates com foto", () => {
       const sem = await desenhar(t, null);
       expect((await sharp(com).metadata()).width, t).toBe(1080);
       expect(com.equals(sem), t).toBe(false);
-      // Canto de cima à esquerda: a foto cobre a arte toda, sem deslocamento pelo padding.
-      const { data } = await sharp(com).extract({ left: 2, top: 2, width: 1, height: 1 }).raw().toBuffer({ resolveWithObject: true });
+      // Canto de cima à esquerda, abaixo da faixa de cor da marca: a foto cobre a arte toda, sem deslocamento
+      // pelo padding. Desvio da Trilha F (estilo creator): os templates com foto agora desenham uma faixa de
+      // 14px da cor da marca sobre o topo da imagem, então a amostra desce um pouco para ficar sob a foto.
+      const { data } = await sharp(com).extract({ left: 2, top: 40, width: 1, height: 1 }).raw().toBuffer({ resolveWithObject: true });
       expect(data[2], t).toBeGreaterThan(data[0]);
     }
     const paisagem = await desenhar("dado-impacto", foto, 1200, 627);
