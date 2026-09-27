@@ -67,4 +67,12 @@ describe("carrossel creator", () => {
     for (const t of ["lista", "checklist"] as TemplateId[])
       for (const tamanho of ["feed", "quadrado", "linkedin", "x"] as Tamanho[]) expect((await desenhar(lista, t, 0, tamanho, null)).length).toBeGreaterThan(5000);
   }, 60_000);
+
+  it("citação e dado nos 4 tamanhos, com e sem foto", async () => {
+    const citacao = { ...carrossel, template: "citacao", slides: [{ titulo: "Cora", texto: "Empreender já exige coragem. Seu banco não precisa exigir paciência." }] } as PostGerado;
+    const dado = { ...carrossel, template: "dado-impacto", slides: [{ titulo: "1,9 milhão", texto: "de notas fiscais emitidas todo mês na plataforma" }] } as PostGerado;
+    for (const [post, t] of [[citacao, "citacao"], [dado, "dado-impacto"]] as [PostGerado, TemplateId][])
+      for (const tamanho of ["feed", "quadrado", "linkedin", "x"] as Tamanho[])
+        for (const foto of [null, FOTO]) expect((await desenhar(post, t, 0, tamanho, foto)).length).toBeGreaterThan(5000);
+  }, 60_000);
 });

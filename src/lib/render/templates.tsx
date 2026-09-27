@@ -439,47 +439,25 @@ function Citacao(p: ArteProps) {
   const u = Math.min(w, h) / 1080;
   const s = post.slides[0];
   const frase = limpar(s.texto || post.gancho);
-  const fs = caber(frase, w - 168 * u, h * 0.52, 104 * u, 40 * u, 1.12);
   const autor = limpar(s.titulo || "").toLowerCase() === limpar(p.brand.nome).toLowerCase() || !s.titulo ? null : limpar(s.titulo);
-  if (p.foto) {
-    const paisagem = w / h > 1.3;
-    const larguraTexto = paisagem ? w * 0.52 : w - 168 * u;
-    const fsFoto = caber(frase, larguraTexto, h * (paisagem ? 0.5 : 0.3), 88 * u, 36 * u, 1.12);
-    const aspas = tema.destaqueNoEscuro;
-    const bloco = paisagem ? larguraTexto : 100 * u + alturaTexto(frase, larguraTexto, fsFoto, 1.12) + (autor ? 70 * u : 0) + 90 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [aspas, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} topo={false} />
-        <div style={{ height: 1 }} />
-        <div style={col({ gap: 30 * u, maxWidth: larguraTexto })}>
-          <div style={{ fontFamily: "Titulo", fontSize: 150 * u, lineHeight: 0.6, height: 70 * u, color: aspas }}>“</div>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fsFoto, lineHeight: 1.12, color: tema.naEscuro, letterSpacing: -fsFoto * 0.02, textShadow: SOMBRA_TEXTO }}><Kern t={frase} fs={fsFoto} /></div>
-          {autor ? (
-            <div style={row({ alignItems: "center", gap: 20 * u })}>
-              <div style={{ width: 70 * u, height: 6 * u, background: aspas }} />
-              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 32 * u, color: tema.naEscuro }}>{autor}</div>
-            </div>
-          ) : null}
-          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-        </div>
-      </Moldura>
-    );
-  }
+  const f = p.foto ? faixaDaFoto(p, 0.42) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fs = caber(frase, areaW, f ? (f.paisagem ? h * 0.46 : h * 0.3) : h * 0.5, (f ? 84 : 100) * u, 38 * u, 1.1);
   return (
-    <Moldura p={p} bg={tema.primaria}>
-      <div style={{ position: "absolute", left: 40 * u, top: -120 * u, fontFamily: "Titulo", fontSize: 560 * u, color: tema.destaqueNaPrimaria, opacity: 0.35, lineHeight: 1 }}>“</div>
-      <div style={{ height: 120 * u }} />
-      <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.12, color: tema.naPrimaria, letterSpacing: -fs * 0.02 }}><Kern t={frase} fs={fs} /></div>
-      <div style={col({ gap: 26 * u })}>
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={{ fontFamily: "Titulo", fontSize: (f ? 140 : 220) * u, lineHeight: 0.7, height: (f ? 60 : 100) * u, color: tema.primariaNoPapel }}>“</div>
+      <div style={col({ gap: 26 * u, maxWidth: areaW })}>
+        <TituloCreator texto={frase} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.1} />
         {autor ? (
-          <div style={row({ alignItems: "center", gap: 20 * u })}>
-            <div style={{ width: 70 * u, height: 6 * u, background: tema.destaqueNaPrimaria }} />
-            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naPrimaria }}>{autor}</div>
+          <div style={row({ alignItems: "center", gap: 18 * u })}>
+            <div style={{ width: 60 * u, height: 6 * u, background: tema.primaria }} />
+            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u, color: tema.tintaNoPapel }}>{autor}</div>
           </div>
         ) : null}
-        <Rodape p={p} cor={tema.naPrimaria} fundoClaro={false} />
       </div>
-    </Moldura>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
@@ -488,48 +466,26 @@ function Citacao(p: ArteProps) {
 function DadoImpacto(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
-  const paisagem = w / h > 1.3;
   const s = post.slides[0];
   const numero = limpar(s.titulo || "");
-  const fsNum = caber(numero, paisagem ? w * 0.5 : w - 168 * u, h * 0.42, 400 * u, 120 * u, 1, 0.6);
   const texto = limpar(s.texto || post.gancho);
-  if (p.foto) {
-    const larguraTexto = paisagem ? w * 0.5 : w - 168 * u;
-    const fsNumFoto = caber(numero, larguraTexto, h * (paisagem ? 0.36 : 0.22), 300 * u, 96 * u, 1, 0.6);
-    const fsTextoFoto = caber(texto, larguraTexto, h * (paisagem ? 0.22 : 0.14), 46 * u, 28 * u, 1.3, 0.5);
-    const bloco = paisagem ? larguraTexto : fsNumFoto * 0.9 + alturaTexto(texto, larguraTexto, fsTextoFoto, 1.3, 0.5) + 110 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [tema.destaqueNoEscuro, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
-        <div style={row({ alignItems: "center", gap: 16 * u })}>
-          <div style={{ width: 18 * u, height: 18 * u, borderRadius: 99, background: tema.destaqueNoEscuro }} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 4 * u, color: tema.naEscuro }}>EM NÚMEROS</div>
-        </div>
-        <div style={col({ gap: 24 * u, maxWidth: larguraTexto })}>
-          <div style={{ fontFamily: "Titulo", fontSize: fsNumFoto, lineHeight: 0.9, color: tema.destaqueNoEscuro, letterSpacing: -fsNumFoto * 0.04, textShadow: SOMBRA_TEXTO }}>{numero}</div>
-          <div style={{ fontFamily: "Corpo", fontSize: fsTextoFoto, lineHeight: 1.3, color: tema.naEscuro }}>{texto}</div>
-          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-        </div>
-      </Moldura>
-    );
-  }
+  const f = p.foto ? faixaDaFoto(p, 0.4) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fsNum = caber(numero, areaW, h * (f ? 0.2 : 0.36), (f ? 260 : 380) * u, 96 * u, 1, 0.6);
+  const fsTexto = caber(texto, areaW, h * (f ? 0.14 : 0.2), 48 * u, 28 * u, 1.3, 0.5);
   return (
-    <Moldura p={p} bg={tema.escuro}>
-      {Array.from({ length: 6 }).map((_, k) => (
-        <div key={k} style={{ position: "absolute", left: 0, top: (h / 6) * k, width: w, height: 1, background: tema.naEscuro, opacity: 0.06 }} />
-      ))}
-      <div style={row({ alignItems: "center", gap: 16 * u })}>
-        <div style={{ width: 18 * u, height: 18 * u, borderRadius: 99, background: tema.destaqueNoEscuro }} />
-        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 4 * u, color: tema.naEscuro, opacity: 0.75 }}>EM NÚMEROS</div>
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={row({ alignItems: "center", gap: 14 * u })}>
+        <div style={{ width: 16 * u, height: 16 * u, borderRadius: 99, background: tema.primaria }} />
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 4 * u, color: tema.mutedNoPapel }}>EM NÚMEROS</div>
       </div>
-      <div style={paisagem ? row({ alignItems: "center", gap: 56 * u }) : col({ gap: 30 * u })}>
-        <div style={{ fontFamily: "Titulo", fontSize: fsNum, lineHeight: 0.9, color: tema.destaqueNoEscuro, letterSpacing: -fsNum * 0.04 }}>{numero}</div>
-        <div style={{ fontFamily: "Corpo", fontSize: caber(texto, paisagem ? w * 0.36 : w - 168 * u, h * 0.3, 54 * u, 30 * u, 1.3, 0.5), lineHeight: 1.3, color: tema.naEscuro, maxWidth: paisagem ? w * 0.38 : w * 0.85 }}>
-          {texto}
-        </div>
+      <div style={col({ gap: 20 * u, maxWidth: areaW })}>
+        <div style={{ fontFamily: "Titulo", fontSize: fsNum, lineHeight: 0.9, color: tema.primariaNoPapel, letterSpacing: -fsNum * 0.04 }}>{numero}</div>
+        <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.3, color: tema.tintaNoPapel }}>{texto}</div>
       </div>
-      <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-    </Moldura>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
