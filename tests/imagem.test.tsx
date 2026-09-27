@@ -5,6 +5,7 @@ import { contrastRatio, mix } from "@/lib/color";
 import { DEMOS } from "@/lib/engine/demo";
 import type { LLM } from "@/lib/llm";
 import { ErroImagem, criarImagemDoPost, hashImagem, pastaDoDominio, reservarUsoImagem } from "@/lib/imagem";
+import { conferirImagem } from "@/lib/imagem/conferir";
 import { nomeDaCor } from "@/lib/imagem/cores";
 import {
   SISTEMA_DIRECAO,
@@ -177,7 +178,7 @@ describe("criar imagem", () => {
     ambiente();
     const e = entrada({}, "cache-p1");
     let chamadas = fetchSimulado();
-    const r = await criarImagemDoPost(e, { llm: null });
+    const r = await criarImagemDoPost(e, { llm: null, conferidor: null });
     expect(r.cache).toBe(false);
     expect(r.url).toMatch(/^https:\/\/exemplo\.supabase\.co\/storage\/v1\/object\/public\/posts\/ia\/cora\.com\.br\/[0-9a-f]{32}\.jpg$/);
     const openai = chamadas.find((c) => c.url.startsWith("https://api.openai.com/"))!;
@@ -190,7 +191,7 @@ describe("criar imagem", () => {
     expect((upload.init!.headers as Record<string, string>)["content-type"]).toBe("image/jpeg");
 
     chamadas = fetchSimulado({ existe: true });
-    const r2 = await criarImagemDoPost(e, { llm: null });
+    const r2 = await criarImagemDoPost(e, { llm: null, conferidor: null });
     expect(r2).toMatchObject({ url: r.url, cache: true });
     expect(chamadas.some((c) => c.url.startsWith("https://api.openai.com/"))).toBe(false);
   });
@@ -211,7 +212,7 @@ describe("criar imagem", () => {
     vi.stubEnv("OPENAI_IMAGE_MODEL", "gpt-image-1-mini");
     vi.stubEnv("OPENAI_IMAGE_QUALITY", "high");
     const chamadas = fetchSimulado();
-    await criarImagemDoPost(entrada({}, "modelo-p1"), { llm: null });
+    await criarImagemDoPost(entrada({}, "modelo-p1"), { llm: null, conferidor: null });
     const corpo = JSON.parse(String(chamadas.find((c) => c.url.startsWith("https://api.openai.com/"))!.init!.body));
     expect(corpo).toMatchObject({ model: "gpt-image-1-mini", quality: "high" });
   });
@@ -219,11 +220,11 @@ describe("criar imagem", () => {
   it("sem chave da OpenAI ou sem Supabase: erro 503 claro", async () => {
     ambiente();
     vi.stubEnv("OPENAI_API_KEY", "");
-    await expect(criarImagemDoPost(entrada(), { llm: null })).rejects.toMatchObject({ status: 503, message: expect.stringMatching(/OPENAI_API_KEY/) });
+    await expect(criarImagemDoPost(entrada(), { llm: null, conferidor: null })).rejects.toMatchObject({ status: 503, message: expect.stringMatching(/OPENAI_API_KEY/) });
     ambiente();
     vi.stubEnv("SUPABASE_URL", "");
     vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "");
-    await expect(criarImagemDoPost(entrada(), { llm: null })).rejects.toMatchObject({ status: 503, message: expect.stringMatching(/Supabase/) });
+    await expect(criarImagemDoPost(entrada(), { llm: null, conferidor: null })).rejects.toMatchObject({ status: 503, message: expect.stringMatching(/Supabase/) });
   });
 
   it("passou do limite: 429 sem chamar a OpenAI", async () => {
@@ -236,14 +237,14 @@ describe("criar imagem", () => {
   it("traduz moderação e sobrecarga da OpenAI", async () => {
     ambiente();
     fetchSimulado({ openai: () => Response.json({ error: { code: "moderation_blocked", type: "image_generation_user_error" } }, { status: 400 }) });
-    const e1 = await criarImagemDoPost(entrada({}, "mod-p1"), { llm: null }).catch((e) => e);
+    const e1 = await criarImagemDoPost(entrada({}, "mod-p1"), { llm: null, conferidor: null }).catch((e) => e);
     expect(e1).toBeInstanceOf(ErroImagem);
     expect(e1).toMatchObject({ status: 422, message: MSG_MODERACAO });
 
     fetchSimulado({ openai: () => Response.json({ error: { code: "rate_limit_exceeded" } }, { status: 429 }) });
-    await expect(criarImagemDoPost(entrada({}, "mod-p2"), { llm: null })).rejects.toMatchObject({ status: 503, message: MSG_OCUPADO });
+    await expect(criarImagemDoPost(entrada({}, "mod-p2"), { llm: null, conferidor: null })).rejects.toMatchObject({ status: 503, message: MSG_OCUPADO });
     fetchSimulado({ openai: () => new Response("erro", { status: 502 }) });
-    await expect(criarImagemDoPost(entrada({}, "mod-p3"), { llm: null })).rejects.toMatchObject({ status: 503, message: MSG_OCUPADO });
+    await expect(criarImagemDoPost(entrada({}, "mod-p3"), { llm: null, conferidor: null })).rejects.toMatchObject({ status: 503, message: MSG_OCUPADO });
   });
 });
 
@@ -338,6 +339,42 @@ describe("templates com foto", () => {
     const paisagem = await desenhar("dado-impacto", foto, 1200, 627);
     expect((await sharp(paisagem).metadata()).height).toBe(627);
   }, 30_000);
+});
+
+describe("conferência da capa por visão", () => {
+  it("lê o veredito; sem IA ou com falha, aprova para não gastar outra imagem", async () => {
+    const recusa = { nome: "v", gerar: vi.fn(), gerarComAnexos: vi.fn(async () => '{"ok": false, "motivo": "letras na placa"}') };
+    expect(await conferirImagem(Buffer.from("x"), recusa)).toEqual({ ok: false, motivo: "letras na placa" });
+    expect(await conferirImagem(Buffer.from("x"), null)).toEqual({ ok: true, motivo: "" });
+    const quebrado = {
+      nome: "v",
+      gerar: vi.fn(),
+      gerarComAnexos: vi.fn(async () => {
+        throw new Error("x");
+      }),
+    };
+    expect(await conferirImagem(Buffer.from("x"), quebrado)).toEqual({ ok: true, motivo: "" });
+  });
+
+  it("capa recusada é gerada de novo uma vez, com o motivo no prompt", async () => {
+    const prompts: string[] = [];
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (_u: string, init: RequestInit) => {
+        prompts.push(JSON.parse(String(init.body)).prompt);
+        return new Response(JSON.stringify({ data: [{ b64_json: JPEG_PEQUENO }] }));
+      }),
+    );
+    const conferidor = {
+      nome: "v",
+      gerar: vi.fn(),
+      gerarComAnexos: vi.fn().mockResolvedValueOnce('{"ok":false,"motivo":"um logo"}').mockResolvedValue('{"ok":true}'),
+    };
+    const arm = { urlPublica: (c: string) => `https://cdn/${c}`, existe: async () => false, subir: async () => {} };
+    await criarImagemDoPost({ post: postBase, brand: marcaBase }, { llm: null, armazenamento: arm, chaveOpenAI: "k", conferidor });
+    expect(prompts).toHaveLength(2);
+    expect(prompts[1]).toContain("um logo");
+  });
 });
 
 describe("objetos que trazem texto", () => {

@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { provedorConfigurado, type LLM } from "@/lib/llm";
 import { armazenamentoSupabase, type Armazenamento } from "./armazenamento";
+import { conferirImagem } from "./conferir";
 import { escreverDirecao, montarPromptImagem, objetosComTexto, type Direcao, type EntradaImagem } from "./direcao";
 import { ErroImagem, configImagem, gerarImagemOpenAI } from "./openai";
 
@@ -84,7 +85,18 @@ export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {
   if (deps.reservar && !deps.reservar()) {
     throw new ErroImagem("Você chegou ao limite de imagens com IA por hoje. Amanhã libera de novo.", 429);
   }
-  const img = await gerarImagemOpenAI(montarPromptImagem(e, direcao), { chave, modelo, qualidade });
+  const prompt = montarPromptImagem(e, direcao);
+  let img = await gerarImagemOpenAI(prompt, { chave, modelo, qualidade });
+  const conferidor = deps.conferidor === undefined ? provedorConfigurado("rapido") : deps.conferidor;
+  const veredito = await conferirImagem(img.bytes, conferidor);
+  // Uma segunda chance só, e só se ainda couber no limite do dia.
+  if (!veredito.ok && (!deps.reservar || deps.reservar())) {
+    console.info(`[imagem] conferência recusou a capa (${veredito.motivo || "sem motivo"}); gerando de novo`);
+    img = await gerarImagemOpenAI(
+      `${prompt}\nThe previous attempt showed ${veredito.motivo || "text or a logo"}. This time the image must contain zero letters, digits, logos, signs or readable screens.`,
+      { chave, modelo, qualidade },
+    );
+  }
   try {
     await arm.subir(caminho, img.bytes, img.tipo);
   } catch (err) {
