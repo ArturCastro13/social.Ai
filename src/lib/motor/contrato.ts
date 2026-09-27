@@ -2,6 +2,7 @@
 // Fonte: PROMPT_MOTOR_POSTS.md. Tudo aqui é opcional para o motor: ele funciona só com a leitura do site.
 import { z } from "zod";
 import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
+import { IDS_NICHO } from "@/lib/types";
 
 import { FORMATOS_MOTOR, OBJETIVOS, type FormatoMotor, type Frequencia, type ObjetivoId } from "./constantes";
 
@@ -62,7 +63,7 @@ export const pesquisaMercadoSchema = z.object({
   /** O mercado em uma frase, como a pesquisa entendeu. */
   mercado: textoPesquisa(300),
   /** Nicho da base curada que mais se aproxima. Vale mais que o palpite por palavra-chave. */
-  nicho: z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"]).optional(),
+  nicho: z.enum(IDS_NICHO).optional(),
   concorrentes: z
     .array(z.object({ nome: z.string().trim().max(80), url: z.string().trim().url().max(500), o_que_publica: textoPesquisa(400) }))
     .max(6)

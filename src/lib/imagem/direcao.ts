@@ -136,6 +136,21 @@ const CENAS: Record<string, string[]> = {
     "An unboxing moment seen from above: hands opening a plain box with tissue paper, soft daylight, clean surface.",
     "A doorstep delivery scene with a plain parcel on a sunny porch, soft focus background, warm and inviting.",
   ],
+  "marketing-agencias": [
+    "A bright creative studio table seen from above with blank colored paper swatches, a ruler and a small plant, arranged in a clean grid, soft daylight.",
+    "Editorial still life of a single glowing spotlight beam falling on a pedestal with a smooth colored sphere, dark seamless backdrop, sense of attention.",
+    "A megaphone made of folded colored paper on a smooth surface, playful premium campaign look, soft studio light.",
+  ],
+  "servicos-locais": [
+    "A welcoming neighborhood storefront at golden hour seen from the sidewalk, warm light inside, plants by the door, no signage.",
+    "Top-down still life of tidy work tools of a local professional on a wooden counter, soft morning light, sense of care.",
+    "A calm, clean treatment room with soft towels, a plant and natural light through a window, serene and inviting.",
+  ],
+  "ia-dev": [
+    "Abstract 3D composition of smooth glowing nodes connected by thin light threads floating over a matte surface, soft studio light.",
+    "Editorial still life of interlocking translucent geometric blocks assembling themselves into a neat structure, clean seamless backdrop.",
+    "A single small robot figurine made of matte clay arranging tiny colored blocks on a desk, warm soft light, playful and precise.",
+  ],
   padrao: [
     "Abstract sculptural composition of smooth rounded 3D shapes balanced on each other, matte material, soft studio light and gentle shadows.",
     "Editorial still life of a single meaningful object on a pedestal with a clean seamless backdrop, dramatic soft side light.",

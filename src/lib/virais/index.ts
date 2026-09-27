@@ -15,6 +15,10 @@ export const BASE_ARQUIVO: Record<Nicho, ViralItem[]> = {
   healthtech: healthtech as ViralItem[],
   edtech: edtech as ViralItem[],
   "ecommerce-dtc": ecommerce as ViralItem[],
+  // TODO(A2): trocar pela curadoria própria destes nichos em data/virais/*/itens.json.
+  "marketing-agencias": saasB2b as ViralItem[],
+  "servicos-locais": ecommerce as ViralItem[],
+  "ia-dev": saasB2b as ViralItem[],
 };
 
 export function itensDoArquivo(): ViralItem[] {

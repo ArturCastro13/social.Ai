@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { IDS_NICHO } from "@/lib/types";
 
 export const MAX_MATERIAIS = 3;
 export const MAX_CONTEXTO = 30_000;
@@ -23,7 +24,7 @@ export const materiaisSchema = z.array(materialSchema).max(MAX_MATERIAIS).refine
 );
 export const entendimentoSchema = z.object({
   negocio: z.string().trim().min(1).max(1200), segmento: z.string().trim().max(200), publico: z.string().trim().max(300),
-  nicho: z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc", "outro"]),
+  nicho: z.enum([...IDS_NICHO, "outro"]),
   evidencias: z.array(z.object({ fonte: z.string().max(80), trecho: z.string().max(250) })).max(8),
   duvidas: z.array(z.string().max(250)).max(8), fonte: z.enum(["ia", "manual"]),
 });

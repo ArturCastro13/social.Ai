@@ -1,7 +1,10 @@
 // Contratos compartilhados entre motor (/api), base de virais e interface.
 import type { ExtrasAnalise, ExtrasPost } from "@/lib/motor/contrato";
 
-export type Nicho = "saas-b2b" | "fintech" | "healthtech" | "edtech" | "ecommerce-dtc";
+/** Os nichos da biblioteca de virais. A ordem aparece nas telas. */
+export const IDS_NICHO = ["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc", "marketing-agencias", "servicos-locais", "ia-dev"] as const;
+
+export type Nicho = (typeof IDS_NICHO)[number];
 
 export const NICHOS: { id: Nicho; nome: string }[] = [
   { id: "saas-b2b", nome: "SaaS B2B" },
@@ -9,6 +12,9 @@ export const NICHOS: { id: Nicho; nome: string }[] = [
   { id: "healthtech", nome: "Healthtech" },
   { id: "edtech", nome: "Edtech" },
   { id: "ecommerce-dtc", nome: "E-commerce / DTC" },
+  { id: "marketing-agencias", nome: "Marketing e agências" },
+  { id: "servicos-locais", nome: "Serviços e negócio local" },
+  { id: "ia-dev", nome: "IA e tech para devs" },
 ];
 
 export type Rede = "instagram" | "linkedin" | "x" | "facebook";

@@ -2,7 +2,8 @@
 import type { Formato, Nicho, Rede, TemplateId } from "@/lib/types";
 import { FORMATOS_MOTOR, FREQUENCIAS, type FormatoMotor, type Frequencia } from "./contrato";
 
-export type NichoMotor = "saas_b2b" | "fintech" | "healthtech" | "edtech" | "ecommerce_dtc" | "outro";
+export type NichoMotor =
+  | "saas_b2b" | "fintech" | "healthtech" | "edtech" | "ecommerce_dtc" | "marketing_agencias" | "servicos_locais" | "ia_dev" | "outro";
 
 export function nichoParaMotor(n: Nicho | string | null | undefined): NichoMotor {
   const m: Record<string, NichoMotor> = {
@@ -11,13 +12,16 @@ export function nichoParaMotor(n: Nicho | string | null | undefined): NichoMotor
     healthtech: "healthtech",
     edtech: "edtech",
     "ecommerce-dtc": "ecommerce_dtc",
+    "marketing-agencias": "marketing_agencias",
+    "servicos-locais": "servicos_locais",
+    "ia-dev": "ia_dev",
   };
   return m[String(n ?? "")] ?? "outro";
 }
 
 /** Aceita "saas_b2b", "saas-b2b", "SaaS B2B"... Devolve null se não reconhecer. */
 export function nichoDoMotor(n: string | null | undefined): Nicho | null {
-  const k = String(n ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z]/g, "");
+  const k = String(n ?? "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]/g, "");
   const m: Record<string, Nicho> = {
     saasb2b: "saas-b2b",
     saas: "saas-b2b",
@@ -27,6 +31,16 @@ export function nichoDoMotor(n: string | null | undefined): Nicho | null {
     ecommercedtc: "ecommerce-dtc",
     ecommerce: "ecommerce-dtc",
     dtc: "ecommerce-dtc",
+    marketingagencias: "marketing-agencias",
+    marketing: "marketing-agencias",
+    agencia: "marketing-agencias",
+    agencias: "marketing-agencias",
+    servicoslocais: "servicos-locais",
+    negociolocal: "servicos-locais",
+    servicos: "servicos-locais",
+    iadev: "ia-dev",
+    devtools: "ia-dev",
+    ia: "ia-dev",
   };
   return m[k] ?? null;
 }
