@@ -1,4 +1,5 @@
 import type { Scope } from "@/lib/assinatura/contrato";
+import { z } from "zod";
 import { PrivateHttpError } from "./http";
 import { createSessionClient } from "./server";
 
@@ -19,7 +20,7 @@ export async function requireScope(): Promise<Scope> {
 
   try {
     const { data, error } = await client.rpc("ensure_workspace");
-    if (error || typeof data !== "string" || !data) throw new Error("workspace unavailable");
+    if (error || !z.uuid().safeParse(data).success) throw new Error("workspace unavailable");
     return { userId, workspaceId: data };
   } catch {
     throw new PrivateHttpError(503, "dependency_unavailable", "Workspace temporariamente indisponível.");

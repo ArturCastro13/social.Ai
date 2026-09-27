@@ -46,10 +46,16 @@ describe("identidade verificada", () => {
     await expect(requireScope()).rejects.toMatchObject({ status: 503 });
   });
 
+  it("recusa identificador de workspace que não é UUID", async () => {
+    auth.getUser.mockResolvedValue({ data: { user: { id: "user-1" } }, error: null });
+    auth.rpc.mockResolvedValue({ data: "workspace-forged", error: null });
+    await expect(requireScope()).rejects.toMatchObject({ status: 503 });
+  });
+
   it("usa exclusivamente usuário verificado e workspace da RPC", async () => {
     auth.getUser.mockResolvedValue({ data: { user: { id: "user-1" } }, error: null });
-    auth.rpc.mockResolvedValue({ data: "workspace-1", error: null });
-    await expect(requireScope()).resolves.toEqual({ userId: "user-1", workspaceId: "workspace-1" });
+    auth.rpc.mockResolvedValue({ data: "11111111-1111-4111-8111-111111111111", error: null });
+    await expect(requireScope()).resolves.toEqual({ userId: "user-1", workspaceId: "11111111-1111-4111-8111-111111111111" });
     expect(auth.rpc).toHaveBeenCalledWith("ensure_workspace");
   });
 });
