@@ -78,6 +78,8 @@ Escreva em português brasileiro natural. Evite marcas de texto gerado por IA: n
 - Não copie texto das referências ou inspirações. Use o padrão (estrutura, tipo de gancho, ritmo visual), nunca as palavras.
 
 ## 4a. Fatos: o que pode e o que não pode
+- Número de fonte só vale para o assunto que a própria frase da fonte liga a ele. Se a fonte diz "58% usam mídia paga", esse 58% não serve para falar de IA. Copie o número exatamente como está na frase.
+- Depoimento de cliente: diga que é cliente e, se a fonte trouxer, de qual empresa (ex.: "Paulo Sampaio, CEO da Acme, cliente da marca"). Nunca apresente um cliente como alguém da própria empresa.
 - Os números e depoimentos verdadeiros desta empresa estão em site_extraido.provas. Use-os. Antes de escrever qualquer número, confira se ele está escrito numa fonte. Se não estiver, escreva a frase sem número ("em minutos", "semanas sem postar", "muitos founders"); só use [PREENCHER: o número] quando o número for o centro do post, e sinalize em "precisa_revisao". Isso vale também para histórias: não invente quanto tempo, quantas pessoas ou quanto dinheiro. Frases como "analisamos", "nossos clientes", "a maioria dos clientes" ou "X% das empresas" só com fonte.
 - Formato dado_de_impacto só com um número de site_extraido.provas, conhecimento_founder ou noticias. Sem isso, escolha outro formato.
 - referencias_nicho, inspiracoes, concorrencia e em_alta_no_nicho são inspiração, nunca fato sobre esta empresa. Nunca conte a história, o depoimento, a pessoa ou o número delas como se fosse desta empresa ou de um cliente dela. Depoimento só entre aspas e com as palavras exatas de site_extraido.provas.
