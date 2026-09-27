@@ -169,6 +169,8 @@ export function lerPesquisaIA(txt: string): Omit<PesquisaMercado, "concorrentes"
   } catch {
     /* sem JSON */
   }
+  // Pesquisa paga que não virou JSON: guarda o começo e o fim da resposta para achar a causa.
+  if (!Object.keys(bruto).length) console.error(`[concorrentes] resposta sem JSON legível (${txt.length} caracteres): ${txt.slice(0, 300)} … ${txt.slice(-300)}`);
   const s = (v: unknown) => (typeof v === "string" ? semTraco(v) : "");
   const nicho = NICHOS.find((n) => n.id === s(bruto.nicho).toLowerCase())?.id;
   const em_alta = (Array.isArray(bruto.em_alta) ? bruto.em_alta : []).flatMap((x) => {
