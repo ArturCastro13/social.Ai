@@ -130,6 +130,32 @@ amostra. Capas privadas exigem bucket privado e URLs assinadas, não `posts`.
 
 ## Verificação local exigida
 
+Para reproduzir os testes SQL sem Supabase nem instalação global, instalar o
+PGlite apenas numa pasta temporária e executar o runner do repositório:
+
+```bash
+vixo_sql_test_dir=$(mktemp -d)
+npm install --prefix "$vixo_sql_test_dir" --ignore-scripts --no-audit --no-fund @electric-sql/pglite@0.5.8
+NODE_PATH="$vixo_sql_test_dir/node_modules" node supabase/tests/embedded.mjs
+```
+
+O runner sempre cria um banco em memória e não aceita URL de conexão. Ele usa
+um substituto mínimo de `auth.users`, `auth.uid()` e roles para executar as
+quatro migrations e seus testes. Não comprova o serviço Auth real nem corridas
+entre conexões; para isso, executar também a receita PostgreSQL descartável.
+
+Para reprocessar eventos verificados que ficaram pendentes por falha recuperável:
+
+```bash
+npx tsx scripts/reconciliar-billing.ts --test --pending
+```
+
+O comando carrega `.env.local`, exige sandbox e mostra somente contagens.
+`risk_unresolved` exige revisão humana e não entra nesse replay automático.
+Consultar a tentativa autenticada com `GET /api/billing/status?attempt=<uuid>`
+também reconcilia o pagamento. O retorno visual `/app/billing/retorno` será
+entregue no segundo PR: neste backend, testar o status pela API autenticada.
+
 ```bash
 npx vitest run
 npx tsc --noEmit -p .
