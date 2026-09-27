@@ -50,6 +50,6 @@ export async function contextoViralDoNicho(nicho: Nicho, max = 10) {
   const porId = new Map(itens.map((i) => [i.id, i]));
   return padroes.map((p) => ({
     padrao: p,
-    exemplos: p.exemplos.map((id) => porId.get(id)).filter((x): x is ViralItem => !!x).slice(0, 2),
+    exemplos: p.exemplos.map((id) => porId.get(id)).filter((x): x is ViralItem => !!x).slice(0, 3),
   }));
 }

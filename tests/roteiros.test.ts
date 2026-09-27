@@ -27,7 +27,7 @@ import { aplicarExtras, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor
 import { garantirRoteiros, quantosRoteiros, roteirosLocais } from "@/lib/motor/roteiros-locais";
 import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
 import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
-import { itensDoArquivo } from "@/lib/virais";
+import { contextoViralDoNicho, itensDoArquivo } from "@/lib/virais";
 import { POST as analyzePOST } from "@/app/api/analyze/route";
 import type { Analise } from "@/lib/types";
 
@@ -315,15 +315,25 @@ describe("concorrentes e referências no CONTEXTO", () => {
     const refs = padroesDoNicho(catalogo, "fintech", 10).map((p) => ({ padrao: p, exemplos: itensDoArquivo().filter((i) => p.exemplos.includes(i.id)) }));
     const c = montarContexto(cora.brand, null, { referencias: refs });
     expect(c.referencias_nicho.length).toBeGreaterThan(0);
-    expect(c.referencias_nicho.length).toBeLessThanOrEqual(14);
+    expect(c.referencias_nicho.length).toBeLessThanOrEqual(12);
     const comExemplo = c.referencias_nicho.filter((r) => r.texto_gancho);
     expect(comExemplo.length).toBeGreaterThan(0);
     for (const r of c.referencias_nicho) {
-      expect(r.estrutura.length).toBeLessThanOrEqual(4);
-      expect(r.por_que_funciona.length).toBeLessThanOrEqual(200);
+      expect(r.estrutura.length).toBeLessThanOrEqual(6);
+      expect(r.por_que_funciona.length).toBeLessThanOrEqual(240);
       expect(r.texto_gancho.length).toBeLessThanOrEqual(200);
     }
     expect(JSON.stringify(c.referencias_nicho)).not.toMatch(/[—–]/);
+  });
+
+  it("referências: até 12, verificados e carrosséis primeiro, estrutura de até 6 passos", async () => {
+    const refs = await contextoViralDoNicho("saas-b2b", 10);
+    const c = montarContexto(cora.brand, null, { referencias: refs });
+    expect(c.referencias_nicho.length).toBeLessThanOrEqual(12);
+    expect(c.referencias_nicho.length).toBeGreaterThan(6);
+    expect(c.referencias_nicho.every((r) => r.estrutura.length <= 6)).toBe(true);
+    const pesos = c.referencias_nicho.map((r) => Number(r.metrica_verificada) * 2 + Number(r.formato === "carrossel"));
+    expect([...pesos].sort((a, b) => b - a)).toEqual(pesos);
   });
 });
 
