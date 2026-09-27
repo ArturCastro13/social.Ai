@@ -34,6 +34,16 @@ function sdk(overrides: { price?: object; session?: object; expireSession?: obje
 }
 
 describe("Stripe SDK 22.6.2 mapping", () => {
+  it("aceita somente evento assinado de sandbox", () => {
+    const stripe = new Stripe(config.secretKey, { apiVersion: "2026-08-26.dahlia" });
+    const gateway = createStripeGateway(config, stripe);
+    const payload = JSON.stringify({ id: "evt_test_1", type: "invoice.paid", livemode: false, data: { object: { id: "in_1" } } });
+    const signature = stripe.webhooks.generateTestHeaderString({ payload, secret: "whsec_fixture" });
+    expect(gateway.verifyEvent(payload, signature, "whsec_fixture")).toEqual({ eventId: "evt_test_1", type: "invoice.paid", objectId: "in_1", livemode: false });
+    expect(() => gateway.verifyEvent(payload, signature, "whsec_wrong")).toThrow();
+    const live = JSON.stringify({ id: "evt_live_1", type: "invoice.paid", livemode: true, data: { object: { id: "in_1" } } });
+    expect(() => gateway.verifyEvent(live, stripe.webhooks.generateTestHeaderString({ payload: live, secret: "whsec_fixture" }), "whsec_fixture")).toThrow();
+  });
   it("cria checkout com Price BRL mensal e metadados opacos", async () => {
     const gateway = createStripeGateway(config, sdk());
     const result = await gateway.createCheckout({ customerId: customer.id, priceId: config.priceId, workspaceId, attemptId, successUrl: session.success_url, cancelUrl: session.cancel_url }, "key-1");

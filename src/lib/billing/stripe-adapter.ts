@@ -176,6 +176,81 @@ export function createStripeGateway(config: Config, api: Stripe = new Stripe(con
       const line = eligible[0];
       return { ...ref, paid: true, billingReason: ref.billingReason, subscriptionItemId: subscription.subscriptionItemId, priceId: config.priceId, lineId: line.id, periodStart: iso(line.period.start), periodEnd: iso(line.period.end) };
     },
+    async listPaidInvoices(subscriptionId) {
+      const result: RemoteInvoice[] = [];
+      let startingAfter: string | undefined;
+      do {
+        const page = await api.invoices.list({ subscription: subscriptionId, limit: 100, ...(startingAfter ? { starting_after: startingAfter } : {}) });
+        for (const invoice of page.data) {
+          if (invoice.status !== "paid" || (invoice.billing_reason !== "subscription_create" && invoice.billing_reason !== "subscription_cycle")) continue;
+          result.push(await this.getPaidInvoice(invoice.id));
+        }
+        if (!page.has_more) break;
+        startingAfter = page.data.at(-1)?.id;
+        if (!startingAfter) reject("invalid_pagination");
+      } while (true);
+      return result;
+    },
+    verifyEvent(rawBody, signature, secret) {
+      let event: Stripe.Event;
+      try { event = api.webhooks.constructEvent(rawBody, signature, secret); }
+      catch { return reject("invalid_signature"); }
+      if (event.livemode !== false || !event.id || !event.data.object || !("id" in event.data.object) || typeof event.data.object.id !== "string" || !event.data.object.id) reject("invalid_event");
+      return { eventId: event.id, type: event.type, objectId: event.data.object.id, livemode: false };
+    },
+    async resolveRisk(kind, objectId) {
+      const disputed = kind === "dispute" ? await api.disputes.retrieve(objectId) : null;
+      if (disputed) assertStripeTestObject(disputed);
+      const chargeId = disputed ? id(disputed.charge) : objectId;
+      const charge = await api.charges.retrieve(chargeId);
+      assertStripeTestObject(charge);
+      const customerId = charge.customer ? id(charge.customer) : null;
+      if (!customerId) return { kind: "unresolved", customerId: null };
+      await normalizeCustomer(await api.customers.retrieve(customerId));
+      const subscriptionIds = new Set<string>();
+      let unresolved = false;
+      async function inspect(payment: Stripe.InvoicePayment) {
+        assertStripeTestObject(payment);
+        const invoiceId = id(payment.invoice);
+        const ref = await invoiceReference(await api.invoices.retrieve(invoiceId));
+        if (ref.customerId !== customerId) unresolved = true;
+        else subscriptionIds.add(ref.subscriptionId);
+      }
+      if (charge.payment_intent) {
+        const paymentIntentId = id(charge.payment_intent);
+        let startingAfter: string | undefined;
+        do {
+          const page = await api.invoicePayments.list({ payment: { type: "payment_intent", payment_intent: paymentIntentId }, limit: 100, ...(startingAfter ? { starting_after: startingAfter } : {}) });
+          for (const payment of page.data) {
+            if (payment.payment.type !== "payment_intent" || !payment.payment.payment_intent || id(payment.payment.payment_intent) !== paymentIntentId) { unresolved = true; continue; }
+            await inspect(payment);
+          }
+          if (!page.has_more) break;
+          startingAfter = page.data.at(-1)?.id;
+          if (!startingAfter) reject("invalid_pagination");
+        } while (true);
+      } else {
+        // Legacy charges have no charge filter. Inspect each known invoice payment for this Customer.
+        let startingAfter: string | undefined;
+        do {
+          const page = await api.invoices.list({ customer: customerId, limit: 100, ...(startingAfter ? { starting_after: startingAfter } : {}) });
+          for (const invoice of page.data) {
+            let paymentAfter: string | undefined;
+            do {
+              const payments = await api.invoicePayments.list({ invoice: invoice.id, limit: 100, ...(paymentAfter ? { starting_after: paymentAfter } : {}) });
+              for (const payment of payments.data) if (payment.payment.type === "charge" && payment.payment.charge && id(payment.payment.charge) === chargeId) await inspect(payment);
+              if (!payments.has_more) break;
+              paymentAfter = payments.data.at(-1)?.id;
+              if (!paymentAfter) reject("invalid_pagination");
+            } while (true);
+          }
+          if (!page.has_more) break;
+          startingAfter = page.data.at(-1)?.id;
+          if (!startingAfter) reject("invalid_pagination");
+        } while (true);
+      }
+      return unresolved || subscriptionIds.size === 0 ? { kind: "unresolved", customerId } : { kind: "resolved", customerId, subscriptionIds: [...subscriptionIds] };
+    },
     async createPortal(customerId, workspaceId, configurationId, returnUrl) {
       safeUrl(returnUrl, config.origin, "/app/billing");
       if (returnUrl !== `${config.origin}/app/billing`) reject("invalid_url");

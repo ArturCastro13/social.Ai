@@ -6,6 +6,8 @@ export type RemoteCheckout = { id: string; url: string | null; livemode: false; 
 export type RemoteSubscription = { id: string; livemode: false; customerId: string; status: Exclude<BillingStatus, "none">; priceId: string; subscriptionItemId: string; cancelAtPeriodEnd: boolean; periodStart: string; periodEnd: string; latestInvoiceId: string | null };
 export type RemoteInvoiceReference = { id: string; livemode: false; customerId: string; subscriptionId: string; billingReason: string | null; paid: boolean };
 export type RemoteInvoice = RemoteInvoiceReference & { paid: true; billingReason: "subscription_create" | "subscription_cycle"; subscriptionItemId: string; priceId: string; lineId: string; periodStart: string; periodEnd: string };
+export type VerifiedEvent = { eventId: string; type: string; objectId: string; livemode: false };
+export type RiskResolution = { kind: "resolved"; customerId: string; subscriptionIds: string[] } | { kind: "unresolved"; customerId: string | null };
 export type CheckoutInput = { customerId: string; priceId: string; workspaceId: string; attemptId: string; successUrl: string; cancelUrl: string };
 export interface StripeGateway {
   ensureCustomer(workspaceId: string, key: string): Promise<RemoteCustomer>;
@@ -17,6 +19,9 @@ export interface StripeGateway {
   getSubscription(id: string): Promise<RemoteSubscription>;
   getInvoiceReference(id: string): Promise<RemoteInvoiceReference>;
   getPaidInvoice(id: string): Promise<RemoteInvoice>;
+  listPaidInvoices(subscriptionId: string): Promise<RemoteInvoice[]>;
+  verifyEvent(rawBody: string, signature: string, secret: string): VerifiedEvent;
+  resolveRisk(kind: "refund" | "dispute", objectId: string): Promise<RiskResolution>;
   createPortal(customerId: string, workspaceId: string, configurationId: string, returnUrl: string): Promise<{ url: string }>;
 }
 

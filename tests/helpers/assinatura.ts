@@ -111,6 +111,9 @@ export function createBillingHarness() {
     async getSubscription(id) { const row = remoteSubscriptions.find(s => s.id === id); if (!row) throw new Error("unknown subscription"); return row; },
     async getInvoiceReference(): Promise<RemoteInvoiceReference> { throw new Error("not used"); },
     async getPaidInvoice(): Promise<RemoteInvoice> { throw new Error("not used"); },
+    async listPaidInvoices(): Promise<RemoteInvoice[]> { return []; },
+    verifyEvent() { throw new Error("not used"); },
+    async resolveRisk() { return { kind: "unresolved" as const, customerId: null }; },
     async createPortal(id, workspaceId, configurationId, returnUrl) { if (id !== customerId || workspaceId !== scope.workspaceId || configurationId !== config.portalConfigurationId || returnUrl !== `${config.origin}/app/billing`) throw new Error("unsafe portal"); return { url: "https://billing.stripe.test/portal" }; },
   };
   const start = createCheckoutService({ repository: repo, gateway, config, frequency: async () => { frequencyCount++; }, now: () => time, pause: async () => { await new Promise<void>(resolve => setTimeout(resolve, 1)); } });
