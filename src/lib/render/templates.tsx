@@ -190,6 +190,19 @@ function Autor({ p, cor, corSec, tamanho = 1 }: { p: ArteProps; cor: string; cor
 }
 
 /** Título display com o trecho de destaque sobre um marca-texto na cor da marca. */
+// Satori não aplica kerning GPOS: numa fonte pesada, pontuação de fechamento (.,!?:;) fica afastada da
+// última letra. Separa a pontuação num bloco à parte com margem negativa para encostar de volta na palavra.
+function palavraComKern(palavra: string, fs: number) {
+  const m = palavra.match(/^(.*?)([.,!?:;]+)$/);
+  if (!m || !m[1]) return <>{palavra}</>;
+  return (
+    <div style={{ display: "flex" }}>
+      <div>{m[1]}</div>
+      <div style={{ marginLeft: -fs * 0.13 }}>{m[2]}</div>
+    </div>
+  );
+}
+
 function TituloCreator({ texto, destaque, fs, cor, marca, lh = 0.98 }: { texto: string; destaque?: string | null; fs: number; cor: string; marca: string; lh?: number }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", columnGap: fs * 0.24, rowGap: fs * 0.06, fontFamily: "Titulo", fontSize: fs, lineHeight: lh, color: cor, letterSpacing: -fs * 0.035 }}>
@@ -202,7 +215,7 @@ function TituloCreator({ texto, destaque, fs, cor, marca, lh = 0.98 }: { texto: 
               : { display: "flex" }
           }
         >
-          {w.palavra}
+          {palavraComKern(w.palavra, fs)}
         </div>
       ))}
     </div>
@@ -540,9 +553,9 @@ function AntesDepois(p: ArteProps) {
           <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 5 * u, color: cor, opacity: 0.75 }}>{rotulo}</div>
         </div>
         {limpar(s.titulo).toLowerCase() === rotulo.toLowerCase() ? null : (
-          <div style={{ fontFamily: "Titulo", fontSize: 54 * u, color: cor, textDecoration: riscado ? "line-through" : "none", opacity: riscado ? 0.55 : 1 }}>{limpar(s.titulo)}</div>
+          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: 54 * u, color: cor, textDecoration: riscado ? "line-through" : "none", opacity: riscado ? 0.55 : 1 }}><Kern t={s.titulo} fs={54 * u} /></div>
         )}
-        <div style={{ fontFamily: riscado ? "Corpo" : "Titulo", fontSize: fs, lineHeight: 1.18, color: cor, opacity: riscado ? 0.7 : 1 }}>{t}</div>
+        <div style={{ display: "flex", fontFamily: riscado ? "Corpo" : "Titulo", fontSize: fs, lineHeight: 1.18, color: cor, opacity: riscado ? 0.7 : 1 }}>{riscado ? t : <Kern t={t} fs={fs} />}</div>
       </div>
     );
   };
