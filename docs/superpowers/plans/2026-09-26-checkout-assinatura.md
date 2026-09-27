@@ -54,7 +54,7 @@ Definir na Tarefa 1; todas as tarefas importam os mesmos tipos. `DraftBody` usa 
 ```ts
 type Scope = { userId: string; workspaceId: string };
 type UsageKind = 'material_extract' | 'context_analyze' |
-  'competitor_suggest' | 'preview_generate' | 'week_generate';
+  'competitor_suggest' | 'preview_generate' | 'week_generate' | 'image_generate';
 type BillingStatus = 'none' | 'incomplete' | 'incomplete_expired' |
   'trialing' | 'active' | 'past_due' | 'unpaid' | 'paused' | 'canceled';
 type AccessState = {
@@ -171,8 +171,8 @@ it('não libera duas operações quando resta apenas uma', async () => {
 
 ```ts
 export const TEST_LIMITS = {
-  free: { material_extract: 3, context_analyze: 2, competitor_suggest: 1, preview_generate: 1, week_generate: 0 },
-  paid: { material_extract: 10, context_analyze: 10, competitor_suggest: 10, preview_generate: 0, week_generate: 4 },
+  free: { material_extract: 3, context_analyze: 2, competitor_suggest: 1, preview_generate: 1, week_generate: 0, image_generate: 1 },
+  paid: { material_extract: 10, context_analyze: 10, competitor_suggest: 10, preview_generate: 0, week_generate: 4, image_generate: 24 },
   postsPerWeek: 6,
 } as const;
 ```
