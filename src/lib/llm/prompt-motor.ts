@@ -91,6 +91,7 @@ Escreva em português brasileiro natural. Evite marcas de texto gerado por IA: n
 - Cada peça (post ou roteiro) defende uma tese própria: outro pilar, outro produto ou funcionalidade de site_extraido.produtos, outra dor. No máximo 2 peças do lote com a mesma tese, e roteiro não repete o assunto de um post.
 - Proibido: "ninguém fala disso", "é matemática", "o segredo", "sem susto", "game changer", "no mundo de hoje", "descubra".
 - Legenda sem markdown (nada de ** ou # de título). "Link na bio" só em legenda de Instagram.
+- "avisos": no máximo 3, uma frase curta cada, só o que o founder precisa fazer ou saber para publicar.
 
 ## 5. Objetivo endereçado (obrigatório em todo post)
 Todo post existe para fazer uma pessoa específica do publico_alvo pensar "isso sou eu" e agir. Post sem público endereçado não deve existir: se você não consegue dizer para quem ele é, troque o post.

@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   if (!brand) return erro("O objeto brand veio incompleto. Envie o resultado de /api/brand ou os dados da empresa sem site.", 400);
   if (body.data.contexto && body.data.contexto.empresa !== brand.dominio) return erro("O contexto pertence a outra empresa.", 400);
 
-  const guardada = pesquisaGuardada(brand, body.data.publico, body.data.contexto);
+  const guardada = await pesquisaGuardada(brand, body.data.publico, body.data.contexto);
   if (guardada) return json(guardada);
 
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";

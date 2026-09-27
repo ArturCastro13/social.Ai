@@ -16,7 +16,8 @@ import { extrairJson } from "@/lib/engine/schema";
 import { corte } from "@/lib/engine/texto-local";
 import { todosOsVirais } from "@/lib/virais";
 import { NICHOS } from "@/lib/types";
-import { itemEmAltaSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
+import { store } from "@/lib/store";
+import { itemEmAltaSchema, pesquisaMercadoSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
 import { hostDe } from "./benchmark";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
@@ -233,14 +234,31 @@ async function chamarIA(llm: LLM, sistema: string, prompt: string, prazoMs: numb
   }
 }
 
-// Pesquisa com busca na web custa centavos: a mesma marca e o mesmo público não pagam de novo por 6 horas.
+// Pesquisa com busca na web custa uns US$ 0,11: a mesma marca, o mesmo público e o mesmo contexto não pagam de
+// novo por 7 dias. Memória da instância primeiro, depois o banco (sobrevive a deploy e a outra instância).
 const guardadas = new Map<string, { em: number; resposta: RespostaConcorrentes }>();
-const VALIDADE_MS = 6 * 60 * 60 * 1000;
+const VALIDADE_MS = 7 * 24 * 60 * 60 * 1000;
 
-/** Pesquisa já feita para esta marca, este público e este contexto confirmado, se ainda vale. */
-export function pesquisaGuardada(brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado): RespostaConcorrentes | null {
-  const g = guardadas.get(chaveGuarda(brand, publico, contexto));
-  return g && Date.now() - g.em < VALIDADE_MS ? g.resposta : null;
+/** Pesquisa já feita para esta marca, este público e este contexto confirmado, se ainda vale. Nunca lança. */
+export async function pesquisaGuardada(brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado): Promise<RespostaConcorrentes | null> {
+  const chave = chaveGuarda(brand, publico, contexto);
+  const g = guardadas.get(chave);
+  if (g && Date.now() - g.em < VALIDADE_MS) return g.resposta;
+  try {
+    const salva = lerRespostaGuardada(await store.buscarPesquisa(chave, VALIDADE_MS / 3600e3));
+    if (salva) guardadas.set(chave, { em: Date.now(), resposta: salva });
+    return salva;
+  } catch {
+    return null;
+  }
+}
+
+/** O que veio do banco só vale se ainda tiver o formato de hoje. */
+function lerRespostaGuardada(v: unknown): RespostaConcorrentes | null {
+  const o = v as { sugestoes?: unknown; pesquisa?: unknown } | null;
+  if (!o || !Array.isArray(o.sugestoes)) return null;
+  const p = pesquisaMercadoSchema.safeParse(o.pesquisa);
+  return p.success ? { sugestoes: o.sugestoes as SugestaoConcorrente[], pesquisa: p.data } : null;
 }
 const chaveGuarda = (brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado) =>
   `${brand.dominio}|${normal(publico?.trim() ?? "")}|${contexto ? createHash("sha256").update(JSON.stringify(contexto.entendimento)).digest("base64url").slice(0, 12) : ""}`;
@@ -319,7 +337,11 @@ export async function buscarConcorrentes(brand: BrandProfile, op: OpcoesSugestao
     out.push(...sugestoesDaBase(itens, nicho, { marca: brand.nome, max: MAX_SUGESTOES }));
   }
   const resposta: RespostaConcorrentes = pesquisa ? { sugestoes: out, pesquisa } : { sugestoes: out };
-  if (pesquisa) guardadas.set(chaveGuarda(brand, op.publico, op.contexto), { em: Date.now(), resposta });
+  if (pesquisa) {
+    const chave = chaveGuarda(brand, op.publico, op.contexto);
+    guardadas.set(chave, { em: Date.now(), resposta });
+    await store.salvarPesquisa(chave, resposta).catch((e: Error) => console.error("[concorrentes] não guardou a pesquisa:", e.message));
+  }
   return resposta;
 }
 
