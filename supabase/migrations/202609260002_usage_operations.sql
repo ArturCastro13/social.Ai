@@ -192,7 +192,7 @@ begin
   if p_action not in ('otp_send','otp_verify','checkout','provider') or p_identity_hash !~ '^[0-9a-f]{64}$'
     or p_window_seconds < 60 or p_window_seconds > 86400 or p_limit < 1 or p_limit > 100
   then raise exception 'invalid frequency input' using errcode = '22023'; end if;
-  v_start := pg_catalog.to_timestamp(pg_catalog.floor(pg_catalog.extract(epoch from pg_catalog.now()) / p_window_seconds) * p_window_seconds);
+  v_start := pg_catalog.to_timestamp(pg_catalog.floor(pg_catalog.date_part('epoch', pg_catalog.now()) / p_window_seconds) * p_window_seconds);
   insert into public.workspace_frequency(action,identity_hash,window_start,count)
     values(p_action,p_identity_hash,v_start,1)
     on conflict(action,identity_hash,window_start) do update set count = public.workspace_frequency.count + 1
