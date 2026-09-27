@@ -22,6 +22,19 @@ describe("fonte do título", () => {
   });
 });
 
+describe("tema do estilo creator", () => {
+  it("papel, textos e marca-texto legíveis em várias paletas", () => {
+    for (const primaria of ["#10b77f", "#fe3e6d", "#0b66ff", "#ffd400", "#111111", "#f5f5f5"]) {
+      const brand = { ...DEMOS[0].brand, paleta: { ...DEMOS[0].brand.paleta, primaria } } as BrandProfile;
+      const t = temaDaMarca(brand);
+      expect(contrastRatio(t.tintaNoPapel, t.papel)).toBeGreaterThanOrEqual(7);
+      expect(contrastRatio(t.mutedNoPapel, t.papel)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(t.primariaNoPapel, t.papel)).toBeGreaterThanOrEqual(3);
+      expect(contrastRatio(t.tintaNoPapel, t.marcaTexto)).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+});
+
 describe("render", () => {
   it("tema garante contraste legível para qualquer cor principal", () => {
     const brand = DEMOS[0].brand;
