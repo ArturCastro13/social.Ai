@@ -58,8 +58,8 @@ export const supabaseBillingRepository: BillingRepository = {
     const r = await step(scope, { action: "claim_attempt", id: seed.id, key: seed.key, token: seed.token, draftId, draftVersion, customerId: seed.input.customerId, input: seed.input });
     if (r.invalid_draft === true) return { invalidDraft: true };
     if (r.hold === true) return { operatorHold: true };
-    if (typeof r.claimed !== "boolean" || typeof r.created !== "boolean") unavailable();
-    return { row: attemptRow(r.row, scope), claimed: r.claimed, created: r.created };
+    if (typeof r.claimed !== "boolean" || typeof r.created !== "boolean" || typeof r.draft_current !== "boolean") unavailable();
+    return { row: attemptRow(r.row, scope), claimed: r.claimed, created: r.created, draftCurrent: r.draft_current };
   },
   async markFrequency(scope, id, token, allowed) { return ok(await step(scope, { action: "mark_frequency", id, token, reason: allowed ? "ok" : "denied" })); },
   async saveSession(scope, id, token, sessionId) { return ok(await step(scope, { action: "save_session", id, token, sessionId })); },

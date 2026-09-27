@@ -62,10 +62,16 @@ begin
     p_draft_id=>draft,p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
   if r->>'claimed' <> 'true' or r->'row'->>'session_id' <> 'cs_test_owner' or r->'row'->>'idempotency_key' <> 'checkout-key'
   then raise exception 'same attempt recovery failed'; end if;
+  r := public.save_draft(actor,w,draft,1,
+    '{"brand":null,"preferencias":{},"contexto":null,"personalizacoes":{}}'::jsonb);
+  if r->>'status' <> 'ok' then raise exception 'draft update fixture failed'; end if;
+  r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>rival,p_token=>rival,p_key=>'wrong-key',
+    p_draft_id=>draft,p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
+  if r->>'draft_current' <> 'false' then raise exception 'stale persisted draft returned as current'; end if;
   r := public.billing_checkout_step(actor,w,'close_attempt',p_id=>attempt,p_token=>rival);
   if r->>'ok' <> 'true' then raise exception 'session close failed'; end if;
   r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>'44444444-4444-4444-8444-444444444444',p_token=>token,p_key=>'new-key',
-    p_draft_id=>draft,p_draft_version=>2,p_customer_id=>'cus_owner',p_input=>input);
+    p_draft_id=>draft,p_draft_version=>3,p_customer_id=>'cus_owner',p_input=>input);
   if r->>'invalid_draft' <> 'true' then raise exception 'stale draft accepted'; end if;
 end $$;
 rollback;

@@ -26,6 +26,24 @@ describe("checkout sandbox recuperável", () => {
     expect(h.frequencyCount()).toBe(2);
   });
 
+  it("não devolve a URL antiga quando o rascunho persistido mudou e o cliente repete a versão antiga", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.changeDraft();
+    await expect(h.start(h.scope, 1)).rejects.toMatchObject({ code: "invalid_draft" });
+    expect(h.sessions()[0].status).toBe("expired");
+    expect(h.sessions()).toHaveLength(1);
+  });
+
+  it("não devolve URL de sessão que Stripe manteve aberta após tentar expirar", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.changeDraft();
+    h.keepSessionOpenOnExpire();
+    await expect(h.start()).rejects.toMatchObject({ code: "stripe_mismatch" });
+    expect(h.sessions()).toHaveLength(1);
+  });
+
   it("requer operador se resultado desconhecido ultrapassou 24 horas", async () => {
     const h = createBillingHarness();
     h.failNextWrite("checkout_session");
@@ -71,6 +89,14 @@ describe("checkout sandbox recuperável", () => {
     const customerId = h.getCustomer()?.customerId ?? "";
     h.setSubscriptions([{ id: "sub_1", livemode: false, customerId, status: "past_due", priceId: "price_test_monthly", subscriptionItemId: "si_1", cancelAtPeriodEnd: false, periodStart: "2026-09-01T00:00:00.000Z", periodEnd: "2026-10-01T00:00:00.000Z", latestInvoiceId: null }]);
     expect(await h.start()).toEqual({ kind: "billing_state", status: "past_due", portalAvailable: true });
+    expect(h.sessions()).toHaveLength(1);
+  });
+
+  it("bloqueia assinatura atual em outro Price do mesmo Customer", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.setSubscriptions([{ id: "sub_other", livemode: false, customerId: h.getCustomer()?.customerId ?? "", status: "active", priceId: "price_other", subscriptionItemId: "si_other", cancelAtPeriodEnd: false, periodStart: "2026-09-01T00:00:00.000Z", periodEnd: "2026-10-01T00:00:00.000Z", latestInvoiceId: null }]);
+    expect(await h.start()).toEqual({ kind: "operator_required", reason: "inconsistent_remote_state" });
     expect(h.sessions()).toHaveLength(1);
   });
 

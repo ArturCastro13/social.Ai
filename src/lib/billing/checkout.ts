@@ -92,6 +92,8 @@ export function createCheckoutService({ repository, gateway, frequency, config, 
       if ("operatorHold" in claim) return { kind: "operator_required", reason: "unknown_outcome" };
       const row = claim.row;
       if (row.state === "operator_required") return { kind: "operator_required", reason: "unknown_outcome" };
+      if (claim.draftCurrent && (row.draftId !== input.draftId || row.draftVersion !== input.draftVersion))
+        throw error(409, "invalid_draft", "Rascunho alterado ou indisponível.");
       if (!claim.claimed) { await pause(30); continue; }
       try {
         if (row.frequencyState === "pending") {
@@ -106,9 +108,10 @@ export function createCheckoutService({ repository, gateway, frequency, config, 
         let session = row.sessionId ? await gateway.getCheckout(row.sessionId) : await gateway.createCheckout(row.input, row.idempotencyKey);
         validatedSession(session, row);
         if (!row.sessionId && !await repository.saveSession(scope, row.id, token, session.id)) throw error(503, "billing_write_failed", "Falha ao registrar sessão de cobrança.");
-        if (session.status === "open" && (row.draftId !== input.draftId || row.draftVersion !== input.draftVersion || new Date(session.expiresAt) <= now())) {
+        if (session.status === "open" && (!claim.draftCurrent || new Date(session.expiresAt) <= now())) {
           session = await gateway.expireCheckout(session.id);
           validatedSession(session, row);
+          if (session.status === "open") throw error(503, "stripe_mismatch", "Expiração de sessão não confirmada.");
         }
         if (session.status === "expired") {
           const present = await subscriptions(scope, customerId);

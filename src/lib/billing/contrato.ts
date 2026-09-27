@@ -23,11 +23,12 @@ export interface StripeGateway {
 export type CustomerRow = { workspaceId: string; idempotencyKey: string; customerId: string | null; firstRequestedAt: string; leaseToken: string | null; leaseUntil: string | null; recoveryRequired: boolean };
 export type AttemptRow = { id: string; workspaceId: string; draftId: string; draftVersion: number; customerId: string; idempotencyKey: string; firstRequestedAt: string; leaseToken: string | null; leaseUntil: string | null; sessionId: string | null; state: "pending" | "open" | "closed" | "operator_required"; frequencyState: "pending" | "ok" | "denied"; input: CheckoutInput };
 export type Claim<T> = { row: T; claimed: boolean; created: boolean };
+export type AttemptClaim = Claim<AttemptRow> & { draftCurrent: boolean };
 export interface BillingRepository {
   claimCustomer(scope: Scope, seed: { key: string; token: string }): Promise<Claim<CustomerRow>>;
   saveCustomer(scope: Scope, token: string, id: string): Promise<boolean>;
   releaseCustomer(scope: Scope, token: string): Promise<void>;
-  claimAttempt(scope: Scope, draftId: string, draftVersion: number, seed: { id: string; key: string; token: string; input: CheckoutInput }): Promise<Claim<AttemptRow> | { invalidDraft: true } | { operatorHold: true }>;
+  claimAttempt(scope: Scope, draftId: string, draftVersion: number, seed: { id: string; key: string; token: string; input: CheckoutInput }): Promise<AttemptClaim | { invalidDraft: true } | { operatorHold: true }>;
   markFrequency(scope: Scope, id: string, token: string, ok: boolean): Promise<boolean>;
   saveSession(scope: Scope, id: string, token: string, sessionId: string): Promise<boolean>;
   releaseAttempt(scope: Scope, id: string, token: string): Promise<void>;

@@ -45,6 +45,7 @@ export function createBillingHarness() {
   let hold: string | null = null;
   let failWrite: string | null = null;
   let frequencyCount = 0;
+  let expireRemainsOpen = false;
   let remoteSubscriptions: RemoteSubscription[] = [];
   const remoteCustomers = new Map<string, RemoteCustomer>();
   const customerKeys = new Map<string, RemoteCustomer>();
@@ -80,7 +81,7 @@ export function createBillingHarness() {
         attempt.leaseToken = seed.token;
         attempt.leaseUntil = new Date(time.getTime() + 20_000).toISOString();
       }
-      return { row: { ...attempt }, claimed: attempt.leaseToken === seed.token, created };
+      return { row: { ...attempt }, claimed: attempt.leaseToken === seed.token, created, draftCurrent: attempt.draftVersion === draftVersion };
     },
     async markFrequency(_s, id, token, ok) { if (!attempt || attempt.id !== id || attempt.leaseToken !== token) return false; attempt.frequencyState = ok ? "ok" : "denied"; if (!ok) attempt.state = "closed"; return true; },
     async saveSession(_s, id, token, sessionId) { maybeFail("checkout_session"); if (!attempt || attempt.id !== id || attempt.leaseToken !== token) return false; attempt.sessionId = sessionId; attempt.state = "open"; return true; },
@@ -104,7 +105,7 @@ export function createBillingHarness() {
       checkoutKeys.set(key, row); remoteSessions.set(row.id, row); return row;
     },
     async getCheckout(id) { const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); return row; },
-    async expireCheckout(id) { const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); if (row.status === "open") row.status = "expired"; return row; },
+    async expireCheckout(id) { const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); if (row.status === "open" && !expireRemainsOpen) row.status = "expired"; return row; },
     async listCurrentSubscriptions() { return remoteSubscriptions; },
     async getSubscription(id) { const row = remoteSubscriptions.find(s => s.id === id); if (!row) throw new Error("unknown subscription"); return row; },
     async getInvoiceReference(): Promise<RemoteInvoiceReference> { throw new Error("not used"); },
@@ -113,5 +114,5 @@ export function createBillingHarness() {
   };
   const start = createCheckoutService({ repository: repo, gateway, config, frequency: async () => { frequencyCount++; }, now: () => time, pause: async () => { await new Promise<void>(resolve => setTimeout(resolve, 1)); } });
   const portal = createPortalService(repo, gateway, config);
-  return { scope, draftId, start: (s: Scope = scope, version = draftVersion) => start(s, { draftId, draftVersion: version }), portal, sessions: () => [...remoteSessions.values()], failNextWrite: (name: string) => { failWrite = name; }, frequencyCount: () => frequencyCount, advanceHours: (hours: number) => { time = new Date(time.getTime() + hours * 3_600_000); }, changeDraft: () => { draftVersion++; }, setSubscriptions: (rows: RemoteSubscription[]) => { remoteSubscriptions = rows; }, getAttempt: () => attempt, getCustomer: () => customer, tamperSession: (f: (s: RemoteCheckout) => void) => { for (const s of remoteSessions.values()) f(s); }, holdReason: () => hold };
+  return { scope, draftId, start: (s: Scope = scope, version = draftVersion) => start(s, { draftId, draftVersion: version }), portal, sessions: () => [...remoteSessions.values()], failNextWrite: (name: string) => { failWrite = name; }, frequencyCount: () => frequencyCount, advanceHours: (hours: number) => { time = new Date(time.getTime() + hours * 3_600_000); }, changeDraft: () => { draftVersion++; }, keepSessionOpenOnExpire: () => { expireRemainsOpen = true; }, setSubscriptions: (rows: RemoteSubscription[]) => { remoteSubscriptions = rows; }, getAttempt: () => attempt, getCustomer: () => customer, tamperSession: (f: (s: RemoteCheckout) => void) => { for (const s of remoteSessions.values()) f(s); }, holdReason: () => hold };
 }

@@ -100,7 +100,14 @@ begin
     elsif a.lease_until is null or a.lease_until < now() then
       update public.checkout_attempts set lease_token=p_token,lease_until=now()+interval '20 seconds' where id=a.id returning * into a;
     end if;
-    return pg_catalog.jsonb_build_object('row',pg_catalog.to_jsonb(a),'claimed',a.lease_token=p_token,'created',is_new);
+    perform 1 from public.drafts d where d.id=a.draft_id and d.workspace_id=p_workspace_id for update;
+    if found then
+      select public.draft_snapshot_usable(p_actor_user_id,a.draft_id,a.draft_version) and exists(
+        select 1 from public.drafts d where d.id=a.draft_id and d.workspace_id=p_workspace_id and d.version=a.draft_version
+      ) into valid_draft;
+    else valid_draft := false; end if;
+    return pg_catalog.jsonb_build_object('row',pg_catalog.to_jsonb(a),'claimed',a.lease_token=p_token,'created',is_new,
+      'draft_current',coalesce(valid_draft,false));
   elsif p_action = 'mark_frequency' then
     update public.checkout_attempts set frequency_state=case when p_reason='ok' then 'ok' else 'denied' end,
       state=case when p_reason='ok' then state else 'closed' end

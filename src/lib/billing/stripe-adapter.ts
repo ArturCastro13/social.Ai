@@ -124,8 +124,12 @@ export function createStripeGateway(config: Config, api: Stripe = new Stripe(con
     },
     async getCheckout(sessionId) { return normalizeCheckout(await api.checkout.sessions.retrieve(sessionId)); },
     async expireCheckout(sessionId) {
-      try { return normalizeCheckout(await api.checkout.sessions.expire(sessionId)); }
-      catch { return normalizeCheckout(await api.checkout.sessions.retrieve(sessionId)); }
+      let raw: Stripe.Checkout.Session;
+      try { raw = await api.checkout.sessions.expire(sessionId); }
+      catch { raw = await api.checkout.sessions.retrieve(sessionId); }
+      const session = await normalizeCheckout(raw);
+      if (session.status === "open") reject("checkout_expiration_unconfirmed");
+      return session;
     },
     async listCurrentSubscriptions(customerId) {
       const customer = await normalizeCustomer(await api.customers.retrieve(customerId));
@@ -133,7 +137,7 @@ export function createStripeGateway(config: Config, api: Stripe = new Stripe(con
       const result: RemoteSubscription[] = [];
       let startingAfter: string | undefined;
       do {
-        const page = await api.subscriptions.list({ customer: customerId, status: "all", price: config.priceId, limit: 100, ...(startingAfter ? { starting_after: startingAfter } : {}) });
+        const page = await api.subscriptions.list({ customer: customerId, status: "all", limit: 100, ...(startingAfter ? { starting_after: startingAfter } : {}) });
         for (const s of page.data) {
           if (s.status !== "canceled" && s.status !== "incomplete_expired") result.push(await normalizeSubscription(s));
         }

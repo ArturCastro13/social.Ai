@@ -12,17 +12,18 @@ const subscription = { id: "sub_1", livemode: false, customer: customer.id, meta
 const invoice = { id: "in_1", livemode: false, customer: customer.id, status: "paid", billing_reason: "subscription_cycle", parent: { type: "subscription_details", subscription_details: { subscription: "sub_1" } } };
 const invoiceLine = { id: "il_1", livemode: false, parent: { type: "subscription_item_details", subscription_item_details: { subscription: "sub_1", subscription_item: "si_1", proration: false } }, pricing: { type: "price_details", price_details: { price: "price_monthly" } }, quantity: 1, period: { start: 1_772_323_200, end: 1_774_742_400 }, subscription: "sub_1" };
 
-function sdk(overrides: { price?: object; session?: object; invoice?: object; lines?: object[]; linePages?: object[][]; portalConfiguration?: object } = {}): Stripe {
+function sdk(overrides: { price?: object; session?: object; expireSession?: object; subscription?: object; invoice?: object; lines?: object[]; linePages?: object[][]; portalConfiguration?: object } = {}): Stripe {
   const p = overrides.price ?? price;
   const s = overrides.session ?? session;
   const inv = overrides.invoice ?? invoice;
+  const sub = overrides.subscription ?? subscription;
   const lines = overrides.lines ?? [invoiceLine];
   const linePages = overrides.linePages ?? [lines];
   return {
     prices: { retrieve: async () => p },
     customers: { retrieve: async () => customer, create: async () => customer },
-    checkout: { sessions: { create: async () => s, retrieve: async () => s, expire: async () => ({ ...s, status: "expired" }), listLineItems: async () => ({ data: [{ id: "li_1", price: p, quantity: 1 }], has_more: false }) } },
-    subscriptions: { retrieve: async () => subscription, list: async () => ({ data: [subscription], has_more: false }) },
+    checkout: { sessions: { create: async () => s, retrieve: async () => s, expire: async () => overrides.expireSession ?? { ...s, status: "expired" }, listLineItems: async () => ({ data: [{ id: "li_1", price: p, quantity: 1 }], has_more: false }) } },
+    subscriptions: { retrieve: async () => sub, list: async (params?: { price?: string }) => ({ data: params?.price && (sub as typeof subscription).items.data[0].price.id !== params.price ? [] : [sub], has_more: false }) },
     subscriptionItems: { list: async () => ({ data: [], has_more: false }) },
     invoices: { retrieve: async () => inv, listLineItems: async (...[, params]: [string, { starting_after?: string }?]) => {
       const index = params?.starting_after ? linePages.findIndex(page => page.some(line => (line as { id?: string }).id === params.starting_after)) + 1 : 0;
@@ -65,5 +66,16 @@ describe("Stripe SDK 22.6.2 mapping", () => {
   it("recusa portal com alteração de plano habilitada", async () => {
     const gateway = createStripeGateway(config, sdk({ portalConfiguration: { id: "bpc_safe", livemode: false, active: true, features: { subscription_update: { enabled: true }, subscription_cancel: { enabled: false } } } }));
     await expect(gateway.createPortal(customer.id, workspaceId, "bpc_safe", `${config.origin}/app/billing`)).rejects.toMatchObject({ code: "unsafe_portal_configuration" });
+  });
+
+  it("recusa expiração sem confirmação quando a sessão continua aberta", async () => {
+    const gateway = createStripeGateway(config, sdk({ expireSession: session }));
+    await expect(gateway.expireCheckout(session.id)).rejects.toMatchObject({ code: "checkout_expiration_unconfirmed" });
+  });
+
+  it("inspeciona todas assinaturas do Customer mesmo em outro Price", async () => {
+    const foreign = { ...subscription, items: { data: [{ ...subscription.items.data[0], price: { ...price, id: "price_other" } }], has_more: false } };
+    const gateway = createStripeGateway(config, sdk({ subscription: foreign }));
+    await expect(gateway.listCurrentSubscriptions(customer.id)).rejects.toMatchObject({ code: "invalid_subscription_price" });
   });
 });
