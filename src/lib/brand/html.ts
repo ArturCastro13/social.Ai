@@ -63,16 +63,25 @@ function blocosComNumero($: cheerio.CheerioAPI, max = 12): string[] {
     200,
   );
   const menores = candidatos.filter((c) => !candidatos.some((o) => o !== c && o.length < c.length && c.includes(o)));
+  // "NPS 86" ou "1 dia útil" sozinhos perdem do que são. Com rótulo curto, sobe para o menor bloco que contém
+  // o número e diz a que ele se refere ("RH's clientes NPS 86", "Tempo médio de autorização de internação 1 dia útil").
+  const comRotulo = menores.map((c) => {
+    if (palavrasDeRotulo(c) >= 3) return c;
+    const pai = candidatos.filter((o) => o !== c && o.includes(c) && o.length <= 160).sort((a, b) => a.length - b.length)[0];
+    return pai ?? c;
+  });
   // Preço é prova fraca para post: vai para o fim, e as provas de resultado ficam com as vagas.
   const preco = (t: string) => /R\$/.test(t);
-  return [...menores.filter((t) => !preco(t)), ...menores.filter(preco)].slice(0, max);
+  const unicos = [...new Set(comRotulo)];
+  return [...unicos.filter((t) => !preco(t)), ...unicos.filter(preco)].slice(0, max);
 }
 
 const VAZIAS = new Set(["de", "do", "da", "dos", "das", "por", "mais", "com", "até", "ate", "em", "que", "mil", "the", "and"]);
-/** Tem palavra de verdade além do número ("Membros ativos"), não só "+ de 85%". */
-function temRotulo(t: string): boolean {
-  return (t.toLowerCase().match(/\p{L}{3,}/gu) ?? []).some((w) => !VAZIAS.has(w) && !/^(milh|bilh)/.test(w));
+/** Quantas palavras de verdade há além do número ("Membros ativos" tem 2; "+ de 85%" tem 0). */
+function palavrasDeRotulo(t: string): number {
+  return (t.toLowerCase().match(/\p{L}{3,}/gu) ?? []).filter((w) => !VAZIAS.has(w) && !/^(milh|bilh)/.test(w)).length;
 }
+const temRotulo = (t: string) => palavrasDeRotulo(t) > 0;
 
 /** Depoimentos marcados como tal no HTML, até 3. */
 function depoimentos($: cheerio.CheerioAPI): string[] {

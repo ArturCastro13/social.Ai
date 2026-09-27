@@ -1,8 +1,35 @@
 # Status: o que ficou pronto, o que falta e por onde começar
 
-Última atualização: noite de 26/09/2026.
+Última atualização: fim da noite de 26/09/2026.
 
 Produção: **https://social-ai-beige.vercel.app** · Repositório: https://github.com/bruno-dotcom12/social.Ai
+
+## 26/09/2026 fim da noite: IA ligada, pesquisa de mercado e auditoria
+
+A chave da Anthropic está na Vercel (production e preview) e o caminho com IA foi testado de ponta a ponta, inclusive em produção (Nuvemshop: leitura 2,7 s, pesquisa 22 s, posts 115 s, tudo pela IA).
+
+Feito:
+- **PR #2 do Arthur (anexos e contexto revisável)** entrou na `main`. Ajuste no fluxo dele: a busca de concorrentes voltou a sair assim que o site é lido (em segundo plano, enquanto o founder responde), porque é o que o founder pediu. Confirmar o resumo do negócio só refaz a busca quando o nicho confirmado é diferente do que a pesquisa achou. Os concorrentes achados pela IA voltaram a vir marcados.
+- **Pesquisa de mercado na web** (`POST /api/concorrentes`, `src/lib/motor/concorrentes.ts`): Claude com busca na web (3 buscas) acha concorrentes reais (site conferido), o que eles publicam e o que está em alta no nicho, com a fonte. A tela mostra "Em alta no seu mercado". Vai para o motor em `preferencias.pesquisa_mercado`; pelo menos 2 posts partem de um tema em alta ligado a um fato da empresa. Fica guardada 7 dias (memória e tabela `analises`, chave `pesquisa:...`).
+- **Causa das "inspirações sem nada a ver"**: o nicho vinha de contagem de palavra-chave (o próprio social.Ai virava "e-commerce") e a lista era completada com perfis da base curada. Agora o nicho vem da pesquisa ou do contexto confirmado, e perfis da base só aparecem quando não há IA.
+- **Travas contra invenção** (vieram das auditorias): o leitor de site guarda provas com rótulo e depoimentos (`brand.provas`); número sem fonte sai do texto ou vira `[PREENCHER: número real]` e o post vai para revisão (`src/lib/motor/checar-numeros.ts`); markdown, "link na bio" fora do Instagram e nome técnico são tratados em código; JSON quebrado é consertado (`jsonrepair`); campo longo é aparado em vez de derrubar a análise; a IA recebe a data de hoje.
+- **Modelos** (`src/lib/llm/index.ts`): pesquisa e posts com **Claude Sonnet 5** (esforço baixo); tarefas curtas com **Haiku 4.5**. Trocar sem mexer no código: `ANTHROPIC_MODEL_PESQUISA`, `ANTHROPIC_MODEL_POSTS`, `ANTHROPIC_MODEL`.
+- **Custo medido**: uns US$ 0,10 a 0,15 a pesquisa e US$ 0,14 os posts, ou seja, US$ 0,25 a 0,30 por site novo. Repetir o site não paga. Limites: 3 análises por e-mail, 5 pesquisas por IP por dia, 60 análises por dia (`LIMITE_GLOBAL_DIA`).
+- **`npm run ia:auditar -- <url> [saida.json] [sem-founder]`**: roda pesquisa e análise com IA para um site e salva o JSON (uns US$ 0,30).
+- **Verificação**: lint, `tsc`, 311 testes e build de produção.
+
+Auditoria (subagentes independentes conferindo na web, nota de 0 a 10):
+
+| Rodada | Concorrentes | Em alta | Posts | Publicável? |
+|---|---|---|---|---|
+| Haiku, antes das travas (Conta Azul, Alice) | 5 a 6 | 5 a 7 | 3 | Não: números e depoimentos inventados |
+| Haiku, com travas | 4 a 6 | 4 a 7 | 3 a 5 | Não: inventava funcionalidade e repetia a tese |
+| Sonnet 5, com travas | 4 a 6 | 5 a 7 | 5 | Metade das peças saía pronta; o resto pedia ajustes de minutos |
+
+Pendente:
+- **Imagens com IA (OpenAI)**: em construção. O Claude escreve a direção de arte, a OpenAI gera a imagem, o template põe o texto por cima. `OPENAI_API_KEY` já está na Vercel.
+- **Limite de gasto**: definir teto mensal no Console da Anthropic e da OpenAI (a chave é de um amigo).
+- **Ainda não é "publicar sem olhar"**: o que mais sobra é número verdadeiro usado no contexto errado e tese repetida entre peças. Post com risco aparece marcado para revisar.
 
 ## 26/09/2026 noite
 

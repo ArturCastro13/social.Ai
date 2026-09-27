@@ -7,7 +7,7 @@ import type { RoteiroVideo } from "./contrato";
 
 export const AVISO_NUMEROS = "Tirei números que não estavam nas fontes (e onde não dava, deixei [PREENCHER: número real]). Confira se as frases ainda dizem o que você quer antes de publicar.";
 
-const UNIDADE = String.raw`%|x\b|k\b|mil\b|milh(?:ão|ões|oes|ao)\b|bilh(?:ão|ões|oes|ao)\b|h\b|horas?\b|dias?\b|minutos?\b|min\b|segundos?\b|semanas?\b|meses\b|m[eê]s\b|anos?\b`;
+const UNIDADE = String.raw`%|x\b|k\b|mil\b|milh(?:ão|ões|oes|ao)\b|bilh(?:ão|ões|oes|ao)\b|h\b|horas?\b|dias?\b|minutos?\b|min\b|segundos?\b|semanas?\b|meses\b|m[eê]s\b|anos?\b|vez(?:es)?\b`;
 // Número solto (não colado em letra, @, #, / ou outro número), com R$ antes ou unidade depois, opcionais.
 const RE_NUMERO = new RegExp(String.raw`(R\$\s*)?(?<![\p{L}\d.,/#@_-])(\d+(?:[.,]\d+)*)(\s*(?:${UNIDADE}))?`, "giu");
 const RE_URL = /https?:\/\/\S+/g;
@@ -162,3 +162,34 @@ export function limparFormato<T extends { legendas?: Record<string, string>; leg
 const RE_CAMPO_INTERNO =
   /\b(em_alta_no_nicho|site_extraido|conhecimento_founder|referencias_nicho|transcricao_audio|brand_book_extraido|publico_alvo|mercado_pesquisado|formatos_permitidos|precisa_revisao|origem_tema)\b/i;
 export const AVISO_CAMPO_INTERNO = "O texto cita um nome técnico do sistema (como em_alta_no_nicho). Reescreva essa frase antes de publicar.";
+
+// Nome técnico que escapou para diagnóstico, avisos ou estratégia vira a palavra que o founder entende.
+const NOMES_HUMANOS: [RegExp, string][] = [
+  [/\bsite_extraido(\.\w+)*\b/gi, "o seu site"],
+  [/\bconhecimento_founder\b/gi, "as suas respostas"],
+  [/\btranscricao_audio\b/gi, "o seu áudio"],
+  [/\bem_alta_no_nicho\b/gi, "a pesquisa do que está em alta"],
+  [/\bmercado_pesquisado\b/gi, "a pesquisa de mercado"],
+  [/\breferencias_nicho\b/gi, "as referências do nicho"],
+  [/\bdesempenho_proprio\b/gi, "os números dos seus posts"],
+  [/\binsights_audiencia(\.\w+)*\b/gi, "os dados da sua audiência"],
+  [/\bhistorico_preferencias\b/gi, "o que você aprovou antes"],
+  [/\bformatos_permitidos\b/gi, "os formatos escolhidos"],
+  [/\bbrand_book_extraido\b/gi, "o seu brand book"],
+  [/\bpublico_alvo\b/gi, "o seu público"],
+  [/\bnoticias\b(?=\s+(veio|vazio|está|esta))/gi, "a lista de notícias"],
+  [/\bnoticia_comentada\b/gi, "notícia comentada"],
+];
+
+/** Troca nomes de campo do CONTEXTO por palavras do founder, em qualquer texto. */
+export function humanizarCampos(t: string): string {
+  return NOMES_HUMANOS.reduce((acc, [re, nome]) => acc.replace(re, nome), t);
+}
+
+/** Aplica humanizarCampos em todas as strings de um objeto (diagnóstico, estratégia, avisos). */
+export function humanizarTudo<T>(v: T): T {
+  if (typeof v === "string") return humanizarCampos(v) as T;
+  if (Array.isArray(v)) return v.map(humanizarTudo) as T;
+  if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, humanizarTudo(x)])) as T;
+  return v;
+}

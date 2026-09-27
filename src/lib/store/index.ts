@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { promises as fs } from "node:fs";
 import os from "node:os";
@@ -49,6 +50,12 @@ export interface Store {
   buscarAnalise(id: string): Promise<Analise | null>;
   buscarCache(urlChave: string, nPosts: number, maxIdadeHoras?: number): Promise<Analise | null>;
   salvarAnalise(a: Analise, urlChave: string, email?: string | null, nPosts?: number): Promise<void>;
+  /**
+   * Pesquisa de mercado já paga (concorrentes e em alta), guardada na mesma tabela do cache de análises com
+   * url_chave "pesquisa:<chave>" e n_posts 0. Reusar por 7 dias evita pagar a busca na web de novo.
+   */
+  buscarPesquisa(chave: string, maxIdadeHoras?: number): Promise<unknown | null>;
+  salvarPesquisa(chave: string, dados: unknown): Promise<void>;
   contarUso(email: string): Promise<number>;
   registrarUso(email: string, url: string): Promise<void>;
   salvarLead(l: Lead): Promise<void>;
@@ -67,6 +74,10 @@ export interface Store {
   salvarViral(v: ViralItem): Promise<{ destino: string }>;
 }
 
+const PREFIXO_PESQUISA = "pesquisa:";
+/** Id curto e estável da pesquisa guardada. O prefixo nunca aparece num id de análise (base64url sem ":"). */
+const idPesquisa = (chave: string) => `${PREFIXO_PESQUISA}${createHash("sha256").update(chave).digest("base64url").slice(0, 16)}`;
+
 // ---------------- Supabase ----------------
 
 function supabaseStore(client: SupabaseClient): Store {
@@ -77,6 +88,7 @@ function supabaseStore(client: SupabaseClient): Store {
   return {
     tipo: "supabase",
     async buscarAnalise(id) {
+      if (id.startsWith(PREFIXO_PESQUISA)) return null;
       const r = await client.from("analises").select("dados").eq("id", id).maybeSingle();
       return (ok(r)?.dados as Analise) ?? null;
     },
@@ -95,6 +107,26 @@ function supabaseStore(client: SupabaseClient): Store {
     },
     async salvarAnalise(a, urlChave, email, nPosts) {
       ok(await client.from("analises").upsert({ id: a.id, url_chave: urlChave, n_posts: nPosts ?? a.posts.length, dados: a, email: email ?? null }));
+    },
+    async buscarPesquisa(chave, maxIdadeHoras = 24 * 7) {
+      const desde = new Date(Date.now() - maxIdadeHoras * 3600e3).toISOString();
+      const r = await client
+        .from("analises")
+        .select("dados")
+        .eq("url_chave", `${PREFIXO_PESQUISA}${chave}`)
+        .eq("n_posts", 0)
+        .gte("criado_em", desde)
+        .order("criado_em", { ascending: false })
+        .limit(1);
+      return ok(r)?.[0]?.dados ?? null;
+    },
+    async salvarPesquisa(chave, dados) {
+      // criado_em explícito: o upsert de uma pesquisa refeita renova a validade.
+      ok(
+        await client
+          .from("analises")
+          .upsert({ id: idPesquisa(chave), url_chave: `${PREFIXO_PESQUISA}${chave}`, n_posts: 0, dados, email: null, criado_em: new Date().toISOString() }),
+      );
     },
     async contarUso(email) {
       const r = await client.from("uso").select("id", { count: "exact", head: true }).eq("email", email.toLowerCase());
@@ -192,6 +224,7 @@ function localStore(): Store {
   return {
     tipo: "local",
     async buscarAnalise(id) {
+      if (id.startsWith(PREFIXO_PESQUISA)) return null;
       return (await ler<Registro>("analises")).find((r) => r.id === id)?.dados ?? null;
     },
     async buscarCache(urlChave, nPosts, maxIdadeHoras = 24 * 7) {
@@ -204,6 +237,20 @@ function localStore(): Store {
     async salvarAnalise(a, urlChave, email, nPosts) {
       const todos = (await ler<Registro>("analises")).filter((r) => r.id !== a.id);
       todos.push({ id: a.id, url_chave: urlChave, n_posts: nPosts ?? a.posts.length, dados: a, email: email ?? null, criado_em: agora() });
+      await gravar("analises", todos.slice(-200));
+    },
+    async buscarPesquisa(chave, maxIdadeHoras = 24 * 7) {
+      const limite = Date.now() - maxIdadeHoras * 3600e3;
+      const url = `${PREFIXO_PESQUISA}${chave}`;
+      const r = (await ler<{ url_chave: string; n_posts: number; dados: unknown; criado_em: string }>("analises"))
+        .filter((x) => x.url_chave === url && x.n_posts === 0 && Date.parse(x.criado_em) >= limite)
+        .sort((a, b) => b.criado_em.localeCompare(a.criado_em))[0];
+      return r?.dados ?? null;
+    },
+    async salvarPesquisa(chave, dados) {
+      const id = idPesquisa(chave);
+      const todos = (await ler<{ id: string }>("analises")).filter((r) => r.id !== id);
+      todos.push({ id, url_chave: `${PREFIXO_PESQUISA}${chave}`, n_posts: 0, dados, email: null, criado_em: agora() } as { id: string });
       await gravar("analises", todos.slice(-200));
     },
     async contarUso(email) {

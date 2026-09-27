@@ -16,7 +16,8 @@ import { extrairJson } from "@/lib/engine/schema";
 import { corte } from "@/lib/engine/texto-local";
 import { todosOsVirais } from "@/lib/virais";
 import { NICHOS } from "@/lib/types";
-import { itemEmAltaSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
+import { store } from "@/lib/store";
+import { itemEmAltaSchema, pesquisaMercadoSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
 import { hostDe } from "./benchmark";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
@@ -73,6 +74,8 @@ Regras:
 ${REGRAS_COMUNS}`;
 
 export const MAX_BUSCAS = 3;
+/** A pesquisa roda em segundo plano enquanto o founder responde; o Sonnet leva de 30 a 45 s com 3 buscas. */
+export const PRAZO_PESQUISA_MS = 75_000;
 
 export const SISTEMA_PESQUISA = `Você é analista de mercado e de conteúdo de um founder brasileiro. Recebe um JSON com o que a empresa faz.
 Antes de buscar, entenda pelo texto do site o que a empresa vende e para quem. Não confie no nome da empresa para adivinhar o setor.
@@ -89,7 +92,13 @@ ${REGRAS_COMUNS}
 - "o_que_publica": temas e formatos que o concorrente usa no conteúdo, pelo que a busca mostrou. Se não achou nada, deixe vazio.
 - O "motivo" do concorrente diz só o que a busca mostrou (o que vendem e para quem). Não afirme integração, parceria ou número que você não viu.
 - "em_alta": até 6 itens, no máximo 1 por url. Prefira imprensa, associações, dados públicos e criadores do nicho a blog de fornecedor. "tema" é o assunto; "gancho", a frase ou o ângulo de abertura que está sendo usado; "por_que", o mecanismo que faz funcionar para esse público; "quem", quem publicou (concorrente, mídia ou criador); "url", o link onde você viu.
+- "hoje" é a data de referência. Prefira fontes publicadas nos últimos 6 meses; não traga tendência de um ano anterior como se fosse atual, e trate prazo que já passou como passado.
 - Nada de número de curtidas, seguidores ou visualizações, a não ser que esteja escrito na fonte. Não invente tendência: se a busca não mostrou, deixe a lista mais curta.`;
+
+/** Data de hoje no Brasil (AAAA-MM-DD). Vai na mensagem, não no system prompt, para não quebrar o cache. */
+export function hojeEmSaoPaulo(agora = new Date()): string {
+  return agora.toLocaleDateString("sv-SE", { timeZone: "America/Sao_Paulo" });
+}
 
 /** O que o site conta, sem repetir: o hero costuma aparecer na description, no h1 e no primeiro parágrafo. */
 function descricaoDoSite(brand: BrandProfile, max = 900): string {
@@ -114,6 +123,7 @@ export function montarPromptConcorrentes(brand: BrandProfile, publico?: string |
   return JSON.stringify({
     empresa: brand.nome || brand.title || "",
     site: ehSemSite(brand.url) ? null : brand.url,
+    hoje: hojeEmSaoPaulo(),
     titulo_do_site: corte(brand.title || "", 160),
     o_que_faz: e?.negocio || descricaoDoSite(brand),
     publico: e?.publico || corte(publico?.trim() || "", 300),
@@ -224,14 +234,31 @@ async function chamarIA(llm: LLM, sistema: string, prompt: string, prazoMs: numb
   }
 }
 
-// Pesquisa com busca na web custa centavos: a mesma marca e o mesmo público não pagam de novo por 6 horas.
+// Pesquisa com busca na web custa uns US$ 0,11: a mesma marca, o mesmo público e o mesmo contexto não pagam de
+// novo por 7 dias. Memória da instância primeiro, depois o banco (sobrevive a deploy e a outra instância).
 const guardadas = new Map<string, { em: number; resposta: RespostaConcorrentes }>();
-const VALIDADE_MS = 6 * 60 * 60 * 1000;
+const VALIDADE_MS = 7 * 24 * 60 * 60 * 1000;
 
-/** Pesquisa já feita para esta marca, este público e este contexto confirmado, se ainda vale. */
-export function pesquisaGuardada(brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado): RespostaConcorrentes | null {
-  const g = guardadas.get(chaveGuarda(brand, publico, contexto));
-  return g && Date.now() - g.em < VALIDADE_MS ? g.resposta : null;
+/** Pesquisa já feita para esta marca, este público e este contexto confirmado, se ainda vale. Nunca lança. */
+export async function pesquisaGuardada(brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado): Promise<RespostaConcorrentes | null> {
+  const chave = chaveGuarda(brand, publico, contexto);
+  const g = guardadas.get(chave);
+  if (g && Date.now() - g.em < VALIDADE_MS) return g.resposta;
+  try {
+    const salva = lerRespostaGuardada(await store.buscarPesquisa(chave, VALIDADE_MS / 3600e3));
+    if (salva) guardadas.set(chave, { em: Date.now(), resposta: salva });
+    return salva;
+  } catch {
+    return null;
+  }
+}
+
+/** O que veio do banco só vale se ainda tiver o formato de hoje. */
+function lerRespostaGuardada(v: unknown): RespostaConcorrentes | null {
+  const o = v as { sugestoes?: unknown; pesquisa?: unknown } | null;
+  if (!o || !Array.isArray(o.sugestoes)) return null;
+  const p = pesquisaMercadoSchema.safeParse(o.pesquisa);
+  return p.success ? { sugestoes: o.sugestoes as SugestaoConcorrente[], pesquisa: p.data } : null;
 }
 const chaveGuarda = (brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado) =>
   `${brand.dominio}|${normal(publico?.trim() ?? "")}|${contexto ? createHash("sha256").update(JSON.stringify(contexto.entendimento)).digest("base64url").slice(0, 12) : ""}`;
@@ -257,7 +284,7 @@ export async function buscarConcorrentes(brand: BrandProfile, op: OpcoesSugestao
       op.llm,
       buscar ? SISTEMA_PESQUISA : SISTEMA_CONCORRENTES,
       montarPromptConcorrentes(brand, op.publico, op.contexto),
-      op.prazoIaMs ?? (buscar ? 45_000 : 12_000),
+      op.prazoIaMs ?? (buscar ? PRAZO_PESQUISA_MS : 12_000),
       buscar,
     );
     const lida = txt ? lerPesquisaIA(txt) : null;
@@ -294,7 +321,11 @@ export async function buscarConcorrentes(brand: BrandProfile, op: OpcoesSugestao
     }
   }
 
-  if (!out.length && nicho !== "outro") {
+  // A base curada entra só quando não houve IA (sem chave, limite do dia, empresa de exemplo). Se a IA foi tentada e
+  // falhou, é melhor lista vazia (a pessoa cola os links) do que perfis de outro mercado: o palpite de nicho por
+  // palavra-chave erra, e foi assim que apareceram "inspirações que não têm nada a ver".
+  const iaTentada = !!op.llm && !demo;
+  if (!out.length && !iaTentada && nicho !== "outro") {
     let itens = op.itens;
     if (!itens) {
       try {
@@ -306,7 +337,11 @@ export async function buscarConcorrentes(brand: BrandProfile, op: OpcoesSugestao
     out.push(...sugestoesDaBase(itens, nicho, { marca: brand.nome, max: MAX_SUGESTOES }));
   }
   const resposta: RespostaConcorrentes = pesquisa ? { sugestoes: out, pesquisa } : { sugestoes: out };
-  if (pesquisa) guardadas.set(chaveGuarda(brand, op.publico, op.contexto), { em: Date.now(), resposta });
+  if (pesquisa) {
+    const chave = chaveGuarda(brand, op.publico, op.contexto);
+    guardadas.set(chave, { em: Date.now(), resposta });
+    await store.salvarPesquisa(chave, resposta).catch((e: Error) => console.error("[concorrentes] não guardou a pesquisa:", e.message));
+  }
   return resposta;
 }
 

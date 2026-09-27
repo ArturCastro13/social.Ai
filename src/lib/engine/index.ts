@@ -38,7 +38,7 @@ import {
   temAprendizado,
 } from "@/lib/motor/aprendizados";
 import { diaDaSemana } from "@/lib/motor/saida";
-import { checarNumeros, limparFormato, numerosDasFontes } from "@/lib/motor/checar-numeros";
+import { checarNumeros, humanizarTudo, limparFormato, numerosDasFontes } from "@/lib/motor/checar-numeros";
 import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import { ultimaPorPost } from "@/lib/feedback";
 import type { CalendarioItem } from "@/lib/types";
@@ -172,7 +172,7 @@ const usoGlobal = { dia: "", total: 0 };
 function dentroDoTetoGlobal(): boolean {
   const hoje = new Date().toISOString().slice(0, 10);
   if (usoGlobal.dia !== hoje) Object.assign(usoGlobal, { dia: hoje, total: 0 });
-  return usoGlobal.total < Number(process.env.LIMITE_GLOBAL_DIA || 300);
+  return usoGlobal.total < Number(process.env.LIMITE_GLOBAL_DIA || 60);
 }
 
 /** Tempo máximo somado das chamadas de IA, abaixo do maxDuration da rota, para sobrar tempo ao motor local. */
@@ -420,6 +420,10 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     const temFounder = !!(pref?.conhecimento_founder && Object.values(pref.conhecimento_founder).some((v) => v?.trim())) || !!pref?.founder?.transcricao_audio?.trim();
     comRoteiros.posts = limparFormato(comRoteiros.posts, temFounder);
     if (comRoteiros.roteiros) comRoteiros.roteiros = limparFormato(comRoteiros.roteiros, temFounder);
+    comRoteiros.avisos = humanizarTudo(comRoteiros.avisos);
+    comRoteiros.diagnostico = humanizarTudo(comRoteiros.diagnostico);
+    comRoteiros.estrategia = humanizarTudo(comRoteiros.estrategia);
+    comRoteiros.pilares = humanizarTudo(comRoteiros.pilares);
     const checado = checarNumeros(comRoteiros.posts, comRoteiros.roteiros, numerosDasFontes(textosDasFontes(brand, pref)));
     if (checado.trocados) {
       comRoteiros.posts = checado.posts;

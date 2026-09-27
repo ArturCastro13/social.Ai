@@ -1,7 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+// Pesquisas guardadas no "banco" deste teste.
+const pesquisasNoBanco = vi.hoisted(() => new Map<string, unknown>());
+
 vi.mock("@/lib/store", () => ({
   store: {
+    buscarPesquisa: async (chave: string) => pesquisasNoBanco.get(chave) ?? null,
+    salvarPesquisa: async (chave: string, dados: unknown) => void pesquisasNoBanco.set(chave, dados),
     buscarCache: async () => null,
     salvarAnalise: async () => undefined,
     contarUso: async () => 0,
@@ -126,15 +131,14 @@ describe("sugerirConcorrentes", () => {
     expect(JSON.stringify(s)).not.toMatch(/[—–]/);
   });
 
-  it("IA com erro, lenta ou com lixo: cai para a base sem lançar", async () => {
+  it("IA com erro, lenta ou com lixo: lista vazia, sem lançar e sem perfis de outro mercado", async () => {
     const erro = llmFalso(async () => {
       throw new Error("HTTP 429");
     });
     const lenta = llmFalso(() => new Promise((r) => setTimeout(() => r('{"sugestoes":[]}'), 500)));
     for (const [llm, prazo] of [[erro, 1000], [lenta, 20], [llmFalso("não sei"), 1000]] as const) {
       const s = await sugerirConcorrentes(semSite, { llm, verificar: async () => true, itens, prazoIaMs: prazo });
-      expect(s.length).toBeGreaterThan(0);
-      expect(s.every((x) => x.fonte === "base_nicho")).toBe(true);
+      expect(s).toEqual([]);
     }
   });
 
@@ -177,8 +181,23 @@ describe("sugerirConcorrentes", () => {
     expect(r.pesquisa?.nicho).toBe("saas-b2b");
     expect(r.pesquisa?.concorrentes).toEqual([{ nome: "Feegow", url: "https://feegow.com.br/", o_que_publica: "Dicas de gestão, em carrossel" }]);
     expect(r.pesquisa?.em_alta.map((t) => [t.tema, t.url])).toEqual([["Falta de paciente", "https://exemplo.com/a"], ["Sem link válido", undefined]]);
-    expect(pesquisaGuardada(marca)).toEqual(r);
-    expect(pesquisaGuardada(marca, "outro público")).toBeNull();
+    expect(await pesquisaGuardada(marca)).toEqual(r);
+    expect(pesquisasNoBanco.get("pesquisa-teste.com.br||")).toEqual(r);
+    expect(await pesquisaGuardada(marca, "outro público")).toBeNull();
+  });
+
+  it("pesquisa guardada no banco é reaproveitada por outra instância, e formato antigo é ignorado", async () => {
+    const marca = { ...semSite, dominio: "banco-teste.com.br", nome: "Banco Teste" };
+    const salva = {
+      sugestoes: [{ nome: "Feegow", url: "https://feegow.com.br/", motivo: "Agenda.", fonte: "ia" }],
+      pesquisa: { mercado: "Agenda para clínicas", nicho: "saas-b2b", concorrentes: [], em_alta: [{ tema: "Falta de paciente" }] },
+    };
+    pesquisasNoBanco.set("banco-teste.com.br||", salva);
+    const r = await pesquisaGuardada(marca);
+    expect(r?.sugestoes[0].nome).toBe("Feegow");
+    expect(r?.pesquisa?.em_alta[0]).toMatchObject({ tema: "Falta de paciente", gancho: "" });
+    pesquisasNoBanco.set("banco-teste.com.br|outro|", { sugestoes: "formato velho" });
+    expect(await pesquisaGuardada(marca, "outro")).toBeNull();
   });
 
   it("lerPesquisaIA nunca lança e ignora nicho fora da lista", () => {

@@ -1,0 +1,9 @@
+# Não vai para a Vercel no deploy pela CLI: cópias de trabalho de agentes, dados locais de teste
+# (podem ter leads e entrevistas), variáveis de ambiente e arquivos temporários.
+.claude
+.agents
+.tmp
+.data
+.env*
+!.env.example
+*.tsbuildinfo
