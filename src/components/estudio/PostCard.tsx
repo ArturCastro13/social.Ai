@@ -1,10 +1,12 @@
 "use client";
 
 /* eslint-disable @next/next/no-img-element */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { LIMITES_EDICAO, TEMPLATES_COM_FOTO, criarImagemIA, postEditado, temEdicao, totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
+import { marcarSemCapa } from "@/lib/client/capas";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
 import { urlCanva } from "./canva";
+import { CapasContexto } from "./capas-contexto";
 import { AprovarRecusar, JaPostei, Recusado } from "./JaPostei";
 import { BOTAO_SECUNDARIO, CaixaRevisar, SeloFounder, TresLinhas, comLacunas } from "./Partes";
 import { NOMES_REDE, diaCurto, nomeDoPadrao } from "./rotulos";
@@ -81,6 +83,7 @@ export function PostCard({
   selecao?: { marcado: boolean; onMarcar: (v: boolean) => void };
 }) {
   const post = postEditado(original, pers);
+  const capaAuto = useContext(CapasContexto)[original.id];
   const editado = temEdicao(pers);
   const template = pers.template ?? post.template;
   const total = totalSlides(post, template);
@@ -214,11 +217,11 @@ export function PostCard({
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}
-        {criandoImagem && (
+        {(criandoImagem || capaAuto === "pintando") && (
           <div className="absolute inset-x-3 bottom-3 z-10 rounded-2xl bg-tinta/85 px-4 py-3 text-papel backdrop-blur-sm" role="status">
             <p className="flex items-center gap-2 text-sm font-semibold">
               <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-limao" />
-              Criando a imagem com IA
+              {capaAuto === "pintando" && !criandoImagem ? "Pintando a capa com IA" : "Criando a imagem com IA"}
             </p>
             <p className="mt-0.5 text-xs leading-snug text-papel/80">Leva uns 20 a 40 segundos. O texto do post entra por cima, com as cores da sua marca.</p>
           </div>
@@ -447,7 +450,10 @@ export function PostCard({
                 Imagem criada com IA, texto do seu post.
                 <button
                   type="button"
-                  onClick={() => novaArte({ ...pers, foto: null })}
+                  onClick={() => {
+                    marcarSemCapa(analise.id, original.id);
+                    novaArte({ ...pers, foto: null });
+                  }}
                   className="font-semibold text-tinta-2 underline decoration-tinta/30 underline-offset-2 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
                 >
                   Tirar imagem

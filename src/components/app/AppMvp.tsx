@@ -129,7 +129,14 @@ export function AppMvp({
             </p>
             <div className="mt-8">
               {g.brand && (g.aoVivo.resumo || Object.keys(g.aoVivo.posts).length || g.aoVivo.escrevendo) ? (
-                <AoVivo estado={g.aoVivo} quantidade={dados.quantidade} totalVirais={totalVirais} brand={g.brand} />
+                <AoVivo
+                  estado={g.aoVivo}
+                  quantidade={dados.quantidade}
+                  totalVirais={totalVirais}
+                  brand={g.brand}
+                  nicho={ultimas.preferencias?.pesquisa_mercado?.nicho}
+                  publico={ultimas.preferencias?.publico_alvo}
+                />
               ) : (
                 <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || (dados.semSite ? "sua empresa" : dados.url)} />
               )}

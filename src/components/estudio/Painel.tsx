@@ -6,9 +6,11 @@ import { baixarZip, gravarFoto, lerFotos, type Personalizacao } from "@/lib/clie
 import type { Analise } from "@/lib/types";
 import { AbasBaixo, AbasTopo, type Aba } from "./abas";
 import { Calendario } from "./Calendario";
+import { CapasContexto } from "./capas-contexto";
 import { Concorrentes } from "./Concorrentes";
 import { Hoje } from "./Hoje";
 import { SeusResultados } from "./SeusResultados";
+import { useCapasAutomaticas } from "./useCapas";
 import { useFeedback } from "./useFeedback";
 
 /**
@@ -30,6 +32,7 @@ export function Painel({
   onNova?: () => void;
 }) {
   const [pers, setPers] = useState<Record<string, Personalizacao>>({});
+  const [fotosLidas, setFotosLidas] = useState(false);
   const [zip, setZip] = useState<{ feito: number; total: number } | null>(null);
   const [aviso, setAviso] = useState("");
   const fb = useFeedback(analise);
@@ -38,17 +41,26 @@ export function Painel({
     if ((p.foto ?? null) !== (pers[id]?.foto ?? null)) gravarFoto(analise.id, id, p.foto ?? null);
     setPers((old) => ({ ...old, [id]: p }));
   };
+  const capas = useCapasAutomaticas(analise, pers, mudarPers, fotosLidas);
 
   // Imagens criadas com IA voltam do navegador depois de montar (o HTML do servidor não tem localStorage).
+  // Só depois de ler (com ou sem fotos) as capas automáticas podem começar: senão pediriam de novo uma capa
+  // que a pessoa já tinha guardado.
   useEffect(() => {
     const fotos = lerFotos(analise.id);
-    if (!Object.keys(fotos).length) return;
+    if (!Object.keys(fotos).length) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setFotosLidas(true);
+      return;
+    }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setPers((old) => {
       const novo = { ...old };
       for (const [id, url] of Object.entries(fotos)) novo[id] = { ...novo[id], foto: novo[id]?.foto ?? url };
       return novo;
     });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFotosLidas(true);
   }, [analise.id]);
 
   async function baixarUma(url: string, nome: string) {
@@ -81,31 +93,33 @@ export function Painel({
 
   return (
     <section id="resultado" className="flex flex-col bg-papel pb-[calc(4rem+env(safe-area-inset-bottom)+2rem)] md:pb-20">
-      {slotAbas && createPortal(<AbasTopo aba={aba} onAba={onAba} pendentes={pendentes} />, slotAbas)}
+      <CapasContexto.Provider value={capas}>
+        {slotAbas && createPortal(<AbasTopo aba={aba} onAba={onAba} pendentes={pendentes} />, slotAbas)}
 
-      {/* key: a aba nova entra com um leve deslize. "backwards" e não "both": transform que fica depois da animação prende as barras fixas dentro da aba. */}
-      <div key={aba} className="animate-[aparecer_.35s_cubic-bezier(.2,.7,.1,1)_backwards]">
-        {aba === "hoje" && <Hoje analise={analise} fb={fb} pers={pers} onPers={mudarPers} onBaixar={baixarUma} onAba={onAba} />}
-        {aba === "calendario" && (
-          <Calendario analise={analise} fb={fb} pers={pers} onPers={mudarPers} onBaixar={baixarUma} onZip={baixarTudo} zip={zip} aviso={aviso} onNova={onNova} />
-        )}
-        {aba === "resultados" && (
-          <div className="mx-auto w-full max-w-6xl space-y-12 px-4 pt-6 sm:pt-10">
-            <SeusResultados analise={analise} fb={fb} onAbrir={(ancora) => onAba("calendario", ancora)} />
-            <section aria-labelledby="titulo-concorrentes-aba" className="border-t border-tinta/10 pt-10">
-              <h2 id="titulo-concorrentes-aba" className="font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
-                Concorrentes e nicho
-              </h2>
-              <p className="mt-2 max-w-xl text-tinta-2">O que outras marcas publicam e o que foi bem no seu nicho. Use como referência.</p>
-              <div className="mt-6 max-w-4xl">
-                <Concorrentes analise={analise} />
-              </div>
-            </section>
-          </div>
-        )}
-      </div>
+        {/* key: a aba nova entra com um leve deslize. "backwards" e não "both": transform que fica depois da animação prende as barras fixas dentro da aba. */}
+        <div key={aba} className="animate-[aparecer_.35s_cubic-bezier(.2,.7,.1,1)_backwards]">
+          {aba === "hoje" && <Hoje analise={analise} fb={fb} pers={pers} onPers={mudarPers} onBaixar={baixarUma} onAba={onAba} />}
+          {aba === "calendario" && (
+            <Calendario analise={analise} fb={fb} pers={pers} onPers={mudarPers} onBaixar={baixarUma} onZip={baixarTudo} zip={zip} aviso={aviso} onNova={onNova} />
+          )}
+          {aba === "resultados" && (
+            <div className="mx-auto w-full max-w-6xl space-y-12 px-4 pt-6 sm:pt-10">
+              <SeusResultados analise={analise} fb={fb} onAbrir={(ancora) => onAba("calendario", ancora)} />
+              <section aria-labelledby="titulo-concorrentes-aba" className="border-t border-tinta/10 pt-10">
+                <h2 id="titulo-concorrentes-aba" className="font-display text-2xl font-semibold tracking-[-0.02em] sm:text-3xl">
+                  Concorrentes e nicho
+                </h2>
+                <p className="mt-2 max-w-xl text-tinta-2">O que outras marcas publicam e o que foi bem no seu nicho. Use como referência.</p>
+                <div className="mt-6 max-w-4xl">
+                  <Concorrentes analise={analise} />
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
 
-      <AbasBaixo aba={aba} onAba={onAba} pendentes={pendentes} />
+        <AbasBaixo aba={aba} onAba={onAba} pendentes={pendentes} />
+      </CapasContexto.Provider>
     </section>
   );
 }

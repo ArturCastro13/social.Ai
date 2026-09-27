@@ -110,9 +110,17 @@ export interface ImagemCriada {
 
 /**
  * Pede a imagem do post com IA (direção de arte do Claude, imagem da OpenAI). Leva o texto editado, para a cena
- * bater com o que vai na arte. `variacao` maior que 0 pede outra cena ("Gerar outra").
+ * bater com o que vai na arte. `variacao` maior que 0 pede outra cena ("Gerar outra"). `aoParcial` recebe a
+ * prévia borrada enquanto a capa é pintada (a E5 usa; por enquanto só é repassado e não faz nada).
  */
-export async function criarImagemIA(analise: Analise, original: PostGerado, pers: Personalizacao, variacao = 0): Promise<ImagemCriada> {
+export async function criarImagemIA(
+  analise: Analise,
+  original: PostGerado,
+  pers: Personalizacao,
+  variacao = 0,
+  aoParcial?: (dataUrl: string) => void,
+): Promise<ImagemCriada> {
+  void aoParcial;
   const { legendas: _l, ...post } = postEditado(original, pers);
   void _l;
   const corte = (s: string | undefined, n: number) => (s ? s.slice(0, n) : undefined);
