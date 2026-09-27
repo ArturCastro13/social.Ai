@@ -13,6 +13,8 @@ export interface Personalizacao {
   cor?: string | null;
   template?: TemplateId | null;
   edicao?: EdicaoPost | null;
+  /** URL pública da imagem criada com IA (bucket "posts"). A arte a usa como fundo. */
+  foto?: string | null;
 }
 
 /** Limites do payload ?d= da rota de arte (mesmos do zod de lá). Os campos de edição respeitam esses tamanhos. */
@@ -37,7 +39,7 @@ export function postEditado(post: PostGerado, pers: Personalizacao | undefined):
 
 const TAMANHO_POR_REDE: Record<Rede, string> = { instagram: "feed", facebook: "feed", linkedin: "linkedin", x: "x" };
 
-function marcaMinima(b: BrandProfile) {
+export function marcaMinima(b: BrandProfile) {
   // Só o que a arte precisa. Mantém a URL curta.
   return {
     nome: b.nome,
@@ -81,6 +83,7 @@ export function urlArte(
   if (opts.tamanho) q.set("tamanho", opts.tamanho);
   if (opts.template && opts.template !== post.template) q.set("template", opts.template);
   if (opts.cor && opts.cor.toLowerCase() !== analise.brand.paleta.primaria.toLowerCase()) q.set("cor", opts.cor);
+  if (opts.foto) q.set("foto", opts.foto);
   // Na demo, a rota acha o post pelo id no arquivo pré-processado; os posts montados na hora
   // a partir do que o founder contou não estão lá, então vão com os dados na URL.
   // Post editado vai sempre com os dados na URL.
@@ -94,6 +97,72 @@ export function urlArte(
   // o texto editado seria ignorado; o sufixo faz a busca falhar e a rota desenhar o que veio em ?d=.
   const idCaminho = editado ? `${post.id}-editado` : post.id;
   return `${opts.base ?? ""}/api/render/${encodeURIComponent(idCaminho)}?${q.toString()}`;
+}
+
+/** Templates que usam a imagem criada com IA (no carrossel, só a capa). Os outros seguem só com cor. */
+export const TEMPLATES_COM_FOTO: TemplateId[] = ["capa-gancho", "citacao", "dado-impacto", "print-x", "bastidor"];
+
+/** Resposta de POST /api/imagem. */
+export interface ImagemCriada {
+  url: string;
+  direcao: string;
+}
+
+/**
+ * Pede a imagem do post com IA (direção de arte do Claude, imagem da OpenAI). Leva o texto editado, para a cena
+ * bater com o que vai na arte. `variacao` maior que 0 pede outra cena ("Gerar outra").
+ */
+export async function criarImagemIA(analise: Analise, original: PostGerado, pers: Personalizacao, variacao = 0): Promise<ImagemCriada> {
+  const { legendas: _l, ...post } = postEditado(original, pers);
+  void _l;
+  const corte = (s: string | undefined, n: number) => (s ? s.slice(0, n) : undefined);
+  let res: Response;
+  try {
+    res = await fetch("/api/imagem", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        post: { ...post, template: pers.template ?? post.template },
+        brand: marcaMinima(analise.brand),
+        contexto: {
+          nicho: analise.nicho,
+          publico: corte(analise.publico, 600),
+          tom: corte(analise.tom_de_voz, 400),
+          resumo: corte(analise.resumo_negocio, 1200),
+        },
+        variacao,
+      }),
+    });
+  } catch {
+    throw new Error("Sem conexão com o servidor. Confira a internet e tente de novo.");
+  }
+  const dados = (await res.json().catch(() => null)) as (Partial<ImagemCriada> & { erro?: string }) | null;
+  if (!res.ok || !dados?.url) throw new Error(dados?.erro || "Não deu para criar a imagem agora. Tente de novo.");
+  return { url: dados.url, direcao: dados.direcao ?? "" };
+}
+
+// Imagens criadas com IA ficam no navegador, por análise: recarregar a página não perde o que já foi pago.
+const CHAVE_FOTOS = (analiseId: string) => `socialai:fotos:${analiseId}`;
+
+export function lerFotos(analiseId: string): Record<string, string> {
+  try {
+    const j = JSON.parse(localStorage.getItem(CHAVE_FOTOS(analiseId)) ?? "null") as unknown;
+    if (!j || typeof j !== "object") return {};
+    return Object.fromEntries(Object.entries(j).filter(([, v]) => typeof v === "string" && /^https:\/\//.test(v)));
+  } catch {
+    return {};
+  }
+}
+
+export function gravarFoto(analiseId: string, postId: string, url: string | null) {
+  try {
+    const fotos = lerFotos(analiseId);
+    if (url) fotos[postId] = url;
+    else delete fotos[postId];
+    localStorage.setItem(CHAVE_FOTOS(analiseId), JSON.stringify(fotos));
+  } catch {
+    /* navegador sem armazenamento: segue só em memória */
+  }
 }
 
 function nomeArquivo(s: string) {

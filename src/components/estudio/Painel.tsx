@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { baixarZip, type Personalizacao } from "@/lib/client/artes";
+import { baixarZip, gravarFoto, lerFotos, type Personalizacao } from "@/lib/client/artes";
 import type { Analise } from "@/lib/types";
 import { AbasBaixo, AbasTopo, type Aba } from "./abas";
 import { Calendario } from "./Calendario";
@@ -34,7 +34,22 @@ export function Painel({
   const [aviso, setAviso] = useState("");
   const fb = useFeedback(analise);
   const pendentes = fb.carregado ? analise.posts.filter((p) => !fb.decisoes[p.id]).length : 0;
-  const mudarPers = (id: string, p: Personalizacao) => setPers((old) => ({ ...old, [id]: p }));
+  const mudarPers = (id: string, p: Personalizacao) => {
+    if ((p.foto ?? null) !== (pers[id]?.foto ?? null)) gravarFoto(analise.id, id, p.foto ?? null);
+    setPers((old) => ({ ...old, [id]: p }));
+  };
+
+  // Imagens criadas com IA voltam do navegador depois de montar (o HTML do servidor não tem localStorage).
+  useEffect(() => {
+    const fotos = lerFotos(analise.id);
+    if (!Object.keys(fotos).length) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPers((old) => {
+      const novo = { ...old };
+      for (const [id, url] of Object.entries(fotos)) novo[id] = { ...novo[id], foto: novo[id]?.foto ?? url };
+      return novo;
+    });
+  }, [analise.id]);
 
   async function baixarUma(url: string, nome: string) {
     setAviso("");

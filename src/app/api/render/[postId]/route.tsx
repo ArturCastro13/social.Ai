@@ -1,16 +1,16 @@
 import { ImageResponse } from "next/og";
-import { z } from "zod";
+import sharp from "sharp";
 import { fetchLimited } from "@/lib/brand/fetch";
 import { demoPorId } from "@/lib/engine/demo";
 import { TEMPLATES, templateValido } from "@/lib/engine/schema";
 import { CORS_HEADERS, erro } from "@/lib/http";
 import { adaptarSlides } from "@/lib/render/adaptar";
+import { doPayload, payloadSchema } from "@/lib/render/payload";
 import { fontesDaMarca } from "@/lib/render/fonts";
 import { Arte, totalDeImagens } from "@/lib/render/templates";
 import { TAMANHOS, tamanhoPadrao, temaDaMarca, type Tamanho } from "@/lib/render/tema";
 import { store } from "@/lib/store";
 import type { BrandProfile, PostGerado, TemplateId } from "@/lib/types";
-import { formatoSchema, redeSchema } from "@/lib/virais/schema";
 
 export const maxDuration = 30;
 
@@ -27,7 +27,11 @@ async function comoDataUri(url: string | null | undefined): Promise<string | nul
     const { body, contentType } = await fetchLimited(url, { timeoutMs: 3500, maxBytes: 1_500_000, accept: "image/*" });
     const tipo = contentType.split(";")[0].trim() || (url.endsWith(".svg") ? "image/svg+xml" : "image/png");
     if (!/^image\/(png|jpe?g|svg\+xml|webp|gif)$/.test(tipo) || body.length < 50) return null;
-    const uri = `data:${tipo};base64,${body.toString("base64")}`;
+    // O Satori não lê WebP (quebra a arte inteira): vira JPEG antes.
+    const uri =
+      tipo === "image/webp"
+        ? `data:image/jpeg;base64,${(await sharp(body).jpeg({ quality: 88 }).toBuffer()).toString("base64")}`
+        : `data:${tipo};base64,${body.toString("base64")}`;
     if (imagens.size >= LIMITE_CACHE) imagens.delete(imagens.keys().next().value!);
     imagens.set(url, uri);
     return uri;
@@ -36,43 +40,11 @@ async function comoDataUri(url: string | null | undefined): Promise<string | nul
   }
 }
 
-const hex = z.string().regex(/^#[0-9a-fA-F]{6}$/);
-const texto = (n: number) => z.string().max(n).default("");
-
-/** Payload ?d= vem do cliente: valida tudo e aplica padrões, para o Satori nunca receber lixo. */
-const payloadSchema = z.object({
-  post: z.object({
-    id: z.string().max(80),
-    rede_principal: redeSchema,
-    formato: formatoSchema,
-    template: z.string().max(30),
-    gancho: texto(300),
-    slides: z.array(z.object({ titulo: texto(300), texto: texto(700) })).min(1).max(8),
-    hashtags: z.array(z.string().max(40)).max(12).default([]),
-    padrao_inspirador: texto(80),
-    por_que: texto(400),
-  }),
-  brand: z.object({
-    nome: z.string().min(1).max(80),
-    dominio: z.string().max(120).default(""),
-    url: z.string().max(300).default(""),
-    logo: z.string().max(2000).nullable().default(null),
-    handles: z.record(z.string(), z.string().max(120).optional()).default({}),
-    paleta: z.object({ primaria: hex, secundaria: hex, destaque: hex, fundo: hex, texto: hex }),
-    fontes: z.object({ titulo: z.string().max(60).default("Inter"), corpo: z.string().max(60).default("Inter") }).default({ titulo: "Inter", corpo: "Inter" }),
-  }),
-});
-
 function lerPayload(d: string | null): { post: PostGerado; brand: BrandProfile } | null {
   if (!d || d.length > 16_000) return null;
   try {
     const r = payloadSchema.safeParse(JSON.parse(Buffer.from(d, "base64url").toString("utf8")));
-    if (!r.success) return null;
-    const { post, brand } = r.data;
-    return {
-      post: { ...post, template: templateValido(post.template, post.formato), legendas: { instagram: "", linkedin: "", x: "", facebook: "" } },
-      brand: { ...brand, paleta: { ...brand.paleta, todas: [] } } as unknown as BrandProfile,
-    };
+    return r.success ? doPayload(r.data) : null;
   } catch {
     return null;
   }

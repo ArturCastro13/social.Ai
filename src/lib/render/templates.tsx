@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { HOST_SEM_SITE } from "@/lib/brand/sem-site";
+import { contrastRatio, mix, withAlpha } from "@/lib/color";
 import type { CSSProperties, ReactNode } from "react";
 import type { BrandProfile, PostGerado, TemplateId } from "@/lib/types";
 import type { Tema } from "./tema";
@@ -23,21 +24,30 @@ const EMOJI = /[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu;
 export const limpar = (s: string) => s.replace(EMOJI, "").replace(/\s{2,}/g, " ").trim();
 
 /** Tamanho de fonte que cabe na caixa, estimando largura média de caractere. */
+function contarLinhas(palavras: string[], largura: number, s: number, larguraChar: number) {
+  const porLinha = Math.max(1, Math.floor(largura / (s * larguraChar)));
+  let linhas = 1, atual = 0;
+  for (const p of palavras) {
+    const n = p.length + (atual ? 1 : 0);
+    if (atual + n > porLinha) {
+      linhas++;
+      atual = p.length;
+    } else atual += n;
+  }
+  return linhas;
+}
+
 export function caber(texto: string, largura: number, altura: number, max: number, min: number, lh = 1.08, larguraChar = 0.54) {
   const palavras = limpar(texto).split(" ");
   for (let s = max; s > min; s -= 2) {
-    const porLinha = Math.max(1, Math.floor(largura / (s * larguraChar)));
-    let linhas = 1, atual = 0;
-    for (const p of palavras) {
-      const n = p.length + (atual ? 1 : 0);
-      if (atual + n > porLinha) {
-        linhas++;
-        atual = p.length;
-      } else atual += n;
-    }
-    if (linhas * s * lh <= altura) return s;
+    if (contarLinhas(palavras, largura, s, larguraChar) * s * lh <= altura) return s;
   }
   return min;
+}
+
+/** Altura estimada de um texto já com a fonte escolhida, pela mesma conta do caber. */
+export function alturaTexto(texto: string, largura: number, fs: number, lh = 1.08, larguraChar = 0.54) {
+  return texto ? contarLinhas(limpar(texto).split(" "), largura, fs, larguraChar) * fs * lh : 0;
 }
 
 /**
@@ -124,6 +134,61 @@ function Moldura({ p, bg, children, style }: { p: ArteProps; bg: string; childre
   );
 }
 
+// ---------------------------------------------------------------- foto de fundo (imagem da IA)
+
+/** Cor do véu sobre a foto: o escuro da marca, puxado para o preto para não acinzentar a imagem. */
+const corDoVeu = (tema: Tema) => mix(tema.escuro, "#000000", 0.3);
+
+/**
+ * Opacidade mínima do véu para cada texto ter contraste com qualquer foto por baixo. Confere o pior caso
+ * (foto branca sob o véu), do mesmo jeito que o tema confere cada par de cores. Nunca abaixo de 0,7: menos que isso
+ * deixa a foto com cara de lavada, nem clara nem escura.
+ */
+export function veuLegivel(veu: string, textos: [cor: string, minimo: number][]): number {
+  for (let a = 0.7; a < 0.97; a += 0.02) {
+    const pior = mix("#ffffff", veu, a);
+    if (textos.every(([cor, min]) => contrastRatio(cor, pior) >= min)) return Math.round(a * 100) / 100;
+  }
+  return 0.97;
+}
+
+/**
+ * Foto em tela cheia com véu só onde o texto fica: embaixo (retrato e quadrado) ou à esquerda (paisagem),
+ * mais uma faixa no topo para a marca. `bloco` é o tamanho do texto (altura embaixo, largura à esquerda):
+ * o véu cobre esse bloco com a opacidade cheia e some aos poucos depois dele. Devolve também a opacidade.
+ */
+function FundoFoto({ p, foto, textos, bloco, lado, topo = true }: { p: ArteProps; foto: string; textos: [string, number][]; bloco: number; lado: "baixo" | "esquerda"; topo?: boolean }) {
+  const u = Math.min(p.w, p.h) / 1080;
+  const cor = corDoVeu(p.tema);
+  const alfa = veuLegivel(cor, textos);
+  const cheio = withAlpha(cor, alfa);
+  const nada = withAlpha(cor, 0);
+  const total = lado === "baixo" ? p.h : p.w;
+  // Padding da moldura, o bloco e um respiro. Nunca menos de 30% nem mais de 70% da arte.
+  const ate = Math.round(Math.min(0.7, Math.max(0.3, (bloco + 130 * u) / total)) * 100);
+  // Um bloco só, em posição absoluta: fragmento com filhos absolutos sai deslocado pelo padding no Satori.
+  return (
+    <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: p.w, height: p.h }}>
+      <img src={foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: p.w, height: p.h, objectFit: "cover" }} />
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          width: p.w,
+          height: p.h,
+          backgroundImage: `linear-gradient(${lado === "baixo" ? "to top" : "to right"}, ${cheio} 0%, ${cheio} ${ate}%, ${withAlpha(cor, alfa * 0.45)} ${Math.min(100, ate + 12)}%, ${nada} ${Math.min(100, ate + 28)}%)`,
+        }}
+      />
+      {topo ? (
+        <div style={{ position: "absolute", left: 0, top: 0, width: p.w, height: 250 * u, backgroundImage: `linear-gradient(to bottom, ${cheio} 0%, ${withAlpha(cor, alfa * 0.8)} 45%, ${nada} 100%)` }} />
+      ) : null}
+    </div>
+  );
+}
+
+const SOMBRA_TEXTO = "0 2px 18px rgba(0,0,0,0.35)";
+
 // ---------------------------------------------------------------- capa-gancho (carrossel)
 
 function CapaGancho(p: ArteProps) {
@@ -134,6 +199,36 @@ function CapaGancho(p: ArteProps) {
   const s = post.slides[i];
   const contador = `${i + 1}/${total}`;
   const areaW = w - 168 * u;
+
+  if (i === 0 && p.foto) {
+    const titulo = limpar(s.titulo || post.gancho);
+    const paisagem = w / h > 1.3;
+    const larguraTexto = paisagem ? w * 0.5 : areaW;
+    const fs = caber(titulo, larguraTexto, h * (paisagem ? 0.46 : 0.26), 124 * u, 50 * u);
+    const sub = limpar(s.texto);
+    const fsSub = caber(sub, larguraTexto * 0.92, h * 0.08, 38 * u, 26 * u, 1.3, 0.5);
+    const bloco = paisagem ? larguraTexto : alturaTexto(titulo, larguraTexto, fs, 1.02) + (sub ? alturaTexto(sub, larguraTexto * 0.92, fsSub, 1.3, 0.5) + 28 * u : 0) + 90 * u;
+    return (
+      <Moldura p={p} bg={tema.escuro}>
+        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
+        <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
+          <Marca p={p} cor={tema.naEscuro} fundoClaro={false} />
+          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naEscuro }}>{contador}</div>
+        </div>
+        <div style={col({ gap: 28 * u, maxWidth: larguraTexto })}>
+          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.02, color: tema.naEscuro, letterSpacing: -fs * 0.03, textShadow: SOMBRA_TEXTO }}><Kern t={titulo} fs={fs} /></div>
+          {sub ? (
+            <div style={{ fontFamily: "Corpo", fontSize: fsSub, lineHeight: 1.3, color: tema.naEscuro, maxWidth: larguraTexto * 0.92 }}>{sub}</div>
+          ) : null}
+          <div style={row({ alignItems: "center" })}>
+            <div style={row({ alignItems: "center", background: tema.primaria, color: tema.naPrimaria, borderRadius: 999, padding: `${14 * u}px ${30 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u })}>
+              Arraste para o lado →
+            </div>
+          </div>
+        </div>
+      </Moldura>
+    );
+  }
 
   if (i === 0) {
     const titulo = limpar(s.titulo || post.gancho);
@@ -260,18 +355,43 @@ function Citacao(p: ArteProps) {
   const s = post.slides[0];
   const frase = limpar(s.texto || post.gancho);
   const fs = caber(frase, w - 168 * u, h * 0.52, 104 * u, 40 * u, 1.12);
+  const autor = limpar(s.titulo || "").toLowerCase() === limpar(p.brand.nome).toLowerCase() || !s.titulo ? null : limpar(s.titulo);
+  if (p.foto) {
+    const paisagem = w / h > 1.3;
+    const larguraTexto = paisagem ? w * 0.52 : w - 168 * u;
+    const fsFoto = caber(frase, larguraTexto, h * (paisagem ? 0.5 : 0.3), 88 * u, 36 * u, 1.12);
+    const aspas = tema.destaqueNoEscuro;
+    const bloco = paisagem ? larguraTexto : 100 * u + alturaTexto(frase, larguraTexto, fsFoto, 1.12) + (autor ? 70 * u : 0) + 90 * u;
+    return (
+      <Moldura p={p} bg={tema.escuro}>
+        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [aspas, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} topo={false} />
+        <div style={{ height: 1 }} />
+        <div style={col({ gap: 30 * u, maxWidth: larguraTexto })}>
+          <div style={{ fontFamily: "Titulo", fontSize: 150 * u, lineHeight: 0.6, height: 70 * u, color: aspas }}>“</div>
+          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fsFoto, lineHeight: 1.12, color: tema.naEscuro, letterSpacing: -fsFoto * 0.02, textShadow: SOMBRA_TEXTO }}><Kern t={frase} fs={fsFoto} /></div>
+          {autor ? (
+            <div style={row({ alignItems: "center", gap: 20 * u })}>
+              <div style={{ width: 70 * u, height: 6 * u, background: aspas }} />
+              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 32 * u, color: tema.naEscuro }}>{autor}</div>
+            </div>
+          ) : null}
+          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
+        </div>
+      </Moldura>
+    );
+  }
   return (
     <Moldura p={p} bg={tema.primaria}>
       <div style={{ position: "absolute", left: 40 * u, top: -120 * u, fontFamily: "Titulo", fontSize: 560 * u, color: tema.destaqueNaPrimaria, opacity: 0.35, lineHeight: 1 }}>“</div>
       <div style={{ height: 120 * u }} />
       <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.12, color: tema.naPrimaria, letterSpacing: -fs * 0.02 }}><Kern t={frase} fs={fs} /></div>
       <div style={col({ gap: 26 * u })}>
-        {limpar(s.titulo || "").toLowerCase() === limpar(p.brand.nome).toLowerCase() || !s.titulo ? null : (
-        <div style={row({ alignItems: "center", gap: 20 * u })}>
-          <div style={{ width: 70 * u, height: 6 * u, background: tema.destaqueNaPrimaria }} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naPrimaria }}>{limpar(s.titulo)}</div>
-        </div>
-        )}
+        {autor ? (
+          <div style={row({ alignItems: "center", gap: 20 * u })}>
+            <div style={{ width: 70 * u, height: 6 * u, background: tema.destaqueNaPrimaria }} />
+            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naPrimaria }}>{autor}</div>
+          </div>
+        ) : null}
         <Rodape p={p} cor={tema.naPrimaria} fundoClaro={false} />
       </div>
     </Moldura>
@@ -288,6 +408,26 @@ function DadoImpacto(p: ArteProps) {
   const numero = limpar(s.titulo || "");
   const fsNum = caber(numero, paisagem ? w * 0.5 : w - 168 * u, h * 0.42, 400 * u, 120 * u, 1, 0.6);
   const texto = limpar(s.texto || post.gancho);
+  if (p.foto) {
+    const larguraTexto = paisagem ? w * 0.5 : w - 168 * u;
+    const fsNumFoto = caber(numero, larguraTexto, h * (paisagem ? 0.36 : 0.22), 300 * u, 96 * u, 1, 0.6);
+    const fsTextoFoto = caber(texto, larguraTexto, h * (paisagem ? 0.22 : 0.14), 46 * u, 28 * u, 1.3, 0.5);
+    const bloco = paisagem ? larguraTexto : fsNumFoto * 0.9 + alturaTexto(texto, larguraTexto, fsTextoFoto, 1.3, 0.5) + 110 * u;
+    return (
+      <Moldura p={p} bg={tema.escuro}>
+        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [tema.destaqueNoEscuro, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
+        <div style={row({ alignItems: "center", gap: 16 * u })}>
+          <div style={{ width: 18 * u, height: 18 * u, borderRadius: 99, background: tema.destaqueNoEscuro }} />
+          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 4 * u, color: tema.naEscuro }}>EM NÚMEROS</div>
+        </div>
+        <div style={col({ gap: 24 * u, maxWidth: larguraTexto })}>
+          <div style={{ fontFamily: "Titulo", fontSize: fsNumFoto, lineHeight: 0.9, color: tema.destaqueNoEscuro, letterSpacing: -fsNumFoto * 0.04, textShadow: SOMBRA_TEXTO }}>{numero}</div>
+          <div style={{ fontFamily: "Corpo", fontSize: fsTextoFoto, lineHeight: 1.3, color: tema.naEscuro }}>{texto}</div>
+          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
+        </div>
+      </Moldura>
+    );
+  }
   return (
     <Moldura p={p} bg={tema.escuro}>
       {Array.from({ length: 6 }).map((_, k) => (
@@ -320,8 +460,18 @@ function PrintX(p: ArteProps) {
   const handle = brand.handles.x ?? brand.handles.instagram ?? (dominioVisivel(brand) ? "@" + brand.dominio.split(".")[0] : arrobaDoNome(brand));
   return (
     <Moldura p={p} bg={tema.primaria} style={{ alignItems: "center", justifyContent: "center" }}>
-      <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.25 }} />
-      <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.naPrimaria, opacity: 0.12 }} />
+      {p.foto ? (
+        // O cartão é branco com texto escuro: a foto fica inteira, só um pouco mais escura para o cartão saltar.
+        <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: w, height: h }}>
+          <img src={p.foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: w, height: h, objectFit: "cover" }} />
+          <div style={{ position: "absolute", left: 0, top: 0, width: w, height: h, background: withAlpha(tema.escuro, 0.18) }} />
+        </div>
+      ) : (
+        <>
+          <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.25 }} />
+          <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.naPrimaria, opacity: 0.12 }} />
+        </>
+      )}
       <div style={col({ width: cartaoW, background: "#ffffff", borderRadius: 40 * u, padding: 60 * u, gap: 36 * u, boxShadow: `0 ${30 * u}px ${80 * u}px rgba(0,0,0,0.25)` })}>
         <div style={row({ alignItems: "center", gap: 24 * u })}>
           <div style={row({ width: 104 * u, height: 104 * u, borderRadius: 9999, background: p.logo ? "#ffffff" : tema.primaria, border: `${3 * u}px solid #e7e7e7`, alignItems: "center", justifyContent: "center", overflow: "hidden" })}>

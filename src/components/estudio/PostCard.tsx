@@ -2,7 +2,7 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
-import { LIMITES_EDICAO, postEditado, temEdicao, totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
+import { LIMITES_EDICAO, TEMPLATES_COM_FOTO, criarImagemIA, postEditado, temEdicao, totalSlides, urlArte, type Personalizacao } from "@/lib/client/artes";
 import type { Analise, PostGerado, Rede, TemplateId } from "@/lib/types";
 import { urlCanva } from "./canva";
 import { AprovarRecusar, JaPostei, Recusado } from "./JaPostei";
@@ -92,6 +92,8 @@ export function PostCard({
   const [tentativa, setTentativa] = useState(0);
   const [rascunho, setRascunho] = useState<Rascunho | null>(null);
   const [avisoCanva, setAvisoCanva] = useState(false);
+  const [criandoImagem, setCriandoImagem] = useState(false);
+  const [erroImagem, setErroImagem] = useState("");
   const s = Math.min(slide, total - 1);
   const base = urlArte(analise, original, { ...pers, slide: s, tamanho: "feed" });
   const src = tentativa ? `${base}&r=${tentativa}` : base;
@@ -101,10 +103,26 @@ export function PostCard({
   const revisar = post.precisa_revisao ?? [];
   const aprovado = decisao === "aprovado";
   const personalizado = editado || !!pers.cor || !!pers.template;
+  const aceitaFoto = TEMPLATES_COM_FOTO.includes(template);
 
   function novaArte(p: Personalizacao) {
     setCarregandoArte(true);
     onPers(p);
+  }
+
+  async function criarImagem() {
+    setErroImagem("");
+    setCriandoImagem(true);
+    try {
+      // "Gerar outra" pede uma cena diferente; a primeira usa a variação 0, que acha a imagem já criada se houver.
+      const { url } = await criarImagemIA(analise, original, pers, pers.foto ? 1 + Math.floor(Math.random() * 50) : 0);
+      setSlide(0); // no carrossel, a imagem vai na capa
+      if (url !== pers.foto) novaArte({ ...pers, foto: url });
+    } catch (e) {
+      setErroImagem((e as Error).message);
+    } finally {
+      setCriandoImagem(false);
+    }
   }
 
   async function copiar() {
@@ -196,6 +214,15 @@ export function PostCard({
 
       <div className="relative aspect-[4/5] overflow-hidden bg-papel-2">
         {carregandoArte && <div className="absolute inset-0 animate-pulse bg-papel-3/60" />}
+        {criandoImagem && (
+          <div className="absolute inset-x-3 bottom-3 z-10 rounded-2xl bg-tinta/85 px-4 py-3 text-papel backdrop-blur-sm" role="status">
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <span aria-hidden="true" className="h-2 w-2 animate-pulse rounded-full bg-limao" />
+              Criando a imagem com IA
+            </p>
+            <p className="mt-0.5 text-xs leading-snug text-papel/80">Leva uns 20 a 40 segundos. O texto do post entra por cima, com as cores da sua marca.</p>
+          </div>
+        )}
         <img
           key={src}
           src={src}
@@ -372,7 +399,8 @@ export function PostCard({
                   onClick={() => {
                     setSlide(0);
                     setCarregandoArte(true);
-                    onPers({});
+                    // A imagem criada com IA fica: ela foi paga e tem botão próprio para tirar.
+                    onPers(pers.foto ? { foto: pers.foto } : {});
                     setRascunho(null);
                   }}
                   className="ml-auto text-xs font-semibold text-tinta-2 underline decoration-tinta/30 underline-offset-2 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
@@ -394,6 +422,39 @@ export function PostCard({
             </summary>
             <p className="mt-1">{post.por_que}</p>
           </details>
+        )}
+
+        {aceitaFoto && (
+          <div className="mt-3">
+            <button
+              type="button"
+              onClick={criarImagem}
+              disabled={criandoImagem}
+              aria-busy={criandoImagem}
+              className={`${foco ? ACAO_PEQUENA : BOTAO_SECUNDARIO} w-full gap-2`}
+              title="O Claude escreve a direção de arte, a OpenAI cria a imagem sem texto e o seu post entra por cima"
+            >
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-pauta" />
+              {criandoImagem ? "Criando a imagem…" : pers.foto ? "Gerar outra imagem" : "Criar imagem com IA"}
+            </button>
+            {erroImagem && (
+              <p className="mt-2 rounded-xl bg-pauta/10 px-3 py-2 text-xs leading-snug text-pauta-escura" role="alert">
+                {erroImagem}
+              </p>
+            )}
+            {pers.foto && !criandoImagem && !erroImagem && (
+              <p className="mt-1.5 flex flex-wrap items-center justify-center gap-x-2 text-xs text-tinta-3">
+                Imagem criada com IA, texto do seu post.
+                <button
+                  type="button"
+                  onClick={() => novaArte({ ...pers, foto: null })}
+                  className="font-semibold text-tinta-2 underline decoration-tinta/30 underline-offset-2 hover:text-tinta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pauta"
+                >
+                  Tirar imagem
+                </button>
+              </p>
+            )}
+          </div>
         )}
 
         {/* Na aba "Hoje", Aprovar e Recusar ficam numa barra fixa da própria aba, sempre à vista. */}
