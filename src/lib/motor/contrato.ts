@@ -55,6 +55,16 @@ export const itemEmAltaSchema = z.object({
   url: z.string().trim().url().max(500).optional(),
 });
 
+/** Um post que está rendendo agora no nicho do cliente, achado na busca ao vivo. */
+export const viralAoVivoSchema = z.object({
+  gancho: z.string().trim().min(1).max(240),
+  formato: textoPesquisa(40),
+  rede: textoPesquisa(20),
+  por_que: textoPesquisa(300),
+  quem: textoPesquisa(100),
+  url: z.string().trim().url().max(500).optional(),
+});
+
 /**
  * Pesquisa de mercado feita na web enquanto o founder responde as perguntas (POST /api/concorrentes).
  * Volta para o motor dentro das preferências: o que cada concorrente publica e o que está em alta no nicho.
@@ -70,6 +80,8 @@ export const pesquisaMercadoSchema = z.object({
     .default([]),
   /** Temas e ganchos que estão rendendo com concorrentes e mídias do nicho, cada um com a fonte achada na busca. */
   em_alta: z.array(itemEmAltaSchema).max(8).default([]),
+  /** Posts de alto engajamento do nicho nos últimos 12 meses, da quarta busca. */
+  virais_ao_vivo: z.array(viralAoVivoSchema).max(6).default([]),
 });
 export type PesquisaMercado = z.infer<typeof pesquisaMercadoSchema>;
 

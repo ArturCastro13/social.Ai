@@ -17,7 +17,7 @@ import { corte } from "@/lib/engine/texto-local";
 import { todosOsVirais } from "@/lib/virais";
 import { NICHOS } from "@/lib/types";
 import { store } from "@/lib/store";
-import { itemEmAltaSchema, pesquisaMercadoSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
+import { itemEmAltaSchema, pesquisaMercadoSchema, viralAoVivoSchema, type PesquisaMercado, type RespostaConcorrentes, type SugestaoConcorrente } from "./contrato";
 import { hostDe } from "./benchmark";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
@@ -73,7 +73,7 @@ Regras:
 - Não alegue pesquisa realizada: são sugestões para o usuário verificar.
 ${REGRAS_COMUNS}`;
 
-export const MAX_BUSCAS = 3;
+export const MAX_BUSCAS = 4;
 /** A pesquisa roda em segundo plano enquanto o founder responde; o Sonnet leva de 30 a 45 s com 3 buscas. */
 export const PRAZO_PESQUISA_MS = 75_000;
 
@@ -83,8 +83,9 @@ Use a busca na web (no máximo ${MAX_BUSCAS} buscas), uma para cada objetivo:
 1. Concorrentes: até 5 empresas reais que vendem o mesmo tipo de produto, para o mesmo público e porte, de preferência no Brasil. Inclua pelo menos um concorrente direto do mesmo modelo de negócio (outra startup, se esta for startup), não só as grandes do setor. Se no Brasil houver poucos, complete com referências internacionais e diga isso no motivo.
 2. Conteúdo que está rendendo: temas, ganchos e formatos que concorrentes, mídias e criadores do nicho estão publicando e que geram conversa.
 3. O assunto do momento para o cliente desta empresa: mudança de regra, preço, prazo, reajuste ou fato recente que pesa na decisão dele agora (os subtítulos do site dão pistas).
+4. Virais do nicho: posts de alto engajamento dos últimos 12 meses sobre o tema desta empresa, no LinkedIn, Instagram ou X, de concorrentes, criadores ou mídias do nicho. Busque o tema junto de termos como "carrossel", "post viral" ou "mais compartilhado".
 Depois das buscas, responda só com JSON, sem texto fora dele:
-{"mercado": "", "nicho": "", "concorrentes": [{"nome": "", "url": "", "motivo": "", "o_que_publica": ""}], "em_alta": [{"tema": "", "gancho": "", "por_que": "", "quem": "", "url": ""}]}
+{"mercado": "", "nicho": "", "concorrentes": [{"nome": "", "url": "", "motivo": "", "o_que_publica": ""}], "em_alta": [{"tema": "", "gancho": "", "por_que": "", "quem": "", "url": ""}], "virais_ao_vivo": [{"gancho": "", "formato": "", "rede": "", "por_que": "", "quem": "", "url": ""}]}
 Regras:
 - Só empresas e fontes que apareceram nas buscas.
 ${REGRAS_COMUNS}
@@ -92,6 +93,7 @@ ${REGRAS_COMUNS}
 - "o_que_publica": temas e formatos que o concorrente usa no conteúdo, pelo que a busca mostrou. Se não achou nada, deixe vazio.
 - O "motivo" do concorrente diz só o que a busca mostrou (o que vendem e para quem). Não afirme integração, parceria ou número que você não viu.
 - "em_alta": até 6 itens, no máximo 1 por url. Prefira imprensa, associações, dados públicos e criadores do nicho a blog de fornecedor. "tema" é o assunto; "gancho", a frase ou o ângulo de abertura que está sendo usado; "por_que", o mecanismo que faz funcionar para esse público; "quem", quem publicou (concorrente, mídia ou criador); "url", o link onde você viu.
+- "virais_ao_vivo": até 6 posts reais que apareceram na busca. "gancho" é a frase de abertura em português (traduza se vier em inglês); "formato" (carrossel, imagem-unica, print-tweet, citacao, lista, video); "rede"; "por_que" é o mecanismo em uma frase; "quem" publicou; "url" o link do post. Sem busca que ache post, deixe a lista vazia.
 - "hoje" é a data de referência. Prefira fontes publicadas nos últimos 6 meses; não traga tendência de um ano anterior como se fosse atual, e trate prazo que já passou como passado.
 - Nada de número de curtidas, seguidores ou visualizações, a não ser que esteja escrito na fonte. Não invente tendência: se a busca não mostrou, deixe a lista mais curta.`;
 
@@ -177,7 +179,14 @@ export function lerPesquisaIA(txt: string): Omit<PesquisaMercado, "concorrentes"
     const item = comLink?.success ? comLink : itemEmAltaSchema.safeParse(base);
     return item.success && item.data.tema ? [item.data] : [];
   });
-  return { mercado: corte(s(bruto.mercado), 300), ...(nicho ? { nicho } : {}), em_alta: em_alta.slice(0, 8) };
+  const virais_ao_vivo = (Array.isArray(bruto.virais_ao_vivo) ? bruto.virais_ao_vivo : []).flatMap((x) => {
+    const o = (x ?? {}) as Record<string, unknown>;
+    const base = { gancho: corte(s(o.gancho), 240), formato: corte(s(o.formato), 40), rede: corte(s(o.rede), 20), por_que: corte(s(o.por_que), 300), quem: corte(s(o.quem), 100) };
+    const comLink = /^https?:\/\//.test(s(o.url)) ? viralAoVivoSchema.safeParse({ ...base, url: s(o.url) }) : null;
+    const item = comLink?.success ? comLink : viralAoVivoSchema.safeParse(base);
+    return item.success ? [item.data] : [];
+  });
+  return { mercado: corte(s(bruto.mercado), 300), ...(nicho ? { nicho } : {}), em_alta: em_alta.slice(0, 8), virais_ao_vivo: virais_ao_vivo.slice(0, 6) };
 }
 
 /**
@@ -260,8 +269,9 @@ function lerRespostaGuardada(v: unknown): RespostaConcorrentes | null {
   const p = pesquisaMercadoSchema.safeParse(o.pesquisa);
   return p.success ? { sugestoes: o.sugestoes as SugestaoConcorrente[], pesquisa: p.data } : null;
 }
+// v2: pesquisa com a quarta busca (virais ao vivo). Mudou o formato da pesquisa, suba a versão.
 const chaveGuarda = (brand: BrandProfile, publico?: string | null, contexto?: ContextoConfirmado) =>
-  `${brand.dominio}|${normal(publico?.trim() ?? "")}|${contexto ? createHash("sha256").update(JSON.stringify(contexto.entendimento)).digest("base64url").slice(0, 12) : ""}`;
+  `v2|${brand.dominio}|${normal(publico?.trim() ?? "")}|${contexto ? createHash("sha256").update(JSON.stringify(contexto.entendimento)).digest("base64url").slice(0, 12) : ""}`;
 
 /**
  * Até 5 sugestões e, com busca na web, a pesquisa de mercado. IA primeiro (só sites que responderam); a base
@@ -316,7 +326,7 @@ export async function buscarConcorrentes(brand: BrandProfile, op: OpcoesSugestao
       });
       confirmados.push({ nome, url: c.url, o_que_publica: corte(c.s.o_que_publica ?? "", 400) });
     });
-    if (buscar && lida && (lida.mercado || lida.em_alta.length || confirmados.length)) {
+    if (buscar && lida && (lida.mercado || lida.em_alta.length || lida.virais_ao_vivo.length || confirmados.length)) {
       pesquisa = { ...lida, ...(nicho !== "outro" ? { nicho } : {}), concorrentes: confirmados };
     }
   }
