@@ -65,10 +65,28 @@ class GeminiLLM implements LLM {
   }
 }
 
-/** Tokens de cada chamada nos logs, para acompanhar o gasto da chave (nada do conteúdo). */
-function registrarUso(modelo: string, tipo: string, u: Anthropic.Usage) {
+/** Linha de log de uma chamada: tokens (inclusive cache), buscas e tempo. Nada do conteúdo. */
+export function linhaUso(modelo: string, tipo: string, u: Anthropic.Usage, ms: number): string {
   const buscas = u.server_tool_use?.web_search_requests ?? 0;
-  console.info(`[ia] ${tipo} ${modelo} entrada=${u.input_tokens} saida=${u.output_tokens}${buscas ? ` buscas=${buscas}` : ""}`);
+  const leitura = u.cache_read_input_tokens ?? 0;
+  const escrita = u.cache_creation_input_tokens ?? 0;
+  return (
+    `[ia] ${tipo} ${modelo} entrada=${u.input_tokens} saida=${u.output_tokens}` +
+    (leitura ? ` cache_leitura=${leitura}` : "") +
+    (escrita ? ` cache_escrita=${escrita}` : "") +
+    (buscas ? ` buscas=${buscas}` : "") +
+    ` ${ms}ms`
+  );
+}
+
+/** Tokens de cada chamada nos logs, para acompanhar o gasto da chave (nada do conteúdo). */
+function registrarUso(modelo: string, tipo: string, u: Anthropic.Usage, inicio: number) {
+  console.info(linhaUso(modelo, tipo, u, Date.now() - inicio));
+}
+
+/** Falha da chamada nos logs: só o tipo do erro e o tempo, porque a mensagem pode repetir o pedido. */
+function registrarFalha(modelo: string, tipo: string, e: unknown, inicio: number) {
+  console.error(`[ia] ${tipo} ${modelo} falhou ${e instanceof Error ? e.name : "erro"} ${Date.now() - inicio}ms`);
 }
 
 class ClaudeLLM implements LLM {
@@ -83,6 +101,7 @@ class ClaudeLLM implements LLM {
     this.nome = `claude:${this.modelo}`;
   }
   async gerar(sistema: string, prompt: string): Promise<string> {
+    const inicio = Date.now();
     const stream = this.client.messages.stream({
       model: this.modelo,
       max_tokens: this.op.maxTokens,
@@ -91,14 +110,24 @@ class ClaudeLLM implements LLM {
       // O Haiku 4.5 não aceita esforço; nos outros, ele segura quanto o modelo pensa (e quanto custa).
       ...(this.op.esforco && !this.modelo.startsWith("claude-haiku") ? { output_config: { effort: this.op.esforco } } : {}),
     });
-    const msg = await stream.finalMessage();
-    registrarUso(this.modelo, "gerar", msg.usage);
+    const msg = await stream.finalMessage().catch((e: unknown) => {
+      registrarFalha(this.modelo, "gerar", e, inicio);
+      throw e;
+    });
+    registrarUso(this.modelo, "gerar", msg.usage, inicio);
     if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
     if (msg.stop_reason === "max_tokens") throw new Error("Claude parou no limite de tamanho da resposta");
     return msg.content.map((b) => (b.type === "text" ? b.text : "")).join("");
   }
   async gerarComAnexos(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string> {
-    const msg = await this.client.messages.create({ model: this.modelo, max_tokens: 6000, system: sistema, messages: [{ role: "user", content: blocosClaude(prompt, anexos) }] }, { timeout: 45_000, maxRetries: 0 });
+    const inicio = Date.now();
+    const msg = await this.client.messages
+      .create({ model: this.modelo, max_tokens: 6000, system: sistema, messages: [{ role: "user", content: blocosClaude(prompt, anexos) }] }, { timeout: 45_000, maxRetries: 0 })
+      .catch((e: unknown) => {
+        registrarFalha(this.modelo, "anexos", e, inicio);
+        throw e;
+      });
+    registrarUso(this.modelo, "anexos", msg.usage, inicio);
     if (msg.stop_reason !== "end_turn") throw new Error("Resposta incompleta ou recusada pelo modelo");
     return msg.content.map(b => b.type === "text" ? b.text : "").join("");
   }
@@ -108,6 +137,7 @@ class ClaudeLLM implements LLM {
     const messages: Anthropic.MessageParam[] = [{ role: "user", content: prompt }];
     // pause_turn: o servidor parou no meio das buscas; manda de novo com o que já veio para ele continuar.
     for (let volta = 0; volta < 3; volta++) {
+      const inicio = Date.now();
       const msg = await this.client.messages.create(
         {
           model: this.modelo,
@@ -127,8 +157,11 @@ class ClaudeLLM implements LLM {
           ...(this.op.esforco && !this.modelo.startsWith("claude-haiku") ? { output_config: { effort: this.op.esforco } } : {}),
         },
         { timeout: Math.max(5_000, fim - Date.now()) },
-      );
-      registrarUso(this.modelo, "pesquisar", msg.usage);
+      ).catch((e: unknown) => {
+        registrarFalha(this.modelo, "pesquisar", e, inicio);
+        throw e;
+      });
+      registrarUso(this.modelo, "pesquisar", msg.usage, inicio);
       if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
       if (msg.stop_reason === "pause_turn" && Date.now() < fim) {
         messages.push({ role: "assistant", content: msg.content });
