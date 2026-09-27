@@ -84,7 +84,8 @@ export function hashResultados(resultados: ResultadoPost[] = []): string {
  * já informou números, o hash dos resultados: plano feito antes das métricas não é servido depois delas.
  */
 export function chaveCache(url: string, preferencias?: Preferencias | null, resultados?: ResultadoPost[]): string {
-  const base = chaveUrl(url);
+  // v2: posts com destaque, direção de capa e padrão viral. Mudou o formato da análise, suba a versão.
+  const base = `v2:${chaveUrl(url)}`;
   const comPref = preferencias ? `${base}#m:${hashPreferencias(preferencias)}` : base;
   const r = hashResultados(resultados);
   return r ? `${comPref}#r:${r}` : comPref;

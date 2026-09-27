@@ -121,6 +121,7 @@ class ClaudeLLM implements LLM {
   }
   async gerarComAnexos(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string> {
     const msg = await this.client.messages.create({ model: this.modelo, max_tokens: 6000, system: sistema, messages: [{ role: "user", content: blocosClaude(prompt, anexos) }] }, { timeout: 45_000, maxRetries: 0 });
+    registrarUso(this.modelo, "anexos", msg.usage);
     if (msg.stop_reason !== "end_turn") throw new Error("Resposta incompleta ou recusada pelo modelo");
     return msg.content.map(b => b.type === "text" ? b.text : "").join("");
   }

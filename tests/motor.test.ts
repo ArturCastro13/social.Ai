@@ -276,7 +276,7 @@ describe("cache com preferências", () => {
   it("a chave muda com as preferências e é estável", () => {
     const a = preferenciasSchema.parse({ perfil_alvo: "founder" });
     const b = preferenciasSchema.parse({ perfil_alvo: "empresa" });
-    expect(chaveCache("https://cora.com.br")).toBe("cora.com.br");
+    expect(chaveCache("https://cora.com.br")).toBe("v2:cora.com.br");
     expect(chaveCache("https://cora.com.br", a)).not.toBe(chaveCache("https://cora.com.br", b));
     expect(chaveCache("https://cora.com.br", a)).toBe(chaveCache("https://www.cora.com.br/", preferenciasSchema.parse({ perfil_alvo: "founder" })));
     expect(hashPreferencias(a)).toHaveLength(12);

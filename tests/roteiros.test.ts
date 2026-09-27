@@ -352,7 +352,7 @@ describe("marca sem site", () => {
     expect(palpiteNicho(brand).nicho).toBe("healthtech");
     expect(palpiteNicho({ ...brand, nicho_informado: "qualquer" as never }).nicho).not.toBe("qualquer");
     expect(nomeDoPerfil(brand)).toBe("Loja da Ana");
-    expect(chaveCache(brand.url)).toBe(brand.dominio);
+    expect(chaveCache(brand.url)).toBe(`v2:${brand.dominio}`);
   });
 
   it("analisar sem IA entrega posts válidos e roteiros, sem inventar e sem cara de IA", async () => {
