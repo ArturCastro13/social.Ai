@@ -10,15 +10,19 @@ create table public.drafts (
   version integer not null check (version > 0),
   body jsonb not null,
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now()
+  updated_at timestamptz not null default now(),
+  unique (workspace_id, id)
 );
 create index drafts_workspace_idx on public.drafts(workspace_id);
 create table public.draft_versions (
-  draft_id uuid not null references public.drafts(id) on delete cascade,
+  draft_id uuid not null,
+  workspace_id uuid not null,
   version integer not null check (version > 0),
   body jsonb not null,
   created_at timestamptz not null default now(),
-  primary key (draft_id, version)
+  primary key (draft_id, version),
+  unique (workspace_id, draft_id, version),
+  foreign key (workspace_id, draft_id) references public.drafts(workspace_id, id) on delete cascade
 );
 create table public.draft_revoked_materials (
   draft_id uuid not null references public.drafts(id) on delete cascade,
@@ -29,10 +33,14 @@ create table public.draft_revoked_materials (
 create table public.workspace_analyses (
   id uuid primary key default gen_random_uuid(),
   workspace_id uuid not null references public.workspaces(id) on delete cascade,
-  draft_id uuid references public.drafts(id) on delete set null,
+  draft_id uuid,
   draft_version integer,
   result jsonb not null,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  constraint analysis_draft_pair check ((draft_id is null) = (draft_version is null)),
+  constraint analysis_existing_workspace_version foreign key (workspace_id, draft_id, draft_version)
+    references public.draft_versions(workspace_id, draft_id, version)
+    on delete set null (draft_id, draft_version)
 );
 create table public.workspace_post_edits (
   id uuid primary key default gen_random_uuid(),
@@ -77,8 +85,9 @@ grant select on public.workspaces, public.drafts, public.draft_versions,
 grant select on public.workspaces, public.drafts, public.draft_versions,
   public.draft_revoked_materials, public.workspace_analyses,
   public.workspace_post_edits, public.workspace_feedback, public.workspace_metrics to service_role;
-grant insert, update, delete on public.workspace_analyses, public.workspace_post_edits,
-  public.workspace_feedback, public.workspace_metrics to service_role;
+revoke insert, update, delete on public.workspaces, public.drafts, public.draft_versions,
+  public.draft_revoked_materials, public.workspace_analyses,
+  public.workspace_post_edits, public.workspace_feedback, public.workspace_metrics from service_role;
 
 create policy workspace_owner on public.workspaces for select to authenticated
   using (owner_user_id = (select auth.uid()));
@@ -169,7 +178,8 @@ begin
     update public.drafts set version = new_version, body = p_body, updated_at = pg_catalog.now()
       where id = new_id;
   end if;
-  insert into public.draft_versions(draft_id, version, body) values (new_id, new_version, p_body);
+  insert into public.draft_versions(draft_id, workspace_id, version, body)
+    values (new_id, p_workspace_id, new_version, p_body);
   return pg_catalog.jsonb_build_object('status', 'ok', 'draft',
     pg_catalog.jsonb_build_object('id', new_id, 'workspace_id', p_workspace_id,
       'version', new_version, 'body', p_body));

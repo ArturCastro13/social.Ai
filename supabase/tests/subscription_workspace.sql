@@ -14,12 +14,19 @@ select set_config('request.jwt.claim.sub', 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb
 select public.ensure_workspace();
 
 -- A browser session has SELECT only, and cannot call the mutation RPCs.
-do $$ begin
-  if has_table_privilege('authenticated', 'public.drafts', 'INSERT,UPDATE,DELETE')
-    or has_function_privilege('authenticated', 'public.save_draft(uuid,uuid,uuid,integer,jsonb)', 'EXECUTE')
+do $$ declare table_name text; begin
+  if has_function_privilege('authenticated', 'public.save_draft(uuid,uuid,uuid,integer,jsonb)', 'EXECUTE')
     or has_function_privilege('authenticated', 'public.delete_draft(uuid,uuid,uuid)', 'EXECUTE')
     or has_function_privilege('authenticated', 'public.delete_workspace_analysis(uuid,uuid,uuid)', 'EXECUTE')
   then raise exception 'authenticated mutation privilege leaked'; end if;
+  foreach table_name in array array[
+    'public.workspaces', 'public.drafts', 'public.draft_versions', 'public.draft_revoked_materials',
+    'public.workspace_analyses', 'public.workspace_post_edits', 'public.workspace_feedback', 'public.workspace_metrics'
+  ] loop
+    if has_table_privilege('authenticated', table_name, 'INSERT,UPDATE,DELETE')
+      or has_table_privilege('service_role', table_name, 'INSERT,UPDATE,DELETE')
+    then raise exception 'direct mutation privilege leaked on %', table_name; end if;
+  end loop;
 end $$;
 
 set local role service_role;
@@ -45,11 +52,38 @@ do $$ begin
   then raise exception 'owner cannot read draft/version'; end if;
 end $$;
 
-set local role service_role;
+-- The privileged test runner seeds only rollback-local analysis fixtures;
+-- service_role is deliberately denied direct DML on these tables.
+set local role postgres;
+do $$ begin
+  begin
+    insert into public.workspace_analyses(workspace_id, draft_id, draft_version, result)
+    values ((select id from public.workspaces where owner_user_id = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'),
+      current_setting('test.draft_a')::uuid, 1, '{}'::jsonb);
+    raise exception 'cross-workspace draft reference accepted';
+  exception when foreign_key_violation then null; end;
+  begin
+    insert into public.workspace_analyses(workspace_id, draft_id, draft_version, result)
+    values ((select id from public.workspaces where owner_user_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+      current_setting('test.draft_a')::uuid, 99, '{}'::jsonb);
+    raise exception 'nonexistent draft version accepted';
+  exception when foreign_key_violation then null; end;
+  begin
+    insert into public.workspace_analyses(workspace_id, draft_id, result)
+    values ((select id from public.workspaces where owner_user_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+      current_setting('test.draft_a')::uuid, '{}'::jsonb);
+    raise exception 'incomplete draft pair accepted';
+  exception when check_violation then null; end;
+end $$;
+insert into public.workspace_analyses(workspace_id, draft_id, draft_version, result)
+values ((select id from public.workspaces where owner_user_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'),
+  current_setting('test.draft_a')::uuid, 1, '{}'::jsonb);
+select set_config('test.attached_analysis_a',
+  (select id::text from public.workspace_analyses where draft_id = current_setting('test.draft_a')::uuid), true);
 insert into public.workspace_analyses(workspace_id, result)
 values ((select id from public.workspaces where owner_user_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'), '{}'::jsonb);
 select set_config('test.analysis_a',
-  (select id::text from public.workspace_analyses where workspace_id =
+  (select id::text from public.workspace_analyses where draft_id is null and workspace_id =
     (select id from public.workspaces where owner_user_id = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa')), true);
 insert into public.workspace_post_edits(analysis_id, post_id, edit)
 values (current_setting('test.analysis_a')::uuid, 'post-1', '{}'::jsonb);
@@ -57,6 +91,7 @@ insert into public.workspace_feedback(analysis_id, post_id, decision)
 values (current_setting('test.analysis_a')::uuid, 'post-1', 'aprovado');
 insert into public.workspace_metrics(analysis_id, post_id, data)
 values (current_setting('test.analysis_a')::uuid, 'post-1', '{}'::jsonb);
+set local role service_role;
 do $$ begin
   if public.delete_workspace_analysis('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
     (select id from public.workspaces where owner_user_id = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb'),
@@ -96,5 +131,9 @@ do $$ declare result jsonb; begin
   then raise exception 'owner delete failed'; end if;
   if exists (select 1 from public.draft_versions where draft_id = current_setting('test.draft_a')::uuid)
   then raise exception 'version data survived deletion'; end if;
+  if not exists (select 1 from public.workspace_analyses
+    where id = current_setting('test.attached_analysis_a')::uuid
+      and draft_id is null and draft_version is null)
+  then raise exception 'draft deletion did not detach retained analysis'; end if;
 end $$;
 rollback;

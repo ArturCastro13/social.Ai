@@ -40,4 +40,25 @@ describe("rotas privadas de rascunho", () => {
     expect(bridge.save).not.toHaveBeenCalled();
     expect(bridge.remove).not.toHaveBeenCalled();
   });
+
+  it("POST, PATCH e DELETE da origem própria persistem com respostas privadas", async () => {
+    const headers = { origin: "https://example.test", "content-type": "application/json" };
+    const create = await POST(new Request("https://example.test/api/workspace/drafts", { method: "POST", headers,
+      body: JSON.stringify({ expectedVersion: 0, body }) }));
+    expect(create.status).toBe(201);
+    expect(create.headers.get("cache-control")).toContain("no-store");
+    expect(bridge.save).toHaveBeenNthCalledWith(1, scope, { expectedVersion: 0, body });
+
+    const update = await PATCH(new Request(`https://example.test/api/workspace/drafts/${id}`, { method: "PATCH", headers,
+      body: JSON.stringify({ expectedVersion: 1, body }) }), ctx);
+    expect(update.status).toBe(200);
+    expect(update.headers.get("cache-control")).toContain("no-store");
+    expect(bridge.save).toHaveBeenNthCalledWith(2, scope, { id, expectedVersion: 1, body });
+
+    const remove = await DELETE(new Request(`https://example.test/api/workspace/drafts/${id}`, { method: "DELETE", headers }), ctx);
+    expect(remove.status).toBe(200);
+    expect(remove.headers.get("cache-control")).toContain("no-store");
+    expect(await remove.json()).toEqual({ ok: true });
+    expect(bridge.remove).toHaveBeenCalledWith(scope, id);
+  });
 });
