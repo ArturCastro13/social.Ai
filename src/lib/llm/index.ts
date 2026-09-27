@@ -152,6 +152,8 @@ class ClaudeLLM implements LLM {
         { timeout: Math.max(5_000, fim - Date.now()) },
       );
       registrarUso(this.modelo, "pesquisar", msg.usage);
+      const consultas = msg.content.flatMap((b) => (b.type === "server_tool_use" && typeof (b.input as { query?: unknown }).query === "string" ? [(b.input as { query: string }).query] : []));
+      if (consultas.length) console.info(`[ia] buscas: ${consultas.join(" | ").slice(0, 600)}`);
       if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
       if (msg.stop_reason === "pause_turn" && Date.now() < fim) {
         messages.push({ role: "assistant", content: msg.content });

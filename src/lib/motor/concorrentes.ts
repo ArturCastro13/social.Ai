@@ -83,7 +83,7 @@ Use a busca na web (no máximo ${MAX_BUSCAS} buscas), uma para cada objetivo:
 1. Concorrentes: até 5 empresas reais que vendem o mesmo tipo de produto, para o mesmo público e porte, de preferência no Brasil. Inclua pelo menos um concorrente direto do mesmo modelo de negócio (outra startup, se esta for startup), não só as grandes do setor. Se no Brasil houver poucos, complete com referências internacionais e diga isso no motivo.
 2. Conteúdo que está rendendo: temas, ganchos e formatos que concorrentes, mídias e criadores do nicho estão publicando e que geram conversa.
 3. O assunto do momento para o cliente desta empresa: mudança de regra, preço, prazo, reajuste ou fato recente que pesa na decisão dele agora (os subtítulos do site dão pistas).
-4. Virais do nicho: posts de alto engajamento dos últimos 12 meses sobre o tema desta empresa, no LinkedIn, Instagram ou X, de concorrentes, criadores ou mídias do nicho. Os posts ficam indexados pelo link: busque "site:linkedin.com/posts" junto do tema (ex.: site:linkedin.com/posts automação de marketing), e depois "site:instagram.com/p" ou "carrossel" com o tema. Use os posts cujo resultado mostra reações ou comentários.
+4. Virais do nicho: posts de alto engajamento dos últimos 12 meses sobre o tema desta empresa, no LinkedIn, Instagram ou X, de concorrentes, criadores ou mídias do nicho. Os posts ficam indexados pelo link: busque "site:linkedin.com/posts" junto do tema (ex.: site:linkedin.com/posts automação de marketing), e depois "site:instagram.com/p" ou "carrossel" com o tema. Traga os posts que essa busca mostrar, de preferência de criadores e empresas do nicho, mesmo sem métrica visível.
 Depois das buscas, responda só com JSON, sem texto fora dele:
 {"mercado": "", "nicho": "", "concorrentes": [{"nome": "", "url": "", "motivo": "", "o_que_publica": ""}], "em_alta": [{"tema": "", "gancho": "", "por_que": "", "quem": "", "url": ""}], "virais_ao_vivo": [{"gancho": "", "formato": "", "rede": "", "por_que": "", "quem": "", "url": ""}]}
 Regras:
@@ -93,7 +93,7 @@ ${REGRAS_COMUNS}
 - "o_que_publica": temas e formatos que o concorrente usa no conteúdo, pelo que a busca mostrou. Se não achou nada, deixe vazio.
 - O "motivo" do concorrente diz só o que a busca mostrou (o que vendem e para quem). Não afirme integração, parceria ou número que você não viu.
 - "em_alta": até 6 itens, no máximo 1 por url. Prefira imprensa, associações, dados públicos e criadores do nicho a blog de fornecedor. "tema" é o assunto; "gancho", a frase ou o ângulo de abertura que está sendo usado; "por_que", o mecanismo que faz funcionar para esse público; "quem", quem publicou (concorrente, mídia ou criador); "url", o link onde você viu.
-- "virais_ao_vivo": até 6 posts reais que apareceram na busca. "gancho" é a frase de abertura em português (traduza se vier em inglês); "formato" (carrossel, imagem-unica, print-tweet, citacao, lista, video); "rede"; "por_que" é o mecanismo em uma frase; "quem" publicou; "url" o link do post. Sem busca que ache post, deixe a lista vazia.
+- "virais_ao_vivo": até 6 posts reais que apareceram na busca. "gancho" é a frase de abertura em português (traduza se vier em inglês); "formato" (carrossel, imagem-unica, print-tweet, citacao, lista, video); "rede"; "por_que" é o mecanismo em uma frase; "quem" publicou; "url" o link do post. Post que apareceu na busca vale, mesmo sem número de curtidas (aí não cite número). Deixe vazio só se nenhuma busca mostrou post.
 - "hoje" é a data de referência. Prefira fontes publicadas nos últimos 6 meses; não traga tendência de um ano anterior como se fosse atual, e trate prazo que já passou como passado.
 - Nada de número de curtidas, seguidores ou visualizações, a não ser que esteja escrito na fonte. Não invente tendência: se a busca não mostrou, deixe a lista mais curta.`;
 
@@ -186,6 +186,7 @@ export function lerPesquisaIA(txt: string): Omit<PesquisaMercado, "concorrentes"
     const item = comLink?.success ? comLink : viralAoVivoSchema.safeParse(base);
     return item.success ? [item.data] : [];
   });
+  console.info(`[concorrentes] virais ao vivo: ${Array.isArray(bruto.virais_ao_vivo) ? bruto.virais_ao_vivo.length : 0} na resposta, ${virais_ao_vivo.length} aproveitados`);
   return { mercado: corte(s(bruto.mercado), 300), ...(nicho ? { nicho } : {}), em_alta: em_alta.slice(0, 8), virais_ao_vivo: virais_ao_vivo.slice(0, 6) };
 }
 

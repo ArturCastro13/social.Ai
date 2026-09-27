@@ -394,13 +394,22 @@ const palavraNormal = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").
 
 /** O destaque só vale se for um trecho seguido do título da capa, de 1 a 6 palavras. Senão, sai vazio. */
 export function destaqueValido(destaque: string, titulo: string): string {
+  // O destaque pedido, se estiver inteiro no título; senão, a maior sequência de 2 ou mais palavras dele que
+  // aparece no título (a IA às vezes escreve o trecho quase igual). Sem isso, a arte fica sem marca-texto.
   const alvo = destaque.split(/\s+/).map(palavraNormal).filter(Boolean);
-  const palavras = titulo.split(/\s+/).map(palavraNormal);
+  const originais = titulo.split(/\s+/).filter(Boolean);
+  const palavras = originais.map(palavraNormal);
   if (!alvo.length || alvo.length > 6) return "";
-  for (let i = 0; i + alvo.length <= palavras.length; i++) {
-    if (alvo.every((a, k) => palavras[i + k] === a)) return destaque.trim();
+  let melhor = { i: 0, n: 0 };
+  for (let i = 0; i < palavras.length; i++) {
+    for (let j = 0; j < alvo.length; j++) {
+      let n = 0;
+      while (i + n < palavras.length && j + n < alvo.length && palavras[i + n] && palavras[i + n] === alvo[j + n]) n++;
+      if (n > melhor.n) melhor = { i, n };
+    }
   }
-  return "";
+  if (melhor.n === alvo.length) return destaque.trim();
+  return melhor.n >= 2 ? originais.slice(melhor.i, melhor.i + melhor.n).join(" ") : "";
 }
 
 /**
@@ -456,7 +465,7 @@ export function postDoMotor(
       precisa_revisao: revisar,
       ...(p.padrao_viral.nome ? { padrao_viral: p.padrao_viral } : {}),
       // O destaque vale só se estiver no texto que a arte mostra grande: a frase na citação, o título nas demais.
-      ...(destaqueValido(p.destaque, template === "citacao" ? slides[0]?.texto || gancho : slides[0]?.titulo || gancho) ? { destaque: p.destaque.trim() } : {}),
+      ...((d) => (d ? { destaque: d } : {}))(destaqueValido(p.destaque, template === "citacao" ? slides[0]?.texto || gancho : slides[0]?.titulo || gancho)),
       ...(p.direcao_capa.cena ? { direcao_capa: p.direcao_capa } : {}),
     },
   };

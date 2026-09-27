@@ -50,7 +50,7 @@ async function main() {
   const pedidas = new Set<string>();
   const pedirCapa = (p: PostGerado, origem: Analise["origem"], contexto: Record<string, unknown>) => {
     // Como a tela: cada post pede a capa uma vez só.
-    if (pedidas.has(p.id) || !precisaCapa({ origem }, p)) return;
+    if (process.env.SEM_CAPAS || pedidas.has(p.id) || !precisaCapa({ origem }, p)) return;
     pedidas.add(p.id);
     capas.push(
       (async () => {
