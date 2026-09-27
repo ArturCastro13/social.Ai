@@ -2,7 +2,11 @@ import { ErroContexto } from "./erros";
 
 export function protegerOrigem(req: Request) {
   const origin = req.headers.get("origin");
-  if ((origin && origin !== new URL(req.url).origin) || req.headers.get("sec-fetch-site") === "cross-site") throw new ErroContexto("Origem não permitida.", 403, "origem");
+  const url = new URL(req.url);
+  // Next can normalize the internal hostname to localhost. The browser's Host
+  // remains the actual destination and cannot be overridden by browser scripts.
+  const destino = `${url.protocol}//${req.headers.get("host") ?? url.host}`;
+  if ((origin && origin !== destino) || req.headers.get("sec-fetch-site") === "cross-site") throw new ErroContexto("Origem não permitida.", 403, "origem");
 }
 export async function lerCorpoLimitado(req: Request, max: number): Promise<Uint8Array> {
   if (Number(req.headers.get("content-length")) > max) throw new ErroContexto("Limite de tamanho excedido.", 413, "tamanho");

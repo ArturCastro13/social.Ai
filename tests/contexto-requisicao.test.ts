@@ -9,6 +9,11 @@ it("limita corpo chunked sem Content-Length", async () => {
 it("nega origem cruzada", () => {
   expect(() => protegerOrigem(new Request("http://localhost/api/materiais", { headers: { origin: "https://malicioso.com" } }))).toThrow();
 });
+it("compara a origem com o Host recebido quando Next normaliza a URL interna", () => {
+  expect(() => protegerOrigem(new Request("http://localhost:3001/api/materiais", { headers: { host: "127.0.0.1:3001", origin: "http://127.0.0.1:3001", "sec-fetch-site": "same-origin" } }))).not.toThrow();
+  expect(() => protegerOrigem(new Request("http://localhost:3001/api/materiais", { headers: { host: "127.0.0.1:3001", origin: "https://malicioso.com" } }))).toThrow();
+  expect(() => protegerOrigem(new Request("http://localhost:3001/api/materiais", { headers: { host: "127.0.0.1:3001", origin: "http://localhost:3001" } }))).toThrow();
+});
 it("limita simultaneidade, frequência e libera após erro", async () => {
   const reserve = criarLimitador(); const a = reserve("a"), b = reserve("b");
   expect(() => reserve("c")).toThrow(); a(); b();

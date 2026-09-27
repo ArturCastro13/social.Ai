@@ -29,7 +29,7 @@ import { EMPRESA_VAZIA, empresaParaMarca, TelaSemSite, type Empresa } from "./Te
 import { CampoConcorrentes, useConcorrentes } from "./Concorrentes";
 import { Chip } from "./ui";
 import { MateriaisEmpresa, useMateriaisEmpresa } from "./MateriaisEmpresa";
-import { ResumoNegocio } from "./ResumoNegocio";
+import { ResumoNegocio, type RascunhoContexto } from "./ResumoNegocio";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
@@ -124,6 +124,7 @@ export function TelaAjustes({
   const [usarSaber, setUsarSaber] = useState(true);
   const [link, setLink] = useState("");
   const [contextoSalvo, setContextoSalvo] = useState<{ chave: string; valor: ContextoConfirmado } | null>(null);
+  const [rascunhoContexto, setRascunhoContexto] = useState<RascunhoContexto | null>(null);
   const [erroContexto, setErroContexto] = useState("");
   const assinatura = JSON.stringify({ dominio: brand?.dominio, descricao: brand?.description, saber: usarSaber ? saber : {}, publico, materiais: materiais.estado.revisao, paleta: redes.paletaInstagram, empresa: semSite ? empresa : null });
   const contexto = contextoSalvo?.chave === assinatura ? contextoSalvo.valor : undefined;
@@ -544,6 +545,7 @@ export function TelaAjustes({
         {brand && <ResumoNegocio
           entrada={{ brand, founder: usarSaber ? saber : {}, materiais: materiais.materiais, publico, ...(semSite ? { descricaoManual: empresa.descricao } : {}) }}
           revisao={materiais.estado.revisao} chaveEntrada={assinatura} pendente={materiais.pendente} confirmado={!!contexto}
+          inicial={rascunhoContexto} onGuardar={setRascunhoContexto}
           onInvalidar={invalidarContexto}
           onConfirmar={c => { setContextoSalvo({ chave: assinatura, valor: c }); setErroContexto(""); concorrentes.buscar(brand, c.entendimento.publico, c); }}
         />}

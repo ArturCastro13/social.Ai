@@ -5,7 +5,7 @@ import { act, cleanup, fireEvent, render, renderHook, screen, waitFor } from "@t
 import { reduzirMateriais, type EstadoMateriais } from "@/lib/client/materiais";
 import { MateriaisEmpresa, useMateriaisEmpresa } from "@/components/onboarding/MateriaisEmpresa";
 import { useConcorrentes } from "@/components/onboarding/Concorrentes";
-import { ResumoNegocio } from "@/components/onboarding/ResumoNegocio";
+import { ResumoNegocio, type RascunhoContexto } from "@/components/onboarding/ResumoNegocio";
 import recallo from "./fixtures/marcas/recallo.json";
 import type { BrandProfile } from "@/lib/types";
 import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
@@ -71,4 +71,26 @@ it("revisão confirma negócio sem anexos e bloqueia durante leitura", async () 
   fireEvent.change(screen.getByLabelText("O que a empresa faz"), { target: { value: "Preparação para exames de inglês" } });
   fireEvent.click(screen.getByRole("button", { name: "Confirmar contexto e buscar concorrentes" }));
   expect(received).toBe("Preparação para exames de inglês");
+});
+it("mantém resumo editado quando o founder volta uma etapa", () => {
+  function Navegacao() {
+    const [mostrar, setMostrar] = React.useState(true);
+    const [rascunho, setRascunho] = React.useState<RascunhoContexto | null>(null);
+    return <><button onClick={() => setMostrar(v => !v)}>Trocar etapa</button>{mostrar && <ResumoNegocio entrada={{ brand: recallo as BrandProfile, founder: {}, materiais: [] }} revisao={0} chaveEntrada="mesma" pendente={false} confirmado={true} onInvalidar={() => {}} onConfirmar={() => {}} inicial={rascunho} onGuardar={setRascunho} />}</>;
+  }
+  render(<Navegacao />);
+  fireEvent.change(screen.getByLabelText('O que a empresa faz'), {target:{value:'Preparação personalizada para inglês'}});
+  fireEvent.click(screen.getByRole('button',{name:'Trocar etapa'})); fireEvent.click(screen.getByRole('button',{name:'Trocar etapa'}));
+  expect((screen.getByLabelText('O que a empresa faz') as HTMLTextAreaElement).value).toBe('Preparação personalizada para inglês');
+});
+it("remover fonte elimina resumo e citações derivados dela antes de reconfirmar", async () => {
+  let result = '';
+  vi.stubGlobal('fetch', async () => ({ok:true,json:async()=>({entendimento:{negocio:'Segredo exclusivo do documento',segmento:'Idiomas',publico:'Adultos',nicho:'edtech',evidencias:[{fonte:'m',trecho:'Segredo exclusivo do documento'}],duvidas:[],fonte:'ia'}})}));
+  const props = {entrada:{brand:recallo as BrandProfile,founder:{},materiais:[material]},revisao:1,chaveEntrada:'com-material',pendente:false,confirmado:false,onInvalidar:()=>{},onConfirmar:(c:unknown)=>{result=JSON.stringify(c);}};
+  const {rerender}=render(<ResumoNegocio {...props}/>);
+  fireEvent.click(screen.getByRole('button',{name:'Analisar contexto com IA'}));
+  await waitFor(()=>expect((screen.getByLabelText('O que a empresa faz') as HTMLTextAreaElement).value).toBe('Segredo exclusivo do documento'));
+  rerender(<ResumoNegocio {...props} entrada={{...props.entrada,materiais:[]}} chaveEntrada="sem-material" revisao={2}/>);
+  fireEvent.click(screen.getByRole('button',{name:'Confirmar contexto e buscar concorrentes'}));
+  expect(result).not.toContain('Segredo exclusivo'); expect(JSON.parse(result).entendimento.evidencias).toEqual([]);
 });
