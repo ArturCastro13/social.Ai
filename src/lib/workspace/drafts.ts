@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isDeepStrictEqual } from "node:util";
 import type { Draft, DraftBody, Scope } from "@/lib/assinatura/contrato";
 import { contextoConfirmadoSchema, hexSchema } from "@/lib/contexto/contrato";
 import { preferenciasSchema } from "@/lib/motor/contrato";
@@ -6,7 +7,7 @@ import { PrivateHttpError } from "@/lib/auth/http";
 import { supabaseDraftRepository, type DraftRepository } from "./repository";
 
 const text = (max: number) => z.string().max(max);
-const brandSchema = z.object({
+export const brandProfileSchema = z.object({
   url: text(2048), dominio: text(255), nome: text(300), title: text(500).nullable(), description: text(2000).nullable(),
   og: z.object({ title: text(500).nullable(), description: text(2000).nullable(), image: text(2048).nullable() }).strict(),
   favicon: text(2048).nullable(), appleTouchIcon: text(2048).nullable(), logo: text(2048).nullable(), themeColor: text(100).nullable(),
@@ -20,7 +21,7 @@ const brandSchema = z.object({
   avisos: z.array(text(500)).max(30), lidoEm: text(100),
   nicho_informado: z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"]).optional(), sem_site: z.boolean().optional(),
 }).strict();
-const personalizacaoSchema = z.object({
+export const personalizacaoSchema = z.object({
   cor: hexSchema.nullable().optional(),
   template: z.enum(["capa-gancho", "lista", "citacao", "dado-impacto", "print-x", "bastidor", "antes-depois", "checklist"]).nullable().optional(),
   foto: text(2048).nullable().optional(),
@@ -29,7 +30,7 @@ const personalizacaoSchema = z.object({
   }).strict().nullable().optional(),
 }).strict();
 export const draftBodySchema = z.object({
-  brand: brandSchema.nullable(), preferencias: preferenciasSchema.strict(), contexto: contextoConfirmadoSchema.nullable(),
+  brand: brandProfileSchema.nullable(), preferencias: preferenciasSchema.strict(), contexto: contextoConfirmadoSchema.nullable(),
   personalizacoes: z.record(z.string().min(1).max(100), personalizacaoSchema),
 }).strict();
 export class WorkspaceError extends PrivateHttpError {}
@@ -48,7 +49,13 @@ export function createDraftService(repository: DraftRepository) {
         throw new WorkspaceError(400, "invalid_draft", "Rascunho ou versão inválidos.");
       const parsed = draftBodySchema.safeParse(input.body);
       if (!parsed.success) throw new WorkspaceError(400, "invalid_draft", "Revise os dados do rascunho.");
-      const body = parsed.data as DraftBody;
+      const parsedBody = parsed.data;
+      const duplicate = parsedBody.preferencias.contexto_empresa;
+      if (duplicate && !isDeepStrictEqual(duplicate, parsedBody.contexto))
+        throw new WorkspaceError(400, "invalid_draft", "O contexto da empresa deve ser único.");
+      const preferencias = { ...parsedBody.preferencias };
+      delete preferencias.contexto_empresa;
+      const body = { ...parsedBody, preferencias } as DraftBody;
       if (Buffer.byteLength(JSON.stringify(body), "utf8") > 150_000) throw new WorkspaceError(413, "body_too_large", "Rascunho grande demais.");
       const result = await repository.save(scope, { id: input.id, expectedVersion: input.expectedVersion, body });
       if (result.kind === "missing") throw new WorkspaceError(404, "not_found", "Rascunho não encontrado.");

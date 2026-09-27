@@ -33,4 +33,18 @@ describe("rascunhos privados", () => {
     const oversized = { ...brand, paragrafos: Array.from({ length: 100 }, () => "á".repeat(1000)) };
     await expect(h.save(h.a, { id: draft.id, expectedVersion: 1, body: { ...h.emptyBody, brand: oversized } as never })).rejects.toMatchObject({ status: 413 });
   });
+
+  it("mantém contexto canônico e rejeita cópia divergente", async () => {
+    const h = createWorkspaceHarness();
+    const contexto = { versao: 1, empresa: "Acme", revisao: 0,
+      entendimento: { negocio: "Vendas", segmento: "B2B", publico: "PME", nicho: "saas-b2b", evidencias: [], duvidas: [], fonte: "manual" },
+      materiais: [] } as const;
+    const body = { ...h.emptyBody, contexto, preferencias: { ...h.emptyBody.preferencias, contexto_empresa: contexto } };
+    const draft = await h.save(h.a, { expectedVersion: 0, body: body as never });
+    expect(draft.body.contexto).toEqual(contexto);
+    expect(draft.body.preferencias.contexto_empresa).toBeUndefined();
+    await expect(h.save(h.a, { expectedVersion: 0, body: {
+      ...body, preferencias: { ...h.emptyBody.preferencias, contexto_empresa: { ...contexto, empresa: "Outra" } },
+    } as never })).rejects.toMatchObject({ status: 400 });
+  });
 });

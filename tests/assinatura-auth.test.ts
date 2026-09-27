@@ -9,9 +9,10 @@ const auth = vi.hoisted(() => ({
   signOut: vi.fn(),
 }));
 vi.mock("@/lib/auth/server", () => ({ createSessionClient: () => ({ auth, rpc: auth.rpc }) }));
+vi.mock("@/lib/workspace/frequency", () => ({ reserveFrequency: vi.fn().mockResolvedValue(undefined) }));
 
 import { requireScope } from "@/lib/auth/scope";
-import { requireAppOrigin, privateJson } from "@/lib/auth/http";
+import { requireAppOrigin, privateBody, privateError, privateJson, PrivateHttpError } from "@/lib/auth/http";
 import { POST as requestOtp } from "@/app/api/auth/otp/route";
 import { POST as verifyOtp } from "@/app/api/auth/verify/route";
 import { GET as getSession } from "@/app/api/auth/session/route";
@@ -73,6 +74,12 @@ describe("HTTP privado", () => {
     expect(response.headers.get("cache-control")).toContain("no-store");
   });
 
+  it("usa contrato de erro privado e limita bytes transmitidos sem Content-Length", async () => {
+    expect(await privateError(new PrivateHttpError(409, "conflict", "Conflito")).json()).toEqual({ erro: "Conflito", codigo: "conflict" });
+    const request = new Request("https://example.test/api/auth/otp", { method: "POST", body: "á".repeat(1100) });
+    await expect(privateBody(request, 2048)).rejects.toMatchObject({ status: 413 });
+  });
+
   it("bloqueia OTP de outra origem antes de chamar Auth", async () => {
     const result = await requestOtp(new Request("https://example.test/api/auth/otp", {
       method: "POST", headers: { origin: "https://evil.test" }, body: JSON.stringify({ email: "a@example.test" }),
@@ -108,6 +115,16 @@ describe("HTTP privado", () => {
     }));
     expect(result.status).toBe(200);
     expect(auth.signInWithOtp).toHaveBeenCalledWith({ email: "a@example.test", options: { shouldCreateUser: true } });
+  });
+
+  it("encaminha token CAPTCHA recebido ao Auth", async () => {
+    auth.signInWithOtp.mockResolvedValue({ error: null });
+    const result = await requestOtp(new Request("https://example.test/api/auth/otp", {
+      method: "POST", headers: { origin: "https://example.test" },
+      body: JSON.stringify({ email: "a@example.test", captchaToken: "captcha-response" }),
+    }));
+    expect(result.status).toBe(200);
+    expect(auth.signInWithOtp).toHaveBeenCalledWith({ email: "a@example.test", options: { shouldCreateUser: true, captchaToken: "captcha-response" } });
   });
 
   it("não confirma OTP sem verificar usuário no servidor", async () => {

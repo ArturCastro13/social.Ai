@@ -4,7 +4,7 @@ import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 import type { Personalizacao } from "@/lib/client/artes";
 
 export type Scope = { userId: string; workspaceId: string };
-export type UsageKind = "material_extract" | "context_analyze" | "competitor_suggest" | "preview_generate" | "week_generate";
+export type UsageKind = "material_extract" | "context_analyze" | "competitor_suggest" | "preview_generate" | "week_generate" | "image_generate";
 export type BillingStatus = "none" | "incomplete" | "incomplete_expired" | "trialing" | "active" | "past_due" | "unpaid" | "paused" | "canceled";
 export type AccessState = {
   status: BillingStatus;
