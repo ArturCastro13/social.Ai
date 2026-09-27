@@ -18,7 +18,7 @@ import {
   objetosComTexto,
   type EntradaImagem,
 } from "@/lib/imagem/direcao";
-import { MSG_MODERACAO, MSG_OCUPADO, TAMANHO_IMAGEM } from "@/lib/imagem/openai";
+import { MSG_MODERACAO, MSG_OCUPADO, TAMANHO_IMAGEM, lerEventosSse } from "@/lib/imagem/openai";
 import { fontesDaMarca } from "@/lib/render/fonts";
 import { Arte, veuLegivel } from "@/lib/render/templates";
 import { temaDaMarca } from "@/lib/render/tema";
@@ -380,6 +380,29 @@ describe("conferência da capa por visão", () => {
     await criarImagemDoPost({ post: postBase, brand: marcaBase }, { llm: null, armazenamento: arm, chaveOpenAI: "k", conferidor });
     expect(prompts).toHaveLength(2);
     expect(prompts[1]).toContain("um logo");
+  });
+});
+
+describe("capa que se revela", () => {
+  it("lê os eventos SSE da OpenAI: parcial e final", async () => {
+    const sse = [
+      'event: image_generation.partial_image\ndata: {"type":"image_generation.partial_image","b64_json":"AAA","partial_image_index":0}\n\n',
+      'event: image_generation.completed\ndata: {"type":"image_generation.completed","b64_json":"BBB","usage":{"input_tokens":10,"output_tokens":20}}\n\n',
+    ];
+    const cod = new TextEncoder();
+    const corpo = new ReadableStream({
+      start(c) {
+        sse
+          .join("")
+          .match(/[\s\S]{1,40}/g)!
+          .forEach((p) => c.enqueue(cod.encode(p)));
+        c.close();
+      },
+    });
+    const parciais: string[] = [];
+    const final = await lerEventosSse(new Response(corpo), (b64) => parciais.push(b64));
+    expect(parciais).toEqual(["AAA"]);
+    expect(final).toEqual({ b64: "BBB", uso: { entrada: 10, saida: 20 } });
   });
 });
 

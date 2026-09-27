@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import sharp from "sharp";
 import { provedorConfigurado, type LLM } from "@/lib/llm";
 import { armazenamentoSupabase, type Armazenamento } from "./armazenamento";
 import { conferirImagem } from "./conferir";
@@ -55,7 +56,11 @@ export function hashImagem(e: EntradaImagem, d: Direcao, modelo: string, qualida
   return sha([e.post.id, e.post.gancho, d.estilo, d.cena, modelo, qualidade].join("\n")).slice(0, 32);
 }
 
-export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {}): Promise<ImagemDoPost> {
+/**
+ * `aoParcial` recebe a prévia borrada da capa (E5), reduzida para caber numa data URL na tela. Só entra na
+ * primeira geração: a segunda chance da conferência (E2) segue sem prévia.
+ */
+export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {}, aoParcial?: (dataUrl: string) => void): Promise<ImagemDoPost> {
   const chave = deps.chaveOpenAI === undefined ? process.env.OPENAI_API_KEY : deps.chaveOpenAI;
   if (!chave) throw new ErroImagem("A criação de imagem com IA não está ligada neste servidor: falta a chave da OpenAI (OPENAI_API_KEY).", 503);
   const arm = deps.armazenamento === undefined ? armazenamentoSupabase() : deps.armazenamento;
@@ -86,7 +91,22 @@ export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {
     throw new ErroImagem("Você chegou ao limite de imagens com IA por hoje. Amanhã libera de novo.", 429);
   }
   const prompt = montarPromptImagem(e, direcao);
-  let img = await gerarImagemOpenAI(prompt, { chave, modelo, qualidade });
+  let img = await gerarImagemOpenAI(prompt, {
+    chave,
+    modelo,
+    qualidade,
+    aoParcial: aoParcial
+      ? (b64) => {
+          // Prévia pequena: vai para a tela como data URL, então 480 px de largura bastam.
+          void sharp(Buffer.from(b64, "base64"))
+            .resize({ width: 480 })
+            .jpeg({ quality: 60 })
+            .toBuffer()
+            .then((b) => aoParcial(`data:image/jpeg;base64,${b.toString("base64")}`))
+            .catch(() => {});
+        }
+      : undefined,
+  });
   const conferidor = deps.conferidor === undefined ? provedorConfigurado("rapido") : deps.conferidor;
   const veredito = await conferirImagem(img.bytes, conferidor);
   // Uma segunda chance só, e só se ainda couber no limite do dia.

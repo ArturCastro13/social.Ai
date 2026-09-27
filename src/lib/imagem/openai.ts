@@ -60,8 +60,42 @@ export function erroDaOpenAI(status: number, corpo: string): ErroImagem {
   return new ErroImagem("Não deu para criar a imagem agora. Tente de novo.", 502);
 }
 
+/** Lê o SSE da geração com prévia: chama `aoParcial` a cada prévia e devolve a imagem final e o uso. */
+export async function lerEventosSse(res: Response, aoParcial: (b64: string) => void): Promise<{ b64: string; uso: { entrada: number; saida: number } }> {
+  if (!res.body) throw new ErroImagem("O gerador de imagens respondeu vazio. Tente de novo.", 502);
+  const leitor = res.body.getReader();
+  const dec = new TextDecoder();
+  let resto = "";
+  let final: { b64: string; uso: { entrada: number; saida: number } } | null = null;
+  const tratar = (bloco: string) => {
+    const dados = bloco
+      .split("\n")
+      .filter((l) => l.startsWith("data:"))
+      .map((l) => l.slice(5).trim())
+      .join("");
+    if (!dados) return;
+    const j = JSON.parse(dados) as { type?: string; b64_json?: string; usage?: { input_tokens?: number; output_tokens?: number } };
+    if (j.type === "image_generation.partial_image" && j.b64_json) aoParcial(j.b64_json);
+    if (j.type === "image_generation.completed" && j.b64_json) final = { b64: j.b64_json, uso: { entrada: j.usage?.input_tokens ?? 0, saida: j.usage?.output_tokens ?? 0 } };
+  };
+  for (;;) {
+    const { value, done } = await leitor.read();
+    resto += dec.decode(value ?? new Uint8Array(), { stream: !done });
+    const blocos = resto.split("\n\n");
+    resto = blocos.pop() ?? "";
+    blocos.forEach(tratar);
+    if (done) break;
+  }
+  if (resto.trim()) tratar(resto);
+  if (!final) throw new ErroImagem("O gerador de imagens parou no meio. Tente de novo.", 502);
+  return final;
+}
+
 /** Gera uma imagem retrato. Registra só modelo, tokens e tempo; nunca a chave nem o prompt. */
-export async function gerarImagemOpenAI(prompt: string, op: { chave: string; modelo: string; qualidade: Qualidade; timeoutMs?: number }): Promise<ImagemGerada> {
+export async function gerarImagemOpenAI(
+  prompt: string,
+  op: { chave: string; modelo: string; qualidade: Qualidade; timeoutMs?: number; aoParcial?: (b64: string) => void },
+): Promise<ImagemGerada> {
   const inicio = Date.now();
   let res: Response;
   try {
@@ -77,6 +111,7 @@ export async function gerarImagemOpenAI(prompt: string, op: { chave: string; mod
         output_format: "jpeg",
         output_compression: 85,
         moderation: "auto",
+        ...(op.aoParcial ? { stream: true, partial_images: 1 } : {}),
       }),
       signal: AbortSignal.timeout(op.timeoutMs ?? 100_000),
     });
@@ -89,16 +124,21 @@ export async function gerarImagemOpenAI(prompt: string, op: { chave: string; mod
     console.error(`[imagem] openai HTTP ${res.status} ${op.modelo} ${Date.now() - inicio}ms`);
     throw erroDaOpenAI(res.status, corpo);
   }
-  const data = (await res.json()) as { data?: { b64_json?: string }[]; usage?: { input_tokens?: number; output_tokens?: number } };
-  const b64 = data.data?.[0]?.b64_json;
-  if (!b64) throw new ErroImagem("O gerador de imagens respondeu vazio. Tente de novo.", 502);
+  const { b64, uso: usoFinal } = op.aoParcial
+    ? await lerEventosSse(res, op.aoParcial)
+    : await (async () => {
+        const data = (await res.json()) as { data?: { b64_json?: string }[]; usage?: { input_tokens?: number; output_tokens?: number } };
+        const b = data.data?.[0]?.b64_json;
+        if (!b) throw new ErroImagem("O gerador de imagens respondeu vazio. Tente de novo.", 502);
+        return { b64: b, uso: { entrada: data.usage?.input_tokens ?? 0, saida: data.usage?.output_tokens ?? 0 } };
+      })();
   let bytes: Buffer = Buffer.from(b64, "base64");
   // Arquivo grande demais para a rota de arte: recomprime até caber.
   for (const q of [78, 68, 58]) {
     if (bytes.length <= MAX_BYTES) break;
     bytes = await sharp(bytes).jpeg({ quality: q, mozjpeg: true }).toBuffer();
   }
-  const uso = { entrada: data.usage?.input_tokens ?? 0, saida: data.usage?.output_tokens ?? 0 };
+  const uso = usoFinal;
   console.info(`[imagem] openai ${op.modelo} ${op.qualidade} entrada=${uso.entrada} saida=${uso.saida} ${Date.now() - inicio}ms ${Math.round(bytes.length / 1024)}KB`);
   return { bytes, tipo: "image/jpeg", uso };
 }
