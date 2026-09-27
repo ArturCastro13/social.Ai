@@ -152,6 +152,9 @@ export interface Enderecamento {
   acao_esperada: string;
 }
 
+/** Estilo da imagem da capa. O mesmo que a direção de arte usa (src/lib/imagem/direcao.ts). */
+export type EstiloCapa = "fotografia" | "ilustracao-3d" | "ilustracao-flat";
+
 /** Campos extras que o motor novo adiciona a cada post (todos opcionais para não quebrar demo e cache antigos). */
 export interface ExtrasPost {
   trilho?: "founder" | "empresa";
@@ -164,6 +167,12 @@ export interface ExtrasPost {
   padrao_referencia?: { nome: string; fonte_url: string };
   chamada_final?: string;
   precisa_revisao?: string[];
+  /** Padrão viral que o post adaptou e de onde ele veio (busca ao vivo ou biblioteca curada). */
+  padrao_viral?: { nome: string; origem: "ao_vivo" | "biblioteca" };
+  /** Trecho do título da capa que a arte marca com a cor da marca. */
+  destaque?: string;
+  /** Direção de arte da imagem da capa, escrita pelo Claude junto com o post (em inglês). */
+  direcao_capa?: { cena: string; estilo: EstiloCapa };
 }
 
 /**

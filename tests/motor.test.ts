@@ -412,4 +412,26 @@ describe("postDoMotor", () => {
     expect(final.id).toBe("abc-p1");
     expect(final.legendas.instagram).toContain("Legenda");
   });
+
+  it("leva padrão viral, destaque que existe no título e direção da capa", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const p = cru({
+      slides_ou_arte: [{ titulo: "Por que seus alunos somem antes do 3º mês", texto: "" }],
+      padrao_viral: { nome: "erro invisível", origem: "ao_vivo" },
+      destaque: "antes do 3º mês",
+      direcao_capa: { cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d" },
+    });
+    const { extras } = postDoMotor(p, 0, [], c);
+    expect(extras.padrao_viral).toEqual({ nome: "erro invisível", origem: "ao_vivo" });
+    expect(extras.destaque).toBe("antes do 3º mês");
+    expect(extras.direcao_capa).toEqual({ cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d" });
+  });
+
+  it("destaque que não está no título sai; campos ruins não derrubam o post", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const { extras } = postDoMotor(cru({ destaque: "outra coisa", padrao_viral: "x", direcao_capa: 3 }), 0, [], c);
+    expect(extras.destaque).toBeUndefined();
+    expect(extras.padrao_viral).toBeUndefined();
+    expect(extras.direcao_capa).toBeUndefined();
+  });
 });

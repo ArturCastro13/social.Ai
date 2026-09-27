@@ -78,6 +78,13 @@ export const postMotorSchema = z
     hashtags: lista(txt(40), 12),
     chamada_final: txt(300),
     por_que_funciona: txt(600),
+    padrao_viral: z
+      .object({ nome: txt(120), origem: z.enum(["ao_vivo", "biblioteca"]).catch("biblioteca") })
+      .catch({ nome: "", origem: "biblioteca" as const }),
+    destaque: txt(120),
+    direcao_capa: z
+      .object({ cena: txt(900), estilo: z.enum(["fotografia", "ilustracao-3d", "ilustracao-flat"]).catch("fotografia") })
+      .catch({ cena: "", estilo: "fotografia" as const }),
     precisa_revisao: lista(txt(200), 6),
   })
   .refine((p) => p.gancho.length > 0, { message: "post sem gancho" });
@@ -383,6 +390,19 @@ export function contextoDosPosts(op: OpcoesAdaptador, publicoInferido = ""): Con
 
 type PostMotor = z.output<typeof postMotorSchema>;
 
+const palavraNormal = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+
+/** O destaque só vale se for um trecho seguido do título da capa, de 1 a 6 palavras. Senão, sai vazio. */
+export function destaqueValido(destaque: string, titulo: string): string {
+  const alvo = destaque.split(/\s+/).map(palavraNormal).filter(Boolean);
+  const palavras = titulo.split(/\s+/).map(palavraNormal);
+  if (!alvo.length || alvo.length > 6) return "";
+  for (let i = 0; i + alvo.length <= palavras.length; i++) {
+    if (alvo.every((a, k) => palavras[i + k] === a)) return destaque.trim();
+  }
+  return "";
+}
+
 /**
  * Um post do modelo no formato do app, mais os extras do motor. `trilhosAntes` são os trilhos dos posts anteriores
  * do lote: no perfil "ambos", o post sem trilho vai para o lado com menos posts até aqui.
@@ -434,6 +454,9 @@ export function postDoMotor(
       padrao_referencia: nomePadrao || p.padrao_referencia.fonte_url ? { nome: nomePadrao, fonte_url: p.padrao_referencia.fonte_url } : undefined,
       chamada_final: p.chamada_final || undefined,
       precisa_revisao: revisar,
+      ...(p.padrao_viral.nome ? { padrao_viral: p.padrao_viral } : {}),
+      ...(destaqueValido(p.destaque, slides[0]?.titulo || gancho) ? { destaque: p.destaque.trim() } : {}),
+      ...(p.direcao_capa.cena ? { direcao_capa: p.direcao_capa } : {}),
     },
   };
 }

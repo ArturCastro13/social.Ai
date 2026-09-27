@@ -1,6 +1,7 @@
 import type { LLM } from "@/lib/llm";
 import { extrairJson } from "@/lib/engine/schema";
 import { corte } from "@/lib/engine/texto-local";
+import type { EstiloCapa } from "@/lib/motor/contrato";
 import type { Formato, Nicho, PostGerado, Rede } from "@/lib/types";
 import { nomeDaCor } from "./cores";
 
@@ -20,7 +21,7 @@ export interface EntradaImagem {
   variacao?: number;
 }
 
-export type Estilo = "fotografia" | "ilustracao-3d" | "ilustracao-flat";
+export type Estilo = EstiloCapa;
 
 export interface Direcao {
   estilo: Estilo;
