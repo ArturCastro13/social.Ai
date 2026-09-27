@@ -10,7 +10,7 @@ import { nomeDaCor } from "./cores";
 // Sem IA, a cena sai de uma lista por nicho.
 
 export interface EntradaImagem {
-  post: Pick<PostGerado, "id" | "gancho" | "slides" | "formato" | "rede_principal" | "template">;
+  post: Pick<PostGerado, "id" | "gancho" | "slides" | "formato" | "rede_principal" | "template" | "direcao_capa">;
   brand: {
     nome: string;
     dominio: string;
@@ -226,11 +226,11 @@ export function montarPromptImagem(e: EntradaImagem, d: Direcao): string {
     (outras.length ? `, with ${outras.map((c) => `${c.nome} (${c.hex})`).join(" and ")} as accents` : "") +
     ". Neutrals only in support.";
   return [
-    `Vertical ${FORMATO_EN[e.post.formato] ?? "image"} for a professional ${REDE_EN[e.post.rede_principal]} brand post.`,
+    `Horizontal ${FORMATO_EN[e.post.formato] ?? "image"} for a professional ${REDE_EN[e.post.rede_principal]} brand post.`,
     d.cena,
     ESTILO_EN[d.estilo],
     paleta,
-    "Composition: main subject in the upper and middle part of the frame; the lower third stays calm, simple and uncluttered (smooth surface, soft shadow or defocused background) because a headline will be placed there later.",
+    "Composition: wide horizontal frame; keep the main subject inside the central 60% so it survives a crop to a wide band or to a square; calm, uncluttered edges.",
     "Absolutely no text of any kind: no letters, words, numbers, captions, signage, labels, logos, brand marks, watermarks, user interfaces or readable screens anywhere in the image.",
     "No identifiable real people, faces or celebrities; no before-and-after or split-screen layout.",
     ehSaude(e) ? "No sick patients, blood, needles, surgery, pills in close-up or medical procedures." : "",

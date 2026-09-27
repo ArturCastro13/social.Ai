@@ -1,13 +1,14 @@
 import sharp from "sharp";
 
 // Imagem pela API REST da OpenAI (POST /v1/images/generations), com fetch: uma chamada só não justifica o SDK.
-// Padrão gpt-image-2 em qualidade medium, retrato 1024x1536: US$ 0,041 por imagem na tabela oficial
+// Padrão gpt-image-2 em qualidade medium, paisagem 1536x1024: US$ 0,041 por imagem na tabela oficial
 // (developers.openai.com/api/docs/guides/image-generation, "Calculating costs"). high custa US$ 0,165.
 // Sai em JPEG porque o Satori, que compõe a arte, não lê WebP.
 
 export const MODELO_PADRAO = "gpt-image-2";
 export const QUALIDADE_PADRAO = "medium";
-export const TAMANHO_IMAGEM = "1024x1536";
+/** Paisagem: a capa creator usa a faixa de cima (cerca de 1,6:1) e o horizontal usa a metade esquerda. */
+export const TAMANHO_IMAGEM = "1536x1024";
 /** Teto do arquivo: a rota de arte só baixa até 1,5 MB. */
 export const MAX_BYTES = 1_400_000;
 

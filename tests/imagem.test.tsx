@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import sharp from "sharp";
 import { ImageResponse } from "next/og";
 import { contrastRatio, mix } from "@/lib/color";
@@ -17,7 +17,7 @@ import {
   objetosComTexto,
   type EntradaImagem,
 } from "@/lib/imagem/direcao";
-import { MSG_MODERACAO, MSG_OCUPADO } from "@/lib/imagem/openai";
+import { MSG_MODERACAO, MSG_OCUPADO, TAMANHO_IMAGEM } from "@/lib/imagem/openai";
 import { fontesDaMarca } from "@/lib/render/fonts";
 import { Arte, veuLegivel } from "@/lib/render/templates";
 import { temaDaMarca } from "@/lib/render/tema";
@@ -25,6 +25,10 @@ import { POST } from "@/app/api/imagem/route";
 
 const cora = DEMOS.find((d) => d.id === "cora")!;
 const capa = cora.posts.find((p) => p.template === "capa-gancho")!;
+// Nomes usados pelo plano de execução: o mesmo post e a mesma marca de sempre.
+const postBase = capa;
+const marcaBase = { nome: cora.brand.nome, dominio: cora.brand.dominio, paleta: cora.brand.paleta };
+let JPEG_PEQUENO = "";
 
 function entrada(extra: Partial<EntradaImagem> = {}, postId = capa.id): EntradaImagem {
   return {
@@ -76,6 +80,10 @@ function ambiente() {
   vi.stubEnv("OPENAI_IMAGE_MODEL", "");
   vi.stubEnv("OPENAI_IMAGE_QUALITY", "");
 }
+
+beforeAll(async () => {
+  JPEG_PEQUENO = (await jpegPequeno()).toString("base64");
+});
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -131,7 +139,36 @@ describe("direção de arte", () => {
     expect(p).toMatch(/Absolutely no text of any kind/);
     expect(p).toMatch(/No identifiable real people/);
     expect(p).toMatch(/\(#fe3e6d\) is the dominant color/);
-    expect(p).toMatch(/lower third stays calm/);
+    expect(p).toMatch(/central 60%/);
+  });
+});
+
+describe("capa com direção pronta", () => {
+  it("usa a direção do post e não chama o Claude", async () => {
+    const llm = { nome: "falso", gerar: vi.fn(async () => '{"estilo":"fotografia","cena":"outra"}') };
+    const subidos: string[] = [];
+    const arm = { urlPublica: (c: string) => `https://cdn/${c}`, existe: async () => false, subir: async (c: string) => void subidos.push(c) };
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify({ data: [{ b64_json: JPEG_PEQUENO }] }))));
+    const post = { ...postBase, direcao_capa: { cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d" as const } };
+    const r = await criarImagemDoPost({ post, brand: marcaBase }, { llm, armazenamento: arm, chaveOpenAI: "k", conferidor: null });
+    expect(llm.gerar).not.toHaveBeenCalled();
+    expect(r.direcao).toMatchObject({ cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d", origem: "ia" });
+  });
+
+  it("direção pronta com objeto que vira texto é reescrita pelo Claude", async () => {
+    // A cena precisa de 40 caracteres ou mais: lerDirecao descarta cena curta demais (achando que a IA falhou).
+    const llm = { nome: "falso", gerar: vi.fn(async () => '{"estilo":"fotografia","cena":"A calm sculpture made of stacked stones catching soft morning light"}') };
+    const arm = { urlPublica: (c: string) => `https://cdn/${c}`, existe: async () => false, subir: async () => {} };
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(JSON.stringify({ data: [{ b64_json: JPEG_PEQUENO }] }))));
+    const post = { ...postBase, direcao_capa: { cena: "A laptop screen showing a dashboard", estilo: "fotografia" as const } };
+    const r = await criarImagemDoPost({ post, brand: marcaBase }, { llm, armazenamento: arm, chaveOpenAI: "k", conferidor: null });
+    expect(llm.gerar).toHaveBeenCalled();
+    expect(r.direcao.cena).toContain("stacked stones");
+  });
+
+  it("imagem em paisagem e prompt de faixa larga", () => {
+    expect(TAMANHO_IMAGEM).toBe("1536x1024");
+    expect(montarPromptImagem({ post: postBase, brand: marcaBase }, { estilo: "fotografia", cena: "x", origem: "regra" })).toMatch(/Horizontal/);
   });
 });
 
@@ -145,7 +182,7 @@ describe("criar imagem", () => {
     expect(r.url).toMatch(/^https:\/\/exemplo\.supabase\.co\/storage\/v1\/object\/public\/posts\/ia\/cora\.com\.br\/[0-9a-f]{32}\.jpg$/);
     const openai = chamadas.find((c) => c.url.startsWith("https://api.openai.com/"))!;
     const corpo = JSON.parse(String(openai.init!.body));
-    expect(corpo).toMatchObject({ model: "gpt-image-2", quality: "medium", size: "1024x1536", output_format: "jpeg", n: 1 });
+    expect(corpo).toMatchObject({ model: "gpt-image-2", quality: "medium", size: "1536x1024", output_format: "jpeg", n: 1 });
     expect(corpo.prompt).toMatch(/Absolutely no text/);
     expect((openai.init!.headers as Record<string, string>).authorization).toBe("Bearer sk-teste");
     const upload = chamadas.find((c) => c.init?.method === "POST" && c.url.includes("/storage/v1/object/posts/"))!;

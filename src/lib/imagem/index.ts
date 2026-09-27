@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { provedorConfigurado, type LLM } from "@/lib/llm";
 import { armazenamentoSupabase, type Armazenamento } from "./armazenamento";
-import { escreverDirecao, montarPromptImagem, type Direcao, type EntradaImagem } from "./direcao";
+import { escreverDirecao, montarPromptImagem, objetosComTexto, type Direcao, type EntradaImagem } from "./direcao";
 import { ErroImagem, configImagem, gerarImagemOpenAI } from "./openai";
 
 // Imagem do post com IA, "o melhor de cada IA": o Claude escreve a direção de arte, a OpenAI desenha a imagem
@@ -27,6 +27,8 @@ export interface Dependencias {
   reservar?: () => boolean;
   /** Pasta dentro de ia/. Padrão: o domínio da marca. */
   pasta?: string;
+  /** Quem confere a capa pronta com visão. undefined: o provedor configurado. null: sem conferência. */
+  conferidor?: LLM | null;
 }
 
 // A IA não repete a mesma direção de arte, e sem a mesma direção o hash muda. Guardar a direção por entrada
@@ -60,6 +62,11 @@ export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {
 
   const k = chaveEntrada(e);
   let direcao = direcoes.get(k);
+  // A direção que o Claude escreveu junto com o post vale na primeira imagem, se não citar objeto que vira texto.
+  const pronta = e.post.direcao_capa;
+  if (!direcao && pronta?.cena && !(e.variacao ?? 0) && !objetosComTexto(pronta.cena).length) {
+    direcao = { estilo: pronta.estilo, cena: pronta.cena, origem: "ia" };
+  }
   if (!direcao) {
     const llm = deps.llm === undefined ? provedorConfigurado("rapido") : deps.llm;
     direcao = await escreverDirecao(e, llm);
