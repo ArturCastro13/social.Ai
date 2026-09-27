@@ -1,5 +1,29 @@
 # Deploy
 
+## Backend de assinatura: não ativar em produção
+
+O backend Stripe desta branch é **somente sandbox**. Preservar
+`BILLING_MODE=disabled` por padrão. O merge não ativa cobrança nem altera as
+telas atuais; integração de rotas/telas depende do redesenho e de outro PR.
+Não alterar variáveis Vercel nem aplicar SQL remoto como parte deste PR.
+
+O schema legado continua em `supabase/schema.sql`. Para a assinatura, usar
+as migrations aditivas de `supabase/migrations/`, em ordem lexicográfica,
+**uma vez cada**, no SQL Editor de um projeto Supabase de teste, após revisão
+do Bruno. Registrar quais foram aplicadas. Elas não são substituídas pela
+reexecução do schema legado e não são idempotentes por padrão; não reaplicar
+nem remover tabelas para contornar um erro. Não há aplicação automática no
+build. Em caso de falha, inspecionar o estado antes de qualquer nova execução.
+
+Executar os arquivos de `supabase/tests/` apenas em banco descartável; usam
+usuários sintéticos e verificações de privilégios. A receita de concorrência
+exige duas conexões PostgreSQL reais. Seguir [CHECKOUT-SANDBOX.md](docs/CHECKOUT-SANDBOX.md)
+para Auth por código, segredos locais, Stripe CLI e cartões de teste.
+
+As instruções legadas de publicação abaixo não autorizam habilitar cobrança
+real. O fallback `.data/`/demo descrito para o produto antigo não se aplica ao
+backend de assinatura, que falha fechado quando uma dependência não responde.
+
 Produção: **https://social-ai-beige.vercel.app** (projeto `social-ai` na conta `bruno-dotcom12`, ligado a esta pasta por `.vercel/`).
 
 ## Publicar uma nova versão
