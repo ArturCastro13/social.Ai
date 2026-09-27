@@ -11,7 +11,8 @@ import { analiseLocal } from "./local";
 import { palpiteNicho } from "./nicho";
 import { analiseIASchema, extrairJson, postDaSaida, semTravessao, templateValido, type AnaliseIA } from "./schema";
 import { demoPorDominio } from "./demo";
-import type { Preferencias } from "@/lib/motor/contrato";
+import type { EventoDoMotor, Preferencias } from "@/lib/motor/contrato";
+import { criarOuvinteAoVivo } from "./ao-vivo";
 import { intercalar, postsDoFounder, referenciaDoPadrao } from "@/lib/motor/local-founder";
 import { aplicarLinkDestino } from "@/lib/motor/link-destino";
 import { extrairInspiracoes, montarContexto, redesDoMotor } from "@/lib/motor/contexto";
@@ -38,7 +39,7 @@ import {
   temAprendizado,
 } from "@/lib/motor/aprendizados";
 import { diaDaSemana } from "@/lib/motor/saida";
-import { checarNumeros, humanizarTudo, limparFormato, numerosDasFontes } from "@/lib/motor/checar-numeros";
+import { checarNumeros, humanizarTudo, limparFormato, numerosDasFontes, textosDasFontes } from "@/lib/motor/checar-numeros";
 import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import { ultimaPorPost } from "@/lib/feedback";
 import type { CalendarioItem } from "@/lib/types";
@@ -152,6 +153,10 @@ export interface AnalisarOpcoes {
   forcarNovo?: boolean;
   /** Onboarding em camadas. Com preferências, o motor novo (PROMPT_MOTOR_POSTS.md) entra no lugar do prompt antigo. */
   preferencias?: Preferencias;
+  /** Geração ao vivo: o post sendo escrito e cada post pronto saem por aqui enquanto a IA escreve. */
+  aoVivo?: (e: EventoDoMotor) => void;
+  /** Cancela a chamada da IA quando a pessoa fecha a página. */
+  sinal?: AbortSignal;
 }
 
 // Teto global por instância, para nenhum script esgotar a cota da IA numa noite.
@@ -280,6 +285,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   const palpite = nichoConfirmado && nichoConfirmado !== "outro" ? nichoConfirmado : (pref?.pesquisa_mercado?.nicho ?? palpiteNicho(brand).nicho);
   const avisos: string[] = [];
   const id = novoId();
+  const temFounder = !!(pref?.conhecimento_founder && Object.values(pref.conhecimento_founder).some((v) => v?.trim())) || !!pref?.founder?.transcricao_audio?.trim();
 
   let saida: AnaliseIA | null = null;
   let motor: ResultadoMotor | null = null;
@@ -307,6 +313,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       let interpretar: (txt: string) => { saida: AnaliseIA; motor?: ResultadoMotor } | { erro: string };
       const erroZod = (issues: { path: PropertyKey[]; message: string }[]) =>
         issues.slice(0, 4).map((i) => `${i.path.map(String).join(".")}: ${i.message}`).join("; ");
+      let ouvinte: { receber: (delta: string) => void } | null = null;
 
       if (pref) {
         const redes = redesDoMotor(brand, pref);
@@ -316,6 +323,16 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
           const dia = diaDaSemana(d.dia_semana);
           return d.engajamento_pct !== null && dia !== null && d.horario ? [`${dia}|${d.horario}`] : [];
         });
+        ouvinte = op.aoVivo
+          ? criarOuvinteAoVivo({
+              id,
+              quantidade,
+              adaptador: { brand, palpite, quantidade, redes, preferencias: pref, padroes: contexto.map((c) => c.padrao), horariosComDado },
+              fontes: numerosDasFontes(textosDasFontes(brand, pref)),
+              temFounder,
+              emitir: op.aoVivo,
+            })
+          : null;
         sistema = SISTEMA_MOTOR;
         prompt = montarPromptMotor(ctx);
         interpretar = (txt) => {
@@ -345,10 +362,12 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
       // Segunda tentativa só se a primeira falhou rápido o bastante para a nova caber inteira nos 300 s da rota.
       for (let tentativa = 0; tentativa < 2 && !saida && (tentativa === 0 || Date.now() - inicio < 290_000 - PRAZO_IA_MS); tentativa++) {
         try {
-          const txt = await llm.gerar(
-            sistema,
-            erroAnterior ? `${prompt}\n\nA resposta anterior veio inválida (${erroAnterior}). Corrija e devolva só o JSON.` : prompt,
-          );
+          const promptAtual = erroAnterior ? `${prompt}\n\nA resposta anterior veio inválida (${erroAnterior}). Corrija e devolva só o JSON.` : prompt;
+          // Primeira tentativa ao vivo, quando a tela pediu e o provedor transmite; a nova tentativa vai inteira.
+          const txt =
+            tentativa === 0 && ouvinte && llm.gerarEmStream
+              ? await llm.gerarEmStream(sistema, promptAtual, ouvinte.receber, op.sinal)
+              : await llm.gerar(sistema, promptAtual);
           const r = interpretar(txt);
           if ("saida" in r) {
             saida = r.saida;
@@ -358,6 +377,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
             erroAnterior = r.erro;
           }
         } catch (e) {
+          if (op.sinal?.aborted) break; // a pessoa saiu: não paga outra tentativa
           erroAnterior = (e as Error).message.slice(0, 200);
           if (/HTTP (401|403|429)/.test(erroAnterior)) break; // chave inválida ou sem cota: não adianta repetir
         }
@@ -404,7 +424,6 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   );
   // Texto da IA: número que não está em nenhuma fonte vira [PREENCHER] e o post vai para revisão.
   if (provedor) {
-    const temFounder = !!(pref?.conhecimento_founder && Object.values(pref.conhecimento_founder).some((v) => v?.trim())) || !!pref?.founder?.transcricao_audio?.trim();
     comRoteiros.posts = limparFormato(comRoteiros.posts, temFounder);
     if (comRoteiros.roteiros) comRoteiros.roteiros = limparFormato(comRoteiros.roteiros, temFounder);
     comRoteiros.avisos = humanizarTudo(comRoteiros.avisos);
@@ -493,26 +512,4 @@ async function contextoDoMotor(
     concorrenciaExtraida,
     ...historico,
   });
-}
-
-/** Tudo o que a IA recebeu como fato: o que o site diz, o que o founder contou, materiais, notícias e a pesquisa. */
-export function textosDasFontes(brand: BrandProfile, pref: Preferencias | null): (string | null | undefined)[] {
-  return [
-    brand.nome,
-    brand.title,
-    brand.description,
-    brand.og?.description,
-    ...brand.headings.h1,
-    ...brand.headings.h2,
-    ...brand.paragrafos,
-    ...(brand.provas ?? []),
-    JSON.stringify(pref?.conhecimento_founder ?? {}),
-    pref?.founder?.transcricao_audio,
-    pref?.brand_book_texto,
-    pref?.objetivo_livre,
-    pref?.publico_alvo,
-    JSON.stringify(pref?.noticias ?? []),
-    JSON.stringify(pref?.pesquisa_mercado ?? {}),
-    JSON.stringify(pref?.contexto_empresa ?? {}),
-  ];
 }

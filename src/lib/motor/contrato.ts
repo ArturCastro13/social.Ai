@@ -2,7 +2,7 @@
 // Fonte: PROMPT_MOTOR_POSTS.md. Tudo aqui é opcional para o motor: ele funciona só com a leitura do site.
 import { z } from "zod";
 import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
-import { IDS_NICHO } from "@/lib/types";
+import { IDS_NICHO, type Analise, type PostGerado } from "@/lib/types";
 
 import { FORMATOS_MOTOR, OBJETIVOS, type FormatoMotor, type Frequencia, type ObjetivoId } from "./constantes";
 
@@ -274,3 +274,17 @@ export function conhecimentoPreenchido(c?: ConhecimentoFounder | null): Conhecim
   }
   return Object.keys(out).length ? out : null;
 }
+
+/**
+ * Eventos da geração ao vivo (POST /api/analyze com `stream: true`), um por linha de NDJSON.
+ * `previa` diz se o post veio da escrita ao vivo da IA (true) ou saiu pronto no fim (demo, cache, motor local).
+ */
+export type EventoAoVivo =
+  | { tipo: "inicio"; concorrentes: string[]; em_alta: string[]; virais_ao_vivo: number; preenchimento?: string }
+  | { tipo: "escrevendo"; indice: number; gancho: string | null }
+  | { tipo: "post"; indice: number; post: PostGerado; previa: boolean }
+  | { tipo: "final"; analise: Analise }
+  | { tipo: "erro"; mensagem: string };
+
+/** O que o motor emite enquanto escreve. */
+export type EventoDoMotor = Extract<EventoAoVivo, { tipo: "escrevendo" | "post" }>;
