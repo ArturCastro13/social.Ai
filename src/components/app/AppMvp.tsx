@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
+import { AoVivo } from "@/components/estudio/AoVivo";
 import { Carregando } from "@/components/estudio/Carregando";
 import { Formulario, type DadosFormulario } from "@/components/estudio/Formulario";
 import { useAba } from "@/components/estudio/abas";
@@ -121,13 +122,17 @@ export function AppMvp({
         )}
 
         {dados && (g.fase === "trabalhando" || (direto && g.fase === "parado")) && (
-          <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-20">
+          <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-20">
             <h1 className="font-display text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">Preparando as ideias de hoje</h1>
             <p className="mt-3 text-tinta-2">
               {dados.semSite ? "Estamos pensando na sua empresa e no seu nicho." : "Estamos lendo a sua marca e o seu nicho."} Não feche esta página.
             </p>
             <div className="mt-8">
-              <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || (dados.semSite ? "sua empresa" : dados.url)} />
+              {g.brand && (g.aoVivo.resumo || Object.keys(g.aoVivo.posts).length || g.aoVivo.escrevendo) ? (
+                <AoVivo estado={g.aoVivo} quantidade={dados.quantidade} totalVirais={totalVirais} brand={g.brand} />
+              ) : (
+                <Carregando etapas={g.etapas} brand={g.brand} dominio={g.dominio || (dados.semSite ? "sua empresa" : dados.url)} />
+              )}
             </div>
           </section>
         )}
