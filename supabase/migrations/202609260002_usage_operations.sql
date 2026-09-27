@@ -78,9 +78,6 @@ begin
   then raise exception 'invalid usage input' using errcode = '22023'; end if;
   perform 1 from public.workspaces w where w.id = p_workspace_id and w.owner_user_id = p_actor_user_id for update;
   if not found then raise exception 'workspace unavailable' using errcode = '28000'; end if;
-  if not public.draft_snapshot_usable(p_actor_user_id, p_draft_id, p_draft_version)
-    or not exists (select 1 from public.drafts d where d.id = p_draft_id and d.workspace_id = p_workspace_id)
-  then return pg_catalog.jsonb_build_object('status','conflict'); end if;
   select * into prior from public.usage_operations
     where workspace_id = p_workspace_id and operation_id = p_operation_id;
   if found then
@@ -89,11 +86,17 @@ begin
     return pg_catalog.jsonb_build_object('status','ok','operation_id',prior.operation_id,
       'state',prior.state,'result_id',prior.result_id,'request_hash',prior.request_hash);
   end if;
+  -- A historical operation remains readable after source revocation or draft
+  -- deletion. Only a NEW reservation needs a currently usable snapshot.
+  perform 1 from public.drafts d where d.id = p_draft_id and d.workspace_id = p_workspace_id for update;
+  if not found or not public.draft_snapshot_usable(p_actor_user_id, p_draft_id, p_draft_version)
+  then return pg_catalog.jsonb_build_object('status','conflict'); end if;
   select * into access_row from public.workspace_billing_access where workspace_id = p_workspace_id for update;
   if not found then raise exception 'billing access unavailable'; end if;
+  if access_row.risk_hold then return pg_catalog.jsonb_build_object('status','quota'); end if;
   if access_row.status in ('active','past_due') then
     if access_row.risk_hold or access_row.paid_from is null or access_row.paid_through is null
-      or pg_catalog.now() < access_row.paid_from or pg_catalog.now() >= access_row.paid_through
+      or pg_catalog.clock_timestamp() < access_row.paid_from or pg_catalog.clock_timestamp() >= access_row.paid_through
     then return pg_catalog.jsonb_build_object('status','quota'); end if;
     v_tier := 'paid'; v_start := access_row.paid_from; v_end := access_row.paid_through;
   elsif access_row.status in ('none','canceled','incomplete_expired') then
@@ -134,6 +137,8 @@ grant execute on function public.reserve_workspace_usage(uuid,uuid,uuid,text,uui
 create function public.transition_workspace_usage(p_actor_user_id uuid, p_workspace_id uuid,
   p_operation_id uuid, p_from text, p_to text, p_result_id uuid) returns boolean
 language plpgsql security definer set search_path = '' as $$
+declare prior public.usage_operations%rowtype; access_row public.workspace_billing_access%rowtype;
+  gate_time timestamptz;
 begin
   if not ((p_from = 'reserved' and p_to in ('started','released') and p_result_id is null)
     or (p_from = 'started' and p_to = 'uncertain' and p_result_id is null)
@@ -141,6 +146,28 @@ begin
   then return false; end if;
   perform 1 from public.workspaces w where w.id = p_workspace_id and w.owner_user_id = p_actor_user_id for update;
   if not found then return false; end if;
+  select * into prior from public.usage_operations u
+    where u.workspace_id = p_workspace_id and u.operation_id = p_operation_id for update;
+  if not found or prior.state <> p_from then return false; end if;
+  if p_to = 'started' then
+    -- save_draft and delete_draft lock this row, so source removal cannot race
+    -- between snapshot validation and the started transition.
+    perform 1 from public.drafts d where d.id = prior.draft_id and d.workspace_id = p_workspace_id for update;
+    if not found or not public.draft_snapshot_usable(p_actor_user_id, prior.draft_id, prior.draft_version)
+    then return false; end if;
+    select * into access_row from public.workspace_billing_access where workspace_id = p_workspace_id for update;
+    if not found or access_row.risk_hold then return false; end if;
+    gate_time := pg_catalog.clock_timestamp();
+    if prior.tier = 'paid' then
+      if access_row.status not in ('active','past_due')
+        or access_row.paid_from is distinct from prior.period_start
+        or access_row.paid_through is distinct from prior.period_end
+        or gate_time < access_row.paid_from or gate_time >= access_row.paid_through
+      then return false; end if;
+    elsif access_row.status not in ('none','canceled','incomplete_expired') then
+      return false;
+    end if;
+  end if;
   update public.usage_operations u set state = p_to, result_id = p_result_id,
     started_at = case when p_to = 'started' then pg_catalog.now() else started_at end,
     finished_at = case when p_to in ('completed','uncertain','released') then pg_catalog.now() else finished_at end

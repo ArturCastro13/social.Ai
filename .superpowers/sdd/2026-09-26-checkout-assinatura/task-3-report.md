@@ -28,3 +28,11 @@
 - `npm run lint`: passed without warnings.
 - `npx tsc --noEmit -p .`: passed.
 - `git diff --check`: passed.
+
+## Review fix round 1 — start boundary and historical lookup
+
+- `reserve_workspace_usage` checks an existing `(workspace, operation)` and immutable hash before testing the current draft. Completed, started, and uncertain records therefore remain readable to the owner after source revocation or draft deletion. A new reservation still requires a live, usable versioned snapshot.
+- New reservations and `reserved -> started` lock the draft row before checking `draft_snapshot_usable`, serializing against `save_draft` source removal and draft deletion. At start, the RPC also locks persisted billing access and checks risk hold, allowed status, current paid window, and exact equality to the reservation's stored paid period. Free reservations can start only while free access remains allowed. Expired, shifted, or risk-held paid periods cannot start a previously reserved provider operation.
+- `subscription_usage.sql` now asserts source revocation between reserve/start, risk hold, expiry, period change, and historical lookup after draft deletion. The fake repository tests the service's 409 behavior and historical result contract; only a real SQL run can verify its lock semantics.
+- `subscription_usage_concurrency.sh` is an executable two-connection test for a local disposable `*_test` or `*_disposable` database with migrations already applied. It seeds a workspace, holds session A after its reservation, and asserts session B waits then receives quota. It has not been run; no local disposable database is available, and no remote database was touched.
+- Fix-round checks: `npx vitest run tests/workspace-usage.test.ts` (8 passed), `npm run lint`, `npx tsc --noEmit -p .`, `bash -n supabase/tests/subscription_usage_concurrency.sh`, and `git diff --check` all passed. PostgreSQL SQL and concurrency assertions remain unexecuted.

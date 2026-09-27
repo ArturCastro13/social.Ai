@@ -6,6 +6,8 @@ function createUsageHarness(limit = 1) {
   const scope = { userId: randomUUID(), workspaceId: randomUUID() };
   const draftId = randomUUID();
   const rows = new Map<string, UsageRecord>();
+  let snapshotUsable = true;
+  let accessValid = true;
   let lock = Promise.resolve();
   const atomic = async <T>(fn: () => T): Promise<T> => {
     const previous = lock;
@@ -21,6 +23,8 @@ function createUsageHarness(limit = 1) {
         if (prior.requestHash !== input.requestHash) return { status: "conflict" };
         return { status: "ok", record: prior };
       }
+      if (!snapshotUsable) return { status: "conflict" };
+      if (!accessValid) return { status: "quota" };
       if ([...rows.values()].filter(r => r.state !== "released").length >= limit) return { status: "quota" };
       const record: UsageRecord = { operationId: input.operationId, state: "reserved", resultId: null, requestHash: input.requestHash };
       rows.set(input.operationId, record);
@@ -29,13 +33,15 @@ function createUsageHarness(limit = 1) {
     transition: (_scope, operationId, from, to, resultId) => atomic(() => {
       const row = rows.get(operationId);
       if (!row || row.state !== from) return false;
+      if (to === "started" && (!snapshotUsable || !accessValid)) return false;
       rows.set(operationId, { ...row, state: to, resultId: resultId ?? null });
       return true;
     }),
   };
   const service = createUsageService(repo);
   const reserve = (operationId: string, requestHash?: string) => service.reserve(scope, { operationId, kind: "image_generate", draftId, draftVersion: 1, requestHash });
-  return { scope, reserve, service, used: () => [...rows.values()].filter(r => r.state !== "released").length };
+  return { scope, reserve, service, revokeSnapshot: () => { snapshotUsable = false; },
+    blockAccess: () => { accessValid = false; }, used: () => [...rows.values()].filter(r => r.state !== "released").length };
 }
 
 describe("reservas de uso", () => {
@@ -75,6 +81,30 @@ describe("reservas de uso", () => {
     await h.service.markUncertain(h.scope, id);
     expect((await h.reserve(id)).state).toBe("uncertain");
     await expect(h.service.markStarted(h.scope, id)).rejects.toMatchObject({ status: 409 });
+  });
+
+  it("não inicia reserva após revogação nem cria outra, mas permite consultar seu estado", async () => {
+    const h = createUsageHarness();
+    const id = randomUUID();
+    await h.reserve(id);
+    h.revokeSnapshot();
+    await expect(h.service.markStarted(h.scope, id)).rejects.toMatchObject({ status: 409 });
+    expect((await h.reserve(id)).state).toBe("reserved");
+    await expect(h.reserve(randomUUID())).rejects.toMatchObject({ status: 409 });
+  });
+
+  it("não inicia após perda de acesso e mantém resultado histórico consultável", async () => {
+    const h = createUsageHarness(2);
+    const blocked = randomUUID();
+    const completed = randomUUID();
+    await h.reserve(blocked);
+    await h.reserve(completed);
+    await h.service.markStarted(h.scope, completed);
+    await h.service.finish(h.scope, completed, randomUUID());
+    h.blockAccess();
+    h.revokeSnapshot();
+    await expect(h.service.markStarted(h.scope, blocked)).rejects.toMatchObject({ status: 409 });
+    expect((await h.reserve(completed)).state).toBe("completed");
   });
 
   it("propaga indisponibilidade do repositório sem fallback local", async () => {
