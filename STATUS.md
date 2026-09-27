@@ -16,7 +16,8 @@ Feito:
 - **Modelos** (`src/lib/llm/index.ts`): pesquisa e posts com **Claude Sonnet 5** (esforço baixo); tarefas curtas com **Haiku 4.5**. Trocar sem mexer no código: `ANTHROPIC_MODEL_PESQUISA`, `ANTHROPIC_MODEL_POSTS`, `ANTHROPIC_MODEL`.
 - **Custo medido**: uns US$ 0,10 a 0,15 a pesquisa e US$ 0,14 os posts, ou seja, US$ 0,25 a 0,30 por site novo. Repetir o site não paga. Limites: 3 análises por e-mail, 5 pesquisas por IP por dia, 60 análises por dia (`LIMITE_GLOBAL_DIA`).
 - **`npm run ia:auditar -- <url> [saida.json] [sem-founder]`**: roda pesquisa e análise com IA para um site e salva o JSON (uns US$ 0,30).
-- **Verificação**: lint, `tsc`, 311 testes e build de produção.
+- **Imagem do post com IA** (`POST /api/imagem`, `src/lib/imagem/`): o Claude Haiku escreve a direção de arte, a OpenAI (`gpt-image-2`, qualidade média, 1024x1536, JPEG) gera a imagem sem texto, e o template põe o texto do post por cima com a fonte e as cores da marca. Botão "Criar imagem com IA" no cartão do post (capa do carrossel, citação, dado de impacto e print de post). A imagem fica no bucket público `posts` do Supabase (`ia/<dominio>/<hash>.jpg`), e o mesmo post não gera de novo. Custo: uns US$ 0,04 por imagem, 20 a 40 s. Limites: 10 por IP e 60 por dia (`LIMITE_IMAGENS_POR_IP`, `LIMITE_IMAGENS_DIA`). Trocar modelo ou qualidade: `OPENAI_IMAGE_MODEL`, `OPENAI_IMAGE_QUALITY`. Testado em produção com a Pipefy.
+- **Verificação**: lint, `tsc`, 330 testes e build de produção. Dois deploys em produção nesta noite.
 
 Auditoria (subagentes independentes conferindo na web, nota de 0 a 10):
 
@@ -27,8 +28,8 @@ Auditoria (subagentes independentes conferindo na web, nota de 0 a 10):
 | Sonnet 5, com travas | 4 a 6 | 5 a 7 | 5 | Metade das peças saía pronta; o resto pedia ajustes de minutos |
 
 Pendente:
-- **Imagens com IA (OpenAI)**: em construção. O Claude escreve a direção de arte, a OpenAI gera a imagem, o template põe o texto por cima. `OPENAI_API_KEY` já está na Vercel.
 - **Limite de gasto**: definir teto mensal no Console da Anthropic e da OpenAI (a chave é de um amigo).
+- **Imagens**: lista, checklist e antes e depois ainda não usam a imagem; no LinkedIn e no X (horizontal) a imagem vertical é cortada para caber. As 2 imagens de teste do desenvolvimento ficaram em `ia/teste/` no bucket.
 - **Ainda não é "publicar sem olhar"**: o que mais sobra é número verdadeiro usado no contexto errado e tese repetida entre peças. Post com risco aparece marcado para revisar.
 
 ## 26/09/2026 noite
