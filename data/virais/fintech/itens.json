@@ -490,5 +490,1355 @@
     },
     "status": "verificado",
     "notas_curadoria": "A Exame confirma o anúncio da gravidez do quarto filho no Instagram (@junqueira.cristina) no Dia das Mães de 2024, com o post incorporado. O IPO na NYSE aos oito meses de gestação (dez/2021) é fato amplamente noticiado. O texto_gancho é gancho de exemplo no padrão, não citação literal do post."
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Conheci o David Vélez numa quinta à noite, em 2013.",
+    "estrutura": [
+      "Bloco 1: a cena de origem com data e detalhe: 'conversamos por duas horas e meia sobre a ideia do que viria a ser o Nu'",
+      "Bloco 2: o começo sem nada: sem logo, sem marca, sem escritório, sem dinheiro",
+      "Bloco 3: todo mundo disse que não dava",
+      "Bloco 4: virada para o presente: lançamento do Nu nos EUA",
+      "Bloco 5: a objeção repetida ('vai recomeçar do zero?') e a resposta com humildade",
+      "Bloco 6: fecho: é dia um de novo, e é a parte de que ela mais gosta"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem imagem ou vídeo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma cena datada e íntima (quinta à noite, 2013, duas horas e meia de conversa) que prende antes de qualquer anúncio. O lançamento nos EUA chega embrulhado em narrativa de fundadora, e o número de clientes aparece como prova do caminho, não como propaganda.",
+    "autor_ou_marca": "Cristina Junqueira (Nubank)",
+    "link_fonte": "https://www.linkedin.com/posts/crisjunqueira_i-met-david-v%C3%A9lez-on-a-thursday-evening-in-activity-7503973781464420352-_p97",
+    "metricas": {
+      "curtidas": 5959,
+      "comentarios": 151,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "5.959 reações e 151 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'I met David Vélez on a Thursday evening in 2013. We talked for two and a half hours about his idea for what would become Nu.' Página mostra 'há 2 semanas' em 27/09/2026 (meados de setembro de 2026), no lançamento do Nu nos EUA. Autor e abertura conferidos.",
+    "nicho": "fintech",
+    "id": "fintech-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Hoje a Ramp captou US$ 750 milhões com valuation de US$ 44 bilhões.",
+    "estrutura": [
+      "Bloco 1: o número da rodada logo na primeira linha",
+      "Bloco 2: contraste de escala: 'da última vez que crescemos tão rápido, éramos 1/20 do tamanho'",
+      "Bloco 3: tese histórica em uma frase: por séculos os negócios tiveram dois pilares, agora surge um terceiro, a inteligência",
+      "Bloco 4: fecho em duas frases curtas: é o custo menos governado e a maior oportunidade"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, curto, sem mídia",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número grande na primeira linha, seguido de uma comparação de escala que reforça o crescimento sem repetir o valor. A tese curta e provocadora no fim convida à discordância, e o post rendeu 300 comentários.",
+    "autor_ou_marca": "Eric Glyman (Ramp)",
+    "link_fonte": "https://www.linkedin.com/posts/eglyman_today-ramp-raised-750m-at-a-44b-valuation-activity-7468292936078819328-xtho",
+    "metricas": {
+      "curtidas": 5622,
+      "comentarios": 300,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "5.622 reações e 300 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Today, Ramp raised $750M at a $44B valuation. Last time we grew this fast, we were 1/20th the size.' Página mostra 'há 3 meses' em 27/09/2026 (por volta de junho de 2026). Blocos 3 e 4 vêm da leitura anterior; só a abertura foi reconferida literalmente.",
+    "nicho": "fintech",
+    "id": "fintech-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Chega um momento da carreira em que o seu conhecimento começa a trabalhar contra você.",
+    "estrutura": [
+      "Bloco 1: frase de abertura paradoxal",
+      "Bloco 2: por que acontece: 'você acumulou experiência, tomou decisões difíceis, viu problemas parecidos e acertou muitas vezes', e passa a achar que já sabe a resposta",
+      "Bloco 3: caso pessoal: construir a Me Poupe! do zero",
+      "Bloco 4: o problema: querer decidir, revisar e aprovar tudo",
+      "Bloco 5: a empresa não cresce na velocidade de uma pessoa só",
+      "Bloco 6: lição: crescer como líder é fazer perguntas melhores"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O paradoxo da abertura (experiência que atrapalha) é algo que todo profissional sênior reconhece em si. A autora admite o próprio erro como fundadora, o que dá permissão para outros líderes confessarem o mesmo nos comentários.",
+    "autor_ou_marca": "Nathalia Arcuri (Me Poupe!)",
+    "link_fonte": "https://pt.linkedin.com/posts/nathaliaarcuri_chega-um-momento-da-carreira-em-que-o-seu-activity-7504212148483538944-Ee1K",
+    "metricas": {
+      "curtidas": 3440,
+      "comentarios": 43,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "3.440 reações e 43 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido; antes constava 3.439)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página mostra 'há 2 semanas' em 27/09/2026. Autora é fundadora de empresa de educação financeira (finanças pessoais), mas o tema do post é liderança, não finanças: vale como modelo de bastidor de founder, não como referência de assunto do nicho. Tipo de gancho corrigido de historia-pessoal para contraintuitivo, que descreve melhor a abertura.",
+    "nicho": "fintech",
+    "id": "fintech-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Hoje a Brex passa oficialmente a fazer parte do Capital One!",
+    "estrutura": [
+      "Bloco 1: anúncio do marco na primeira linha",
+      "Bloco 2: a crença de origem: 'como uma empresa gasta dinheiro define o que ela vira'",
+      "Bloco 3: finanças não é backoffice, é o centro das decisões",
+      "Bloco 4: prova: 1 em cada 3 startups dos EUA e os grandes laboratórios de IA usam a Brex",
+      "Bloco 5: humildade estratégica: 'ainda estamos a menos de 2% do caminho'",
+      "Bloco 6: por que o novo parceiro fecha essa lacuna"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma uma aquisição, que poderia soar como fim de jornada, em narrativa de missão que continua. A prova social concreta (1 em cada 3 startups) e o número 'menos de 2% do caminho' mostram o tamanho do jogo pela frente.",
+    "autor_ou_marca": "Pedro Franceschi (Brex)",
+    "link_fonte": "https://www.linkedin.com/posts/pfranceschi_today-brex-is-officially-part-of-capital-activity-7447377443528687616-aX7j",
+    "metricas": {
+      "curtidas": 3113,
+      "comentarios": 79,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "3.113 reações e 79 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Today Brex is officially part of Capital One! When we started Brex, we always believed that how a company spends money defines what it becomes.' Página mostra 'há 5 meses' em 27/09/2026 (por volta de abril de 2026). Founder brasileiro, referência forte para o público do social.Ai.",
+    "nicho": "fintech",
+    "id": "fintech-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Treze anos atrás, o Nu era formado por um grupo de doze pessoas que trabalhavam numa casa alugada em São Paulo.",
+    "estrutura": [
+      "Bloco 1: cena de origem com números pequenos (13 anos, 12 pessoas, casa alugada)",
+      "Bloco 2: 'Sem escritório corporativo, sem logo, sem produto.'",
+      "Bloco 3: virada com números grandes: três países, mais de 140 milhões de clientes",
+      "Bloco 4: o anúncio: Nu nos EUA e Nu Global",
+      "Bloco 5: lista de benefícios concretos para o cliente americano (rendimento sem mínimo, cartão sem anuidade, cashback, atendimento humano)",
+      "Bloco 6: Nu Global: conta multimoeda para usar em dezenas de países sem taxa"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem de anúncio do Nu Global com a marca",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O contraste entre o começo minúsculo (12 pessoas numa casa alugada) e a escala atual cria um arco de história em duas frases. Depois entrega benefícios específicos e mensuráveis, o que dá credibilidade ao anúncio institucional.",
+    "autor_ou_marca": "Nubank",
+    "link_fonte": "https://pt.linkedin.com/posts/nubank_lançamento-nos-estados-unidos-e-introdução-activity-7503883863568523264-3TVJ",
+    "metricas": {
+      "curtidas": 1716,
+      "comentarios": 33,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.716 reações e 33 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página mostra 'há 2 semanas' em 27/09/2026. Abertura e autor conferidos. Os números exatos da lista de benefícios (cashback, quantidade de países) vêm da leitura anterior e não foram reconferidos. Mesmo gancho de origem usado pela cofundadora no post pessoal dela.",
+    "nicho": "fintech",
+    "id": "fintech-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "300 mil contadores deixaram a profissão. Os diplomas de contabilidade estão no menor nível em 20 anos.",
+    "estrutura": [
+      "Bloco 1: dados de dor em frases curtas (300 mil saíram, diplomas no menor nível em 20 anos, escritórios recusando clientes)",
+      "Bloco 2: o lançamento como resposta: sistema de IA para escritórios contábeis",
+      "Bloco 3: como funciona em linguagem de processo (fechamento, conciliação e lançamentos viram procedimentos vivos)",
+      "Bloco 4: prova: parceiros fechando os livros em metade do tempo e grandes escritórios já usando a Ramp",
+      "Bloco 5: tese: a maior mudança na contabilidade desde a planilha",
+      "Bloco 6: CTA de marcação: 'Conhece um contador? Marque nos comentários' em troca de 3 meses de acesso grátis"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com a crise do setor em números, não com o produto, então o lançamento chega como solução para um problema já aceito. O CTA de marcar um contador em troca de acesso grátis transforma cada comentário em indicação, e o post rendeu 205 comentários.",
+    "autor_ou_marca": "Eric Glyman (Ramp)",
+    "link_fonte": "https://www.linkedin.com/posts/eglyman_300000-cpas-have-left-the-profession-accounting-activity-7467922928462905344-HvMP",
+    "metricas": {
+      "curtidas": 1616,
+      "comentarios": 205,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.616 reações e 205 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: '300,000 CPAs have left the profession. Accounting degrees are at a 20-year low.' CTA original confirmado: 'Know a CPA? Tag them in the comments', com 3 meses de acesso gratuito. Página mostra 'há 3 meses' em 27/09/2026 (por volta de junho de 2026). CPA traduzido como contador.",
+    "nicho": "fintech",
+    "id": "fintech-21"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A IA é extremamente boa em gastar o seu dinheiro em silêncio.",
+    "estrutura": [
+      "Bloco 1: frase de alerta contraintuitiva",
+      "Bloco 2: confissão com número: o gasto da própria Ramp com tokens foi de erro de arredondamento para mais de 10% da folha em um ano, e US$ 1,5 milhão queimado em uma semana de maio",
+      "Bloco 3: detalhe humano: o CFO não gostou de ver isso contado para a internet",
+      "Bloco 4: perguntas que o financeiro não sabe responder (qual time, qual modelo, o que mudou)",
+      "Bloco 5: as duas saídas ruins (pagar e torcer ou cortar tudo)",
+      "Bloco 6: a terceira saída: o produto que conecta os provedores de IA e mostra o gasto"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto em minúsculas, sem mídia visível na página pública",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O founder expõe um número embaraçoso da própria empresa (US$ 1,5 milhão em uma semana) antes de vender, o que gera confiança e curiosidade. A estrutura de dilema com duas saídas ruins e uma terceira é clássica de venda consultiva.",
+    "autor_ou_marca": "Eric Glyman (Ramp)",
+    "link_fonte": "https://www.linkedin.com/posts/eglyman_ai-is-extremely-good-at-spending-your-money-activity-7483521252717133824-R_Za",
+    "metricas": {
+      "curtidas": 1044,
+      "comentarios": 91,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.044 reações e 91 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'AI is extremely good at spending your money very quietly. our own token spend went from a rounding error to more than 10% of payroll in a year.' Números de 10% da folha e US$ 1,5 milhão em uma semana de maio confirmados. Página mostra 'há 2 meses' em 27/09/2026 (por volta de julho de 2026). A leitura atual não mostrou vídeo: padrão visual corrigido para post só texto e uso_rosto para false.",
+    "nicho": "fintech",
+    "id": "fintech-22"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Por muito tempo, ninguém viu problema em pagar multa por atraso e ir até a Blockbuster devolver um filme.",
+    "estrutura": [
+      "Bloco 1: analogia familiar (multa da Blockbuster)",
+      "Bloco 2: a virada: 'até a tecnologia mostrar que a experiência simplesmente não precisava funcionar assim'",
+      "Bloco 3: o paralelo: sistema bancário dos EUA com estrutura cara e tarifas embutidas",
+      "Bloco 4: a lógica econômica: estrutura mais eficiente devolve ganhos ao cliente",
+      "Bloco 5: fecho: essa é a oportunidade do Nu nos EUA"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa uma analogia que qualquer leitor viveu ou conhece para explicar uma tese complexa de disrupção bancária. O leitor chega sozinho à conclusão (tarifa bancária é a nova multa da locadora) antes de a autora dizer o que o Nu vai fazer.",
+    "autor_ou_marca": "Cristina Junqueira (Nubank)",
+    "link_fonte": "https://www.linkedin.com/posts/crisjunqueira_for-a-long-time-no-one-saw-a-problem-with-activity-7506438590483333120-lgr_",
+    "metricas": {
+      "curtidas": 922,
+      "comentarios": 31,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "922 reações e 31 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'For a long time, no one saw a problem with paying late fees and going to a Blockbuster store to return a movie. Until technology showed that the experience simply didn't have to work that way.' Página mostra 'há 1 semana' em 27/09/2026.",
+    "nicho": "fintech",
+    "id": "fintech-23"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Um aluno do 8º ano já montando a própria carteira de ações.",
+    "estrutura": [
+      "Bloco 1: dois exemplos concretos e surpreendentes em frases curtas (8º ano com carteira de ações, 7º ano com loja online de bijuterias)",
+      "Bloco 2: quebra de expectativa: eles não estudam em escola de negócios",
+      "Bloco 3: o caso: escola que implantou educação financeira do 1º ao 9º ano",
+      "Bloco 4: o que o conteúdo mistura (economia comportamental, psicologia, matemática)",
+      "Bloco 5: o ponto central: ensinar a tomar decisões, não a comprar ações",
+      "Bloco 6: lista do que educação financeira deveria ensinar"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia visível na página pública",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma cena inesperada envolvendo crianças e dinheiro, que gera curiosidade imediata. Depois reposiciona o assunto (decisão, não ações), o que dá ao leitor uma ideia nova para repetir e compartilhar.",
+    "autor_ou_marca": "Nathalia Arcuri (Me Poupe!)",
+    "link_fonte": "https://pt.linkedin.com/posts/nathaliaarcuri_um-aluno-do-8%C2%BA-ano-j%C3%A1-montando-a-pr%C3%B3pria-activity-7506739403235430400-BaB4",
+    "metricas": {
+      "curtidas": 851,
+      "comentarios": 26,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "851 reações e 26 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido; antes constava 850)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Segunda frase original: 'Uma aluna do 7º ano transformando a produção de bijuterias em uma loja online.' Página mostra 'há 1 semana' em 27/09/2026. A leitura atual não mostrou imagem no post: padrão visual corrigido para só texto. Tema de educação financeira, dentro do nicho de finanças pessoais.",
+    "nicho": "fintech",
+    "id": "fintech-24"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Toda vez que abrimos as portas do nosso Programa de Estágio, é a mesma sensação: estamos formando o time que vai construir o Nubank dos próximos anos.",
+    "estrutura": [
+      "Bloco 1: sentimento da fundadora sobre o programa",
+      "Bloco 2: a novidade: 'Este ano, o programa nasce com a IA no centro.'",
+      "Bloco 3: promessa concreta: construir com os mesmos modelos e agentes usados por um banco com 139 milhões de clientes",
+      "Bloco 4: perfil buscado: gente curiosa que vai fundo sem ter todas as respostas",
+      "Bloco 5: CTA com prazo: inscrições para o Programa de Estágio 2027 até 30 de agosto"
+    ],
+    "padrao_visual": {
+      "fundo": "post de texto com link de inscrição",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um recrutamento comum vira post de visão porque vem da cofundadora e amarra o estágio a um número de escala (139 milhões de clientes) e à IA. O prazo fechado no fim dá urgência ao CTA.",
+    "autor_ou_marca": "Cristina Junqueira (Nubank)",
+    "link_fonte": "https://pt.linkedin.com/posts/crisjunqueira_toda-vez-que-abrimos-as-portas-do-nosso-programa-activity-7495154734383661056-Ozv6",
+    "metricas": {
+      "curtidas": 764,
+      "comentarios": 19,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "764 reações e 19 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página mostra 'há 1 mês' em 27/09/2026 (agosto de 2026). Prazo de 30 de agosto para o Programa de Estágio 2027 confirmado. Post com prazo vencido: útil como modelo de estrutura, não como referência de assunto atual.",
+    "nicho": "fintech",
+    "id": "fintech-25"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Hola, Argentina. Hoje demos mais um passo importante na construção do Inter como um Super App financeiro global.",
+    "estrutura": [
+      "Bloco 1: saudação no idioma do novo mercado, com bandeira",
+      "Bloco 2: o anúncio: início da operação na Argentina por parceria estratégica com a BIND",
+      "Bloco 3: o que o cliente ganha: conta local e Global Account para investir em dólar",
+      "Bloco 4: por que importa: diversificação e acesso internacional",
+      "Bloco 5: fecho de visão: ecossistema financeiro sem fronteiras, com a hashtag de campanha #AhoraSoyGlobal"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A primeira palavra no idioma do novo país sinaliza a expansão antes de qualquer explicação. Post curto, com benefício claro e hashtag de campanha, que também abriu espaço para clientes debaterem nos comentários.",
+    "autor_ou_marca": "Inter",
+    "link_fonte": "https://pt.linkedin.com/posts/inter_ahorasoyglobal-activity-7503171647764582400-Hvay",
+    "metricas": {
+      "curtidas": 670,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "670 reações e 14 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Abertura original: 'Hola, Argentina 🇦🇷 Hoje demos mais um passo importante...' Página mostra 'há 2 semanas' em 27/09/2026. A leitura atual indicou uma imagem, mas pode ser a capa do perfil da empresa; mídia própria do post não confirmada com certeza.",
+    "nicho": "fintech",
+    "id": "fintech-26"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Por que estou saindo do LinkedIn?",
+    "estrutura": [
+      "Bloco 1: pergunta polêmica em destaque, vinda de um CEO de banco",
+      "Bloco 2: 'Este é meu último post por aqui.'",
+      "Bloco 3: o destino: toda a produção de conteúdo passa a ser feita no Fórum, espaço de discussões dentro do Super App do Inter",
+      "Bloco 4: o que o leitor encontra lá (lançamentos, carreira, investimentos, inovação)",
+      "Bloco 5: CTA passo a passo: entrar no app, abrir o Fórum, criar perfil"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Anunciar a saída da própria rede onde se está postando é uma quebra de padrão que força o clique. Na prática é um CTA de produto disfarçado de despedida, e gerou debate (41 comentários, inclusive críticos).",
+    "autor_ou_marca": "João Vitor Menin (Inter)",
+    "link_fonte": "https://pt.linkedin.com/posts/jo%C3%A3ovitormenin_por-que-estou-saindo-do-linkedin-este-activity-7243001117448507394-1Wnw",
+    "metricas": {
+      "curtidas": 623,
+      "comentarios": 41,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "623 reações e 41 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página mostra 'há 2 anos' em 27/09/2026, ou seja, por volta de setembro de 2024. Post antigo: bom como modelo de gancho, mas não é viral recente. Link diferente do post de 10 milhões de clientes do mesmo autor já na biblioteca.",
+    "nicho": "fintech",
+    "id": "fintech-27"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "O Nu encerrou o mês de junho com 139 milhões de clientes, e o engajamento continuou a crescer, atingindo 83,5%.",
+    "estrutura": [
+      "Bloco 1: número de clientes e taxa de atividade na primeira frase",
+      "Bloco 2: dado do Brasil: 'a taxa de atividade foi ainda maior, superando 86% pela primeira vez'",
+      "Bloco 3: interpretação: o cliente não só chega, ele traz mais da vida financeira para o Nu",
+      "Bloco 4: recordes: lucro líquido acima de US$ 1 bilhão no trimestre e receita recorde",
+      "Bloco 5: tese: obsessão pelo cliente vira resultado",
+      "Bloco 6: CTA para a newsletter com os outros destaques"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem de capa da newsletter com a marca",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O resultado trimestral é contado primeiro como comportamento do cliente (engajamento) e só depois como lucro, o que soa menos como balanço e mais como prova de produto. Marcos 'pela primeira vez' dão sensação de recorde.",
+    "autor_ou_marca": "Nubank",
+    "link_fonte": "https://pt.linkedin.com/posts/nubank_us-1-bilhão-de-lucro-líquido-no-2t26-o-activity-7495904068066930688-daaN",
+    "metricas": {
+      "curtidas": 477,
+      "comentarios": 23,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "477 reações e 23 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Resultado do 2T26. Página mostra 'há 1 mês' em 27/09/2026 (agosto de 2026). Abertura e segunda frase conferidas. O valor exato de receita citado na versão anterior (quase US$ 5,9 bilhões) não foi reconferido e saiu da estrutura.",
+    "nicho": "fintech",
+    "id": "fintech-28"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Uma empresa pode bater todas as metas e, ainda assim, estar falhando na gestão.",
+    "estrutura": [
+      "Bloco 1: afirmação contraintuitiva",
+      "Bloco 2: dado da OMS: 'estima que 15% dos adultos em idade produtiva convivam com algum transtorno mental', com dias de trabalho perdidos e custo bilionário",
+      "Bloco 3: conclusão: saúde mental é assunto de gestão",
+      "Bloco 4: aprendizado pessoal construindo a Me Poupe!: gestor não é psicólogo",
+      "Bloco 5: o papel do líder: cultura em que pedir ajuda não é frescura",
+      "Bloco 6: onde a cultura aparece: no erro e quando a meta bate no limite da pessoa"
+    ],
+    "padrao_visual": {
+      "fundo": "post só texto, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quebra a crença de que meta batida é sinal de boa gestão e sustenta a quebra com um dado da OMS logo na segunda frase. Depois traz o bastidor da fundadora, o que humaniza o dado.",
+    "autor_ou_marca": "Nathalia Arcuri (Me Poupe!)",
+    "link_fonte": "https://pt.linkedin.com/posts/nathaliaarcuri_uma-empresa-pode-bater-todas-as-metas-e-activity-7505246229501714434-qaiv",
+    "metricas": {
+      "curtidas": 325,
+      "comentarios": 18,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "325 reações e 18 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (reconferido)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página mostra 'há 1 semana' em 27/09/2026. Encaixe fraco no nicho: autora é fundadora de empresa de educação financeira, mas o tema é saúde mental e gestão. Mantido só como modelo de estrutura de bastidor de founder; engajamento modesto.",
+    "nicho": "fintech",
+    "id": "fintech-29"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A Stone é campeã no Valor 1000.",
+    "estrutura": [
+      "Bloco 1: o prêmio na primeira linha",
+      "Bloco 2: frase de marca empregadora: 'Você entra para transformar uma experiência de pagamento. Quando vê, está movimentando a economia do país.'",
+      "Bloco 3: o prêmio com contexto: campeã do setor de Serviços Financeiros no Valor 1000 de 2026, cerca de 5 milhões de empreendedores atendidos",
+      "Bloco 4: cultura por trás da conquista: trabalho coletivo, troca entre áreas, autonomia com responsabilidade",
+      "Bloco 5: anáfora de fechamento: 'É pra quem faz oportunidade virar negócio. É pra quem faz número virar decisão. É pra quem faz melhor junto.'",
+      "Bloco 6: prêmio dedicado às cerca de 10 mil pessoas do time",
+      "Bloco 7: CTA duplo: matéria completa no primeiro comentário e 'Depois conta pra gente o que mais gostou'"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única comemorativa com a marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O prêmio de um veículo reconhecido funciona como prova social instantânea. A segunda frase coloca o funcionário como protagonista, e a dedicatória aos 10 mil do time transforma conquista corporativa em orgulho que o próprio time compartilha. O link no primeiro comentário puxa interação.",
+    "autor_ou_marca": "Stone",
+    "link_fonte": "https://pt.linkedin.com/posts/stone-co_a-stone-é-campeã-no-valor-1000-você-entra-activity-7503828454539280384-ZnP5",
+    "metricas": {
+      "curtidas": 534,
+      "comentarios": 26,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "534 reações e 26 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (desta vez a página abriu)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Página do post abriu na reverificação e o texto completo foi lido; status promovido de 'a verificar' para 'verificado' e estrutura reescrita a partir do texto real. Página mostra 'há 2 semanas' em 27/09/2026. A imagem pode ser a capa do perfil da empresa; mídia própria do post não confirmada com certeza.",
+    "nicho": "fintech",
+    "id": "fintech-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "CHEGA DE BETS!!!",
+    "estrutura": [
+      "Slide 1: ilustração pop art assinada por @crisvector (crédito confirmado na legenda) sobre o fim das bets",
+      "Slide 2: vídeo meme com o título 'A galera assim defendendo as BETs:' em amarelo sobre fundo preto (visto na imagem de capa da página)",
+      "Slide 3: dado duro em print: R$ 120 bilhões por ano fora da economia real (FEA-USP) e R$ 30 bilhões por ano de impacto no SUS (IEPS)",
+      "Slide 4: meme de fechamento puxando o assunto para o bolso do trabalhador",
+      "Legenda: explica para onde vai o dinheiro (mercadinho, farmácia, pequenos negócios), cita as duas fontes, fecha com 'Bet não é e nunca foi investimento' e parabeniza o presidente"
+    ],
+    "padrao_visual": {
+      "fundo": "mistura de ilustração colorida e slides pretos com vídeo meme e título amarelo serifado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega carona numa decisão do governo no mesmo dia com opinião em caixa alta e três exclamações. Os slides são memes que o público já compartilha, e os números de impacto (R$ 120 bi e R$ 30 bi) ficam na legenda com fonte, o que dá autoridade sem virar aula.",
+    "autor_ou_marca": "Nath Finanças (@nathfinancas)",
+    "link_fonte": "https://www.instagram.com/p/DdvHw14llWb/",
+    "metricas": {
+      "curtidas": 46000,
+      "comentarios": 752,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '46K likes, 752 comments'. Curtidas arredondadas pelo Instagram (46K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026. Texto de abertura, autora, data, fontes (FEA-USP, IEPS), frase final e crédito @crisvector confirmados na legenda. Na verificação só vi a capa da página, que mostra o vídeo meme; a ordem exata dos slides e o conteúdo dos slides 3 e 4 não foram conferidos. Tema: apostas online e endividamento, finanças pessoais.",
+    "nicho": "fintech",
+    "id": "fintech-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Chega de ouvir \"aqui a gente não aceita essa bandeira\"!",
+    "estrutura": [
+      "Slide 1: capa com foto de maquininha e cartão de vale-refeição e a promessa de que o VA vai passar em qualquer maquininha a partir de novembro",
+      "Slide 2: 'O que está mudando?' com a obrigação de aceitar qualquer bandeira de VA e VR na mesma maquininha",
+      "Slide 3: a regra em números (teto de taxa e prazo de repasse ao comerciante)",
+      "Slide 4: quem ganha, o trabalhador e o pequeno comerciante, e o que continua igual",
+      "Slide 5: CTA pedindo para salvar e compartilhar",
+      "Legenda: resume a regra em duas frases e cita a fonte da matéria (NSC Total)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto na capa (maquininha e cartão verde), slides internos em azul e branco",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma frase que todo mundo já ouviu no caixa e promete o fim dessa dor. O carrossel responde em ordem o que muda e quem ganha, e a legenda curta com fonte deixa o conteúdo com cara de notícia confiável.",
+    "autor_ou_marca": "N3 Notícias (@n3.noticias)",
+    "link_fonte": "https://www.instagram.com/p/DdmY7ozFjf0/",
+    "metricas": {
+      "curtidas": 41000,
+      "comentarios": 607,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '41K likes, 607 comments'. Curtidas arredondadas pelo Instagram (41K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Texto de abertura, perfil e fonte (nsctotal.com.br) confirmados na legenda; capa com maquininha e cartão de VR vista. Números citados nos slides internos (decreto, teto de taxa, 22 milhões de trabalhadores) não foram conferidos nesta verificação. Nicho: meios de pagamento.",
+    "nicho": "fintech",
+    "id": "fintech-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "NUBANK CAIU E O BRASILEIRO DESCOBRIU NO PIOR MOMENTO",
+    "estrutura": [
+      "Slide 1: print de tweet de @erikaaleti 'A Nubank resolve cair no momento q ia me mandar um pix' sobre vídeo meme, em fundo degradê azul e rosa",
+      "Slides 2 a 7: outros prints de clientes com o Pix falhando em situações do dia a dia (mercado, corrida de app, lanche), cada um com um vídeo meme",
+      "Slide 8: último print de reclamação para fechar a sequência",
+      "Legenda: repete a manchete em caixa alta, dá o contexto jornalístico da instabilidade no Pix e cita as fontes (Tecnoblog, SpaceMoney, redes sociais)"
+    ],
+    "padrao_visual": {
+      "fundo": "cartão de tweet branco sobre degradê azul e rosa, com vídeo meme embaixo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transforma uma falha de fintech em comédia coletiva com prints reais de clientes, o que gera identificação imediata. Cada slide é uma variação da mesma dor, então a pessoa arrasta até o fim e marca amigos.",
+    "autor_ou_marca": "Memes Brasil (@memesbrasil)",
+    "link_fonte": "https://www.instagram.com/p/Dc4oKCtCSUn/",
+    "metricas": {
+      "curtidas": 90000,
+      "comentarios": 1285,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '90K likes, 1,285 comments'. Curtidas arredondadas pelo Instagram (90K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 04/09/2026. Manchete, perfil, data e fontes confirmados na legenda; slide 1 (tweet de @erikaaleti) visto na capa. Situações dos slides 2 a 8 não conferidas uma a uma. Útil como referência de crise de fintech e do formato print de tweet em carrossel.",
+    "nicho": "fintech",
+    "id": "fintech-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O Nu continua crescendo: apresentamos o Nu Global e o Nu EUA para pessoas que moram no exterior.",
+    "estrutura": [
+      "Slide 1: vídeo com tela do app 'Bem-vindos ao Nu', perfil do usuário e botões Deposit e Send sobre fundo roxo escuro",
+      "Slides 2 a 6: vídeos curtos mostrando o produto em uso por quem mora fora do Brasil",
+      "Legenda: frase de anúncio, disponibilidade para pessoas elegíveis no exterior e CTA para nu.com"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeos com tela do app em primeiro plano sobre roxo escuro da marca",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Anúncio de produto contado como capítulo de uma história de crescimento ('O Nu continua crescendo'). Mostra o app funcionando na tela em vez de descrever, e fala direto com um público de dor clara: brasileiro que mora fora.",
+    "autor_ou_marca": "Nubank (@nubank)",
+    "link_fonte": "https://www.instagram.com/p/DdH-G7cgNJ3/",
+    "metricas": {
+      "curtidas": 6101,
+      "comentarios": 218,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '6,101 likes, 218 comments'."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/09/2026. Texto de abertura, perfil e CTA para nu.com confirmados na legenda; capa com tela 'Bem-vindos ao Nu' vista. Conteúdo dos vídeos 2 a 6 não conferido.",
+    "nicho": "fintech",
+    "id": "fintech-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "NUBANK ANUNCIA CARTÃO DE CRÉDITO PLATINUM CROMA. Novo serviço financeiro dá 5% de cashback em Netflix, Spotify e diversas outras assinaturas",
+    "estrutura": [
+      "Slide 1: capa com foto do cartão Nubank Croma (logo nu e Mastercard) com marca @TECNOBLOG e manchete",
+      "Slide 2: o que é o Croma: platinum Mastercard, para quem ganha acima de R$ 5 mil, escolha entre 0,8% de cashback ou 1,4 ponto por dólar",
+      "Slide 3: preço (R$ 39 por mês) e como zerar a mensalidade (gastar R$ 4 mil por mês ou ter R$ 30 mil investidos)",
+      "Slide 4: benefícios em assinaturas",
+      "Slide 5: CTA 'Gostou do novo Nubank Croma? Me conta nos comentários'"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do cartão em close sobre fundo cinza, slides internos de texto com marca do veículo",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Notícia de lançamento com números que o leitor usa para decidir na hora (renda mínima de R$ 5 mil, R$ 39 por mês, isenção com R$ 4 mil de gasto). Fecha com pergunta aberta, o que puxa comentários de quem quer ou não o cartão.",
+    "autor_ou_marca": "Tecnoblog (@tecnoblog)",
+    "link_fonte": "https://www.instagram.com/p/DbVy2gMjlxN/",
+    "metricas": {
+      "curtidas": 5826,
+      "comentarios": 213,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '5,826 likes, 213 comments'."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Post de 28/07/2026. Perfil, data, dados do cartão (R$ 5 mil, 0,8% ou 1,4 ponto, R$ 39 por mês, isenção) e CTA final confirmados na legenda, que abre com 'O Nubank fez o lançamento do novo cartão de crédito Nubank Croma'. A manchete da capa usada como gancho e o '5% em assinaturas' não apareceram no recorte da capa que consegui ver, por isso rebaixado. Ordem dos slides 2 a 5 não conferida.",
+    "nicho": "fintech",
+    "id": "fintech-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Conheça os canais oficiais da InfinitePay! Antes de responder qualquer mensagem!",
+    "estrutura": [
+      "Slide 1: 'Conheça os canais oficiais da InfinitePay!' em letra enorme, subtítulo sobre responder mensagens e celular com o perfil verificado",
+      "Slide 2: siga apenas o perfil oficial @infinitepay e desconfie de nomes com número, ponto ou letra a mais",
+      "Slide 3: a InfinitePay nunca pede seu código de acesso",
+      "Slide 4: canal oficial de suporte é o chat do app",
+      "Slide 5: fechamento sobre segurança e pedido para salvar",
+      "Legenda: 'Atenção, empreendedor!' com três dicas numeradas e 'Salve esse post e envie para quem também usa InfinitePay'"
+    ],
+    "padrao_visual": {
+      "fundo": "lilás claro com tipografia preta grande em negrito e mockup de celular",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Conteúdo de utilidade contra golpe, que o lojista salva e manda para outros lojistas, como a própria legenda pede. Cada slide carrega uma regra só em letra grande, fácil de lembrar na hora de uma mensagem suspeita.",
+    "autor_ou_marca": "InfinitePay (@infinitepay)",
+    "link_fonte": "https://www.instagram.com/p/DVjTNm9EkeT/",
+    "metricas": {
+      "curtidas": 5125,
+      "comentarios": 3141,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '5,125 likes, 3,141 comments'."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 06/03/2026. Texto da capa visto na imagem ('Conheça os canais oficiais da InfinitePay!' e '...de responder qualquer mensagem!'). Perfil, data e as três dicas confirmados na legenda. Slides internos não conferidos um a um. Nicho: maquininha e conta para pequenos negócios. Comentários altos em relação às curtidas, motivo não confirmado.",
+    "nicho": "fintech",
+    "id": "fintech-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "ENEMigos do atraso. Clientes Nubank têm 3 meses de Duolingo Super grátis pra dar um gás nos estudos para o Enem.",
+    "estrutura": [
+      "Slide 1: trocadilho 'ENEMigos do atraso' em letras brancas enormes sobre roxo, com 'ENEM' em tarja verde",
+      "Slide 2: a oferta: 3 meses de Duolingo Super grátis para clientes Nubank",
+      "Slide 3: como ativar pelo app",
+      "Slide 4: fechamento pedindo para mandar a quem vai fazer o Enem",
+      "Legenda: repete a oferta e manda para o link da bio para ativar"
+    ],
+    "padrao_visual": {
+      "fundo": "roxo Nubank com blocos verde limão do Duolingo, tipografia branca gigante",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Parceria de marcas com trocadilho no momento certo do calendário (Enem) e cores das duas marcas juntas na capa. A oferta é concreta (3 meses grátis) e o benefício vira motivo para o cliente abrir o app do banco.",
+    "autor_ou_marca": "Duolingo Brasil (@duolingobrasil) em parceria com Nubank",
+    "link_fonte": "https://www.instagram.com/p/DdSEpReGj43/",
+    "metricas": {
+      "curtidas": 7717,
+      "comentarios": 267,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '7,717 likes, 267 comments'."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026. Capa 'ENEMigos do atraso' vista na imagem; oferta confirmada na legenda ('Clientes Nubank têm 3 meses de Duolingo Super grátis pra dar um gás nos estudos para o Enem'). Gancho corrigido para o texto real. Slides 2 a 4 não conferidos. Nicho: ação de benefício de banco digital.",
+    "nicho": "fintech",
+    "id": "fintech-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Precisamos falar sobre educação financeira!",
+    "estrutura": [
+      "Bloco 1: arte azul com marca Globo, título 'Nath Finanças no Jornal Nacional' e recorte da foto dela sorrindo",
+      "Bloco 2: legenda abre com o chamado 'Precisamos falar sobre educação financeira!'",
+      "Bloco 3: conta que foi convidada para reportagem especial no JN sobre como a Nath Finanças nasceu e 'finanças reais para pessoas reais'",
+      "Bloco 4: bastidor da equipe no escritório em Nova Iguaçu, em reuniões e palestras, e agradecimento",
+      "Bloco 5: CTA para ver a série em 3 partes e contar o que achou"
+    ],
+    "padrao_visual": {
+      "fundo": "arte azul da Globo com logotipo JN e foto recortada da criadora",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A marca Globo e o Jornal Nacional na arte dão prova social instantânea, e a legenda conta a conquista como história de origem (Nova Iguaçu), o que faz a audiência comemorar junto. A causa vem antes do ego na primeira frase.",
+    "autor_ou_marca": "Nath Finanças (@nathfinancas)",
+    "link_fonte": "https://www.instagram.com/p/DIHBCEpJkn0/",
+    "metricas": {
+      "curtidas": 28000,
+      "comentarios": 780,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '28K likes, 780 comments'. Curtidas arredondadas pelo Instagram (28K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 06/04/2025. Legenda e autora confirmadas. Visual corrigido: a imagem não é uma foto simples, é arte da Globo 'Nath Finanças no Jornal Nacional' com a foto dela. Nicho: educação financeira pessoal.",
+    "nicho": "fintech",
+    "id": "fintech-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "É o fim do Nubank? Banco Central avalia proibir que fintechs e serviços digitais usem palavras como \"banco\" e \"bank\" em seus nomes.",
+    "estrutura": [
+      "Bloco 1: foto da entrada da sede do Nubank com a escultura roxa 'NU', logo O POVO no topo e título em pergunta",
+      "Bloco 2: legenda explica a regra em estudo pelo Banco Central",
+      "Bloco 3: por que o Nubank não é banco pela legislação",
+      "Bloco 4: prazo da consulta pública (13 de fevereiro a 31 de maio) e como opinar",
+      "Bloco 5: descrição #ParaTodosVerem e CTA para o link da bio"
+    ],
+    "padrao_visual": {
+      "fundo": "foto da fachada de vidro da sede do Nubank com escultura roxa e título sobreposto",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pergunta alarmista sobre uma marca que milhões usam cria medo de perder algo e muito comentário. A legenda desarma o susto com contexto regulatório e prazo concreto para o leitor opinar.",
+    "autor_ou_marca": "O POVO (@opovoonline)",
+    "link_fonte": "https://www.instagram.com/p/DI5GnBysH6d/",
+    "metricas": {
+      "curtidas": 24000,
+      "comentarios": 882,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '24K likes, 882 comments'. Curtidas arredondadas pelo Instagram (24K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/04/2025. Título da arte confirmado no #ParaTodosVerem da própria legenda; foto da fachada vista na capa. Perfil, prazos da consulta e explicação regulatória confirmados na legenda.",
+    "nicho": "fintech",
+    "id": "fintech-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Resultados Nubank: \"Estamos construindo a maior plataforma de consumo da América Latina.\"",
+    "estrutura": [
+      "Bloco 1: arte roxa com a frase 'Estamos construindo a maior plataforma de consumo da América Latina' em letras brancas grandes",
+      "Bloco 2: legenda com recordes do 4º trimestre de 2023: quase 94 milhões de clientes e lucro líquido de US$ 360,9 milhões",
+      "Bloco 3: primeiro ano completo no azul, mais de US$ 1 bilhão de lucro líquido em 2023",
+      "Bloco 4: estratégia (alta renda no Brasil, México e Colômbia) e link na bio"
+    ],
+    "padrao_visual": {
+      "fundo": "roxo sólido da marca com letras brancas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Resultado trimestral virou peça de marca: a arte traz só a frase de visão e os números ficam na legenda. O cliente se sente parte do sucesso e o post funciona como prova de solidez do banco.",
+    "autor_ou_marca": "Nubank (@nubank)",
+    "link_fonte": "https://www.instagram.com/p/C3qjhgVvvBi/",
+    "metricas": {
+      "curtidas": 4098,
+      "comentarios": 7467,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '4,098 likes, 7,467 comments'."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/02/2024. Frase da arte vista na capa; números confirmados na legenda. Removida a menção a um like_count de 6887 no JSON interno, que não consegui ver. Comentários muito acima das curtidas, motivo não confirmado. A atribuição da frase ao fundador David Vélez não aparece na legenda nem no recorte da capa.",
+    "nicho": "fintech",
+    "id": "fintech-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "citacao",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "CUIDADO: é na hora do desespero que a gente baixa a guarda e toma as decisões mais imbecis.",
+    "estrutura": [
+      "Bloco 1: arte amarela com a frase em caixa alta preta e 'CUIDADO:' em tarja preta com letra amarela",
+      "Bloco 2: legenda sobre a pressa de ganhar dinheiro rápido levar a perder o pouco que se tem",
+      "Bloco 3: a vida do pobre muda com um PROCESSO de foco, constância, sacrifícios e prioridades",
+      "Bloco 4: alerta contra fórmula mágica: quem cai no papinho fica mais pobre e alguém fica mais rico"
+    ],
+    "padrao_visual": {
+      "fundo": "amarelo chapado com tipografia condensada preta",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frase de alerta com palavra forte ('imbecis') e tarja 'CUIDADO' que para o scroll. É fácil de compartilhar como indireta contra golpe e promessa de dinheiro fácil, e a cor fixa reforça a marca do criador.",
+    "autor_ou_marca": "Eduardo Feldberg, Primo Pobre (@eduardofeldberg)",
+    "link_fonte": "https://www.instagram.com/p/C2_KA1vriCX/",
+    "metricas": {
+      "curtidas": 14000,
+      "comentarios": 82,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '14K likes, 82 comments'. Curtidas arredondadas pelo Instagram (14K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 05/02/2024. Texto da arte visto na capa ('CUIDADO: É NA HORA DO DESESPERO QUE [A GEN]TE BAIXA A GUARDA E TOMA AS DECISÕ[ES]...'); legenda e autor confirmados. Nicho: finanças pessoais.",
+    "nicho": "fintech",
+    "id": "fintech-41"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Torcer pela minha queda não te faz religioso. Dia difícil pra ser hater da Your Rich BFF.",
+    "estrutura": [
+      "Slide 1: criadora sorrindo na rua em frente a uma porta vermelha, segurando o jornal impresso",
+      "Slides 2 a 6: mais fotos com o jornal e a matéria sobre ela",
+      "Legenda: agradece a jornalista @jeannasmialek, promete tornar finanças pessoais acessíveis e provoca o 'chefe antigo'"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de rua com luz natural",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Converte uma matéria na imprensa em celebração pessoal com humor e alfinetada nos haters, o que convida a audiência a defender e parabenizar. O jornal físico nas fotos repete a prova sem precisar de texto.",
+    "autor_ou_marca": "Vivian Tu, Your Rich BFF (@your.richbff)",
+    "link_fonte": "https://www.instagram.com/p/DCeueAmxYK7/",
+    "metricas": {
+      "curtidas": 72000,
+      "comentarios": 1674,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '72K likes, 1,674 comments'. Curtidas arredondadas pelo Instagram (72K)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Praying on my downfall doesn't make you religious. Tough day to be a Your Rich BFF hater.' Post de 17/11/2024. Legenda, autora e capa (foto com jornal) confirmadas. Nome do jornal e conteúdo dos slides 2 a 6 não conferidos. Referência internacional de finanças pessoais.",
+    "nicho": "fintech",
+    "id": "fintech-42"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Não existe um número único que você precisa atingir até os 40.",
+    "estrutura": [
+      "Slide 1: capa com um '0' gigante laranja sobre fundo preto",
+      "Slides seguintes: marcos financeiros para checar até os 40 (conteúdo interno não conferido)",
+      "Legenda: diz que não há número mágico, mas há marcos de poupança, investimento, carreira e relacionamento",
+      "Legenda: CTA 'Comente DECADE' para receber o checklist grátis de patrimônio por década"
+    ],
+    "padrao_visual": {
+      "fundo": "preto com numeral gigante laranja na capa",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nega a pergunta que o leitor tem na cabeça ('quanto eu deveria ter aos 40?') e troca por marcos, o que faz cada pessoa se comparar com a lista. A palavra-chave no comentário para receber material grátis puxa comentários e alcance.",
+    "autor_ou_marca": "Ramit Sethi (@ramit)",
+    "link_fonte": "https://www.instagram.com/p/DdXUK3uGt1q/",
+    "metricas": {
+      "curtidas": 4931,
+      "comentarios": 752,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '4,931 likes, 752 comments'."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Original da legenda: 'There's no single number you need to hit by 40.' Post de 16/09/2026. Legenda, autor e CTA DECADE confirmados. O item original trazia capa 'MONEY MILESTONES to ACCOMPLISH BEFORE 40' com colagem editorial e nove marcos listados, mas a capa vista é um '0' laranja em fundo preto; gancho trocado pela frase da legenda e slides internos não conferidos, por isso rebaixado.",
+    "nicho": "fintech",
+    "id": "fintech-43"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Nunca mais vou resgatar pontos como cashback. E depois disso, você também não.",
+    "estrutura": [
+      "Slide 1: foto dentro do avião com caixa branca: se você tem o mesmo cartão de viagem que eu, transfira 40 mil pontos para a Alaska Airlines e reserve executiva para Dublin por só US$ 58",
+      "Slide 2: o que o assento inclui",
+      "Slide 3: comparação do valor da passagem com o valor do mesmo saldo resgatado como cashback",
+      "Slide 4: CTA para comentar CARDRECS e receber o guia de cartões na DM",
+      "Legenda: repete o gancho e o CTA CARDRECS"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos reais dentro do avião com caixas de texto brancas e letra serifada preta",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O contraste de números (40 mil pontos por US$ 58 numa executiva) mostra o erro do leitor de forma concreta logo na capa. A palavra-chave CARDRECS transforma curiosidade em comentário, por isso os comentários passam das curtidas.",
+    "autor_ou_marca": "Tori Dunlap, Her First $100K (@herfirst100k)",
+    "link_fonte": "https://www.instagram.com/p/DdwmXLkmt8L/",
+    "metricas": {
+      "curtidas": 690,
+      "comentarios": 1281,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '690 likes, 1,281 comments'. Post com 1 dia no ar."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'I will never redeem points for cash back again. And after this, neither will you.' Post de 26/09/2026. Legenda, autora e texto da capa (40K points, Alaska Airlines, Dublin por US$ 58) confirmados. Valores dos slides 2 e 3 (como US$ 3.800 e 30x) não conferidos. Nicho: cartão de crédito e pontos.",
+    "nicho": "fintech",
+    "id": "fintech-44"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Se você fizer exatamente o que eu digo, pode quitar boa parte da sua dívida até o começo da semana que vem. (são só 5 dias a partir de agora!)",
+    "estrutura": [
+      "Slide 1: foto dela lendo na cama com a promessa de prazo curto",
+      "Slide 2: prints de mensagens de seguidoras que quitaram dívidas",
+      "Slide 3: número de resultado e CTA 'Comente CHALLENGE'",
+      "Legenda: diz que frugalidade extrema falha como dieta radical e oferece o desafio grátis de 5 dias para quitar dívidas por comentário ou DM"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de estilo de vida com faixas de texto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Promessa com prazo específico (5 dias) contra o conselho comum de cortar tudo, reforçada pela comparação com dieta radical. O desafio grátis por palavra-chave transforma interesse em comentário, e a opção de DM capta quem tem vergonha de falar de dívida em público.",
+    "autor_ou_marca": "Tori Dunlap, Her First $100K (@herfirst100k)",
+    "link_fonte": "https://www.instagram.com/p/DdrL8bOGzcX/",
+    "metricas": {
+      "curtidas": 888,
+      "comentarios": 2658,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no og:description da página pública do post: '888 likes, 2,658 comments'."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Original atribuído ao slide 1: 'If you do *exactly* what I tell you to, you could significantly pay off your debt by early next week. (that's just 5 days from now!)'. Post de 24/09/2026. Autora, legenda ('Most people tell you to cut everything you love and practice extreme frugality to get out of debt') e CTA CHALLENGE confirmados; capa mostra ela lendo na cama, mas o texto do slide 1 não apareceu no recorte visto, por isso rebaixado. O número '50.000 mulheres' do slide 3 não foi conferido e foi retirado da estrutura.",
+    "nicho": "fintech",
+    "id": "fintech-45"
+  },
+  {
+    "rede": "x",
+    "formato": "dado-impacto",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Para quem acha que é só um joguinho: as Bets geram um impacto de R$ 30 bilhões por ano no SUS (dados IEPS).",
+    "estrutura": [
+      "Bloco 1: Abre rebatendo a crença do leitor (\"para quem acha que é só um joguinho\").",
+      "Bloco 2: Primeiro número grande com fonte entre parênteses (R$ 30 bilhões por ano no SUS, IEPS).",
+      "Bloco 3: Segundo número ainda maior com outra fonte (mais de R$ 120 bilhões por ano deixam de circular na economia, FEA-USP).",
+      "Bloco 4: Fecha trazendo o problema para o bolso de quem lê (\"isso afeta o bolso de todo mundo\")."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto, sem imagem",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Desmonta uma crença popular com dois números enormes e fontes acadêmicas citadas entre parênteses, o que dá autoridade e faz o post virar argumento pronto para compartilhar. A última frase transforma um tema coletivo em problema do bolso de quem lê.",
+    "autor_ou_marca": "Nath Finanças (@nathfinancas)",
+    "link_fonte": "https://x.com/nathfinancas/status/2103681646163587576",
+    "metricas": {
+      "curtidas": 26671,
+      "comentarios": 653,
+      "compartilhamentos": 4755,
+      "visualizacoes": 315540,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com (espelho público da API do X). Compartilhamentos = retweets; também 732 salvamentos e 111 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/09/2026. Texto original em PT-BR conferido na íntegra, sem mídia. Finanças pessoais e apostas, tema quente no nicho.",
+    "nicho": "fintech",
+    "id": "fintech-46"
+  },
+  {
+    "rede": "x",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "🚨 Seu vale-alimentação vai passar em qualquer maquininha a partir de novembro. Entenda a nova regra!",
+    "estrutura": [
+      "Bloco 1: Emoji de sirene para sinalizar notícia urgente.",
+      "Bloco 2: Benefício concreto na segunda pessoa (seu vale vai passar em qualquer maquininha).",
+      "Bloco 3: Prazo específico (a partir de novembro).",
+      "Bloco 4: Chamada curta para entender a regra, com uma foto anexada ilustrando a notícia."
+    ],
+    "padrao_visual": {
+      "fundo": "foto de notícia anexada ao tweet",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Traduz uma regra regulatória de meios de pagamento em ganho direto no dia a dia de quem lê, com prazo claro. Foi amplificado por criadora de finanças: Nath Finanças citou com \"Notícia boaaaaa\" e esse quote teve 25.530 curtidas e 821 mil visualizações.",
+    "autor_ou_marca": "N3 Notícias (@n3noticias)",
+    "link_fonte": "https://x.com/n3noticias/status/2102466540264378557",
+    "metricas": {
+      "curtidas": 2741,
+      "comentarios": 103,
+      "compartilhamentos": 155,
+      "visualizacoes": 1419744,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 552 salvamentos e 652 citações; 1 foto anexada. Quote da Nath Finanças (x.com/nathfinancas/status/2102471104543809911) conferido no mesmo dia: 25.530 curtidas, 698 RTs, 821.074 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Nicho de meios de pagamento e benefícios (vale-alimentação aceito em qualquer maquininha). Bom exemplo de notícia regulatória traduzida em ganho pessoal; o alcance veio muito das citações (652).",
+    "nicho": "fintech",
+    "id": "fintech-47"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "1. Nova alíquota de 17.5% para todos seus investimentos.",
+    "estrutura": [
+      "Bloco 1: Item 1 com a alíquota nova sobre investimentos (17,5%).",
+      "Bloco 2: Item 2 com produtos que perdem isenção (CRI, CRA, LCI e LCA, mais 5% de IR).",
+      "Bloco 3: Item 3 com imposto sobre empresas (CSLL de 9% para 15%).",
+      "Bloco 4: Contexto que amplia (quase 30 impostos criados desde 2023).",
+      "Bloco 5: Fecho numérico memorável (um novo imposto a cada 34 dias)."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto em lista numerada",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Começa direto no número que mexe na carteira do investidor, sem introdução, e nomeia produtos que o público tem (LCI, LCA, CRI, CRA). Termina com uma estatística fácil de repetir (\"um novo imposto a cada 34 dias\") que vira bordão.",
+    "autor_ou_marca": "Thiago Nigro (@ThiagoNigro), Primo Rico",
+    "link_fonte": "https://x.com/ThiagoNigro/status/1932149618332098944",
+    "metricas": {
+      "curtidas": 9784,
+      "comentarios": 325,
+      "compartilhamentos": 1077,
+      "visualizacoes": 467306,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 362 salvamentos e 106 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/06/2025, no contexto da proposta de tributação de investimentos. Texto original em PT-BR conferido. Os números são do autor, não checados pela curadoria.",
+    "nicho": "fintech",
+    "id": "fintech-48"
+  },
+  {
+    "rede": "x",
+    "formato": "dado-impacto",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Quase metade dos brasileiros estão inadimplentes. 7 em cada 10 não tem nada guardado.",
+    "estrutura": [
+      "Bloco 1: Dado de choque sobre inadimplência (quase metade dos brasileiros).",
+      "Bloco 2: Segundo dado sobre poupança (7 em cada 10 sem nada guardado).",
+      "Bloco 3: Diagnóstico curto (país com sérios problemas de poupança).",
+      "Bloco 4: Ironia final (\"Solução: taxar poupança/investimento\")."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto, quebrado em linhas curtas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dois números simples sobre crédito e poupança montam o problema em duas linhas, e a ironia no final entrega a opinião sem precisar argumentar, o que puxa retweet de quem concorda.",
+    "autor_ou_marca": "Thiago Nigro (@ThiagoNigro), Primo Rico",
+    "link_fonte": "https://x.com/ThiagoNigro/status/1932414643433259489",
+    "metricas": {
+      "curtidas": 7302,
+      "comentarios": 105,
+      "compartilhamentos": 589,
+      "visualizacoes": 207049,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 118 salvamentos e 36 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/06/2025. Texto original em PT-BR conferido (o original diz \"País com sério problemas de poupança\").",
+    "nicho": "fintech",
+    "id": "fintech-49"
+  },
+  {
+    "rede": "x",
+    "formato": "antes-depois",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Poder de compra do seu salário: 1994: R$ 100,00. 2025: R$ 13,28. Até onde a nossa moeda pode ir?",
+    "estrutura": [
+      "Bloco 1: Título pessoal (\"poder de compra do seu salário\").",
+      "Bloco 2: Ponto de partida redondo (1994: R$ 100,00).",
+      "Bloco 3: Série de anos com o valor caindo (2014: R$ 22,00; 2016: R$ 18,59; 2019: R$ 16,75; 2021: R$ 15,30; 2023: R$ 13,50).",
+      "Bloco 4: Valor atual (2025: R$ 13,28).",
+      "Bloco 5: Pergunta aberta que convida resposta (\"Até onde a nossa moeda pode ir?\")."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto em linha do tempo",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A base 100 torna a perda de valor instantaneamente legível e a coluna de anos funciona como um gráfico em texto. A pergunta final abre espaço para comentários.",
+    "autor_ou_marca": "Thiago Nigro (@ThiagoNigro), Primo Rico",
+    "link_fonte": "https://x.com/ThiagoNigro/status/1932561037347196955",
+    "metricas": {
+      "curtidas": 2707,
+      "comentarios": 103,
+      "compartilhamentos": 176,
+      "visualizacoes": 76407,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 62 salvamentos e 11 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/06/2025. Texto original conferido: \"Poder de compra do seu salário: 1994: R$ 100,00 | 2014: R$ 22,00 | 2016: R$ 18,59 | 2019: R$ 16,75 | 2021: R$ 15,30 | 2023: R$ 13,50 | 2025: R$ 13,28. Até onde a nossa moeda pode ir?\" Engajamento menor que os outros do mesmo autor, incluído pelo formato antes e depois.",
+    "nicho": "fintech",
+    "id": "fintech-50"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Banco Central do Brasil e Banco Central Europeu iniciam fase de avaliação para interligação entre Pix e TIPS, sistema europeu de pagamentos instantâneos",
+    "estrutura": [
+      "Bloco 1: Dois nomes de peso lado a lado (BC do Brasil e BC Europeu).",
+      "Bloco 2: Ação concreta (iniciam fase de avaliação).",
+      "Bloco 3: Objeto que o brasileiro conhece e usa todo dia (interligação do Pix).",
+      "Bloco 4: Explicação curta do termo técnico (TIPS, sistema europeu de pagamentos instantâneos) e link para a nota oficial."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet institucional só de texto com link, sem mídia",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O Pix virou motivo de orgulho nacional e a notícia de que ele pode se conectar à Europa soa como validação internacional. A manchete seca, sem adjetivos, funciona porque o fato sozinho já é o gancho.",
+    "autor_ou_marca": "Banco Central do Brasil (@BancoCentralBR)",
+    "link_fonte": "https://x.com/BancoCentralBR/status/2103100898595447083",
+    "metricas": {
+      "curtidas": 2983,
+      "comentarios": 0,
+      "compartilhamentos": 247,
+      "visualizacoes": 294423,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com para este status. Também 85 salvamentos e 76 citações. A comparação com outros posts do perfil (42 a 112 curtidas) vem da curadoria e não foi reconferida."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Formato corrigido de imagem-unica para print-tweet: o post é texto com link (bcb.gov.br/detalhenoticia/21271/nota), sem mídia. Zero respostas provavelmente por respostas restritas no perfil institucional.",
+    "nicho": "fintech",
+    "id": "fintech-51"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Conheci um founder alemão esta semana e perguntei se as histórias sobre as dificuldades de startups na Alemanha são exageradas. \"Não, elas são atenuadas.\"",
+    "estrutura": [
+      "Bloco 1: Cena pessoal e específica (conheci um founder alemão esta semana).",
+      "Bloco 2: Pergunta que o leitor também faria e resposta curta que vira o jogo (\"não, são atenuadas\").",
+      "Bloco 3: Detalhe absurdo e concreto (um dia inteiro ouvindo um tabelião ler um contrato de investimento de 90 páginas, obrigatório pelo § 13 BeurkG).",
+      "Bloco 4: Número que choca (o tabelião cobrou 30 mil euros).",
+      "Bloco 5: Punchline seca (a segunda empresa dele, claro, não foi aberta na Alemanha)."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma história curta de terceiros, com um detalhe verificável (o artigo da lei) e um custo absurdo (30 mil euros para ler um contrato de investimento), prova um ponto sobre burocracia sem parecer opinião. A última frase entrega a moral sem explicar.",
+    "autor_ou_marca": "Patrick Collison (Stripe)",
+    "link_fonte": "https://x.com/patrickc/status/2093717019896197186",
+    "metricas": {
+      "curtidas": 30073,
+      "comentarios": 1051,
+      "compartilhamentos": 2169,
+      "visualizacoes": 12116296,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 3.927 salvamentos e 654 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 29/08/2026. Original conferido: \"Met a German founder this week and asked him if all the stories one reads about the challenges of startups in Germany are exaggerated. 'No, they're understated.' Proceeded to describe spending a full day having a 90-page investment contract read to him (mandatory under German law; § 13 BeurkG) by a notary that then charged €30,000. That was for his first company. His second company, needless to say, was not incorporated in Germany.\" Encaixe no nicho pelo autor (CEO de fintech) e pelo tema de captação e abertura de empresa; não fala de produto financeiro.",
+    "nicho": "fintech",
+    "id": "fintech-52"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Alguns dados que reunimos recentemente sobre empreendedorismo e computação na Europa.",
+    "estrutura": [
+      "Slide 1: \"Dealing with government\": nota dos founders para a relação com o governo por país (Suíça 8,2, EUA 7,6, Reino Unido 6,9 no topo; Alemanha 3,7 e Espanha 3,3 no fim; média europeia 5,4).",
+      "Slide 2: \"Would founders incorporate in the same country again?\": EUA 85%, Suíça 68%, Alemanha 40%, França 33%, Espanha 25%.",
+      "Slide 3: Volume mensal de pagamentos de empresas de IA na Stripe desde jan/2023: curva dos EUA disparando e a da UE quase plana.",
+      "Slide 4: Capacidade de data centers por país em gigawatts: EUA passam de 100 GW com o pipeline, países europeus destacados em laranja lá embaixo.",
+      "Bloco final no texto: link para o site de dados, por que a Stripe publica isso (dados empíricos para ajudar a Europa) e convite para a newsletter de economia."
+    ],
+    "padrao_visual": {
+      "fundo": "4 gráficos em fundo cinza claro, roxo para EUA e outros, laranja para UE",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Cada gráfico é um ranking de países, o que faz o público de cada país citar e discutir sua posição (486 citações). O slide 3 usa dado proprietário de pagamentos da Stripe, que ninguém mais tem, e posiciona a empresa como fonte de dados, não como vendedora; por isso virou material salvo (2.227 salvamentos).",
+    "autor_ou_marca": "Patrick Collison (Stripe)",
+    "link_fonte": "https://x.com/patrickc/status/2103130520976769461",
+    "metricas": {
+      "curtidas": 4542,
+      "comentarios": 271,
+      "compartilhamentos": 617,
+      "visualizacoes": 1921907,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 2.227 salvamentos e 486 citações. As 4 imagens foram baixadas e lidas pelo verificador."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Original conferido: \"Some data we recently assembled on entrepreneurship/compute in Europe: https://eudata.vercel.app. We hope that one of the useful roles that Stripe can play is in collecting and publishing empirical data pertaining to entrepreneurship and industry in Europe.\" (o texto segue com convite para stripeeconomics.substack.com). Estrutura dos slides reescrita a partir das imagens reais. Post com 4 imagens, o equivalente a carrossel no X.",
+    "nicho": "fintech",
+    "id": "fintech-53"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Bonjour la France, nós obtivemos nossa licença bancária francesa.",
+    "estrutura": [
+      "Bloco 1: Tweet principal com uma frase só, inteira em francês, sem explicação (\"Bonjour la France\").",
+      "Bloco 2: Resposta no fio, em inglês, com o marco (licença bancária francesa, um grande passo na jornada europeia).",
+      "Bloco 3: Escala (rede de quase 60 milhões de clientes na Europa, um dos maiores bancos digitais do continente por número de clientes).",
+      "Bloco 4: Assinatura bilíngue (\"Depuis la France, pour l'Europe\") e aviso legal sobre os países onde é banco."
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto, com uma resposta no fio",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O tweet principal é curto, no idioma do mercado novo e soa como mensagem pessoal para um país, o que gera curiosidade e orgulho local. O detalhe corporativo fica na resposta, que só quem se interessou lê: 13 mil curtidas no primeiro contra 484 no segundo.",
+    "autor_ou_marca": "Revolut (@Revolut)",
+    "link_fonte": "https://x.com/Revolut/status/2086709213498142723",
+    "metricas": {
+      "curtidas": 13070,
+      "comentarios": 465,
+      "compartilhamentos": 1023,
+      "visualizacoes": 8227826,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com (status e fio). Também 641 salvamentos e 392 citações. O segundo tweet do fio tinha 484 curtidas e 707.611 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/08/2026. Original conferido: \"Bonjour la France, nous avons obtenu notre agrément bancaire français.\" O fio tem só 2 tweets, então o formato foi corrigido de carrossel para print-tweet e a estrutura passou de slides para blocos. Idioma marcado como en porque o fio continua em inglês; o gancho é em francês.",
+    "nicho": "fintech",
+    "id": "fintech-54"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A tokenização está chegando aos Estados Unidos.",
+    "estrutura": [
+      "Bloco 1: Frase curta de manchete (a tokenização está chegando aos EUA).",
+      "Bloco 2: Crédito ao regulador (graças à liderança da SEC, os americanos podem colher os benefícios).",
+      "Bloco 3: Benefícios em lista rápida (liquidação instantânea, negociação 24/7, fracionamento por padrão).",
+      "Bloco 4: Fecho curto (\"um bom dia para a inovação nos EUA\") e quote do perfil oficial da Robinhood apoiando a isenção de inovação da SEC."
+    ],
+    "padrao_visual": {
+      "fundo": "quote tweet só de texto",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma frase de cinco palavras em tom de anúncio histórico, vinda do CEO de uma corretora, faz o post parecer notícia. A lista de benefícios concretos (liquidação instantânea, 24/7, fracionamento) traduz o termo técnico e o quote do perfil oficial dá o contexto sem pesar a abertura.",
+    "autor_ou_marca": "Vlad Tenev (Robinhood)",
+    "link_fonte": "https://x.com/vladtenev/status/2100575159736553687",
+    "metricas": {
+      "curtidas": 9664,
+      "comentarios": 1386,
+      "compartilhamentos": 1412,
+      "visualizacoes": 1486226,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 429 salvamentos e 565 citações. Post citado (@RobinhoodApp): 3.452 curtidas e 871.750 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2026. Original conferido na íntegra: \"Tokenization is coming to America. Thanks to the SEC's leadership, Americans can start to reap the benefits of tokenization: instant settlement, 24/7 trading, fractionalization by default and more. It's a good day for US innovation.\" Sem mídia; formato corrigido de imagem-unica para print-tweet.",
+    "nicho": "fintech",
+    "id": "fintech-55"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "A Ramp fez um musical de verdade na Broadway, com Billy Porter, Billy Zane e Jessica Billy Vosk. É um show sobre contas. Feito por Bills. Estrelado por Bills.",
+    "estrutura": [
+      "Bloco 1: Fato inesperado para uma fintech B2B (fizemos um musical real na Broadway).",
+      "Bloco 2: Trocadilho com o elenco (todos chamados Billy) e o produto (bills, contas a pagar).",
+      "Bloco 3: Credenciais que provam que é sério (músicas originais, coreografia completa, dramaturgo da Broadway).",
+      "Bloco 4: Contexto histórico (nos anos 50 e 60 as grandes empresas faziam musicais sobre carros, eletrodomésticos e refrigerante; \"perdemos a coragem\").",
+      "Bloco 5: Manifesto e chamada (\"estamos trazendo de volta o musical industrial\", uma noite só, 25 de setembro, Broadhurst Theatre, link do site), com vídeo de 16 segundos."
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de 16 segundos com o elenco",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Uma fintech de despesas corporativas e pagamento de contas, tema considerado chato, faz algo absurdo e caro com um trocadilho que fixa o produto (bills). O paralelo histórico com os musicais industriais transforma a piada em manifesto de marca.",
+    "autor_ou_marca": "Eric Glyman (Ramp)",
+    "link_fonte": "https://x.com/eglyman/status/2098049270553383031",
+    "metricas": {
+      "curtidas": 1025,
+      "comentarios": 104,
+      "compartilhamentos": 104,
+      "visualizacoes": 649802,
+      "observacao": "Relido pelo verificador em 27/09/2026 via api.fxtwitter.com. Também 228 salvamentos e 63 citações. Mídia: 1 vídeo."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/09/2026. Original conferido: \"Ramp made a real Broadway musical starring Billy Porter, Billy Zane and Jessica Billy Vosk. It's a show about bills. By Bills. Starring Bills, with original songs, full choreography, and an actual Broadway playwright.\" (travessão do original trocado por vírgula). Engajamento modesto em curtidas; vale mais pela ideia de marca do que pelo número. O post \"Ramp is now live in the UK\" (x.com/eglyman/status/2099845210666574073) citado pela curadoria não foi reconferido.",
+    "nicho": "fintech",
+    "id": "fintech-56"
   }
 ]

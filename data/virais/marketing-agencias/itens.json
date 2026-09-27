@@ -1,0 +1,1681 @@
+[
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "A saída da Mari Saad da Mascavo só mostra o quanto o mercado da \"creator economy\", que movimentou no Brasil US$ 5,47 bilhões em 2025, ainda é bem... amador.",
+    "estrutura": [
+      "Bloco 1: fato quente do mercado (saída de uma creator da própria marca) amarrado a um número grande do setor",
+      "Bloco 2: contexto: Brasil é o 2º maior mercado e tem gestão amadora; cita o comentário de outra profissional que motivou o texto e anuncia o recorte beauty e cosméticos",
+      "Bloco 3: tese: a internet e os coaches venderam que ter marca é só ter seguidor e fazer conteúdo de valor",
+      "Bloco 4: lista de erros de lançamento, gestão e jurídico, com casos nominais (Mascavo sem tons para 57% da população, base da Boca Rosa com defeito, WePink multada em R$ 1,5 mi)",
+      "Bloco 5: contraponto com casos que deram certo por licenciamento ou parceria (Eudora Niina Secrets com 30% ao ano, Aura Beauty com R$ 40,7 mi no semestre)",
+      "Bloco 6: reflexão final sobre por que as creators insistem em operar a marca sozinhas"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única sem texto alternativo (conteúdo da imagem não identificado)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega uma notícia que o mercado está comentando e abre com um número de setor na primeira linha. Depois sustenta a crítica com casos nominais e números (multa, faturamento), o que convida quem discorda a comentar com argumento.",
+    "autor_ou_marca": "Galileu Nogueira",
+    "link_fonte": "https://pt.linkedin.com/posts/galileunogueira_a-sa%C3%ADda-da-mari-saad-da-mascavo-s%C3%B3-mostra-activity-7508191046665732096-jT8b",
+    "metricas": {
+      "curtidas": 1001,
+      "comentarios": 101,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026 (data confirmada na página). Tema: marcas de creators e marketing de influência no segmento beauty. uso_rosto não confirmado, imagem sem texto alternativo.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-01"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Pernil, nosso CCO, é indicado ao Caboré 2026 na categoria “Profissional de Criação”.",
+    "estrutura": [
+      "Bloco 1: anúncio direto do reconhecimento (indicação ao Caboré) com apelido e cargo",
+      "Bloco 2: moldura de continuidade: mais um ano em que a agência celebra a chegada de uma gaiola, agora reconhecendo a criação",
+      "Bloco 3: parabéns com o nome completo do profissional (Marco Giannelli) e orgulho do time"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única sem texto alternativo (conteúdo não identificado)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Prêmio do setor é prova social pura para agência, e citar a pessoa pelo nome faz a rede dela reagir e comentar parabéns (51 comentários). Três linhas curtas deixam a notícia ser o conteúdo.",
+    "autor_ou_marca": "AlmapBBDO",
+    "link_fonte": "https://pt.linkedin.com/posts/almapbbdo_pernil-nosso-cco-%C3%A9-indicado-ao-cabor%C3%A9-2026-activity-7509004158482632704-I8FD",
+    "metricas": {
+      "curtidas": 448,
+      "comentarios": 51,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Página de empresa de agência. uso_rosto marcado como false porque a imagem não pôde ser vista (sem texto alternativo); é provável que seja foto do profissional.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-02"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Como uma cheesecake de dois ingredientes virou 40 milhões de visualizações para um iogurte.",
+    "estrutura": [
+      "Bloco 1: título com número grande e objetos inesperados (cheesecake, iogurte)",
+      "Bloco 2: o que a marca percebeu: a receita de dois ingredientes crescia no Instagram e no TikTok",
+      "Bloco 3: execução e números: 64 creators, mais de 40 milhões de views, mais de 60% das interações aprovando o produto",
+      "Bloco 4: a leitura: não foi pegar carona, a trend era da comunidade e a marca achou um papel legítimo nela",
+      "Bloco 5: POV da agência em uma frase de princípio e CTA de salvar o caso, com crédito à Propmark e bloco de hashtags"
+    ],
+    "padrao_visual": {
+      "fundo": "sem imagem (texto puro)",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Case de terceiro contado como aula: número no título, mecanismo no meio e uma frase de princípio que a agência assina. O pedido de salvar transforma o post em referência, e a agência ganha autoridade sem falar de si.",
+    "autor_ou_marca": "Agência Porto Publicidade",
+    "link_fonte": "https://pt.linkedin.com/posts/porto-publicidade_agenciadepublicidade-publicidade-marketing-activity-7501345332887252992-kxs5",
+    "metricas": {
+      "curtidas": 283,
+      "comentarios": 15,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 03/09/2026 (data derivada do ID da atividade). Case Batavo analisado por agência, com crédito à Propmark. Post sem mídia anexada.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-03"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Ninguém quer ser todo mundo. Ser todo mundo é ser apenas “mais um”.",
+    "estrutura": [
+      "Bloco 1: frase de efeito que inverte um ditado conhecido",
+      "Bloco 2: revela que é a provocação por trás da primeira campanha da agência para Ipanema",
+      "Bloco 3: origem do insight: a frase de infância 'Você não é todo mundo' ganhando sentido de autenticidade e liberdade de escolha",
+      "Bloco 4: vídeo da campanha anexado ao post"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo nativo da campanha (conteúdo não assistido)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa um bordão que todo brasileiro ouviu dos pais e dá a ele um sentido novo. A agência mostra o conceito criativo por trás da peça, o que vira vitrine de pensamento e não só de execução.",
+    "autor_ou_marca": "AlmapBBDO",
+    "link_fonte": "https://pt.linkedin.com/posts/almapbbdo_ningu%C3%A9m-quer-ser-todo-mundo-ser-todo-mundo-activity-7505416981148479488-06JA",
+    "metricas": {
+      "curtidas": 264,
+      "comentarios": 12,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 15/09/2026 (data derivada do ID da atividade). Lançamento de campanha para Ipanema. Mídia é vídeo nativo (miniatura com botão de play na página).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-04"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Se existe uma empresa inquieta, esta empresa é O Boticário.",
+    "estrutura": [
+      "Bloco 1: afirmação elogiosa sobre uma marca conhecida e a novidade: Studio Boti, um salão de beleza dentro das lojas, com a ironia 'como dizem os textos criados por IA, isso muda o jogo'",
+      "Bloco 2: o problema de fundo: e-commerce esvaziando loja física e aluguel de shopping",
+      "Bloco 3: por que a ideia resolve: maquiagem ainda não se faz pelo digital",
+      "Bloco 4: palpite do consultor sobre a origem da ideia, em diálogo imaginado",
+      "Bloco 5: números de expansão (150 lojas, meta de 300 no ano e mil em 2028) e o modelo em que o valor pago volta em produto",
+      "Bloco 6: veredito 'não sei se é lucrativo, mas é genial' e CTA de palestra"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única (conteúdo não identificado)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Consultor comenta lançamento de marca famosa com opinião própria, humor e um diálogo imaginado de bastidor. Análise de varejo em tom de conversa, com números concretos de expansão, gera comentários (21).",
+    "autor_ou_marca": "Murilo Moreno",
+    "link_fonte": "https://pt.linkedin.com/posts/murilomoreno_murilomoreno-consultor-estrategia-activity-7505599742811439104-nH00",
+    "metricas": {
+      "curtidas": 190,
+      "comentarios": 21,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 15/09/2026. Consultor de estratégia e palestrante; encaixe no nicho pela análise de marketing de varejo.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-05"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Todo vez que a gente faz atribuição por clique, chega um momento que cai em: eu precisava desse anúncio pra vender, ou gastei mais do que precisava?",
+    "estrutura": [
+      "Bloco 1: a dúvida que todo gestor de mídia tem, em forma de pergunta",
+      "Bloco 2: nomeia a solução: o 'trifecta' do Google (clique, modelagem, experimento)",
+      "Bloco 3: o que o clique mostra e o ponto cego dele (incrementalidade)",
+      "Bloco 4: o que a modelagem resolve (olha a variância) e o ponto cego dela (detalhe operacional)",
+      "Bloco 5: o experimento como terceira perna para confirmar na prática",
+      "Bloco 6: opinião própria: incluir pesquisa de saúde de marca e transformar o trifecta em quadrifecta"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo nativo (conteúdo não assistido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com a pergunta exata de quem investe em anúncio e entrega um framework com nome próprio, explicado em linguagem simples. Fecha acrescentando uma quarta perna de autoria dela, o que dá ponto de vista além do resumo do Google.",
+    "autor_ou_marca": "Guta Tolmasquim",
+    "link_fonte": "https://pt.linkedin.com/posts/guta-tolmasquim_todo-vez-que-a-gente-faz-atribui%C3%A7%C3%A3o-por-clique-activity-7505247926865199105-yBWf",
+    "metricas": {
+      "curtidas": 174,
+      "comentarios": 11,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026 (data derivada do ID da atividade). Gancho literal, inclusive o 'Todo vez' do original. Corrigido: o post tem vídeo nativo, não é texto puro. Removida a afirmação de que outro profissional repostou, não confirmada.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-06"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Eu afirmo com tranquilidade: IA é horrenda pra estratégia e gestão de Ads.",
+    "estrutura": [
+      "Bloco 1: afirmação polêmica contra o hype de IA",
+      "Bloco 2: credencial: usa Claude 'num nível psicopático' com 4 analistas, dezenas de contas e milhões de reais",
+      "Bloco 3: nuance: sem entender de estratégia, a IA faz bobagem sozinha",
+      "Bloco 4: onde ela brilha: operação, mas com checagem dupla das 'ideias de GIRICO'",
+      "Bloco 5: fecho provocativo: o emprego dos gestores de tráfego está safe. Por enquanto."
+    ],
+    "padrao_visual": {
+      "fundo": "sem imagem (texto puro)",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contraria o discurso de que IA substitui gestor de tráfego, mas com credencial de quem usa muito. A tensão entre 'horrenda' e 'uso num nível psicopático' prende, e o fecho 'por enquanto' puxa debate (26 comentários).",
+    "autor_ou_marca": "Renan Caixeiro",
+    "link_fonte": "https://pt.linkedin.com/posts/renancaixeiro_eu-afirmo-com-tranquilidade-ia-%C3%A9-horrenda-activity-7504124761040441344-yN2N",
+    "metricas": {
+      "curtidas": 133,
+      "comentarios": 26,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 11/09/2026. Gestor de tráfego pago com time próprio. Texto curto, sem mídia.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-07"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "RevOps está ficando cada vez mais relevante.",
+    "estrutura": [
+      "Bloco 1: afirmação de tendência em uma linha",
+      "Bloco 2: o paradoxo: marketing, vendas e CS bons individualmente e operação de receita ruim",
+      "Bloco 3: lista de dores em frases soltas (CRM bagunçado, dados que não batem, forecast que é torcida)",
+      "Bloco 4: o que RevOps é e não é",
+      "Bloco 5: gancho para o RevOps Summit e o workshop da Nekt, com oferta de 20 ingressos",
+      "Bloco 6: CTA de palavra-chave: comenta REVOPS que eu mando o link na DM"
+    ],
+    "padrao_visual": {
+      "fundo": "sem imagem (texto puro)",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frases curtas em linhas separadas listam dores que o leitor reconhece. O CTA 'comenta REVOPS' troca ingresso por comentário, o que explica 79 comentários para 97 reações.",
+    "autor_ou_marca": "Antonio Duarte",
+    "link_fonte": "https://pt.linkedin.com/posts/antonioaduarte_nekt-activity-7506686033762230272-dXnZ",
+    "metricas": {
+      "curtidas": 97,
+      "comentarios": 79,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 18/09/2026. Autor ligado à Nekt (plataforma de dados). Encaixe no nicho pelo lado growth e operação de receita, não é agência. Exemplo claro da mecânica 'comente a palavra para receber'.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-08"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Na Kiwify, a gente joga para ganhar.",
+    "estrutura": [
+      "Slide 1: capa do documento 'Cultura Kiwify' (PDF de 5 páginas)",
+      "Bloco 1 da legenda: frase de posicionamento curta e competitiva",
+      "Bloco 2: missão: a mais completa plataforma de infoprodutos e conta digital do Brasil",
+      "Bloco 3: traços da cultura (mentalidade de dono, apetite por desafio, foco no que move o ponteiro)",
+      "Bloco 4: apresenta a nova Página de Carreiras em quatro tópicos com emoji",
+      "Bloco 5: convite para construir 'o próximo nível da Creator Economy' e link"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF de marca (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frase de abertura curta e com atitude, seguida de carrossel de cultura que funciona como employer branding. A marca se apresenta como time vencedor e mobiliza funcionários e o ecossistema de infoprodutores a reagir.",
+    "autor_ou_marca": "Kiwify",
+    "link_fonte": "https://pt.linkedin.com/posts/kiwify_cultura-kiwify-activity-7462900425462046720-Xxiy",
+    "metricas": {
+      "curtidas": 418,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/05/2026. Carrossel-documento de 5 páginas. Só a legenda foi lida. Encaixe no nicho fraco: é employer branding de plataforma de infoprodutos, útil só como modelo de post de cultura.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-09"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "se você pesquisar na internet o que são redes sociais, ela vai te responder que são espaços virtuais de interação e trazer uma coleção de artigos explicando o funcionamento das plataformas digitais.",
+    "estrutura": [
+      "Slide 1: capa 'É A GENTE SOCIALIZANDO' (PDF de 13 páginas)",
+      "Bloco 1 da legenda: definição de dicionário de redes sociais",
+      "Bloco 2: virada: rede social é o grupo de amigos, a família, a vizinhança",
+      "Bloco 3: tese: a internet imita a vida, não o contrário",
+      "Bloco 4: lista com emoji de metáforas do mundo real na web (navegar, endereço, IP, e-mail, desktop)",
+      "Bloco 5: revelação: tudo isso foi o processo criativo do rebranding dos amiguINs (uma constituição para a 'cINdade')",
+      "Bloco 6: link para a newsletter e fecho sobre usar a vida real como referência criativa"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Parte do óbvio (definição) para uma virada humana e só no fim revela que o texto era bastidor de um rebranding. O tom em minúsculas soa como conversa, e a lista de metáforas é fácil de ler.",
+    "autor_ou_marca": "Bruna Lucas",
+    "link_fonte": "https://pt.linkedin.com/posts/bruna-lucas_%C3%A9-a-gente-socializando-activity-7505676428202369026-vGjz",
+    "metricas": {
+      "curtidas": 63,
+      "comentarios": 20,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 15/09/2026. Carrossel-documento de 13 páginas. Encaixe no nicho por branding (bastidor de rebranding de comunidade). Engajamento modesto, boa proporção de comentários.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-10"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "As jogadas de marketing mais estratégicas da semana",
+    "estrutura": [
+      "Slide 1: capa 'As jogadas estratégicas da última semana' (PDF de 10 páginas)",
+      "Bloco 1 da legenda: promessa: o que elas ensinam sobre estratégia sem complicação",
+      "Bloco 2: retorno do quadro semanal, convite 'pega o café' e spoiler dos cases",
+      "Bloco 3: lista numerada de 8 ações de marcas (Heineken e Spotify, iFood e Itaú, Serasa, Trident, Coca-Cola FEMSA, quem disse, berenice?, Corona, Flying Fish)",
+      "Bloco 4: aprendizado pessoal e pergunta ao leitor",
+      "Bloco 5: CTA de salvar para ter repertório de campanha"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF com cases de marcas (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quadro fixo de curadoria semanal cria hábito e vira material de repertório que o público salva. A lista numerada na legenda promete um case por slide.",
+    "autor_ou_marca": "Kathleen Sales",
+    "link_fonte": "https://pt.linkedin.com/posts/kathleen-sales_as-jogadas-estrat%C3%A9gicas-da-%C3%BAltima-semana-activity-7503052097689509888-jiNZ",
+    "metricas": {
+      "curtidas": 34,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/09/2026. Carrossel-documento de 10 páginas. Engajamento baixo, incluído como modelo de curadoria semanal para social media.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-11"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Assim como fiz de Sadia, hoje, dessa vez, será da Seara.",
+    "estrutura": [
+      "Slide 1: capa 'Seara, Instagram, Rock in Rio' (PDF de 10 páginas)",
+      "Bloco 1 da legenda: recorte da análise: 50 publicações e 10.214 comentários do perfil no Rock in Rio 2026",
+      "Bloco 2: achados de performance: 27 dos 50 posts são de creators e concentram 79% das curtidas; mediana 2.523 contra média 8.555",
+      "Bloco 3: alerta de método: média sozinha engana",
+      "Bloco 4: leitura dos comentários: 27% vêm da própria marca; só 2,7% dos orgânicos falam de produto",
+      "Bloco 5: o caminho de análise: formato, autoria, métricas, comentários, autor, insight",
+      "Bloco 6: ferramenta própria gratuita, ressalva de janela de 17 dias e pergunta ao leitor"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF com dados (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Análise de perfil de marca grande com dados próprios e números específicos, em série (já fez Sadia). Para social media e agência, é o tipo de post que prova método e ainda divulga uma ferramenta própria.",
+    "autor_ou_marca": "Wilken Perez",
+    "link_fonte": "https://pt.linkedin.com/posts/wilkenfilho_seara-instagram-rock-in-rio-activity-7508691932026482688-mret",
+    "metricas": {
+      "curtidas": 18,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Carrossel-documento de 10 páginas. Engajamento baixo (post recente), incluído pela qualidade do formato de análise de perfil.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-12"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Se eu fosse Diretora de Marketing agora, eu…",
+    "estrutura": [
+      "Slide 1: capa do documento (PDF de 6 páginas)",
+      "Bloco 1: faria marketing sensorial (exemplo rhode skin)",
+      "Bloco 2: quebraria o feed (reels da MESHKI, copiados até pela Le Creuset)",
+      "Bloco 3: correria riscos (campanha 'Give Us the Finger' da ŌURA)",
+      "Bloco 4: apostaria em quem as pessoas confiam, não em alcance",
+      "Bloco 5: faria collabs inesperadas (Pinterest e Chamberlain Coffee) e investiria pesado em OOH (outdoors da Canva)",
+      "Bloco 6: fecho: agir rápido, correr riscos e fazer sentir, porque seguro é chato"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF com exemplos de marcas (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O gancho 'se eu fosse' convida o leitor a se imaginar no cargo e promete uma lista pronta de ações. Cada um dos seis tópicos vem com um case real reconhecível, o que dá prova e repertório.",
+    "autor_ou_marca": "Milly Beeching",
+    "link_fonte": "https://www.linkedin.com/posts/milly-beeching-4b2788226_if-i-were-a-marketing-director-right-now-activity-7346887753181085696-iNZc",
+    "metricas": {
+      "curtidas": 5901,
+      "comentarios": 75,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'If I were a Marketing Director right now, I'd…'. Post de 04/07/2025. Carrossel-documento de 6 páginas. Estrutura corrigida: são seis tópicos, não quatro.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-13"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Seu social B2B não é chato, só é previsível",
+    "estrutura": [
+      "Slide 1: capa 'How to make B2B social less predictable' (PDF de 8 páginas)",
+      "Bloco 1: diagnóstico: todo mundo faz do 'jeito B2B' e vira um borrão de webinars e animações de produto",
+      "Bloco 2: quem ganha subverte a expectativa, e não só com memes",
+      "Bloco 3: quatro pares 'Em vez de' e 'Tente' (gráfico de produto por entrevista com quem construiu; anúncio empolgado por algo que deu errado; corte de webinar por vídeo que expande a ideia; carrossel de 3 dicas por formatos criativos)",
+      "Bloco 4: cada par com um 'Por quê?' curto",
+      "Bloco 5: pergunta aos comentários: qual clichê B2B você eliminaria"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Reenquadra a dor ('chato' vira 'previsível') e entrega trocas práticas no formato 'em vez de, tente', fáceis de aplicar amanhã. A pergunta final pede ao leitor seu próprio clichê, o que alimenta os 144 comentários.",
+    "autor_ou_marca": "Amy Watts",
+    "link_fonte": "https://www.linkedin.com/posts/amy-c-watts_how-to-make-b2b-social-less-predictable-activity-7368910881692209152-Wckz",
+    "metricas": {
+      "curtidas": 1890,
+      "comentarios": 144,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Your B2B social isn't boring, it's just predictable'. Post de 03/09/2025. O original usa travessões como separadores, que não foram reproduzidos.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-14"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "O marketing mudou drasticamente nos últimos 5 anos.",
+    "estrutura": [
+      "Slide 1: capa do documento comparativo (PDF de 11 páginas)",
+      "Bloco 1: há 5 anos era jogo de volume e primeira página do Google",
+      "Bloco 2: hoje é confiança, autoridade e visibilidade em todos os canais, inclusive busca por IA",
+      "Bloco 3: oito pares com X e check (gritar mais x ganhar confiança; mídia controlando acesso x audiência própria; funil transacional x jornada contínua; palavra-chave x intenção)",
+      "Bloco 4: conclusão: marcas precisam dobrar a aposta em visibilidade na busca por IA",
+      "Bloco 5: CTA para lista de espera do produto do autor (Searchable) e pergunta aos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF comparativo (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Comparação antigo x novo em pares é um formato muito escaneável e faz o leitor se posicionar de que lado está. A pergunta final sobre onde o leitor está travado ajuda a explicar os 610 comentários.",
+    "autor_ou_marca": "Chris Donnelly",
+    "link_fonte": "https://www.linkedin.com/posts/donnellychris_old-marketing-vs-new-marketing-activity-7370787344406192129-sXcy",
+    "metricas": {
+      "curtidas": 1035,
+      "comentarios": 610,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Marketing has changed dramatically in the last 5 years.' Post de 08/09/2025. Carrossel-documento de 11 páginas. O post é também peça de venda do Searchable. Removida a afirmação sobre a agência do autor, não confirmada na página.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-15"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Você está postando nas redes sociais... mas não está recebendo nenhum negócio inbound por isso.",
+    "estrutura": [
+      "Slide 1: capa 'How to go from likes → customers' (PDF de 4 páginas)",
+      "Bloco 1: dor do leitor e 'então este post é para você'",
+      "Bloco 2: prova social: lista de criadores conhecidos que constroem lista de e-mail (Justin Welsh, Codie Sanchez, Alex Hormozi e outros)",
+      "Bloco 3: o porquê: ninguém quer depender de algoritmo, e e-mail converte até 40x mais",
+      "Bloco 4: social serve para ser achado, e-mail para converter",
+      "Bloco 5: quatro dicas numeradas (isca digital, newsletter no Beehiiv, divulgar a lista sempre, nutrir com conteúdo de valor)"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF curto (conteúdo dos slides não lido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nomeia a frustração de quem posta sem retorno e oferece uma saída clara (lista de e-mail), apoiada em nomes conhecidos e em dicas numeradas. Proporção alta de comentários (200) para reações (319).",
+    "autor_ou_marca": "Hanna Larsson",
+    "link_fonte": "https://www.linkedin.com/posts/hlarsson_how-to-go-from-likes-customers-activity-7353002938190958593-xF8B",
+    "metricas": {
+      "curtidas": 319,
+      "comentarios": 200,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'You're posting on social media..but you're not getting any inbound business from it.' Post de 21/07/2025. tipo_gancho corrigido de 'pergunta' para 'erro-comum' (a abertura é afirmação, não pergunta).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Pare de contratar um Social Media Manager",
+    "estrutura": [
+      "Bloco 1: título imperativo e polêmico",
+      "Bloco 2: história: empresa contratou um social media e esperava vídeo, design, copy, trends, SEO, anúncios e dados",
+      "Bloco 3: 'Parece o sonho, né? Errado.' Três meses depois, engajamento baixo, anúncios sem conversão e burnout",
+      "Bloco 4: a verdade: ela precisava de um time de marketing inteiro",
+      "Bloco 5: lista de papéis (social media, criador de conteúdo, designer, profissional de marketing)",
+      "Bloco 6: fecho: contrate melhor e monte um time"
+    ],
+    "padrao_visual": {
+      "fundo": "sem imagem (texto puro)",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O título parece atacar a profissão, mas o texto defende o profissional contra o acúmulo de funções. Todo social media se reconhece na lista de exigências, o que gera identificação e comentários (329).",
+    "autor_ou_marca": "Fernando Pavon",
+    "link_fonte": "https://www.linkedin.com/posts/fernando-pavon-_stop-hiring-a-social-media-manager-activity-7308314542189531137-sxcp",
+    "metricas": {
+      "curtidas": 5591,
+      "comentarios": 329,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Stop Hiring a Social Media Manager'. Post de 20/03/2025. Sem mídia anexada.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Acho que as marcas precisam parar de postar todo dia nas redes sociais.",
+    "estrutura": [
+      "Bloco 1: opinião contra o senso comum do calendário cheio",
+      "Bloco 2: tese: expectativa de volume acima da eficácia de cada post é o motivo de marcas não viralizarem",
+      "Bloco 3: razão 1: potência vale mais que constância (cortar o calendário pela metade e dobrar o tempo por post)",
+      "Bloco 4: razão 2: a marca precisa de apostas maiores, e criatividade pede tempo",
+      "Bloco 5: razão 3: não se ganha social sem vídeo, e vídeo bom leva tempo",
+      "Bloco 6: nova estratégia em três passos e frase final: ninguém lembra da marca porque ela postou todo dia"
+    ],
+    "padrao_visual": {
+      "fundo": "sem imagem (texto puro)",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contraria a regra mais repetida do social media (postar todo dia) e dá três razões numeradas em caixa alta. Agências e clientes discutem isso toda semana, então o post vira munição de argumento (406 comentários).",
+    "autor_ou_marca": "Jack Appleby",
+    "link_fonte": "https://www.linkedin.com/posts/jackappleby_i-think-brands-gotta-stop-posting-daily-on-activity-7403797805607321600-HFUs",
+    "metricas": {
+      "curtidas": 3339,
+      "comentarios": 406,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'I think brands gotta stop posting daily on social.' Post de 08/12/2025. Estrutura corrigida: a terceira razão é vídeo, a conclusão prática estava na razão 1.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Previsões para agências em 2025:",
+    "estrutura": [
+      "Bloco 1: título curto com ano",
+      "Bloco 2: consultoria em alta e execução indo para dentro das marcas, com espaço para upsell de execução",
+      "Bloco 3: marcas migrando de grandes redes para parceiros boutique de growth",
+      "Bloco 4: demanda por profissionais em T que também consultam e agências que ensinam o cliente",
+      "Bloco 5: agências unidimensionais e transacionais vão continuar morrendo",
+      "Bloco 6: previsões de busca e orgânico (impressões como KPI, boom de conteúdo, thought leaders internos, trabalho integrado)"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única sem texto alternativo (conteúdo não identificado)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Previsão de fim de ano feita por dona de agência fala direto com o medo e a estratégia de outros donos de agência. Lista em tópicos curtos é fácil de concordar ou discordar nos comentários.",
+    "autor_ou_marca": "Carrie Rose",
+    "link_fonte": "https://www.linkedin.com/posts/carrieroseballoch_2025-agency-predictions-consultation-activity-7262030123145609216-ix7h",
+    "metricas": {
+      "curtidas": 1019,
+      "comentarios": 72,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: '2025 Agency Predictions:'. Post de 12/11/2024. A página cita Rise at Seven, agência da autora. Corrigido: o post tem uma imagem anexada, não é texto puro.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "antes-depois",
+    "tipo_gancho": "numero",
+    "texto_gancho": "SEOs: “SEO leva tempo”. Meu cliente: 275.000 de tráfego novo de SEO em 8 meses.",
+    "estrutura": [
+      "Bloco 1: contraste entre o bordão do mercado e o resultado do cliente",
+      "Bloco 2: números de prova (88.585 visitas no último mês, crescimento de 30% ao mês, 6.255 leads, 2.227 assinaturas pagas)",
+      "Bloco 3: 'As 5 coisas que fizemos'",
+      "Bloco 4: correções técnicas e o erro de troca de www que ia derrubar o tráfego",
+      "Bloco 5: SEO programático (mais de 240 páginas), blogs de fundo de funil, ferramentas gratuitas e otimização de páginas entre posição 3 e 20",
+      "Bloco 6: situação de partida do cliente, resultados em 8 meses e CTA de conversa"
+    ],
+    "padrao_visual": {
+      "fundo": "print de gráfico de tráfego subindo até 90 mil por mês",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quebra uma crença do próprio mercado com números do cliente e depois abre o passo a passo. O gráfico subindo na imagem é prova visual imediata, ideal para agência que vende resultado.",
+    "autor_ou_marca": "Jake Ward",
+    "link_fonte": "https://www.linkedin.com/posts/jakezward_seos-seo-takes-time-my-client-275000-activity-7259911654405025792-0Pqg",
+    "metricas": {
+      "curtidas": 1818,
+      "comentarios": 278,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Conferido na página pública do post no LinkedIn (sem login) em 27/09/2026, nos dados estruturados e nos contadores da página. Curtidas = total de reações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'SEOs: \"SEO takes time\" / My client: 275,000 new SEO traffic in 8 months.' Post de 06/11/2024. Imagem confirmada pelo texto alternativo ('SEO graph up to 90K/mo'). O post cita a ferramenta Byword.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-20"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Hoje eu faço 31 anos. E quanto mais o tempo passa, mais eu percebo que a vida vai ficando menos sobre ter todas as respostas e mais sobre saber quais princípios você não abre mão.",
+    "estrutura": [
+      "Slide 1: abertura do marco pessoal (31 anos); conteúdo visual das lâminas não legível no embed",
+      "Slides seguintes: princípios e lições de vida, um por lâmina, conforme a legenda anuncia",
+      "Bloco de legenda 1: marco pessoal como gancho e tese (princípios valem mais que respostas)",
+      "Bloco de legenda 2: humildade explícita: aprendi acertando e errando feio, não são regras universais",
+      "Bloco de legenda 3: fechamento emocional curto: e viva a vida, a vida é boa"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed (lâminas sem texto alternativo)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O aniversário vira pretexto legítimo para entregar uma lista de princípios, formato que gera salvamento. A vulnerabilidade declarada (errei feio, posso mudar de ideia) derruba a guarda e puxa comentários de parabéns e identificação, 556 no total.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral), gestor de tráfego e infoprodutor",
+    "link_fonte": "https://www.instagram.com/p/DdtaNshEUzc/",
+    "metricas": {
+      "curtidas": 3421,
+      "comentarios": 556,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdtaNshEUzc/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos no embed; o embed classifica como carrossel (GraphSidecar). Data aproximada 25/09/2026 (informada pela curadoria, não exibida no embed). uso_rosto não confirmado: as lâminas não têm texto alternativo e a descrição de balões e bolo da versão anterior não foi encontrada.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-21"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Essa é só uma das maneiras de conseguir clientes com tráfego pago.",
+    "estrutura": [
+      "Slide 1: um método concreto de prospecção de clientes para quem vende tráfego pago (a legenda aponta para cima, o método está nas lâminas)",
+      "Slides seguintes: detalhamento do método; texto das lâminas não legível no embed",
+      "Bloco de legenda 1: afirma ter dados de que quanto mais métodos de prospecção, mais contratos fechados",
+      "Bloco de legenda 2: promete mostrar todos os métodos na Aula 4 da Imersão Faturando com Anúncios, às 20h",
+      "Bloco de legenda 3: CTA para ativar notificações pelo link da bio"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Entrega um método de graça no carrossel e deixa claro que é só um de vários, o que abre lacuna de curiosidade para a aula ao vivo da mesma noite. Ataca a dor exata do gestor iniciante: conseguir o primeiro cliente.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/p/Ddrz1UDI1tt/",
+    "metricas": {
+      "curtidas": 1990,
+      "comentarios": 78,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/Ddrz1UDI1tt/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado pelo embed (GraphSidecar). Data aproximada 24/09/2026. Emoji de mão apontando para cima abre a legenda e foi omitido do gancho. uso_rosto não confirmado.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-22"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Eu viciei em todas, mas se eu pudesse escolher SÓ UMA pra começar hoje mesmo, seria a última.",
+    "estrutura": [
+      "Slide 1: capa que apresenta uma lista de recomendações do autor (tema exato não legível no embed)",
+      "Slides intermediários: uma recomendação por lâmina",
+      "Último slide: a favorita do autor, revelada só no fim",
+      "Legenda: uma frase só, que manda o leitor ir até a última lâmina"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A legenda de uma linha transforma o carrossel em caça ao tesouro: para descobrir a favorita o leitor precisa deslizar até o fim, o que aumenta o tempo de tela e o sinal de retenção.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/p/DdxDulxjpQl/",
+    "metricas": {
+      "curtidas": 1022,
+      "comentarios": 29,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdxDulxjpQl/embed/captioned/ em 27/09/2026 (post com cerca de 1 dia, números subindo)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado (GraphSidecar). Data aproximada 26/09/2026. O conteúdo das lâminas (o que é a lista) não é legível no embed; estrutura das lâminas inferida pela legenda. Emoji final omitido.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-23"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "PRAZER, sou o maior panfleteiro do mundo kkkkk",
+    "estrutura": [
+      "Slide 1: autoapresentação bem humorada (maior panfleteiro do mundo)",
+      "Bloco de legenda 1: vira a piada em tese: é assim que se constrói liberdade financeira, virando gestor de tráfego",
+      "Bloco de legenda 2: convite para a Imersão Faturando com Anúncios, a partir de 21 de setembro, às 20h",
+      "Bloco de legenda 3: CTA de comentário com a palavra chave IFA"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A autoironia (gestor de tráfego como panfleteiro digital) simplifica a profissão numa imagem mental memorável. O comentário com palavra chave converte curtida em lead, o que explica 202 comentários para 769 curtidas.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/p/DdUJwiqDhA7/",
+    "metricas": {
+      "curtidas": 769,
+      "comentarios": 202,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdUJwiqDhA7/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado (GraphSidecar). Data aproximada 15/09/2026. uso_rosto não confirmado.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-24"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "POST OFICIAL DO SORTEIO DA CAMISETA SUBIDO",
+    "estrutura": [
+      "Slide 1: anúncio do sorteio da camiseta da comunidade",
+      "Slides seguintes: registros do evento (texto das lâminas não legível no embed)",
+      "Bloco de legenda 1: regra 1, curta e reposte este post",
+      "Bloco de legenda 2: regra 2, comente seu maior insight e marque alguém",
+      "Bloco de legenda 3: despedida informal (até amanhã, meu povo)"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Sorteio de item da comunidade no meio de um lançamento: pedir o maior insight como comentário gera prova social pública do conteúdo e o repost espalha o perfil. Resultado: 995 comentários, perto do número de curtidas.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/p/DdpmPysjrid/",
+    "metricas": {
+      "curtidas": 1421,
+      "comentarios": 995,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdpmPysjrid/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado (GraphSidecar). Data aproximada 23/09/2026, durante a Imersão Faturando com Anúncios.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-25"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Sim… eu sei… só nos vemos no domingo… são 2 dias longe…",
+    "estrutura": [
+      "Slide 1: aviso de pausa de dois dias no evento ao vivo",
+      "Bloco de legenda 1: tom de saudade exagerado, com reticências",
+      "Bloco de legenda 2: três tarefas para o público não esfriar: maratonar o Subidoflix, responder ao quiz, manifestar a vitória no sorteio",
+      "Bloco de legenda 3: data do próximo encontro (sorteio de domingo)"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Trata o intervalo do lançamento como parte do evento e dá tarefas ao público para manter o engajamento aquecido. O quiz e o sorteio puxaram mais comentários que curtidas (5.360 contra 2.485), sinal forte para o algoritmo.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/p/DdsK1BgI9po/",
+    "metricas": {
+      "curtidas": 2485,
+      "comentarios": 5360,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdsK1BgI9po/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado (GraphSidecar). Data aproximada 24/09/2026. As reticências fazem parte do texto original.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-26"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "O jeito antigo de fazer tráfego pago parou de funcionar.",
+    "estrutura": [
+      "Bloco 1: afirmação de ruptura (o jeito antigo parou de funcionar)",
+      "Bloco 2: prova de possibilidade: quem entendeu a mudança fatura R$10 mil por mês gerindo anúncios para outras empresas",
+      "Bloco 3: promessa com datas: de 21/09 a 27/09, o que funciona agora e como fechar o primeiro contrato em até 30 dias, mesmo do zero",
+      "Bloco 4: quebra de objeção: 100% gratuito",
+      "Bloco 5: CTA de comentário com a palavra chave IFA para receber o link no direct"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo (reel); quadro não descrito no embed",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Declarar que o método antigo morreu gera medo de ficar para trás em quem já tentou tráfego, e o número concreto (R$10 mil por mês) torna a promessa tangível. A palavra chave no comentário automatiza a captação de leads.",
+    "autor_ou_marca": "Pedro Sobral (@pedrosobral)",
+    "link_fonte": "https://www.instagram.com/reel/DdCnkt0T6wC/",
+    "metricas": {
+      "curtidas": 2086,
+      "comentarios": 354,
+      "compartilhamentos": null,
+      "visualizacoes": 14446,
+      "observacao": "Lido no embed público instagram.com/p/DdCnkt0T6wC/embed/captioned/ em 27/09/2026; visualizações do campo video_view_count do embed"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel (GraphVideo) de data aproximada 08/09/2026. O esquema não tem formato vídeo; classificado como imagem-unica por falta de opção. uso_rosto provável por ser reel do autor, não confirmado; a descrição de barba, livro e pôster da versão anterior não foi encontrada no embed.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-27"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Ter milhões de seguidores não garante mais poder de decisão.",
+    "estrutura": [
+      "Bloco 1: frase que contraria a métrica de vaidade (seguidores)",
+      "Bloco 2: estudo com nome e fonte (Pulso 2026/2027, FSB Holding, Deck e Nexus)",
+      "Bloco 3: dado principal: quase 70% da influência real no Brasil vem de executivos e especialistas",
+      "Bloco 4: interpretação: na era da IA, autoridade técnica e lastro de mercado vencem alcance vazio",
+      "Bloco 5: prova pessoal: o autor foi apontado entre os mais influentes em Marketing e Publicidade",
+      "Bloco 6: CTA de comentário com a palavra INFLUÊNCIA para receber o estudo no direct"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo (reel); capa não descrita no embed",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Junta um dado de estudo com nome e uma conquista do próprio autor, validando a tese e a autoridade ao mesmo tempo. Oferecer o estudo completo via comentário explica os 603 comentários.",
+    "autor_ou_marca": "Rafael Kiso (@rafaelkiso), fundador da mLabs",
+    "link_fonte": "https://www.instagram.com/reel/DccCM2sxtLH/",
+    "metricas": {
+      "curtidas": 3280,
+      "comentarios": 603,
+      "compartilhamentos": null,
+      "visualizacoes": 24159,
+      "observacao": "Lido no embed público instagram.com/p/DccCM2sxtLH/embed/captioned/ em 27/09/2026; visualizações do campo video_view_count do embed"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel (GraphVideo) de data aproximada 24/08/2026. O título de capa citado na versão anterior não foi confirmado no embed e foi retirado. uso_rosto provável, não confirmado.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-28"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "O maior lançamento da história da Hotmart chegou para revolucionar o mercado.",
+    "estrutura": [
+      "Imagem: arte única do anúncio do Launchpad (texto da arte não legível no embed)",
+      "Bloco de legenda 1: superlativo de marca: o maior lançamento da história da Hotmart",
+      "Bloco de legenda 2: o que o produto faz: sites, páginas de vendas, áreas de membros, aplicações web e games com checkout integrado a partir de um prompt, sem programar",
+      "Bloco de legenda 3: prova externa: o CEO JP Resende falou com a Exame sobre Creator Economy",
+      "Bloco de legenda 4: CTA de comentário IAHOTMART para ler a matéria completa"
+    ],
+    "padrao_visual": {
+      "fundo": "arte única (conteúdo não descrito no embed)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca usa a própria cobertura de imprensa (Exame) como prova de relevância e troca a matéria por um comentário com palavra chave, o que converte curiosidade em conversa no direct: 548 comentários.",
+    "autor_ou_marca": "Hotmart (@hotmart)",
+    "link_fonte": "https://www.instagram.com/p/DdHl5RukxCZ/",
+    "metricas": {
+      "curtidas": 1714,
+      "comentarios": 548,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DdHl5RukxCZ/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Gancho corrigido: a versão anterior usava a manchete Depois de vender R$ 50 bilhões, gigante Hotmart lança IA para criar apps, atribuída ao alt da grade, que não aparece no embed. O gancho agora é a abertura literal da legenda. O embed classifica como imagem única (GraphImage), não carrossel. Data aproximada 10/09/2026.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-29"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Se você é dono de academia, box de crossfit, estúdio de pilates ou outro negócio fitness ou esportivo, comente AULA.",
+    "estrutura": [
+      "Slide 1: convite para masterclass gratuita segmentada para negócios fitness",
+      "Bloco de legenda 1: chamada por nicho, listando os tipos de negócio (academia, box de crossfit, pilates)",
+      "Bloco de legenda 2: o que é: masterclass gratuita e online com o convidado @douglaswaltricke, no dia seguinte às 13h30",
+      "Bloco de legenda 3: promessa: vender mais e fidelizar clientes",
+      "Bloco de legenda 4: CTA repetido: comente AULA"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nomear o público exato no gancho faz quem se encaixa parar, e o CTA de uma palavra repetido duas vezes reduz o atrito. Resultado: 2.805 comentários, perto de metade das curtidas, padrão de captação para infoprodutor.",
+    "autor_ou_marca": "Joel Jota (@joeljota)",
+    "link_fonte": "https://www.instagram.com/p/Ddrv2NYo2Rc/",
+    "metricas": {
+      "curtidas": 6790,
+      "comentarios": 2805,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/Ddrv2NYo2Rc/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e autor conferidos; carrossel confirmado (GraphSidecar). Data aproximada 24/09/2026. O gancho junta a abertura da legenda ao CTA; o texto literal segue com e eu e @douglaswaltricke esperamos você amanhã. Mantido no nicho como padrão de captação de infoproduto.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "R$ 1 BILHÃO FATURADOS NOS PRIMEIROS 2 ANOS DE OPERAÇÃO.",
+    "estrutura": [
+      "Bloco 1: número em caixa alta como manchete",
+      "Bloco 2: enquadramento como fenômeno raro no mundo",
+      "Bloco 3: bastidor: ofertas de aporte recusadas porque o caixa próprio banca o crescimento",
+      "Bloco 4: projeção: mais de 1,4 bi em 2026",
+      "Bloco 5: cena do momento: fundadores em Nova Iorque, visita à NASDAQ com donos de clubes da LIGA",
+      "Bloco 6: fecho leve e aspiracional (qual relógio comprar para comemorar)"
+    ],
+    "padrao_visual": {
+      "fundo": "não identificado no embed",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Número redondo e gigante em caixa alta para parar o scroll, e a narrativa de bastidor (NASDAQ, fundos, caixa próprio) transforma resultado em história. Modelo para infoprodutor ou mentoria divulgando marco de faturamento.",
+    "autor_ou_marca": "Flávio Augusto (@geracaodevalor), Mentoring League Society",
+    "link_fonte": "https://www.instagram.com/p/DXX6zfRDs8u/",
+    "metricas": {
+      "curtidas": 70577,
+      "comentarios": 1997,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público instagram.com/p/DXX6zfRDs8u/embed/captioned/ em 27/09/2026"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda conferida; o embed mostra a conta @geracaodevalor como dona e classifica como carrossel (GraphSidecar), não imagem única. Data aproximada 20/04/2026. uso_rosto provável (foto dos fundadores), não confirmado.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Quatro formas de mudar o comportamento humano.",
+    "estrutura": [
+      "Bloco 1: promessa numerada (quatro formas)",
+      "Bloco 2: para fazer alguém FAZER algo: dar um biscoito (adicionar positivo) ou livrar de uma tarefa chata (remover negativo)",
+      "Bloco 3: para fazer alguém PARAR: dar uma tarefa chata (adicionar negativo) ou parar de dar biscoitos (remover positivo)",
+      "Bloco 4: fecho: reforçar o novo comportamento com urgência"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo (reel); quadro não descrito no embed",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Condensa reforço e punição da psicologia comportamental numa matriz 2x2 com exemplos infantis (biscoito, tarefa), fácil de lembrar e de aplicar a vendas, equipe e oferta.",
+    "autor_ou_marca": "Alex Hormozi (@hormozi)",
+    "link_fonte": "https://www.instagram.com/reel/Ddii_P4BHns/",
+    "metricas": {
+      "curtidas": 93260,
+      "comentarios": 825,
+      "compartilhamentos": null,
+      "visualizacoes": 1737552,
+      "observacao": "Lido no embed público instagram.com/p/Ddii_P4BHns/embed/captioned/ em 27/09/2026; visualizações do campo video_view_count do embed"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: Four ways to change human behavior: To get them to DO something: 1) Give them a cookie (add +) 2) Dont have to do chores (minus) To get them to STOP doing: 1) Make them do chores (add) 2) Stop giving them cookies (remove +) And reinforce new behavior with urgency. Reel (GraphVideo) de data aproximada 20/09/2026. Texto de capa citado antes (WHY DO MY EMPLOYEES LEAVE?) não confirmado no embed. Esquema sem formato vídeo.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-32"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Não, não engaja e acredite, nem por ego isso funciona.",
+    "estrutura": [
+      "Bloco 1: nega de cara a pergunta implícita (comprar seguidores engaja?)",
+      "Bloco 2: autoridade de quem repete isso em todas as turmas do Superpoder",
+      "Bloco 3: número que expõe o absurdo: 100 mil seguidores e 15 likes nas postagens",
+      "Bloco 4: fecho com consequência social: todo mundo dá risada nas suas costas"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X, sem imagem",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Responde uma dúvida que todo cliente de agência já teve e usa uma conta visual (100 mil contra 15 likes) que dispensa gráfico. O fecho mexe com vergonha, o que gera resposta e compartilhamento.",
+    "autor_ou_marca": "Paulo Cuenca",
+    "link_fonte": "https://x.com/paulocuenca/status/1647665823144632320",
+    "metricas": {
+      "curtidas": 44,
+      "comentarios": 4,
+      "compartilhamentos": 2,
+      "visualizacoes": 12566,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 44 curtidas, 4 respostas, 2 reposts, 12.566 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/04/2023, texto e autor conferidos. Parte de uma sequência sobre compra de seguidores no Instagram. Autor é educador de social media (curso Superpoder).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-33"
+  },
+  {
+    "rede": "x",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "O Instagram distribui seu conteúdo inicialmente para um pequeno percentual da sua base, se eles engajam, ele distribui mais, se não? Acabou.",
+    "estrutura": [
+      "Bloco 1: explica em uma frase como o algoritmo testa o post com parte da base",
+      "Bloco 2: mostra a condição (engajou, distribui mais; não engajou, ele interrompe o post)",
+      "Bloco 3: pergunta retórica que fecha o raciocínio: seguidores comprados engajam?",
+      "Bloco 4: uma foto anexada de apoio"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com uma foto anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma um mecanismo técnico do algoritmo em regra simples de causa e efeito. A pergunta final deixa o leitor concluir sozinho que seguidor comprado derruba o alcance, o que dá sensação de insight.",
+    "autor_ou_marca": "Paulo Cuenca",
+    "link_fonte": "https://x.com/paulocuenca/status/1647660321878822918",
+    "metricas": {
+      "curtidas": 11,
+      "comentarios": 0,
+      "compartilhamentos": 1,
+      "visualizacoes": 5965,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 11 curtidas, 0 respostas, 1 repost, 5.965 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/04/2023 com 1 foto anexada (confirmado). Texto completo continua com 'Acabou, ele interrompe o post. Seguidores comprados engajam?'. Engajamento modesto, incluído como padrão de explicação de algoritmo.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-34"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Estou indo ali na Gucci.",
+    "estrutura": [
+      "Bloco 1: frase curta e inesperada que não parece de venda",
+      "Bloco 2: revela o contexto: o carrinho do Superpoder fecha agorinha",
+      "Bloco 3: promessa de presente da Gucci para quem entrar",
+      "Bloco 4: chamada para acompanhar ao vivo no Instagram"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma frase de vida pessoal que gera curiosidade e só depois revela o fechamento de carrinho. É o padrão de urgência de lançamento de infoproduto disfarçado de bastidor, com convite para a live.",
+    "autor_ou_marca": "Paulo Cuenca",
+    "link_fonte": "https://x.com/paulocuenca/status/1649174811833249794",
+    "metricas": {
+      "curtidas": 11,
+      "comentarios": 0,
+      "compartilhamentos": 0,
+      "visualizacoes": 5368,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 11 curtidas, 0 respostas, 0 reposts, 5.368 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/04/2023, último dia de carrinho do curso Superpoder. Exemplo de copy de lançamento.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-35"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Obrigado, Elon.",
+    "estrutura": [
+      "Bloco 1: agradecimento irônico a uma figura conhecida",
+      "Bloco 2: revela o motivo: agora dá para anunciar o Desafio da Gestão de Tráfego no X também",
+      "Bloco 3: contagem regressiva em caixa alta: FALTAM 5 DIAS, MOÇADA",
+      "Bloco 4: CTA para o link da bio"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O gancho de duas palavras pega carona em um assunto do momento (regras de anúncio no X) e só depois vira anúncio. O humor reduz a rejeição a post de lançamento.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/1836528307908522310",
+    "metricas": {
+      "curtidas": 59,
+      "comentarios": 1,
+      "compartilhamentos": 0,
+      "visualizacoes": 2726,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 59 curtidas, 1 resposta, 0 reposts, 2.726 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 18/09/2024, divulgação do Desafio da Gestão de Tráfego. Pedro Sobral é referência em tráfego pago no Brasil; alcance dele no X é pequeno perto do Instagram.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-36"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Eu virei a minha vida de cabeça pra baixo pra viver de uma profissão que eu não fazia ideia de como seria.",
+    "estrutura": [
+      "Slide 1: virada de vida e revelação: nem era gestor de tráfego, era gerente de mídias sociais; fiz isso de forma consciente. Explico:",
+      "Slide 2: como pesou prós e contras com três perguntas (o que pode dar errado, o que faço se der tudo errado, e se der certo)",
+      "Slide 3: conselho direto ao leitor para cruzar a própria linha do medo"
+    ],
+    "padrao_visual": {
+      "fundo": "fio de texto no X, sem imagem",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "História de transição de carreira que o público (social medias querendo virar gestor de tráfego) reconhece como a própria. O 'Explico:' funciona como seta de carrossel para o próximo bloco.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/1818015473553875327",
+    "metricas": {
+      "curtidas": 19,
+      "comentarios": 1,
+      "compartilhamentos": 0,
+      "visualizacoes": 1407,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do primeiro post do fio: 19 curtidas, 1 resposta, 0 reposts, 1.407 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fio de 3 posts de 29/07/2024 (conferido). Classificado como carrossel porque o fio no X tem a mesma lógica de slides sequenciais.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-37"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Regra básica de precificação para quem presta serviço de marketing digital: cobre um valor que vai colocar mais dinheiro no bolso do cliente do que no seu.",
+    "estrutura": [
+      "Bloco 1: anuncia uma regra para um público específico (prestador de serviço de marketing digital)",
+      "Bloco 2: entrega a regra em uma frase que inverte a lógica de preço"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fala direto com o dono de agência e resolve a dor de precificar em uma linha. A inversão (o cliente ganha mais que você) é fácil de citar e repostar.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/2095123714471797153",
+    "metricas": {
+      "curtidas": 18,
+      "comentarios": 0,
+      "compartilhamentos": 0,
+      "visualizacoes": 866,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 18 curtidas, 0 respostas, 0 reposts, 866 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/09/2026. Engajamento baixo no X; incluído pelo tema central para agências (preço de serviço).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-38"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Apertar os botões sempre será a parte mais fácil no tráfego pago.",
+    "estrutura": [
+      "Bloco 1: rebaixa a parte técnica que o iniciante acha difícil",
+      "Bloco 2: aponta o difícil de verdade: pensar estrategicamente",
+      "Bloco 3: receita simples e bem humorada: bunda na cadeira mais estudo",
+      "Bloco 4: encorajamento curto: você consegue"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quebra a crença de que tráfego pago é saber mexer no gerenciador. Desloca o valor para estratégia, o que posiciona o autor como mentor e não como operador.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/1818820663366365568",
+    "metricas": {
+      "curtidas": 20,
+      "comentarios": 0,
+      "compartilhamentos": 0,
+      "visualizacoes": 1182,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 20 curtidas, 0 respostas, 0 reposts, 1.182 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 01/08/2024 (UTC).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-39"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Eu fiz uma consultoria no IG há poucos dias, e quero trazer um insight de lá pra cá:",
+    "estrutura": [
+      "Bloco 1: origem do conteúdo: uma consultoria real feita no Instagram",
+      "Bloco 2: filtro em lista: fatura cerca de 5 mil por mês, trabalha sozinho, consegue absorver mais clientes",
+      "Bloco 3: conclusão que alivia: você NÃO precisa se preocupar com processos ainda"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X com lista numerada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A lista de três condições faz o leitor se autodiagnosticar. A conclusão tira uma culpa comum de freelancer de marketing, o que gera identificação.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/1821733296587362652",
+    "metricas": {
+      "curtidas": 24,
+      "comentarios": 0,
+      "compartilhamentos": 0,
+      "visualizacoes": 1677,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 24 curtidas, 0 respostas, 0 reposts, 1.677 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/08/2024, reaproveitando insight de consultoria (bastidor transformado em conteúdo).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-40"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Se você tem 30 anos e sente que tá atrasado na vida, leia isso:",
+    "estrutura": [
+      "Slide 1: chama um público por idade e dor: 30 anos e sensação de atraso",
+      "Slide 2: analogia: uma vida de 100 anos em 24 horas; aos 30 são 07h12, aos 40 são 09h36, aos 50 é meio dia",
+      "Slide 3: provocação: tem gente que se desespera antes das 8h da manhã",
+      "Slide 4: virada otimista: ainda dá tempo de ter um excelente dia",
+      "Slide 5: CTA para a Imersão Faturando com Anúncios"
+    ],
+    "padrao_visual": {
+      "fundo": "fio de texto no X",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A analogia do relógio transforma idade em número concreto e cria alívio. A emoção positiva prepara o leitor para o CTA de venda no último bloco.",
+    "autor_ou_marca": "Pedro Sobral",
+    "link_fonte": "https://x.com/pedrosobral/status/2102023833007866102",
+    "metricas": {
+      "curtidas": 21,
+      "comentarios": 1,
+      "compartilhamentos": 0,
+      "visualizacoes": 2811,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do primeiro post do fio: 21 curtidas, 1 resposta, 0 reposts, 2.811 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fio de 5 posts de 21/09/2026 (conferido) que termina divulgando a Imersão Faturando com Anúncios. Estrutura de carrossel de infoprodutor com CTA no fim.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-41"
+  },
+  {
+    "rede": "x",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "2,8 milhões de empresas baixadas em 2025. 9,1 milhões de CNPJs inadimplentes. Selic ainda em 14%.",
+    "estrutura": [
+      "Bloco 1: três números em sequência, sem contexto, para chocar",
+      "Bloco 2: tese: você concorre com o Estado, que capta acima da margem líquida da maioria dos setores",
+      "Bloco 3: conselho prático: cuide do caixa e dos pequenos detalhes do financeiro",
+      "Bloco 4: lição de marketing no fecho: pessoas compram solução para problemas, não produto ou serviço"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com empilhamento de dados que dão peso e urgência. Fecha com uma frase clássica de marketing que qualquer dono de negócio pode repostar.",
+    "autor_ou_marca": "Tallis Gomes (G4 Educação)",
+    "link_fonte": "https://x.com/tallisgomes/status/2096591070876352603",
+    "metricas": {
+      "curtidas": 1208,
+      "comentarios": 193,
+      "compartilhamentos": 99,
+      "visualizacoes": 35180,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 1.208 curtidas, 193 respostas, 99 reposts, 35.180 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 06/09/2026. Autor é fundador do G4 (educação executiva, vende cursos de gestão e marketing). Encaixe no nicho é parcial: o post é de gestão financeira para dono de negócio, com lição de marketing só no fecho.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-42"
+  },
+  {
+    "rede": "x",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Sim, é ele mesmo: o famoso Copo Leslie.",
+    "estrutura": [
+      "Bloco 1: confirma o boato com 'Sim, é ele mesmo' e nome de um produto que virou meme",
+      "Bloco 2: contexto da campanha: desenvolvido por Leslie David Baker na papelaria Planos no Papel",
+      "Bloco 3: piada com a cor da marca (não poderia ser de outra cor)",
+      "Bloco 4: hashtags da campanha e foto do produto"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto roxo, cor da marca",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega um meme que o público já conhecia (o ator de The Office no Brasil) e transforma em objeto físico. O 'Sim, é ele mesmo' conversa com quem já estava comentando a campanha.",
+    "autor_ou_marca": "Nubank",
+    "link_fonte": "https://x.com/nubank/status/1762833458210963891",
+    "metricas": {
+      "curtidas": 2379,
+      "comentarios": 238,
+      "compartilhamentos": 42,
+      "visualizacoes": 4006148,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 2.379 curtidas, 238 respostas, 42 reposts, 4.006.148 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 28/02/2024 da campanha Planos no Papel, com 1 foto anexada (confirmado). É post de marca, incluído como referência de social media para agências (desdobramento de campanha em produto meme). A menção a um vídeo de 19/02/2024 com mais de 6 milhões de visualizações não foi conferida.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-43"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Empresas de IA deveriam aprender o que Mamdani já entendeu: a tática de PR mais testada e aprovada é simplesmente dar coisas às pessoas.",
+    "estrutura": [
+      "Bloco 1: tese contraintuitiva de PR ligada a um nome do noticiário",
+      "Bloco 2: prova histórica em lista: banquetes de César, moedas de Rockefeller, Plano Marshall, favoritos da Oprah, Starlink na United",
+      "Bloco 3: recomendação concreta: construir parques, subsidiar contas, fazer churrasco, patrocinar excursões",
+      "Bloco 4: crítica ao gasto com marketing e lobby que sai pela culatra e repetição do mantra"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X citando outro post",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Une um tema quente (política e IA) a uma regra simples de comunicação, com exemplos históricos que dão autoridade. A frase repetida no fim vira bordão.",
+    "autor_ou_marca": "Lulu Cheng Meservey (Rostra)",
+    "link_fonte": "https://x.com/lulumeservey/status/2090308712325898430",
+    "metricas": {
+      "curtidas": 4509,
+      "comentarios": 260,
+      "compartilhamentos": 214,
+      "visualizacoes": 557200,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 4.509 curtidas, 260 respostas, 214 reposts, 557.200 visualizações. 901 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'AI companies should learn what Mamdani already understands: The most tried and true PR tactic is just give people stuff'. Post de 20/08/2026, cita um post de outra conta. Autora é fundadora da agência de comunicação Rostra.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-44"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Minha empresa tem 8 pessoas. Lucrativa. Sem capital de fora. US$ 5 milhões de receita este ano.",
+    "estrutura": [
+      "Bloco 1: números secos da empresa em frases curtas (receita dobrando todo ano desde 2023)",
+      "Bloco 2: estilo de vida: trabalha de casa, leva e busca os filhos na escola, lanche com eles",
+      "Bloco 3: virada: mesmo assim perguntam como vai o 'negocinho de estilo de vida'",
+      "Bloco 4: provocação: só é empreendedor quem dorme no chão do escritório?"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frases curtas de prova (8 pessoas, lucro, 5 milhões) seguidas de uma injustiça percebida. Donos de agência pequena se identificam e defendem o autor nas respostas.",
+    "autor_ou_marca": "Dave Gerhardt (Exit Five)",
+    "link_fonte": "https://x.com/davegerhardt/status/2077099451890475276",
+    "metricas": {
+      "curtidas": 2818,
+      "comentarios": 217,
+      "compartilhamentos": 44,
+      "visualizacoes": 323379,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 2.818 curtidas, 217 respostas, 44 reposts, 323.379 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'My company is 8 people. Profitable. No outside capital. $5M revenue this year'. Post de 14/07/2026. Autor é ex-CMO e dono da Exit Five, comunidade e negócio de marketing B2B.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-45"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Os únicos negócios que restam para construir:",
+    "estrutura": [
+      "Bloco 1: afirmação categórica que provoca discordância",
+      "Bloco 2: item 1 da lista: empresas de serviço nativas em IA",
+      "Bloco 3: itens 2 a 5: negócios offline, distribuição (mídia, comunidade, audiência), dados proprietários, agentes que rodam o trabalho de um setor",
+      "Bloco 4: itens 6 a 13 (robótica, energia, saúde, marketplaces, ativos reais, agentes verticais, segurança), sem conclusão, deixando o debate para as respostas"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X com lista numerada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O 'únicos' força o leitor a concordar ou brigar. Colocar 'serviço nativo em IA' em primeiro fala direto com agências que estão se reinventando.",
+    "autor_ou_marca": "Greg Isenberg (Late Checkout)",
+    "link_fonte": "https://x.com/gregisenberg/status/2098755584568828177",
+    "metricas": {
+      "curtidas": 5564,
+      "comentarios": 350,
+      "compartilhamentos": 505,
+      "visualizacoes": 413687,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 5.564 curtidas, 350 respostas, 505 reposts, 413.687 visualizações. 7.678 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'The only businesses left to build:'. Post de 12/09/2026, lista de 13 itens (conferida). Autor comanda a Late Checkout, estúdio e agência de produto e comunidade. Encaixe no nicho é parcial (tema é empreendedorismo em geral).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-46"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Tenho negócios há 17 anos. Um time de mais de 100 pessoas. E gerei mais de US$ 7,8 bilhões em vendas para meus clientes.",
+    "estrutura": [
+      "Slide 1: credencial em números e promessa: os atalhos que sei aos 38 e queria saber aos 28",
+      "Slide 2: atalho 1 sobre trabalho e preço: trabalhe sem olhar o relógio",
+      "Slide 3: atalho 12 de marketing: não peça para comprar antes de a pessoa estar convencida",
+      "Slide 4: atalho 14 de mídia: 90% da compra de mídia não importa, foque no criativo",
+      "Slide 5: atalho 18 de copy: um bom gancho vale mais que mil palavras",
+      "Slide 6: atalho 29 de teste: tenha sempre um teste A/B rodando",
+      "Slide 7: atalho 30 final sobre energia ao entrar numa sala"
+    ],
+    "padrao_visual": {
+      "fundo": "fio de texto no X com 31 posts",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com prova social pesada e depois entrega volume: 30 lições curtas numeradas, cada uma repostável sozinha. O leitor salva pelo tamanho da lista.",
+    "autor_ou_marca": "Sabri Suby (King Kong)",
+    "link_fonte": "https://x.com/sabrisuby/status/1826758026109546539",
+    "metricas": {
+      "curtidas": 346,
+      "comentarios": 21,
+      "compartilhamentos": 41,
+      "visualizacoes": 28530,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do primeiro post do fio: 346 curtidas, 21 respostas, 41 reposts, 28.530 visualizações. 372 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'I've been running businesses for 17 years. Have a team of 100+. And have generated my clients over $7.8 billion in sales.' Fio de 31 posts (abertura mais 30 cheat codes, conferidos) de 22/08/2024. A estrutura mostra uma seleção dos atalhos. Autor é fundador da agência King Kong.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-47"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "O Facebook agora diz com todas as letras que seus links estão matando seu alcance.",
+    "estrutura": [
+      "Slide 1: notícia direta: a Meta recomenda colocar o link nos comentários",
+      "Slide 2: dado da própria Meta: 97,3% das visualizações vão para posts sem link externo",
+      "Slide 3: princípio que o dado confirma (Zero-Click Marketing): plataformas premiam conteúdo que segura o usuário no feed",
+      "Slide 4: recomendação: pare de medir sucesso por tráfego de referência",
+      "Slide 5: piada final: não posso linkar o artigo, você sabe por quê"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com 3 prints do relatório anexados",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa um número oficial da própria plataforma para validar uma tese que a autora já defendia. A piada final demonstra a tese na prática e gera respostas.",
+    "autor_ou_marca": "Amanda Natividad (SparkToro)",
+    "link_fonte": "https://x.com/amandanat/status/1935384072072872114",
+    "metricas": {
+      "curtidas": 103,
+      "comentarios": 17,
+      "compartilhamentos": 11,
+      "visualizacoes": 23733,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 103 curtidas, 17 respostas, 11 reposts, 23.733 visualizações. 66 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'Facebook is now saying explicitly that your links are killing your reach.' Post de 18/06/2025 com 3 fotos anexadas (confirmado; por isso tratado como carrossel). Os slides 4 e 5 vêm do resumo original e não foram relidos por inteiro.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-48"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Estou preocupado que a pesquisa de análise de citações esteja nos enganando... e muito.",
+    "estrutura": [
+      "Bloco 1: alerta em primeira pessoa contra uma prática da moda (medir citações em IA)",
+      "Bloco 2: explicação: as ferramentas de IA já sabem quais marcas vão buscar e recomendar, então olhar fontes e URLs ajuda pouco",
+      "Bloco 3: link para o relatório completo e vídeo anexado"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com vídeo anexado",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contradiz o que muitas agências estão vendendo (otimização para IA baseada em citações). O tom de preocupação pessoal soa como aviso de quem entende, não como ataque.",
+    "autor_ou_marca": "Rand Fishkin (SparkToro)",
+    "link_fonte": "https://x.com/randfish/status/2087612290610970640",
+    "metricas": {
+      "curtidas": 185,
+      "comentarios": 31,
+      "compartilhamentos": 20,
+      "visualizacoes": 33573,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 185 curtidas, 31 respostas, 20 reposts, 33.573 visualizações. 189 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'I'm worried that citation analysis research is misleading us... badly.' Post de 12/08/2026 com 1 vídeo anexado (confirmado).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-49"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Todo mundo em 2025: SEO morreu. Mídia paga morreu. Marketing morreu.",
+    "estrutura": [
+      "Bloco 1: lista de coisas que 'morreram' em tom de meme (SEO, mídia paga, marketing, design, SaaS)",
+      "Bloco 2: escalada até 'sua empresa? Provavelmente morta'",
+      "Bloco 3: contraste: as mesmas empresas contratando Head de Marketing com 10 anos de experiência em tudo que morreu, e fluente em Excel",
+      "Bloco 4: piada final: vida longa ao Excel"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Formato de meme 'todo mundo em 2025' com repetição e contraste. Expõe a hipocrisia do mercado de trabalho de marketing, tema que profissionais de agência compartilham.",
+    "autor_ou_marca": "Elena Verna",
+    "link_fonte": "https://x.com/ElenaVerna/status/1906763381631025532",
+    "metricas": {
+      "curtidas": 97,
+      "comentarios": 11,
+      "compartilhamentos": 9,
+      "visualizacoes": 6881,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 97 curtidas, 11 respostas, 9 reposts, 6.881 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'Everyone in 2025: SEO is dead. Paid marketing is dead. Marketing is dead.' Post de 31/03/2025. Autora é líder de growth (Lovable).",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-50"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "A PostHog gasta US$ 45 mil por mês em ideias sem ROI. E está funcionando.",
+    "estrutura": [
+      "Bloco 1: número que parece erro e virada 'e está funcionando'",
+      "Bloco 2: contexto: resumo de conversa com Joe Martin, que comanda o marketing da empresa, e promessa de 10 coisas para roubar",
+      "Bloco 3: item 1: é um orçamento fixo para ideias estranhas, parte de 1,2 milhão por mês de marketing",
+      "Bloco 4: item 2: a concorrência pela atenção não são outras ferramentas, são vídeos de gato",
+      "Bloco 5: itens seguintes com casos concretos (DeskHog esgotado em uma hora, fracasso de 10 mil dólares, canal 'mistakes were made')"
+    ],
+    "padrao_visual": {
+      "fundo": "texto longo no X com lista numerada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número alto e contraintuitivo no gancho, seguido de promessa de '10 coisas para roubar'. Agências leem como munição para vender ideias ousadas a clientes.",
+    "autor_ou_marca": "Peep Laja (Wynter)",
+    "link_fonte": "https://x.com/peeplaja/status/2093667221046263894",
+    "metricas": {
+      "curtidas": 55,
+      "comentarios": 10,
+      "compartilhamentos": 4,
+      "visualizacoes": 7730,
+      "observacao": "Conferido em 27/09/2026 na API pública api.fxtwitter.com do status: 55 curtidas, 10 respostas, 4 reposts, 7.730 visualizações. 53 salvamentos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'PostHog spends $45K a month on ideas with no ROI. And it's working.' Post de 29/08/2026. Autor fundou a CXL e a Wynter.",
+    "nicho": "marketing-agencias",
+    "id": "marketing-agencias-51"
+  }
+]
