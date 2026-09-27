@@ -25,6 +25,12 @@ describe("checagem de números sem fonte", () => {
     );
   });
 
+  it("confere \"N vezes\": o que está na fonte fica, o inventado vira placeholder", () => {
+    const f = numerosDasFontes(["Eleita 3x a Melhor plataforma de e-commerce pela ABCOMM"]);
+    expect(trocarNumerosSemFonte("Fomos eleitos 3 vezes a melhor plataforma.", f).trocados).toBe(0);
+    expect(trocarNumerosSemFonte("Premiada 4 vezes.", f).texto).toBe("Premiada [PREENCHER: número real] vezes.");
+  });
+
   it("reconhece o mesmo número escrito por extenso ou com centavos", () => {
     expect(trocarNumerosSemFonte("Emitimos 1,9 milhão de notas; faturamento de 81 mil a 360 mil; plano de R$ 50.", fontes).trocados).toBe(0);
   });

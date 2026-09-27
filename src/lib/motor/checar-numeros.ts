@@ -7,7 +7,7 @@ import type { RoteiroVideo } from "./contrato";
 
 export const AVISO_NUMEROS = "Tirei números que não estavam nas fontes (e onde não dava, deixei [PREENCHER: número real]). Confira se as frases ainda dizem o que você quer antes de publicar.";
 
-const UNIDADE = String.raw`%|x\b|k\b|mil\b|milh(?:ão|ões|oes|ao)\b|bilh(?:ão|ões|oes|ao)\b|h\b|horas?\b|dias?\b|minutos?\b|min\b|segundos?\b|semanas?\b|meses\b|m[eê]s\b|anos?\b`;
+const UNIDADE = String.raw`%|x\b|k\b|mil\b|milh(?:ão|ões|oes|ao)\b|bilh(?:ão|ões|oes|ao)\b|h\b|horas?\b|dias?\b|minutos?\b|min\b|segundos?\b|semanas?\b|meses\b|m[eê]s\b|anos?\b|vez(?:es)?\b`;
 // Número solto (não colado em letra, @, #, / ou outro número), com R$ antes ou unidade depois, opcionais.
 const RE_NUMERO = new RegExp(String.raw`(R\$\s*)?(?<![\p{L}\d.,/#@_-])(\d+(?:[.,]\d+)*)(\s*(?:${UNIDADE}))?`, "giu");
 const RE_URL = /https?:\/\/\S+/g;
