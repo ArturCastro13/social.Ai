@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Cópias de trabalho de agentes (git worktree) ficam em .claude/worktrees.
+    ".claude/**",
   ]),
 ]);
 
