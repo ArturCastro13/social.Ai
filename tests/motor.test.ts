@@ -35,7 +35,7 @@ const catalogo = construirCatalogo(itensDoArquivo());
 const CHAVES_CONTEXTO = [
   "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "objetivo_livre", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "concorrencia", "desempenho_proprio", "aprendizados_calculados", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
-  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho", "hoje",
+  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho", "virais_ao_vivo", "hoje",
 ];
 
 describe("montarContexto", () => {
@@ -55,6 +55,7 @@ describe("montarContexto", () => {
     expect(c.concorrencia).toEqual([]);
     expect(c.mercado_pesquisado).toBeNull();
     expect(c.em_alta_no_nicho).toEqual([]);
+    expect(c.virais_ao_vivo).toEqual([]);
     expect(c.aprendizados_calculados).toEqual({ n_posts: 0, mediana_engajamento_pct: null, por_formato: [], por_origem_tema: [], por_padrao: [], por_rede: [] });
     expect(c.historico_preferencias).toEqual({ aprovados: [], recusados: [] });
     // Nunca inventa horário.

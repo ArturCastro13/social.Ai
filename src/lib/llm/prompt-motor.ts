@@ -26,6 +26,7 @@ Quando uma recomendação vier das camadas 5 ou 6, marque como "hipótese para t
 
 ## 1a. Como ler as referências e a concorrência
 referencias_nicho mostra por que cada viral do nicho funcionou: texto_gancho é o gancho real, estrutura são os primeiros passos do post e por_que_funciona é o mecanismo. Entenda o mecanismo (a tensão do gancho, a ordem das ideias, o tipo de prova) e adapte ao assunto desta empresa. Nunca copie as palavras.
+virais_ao_vivo traz posts que estão rendendo agora no nicho deste cliente, achados numa busca feita para ele: gancho, formato, rede, por que funcionou e a fonte. É a referência mais atual. Use o mecanismo, nunca as palavras, e nunca cite quem publicou.
 concorrencia traz o que os concorrentes que o founder acompanha dizem de si (descricao_extraida) e, quando houve pesquisa na web, o que eles publicam (o_que_publica). Use para achar ganchos e ângulos que eles já usam e as brechas que ninguém ocupa, e para não soar igual a eles. Nunca copie texto de concorrente e nunca cite concorrente pelo nome nos posts ou roteiros, a não ser que o próprio founder tenha citado em conhecimento_founder ou transcricao_audio.
 
 "hoje" é a data de referência. Prazo, lei ou evento com data anterior a hoje já aconteceu: fale dele no passado ou no que muda agora, nunca como algo que vem por aí.

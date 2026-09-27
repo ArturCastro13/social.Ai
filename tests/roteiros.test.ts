@@ -299,15 +299,18 @@ describe("concorrentes e referências no CONTEXTO", () => {
         nicho: "fintech",
         concorrentes: [{ nome: "Concorrente", url: "https://www.concorrente.com.br/", o_que_publica: "Dicas de imposto em carrossel" }],
         em_alta: [{ tema: "DAS atrasado", gancho: "Você sabe quanto custa atrasar o DAS?", por_que: "medo de multa", quem: "mídia do nicho", url: "https://exemplo.com/das" }],
+        virais_ao_vivo: [{ gancho: "O erro que trava seu caixa", formato: "carrossel", rede: "instagram", por_que: "erro comum", quem: "creator", url: "https://exemplo.com/v" }],
       },
     });
     const c = montarContexto(cora.brand, pref, {});
     expect(c.concorrencia[0].o_que_publica).toBe("Dicas de imposto em carrossel");
     expect(c.mercado_pesquisado).toBe("Conta digital para MEI");
     expect(c.em_alta_no_nicho).toEqual([{ tema: "DAS atrasado", gancho: "Você sabe quanto custa atrasar o DAS?", por_que: "medo de multa", quem: "mídia do nicho", url: "https://exemplo.com/das" }]);
+    expect(c.virais_ao_vivo).toEqual([{ gancho: "O erro que trava seu caixa", formato: "carrossel", rede: "instagram", por_que: "erro comum", quem: "creator", url: "https://exemplo.com/v" }]);
     const prompt = montarPromptMotor(c);
     expect(prompt).toContain("DAS atrasado");
     expect(prompt).toContain("em_alta_no_nicho");
+    expect(montarPromptMotor(c)).toContain("virais_ao_vivo");
   });
 
   it("cada referência do nicho diz o gancho real, a estrutura e por que funcionou, em JSON compacto", () => {

@@ -58,6 +58,8 @@ export interface ContextoMotor {
   mercado_pesquisado: string | null;
   /** Temas e ganchos que estão rendendo agora com concorrentes e mídias do nicho, achados na web, com a fonte. */
   em_alta_no_nicho: { tema: string; gancho: string; por_que: string; quem: string; url: string | null }[];
+  /** Posts que estão rendendo agora no nicho deste cliente, da busca ao vivo. Mecanismo para adaptar, nunca texto para copiar. */
+  virais_ao_vivo: { gancho: string; formato: string; rede: string; por_que: string; quem: string; url: string | null }[];
   /** Posts publicados com os números que o founder informou, e o que se sabe de cada um. */
   desempenho_proprio: {
     rede: string;
@@ -322,6 +324,14 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
       por_que: semTraco(t.por_que),
       quem: semTraco(t.quem),
       url: t.url ?? null,
+    })),
+    virais_ao_vivo: (p?.pesquisa_mercado?.virais_ao_vivo ?? []).map((v) => ({
+      gancho: semTraco(v.gancho),
+      formato: v.formato,
+      rede: v.rede,
+      por_que: semTraco(v.por_que),
+      quem: semTraco(v.quem),
+      url: v.url ?? null,
     })),
     desempenho_proprio: desempenho(ds),
     aprendizados_calculados: calcularAprendizados(ds),
