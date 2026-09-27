@@ -4,7 +4,7 @@
 import { useMemo } from "react";
 import { urlArte } from "@/lib/client/artes";
 import { analiseProvisoria } from "@/lib/client/capas";
-import type { BrandProfile, PostGerado } from "@/lib/types";
+import type { BrandProfile } from "@/lib/types";
 import type { EstadoAoVivo } from "./useGeracao";
 import { useCapasAoVivo } from "./useCapas";
 

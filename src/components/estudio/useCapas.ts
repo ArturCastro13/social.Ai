@@ -26,7 +26,6 @@ export function useCapasAutomaticas(
     for (const post of analise.posts) {
       if (iniciados.current.has(post.id) || recusadas.has(post.id) || !precisaCapa(analise, post, persRef.current[post.id]?.foto)) continue;
       iniciados.current.add(post.id);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEstados((e) => ({ ...e, [post.id]: "pintando" }));
       pedirCapa(analise, post)
         .then((url) => {
@@ -47,7 +46,6 @@ export function useCapasAoVivo(analise: Analise, previas: PostGerado[]): Record<
     for (const post of previas) {
       if (iniciados.current.has(post.id) || !precisaCapa(analise, post)) continue;
       iniciados.current.add(post.id);
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCapas((c) => ({ ...c, [post.id]: { estado: "pintando" } }));
       pedirCapa(analise, post, (parcial) => setCapas((c) => ({ ...c, [post.id]: { ...c[post.id], estado: "pintando", parcial } })))
         .then((url) => setCapas((c) => ({ ...c, [post.id]: { estado: "pronta", url } })))

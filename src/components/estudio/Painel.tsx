@@ -53,13 +53,11 @@ export function Painel({
       setFotosLidas(true);
       return;
     }
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPers((old) => {
       const novo = { ...old };
       for (const [id, url] of Object.entries(fotos)) novo[id] = { ...novo[id], foto: novo[id]?.foto ?? url };
       return novo;
     });
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFotosLidas(true);
   }, [analise.id]);
 
