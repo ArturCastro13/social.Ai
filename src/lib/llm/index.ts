@@ -2,12 +2,16 @@ import Anthropic from "@anthropic-ai/sdk";
 import { blocosClaude, partesGemini, type AnexoLLM } from "./anexos";
 
 // Adaptador de IA de texto: Gemini por padrão (cota gratuita), Claude quando LLM_PROVIDER=claude.
-// Com Claude, dois usos: "posts" escreve a estratégia e os posts, "rapido" faz pesquisa, sugestões e leitura de
-// materiais. Os dois usam o Haiku 4.5 por padrão, que é barato; ANTHROPIC_MODEL_POSTS troca só o modelo dos
-// posts (ex.: claude-sonnet-5 escreve melhor, custa uns US$ 0,25 por análise e leva perto de 4 minutos).
+// Com Claude, cada tarefa no modelo que a auditoria mostrou valer o custo:
+// - "pesquisa" (busca na web de concorrentes e do que está em alta) e "posts" (estratégia, posts e roteiros):
+//   Claude Sonnet 5 com esforço baixo. Nas auditorias, o Haiku inventava dado e funcionalidade e repetia a
+//   mesma tese; o Sonnet não inventou número, achou concorrentes que o Haiku perdia e escreveu mais rápido.
+//   Custo medido: uns US$ 0,15 a pesquisa e US$ 0,14 os posts.
+// - "rapido" (entender o negócio, ler materiais, sugestões curtas): Claude Haiku 4.5, barato.
+// ANTHROPIC_MODEL_PESQUISA, ANTHROPIC_MODEL_POSTS e ANTHROPIC_MODEL trocam cada um sem mexer no código.
 
-/** "posts": a chamada que escreve a análise. "rapido": todo o resto. */
-export type UsoLLM = "posts" | "rapido";
+/** "posts": a chamada que escreve a análise. "pesquisa": a busca na web de concorrentes e do que está em alta. "rapido": o resto. */
+export type UsoLLM = "posts" | "pesquisa" | "rapido";
 
 type Esforco = "low" | "medium" | "high";
 
@@ -112,12 +116,15 @@ class ClaudeLLM implements LLM {
           messages,
           tools: [
             {
+              // Busca básica em todos os modelos. A com filtragem dinâmica (web_search_20260209) dobrou os tokens de
+              // entrada nos testes e, numa rodada, devolveu a resposta final incompleta.
               type: "web_search_20250305",
               name: "web_search",
               max_uses: op.maxBuscas,
               user_location: { type: "approximate", country: "BR", timezone: "America/Sao_Paulo" },
             },
           ],
+          ...(this.op.esforco && !this.modelo.startsWith("claude-haiku") ? { output_config: { effort: this.op.esforco } } : {}),
         },
         { timeout: Math.max(5_000, fim - Date.now()) },
       );
@@ -127,12 +134,12 @@ class ClaudeLLM implements LLM {
         messages.push({ role: "assistant", content: msg.content });
         continue;
       }
-      // Só o texto depois da última busca: antes dela o modelo costuma narrar o que vai procurar.
-      const ultimaBusca = msg.content.findLastIndex((b) => b.type === "web_search_tool_result");
-      return msg.content
-        .slice(ultimaBusca + 1)
-        .map((b) => (b.type === "text" ? b.text : ""))
-        .join("");
+      // O texto depois do último resultado de ferramenta: antes dele o modelo costuma narrar o que vai procurar.
+      // Se ali não houver o JSON inteiro, devolve todo o texto e o leitor procura o JSON.
+      const texto = (blocos: typeof msg.content) => blocos.map((b) => (b.type === "text" ? b.text : "")).join("");
+      const ultimaFerramenta = msg.content.findLastIndex((b) => b.type.endsWith("_tool_result"));
+      const final = texto(msg.content.slice(ultimaFerramenta + 1));
+      return /"concorrentes"|"sugestoes"|"em_alta"/.test(final) ? final : texto(msg.content);
     }
     throw new Error("Pesquisa não terminou no prazo");
   }
@@ -144,10 +151,17 @@ export const PRAZO_POSTS_MS = 240_000;
 function claude(chave: string, uso: UsoLLM): ClaudeLLM {
   if (uso === "posts") {
     const esforco = process.env.ANTHROPIC_EFFORT_POSTS as Esforco | undefined;
-    return new ClaudeLLM(chave, process.env.ANTHROPIC_MODEL_POSTS || process.env.ANTHROPIC_MODEL || "claude-haiku-4-5", {
+    return new ClaudeLLM(chave, process.env.ANTHROPIC_MODEL_POSTS || "claude-sonnet-5", {
       timeoutMs: PRAZO_POSTS_MS,
       maxTokens: 32000,
-      esforco: esforco && ["low", "medium", "high"].includes(esforco) ? esforco : "medium",
+      esforco: esforco && ["low", "medium", "high"].includes(esforco) ? esforco : "low",
+    });
+  }
+  if (uso === "pesquisa") {
+    return new ClaudeLLM(chave, process.env.ANTHROPIC_MODEL_PESQUISA || "claude-sonnet-5", {
+      timeoutMs: 80_000,
+      maxTokens: 16000,
+      esforco: "low",
     });
   }
   return new ClaudeLLM(chave, process.env.ANTHROPIC_MODEL || "claude-haiku-4-5", { timeoutMs: 80_000, maxTokens: 16000 });

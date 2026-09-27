@@ -13,7 +13,7 @@ async function main() {
   const url = process.argv[2] || "https://social-ai-beige.vercel.app";
   const b = await readBrand({ url });
   let t = Date.now();
-  const r = await buscarConcorrentes(b, { llm: provedorConfigurado() });
+  const r = await buscarConcorrentes(b, { llm: provedorConfigurado("pesquisa") });
   console.log(`pesquisa: ${((Date.now() - t) / 1000).toFixed(1)}s, ${r.sugestoes.length} concorrentes, ${r.pesquisa?.em_alta.length ?? 0} em alta`);
   const pref = preferenciasSchema.parse({
     perfil_alvo: "ambos",

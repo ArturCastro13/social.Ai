@@ -35,7 +35,7 @@ const catalogo = construirCatalogo(itensDoArquivo());
 const CHAVES_CONTEXTO = [
   "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "objetivo_livre", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "concorrencia", "desempenho_proprio", "aprendizados_calculados", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
-  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho",
+  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho", "hoje",
 ];
 
 describe("montarContexto", () => {

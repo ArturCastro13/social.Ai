@@ -8,7 +8,7 @@ import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
 // Disparada assim que o site é lido, enquanto o founder responde as perguntas: concorrentes conferidos e,
 // com Claude, a pesquisa de mercado na web (o que eles publicam e o que está em alta no nicho).
 // Sem IA, a base curada do nicho. Nunca devolve erro por falha de IA ou de rede.
-export const maxDuration = 60;
+export const maxDuration = 90;
 
 const Entrada = z.object({
   // Resultado de /api/brand, ou o perfil montado para empresa sem site.
@@ -34,7 +34,7 @@ export async function POST(req: Request) {
   if (guardada) return json(guardada);
 
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  const llm = provedorConfigurado();
+  const llm = provedorConfigurado("pesquisa");
   try {
     const resposta = await buscarConcorrentes(brand, {
       publico: body.data.publico,

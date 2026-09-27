@@ -141,7 +141,7 @@ export function normalizarConcorrentes(links: string[]): string[] {
 }
 
 /**
- * Sugestões de concorrentes e pesquisa de mercado do POST /api/concorrentes. Com busca na web leva uns 20 s.
+ * Sugestões de concorrentes e pesquisa de mercado do POST /api/concorrentes. Com busca na web leva de 20 a 45 s.
  * Qualquer falha (rota ausente, tempo esgotado, resposta estranha) vira lista vazia: os campos manuais continuam valendo.
  */
 export async function buscarSugestoesConcorrentes(
@@ -153,7 +153,7 @@ export async function buscarSugestoesConcorrentes(
   // Controlador próprio em vez de AbortSignal.any, que falta em iPhone mais antigo.
   const ctrl = new AbortController();
   const parar = () => ctrl.abort();
-  const relogio = setTimeout(parar, 60000);
+  const relogio = setTimeout(parar, 95000);
   sinal?.addEventListener("abort", parar);
   let corpo: { sugestoes?: unknown; pesquisa?: unknown };
   try {

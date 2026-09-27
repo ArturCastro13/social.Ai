@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { AVISO_CAMPO_INTERNO, AVISO_NUMEROS, checarNumeros, limparFormato, numerosDasFontes, trocarNumerosSemFonte } from "@/lib/motor/checar-numeros";
+import { humanizarTudo, AVISO_CAMPO_INTERNO, AVISO_NUMEROS, checarNumeros, limparFormato, numerosDasFontes, trocarNumerosSemFonte } from "@/lib/motor/checar-numeros";
 import type { PostGerado } from "@/lib/types";
 
 const fontes = numerosDasFontes(["+ de 1.900.000 De notas fiscais emitidas", "30h por mês", "NPS 86", "Planos a partir de R$ 49", "de R$81K até R$360K", "R$ 50,00 por mês"]);
@@ -64,5 +64,13 @@ describe("limparFormato: bio e campo interno", () => {
     expect((p as { precisa_revisao?: string[] }).precisa_revisao).toEqual([AVISO_CAMPO_INTERNO]);
     const [r] = limparFormato([{ rede: "linkedin", legenda: "Link na bio" }], true);
     expect(r.legenda).toBe("Link no perfil");
+  });
+});
+
+describe("humanizarTudo", () => {
+  it("troca nome técnico por palavra do founder em qualquer texto", () => {
+    expect(humanizarTudo({ a: ["Faltam provas em site_extraido.provas", "conhecimento_founder e desempenho_proprio vazios"] })).toEqual({
+      a: ["Faltam provas em o seu site", "as suas respostas e os números dos seus posts vazios"],
+    });
   });
 });

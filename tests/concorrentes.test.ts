@@ -126,15 +126,14 @@ describe("sugerirConcorrentes", () => {
     expect(JSON.stringify(s)).not.toMatch(/[—–]/);
   });
 
-  it("IA com erro, lenta ou com lixo: cai para a base sem lançar", async () => {
+  it("IA com erro, lenta ou com lixo: lista vazia, sem lançar e sem perfis de outro mercado", async () => {
     const erro = llmFalso(async () => {
       throw new Error("HTTP 429");
     });
     const lenta = llmFalso(() => new Promise((r) => setTimeout(() => r('{"sugestoes":[]}'), 500)));
     for (const [llm, prazo] of [[erro, 1000], [lenta, 20], [llmFalso("não sei"), 1000]] as const) {
       const s = await sugerirConcorrentes(semSite, { llm, verificar: async () => true, itens, prazoIaMs: prazo });
-      expect(s.length).toBeGreaterThan(0);
-      expect(s.every((x) => x.fonte === "base_nicho")).toBe(true);
+      expect(s).toEqual([]);
     }
   });
 

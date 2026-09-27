@@ -8,6 +8,7 @@ import { ultimaPorPost } from "@/lib/feedback";
 import { fetchLimited, normalizeUrl } from "@/lib/brand/fetch";
 import { corte, depoimentosDoSite, frasesDeProduto, frasesDoSite, numerosDoSite } from "@/lib/engine/texto-local";
 import { textoDaMarca } from "@/lib/engine/nicho";
+import { hojeEmSaoPaulo } from "./concorrentes";
 import { conhecimentoPreenchido, tomDeVozSchema, type Preferencias, type TomDeVoz } from "./contrato";
 import { MOTOR_DO_FORMATO, nichoParaMotor, type NichoMotor } from "./mapa";
 import { publicoAlvoDoSite } from "./enderecamento";
@@ -51,6 +52,8 @@ export interface ContextoMotor {
   inspiracoes: { url: string; tipo: string; descricao_extraida: string }[];
   /** Concorrentes que o founder acompanha. Só para achar ganchos, ângulos e brechas; nunca aparece no resultado. */
   concorrencia: { url: string; descricao_extraida: string; o_que_publica: string }[];
+  /** Data de referência (AAAA-MM-DD, horário de Brasília): prazos e "agora" nos posts partem dela. */
+  hoje: string;
   /** O mercado como a pesquisa na web entendeu, quando houve pesquisa. */
   mercado_pesquisado: string | null;
   /** Temas e ganchos que estão rendendo agora com concorrentes e mídias do nicho, achados na web, com a fonte. */
@@ -310,6 +313,7 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
       descricao_extraida: corte(extras.concorrenciaExtraida?.[url] ?? "", 300),
       o_que_publica: corte(p?.pesquisa_mercado?.concorrentes.find((c) => mesmoSite(c.url, url))?.o_que_publica ?? "", 400),
     })),
+    hoje: hojeEmSaoPaulo(),
     mercado_pesquisado: p?.pesquisa_mercado?.mercado ? semTraco(p.pesquisa_mercado.mercado) : null,
     em_alta_no_nicho: (p?.pesquisa_mercado?.em_alta ?? []).map((t) => ({
       tema: semTraco(t.tema),

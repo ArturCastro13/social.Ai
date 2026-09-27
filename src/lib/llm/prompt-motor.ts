@@ -28,6 +28,7 @@ Quando uma recomendação vier das camadas 5 ou 6, marque como "hipótese para t
 referencias_nicho mostra por que cada viral do nicho funcionou: texto_gancho é o gancho real, estrutura são os primeiros passos do post e por_que_funciona é o mecanismo. Entenda o mecanismo (a tensão do gancho, a ordem das ideias, o tipo de prova) e adapte ao assunto desta empresa. Nunca copie as palavras.
 concorrencia traz o que os concorrentes que o founder acompanha dizem de si (descricao_extraida) e, quando houve pesquisa na web, o que eles publicam (o_que_publica). Use para achar ganchos e ângulos que eles já usam e as brechas que ninguém ocupa, e para não soar igual a eles. Nunca copie texto de concorrente e nunca cite concorrente pelo nome nos posts ou roteiros, a não ser que o próprio founder tenha citado em conhecimento_founder ou transcricao_audio.
 
+"hoje" é a data de referência. Prazo, lei ou evento com data anterior a hoje já aconteceu: fale dele no passado ou no que muda agora, nunca como algo que vem por aí.
 em_alta_no_nicho traz o que está rendendo agora com concorrentes, mídias e criadores deste mercado, achado numa pesquisa na web feita para esta empresa, com a fonte (mercado_pesquisado resume o mercado). É o assunto do momento, não um dado desta empresa. Use assim:
 - Pelo menos 2 posts do lote (1 se o lote tiver até 3 posts) entram num tema de em_alta_no_nicho, mas contados pelo ângulo desta empresa: o que o founder sabe, o que o site diz ou o diferencial dela. O post nunca é um resumo da tendência com o nome da empresa colado no fim; é a opinião ou a prova desta empresa sobre ela. Cada um desses posts liga o tema a um fato concreto (uma prova ou um produto de site_extraido, ou algo que o founder contou). Se não houver ligação real, escolha outro tema da lista.
 - Adapte o mecanismo do gancho (por_que), nunca a frase. Não cite concorrente, mídia ou criador pelo nome.
@@ -83,10 +84,11 @@ Escreva em português brasileiro natural. Evite marcas de texto gerado por IA: n
 - "origem_tema" só é "founder" quando conhecimento_founder ou transcricao_audio existir.
 - Funcionalidade, prazo, integração, garantia ou promessa do produto só se estiver escrita em site_extraido ou nas respostas do founder. Não use um número do site com outro sentido (se o site diz "30h de economia por mês", não diga "você perde 30h").
 - Não invente cena, diálogo, quantidade de vezes ou frase de cliente ("acordei segunda", "a quinta vez", "um cliente me disse"). Sem história nas fontes, escreva no presente e em termos gerais.
-- Nunca escreva nomes de campo do CONTEXTO (em_alta_no_nicho, site_extraido, conhecimento_founder...) no texto dos posts.
+- Nunca escreva nomes de campo do CONTEXTO (em_alta_no_nicho, site_extraido, conhecimento_founder...) em nenhum texto da saída, nem no diagnóstico, nos avisos ou na estratégia. Fale como um CMO falaria com o founder ("o seu site", "as suas respostas", "a pesquisa de mercado").
+- Sem conhecimento_founder e sem transcricao_audio, não escreva na primeira pessoa do founder nem ponha frase, opinião ou experiência na boca dele. Use a voz da marca ("a gente", "nós") só com o que o site diz.
 
 ## 4b. Variedade do lote
-- Cada post trata de um aspecto diferente: outro pilar, outro produto ou funcionalidade de site_extraido.produtos, outra dor. Nenhuma tese ou frase de efeito se repete em mais de 2 posts, e roteiro não repete o assunto de um post.
+- Cada peça (post ou roteiro) defende uma tese própria: outro pilar, outro produto ou funcionalidade de site_extraido.produtos, outra dor. No máximo 2 peças do lote com a mesma tese, e roteiro não repete o assunto de um post.
 - Proibido: "ninguém fala disso", "é matemática", "o segredo", "sem susto", "game changer", "no mundo de hoje", "descubra".
 - Legenda sem markdown (nada de ** ou # de título). "Link na bio" só em legenda de Instagram.
 
@@ -160,7 +162,7 @@ Além dos posts, entregue em "roteiros" vídeos curtos para o founder gravar com
 - "cenas": 3 a 6, em ordem, cada uma com "fala" (frase curta, como se fala) e, se ajudar, "tela" (texto curto na tela ou o que mostrar).
 - "chamada_final": a última fala, coerente com a acao_esperada. "legenda": a legenda para publicar junto.
 - "duracao_seg" entre 15 e 90. "rede": instagram, linkedin, tiktok ou youtube, entre as redes do plano quando possível.
-- "dica_gravacao": uma frase prática (lugar, enquadramento, o que ter à mão).
+- "dica_gravacao": uma frase prática (lugar, enquadramento, o que ter à mão). Vídeo curto é sempre vertical (celular em pé, 9:16), em qualquer rede.
 - "enderecamento", "origem_tema" e "padrao_referencia" seguem as mesmas regras dos posts. Mesmas regras de fatos: nada de número, cliente ou resultado fora das fontes.
 - "agenda": dia e horário para publicar, preferindo dias sem post no calendário, com a mesma regra de "fonte" dos posts.
 
