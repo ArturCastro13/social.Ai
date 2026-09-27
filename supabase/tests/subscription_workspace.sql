@@ -136,4 +136,20 @@ do $$ declare result jsonb; begin
       and draft_id is null and draft_version is null)
   then raise exception 'draft deletion did not detach retained analysis'; end if;
 end $$;
+-- Rejected A reintroduction must not revoke B from the accepted version.
+do $$ declare actor uuid := 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa'; w uuid; d uuid; r jsonb; before_body jsonb;
+begin
+  select id into w from public.workspaces where owner_user_id=actor;
+  r := public.save_draft(actor,w,null,0,'{"brand":null,"preferencias":{},"contexto":{"materiais":[{"id":"A"},{"id":"B"}]},"personalizacoes":{}}');
+  d := (r->'draft'->>'id')::uuid;
+  r := public.save_draft(actor,w,d,1,'{"brand":null,"preferencias":{},"contexto":{"materiais":[{"id":"B"}]},"personalizacoes":{}}');
+  before_body := r->'draft'->'body';
+  r := public.save_draft(actor,w,d,2,'{"brand":null,"preferencias":{},"contexto":{"materiais":[{"id":"A"}]},"personalizacoes":{}}');
+  if r->>'status' is distinct from 'revoked'
+    or not exists(select 1 from public.drafts where id=d and version=2 and body=before_body)
+    or (select count(*) from public.draft_versions where draft_id=d) <> 2
+    or (select array_agg(material_id order by material_id) from public.draft_revoked_materials where draft_id=d) is distinct from array['A']::text[]
+    or not public.draft_snapshot_usable(actor,d,2)
+  then raise exception 'rejected save mutated accepted draft/revocations/usability'; end if;
+end $$;
 rollback;

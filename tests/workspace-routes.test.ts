@@ -23,6 +23,17 @@ beforeEach(() => {
 });
 
 describe("rotas privadas de rascunho", () => {
+  it("usa o envelope acordado para formas externas inválidas", async () => {
+    const headers = { origin: "https://example.test", "content-type": "application/json" };
+    for (const response of [
+      await POST(new Request("https://example.test/api/workspace/drafts", { method: "POST", headers, body: "{}" })),
+      await PATCH(new Request(`https://example.test/api/workspace/drafts/${id}`, { method: "PATCH", headers, body: "{}" }), ctx),
+    ]) {
+      expect(response.status).toBe(400);
+      expect(await response.json()).toEqual({ erro: "Rascunho inválido.", codigo: "invalid_draft" });
+    }
+    expect(bridge.save).not.toHaveBeenCalled();
+  });
   it("GET devolve conteúdo próprio com cache desabilitado", async () => {
     const response = await GET(new Request(`https://example.test/api/workspace/drafts/${id}`), ctx);
     expect(response.status).toBe(200);

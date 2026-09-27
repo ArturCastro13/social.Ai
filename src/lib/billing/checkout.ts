@@ -1,14 +1,16 @@
 import { randomUUID } from "node:crypto";
-import type { BillingStatus, CheckoutResult, Scope } from "@/lib/assinatura/contrato";
+import type { AccessState, BillingStatus, CheckoutResult, Scope } from "@/lib/assinatura/contrato";
 import { stripeTestConfig } from "@/lib/assinatura/config";
 import { PrivateHttpError } from "@/lib/auth/http";
 import { reserveCheckoutFrequency } from "@/lib/workspace/frequency";
 import type { AttemptRow, BillingRepository, CheckoutInput, RemoteCheckout, RemoteSubscription, StripeGateway } from "./contrato";
 import { supabaseBillingRepository } from "./repository";
 import { createStripeGateway, StripeEvidenceError } from "./stripe-adapter";
+import { createBillingReconciler } from "./reconcile";
+import { supabaseReconcileRepository } from "./reconcile-repository";
 
 type Config = { priceId: string; origin: string };
-type Deps = { repository: BillingRepository; gateway: StripeGateway; frequency(scope: Scope): Promise<void>; config: Config; now(): Date; pause(ms: number): Promise<void> };
+type Deps = { repository: BillingRepository; gateway: StripeGateway; reconcile(scope: Scope, customerId: string, subscriptionId: string): Promise<AccessState>; frequency(scope: Scope): Promise<void>; config: Config; now(): Date; pause(ms: number): Promise<void> };
 const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 const error = (status: number, code: string, message: string) => new PrivateHttpError(status, code, message);
 const ageHours = (first: string, now: Date) => (now.getTime() - new Date(first).getTime()) / 3_600_000;
@@ -19,12 +21,11 @@ function validatedSession(session: RemoteCheckout, row: AttemptRow): void {
 }
 function checkoutResult(session: RemoteCheckout, row: AttemptRow): CheckoutResult {
   validatedSession(session, row);
-  if (session.status === "complete") return { kind: "billing_state", status: "incomplete", portalAvailable: true };
   if (session.status !== "open" || !session.url) throw error(503, "stripe_mismatch", "Sessão de cobrança indisponível.");
   return { kind: "checkout", attemptId: row.id, sessionId: session.id, url: session.url };
 }
 
-export function createCheckoutService({ repository, gateway, frequency, config, now, pause }: Deps) {
+export function createCheckoutService({ repository, gateway, reconcile, frequency, config, now, pause }: Deps) {
   async function customer(scope: Scope): Promise<string> {
     for (let i = 0; i < 16; i++) {
       const token = randomUUID();
@@ -113,7 +114,20 @@ export function createCheckoutService({ repository, gateway, frequency, config, 
           validatedSession(session, row);
           if (session.status === "open") throw error(503, "stripe_mismatch", "Expiração de sessão não confirmada.");
         }
-        if (session.status === "expired") {
+        if (session.status === "complete") {
+          if (!session.subscriptionId) return { kind: "operator_required", reason: "unknown_outcome" };
+          const sub = await gateway.getSubscription(session.subscriptionId);
+          if (sub.id !== session.subscriptionId || sub.customerId !== customerId || sub.priceId !== config.priceId || sub.livemode !== false)
+            throw error(503, "stripe_mismatch", "Assinatura de cobrança inconsistente.");
+          const access = await reconcile(scope, customerId, sub.id);
+          if (access.riskHold) return { kind: "operator_required", reason: "inconsistent_remote_state" };
+          if (current(sub)) return { kind: "billing_state", status: sub.status, portalAvailable: true };
+          // Both retrieved and reconciled evidence must be terminal. Lease RPCs commit
+          // before network calls; only this attempt's fencing token may retire it.
+          if (!["canceled", "incomplete_expired"].includes(sub.status) || !["canceled", "incomplete_expired"].includes(access.status))
+            return { kind: "operator_required", reason: "unknown_outcome" };
+        }
+        if (session.status === "expired" || session.status === "complete") {
           const present = await subscriptions(scope, customerId);
           if (present) return present;
           if (!await repository.closeAttempt(scope, row.id, token)) throw error(503, "billing_write_failed", "Falha ao encerrar sessão de cobrança.");
@@ -129,5 +143,9 @@ export function createCheckoutService({ repository, gateway, frequency, config, 
 export async function startCheckout(scope: Scope, input: { draftId: string; draftVersion: number }): Promise<CheckoutResult> {
   let config;
   try { config = stripeTestConfig(); } catch { throw error(503, "billing_disabled", "Cobrança indisponível."); }
-  return createCheckoutService({ repository: supabaseBillingRepository, gateway: createStripeGateway(config), frequency: reserveCheckoutFrequency, config, now: () => new Date(), pause: delay })(scope, input);
+  const gateway = createStripeGateway(config);
+  const reconciler = createBillingReconciler(supabaseReconcileRepository, gateway, config.priceId);
+  return createCheckoutService({ repository: supabaseBillingRepository, gateway,
+    reconcile: (owner, customerId, subscriptionId) => reconciler.reconcileForOwner(owner.workspaceId, customerId, subscriptionId),
+    frequency: reserveCheckoutFrequency, config, now: () => new Date(), pause: delay })(scope, input);
 }

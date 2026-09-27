@@ -259,7 +259,9 @@ export function createStripeGateway(config: Config, api: Stripe = new Stripe(con
       const configuration = await api.billingPortal.configurations.retrieve(configurationId);
       assertStripeTestObject(configuration);
       const cancel = configuration.features.subscription_cancel;
-      if (configuration.id !== configurationId || !configuration.active || configuration.features.subscription_update.enabled || (cancel.enabled && (cancel.mode !== "at_period_end" || cancel.proration_behavior !== "none"))) reject("unsafe_portal_configuration");
+      if (configuration.id !== configurationId || !configuration.active || configuration.features.subscription_update.enabled ||
+        !cancel.enabled || cancel.mode !== "at_period_end" || cancel.proration_behavior !== "none" ||
+        !configuration.features.invoice_history?.enabled || !configuration.features.payment_method_update?.enabled) reject("unsafe_portal_configuration");
       const session = await api.billingPortal.sessions.create({ customer: customerId, configuration: configurationId, return_url: returnUrl });
       assertStripeTestObject(session);
       if (id(session.customer) !== customerId || id(session.configuration) !== configurationId || session.return_url !== returnUrl) reject("invalid_portal_session");

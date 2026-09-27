@@ -15,12 +15,16 @@ Git não apontou conflitos textuais; isso não comprova integração funcional.
 
 ## Evidências locais
 
-- Suíte após a implementação: 401 testes em 36 arquivos, passando.
+- Suíte após a rodada final I1–I5/M2: 420 testes em 36 arquivos, passando.
 - TypeScript e ESLint passaram; a revisão incluiu correções de recuperação de
   checkout, troca de rascunho, assinatura em outro Price e fencing SQL.
 - Quatro migrations e quatro suítes SQL passaram em PGlite 0.5.8 com shim
   mínimo de roles/Auth. O runner reproduzível está em
   `supabase/tests/embedded.mjs`; instruções em `CHECKOUT-SANDBOX.md`.
+  Inclui contrato real RPC → parser de Customer após salvar/liberar, rejeição
+  de rascunho sem efeitos colaterais e fechamento com fencing. Regressões de
+  serviço cobrem recompra após assinatura terminal, conclusão durante expiração,
+  estado expirado independente do acesso e capacidades obrigatórias do portal.
 - `npm run build -- --webpack` passou. **O comando padrão `npm run build`
   não passou neste ambiente**: Turbopack recebeu `Operation not permitted`
   ao abrir uma porta interna, mesmo após concessão de rede. Nenhuma fonte,

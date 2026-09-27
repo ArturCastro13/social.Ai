@@ -80,6 +80,9 @@ begin
   r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>rival,p_token=>rival,p_key=>'wrong-key',
     p_draft_id=>draft,p_draft_version=>1,p_customer_id=>'cus_owner',p_input=>input);
   if r->>'draft_current' <> 'false' then raise exception 'stale persisted draft returned as current'; end if;
+  r := public.billing_checkout_step(actor,w,'close_attempt',p_id=>attempt,p_token=>token);
+  if r->>'ok' is distinct from 'false' or not exists(select 1 from public.checkout_attempts where id=attempt and state='open')
+  then raise exception 'stale token retired current attempt'; end if;
   r := public.billing_checkout_step(actor,w,'close_attempt',p_id=>attempt,p_token=>rival);
   if r->>'ok' <> 'true' then raise exception 'session close failed'; end if;
   r := public.billing_checkout_step(actor,w,'claim_attempt',p_id=>'44444444-4444-4444-8444-444444444444',p_token=>token,p_key=>'new-key',

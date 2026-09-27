@@ -3,6 +3,67 @@ import { createBillingHarness } from "./helpers/assinatura";
 import type { RemoteSubscription } from "@/lib/billing/contrato";
 
 describe("checkout sandbox recuperável", () => {
+  const subscription = (status: RemoteSubscription["status"], id = "sub_1"): RemoteSubscription => ({ id, livemode: false, customerId: "cus_test_customer", status, priceId: "price_test_monthly", subscriptionItemId: "si_1", cancelAtPeriodEnd: false, periodStart: "2026-09-01T00:00:00Z", periodEnd: "2026-10-01T00:00:00Z", latestInvoiceId: null });
+  it.each(["active", "incomplete", "unpaid"] as const)("reconcilia conclusão durante expiração e preserva %s", async status => {
+    const h = createBillingHarness();
+    await h.start();
+    h.changeDraft();
+    h.onExpire(() => {
+      h.tamperSession(s => { s.status = "complete"; s.subscriptionId = "sub_1"; });
+      h.setSubscriptions([subscription(status)]);
+    });
+    expect(await h.start()).toMatchObject({ kind: "billing_state", status });
+    expect(h.sessions()).toHaveLength(1);
+    expect(h.getAttempt()?.state).toBe("open");
+  });
+  it("bloqueia recompra quando consulta da assinatura concluída falha", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.tamperSession(s => { s.status = "complete"; s.subscriptionId = "sub_unknown"; });
+    await expect(h.start()).rejects.toThrow("unknown subscription");
+    expect(h.sessions()).toHaveLength(1);
+    expect(h.getAttempt()?.state).toBe("open");
+  });
+  it("detecta compra concorrente entre assinatura terminal e fechamento", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.tamperSession(s => { s.status = "complete"; s.subscriptionId = "sub_1"; });
+    h.setSubscriptions([subscription("canceled")]);
+    h.onReconcile(() => h.setSubscriptions([subscription("canceled"), subscription("incomplete", "sub_2")]));
+    expect(await h.start()).toMatchObject({ kind: "billing_state", status: "incomplete" });
+    expect(h.getAttempt()?.state).toBe("open");
+    expect(h.sessions()).toHaveLength(1);
+  });
+  it("falha de fencing no fechamento não cria compra", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.tamperSession(s => { s.status = "complete"; s.subscriptionId = "sub_1"; });
+    h.setSubscriptions([subscription("canceled")]);
+    h.onReconcile(() => { h.getAttempt()!.leaseToken = "replacement-worker"; });
+    await expect(h.start()).rejects.toMatchObject({ code: "billing_write_failed" });
+    expect(h.getAttempt()?.state).toBe("open");
+    expect(h.sessions()).toHaveLength(1);
+  });
+  it.each(["canceled", "incomplete_expired"] as const)("permite recompra explícita após sessão completa e assinatura %s", async status => {
+    const h = createBillingHarness();
+    await h.start();
+    const sub: RemoteSubscription = { id: "sub_1", livemode: false, customerId: "cus_test_customer", status: "active", priceId: "price_test_monthly", subscriptionItemId: "si_1", cancelAtPeriodEnd: false, periodStart: "2026-09-01T00:00:00Z", periodEnd: "2026-10-01T00:00:00Z", latestInvoiceId: null };
+    h.tamperSession(s => { s.status = "complete"; s.subscriptionId = sub.id; });
+    h.setSubscriptions([sub]);
+    expect(await h.start()).toMatchObject({ kind: "billing_state", status: "active" });
+    h.setSubscriptions([{ ...sub, status }]);
+    const next = await h.startDraft(h.createDraft());
+    expect(next.kind).toBe("checkout");
+    expect(h.sessions()).toHaveLength(2);
+  });
+
+  it("mantém sessão completa sem assinatura conhecida bloqueada", async () => {
+    const h = createBillingHarness();
+    await h.start();
+    h.tamperSession(s => { s.status = "complete"; });
+    expect(await h.start()).toMatchObject({ kind: "operator_required", reason: "unknown_outcome" });
+    expect(h.sessions()).toHaveLength(1);
+  });
   it("retoma a mesma sessão após falha da gravação local e chamadas paralelas", async () => {
     const h = createBillingHarness();
     h.failNextWrite("checkout_session");

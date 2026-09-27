@@ -46,6 +46,8 @@ export function createBillingHarness() {
   let failWrite: string | null = null;
   let frequencyCount = 0;
   let expireRemainsOpen = false;
+  let expireHook: (() => void) | undefined;
+  let reconcileHook: (() => void) | undefined;
   let remoteSubscriptions: RemoteSubscription[] = [];
   const remoteCustomers = new Map<string, RemoteCustomer>();
   const customerKeys = new Map<string, RemoteCustomer>();
@@ -106,7 +108,7 @@ export function createBillingHarness() {
       checkoutKeys.set(key, row); remoteSessions.set(row.id, row); return row;
     },
     async getCheckout(id) { const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); return row; },
-    async expireCheckout(id) { const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); if (row.status === "open" && !expireRemainsOpen) row.status = "expired"; return row; },
+    async expireCheckout(id) { expireHook?.(); const row = remoteSessions.get(id); if (!row) throw new Error("unknown session"); if (row.status === "open" && !expireRemainsOpen) row.status = "expired"; return row; },
     async listCurrentSubscriptions() { return remoteSubscriptions; },
     async getSubscription(id) { const row = remoteSubscriptions.find(s => s.id === id); if (!row) throw new Error("unknown subscription"); return row; },
     async getInvoiceReference(): Promise<RemoteInvoiceReference> { throw new Error("not used"); },
@@ -116,10 +118,13 @@ export function createBillingHarness() {
     async resolveRisk() { return { kind: "unresolved" as const, customerId: null }; },
     async createPortal(id, workspaceId, configurationId, returnUrl) { if (id !== customerId || workspaceId !== scope.workspaceId || configurationId !== config.portalConfigurationId || returnUrl !== `${config.origin}/app/billing`) throw new Error("unsafe portal"); return { url: "https://billing.stripe.test/portal" }; },
   };
-  const start = createCheckoutService({ repository: repo, gateway, config, frequency: async () => { frequencyCount++; }, now: () => time, pause: async () => { await new Promise<void>(resolve => setTimeout(resolve, 1)); } });
+  const start = createCheckoutService({ repository: repo, gateway, config,
+    reconcile: async (_scope, _customerId, id) => { reconcileHook?.(); return { status: (await gateway.getSubscription(id)).status, paidFrom: null, paidThrough: null, cancelAtPeriodEnd: false, riskHold: false }; },
+    frequency: async () => { frequencyCount++; }, now: () => time, pause: async () => { await new Promise<void>(resolve => setTimeout(resolve, 1)); } });
   const portal = createPortalService(repo, gateway, config);
   return { scope, draftId, start: (s: Scope = scope, version = draftVersions.get(draftId) ?? 1) => start(s, { draftId, draftVersion: version }),
     startDraft: (id: string, version = draftVersions.get(id) ?? 1) => start(scope, { draftId: id, draftVersion: version }),
     createDraft: () => { const id = randomUUID(); draftVersions.set(id, 1); return id; },
+    onExpire: (hook: () => void) => { expireHook = hook; }, onReconcile: (hook: () => void) => { reconcileHook = hook; },
     portal, sessions: () => [...remoteSessions.values()], failNextWrite: (name: string) => { failWrite = name; }, frequencyCount: () => frequencyCount, advanceHours: (hours: number) => { time = new Date(time.getTime() + hours * 3_600_000); }, changeDraft: () => { draftVersions.set(draftId, (draftVersions.get(draftId) ?? 0) + 1); }, keepSessionOpenOnExpire: () => { expireRemainsOpen = true; }, setSubscriptions: (rows: RemoteSubscription[]) => { remoteSubscriptions = rows; }, getAttempt: () => attempt, getCustomer: () => customer, tamperSession: (f: (s: RemoteCheckout) => void) => { for (const s of remoteSessions.values()) f(s); }, holdReason: () => hold };
 }

@@ -23,7 +23,7 @@ export async function PATCH(request: Request, ctx: DraftRouteContext) {
     const scope = await requireScope();
     const { id } = await ctx.params;
     const parsed = patchSchema.safeParse(await privateBody(request, 155_000));
-    if (!parsed.success) return privateJson({ code: "invalid_draft", message: "Rascunho inválido." }, 400);
+    if (!parsed.success) return privateJson({ codigo: "invalid_draft", erro: "Rascunho inválido." }, 400);
     return privateJson(await saveDraft(scope, { id, expectedVersion: parsed.data.expectedVersion, body: parsed.data.body as DraftBody }));
   } catch (error) { return privateError(error); }
 }

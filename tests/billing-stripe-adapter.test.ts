@@ -29,11 +29,20 @@ function sdk(overrides: { price?: object; session?: object; expireSession?: obje
       const index = params?.starting_after ? linePages.findIndex(page => page.some(line => (line as { id?: string }).id === params.starting_after)) + 1 : 0;
       return { data: linePages[index] ?? [], has_more: index < linePages.length - 1 };
     } },
-    billingPortal: { configurations: { retrieve: async () => overrides.portalConfiguration ?? { id: "bpc_safe", livemode: false, active: true, features: { subscription_update: { enabled: false }, subscription_cancel: { enabled: true, mode: "at_period_end", proration_behavior: "none" } } } }, sessions: { create: async () => ({ livemode: false, customer: customer.id, configuration: "bpc_safe", return_url: `${config.origin}/app/billing`, url: "https://billing.stripe.test/portal" }) } },
+    billingPortal: { configurations: { retrieve: async () => overrides.portalConfiguration ?? { id: "bpc_safe", livemode: false, active: true, features: { invoice_history: { enabled: true }, payment_method_update: { enabled: true }, subscription_update: { enabled: false }, subscription_cancel: { enabled: true, mode: "at_period_end", proration_behavior: "none" } } } }, sessions: { create: async () => ({ livemode: false, customer: customer.id, configuration: "bpc_safe", return_url: `${config.origin}/app/billing`, url: "https://billing.stripe.test/portal" }) } },
   } as unknown as Stripe;
 }
 
 describe("Stripe SDK 22.6.2 mapping", () => {
+  it.each(["subscription_cancel", "invoice_history", "payment_method_update"])("recusa portal sem %s", async missing => {
+    const features = { invoice_history: { enabled: true }, payment_method_update: { enabled: true }, subscription_update: { enabled: false }, subscription_cancel: { enabled: true, mode: "at_period_end", proration_behavior: "none" }, [missing]: { enabled: false } };
+    const gateway = createStripeGateway(config, sdk({ portalConfiguration: { id: "bpc_safe", livemode: false, active: true, features } }));
+    await expect(gateway.createPortal(customer.id, workspaceId, "bpc_safe", `${config.origin}/app/billing`)).rejects.toMatchObject({ code: "unsafe_portal_configuration" });
+  });
+
+  it("aceita portal com as três capacidades prometidas", async () => {
+    await expect(createStripeGateway(config, sdk()).createPortal(customer.id, workspaceId, "bpc_safe", `${config.origin}/app/billing`)).resolves.toEqual({ url: "https://billing.stripe.test/portal" });
+  });
   it("aceita somente evento assinado de sandbox", () => {
     const stripe = new Stripe(config.secretKey, { apiVersion: "2026-08-26.dahlia" });
     const gateway = createStripeGateway(config, stripe);

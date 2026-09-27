@@ -67,7 +67,7 @@ begin
       update public.billing_customers set lease_token = p_token, lease_until = now()+interval '20 seconds'
         where workspace_id = p_workspace_id returning * into c;
     end if;
-    return pg_catalog.jsonb_build_object('row',pg_catalog.to_jsonb(c),'claimed',c.lease_token=p_token,'created',is_new);
+    return pg_catalog.jsonb_build_object('row',pg_catalog.to_jsonb(c),'claimed',coalesce(c.lease_token=p_token and c.lease_until>now(),false),'created',is_new);
   elsif p_action = 'save_customer' then
     update public.billing_customers set customer_id=p_customer_id, lease_token=null, lease_until=null
       where workspace_id=p_workspace_id and lease_token=p_token and customer_id is null;

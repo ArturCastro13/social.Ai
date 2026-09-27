@@ -46,11 +46,14 @@ async function step(scope: Scope, args: Args): Promise<Record<string, unknown>> 
   return data as Record<string, unknown>;
 }
 function ok(result: Record<string, unknown>): boolean { if (typeof result.ok !== "boolean") unavailable(); return result.ok; }
+export function parseCustomerClaim(r: Record<string, unknown>, scope: Scope) {
+  if (typeof r.claimed !== "boolean" || typeof r.created !== "boolean") unavailable();
+  return { row: customerRow(r.row, scope), claimed: r.claimed, created: r.created };
+}
 export const supabaseBillingRepository: BillingRepository = {
   async claimCustomer(scope, seed) {
     const r = await step(scope, { action: "claim_customer", key: seed.key, token: seed.token });
-    if (typeof r.claimed !== "boolean" || typeof r.created !== "boolean") unavailable();
-    return { row: customerRow(r.row, scope), claimed: r.claimed, created: r.created };
+    return parseCustomerClaim(r, scope);
   },
   async saveCustomer(scope, token, id) { return ok(await step(scope, { action: "save_customer", token, customerId: id })); },
   async releaseCustomer(scope, token) { await step(scope, { action: "release_customer", token }); },

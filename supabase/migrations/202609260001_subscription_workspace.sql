@@ -164,15 +164,15 @@ begin
       then return pg_catalog.jsonb_build_object('status', 'missing'); end if;
     if current_row.version <> p_expected_version
       then return pg_catalog.jsonb_build_object('status', 'conflict'); end if;
+    if exists (select 1 from public.draft_revoked_materials r
+      join public.draft_material_ids(p_body) ids on ids.material_id = r.material_id
+      where r.draft_id = p_draft_id)
+    then return pg_catalog.jsonb_build_object('status', 'revoked'); end if;
     insert into public.draft_revoked_materials(draft_id, material_id)
       select p_draft_id, old_ids.material_id from public.draft_material_ids(current_row.body) old_ids
       where not exists (select 1 from public.draft_material_ids(p_body) new_ids
         where new_ids.material_id = old_ids.material_id)
       on conflict do nothing;
-    if exists (select 1 from public.draft_revoked_materials r
-      join public.draft_material_ids(p_body) ids on ids.material_id = r.material_id
-      where r.draft_id = p_draft_id)
-    then return pg_catalog.jsonb_build_object('status', 'revoked'); end if;
     new_id := p_draft_id;
     new_version := current_row.version + 1;
     update public.drafts set version = new_version, body = p_body, updated_at = pg_catalog.now()

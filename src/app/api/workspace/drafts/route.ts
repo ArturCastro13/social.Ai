@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     requireAppOrigin(request);
     const scope = await requireScope();
     const parsed = createSchema.safeParse(await privateBody(request, 155_000));
-    if (!parsed.success) return privateJson({ code: "invalid_draft", message: "Rascunho inválido." }, 400);
+    if (!parsed.success) return privateJson({ codigo: "invalid_draft", erro: "Rascunho inválido." }, 400);
     const draft = await saveDraft(scope, { expectedVersion: 0, body: parsed.data.body as DraftBody });
     return privateJson(draft, 201);
   } catch (error) { return privateError(error); }
