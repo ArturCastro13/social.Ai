@@ -61,4 +61,10 @@ describe("carrossel creator", () => {
       }
     }
   }, 120_000);
+
+  it("lista e checklist nos 4 tamanhos", async () => {
+    const lista = { ...carrossel, template: "lista", slides: [{ titulo: "5 sinais de que a planilha travou", texto: "" }, ...["Fechamento leva dias", "Ninguém confia no saldo", "Nota sai atrasada", "Cobrança fica esquecida", "Contador pede tudo de novo"].map((t) => ({ titulo: t, texto: "" }))] } as PostGerado;
+    for (const t of ["lista", "checklist"] as TemplateId[])
+      for (const tamanho of ["feed", "quadrado", "linkedin", "x"] as Tamanho[]) expect((await desenhar(lista, t, 0, tamanho, null)).length).toBeGreaterThan(5000);
+  }, 60_000);
 });

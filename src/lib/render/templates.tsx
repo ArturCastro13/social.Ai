@@ -397,36 +397,38 @@ function Lista(p: ArteProps & { check?: boolean }) {
   const paisagem = w / h > 1.3;
   const [cab, ...itens] = post.slides;
   const titulo = limpar(cab?.titulo || post.gancho);
-  const lista = itens.slice(0, paisagem ? 6 : 6);
+  const lista = itens.slice(0, 6);
   const larguraItem = paisagem ? (w - 120 * u) / 2 - 24 * u : w - 168 * u;
-  const fsItem = Math.min(46 * u, ...lista.map((it) => caber(it.titulo, larguraItem - 110 * u, 110 * u, 46 * u, 26 * u, 1.15, 0.52)));
+  const fsItem = Math.min(44 * u, ...lista.map((it) => caber(it.titulo, larguraItem - 110 * u, 110 * u, 44 * u, 26 * u, 1.15, 0.52)));
+  const fsTitulo = caber(titulo, w - 168 * u, h * (paisagem ? 0.24 : 0.22), 92 * u, 40 * u, 1.0);
   return (
-    <Moldura p={p} bg={tema.claro}>
-      <div style={{ position: "absolute", right: -120 * u, top: -120 * u, width: 360 * u, height: 360 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.12 }} />
-      <div style={{ fontFamily: "Titulo", fontSize: caber(titulo, w - 168 * u, h * (paisagem ? 0.26 : 0.22), 88 * u, 40 * u), lineHeight: 1.04, color: tema.tintaNoClaro, letterSpacing: -2 * u, maxWidth: w * 0.86 }}>
-        {titulo}
+    <Papel p={p}>
+      <div style={col({ gap: 24 * u })}>
+        <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.75} />
+        <TituloCreator texto={titulo} destaque={post.destaque} fs={fsTitulo} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.0} />
       </div>
-      <div style={row({ flexWrap: "wrap", gap: `${(paisagem ? 18 : 26) * u}px ${48 * u}px` })}>
+      <div style={row({ flexWrap: "wrap", gap: `${(paisagem ? 16 : 24) * u}px ${48 * u}px` })}>
         {lista.map((it, k) => (
-          <div key={k} style={row({ alignItems: "center", gap: 28 * u, width: larguraItem })}>
+          <div key={k} style={row({ alignItems: "center", gap: 26 * u, width: larguraItem })}>
             {p.check ? (
-              <div style={row({ width: 64 * u, height: 64 * u, flexShrink: 0, borderRadius: 14 * u, border: `${5 * u}px solid ${tema.primariaNoClaro}`, alignItems: "center", justifyContent: "center" })}>
-                <div style={{ width: 16 * u, height: 30 * u, borderRight: `${6 * u}px solid ${tema.primariaNoClaro}`, borderBottom: `${6 * u}px solid ${tema.primariaNoClaro}`, transform: "rotate(45deg)", marginTop: -8 * u }} />
+              <div style={row({ width: 60 * u, height: 60 * u, flexShrink: 0, borderRadius: 14 * u, border: `${5 * u}px solid ${tema.primariaNoPapel}`, alignItems: "center", justifyContent: "center" })}>
+                <div style={{ width: 16 * u, height: 28 * u, borderRight: `${6 * u}px solid ${tema.primariaNoPapel}`, borderBottom: `${6 * u}px solid ${tema.primariaNoPapel}`, transform: "rotate(45deg)", marginTop: -8 * u }} />
               </div>
             ) : (
-              <div style={row({ width: 72 * u, height: 72 * u, flexShrink: 0, borderRadius: 9999, background: tema.primaria, color: tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 36 * u })}>
-                {k + 1}
-              </div>
+              <div style={row({ width: 64 * u, height: 64 * u, flexShrink: 0, borderRadius: 9999, background: tema.primaria, color: tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 32 * u })}>{k + 1}</div>
             )}
             <div style={col({ gap: 4 * u, flex: 1 })}>
-              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: fsItem, lineHeight: 1.15, color: tema.tintaNoClaro }}>{limpar(it.titulo)}</div>
-              {it.texto ? <div style={{ fontFamily: "Corpo", fontSize: fsItem * 0.7, lineHeight: 1.3, color: tema.mutedNoClaro }}>{limpar(it.texto)}</div> : null}
+              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: fsItem, lineHeight: 1.15, color: tema.tintaNoPapel }}>{limpar(it.titulo)}</div>
+              {it.texto ? <div style={{ fontFamily: "Corpo", fontSize: fsItem * 0.7, lineHeight: 1.3, color: tema.mutedNoPapel }}>{limpar(it.texto)}</div> : null}
             </div>
           </div>
         ))}
       </div>
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 2 * u, color: tema.mutedNoPapel })}>
+        <div>{handleDe(p.brand, post)}</div>
+        <div>SALVE PARA CONSULTAR</div>
+      </div>
+    </Papel>
   );
 }
 
