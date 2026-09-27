@@ -2,10 +2,25 @@ import { describe, expect, it } from "vitest";
 import { contrastRatio } from "@/lib/color";
 import { DEMOS } from "@/lib/engine/demo";
 import { adaptarSlides } from "@/lib/render/adaptar";
+import { familiaDoTitulo } from "@/lib/render/fonts";
 import { temaDaMarca } from "@/lib/render/tema";
 import { caber, limpar } from "@/lib/render/templates";
 import { TEMPLATES } from "@/lib/engine/schema";
 import type { BrandProfile } from "@/lib/types";
+
+describe("fonte do título", () => {
+  it("fonte genérica vira display pelo tom; fonte com personalidade fica", () => {
+    for (const f of ["Inter", "Roboto", "Arial", "Helvetica", "system-ui", "Open Sans", "Montserrat", "Poppins"]) {
+      expect(familiaDoTitulo(f, "direto, prático e bem-humorado")).toBe("Bricolage Grotesque");
+    }
+    expect(familiaDoTitulo("Inter")).toBe("Bricolage Grotesque");
+    expect(familiaDoTitulo("Inter", "acolhedor e cuidadoso")).toBe("Fraunces");
+    expect(familiaDoTitulo("Roboto", "Sofisticado, premium")).toBe("Fraunces");
+    expect(familiaDoTitulo("Arial", "institucional e sério")).toBe("Fraunces");
+    expect(familiaDoTitulo("DM Serif Display", "acolhedor")).toBe("DM Serif Display");
+    expect(familiaDoTitulo("Space Grotesk")).toBe("Space Grotesk");
+  });
+});
 
 describe("render", () => {
   it("tema garante contraste legível para qualquer cor principal", () => {

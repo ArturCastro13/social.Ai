@@ -40,21 +40,21 @@ async function comoDataUri(url: string | null | undefined): Promise<string | nul
   }
 }
 
-function lerPayload(d: string | null): { post: PostGerado; brand: BrandProfile } | null {
+function lerPayload(d: string | null): { post: PostGerado; brand: BrandProfile; tom: string } | null {
   if (!d || d.length > 16_000) return null;
   try {
     const r = payloadSchema.safeParse(JSON.parse(Buffer.from(d, "base64url").toString("utf8")));
-    return r.success ? doPayload(r.data) : null;
+    return r.success ? { ...doPayload(r.data), tom: "" } : null;
   } catch {
     return null;
   }
 }
 
-async function acharPost(postId: string): Promise<{ post: PostGerado; brand: BrandProfile } | null> {
+async function acharPost(postId: string): Promise<{ post: PostGerado; brand: BrandProfile; tom: string } | null> {
   const analiseId = postId.replace(/-p\d+$/, "");
   const a = demoPorId(analiseId) ?? (await store.buscarAnalise(analiseId).catch(() => null));
   const post = a?.posts.find((p) => p.id === postId);
-  return a && post ? { post, brand: a.brand } : null;
+  return a && post ? { post, brand: a.brand, tom: a.tom_de_voz ?? "" } : null;
 }
 
 export async function GET(req: Request, ctx: RouteContext<"/api/render/[postId]">) {
@@ -62,7 +62,7 @@ export async function GET(req: Request, ctx: RouteContext<"/api/render/[postId]"
   const q = new URL(req.url).searchParams;
   const achado = (await acharPost(postId)) ?? lerPayload(q.get("d"));
   if (!achado) return erro("Post não encontrado.", 404);
-  const { brand } = achado;
+  const { brand, tom } = achado;
   const post: PostGerado = { ...achado.post, template: templateValido(achado.post.template, achado.post.formato) };
 
   const templateQ = q.get("template") as TemplateId | null;
@@ -78,7 +78,7 @@ export async function GET(req: Request, ctx: RouteContext<"/api/render/[postId]"
 
   try {
     const [fontes, logo, foto] = await Promise.all([
-      fontesDaMarca(brand.fontes?.titulo ?? "Inter", brand.fontes?.corpo ?? "Inter"),
+      fontesDaMarca(brand.fontes?.titulo ?? "Inter", brand.fontes?.corpo ?? "Inter", tom),
       comoDataUri(brand.logo),
       comoDataUri(q.get("foto")),
     ]);
