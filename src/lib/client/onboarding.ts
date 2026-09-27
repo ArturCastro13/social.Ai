@@ -1,5 +1,6 @@
 // Apoio do onboarding em camadas (telas 1, 2 e 3). Tudo aqui roda no navegador e não chama IA.
-import type { ConhecimentoFounder, FormatoMotor, Frequencia, ObjetivoId, Preferencias, SugestaoConcorrente, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
+import type { ConhecimentoFounder, FormatoMotor, Frequencia, ObjetivoId, PesquisaMercado, Preferencias, SugestaoConcorrente, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
+import { pesquisaMercadoSchema } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 import { semContextoPrivado } from "@/lib/contexto/revisao";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
@@ -140,16 +141,21 @@ export function normalizarConcorrentes(links: string[]): string[] {
 }
 
 /**
- * Sugestões de concorrentes do POST /api/concorrentes. Qualquer falha (rota ausente, tempo esgotado,
- * resposta estranha) vira lista vazia: os campos manuais continuam valendo.
+ * Sugestões de concorrentes e pesquisa de mercado do POST /api/concorrentes. Com busca na web leva uns 20 s.
+ * Qualquer falha (rota ausente, tempo esgotado, resposta estranha) vira lista vazia: os campos manuais continuam valendo.
  */
-export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: string, sinal?: AbortSignal, contexto?: ContextoConfirmado): Promise<SugestaoConcorrente[]> {
+export async function buscarSugestoesConcorrentes(
+  brand: BrandProfile,
+  publico: string,
+  sinal?: AbortSignal,
+  contexto?: ContextoConfirmado,
+): Promise<{ sugestoes: SugestaoConcorrente[]; pesquisa?: PesquisaMercado }> {
   // Controlador próprio em vez de AbortSignal.any, que falta em iPhone mais antigo.
   const ctrl = new AbortController();
   const parar = () => ctrl.abort();
-  const relogio = setTimeout(parar, 20000);
+  const relogio = setTimeout(parar, 60000);
   sinal?.addEventListener("abort", parar);
-  let corpo: { sugestoes?: unknown };
+  let corpo: { sugestoes?: unknown; pesquisa?: unknown };
   try {
     const res = await fetch("/api/concorrentes", {
       method: "POST",
@@ -158,7 +164,7 @@ export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: 
       signal: ctrl.signal,
     });
     if (!res.ok) throw new Error(String(res.status));
-    corpo = (await res.json()) as { sugestoes?: unknown };
+    corpo = (await res.json()) as { sugestoes?: unknown; pesquisa?: unknown };
   } finally {
     clearTimeout(relogio);
     sinal?.removeEventListener("abort", parar);
@@ -178,7 +184,8 @@ export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: 
       fonte: fonte === "base_nicho" ? "base_nicho" : "ia",
     });
   }
-  return out.slice(0, 6);
+  const pesquisa = corpo?.pesquisa ? pesquisaMercadoSchema.safeParse(corpo.pesquisa) : null;
+  return { sugestoes: out.slice(0, 6), ...(pesquisa?.success ? { pesquisa: pesquisa.data } : {}) };
 }
 
 /** Respostas salvas, só com texto. Chaves antigas (crenca_contraria, historia) ficam guardadas e seguem para o motor. */

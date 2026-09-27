@@ -1,6 +1,6 @@
 import { createHash, randomBytes } from "node:crypto";
 import type { Analise, BrandProfile, Nicho, PostGerado, Rede } from "@/lib/types";
-import { provedorConfigurado } from "@/lib/llm";
+import { PRAZO_POSTS_MS, provedorConfigurado } from "@/lib/llm";
 import { nomeDoPerfil } from "@/lib/brand/nome";
 import { resumirPreferencias, textoPreferencias } from "@/lib/feedback";
 import { montarPrompt, SISTEMA } from "@/lib/llm/prompt";
@@ -38,6 +38,7 @@ import {
   temAprendizado,
 } from "@/lib/motor/aprendizados";
 import { diaDaSemana } from "@/lib/motor/saida";
+import { checarNumeros, limparFormato, numerosDasFontes } from "@/lib/motor/checar-numeros";
 import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import { ultimaPorPost } from "@/lib/feedback";
 import type { CalendarioItem } from "@/lib/types";
@@ -175,7 +176,7 @@ function dentroDoTetoGlobal(): boolean {
 }
 
 /** Tempo máximo somado das chamadas de IA, abaixo do maxDuration da rota, para sobrar tempo ao motor local. */
-const PRAZO_IA_MS = 85_000;
+const PRAZO_IA_MS = PRAZO_POSTS_MS;
 
 /**
  * Fluxo do motor: demo pré-processada, cache por URL, uma chamada de IA, e motor local como rede de segurança.
@@ -185,7 +186,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
   brand = aplicarContextoMarca(brand, op.preferencias?.contexto_empresa);
   const quantidade = Math.min(LIMITE_POSTS, Math.max(1, Math.round(op.quantidade)));
   const pref = op.preferencias ?? null;
-  const llm = provedorConfigurado();
+  const llm = provedorConfigurado("posts");
 
   // 1. Empresas de exemplo: resposta instantânea e idêntica em qualquer cenário de palco.
   // Objetivos do rodízio quando o post não traz um: os do onboarding ou, sem ele, os que o site sugere.
@@ -288,7 +289,8 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     : Promise.resolve({});
 
   const nichoConfirmado = pref?.contexto_empresa?.entendimento.nicho;
-  const palpite = nichoConfirmado && nichoConfirmado !== "outro" ? nichoConfirmado : palpiteNicho(brand).nicho;
+  // Nicho confirmado pelo founder, depois o da pesquisa na web, depois o palpite por palavra-chave.
+  const palpite = nichoConfirmado && nichoConfirmado !== "outro" ? nichoConfirmado : (pref?.pesquisa_mercado?.nicho ?? palpiteNicho(brand).nicho);
   const avisos: string[] = [];
   const id = novoId();
 
@@ -353,8 +355,8 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
         };
       }
       let erroAnterior = "";
-      // Segunda tentativa só se a primeira falhou rápido o bastante para caber no prazo.
-      for (let tentativa = 0; tentativa < 2 && !saida && Date.now() - inicio < PRAZO_IA_MS / 2; tentativa++) {
+      // Segunda tentativa só se a primeira falhou rápido o bastante para a nova caber inteira nos 300 s da rota.
+      for (let tentativa = 0; tentativa < 2 && !saida && (tentativa === 0 || Date.now() - inicio < 290_000 - PRAZO_IA_MS); tentativa++) {
         try {
           const txt = await llm.gerar(
             sistema,
@@ -413,6 +415,18 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     { ...comExtras, posts: comExtras.posts.map(comReferencia) },
     { conhecimento: pref?.conhecimento_founder, perfil_alvo: pref?.perfil_alvo, publico: ctxEnd.publico },
   );
+  // Texto da IA: número que não está em nenhuma fonte vira [PREENCHER] e o post vai para revisão.
+  if (provedor) {
+    const temFounder = !!(pref?.conhecimento_founder && Object.values(pref.conhecimento_founder).some((v) => v?.trim())) || !!pref?.founder?.transcricao_audio?.trim();
+    comRoteiros.posts = limparFormato(comRoteiros.posts, temFounder);
+    if (comRoteiros.roteiros) comRoteiros.roteiros = limparFormato(comRoteiros.roteiros, temFounder);
+    const checado = checarNumeros(comRoteiros.posts, comRoteiros.roteiros, numerosDasFontes(textosDasFontes(brand, pref)));
+    if (checado.trocados) {
+      comRoteiros.posts = checado.posts;
+      comRoteiros.roteiros = checado.roteiros;
+      console.info(`[analyze] ${checado.trocados} números sem fonte trocados por [PREENCHER]`);
+    }
+  }
   const aprendizados = comRoteiros.aprendizados ?? aprendizadosLocais(calc) ?? undefined;
   // Benchmark: o da IA (mesma chamada) ou, sem ele, o resumo local do que a página de cada concorrente mostra.
   const benchmark = comRoteiros.benchmark_concorrentes?.length
@@ -488,4 +502,26 @@ async function contextoDoMotor(
     concorrenciaExtraida,
     ...historico,
   });
+}
+
+/** Tudo o que a IA recebeu como fato: o que o site diz, o que o founder contou, materiais, notícias e a pesquisa. */
+export function textosDasFontes(brand: BrandProfile, pref: Preferencias | null): (string | null | undefined)[] {
+  return [
+    brand.nome,
+    brand.title,
+    brand.description,
+    brand.og?.description,
+    ...brand.headings.h1,
+    ...brand.headings.h2,
+    ...brand.paragrafos,
+    ...(brand.provas ?? []),
+    JSON.stringify(pref?.conhecimento_founder ?? {}),
+    pref?.founder?.transcricao_audio,
+    pref?.brand_book_texto,
+    pref?.objetivo_livre,
+    pref?.publico_alvo,
+    JSON.stringify(pref?.noticias ?? []),
+    JSON.stringify(pref?.pesquisa_mercado ?? {}),
+    JSON.stringify(pref?.contexto_empresa ?? {}),
+  ];
 }

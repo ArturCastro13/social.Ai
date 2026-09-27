@@ -24,8 +24,12 @@ import { itensDoArquivo } from "@/lib/virais";
 import { preferenciasSchema } from "@/lib/motor/contrato";
 import { benchmarkLocal, limparBenchmark } from "@/lib/motor/benchmark";
 import {
+  buscarConcorrentes,
+  lerPesquisaIA,
   lerSugestoesIA,
   MOTIVO_BASE,
+  pesquisaGuardada,
+  SISTEMA_PESQUISA,
   reservarUsoConcorrentes,
   siteResponde,
   sugerirConcorrentes,
@@ -90,7 +94,7 @@ describe("sugerirConcorrentes", () => {
     expect(item.nicho).toBe("healthtech");
   });
 
-  it("com IA: só sites que responderam, sem a própria empresa, sem endereço interno, completando com a base", async () => {
+  it("com IA: só sites que responderam, sem a própria empresa, sem endereço interno, sem misturar a base", async () => {
     const llm = llmFalso(
       "```json\n" +
         JSON.stringify({
@@ -117,8 +121,8 @@ describe("sugerirConcorrentes", () => {
       { nome: "Feegow", url: "https://feegow.com.br/", motivo: "Software de gestão para clínicas, concorre direto.", fonte: "ia" },
       { nome: "iClinic", url: "https://iclinic.com.br/", motivo: "Prontuário e agenda para consultório.", fonte: "ia" },
     ]);
-    expect(s.length).toBeLessThanOrEqual(5);
-    expect(s.slice(2).every((x) => x.fonte === "base_nicho")).toBe(true);
+    // Perfis da base curada não são concorrentes: com concorrente confirmado pela IA, a lista fica só com eles.
+    expect(s).toHaveLength(2);
     expect(JSON.stringify(s)).not.toMatch(/[—–]/);
   });
 
@@ -141,6 +145,45 @@ describe("sugerirConcorrentes", () => {
     expect(llm.chamadas).toBe(0);
     expect(verificar).not.toHaveBeenCalled();
     expect(s.every((x) => x.fonte === "base_nicho")).toBe(true);
+  });
+
+  it("com busca na web: nicho da IA, o que cada concorrente publica, em alta com fonte, e sem pagar de novo", async () => {
+    const marca = { ...semSite, dominio: "pesquisa-teste.com.br", nome: "Pesquisa Teste" };
+    const resposta = JSON.stringify({
+      mercado: "Software de agenda para clínicas pequenas",
+      nicho: "SaaS-B2B",
+      concorrentes: [{ nome: "Feegow", url: "https://feegow.com.br", motivo: "Agenda para clínicas.", o_que_publica: "Dicas de gestão — em carrossel" }],
+      em_alta: [
+        { tema: "Falta de paciente", gancho: "Sua agenda tem buraco na terça?", por_que: "dor diária", quem: "mídia do setor", url: "https://exemplo.com/a" },
+        { tema: "Sem link válido", url: "javascript:alert(1)" },
+        { gancho: "sem tema" },
+      ],
+    });
+    const prompts: string[] = [];
+    const llm = {
+      ...llmFalso("nunca"),
+      buscas: 0,
+      async pesquisar(sistema: string, prompt: string) {
+        llm.buscas++;
+        prompts.push(sistema, prompt);
+        return resposta;
+      },
+    };
+    const r = await buscarConcorrentes(marca, { llm, verificar: async () => true, itens });
+    expect(llm.buscas).toBe(1);
+    expect(llm.chamadas).toBe(0);
+    expect(prompts[0]).toBe(SISTEMA_PESQUISA);
+    expect(r.sugestoes).toEqual([{ nome: "Feegow", url: "https://feegow.com.br/", motivo: "Agenda para clínicas.", fonte: "ia" }]);
+    expect(r.pesquisa?.nicho).toBe("saas-b2b");
+    expect(r.pesquisa?.concorrentes).toEqual([{ nome: "Feegow", url: "https://feegow.com.br/", o_que_publica: "Dicas de gestão, em carrossel" }]);
+    expect(r.pesquisa?.em_alta.map((t) => [t.tema, t.url])).toEqual([["Falta de paciente", "https://exemplo.com/a"], ["Sem link válido", undefined]]);
+    expect(pesquisaGuardada(marca)).toEqual(r);
+    expect(pesquisaGuardada(marca, "outro público")).toBeNull();
+  });
+
+  it("lerPesquisaIA nunca lança e ignora nicho fora da lista", () => {
+    expect(lerPesquisaIA("nada")).toEqual({ mercado: "", em_alta: [] });
+    expect(lerPesquisaIA('{"nicho":"agro","mercado":"x"}')).toEqual({ mercado: "x", em_alta: [] });
   });
 
   it("lerSugestoesIA aceita lista direta e ignora o que não é sugestão", () => {

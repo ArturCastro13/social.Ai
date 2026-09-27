@@ -50,7 +50,7 @@ it("mostra erro real de upload sem apagar os dados nem declarar leitura concluí
   expect(screen.queryByText("Pronto para revisar")).toBeNull();
   expect(screen.getByRole("button", { name: "Tentar novamente manual.pdf" })).toBeTruthy();
 });
-it("busca recebe contexto, não seleciona IA sozinha, e invalidação remove sugestões", async () => {
+it("busca recebe contexto, já marca os achados pela IA, e invalidação remove sugestões", async () => {
   const c = contextoConfirmadoSchema.parse({ versao: 1, empresa: "recallo.com.br", revisao: 1, entendimento: { negocio: "Inglês", segmento: "Idiomas", publico: "Adultos", nicho: "edtech", evidencias: [], duvidas: [], fonte: "manual" }, materiais: [] });
   let sent = "";
   vi.stubGlobal("fetch", async (_url: string, req: RequestInit) => { sent = String(req.body); return { ok: true, json: async () => ({ sugestoes: [{ nome: "Escola", url: "https://escola.com.br", motivo: "Idiomas", fonte: "ia" }] }) }; });
@@ -58,8 +58,9 @@ it("busca recebe contexto, não seleciona IA sozinha, e invalidação remove sug
   act(() => result.current.buscar(recallo as BrandProfile, "Adultos", c));
   await waitFor(() => expect(result.current.status).toBe("pronto"));
   expect(JSON.parse(sent).contexto.entendimento.negocio).toBe("Inglês");
-  expect(result.current.valor.marcados).toEqual([]);
-  act(() => result.current.invalidar()); expect(result.current.sugestoes).toEqual([]);
+  // O motor analisa sozinho os concorrentes achados; a pessoa desmarca se quiser.
+  expect(result.current.valor.marcados).toEqual(["https://escola.com.br/"]);
+  act(() => result.current.invalidar()); expect(result.current.sugestoes).toEqual([]); expect(result.current.valor.marcados).toEqual([]);
 });
 it("revisão confirma negócio sem anexos e bloqueia durante leitura", async () => {
   let received = "";

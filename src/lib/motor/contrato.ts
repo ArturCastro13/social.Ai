@@ -43,6 +43,35 @@ export const tomDeVozSchema = z.object({
 export type TomDeVoz = z.infer<typeof tomDeVozSchema>;
 
 /** O que a interface manda em POST /api/analyze no campo `preferencias` (telas 1, 2 e 3). */
+const textoPesquisa = (max: number) => z.string().trim().max(max).default("");
+
+/** Um tema que está rendendo no nicho, com a fonte achada na busca. */
+export const itemEmAltaSchema = z.object({
+  tema: z.string().trim().max(200),
+  gancho: textoPesquisa(200),
+  por_que: textoPesquisa(300),
+  quem: textoPesquisa(100),
+  url: z.string().trim().url().max(500).optional(),
+});
+
+/**
+ * Pesquisa de mercado feita na web enquanto o founder responde as perguntas (POST /api/concorrentes).
+ * Volta para o motor dentro das preferências: o que cada concorrente publica e o que está em alta no nicho.
+ */
+export const pesquisaMercadoSchema = z.object({
+  /** O mercado em uma frase, como a pesquisa entendeu. */
+  mercado: textoPesquisa(300),
+  /** Nicho da base curada que mais se aproxima. Vale mais que o palpite por palavra-chave. */
+  nicho: z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"]).optional(),
+  concorrentes: z
+    .array(z.object({ nome: z.string().trim().max(80), url: z.string().trim().url().max(500), o_que_publica: textoPesquisa(400) }))
+    .max(6)
+    .default([]),
+  /** Temas e ganchos que estão rendendo com concorrentes e mídias do nicho, cada um com a fonte achada na busca. */
+  em_alta: z.array(itemEmAltaSchema).max(8).default([]),
+});
+export type PesquisaMercado = z.infer<typeof pesquisaMercadoSchema>;
+
 export const preferenciasSchema = z.object({
   contexto_empresa: contextoConfirmadoSchema.optional(),
   perfil_alvo: z.enum(["founder", "empresa", "ambos"]).default("empresa"),
@@ -80,6 +109,7 @@ export const preferenciasSchema = z.object({
     .array(z.object({ titulo: z.string().trim().max(300), resumo: z.string().trim().max(1000).default(""), url: z.string().trim().url(), data: z.string().trim().max(40) }))
     .max(10)
     .default([]),
+  pesquisa_mercado: pesquisaMercadoSchema.optional(),
 });
 export type Preferencias = z.infer<typeof preferenciasSchema>;
 
@@ -174,7 +204,13 @@ export interface BenchmarkConcorrente {
   oportunidade: string;
 }
 
-/** Resposta de POST /api/concorrentes: sugestões para a tela de ajustes. */
+/** Resposta de POST /api/concorrentes: sugestões para a tela de ajustes e, quando houve busca na web, a pesquisa. */
+export interface RespostaConcorrentes {
+  sugestoes: SugestaoConcorrente[];
+  pesquisa?: PesquisaMercado;
+}
+
+/** Uma sugestão de concorrente. */
 export interface SugestaoConcorrente {
   nome: string;
   url: string;

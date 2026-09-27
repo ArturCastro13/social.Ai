@@ -109,6 +109,8 @@ export interface BrandProfile {
   themeColor: string | null;
   headings: { h1: string[]; h2: string[] };
   paragrafos: string[];
+  /** Números com rótulo e depoimentos lidos do site. Opcional: perfis antigos e marcas sem site não têm. */
+  provas?: string[];
   redesEncontradas: Partial<Record<Rede | "youtube" | "tiktok", string>>;
   handles: Omit<BrandInput, "url">;
   paleta: {

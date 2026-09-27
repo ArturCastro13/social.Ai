@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { buscarSugestoesConcorrentes, normalizarConcorrentes, normalizarLink } from "@/lib/client/onboarding";
-import type { SugestaoConcorrente } from "@/lib/motor/contrato";
+import type { PesquisaMercado, SugestaoConcorrente } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
@@ -21,6 +21,8 @@ export interface ControleConcorrentes {
   setValor: (f: (c: Concorrentes) => Concorrentes) => void;
   status: StatusSugestoes;
   sugestoes: SugestaoConcorrente[];
+  /** Pesquisa de mercado na web (o que os concorrentes publicam e o que está em alta), quando houve. */
+  pesquisa: PesquisaMercado | null;
   /** Pede sugestões para a marca. Não trava nada: enquanto isso, os campos manuais funcionam. */
   buscar: (brand: BrandProfile, publico: string, contexto?: ContextoConfirmado) => void;
   invalidar: () => void;
@@ -36,8 +38,9 @@ export function useConcorrentes(): ControleConcorrentes {
   const [valor, setValorBruto] = useState<Concorrentes>({ marcados: [], manuais: ["", "", ""] });
   const [status, setStatus] = useState<StatusSugestoes>("ocioso");
   const [sugestoes, setSugestoes] = useState<SugestaoConcorrente[]>([]);
+  const [pesquisa, setPesquisa] = useState<PesquisaMercado | null>(null);
   const ctrl = useRef<AbortController | null>(null);
-  const cache = useRef(new Map<string, SugestaoConcorrente[]>());
+  const cache = useRef(new Map<string, { sugestoes: SugestaoConcorrente[]; pesquisa?: PesquisaMercado }>());
   const ultimaChave = useRef("");
   // Depois que a pessoa escolhe algo (ou volta com escolhas salvas), a tela não marca nada sozinha.
   const escolheu = useRef(false);
@@ -61,8 +64,14 @@ export function useConcorrentes(): ControleConcorrentes {
       const porLink = new Map(novas.map((s) => [s.url, s]));
       // Link colado que é igual a uma sugestão vira sugestão marcada.
       const iguais = c.manuais.map((m) => normalizarLink(m)).filter((u): u is string => !!u && porLink.has(u));
-      const marcados = [...new Set([...c.marcados, ...iguais])];
+      let marcados = [...new Set([...c.marcados, ...iguais])];
       const manuais = c.manuais.map((m) => (iguais.includes(normalizarLink(m) ?? "") ? "" : m));
+      // Até a pessoa mexer, os concorrentes achados pela IA já vão marcados: o motor analisa sem pedir nada.
+      if (!escolheu.current) {
+        const vagas = MAXIMO - marcados.length - manuaisValidos(manuais);
+        const daIa = novas.filter((s) => s.fonte === "ia" && !marcados.includes(s.url)).slice(0, Math.max(0, vagas));
+        marcados = [...marcados, ...daIa.map((s) => s.url)];
+      }
       return { marcados: marcados.slice(0, MAXIMO), manuais };
     });
   }, []);
@@ -75,19 +84,22 @@ export function useConcorrentes(): ControleConcorrentes {
       ctrl.current?.abort();
       const guardadas = cache.current.get(chave);
       if (guardadas) {
-        setStatus(guardadas.length ? "pronto" : "falhou");
-        aplicar(guardadas);
+        setStatus(guardadas.sugestoes.length ? "pronto" : "falhou");
+        aplicar(guardadas.sugestoes);
+        if (guardadas.pesquisa) setPesquisa(guardadas.pesquisa);
         return;
       }
       const c = new AbortController();
       ctrl.current = c;
       setStatus("carregando");
       buscarSugestoesConcorrentes(brand, publico, c.signal, contexto)
-        .then((lista) => {
+        .then((r) => {
           if (c.signal.aborted) return;
-          cache.current.set(chave, lista);
-          setStatus(lista.length ? "pronto" : "falhou");
-          aplicar(lista);
+          cache.current.set(chave, r);
+          setStatus(r.sugestoes.length ? "pronto" : "falhou");
+          aplicar(r.sugestoes);
+          // Uma busca sem pesquisa (limite do dia, IA fora) não apaga a pesquisa que já veio.
+          if (r.pesquisa) setPesquisa(r.pesquisa);
         })
         .catch(() => {
           if (c.signal.aborted) return;
@@ -115,11 +127,11 @@ export function useConcorrentes(): ControleConcorrentes {
 
   const invalidar = useCallback(() => {
     ctrl.current?.abort(); ultimaChave.current = ""; cache.current.clear();
-    setSugestoes([]); setStatus("ocioso");
+    setSugestoes([]); setPesquisa(null); setStatus("ocioso");
     setValorBruto(c => ({ ...c, marcados: [] }));
   }, []);
 
-  return { valor, setValor, status, sugestoes, buscar, restaurar, finais, invalidar };
+  return { valor, setValor, status, sugestoes, pesquisa, buscar, restaurar, finais, invalidar };
 }
 
 const CAMPO =
@@ -130,7 +142,7 @@ const CAMPO =
  * dá para colar link também. Até 3 no total. Só o motor usa, e nada disso aparece nos posts.
  */
 export function CampoConcorrentes({ controle, titulo }: { controle: ControleConcorrentes; titulo: string }) {
-  const { valor, setValor, status, sugestoes } = controle;
+  const { valor, setValor, status, sugestoes, pesquisa } = controle;
   const total = valor.marcados.length + manuaisValidos(valor.manuais);
   const cheio = total >= MAXIMO;
   const daIa = sugestoes.filter((s) => s.fonte === "ia");
@@ -158,7 +170,7 @@ export function CampoConcorrentes({ controle, titulo }: { controle: ControleConc
       {status === "carregando" && (
         <div className="mt-4" role="status" aria-live="polite">
           <p className="text-sm text-tinta-2">
-            Procurando concorrentes do seu mercado <span className="inline-block animate-pisca text-pauta">▍</span>
+            Pesquisando concorrentes e o que está em alta no seu mercado <span className="inline-block animate-pisca text-pauta">▍</span>
           </p>
           <div className="mt-3 space-y-2" aria-hidden>
             {[0, 1, 2].map((i) => (
@@ -181,6 +193,7 @@ export function CampoConcorrentes({ controle, titulo }: { controle: ControleConc
           onAlternar={alternar}
         />
       )}
+      {status !== "carregando" && pesquisa && pesquisa.em_alta.length > 0 && <EmAlta pesquisa={pesquisa} />}
       {valor.marcados.length > 0 && (
         <p className="mt-2 text-xs tabular-nums text-tinta-3" aria-live="polite">
           {total} de 3 escolhidos.{cheio ? " Desmarque um para trocar ou colar outro link." : ""}
@@ -275,6 +288,32 @@ function GrupoSugestoes({
             </li>
           );
         })}
+      </ul>
+    </div>
+  );
+}
+
+/** O que a pesquisa na web achou em alta no nicho. Vai para o motor junto com os concorrentes. */
+function EmAlta({ pesquisa }: { pesquisa: PesquisaMercado }) {
+  return (
+    <div className="mt-5 rounded-2xl bg-papel px-4 py-3">
+      <p className="text-sm font-medium text-tinta">Em alta no seu mercado</p>
+      <p className="mt-0.5 text-sm text-tinta-3">Achamos isso na web agora. Os seus posts vão partir daqui, com o seu jeito.</p>
+      <ul className="mt-2 space-y-2">
+        {pesquisa.em_alta.slice(0, 4).map((t, i) => (
+          <li key={i} className="text-sm leading-snug text-tinta-2">
+            <span className="font-medium text-tinta">{t.tema}</span>
+            {t.gancho && <span>. {t.gancho}</span>}
+            {t.url && (
+              <>
+                {" "}
+                <a href={t.url} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-tinta-3 underline decoration-tinta/30 underline-offset-2 hover:text-tinta">
+                  fonte
+                </a>
+              </>
+            )}
+          </li>
+        ))}
       </ul>
     </div>
   );

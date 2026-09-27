@@ -203,6 +203,7 @@ export async function readBrand(input: BrandInput, opts: ReadBrandOptions = {}):
     themeColor: ex?.themeColor ?? null,
     headings: { h1: ex?.h1 ?? [], h2: ex?.h2 ?? [] },
     paragrafos: ex?.paragrafos ?? [],
+    provas: ex?.provas ?? [],
     redesEncontradas,
     handles,
     paleta,

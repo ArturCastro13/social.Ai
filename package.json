@@ -9,12 +9,14 @@
     "lint": "eslint",
     "test": "vitest run",
     "virais:catalogo": "tsx scripts/gerar-catalogo.ts",
-    "demo:gerar": "tsx scripts/gerar-demo.ts"
+    "demo:gerar": "tsx scripts/gerar-demo.ts",
+    "ia:auditar": "tsx scripts/auditar-ia.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
     "@supabase/supabase-js": "^2.117.2",
     "cheerio": "^1.2.0",
+    "jsonrepair": "^3.15.0",
     "jszip": "^3.10.2",
     "next": "16.3.6",
     "node-vibrant": "^4.0.4",

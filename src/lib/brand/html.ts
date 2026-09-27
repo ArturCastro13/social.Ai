@@ -15,6 +15,8 @@ export interface HtmlExtract {
   h1: string[];
   h2: string[];
   paragrafos: string[];
+  /** Blocos curtos com número e rótulo ("100.000 membros ativos", "NPS 86") e depoimentos, como aparecem no site. */
+  provas: string[];
   redes: Record<string, string>;
   inlineCss: string;
   stylesheets: string[];
@@ -42,6 +44,47 @@ const SOCIAL: [string, RegExp][] = [
   ["youtube", /youtube\.com\/(@|c\/|channel\/|user\/)[\w-]+/i],
   ["tiktok", /tiktok\.com\/@[\w.]+/i],
 ];
+
+// Número com unidade ou contexto que costuma ser prova: %, R$, mil, milhão, horas, clientes, NPS...
+const RE_PROVA =
+  /(\d[\d.,]*\s*(%|x\b|mil\b|milh|bilh|h\b|horas?\b|dias?\b|minutos?\b|anos?\b|meses\b|clientes|membros|empresas|usu[aá]rios|pessoas|lojas|pa[ií]ses|cidades|estrelas|avalia)|R\$\s*\d|\b(NPS|CSAT)\b\s*:?\s*\d|\+\s*(de\s+)?\d)/i;
+
+/**
+ * Blocos de prova do site: o menor bloco que junta o número e o rótulo ("100.000" e "Membros ativos" em
+ * elementos vizinhos viram "100.000 Membros ativos"). Blocos que contêm outro candidato saem (é a seção inteira).
+ */
+function blocosComNumero($: cheerio.CheerioAPI, max = 12): string[] {
+  const candidatos = uniq(
+    $("li, p, span, div, strong, b, h3, h4, h5, dd, dt, figure, figcaption")
+      .map((_, el) => $(el).text())
+      .get()
+      .map((t) => t.replace(/\s+/g, " ").trim())
+      .filter((t) => t.length >= 6 && t.length <= 160 && RE_PROVA.test(t) && temRotulo(t)),
+    200,
+  );
+  const menores = candidatos.filter((c) => !candidatos.some((o) => o !== c && o.length < c.length && c.includes(o)));
+  // Preço é prova fraca para post: vai para o fim, e as provas de resultado ficam com as vagas.
+  const preco = (t: string) => /R\$/.test(t);
+  return [...menores.filter((t) => !preco(t)), ...menores.filter(preco)].slice(0, max);
+}
+
+const VAZIAS = new Set(["de", "do", "da", "dos", "das", "por", "mais", "com", "até", "ate", "em", "que", "mil", "the", "and"]);
+/** Tem palavra de verdade além do número ("Membros ativos"), não só "+ de 85%". */
+function temRotulo(t: string): boolean {
+  return (t.toLowerCase().match(/\p{L}{3,}/gu) ?? []).some((w) => !VAZIAS.has(w) && !/^(milh|bilh)/.test(w));
+}
+
+/** Depoimentos marcados como tal no HTML, até 3. */
+function depoimentos($: cheerio.CheerioAPI): string[] {
+  return uniq(
+    $("blockquote, q, [class*='testimonial'], [class*='depoimento'], [class*='review'], [class*='quote']")
+      .map((_, el) => $(el).text())
+      .get()
+      .filter((t) => t.trim().length >= 40 && t.trim().length <= 400)
+      .map((t) => `Depoimento no site: "${t.replace(/\s+/g, " ").trim()}"`),
+    3,
+  );
+}
 
 function uniq(list: string[], max: number, minLen = 2): string[] {
   const seen = new Set<string>();
@@ -156,6 +199,7 @@ export function extractFromHtml(html: string, pageUrl: string): HtmlExtract {
     8,
     40,
   );
+  const provas = [...blocosComNumero($), ...depoimentos($)];
   const textoVisivel = ($("body").text() ?? "").replace(/\s+/g, " ").trim().length;
 
   return {
@@ -174,6 +218,7 @@ export function extractFromHtml(html: string, pageUrl: string): HtmlExtract {
     h1,
     h2,
     paragrafos,
+    provas,
     redes,
     inlineCss,
     stylesheets,

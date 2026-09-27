@@ -1,3 +1,4 @@
+import { jsonrepair } from "jsonrepair";
 import { z } from "zod";
 import type { Formato, TemplateId } from "@/lib/types";
 import { formatoSchema, nichoSchema, redeSchema } from "@/lib/virais/schema";
@@ -22,11 +23,24 @@ export const GUIA_TEMPLATES: Record<TemplateId, string> = {
   checklist: "imagem única. slides[0].titulo = título. slides[1..6] = itens de checklist, titulo com até 8 palavras, texto vazio.",
 };
 
-const texto = (max: number) => z.string().trim().min(1).max(max);
+/** Corta no último espaço antes do limite. Texto um pouco maior que o combinado não derruba a análise inteira. */
+export function aparar(s: string, max: number): string {
+  if (s.length <= max) return s;
+  const corte = s.slice(0, max);
+  const espaco = corte.lastIndexOf(" ");
+  return (espaco > max * 0.6 ? corte.slice(0, espaco) : corte).replace(/[\s,;:]+$/, "");
+}
+
+const texto = (max: number) =>
+  z
+    .string()
+    .trim()
+    .min(1)
+    .transform((s) => aparar(s, max));
 
 const slideSchema = z.object({
-  titulo: z.string().trim().max(200).default(""),
-  texto: z.string().trim().max(600).default(""),
+  titulo: z.string().trim().default("").transform((s) => aparar(s, 200)),
+  texto: z.string().trim().default("").transform((s) => aparar(s, 600)),
 });
 
 /** Texto tolerante: número vira texto, o resto vira "". */
@@ -51,16 +65,19 @@ export const postIASchema = z.object({
   formato: formatoSchema,
   template: z.string().optional(),
   gancho: texto(220),
-  slides: z.array(slideSchema).min(1).max(8),
+  slides: z.array(slideSchema).min(1).transform((l) => l.slice(0, 8)),
   legendas: z.object({
     instagram: texto(2200),
     linkedin: texto(3000),
     x: texto(280),
     facebook: texto(2200),
   }),
-  hashtags: z.array(z.string().trim().max(40)).max(12).default([]),
-  padrao_inspirador: z.string().trim().max(80).default(""),
-  por_que: z.string().trim().max(400).default(""),
+  hashtags: z
+    .array(z.string())
+    .default([])
+    .transform((h) => h.map((x) => x.trim()).filter((x) => x && x.length <= 40).slice(0, 12)),
+  padrao_inspirador: z.string().trim().default("").transform((s) => aparar(s, 80)),
+  por_que: z.string().trim().default("").transform((s) => aparar(s, 400)),
   enderecamento: enderecamentoIASchema.optional(),
   /** De onde veio o assunto. Valor desconhecido vira undefined, nunca derruba a validação. */
   origem_tema: z.enum(ORIGENS_TEMA).optional().catch(undefined),
@@ -72,13 +89,13 @@ export const analiseIASchema = z.object({
   publico: texto(500),
   tom_de_voz: texto(300),
   posicionamento: texto(240),
-  pilares: z.array(z.object({ nome: texto(60), descricao: texto(300) })).min(3).max(4),
-  diagnostico: z.array(z.object({ titulo: texto(120), texto: texto(600) })).min(3).max(5),
+  pilares: z.array(z.object({ nome: texto(60), descricao: texto(300) })).min(3).transform((l) => l.slice(0, 4)),
+  diagnostico: z.array(z.object({ titulo: texto(120), texto: texto(600) })).min(3).transform((l) => l.slice(0, 5)),
   estrategia: z
     .array(z.object({ rede: redeSchema, frequencia_semanal: z.coerce.number().min(0).max(14), foco: texto(300) }))
     .min(1)
-    .max(4),
-  posts: z.array(postIASchema).min(1).max(12),
+    .transform((l) => l.slice(0, 4)),
+  posts: z.array(postIASchema).min(1).transform((l) => l.slice(0, 12)),
 });
 
 export type AnaliseIA = z.infer<typeof analiseIASchema>;
@@ -111,7 +128,18 @@ export function extrairJson(txt: string): unknown {
   } catch {
     const i = limpo.indexOf("{");
     const j = limpo.lastIndexOf("}");
-    if (i >= 0 && j > i) return JSON.parse(limpo.slice(i, j + 1));
-    throw new Error("Resposta sem JSON");
+    if (i < 0) throw new Error("Resposta sem JSON");
+    const trecho = j > i ? limpo.slice(i, j + 1) : limpo.slice(i);
+    try {
+      return JSON.parse(trecho);
+    } catch {
+      // Modelo pequeno às vezes deixa aspas sem escape no meio do texto ou esquece uma vírgula. Conserta antes de
+      // jogar fora uma resposta de dois minutos; o schema ainda confere tudo depois.
+      try {
+        return JSON.parse(jsonrepair(trecho));
+      } catch {
+        throw new Error("Resposta com JSON inválido");
+      }
+    }
   }
 }

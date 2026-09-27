@@ -283,12 +283,31 @@ describe("concorrentes e referências no CONTEXTO", () => {
     const pref = preferenciasSchema.parse({ concorrentes: ["https://concorrente.com.br", "https://outro.com"] });
     const c = montarContexto(cora.brand, pref, { concorrenciaExtraida: { "https://concorrente.com.br": "Conta PJ grátis. Para MEI" } });
     expect(c.concorrencia).toEqual([
-      { url: "https://concorrente.com.br", descricao_extraida: "Conta PJ grátis. Para MEI" },
-      { url: "https://outro.com", descricao_extraida: "" },
+      { url: "https://concorrente.com.br", descricao_extraida: "Conta PJ grátis. Para MEI", o_que_publica: "" },
+      { url: "https://outro.com", descricao_extraida: "", o_que_publica: "" },
     ]);
     expect(montarPromptMotor(c)).toContain("concorrente.com.br");
     expect(preferenciasSchema.safeParse({ concorrentes: ["https://a.com", "https://b.com", "https://c.com", "https://d.com"] }).success).toBe(false);
     expect(preferenciasSchema.parse({}).concorrentes).toEqual([]);
+  });
+
+  it("pesquisa de mercado: o que o concorrente publica entra pela url, e o que está em alta vai com a fonte", () => {
+    const pref = preferenciasSchema.parse({
+      concorrentes: ["https://concorrente.com.br"],
+      pesquisa_mercado: {
+        mercado: "Conta digital para MEI",
+        nicho: "fintech",
+        concorrentes: [{ nome: "Concorrente", url: "https://www.concorrente.com.br/", o_que_publica: "Dicas de imposto em carrossel" }],
+        em_alta: [{ tema: "DAS atrasado", gancho: "Você sabe quanto custa atrasar o DAS?", por_que: "medo de multa", quem: "mídia do nicho", url: "https://exemplo.com/das" }],
+      },
+    });
+    const c = montarContexto(cora.brand, pref, {});
+    expect(c.concorrencia[0].o_que_publica).toBe("Dicas de imposto em carrossel");
+    expect(c.mercado_pesquisado).toBe("Conta digital para MEI");
+    expect(c.em_alta_no_nicho).toEqual([{ tema: "DAS atrasado", gancho: "Você sabe quanto custa atrasar o DAS?", por_que: "medo de multa", quem: "mídia do nicho", url: "https://exemplo.com/das" }]);
+    const prompt = montarPromptMotor(c);
+    expect(prompt).toContain("DAS atrasado");
+    expect(prompt).toContain("em_alta_no_nicho");
   });
 
   it("cada referência do nicho diz o gancho real, a estrutura e por que funcionou, em JSON compacto", () => {

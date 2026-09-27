@@ -50,7 +50,11 @@ export interface ContextoMotor {
   proibicoes: string[];
   inspiracoes: { url: string; tipo: string; descricao_extraida: string }[];
   /** Concorrentes que o founder acompanha. Só para achar ganchos, ângulos e brechas; nunca aparece no resultado. */
-  concorrencia: { url: string; descricao_extraida: string }[];
+  concorrencia: { url: string; descricao_extraida: string; o_que_publica: string }[];
+  /** O mercado como a pesquisa na web entendeu, quando houve pesquisa. */
+  mercado_pesquisado: string | null;
+  /** Temas e ganchos que estão rendendo agora com concorrentes e mídias do nicho, achados na web, com a fonte. */
+  em_alta_no_nicho: { tema: string; gancho: string; por_que: string; quem: string; url: string | null }[];
   /** Posts publicados com os números que o founder informou, e o que se sabe de cada um. */
   desempenho_proprio: {
     rede: string;
@@ -144,6 +148,7 @@ export function siteExtraido(b: BrandProfile): ContextoMotor["empresa"]["site_ex
   const desc = (b.description || b.og?.description || "").trim();
   const proposta = [h1, desc && desc !== h1 ? desc : ""].filter(Boolean).join(". ").replace(/\.\./g, ".");
   const provas = [
+    ...(b.provas ?? []),
     ...numerosDoSite(frases).map((n) => n.frase),
     ...depoimentosDoSite(b).map((d) => `Relato de cliente no site: "${corte(d, 180)}"`),
   ];
@@ -155,7 +160,7 @@ export function siteExtraido(b: BrandProfile): ContextoMotor["empresa"]["site_ex
     produtos: [...new Set([...frasesDeProduto(frases), ...b.headings.h2.filter((h) => h.length >= 12 && h.length <= 110)])]
       .slice(0, 6)
       .map((f) => corte(f, 140)),
-    provas: [...new Set(provas)].slice(0, 5).map((p) => corte(p, 200)),
+    provas: [...new Set(provas)].slice(0, 10).map((p) => corte(p, 220)),
     paleta: [...new Set(paleta)],
     fontes: [...new Set(fontes)],
   };
@@ -252,6 +257,18 @@ function conhecimentoDoContexto(p: Preferencias | null): ContextoMotor["conhecim
  * Objeto CONTEXTO do motor (Parte 2 da spec). Só com o brand já funciona: campos sem dado ficam vazios ou null.
  * Nunca inventa horário nem métrica: insights e benchmarks saem como "nao_disponivel".
  */
+/** Mesmo site, com ou sem www e barra no fim. */
+function mesmoSite(a: string, b: string): boolean {
+  const host = (u: string) => {
+    try {
+      return new URL(u).hostname.replace(/^www\./, "").toLowerCase();
+    } catch {
+      return u;
+    }
+  };
+  return host(a) === host(b);
+}
+
 export function montarContexto(brand: BrandProfile, preferencias?: Preferencias | null, extras: ExtrasContexto = {}): ContextoMotor {
   const p = preferencias ?? null;
   const posts = new Map((extras.postsAnteriores ?? []).map((x) => [x.id, x]));
@@ -288,7 +305,19 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
     redes: extras.redes ?? redesDoMotor(brand, p),
     proibicoes: [...(p?.proibicoes ?? []), ...(p?.contexto_empresa?.materiais.flatMap(m => m.fatos.filter(f => f.campo === "proibicao").map(f => f.texto)) ?? [])],
     inspiracoes: (p?.inspiracoes ?? []).map((i) => ({ url: i.url, tipo: i.tipo, descricao_extraida: corte(insp[i.url] ?? "", 300) })),
-    concorrencia: (p?.concorrentes ?? []).map((url) => ({ url, descricao_extraida: corte(extras.concorrenciaExtraida?.[url] ?? "", 300) })),
+    concorrencia: (p?.concorrentes ?? []).map((url) => ({
+      url,
+      descricao_extraida: corte(extras.concorrenciaExtraida?.[url] ?? "", 300),
+      o_que_publica: corte(p?.pesquisa_mercado?.concorrentes.find((c) => mesmoSite(c.url, url))?.o_que_publica ?? "", 400),
+    })),
+    mercado_pesquisado: p?.pesquisa_mercado?.mercado ? semTraco(p.pesquisa_mercado.mercado) : null,
+    em_alta_no_nicho: (p?.pesquisa_mercado?.em_alta ?? []).map((t) => ({
+      tema: semTraco(t.tema),
+      gancho: semTraco(t.gancho),
+      por_que: semTraco(t.por_que),
+      quem: semTraco(t.quem),
+      url: t.url ?? null,
+    })),
     desempenho_proprio: desempenho(ds),
     aprendizados_calculados: calcularAprendizados(ds),
     insights_audiencia: { horarios_pico: null, fonte: "nao_disponivel" },

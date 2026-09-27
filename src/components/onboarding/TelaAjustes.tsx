@@ -128,9 +128,9 @@ export function TelaAjustes({
   const [erroContexto, setErroContexto] = useState("");
   const assinatura = JSON.stringify({ dominio: brand?.dominio, descricao: brand?.description, saber: usarSaber ? saber : {}, publico, materiais: materiais.estado.revisao, paleta: redes.paletaInstagram, empresa: semSite ? empresa : null });
   const contexto = contextoSalvo?.chave === assinatura ? contextoSalvo.valor : undefined;
-  const invalidarConcorrentes = concorrentes.invalidar;
-  useEffect(() => { invalidarConcorrentes(); }, [assinatura, invalidarConcorrentes]);
-  const invalidarContexto = useCallback(() => { setContextoSalvo(null); invalidarConcorrentes(); }, [invalidarConcorrentes]);
+  // A pesquisa de concorrentes sai quando o site é lido e não é refeita a cada resposta digitada:
+  // mudar o contexto só pede nova confirmação do resumo.
+  const invalidarContexto = useCallback(() => { setContextoSalvo(null); }, []);
 
   function aplicarSugestao(s: SugestoesOnboarding) {
     setPublico(s.publico_alvo);
@@ -177,8 +177,9 @@ export function TelaAjustes({
     const salvasAntes = lerPreferenciasSalvas(pronta ? pronta.dominio : dominioDe(dados.url));
     // Links salvos entram antes da busca, para a busca não marcar nada por cima da escolha antiga.
     concorrentes.restaurar(salvasAntes?.concorrentes ?? []);
-    // Sem site, a busca já saiu da tela da empresa. Com site, sai agora e não trava a tela.
-    // Concorrentes só são buscados após a revisão conjunta de respostas e materiais.
+    // Com site, a pesquisa de concorrentes e do que está em alta sai agora, em segundo plano, enquanto a
+    // pessoa responde as perguntas. Sem site, sai quando o resumo da empresa é confirmado.
+    if (!pronta && b) concorrentes.buscar(b, s.publico_alvo);
     const salvas = salvasAntes;
     if (salvas) {
       setDaUltimaVez(true);
@@ -303,6 +304,7 @@ export function TelaAjustes({
       ...(turbo.brandBook.trim() ? { brand_book_texto: turbo.brandBook.trim().slice(0, 20000) } : {}),
       noticias: [],
       concorrentes: concorrentes.finais(),
+      ...(concorrentes.pesquisa ? { pesquisa_mercado: concorrentes.pesquisa } : {}),
     };
   }
 
@@ -377,7 +379,13 @@ export function TelaAjustes({
         saber={saber}
         onChange={setSaber}
         lendo={carregando && !semSite ? dominio : null}
-        espera={carregando && semSite ? `Enquanto isso, a gente prepara as sugestões para ${nomeEmpresa}.` : null}
+        espera={
+          carregando && semSite
+            ? `Enquanto isso, a gente prepara as sugestões para ${nomeEmpresa}.`
+            : concorrentes.status === "carregando"
+              ? "Enquanto você responde, a gente pesquisa seus concorrentes e o que está em alta no seu nicho."
+              : null
+        }
         semSite={semSite}
         onVoltar={semSite ? () => irPara("empresa") : undefined}
         onContinuar={(usar) => {
@@ -547,7 +555,12 @@ export function TelaAjustes({
           revisao={materiais.estado.revisao} chaveEntrada={assinatura} pendente={materiais.pendente} confirmado={!!contexto}
           inicial={rascunhoContexto} onGuardar={setRascunhoContexto}
           onInvalidar={invalidarContexto}
-          onConfirmar={c => { setContextoSalvo({ chave: assinatura, valor: c }); setErroContexto(""); concorrentes.buscar(brand, c.entendimento.publico, c); }}
+          onConfirmar={c => {
+            setContextoSalvo({ chave: assinatura, valor: c }); setErroContexto("");
+            // Pesquisa de novo só quando o founder confirmou outro nicho: cada busca na web custa centavos.
+            const p = concorrentes.pesquisa;
+            if (concorrentes.status !== "carregando" && (!p || (p.nicho ?? "outro") !== c.entendimento.nicho)) concorrentes.buscar(brand, c.entendimento.publico, c);
+          }}
         />}
         <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />
 

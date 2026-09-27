@@ -7,7 +7,7 @@ import { preferenciasSchema } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 import { aplicarContextoMarca } from "@/lib/contexto/revisao";
 
-export const maxDuration = 120;
+export const maxDuration = 300;
 
 const handle = z.string().max(200).optional();
 const Entrada = z
