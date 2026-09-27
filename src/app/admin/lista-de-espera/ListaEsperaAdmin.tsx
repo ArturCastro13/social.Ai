@@ -88,8 +88,8 @@ export function ListaEsperaAdmin() {
           type="search"
           value={busca}
           onChange={(e) => setBusca(e.target.value)}
-          placeholder="Buscar por empresa ou e-mail"
-          aria-label="Buscar por empresa ou e-mail"
+          placeholder="Buscar por nome, empresa ou e-mail"
+          aria-label="Buscar por nome, empresa ou e-mail"
           className="h-12 w-full border border-tinta/25 bg-white px-3 text-base outline-none focus:border-pauta sm:max-w-md"
         />
         <button
@@ -117,7 +117,8 @@ export function ListaEsperaAdmin() {
           <ul className="divide-y divide-tinta/10 border-y border-tinta/10 sm:hidden">
             {visiveis.map((i, n) => (
               <li key={`${i.email}-${i.criado_em}-${n}`} className="py-3">
-                <p className="font-semibold break-words">{i.empresa || "Sem nome"}</p>
+                <p className="font-semibold break-words">{i.nome || "Sem nome"}</p>
+                <p className="break-words text-sm text-tinta-2">{i.empresa || "Sem empresa"}</p>
                 <p className="break-all font-mono text-sm">{i.email}</p>
                 <p className="mt-1 text-sm text-tinta-3">
                   {quando(i.criado_em)}
@@ -130,6 +131,7 @@ export function ListaEsperaAdmin() {
           <table className="hidden w-full border-collapse text-left sm:table">
             <thead>
               <tr className="retranca border-b-2 border-tinta text-tinta-3">
+                <th className="py-2 pr-4 font-normal">Nome</th>
                 <th className="py-2 pr-4 font-normal">Empresa</th>
                 <th className="py-2 pr-4 font-normal">E-mail</th>
                 <th className="py-2 font-normal">Inscrição</th>
@@ -138,7 +140,8 @@ export function ListaEsperaAdmin() {
             <tbody className="divide-y divide-tinta/10">
               {visiveis.map((i, n) => (
                 <tr key={`${i.email}-${i.criado_em}-${n}`}>
-                  <td className="py-3 pr-4 font-semibold">{i.empresa || "Sem nome"}</td>
+                  <td className="py-3 pr-4 font-semibold">{i.nome || "Sem nome"}</td>
+                  <td className="py-3 pr-4">{i.empresa || "Sem empresa"}</td>
                   <td className="break-all py-3 pr-4 font-mono text-sm">
                     {i.email}
                     {r.repetidos.has(i.email.trim().toLowerCase()) && <Repetido />}

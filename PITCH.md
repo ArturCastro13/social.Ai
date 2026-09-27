@@ -2,15 +2,15 @@
 
 Tempo total: 3:00. Um apresenta, outro opera a demo no notebook já com a página aberta, o terceiro cuida do cronômetro e segura o plano B.
 
-Antes de subir: página aberta em `https://social-ai-beige.vercel.app`, zoom do navegador em 110%, o site de uma startup do hackathon já escolhido (e testado uma vez nos bastidores), e a aba `/admin/entrevistas` aberta para pegar os números finais. Se a internet estiver ruim, `DEMO_MODE=1` no deploy e usar o exemplo da Cora.
+Antes de subir: página aberta em `https://social-ai-beige.vercel.app`, zoom do navegador em 110%, o site de uma startup do hackathon já escolhido (e testado uma vez nos bastidores), e a aba `/admin/entrevistas` aberta para pegar os números finais. Enquanto não houver chave de IA na Vercel, um site fora das demos passa pelo motor local, que é mais genérico: se o teste nos bastidores não convencer, faça a demo com a Cora. Se a internet estiver ruim, `DEMO_MODE=1` no deploy e usar o exemplo da Cora.
 
 ---
 
 ## 0:00 a 0:25, a dor
 
-"Levanta a mão quem aqui é founder e cuida do marketing da própria startup. [pausa] Pois é. Hoje de manhã a gente conversou com [N] founders aqui no evento. [X] deles cuidam do marketing sozinhos, sem ninguém dedicado. Um deles disse: [frase real da pergunta 5, lida do painel]."
+"Seu negócio está na sua cabeça. Seu marketing não deveria estar. [pausa] Levanta a mão quem aqui é founder e cuida do marketing da própria startup. [pausa] Pois é. Hoje de manhã a gente conversou com [N] founders aqui no evento. [X] deles cuidam do marketing sozinhos, sem ninguém dedicado. Um deles disse: [frase real da pergunta 5, lida do painel]."
 
-"O founder é quem mais sabe do mercado, do produto e do cliente. Ele responde a mesma objeção em toda call de venda. Só que esse conhecimento fica na cabeça dele e não vira conteúdo, porque não sobra tempo nem estrutura. O Instagram da empresa fica para depois. E depois vira nunca."
+"O founder é quem mais sabe do mercado, do produto e do cliente. Ele responde a mesma dúvida em toda call de venda. Só que esse conhecimento fica na cabeça dele e não vira marketing, porque não sobra tempo nem estrutura. E quando tenta usar uma IA, passa horas explicando a própria empresa para ela. O Instagram da empresa fica para depois. E depois vira nunca."
 
 ## 0:25 a 0:50, a dor já paga
 
@@ -24,23 +24,31 @@ Fonte dos números da Doxa, para ter no bolso se perguntarem: [BrazilCham](https
 
 "Esse é o social.Ai. Vou colar o site da [startup do hackathon]."
 
-[Operador cola a URL.]
+[Operador cola a URL e clica em "Ler meu site".]
 
-"Enquanto ele lê o site, a gente responde três perguntas. É o que o ChatGPT não sabe sobre essa empresa: a objeção que o cliente mais faz, o que o mercado acredita e o founder acha errado, e uma história que mudou o jeito de ver o problema. Dá para responder falando."
+"Enquanto ele lê o site, o founder responde três perguntas diretas: qual problema ele resolve para o cliente, qual dúvida mais aparece antes de alguém comprar e por que o cliente escolhe ele e não outra opção. Dá para responder falando. É isso que nenhuma IA acha no site."
 
-[Operador cola as três respostas já combinadas com o founder da startup, ajusta a quantidade para 6 e clica em gerar.]
+[Operador cola as três respostas já combinadas com o founder da startup. Na tela de ajustes, mostra os concorrentes sugeridos, deixa 6 posts e clica em gerar.]
 
-"Ele tirou a paleta e as fontes direto do código do site, [cores aparecem] e agora cruza o que o founder contou com a nossa base de posts que já viralizaram nesse nicho, com link para cada fonte e nenhum número inventado."
+"Ele tirou a paleta e as fontes direto do código do site, [cores aparecem] e agora cruza o que o founder contou com o mercado: os concorrentes e a nossa base de posts que já foram bem nesse nicho, com link para cada fonte e nenhum número inventado."
 
-[Resultado aparece.]
+[Resultado aparece na aba Hoje.]
 
-"Primeiro, a semana: cada post num dia e horário. Olha a etiqueta: 'hipótese do nicho'. A gente não finge que conhece a audiência de vocês antes de ter dado. [aponta um post com o selo] Esse post aqui tem o selo 'da sua cabeça': nasceu da objeção que o founder acabou de contar. Em cada post, três linhas: para quem é, por que funciona, com o padrão da base que ele usou, e de onde veio o assunto. A arte é desenhada por código com as cores e a fonte do site, por isso sai em um segundo e custa quase zero. Se não gostou da cor, troca. [clica numa cor] Legenda para Instagram, LinkedIn, X e Facebook, e o post de gerar cliente já termina com o link de vocês. Baixa tudo num ZIP e posta."
+"Primeiro, o post de hoje. [aponta o selo] Esse aqui tem o selo 'da sua cabeça': nasceu da dúvida que o founder acabou de contar. A arte é desenhada por código com as cores e a fonte do site, por isso sai em um segundo e custa quase zero. Legenda para Instagram, LinkedIn, X e Facebook, e o post de gerar cliente já termina com o link de vocês. Aprovou, vem o próximo. [clica em Aprovar]"
+
+[Operador abre a aba Calendário.]
+
+"Aqui está a semana: cada post num dia e horário. Olha a etiqueta: 'hipótese do nicho'. A gente não finge que conhece a audiência de vocês antes de ter dado. Em cada post, três linhas: para quem é, por que funciona e de onde veio o assunto. E tem vídeo também: o roteiro com o que falar nos três primeiros segundos, cena por cena. Baixa tudo num ZIP e posta."
+
+[Operador abre a aba Resultados.]
+
+"Depois de postar, o founder conta como foi. A próxima semana aprende com esses números."
 
 Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e usar a Cora com as mesmas três respostas: a demo responde na hora, sem internet, e também mostra os posts com o selo "da sua cabeça".
 
 ## 1:55 a 2:20, diferencial e modelo
 
-"A diferença para a Doxa: o assunto sai do que o founder sabe, não de um roteiro genérico. Post estático e estratégia, sem gravar nem clonar ninguém, focado em founder de startup, com preço de ferramenta. A diferença para uma social media: o primeiro post sai em um minuto e já vem com o raciocínio de por que ele deve funcionar."
+"A diferença para a Doxa: o assunto sai do que o founder sabe, não de um roteiro genérico. Post estático pronto e roteiro para quem quiser gravar, sem clonar ninguém, focado em founder de startup, com preço de ferramenta. A diferença para uma social media: o primeiro post sai em um minuto e já vem com o raciocínio de por que ele deve funcionar."
 
 "Modelo: assinatura mensal. A hipótese de hoje é a partir de 49 reais por mês, bem abaixo do custo de qualquer pessoa dedicada. E a gente já perguntou: dos founders que ouvimos, a mediana do que pagariam é [R$ valor do painel] por mês."
 
@@ -52,7 +60,7 @@ Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e usar a Co
 
 ## 2:45 a 3:00, próximo passo
 
-"Hoje o social.Ai entrega post estático e estratégia. O próximo passo é publicar direto nas redes e, depois, vídeo. Quem aqui quer sair do hackathon com um mês de conteúdo pronto: o link está no slide. Obrigado."
+"Hoje o social.Ai entrega a semana pronta: posts na marca e roteiros de vídeo. O próximo passo é ler as métricas direto das redes e publicar por lá. Quem quiser ser um dos primeiros a testar: o link da lista de espera está no slide. Seu negócio está na sua cabeça. Seu marketing não deveria estar. Obrigado."
 
 ---
 
@@ -64,4 +72,4 @@ Se algo falhar: "Enquanto a internet decide, olha um que já rodou", e usar a Co
 
 **"E se a IA inventar algo sobre a empresa?"** O prompt proíbe usar qualquer número ou fato que não esteja no site, e o formato de dado de impacto só é usado quando há número real no texto. Mesmo assim, o founder revisa antes de postar.
 
-**"Como vocês adquirem cliente?"** A própria página é a demo: o founder cola o site e vê o resultado antes de deixar o e-mail. O e-mail só é pedido no download.
+**"Como vocês adquirem cliente?"** Duas portas. A página inicial é a própria demo: o founder cola o site e vê o resultado na hora, sem deixar e-mail. E a lista de espera (`/lista-de-espera`) guarda nome da empresa e e-mail de quem quer testar primeiro.

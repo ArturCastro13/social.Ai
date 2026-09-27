@@ -4,52 +4,56 @@ Base de produção: `https://social-ai-beige.vercel.app`
 
 ## O produto em um parágrafo
 
-Startups têm conhecimento de mercado, produto e cliente concentrado no founder, mas faltam estrutura e tempo para transformar esse conhecimento em aquisição de forma consistente. O social.Ai converte o conhecimento do founder em conteúdo de autoridade que atrai o cliente certo, usando padrões que já geraram alcance no nicho, com a pauta da semana pronta e o melhor dia e horário para cada post. Na prática: a pessoa cola a URL do site (de onde saem marca, paleta, fontes e posicionamento) e responde três perguntas curtas sobre o que só ela sabe. O sistema cruza isso com uma base curada de posts de alto desempenho do nicho e devolve a semana: posts estáticos com arte na identidade da marca, legenda para Instagram, LinkedIn, X e Facebook, e em cada post para quem ele é, qual padrão da base usou e de onde veio o assunto. O modelo de negócio é assinatura mensal com preço de ferramenta.
+O founder sabe mais do que ninguém sobre o próprio mercado, produto e cliente, mas esse conhecimento fica na cabeça dele e não vira marketing, porque falta tempo e estrutura. A frase das páginas públicas resume a proposta: "Seu negócio está na sua cabeça. Seu marketing não deveria estar." O social.Ai transforma o que o founder sabe em marketing pronto, sem que ele passe horas pesquisando, criando, revisando ou ensinando uma IA sobre a própria empresa. Na prática: a pessoa cola a URL do site (ou clica em "Não tenho site" e conta a empresa), responde três perguntas diretas (o problema que resolve, a dúvida que mais aparece antes da compra e o diferencial) e recebe a semana: posts estáticos com arte na identidade da marca, legendas para Instagram, LinkedIn, X e Facebook, roteiros de vídeo para gravar e o dia e horário de cada um. O painel tem três abas (Hoje, Calendário e Resultados) e aprende com as métricas que o founder digita. O modelo de negócio é assinatura mensal com preço de ferramenta.
 
-As quatro promessas e onde cada uma aparece no produto:
+As quatro etapas do "Como funciona" (`src/components/landing/ComoFuncionaEspera.tsx`, iguais na home e na lista de espera) e o que existe de cada uma no produto hoje:
 
-1. **Conhecimento do founder**: passo "O que só você sabe" no onboarding (`conhecimento_founder`) e selo "da sua cabeça" nos posts com `origem_tema: "founder"`.
-2. **Cliente certo**: linha "Para quem" em cada post (`enderecamento.publico` e `acao_esperada`) e o link de destino com UTM nos posts de `gerar_clientes`.
-3. **Padrões que já geraram alcance no nicho**: linha "Por que funciona" com o `padrao_referencia` (nome e link da fonte verificada).
-4. **Pauta da semana com melhor dia e horário**: bloco "Sua semana", com a fonte de cada horário.
+1. **Entendemos a sua empresa.** Existe: leitura do site (`/api/brand`), empresa sem site (`brandSemSite`), as três perguntas (`conhecimento_founder`), @ das redes, brand book colado em texto e transcrição de áudio na tela opcional de turbo.
+2. **Entendemos o mercado.** Existe: concorrentes sugeridos (`/api/concorrentes`), leitura da página pública dos concorrentes informados (`benchmark_concorrentes`) e a base curada de posts do nicho com fonte (`/api/radar`). Ainda não existe: monitoramento de tendências, sinais de interesse do público e leitura de vídeos virais. A base curada só tem post estático e é uma foto, não uma série no tempo.
+3. **Transformamos insight em estratégia.** Existe: o motor (`/api/analyze`) define objetivo, público e ação esperada de cada post (`enderecamento`), a rede e o calendário com a fonte de cada horário.
+4. **Entregamos pronto.** Existe: posts com arte na marca, legendas por rede, roteiros de vídeo, chamada final e link de destino com UTM. Em cada post, três linhas mostram **Para quem** (`enderecamento.publico` e `acao_esperada`), **Por que funciona** (`padrao_referencia`, com link para a fonte) e **Veio de** (`origem_tema`), com o selo "da sua cabeça" quando o post nasceu do que o founder contou.
 
 ## Princípios que guiam as decisões
 
 Gasto de API perto de zero: a arte é desenhada por código (Satori), nunca por IA de imagem, e a IA de texto é chamada uma vez por análise, com cache por URL. A demo nunca quebra: três empresas vêm pré-processadas e, sem chave de IA, um motor local de regras monta a análise a partir do texto do site. Nenhuma métrica é inventada: a base de virais só tem número quando ele foi lido na fonte. O motor fica isolado em rotas `/api`, com CORS aberto, para que qualquer interface (inclusive uma recriada dentro da Adapta) consiga usar.
 
+## Páginas públicas
+
+**Página inicial (`/`).** Hero com a frase acima e o subtítulo "Transforme o que você sabe sobre o seu mercado, produto e cliente em marketing que gera resultado. Sem passar horas pesquisando, criando, revisando ou ensinando uma IA sobre a sua própria empresa." O botão "Começar agora" abre o campo de URL no topo (`src/components/estudio/Estudio.tsx` e `Formulario.tsx`), com "Não tenho site" logo abaixo; enviar leva para `/app`. Depois vêm a dor, o vídeo curto do produto (`VideoDemo`: `demo-vertical.mp4` 4:5 abaixo de 640 px, `demo.mp4` 16:9 acima), o Como funciona em quatro etapas que acendem com a rolagem, o exemplo "Da sua fala ao post pronto" (`VideoFalaAoPost`, loop 4:5 de `/video/fala-ao-post.mp4` com a marca fictícia Rota ERP), os planos em teste, as perguntas e a chamada final. Aqui o CTA é "Começar agora" porque o produto já roda nesta página.
+
+**Lista de espera (`/lista-de-espera`).** Mesmo hero, mesmas quatro etapas e mesmo exemplo, sem preços e sem o campo de URL. O formulário (`FormularioEspera.tsx`) pede nome da empresa e e-mail, com o botão "Quero ser um dos primeiros a testar", e grava pela `POST /api/lista-de-espera` na tabela `leads` com `origem = 'lista-de-espera'`. A página diz que o produto está em desenvolvimento e não promete data. Detalhes em `WAITLIST.md`.
+
 ## Fluxos
 
-**Fluxo principal (página inicial).** O usuário digita a URL e escolhe quantos posts quer (3, 6, 9 ou 12). A interface chama `POST /api/brand`, mostra a paleta e as fontes assim que chegam, e em seguida chama `POST /api/analyze` com o perfil de marca. Enquanto espera, a tela de redação mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando). Com a resposta, o painel exibe posicionamento, diagnóstico, pilares, estratégia por rede, calendário e a grade de posts. Cada post mostra a arte (`GET /api/render/{postId}`), permite trocar a cor principal e o template, e traz a legenda de cada rede com botão de copiar.
+**Onboarding (`/app`).** A home ou `/app` pede só a URL. Com site, a tela seguinte é o passo "O que só você sabe" (`PassoSaber.tsx`): três perguntas diretas, uma por vez, por texto ou voz, com "Pular por agora" sempre visível, enquanto o site é lido em segundo plano. Depois vem a tela de ajustes já preenchida por `/api/inferir` (público, link de destino, quem assina, redes e quantidade de posts, objetivo com botões e texto livre, concorrentes com sugestões de `/api/concorrentes`, tom, formatos, frequência e o turbo opcional com brand book, áudio e inspirações). Os links "ver exemplo" (Cora, Pipefy, Sallve) pulam o onboarding e abrem a demo direto. Enquanto espera, a tela de carregamento mostra as etapas reais (lendo o site, achando a paleta, descobrindo o nicho, comparando com a base, escrevendo, diagramando).
 
-**Onboarding.** `/app` pede só a URL. A tela seguinte começa pelo passo "O que só você sabe" (três perguntas, texto ou voz, "Pular por agora" sempre visível) enquanto o site é lido em segundo plano, e depois mostra os ajustes já preenchidos (público, link de destino, quem assina, redes, objetivo com botões e texto livre, concorrentes com sugestões de `/api/concorrentes`, tom, formatos, frequência e o turbo opcional).
+**Sem site.** Abaixo do campo de URL, "Não tenho site" leva a `/app?semsite=1`. Lá a pessoa conta a empresa (nome, o que faz, para quem, nicho), as redes (cada uma com "Não tenho essa rede social") e, se quiser, até 3 concorrentes. A marca é montada no navegador por `brandSemSite` (`src/lib/brand/sem-site.ts`), com endereço interno `https://sem-site.social.ai/{slug}` que nunca aparece na arte, e vai como `brand` para `/api/inferir` e `/api/analyze`. `readBrand` recusa esse endereço. O nicho escolhido (`nicho_informado`) vale mais que o palpite. Depois segue para as três perguntas e os ajustes.
 
-**Sua semana.** No resultado, logo abaixo do posicionamento, o bloco "Sua semana" (`src/components/estudio/SuaSemana.tsx`) mostra os 7 dias a partir da primeira data do calendário: 7 colunas no desktop, lista por dia no celular. Cada slot tem horário, rede, gancho, a etiqueta da fonte do horário ("hipótese do nicho", "teste" ou "sua audiência"; sem fonte, "hipótese do nicho") e o selo "da sua cabeça" quando o post veio do founder. Posts depois do sétimo dia ficam numa lista curta "Depois desta semana". Em cada post, três linhas fixas: **Para quem** (público e ação esperada), **Por que funciona** (padrão da base com link para a fonte) e **Veio de** ("o que você contou", "seu site", "notícia" ou "padrão do nicho"). Diagnóstico e estratégia ficam recolhidos em "Ver análise completa".
+**Painel em três abas** (`src/components/estudio/Painel.tsx` e `abas.tsx`; no computador as abas ficam no cabeçalho, no celular numa barra fixa embaixo).
 
-**Sem site.** Abaixo do campo de URL, "Não tenho site" leva a `/app?semsite=1`. Lá a pessoa conta a empresa (nome, o que faz, para quem, nicho), as redes (cada uma com "Não tenho essa rede social") e, se quiser, até 3 concorrentes. A marca é montada no navegador por `brandSemSite` (`src/lib/brand/sem-site.ts`), com endereço interno `https://sem-site.social.ai/{slug}` que nunca aparece na arte, e vai como `brand` para `/api/inferir` e `/api/analyze`. `readBrand` recusa esse endereço. O nicho escolhido (`nicho_informado`) vale mais que o palpite.
+- **Hoje** (`Hoje.tsx`): só o post do dia, o próximo pendente pela ordem do calendário, com Aprovar e Recusar numa barra fixa. Decidir passa para o seguinte. Se houver vídeo marcado para hoje ou para o mesmo dia, ele aparece junto. A aba mostra quantos posts ainda estão sem decisão.
+- **Calendário** (`Calendario.tsx`): a semana (`SuaSemana.tsx`, 7 dias a partir da primeira data do calendário, com horário, rede, gancho, a fonte do horário "hipótese do nicho", "teste" ou "sua audiência" e o selo "da sua cabeça"), todos os posts e os vídeos para gravar, "Aprovar todos os pendentes", "Aprovar selecionados" e "Baixar tudo em ZIP".
+- **Resultados** (`SeusResultados.tsx` e `Concorrentes.tsx`): o que foi aprovado, os números do que foi postado, o que o motor aprendeu com eles (`aprendizados`) e "Concorrentes e nicho", com o `benchmark_concorrentes` (sem número de desempenho) e os posts do nicho que passaram de 1,5x a mediana na base curada (`/api/radar`).
 
-**O que chega ao usuário.** Só a recomendação: Sua semana (posts para postar e vídeos para gravar, com dia, horário e fonte do horário), posts prontos, vídeos para gravar (`roteiros`: gancho dos 3 primeiros segundos, cenas, chamada, legenda, dica de gravação) e Seus resultados. Em cada post há Aprovar, Recusar, Customizar (edita gancho, slides e legenda, e a arte é redesenhada), Editar no Canva (baixa a arte e abre o Canva no formato da rede; sem integração oficial) e Já postei (alcance, curtidas, comentários, salvos, compartilhamentos). Virais, ganchos, concorrência, diagnóstico e estratégia ficam dentro do motor.
+Em cada post há Aprovar, Recusar, Customizar (edita gancho, slides e legenda, e a arte é redesenhada), Editar no Canva (baixa a arte e abre o Canva no formato da rede; sem integração oficial) e Já postei (alcance, curtidas, comentários, salvos, compartilhamentos). Cada roteiro de vídeo (`roteiros`) traz o gancho dos 3 primeiros segundos, as cenas, a chamada final, a legenda, a dica de gravação e a agenda. Diagnóstico, estratégia e virais ficam dentro do motor e não aparecem no painel.
 
-**Aprendizado.** As métricas digitadas voltam no próximo CONTEXTO como `desempenho_proprio` (com gancho, formato, padrão, origem do tema, dia e horário) e `aprendizados_calculados` (`src/lib/motor/aprendizados.ts`: média por grupo comparada com a mediana do próprio founder, com "amostra pequena" abaixo de 3 posts). A IA devolve `aprendizados { funcionou, nao_funcionou, ajuste }` e aplica. Sem IA, o motor local escreve os aprendizados e reordena padrões e posts. A chave de cache ganha `#r:<hash>` dos resultados.
+**Aprendizado com as métricas.** As métricas digitadas voltam no próximo CONTEXTO como `desempenho_proprio` (com gancho, formato, padrão, origem do tema, dia e horário) e `aprendizados_calculados` (`src/lib/motor/aprendizados.ts`: média por grupo comparada com a mediana do próprio founder, com "amostra pequena" abaixo de 3 posts). A IA devolve `aprendizados { funcionou, nao_funcionou, ajuste }` e aplica. Sem IA, o motor local escreve os aprendizados e reordena padrões e posts. A chave de cache ganha `#r:<hash>` dos resultados.
 
-**Ideias do dia.** (Fora da tela desde a versão "motor de distribuição"; o componente segue no repositório.) Logo abaixo do cabeçalho do resultado e antes do diagnóstico, as ideias de post aparecem em um baralho (`src/components/baralho/Baralho.tsx`, montado em `src/components/estudio/IdeiasEMetricas.tsx`). Arrastar para a direita aprova, para a esquerda pula. Os dois botões e as setas do teclado fazem o mesmo. A pilha é ordenada pelo Opportunity Score uma vez, com o histórico de quando a análise abriu, para que decidir uma carta não reembaralhe as outras. Ideias já decididas nesta análise não voltam. Ao lado do baralho ficam a nota da carta do topo, os motivos, o `por_que` do post e a legenda por rede com botão de copiar.
-
-**Learning loop.** Cada decisão vai para `POST /api/feedback` e também fica no `localStorage` do navegador, na chave `socialai:historico:{dominio}`, para as métricas sobreviverem a uma nova análise do mesmo site. Na próxima `POST /api/analyze` com IA, o motor lê as decisões e os resultados da marca (`store.listarDecisoes` e `store.listarResultados`) e, com pelo menos 4 decisões, `textoPreferencias` (`src/lib/feedback.ts`) acrescenta ao prompt a seção "O que este founder aprovou antes", com a taxa de aprovação e o engajamento informado por formato. Com menos de 4 decisões, o prompt fica igual. As demos, o cache (a mesma URL em até 7 dias volta do cache, a não ser com `forcarNovo`) e o motor local não usam esse histórico.
-
-**Métricas.** No painel, o bloco de métricas mostra ideias avaliadas, aprovadas e a taxa de aprovação, e um gráfico de barras com a aprovação por formato. Para cada post aprovado, o founder pode informar alcance, curtidas, comentários e salvos (qualquer campo pode ficar vazio). O engajamento é (curtidas + comentários + salvos) / alcance e só é calculado quando há alcance informado. Esses números são digitados pelo founder: não há integração com as APIs do Instagram, do LinkedIn ou do X.
-
-**Radar do nicho.** Ao lado das métricas, o painel chama `GET /api/radar` e lista até 4 posts da base curada que passaram de 1,5x a mediana de curtidas do nicho, com autor, formato e link para o original.
+**Learning loop das decisões.** Cada decisão vai para `POST /api/feedback` e também fica no `localStorage` do navegador, na chave `socialai:historico:{dominio}`, para as métricas sobreviverem a uma nova análise do mesmo site. Na próxima `POST /api/analyze` com IA, o motor lê as decisões e os resultados da marca (`store.listarDecisoes` e `store.listarResultados`) e, com pelo menos 4 decisões, `textoPreferencias` (`src/lib/feedback.ts`) acrescenta ao prompt a seção "O que este founder aprovou antes", com a taxa de aprovação e o engajamento informado por formato. As demos e o cache (a mesma URL em até 7 dias) não usam esse histórico. Aprovações e métricas dos vídeos ficam só no navegador, porque `/api/feedback` aceita só formatos de post estático. Os números são digitados pelo founder: não há integração com as APIs do Instagram, do LinkedIn ou do X.
 
 **Download.** O download é direto, sem pedir e-mail. O ZIP é montado no navegador: uma pasta por post com as imagens (uma por slide no carrossel), um `legendas.md` com as quatro legendas e a data sugerida, e um `calendario.csv` na raiz.
 
-**Validação de dor.** A landing não tem mais formulário. `POST /api/validacao` continua aceitando respostas e o `GET` alimenta `/admin/entrevistas`.
+**Ideias do dia (fora da tela).** O baralho de arrastar (`src/components/baralho/Baralho.tsx`, montado em `src/components/estudio/IdeiasEMetricas.tsx`) e o Opportunity Score seguem no repositório, mas o painel de três abas não os usa.
 
-**Área do time.** `/admin/virais` para cadastrar e verificar itens da base. `/admin/entrevistas` para registrar entrevistas com founders pelo celular, com um painel que calcula os números do pitch ao vivo. Se `ADMIN_PASSWORD` estiver definido, essas rotas exigem o header `x-admin-password`.
+**Validação de dor.** A landing não tem mais formulário de dor. `POST /api/validacao` continua aceitando respostas e o `GET` alimenta `/admin/entrevistas`.
 
-**Modo demo.** `cora.com.br`, `pipefy.com` e `sallve.com.br` respondem na hora com análises pré-processadas, com ou sem internet e com ou sem chave. `DEMO_MODE=1` desliga a IA para qualquer URL e força o motor local.
+**Área do time.** `/admin/lista-de-espera` mostra as inscrições da lista de espera (total, hoje, últimos 7 dias, e-mails únicos e repetidos), com busca, atualização a cada 30 segundos e botão para baixar CSV. `/admin/virais` cadastra e verifica itens da base. `/admin/entrevistas` registra entrevistas com founders pelo celular e calcula os números do pitch ao vivo. `/admin` redireciona para `/admin/entrevistas`. Todas as páginas passam por uma tela de senha (`PortaoAdmin.tsx`) que confere `GET /api/admin/verificar`; a senha certa fica no `localStorage` do navegador para a próxima visita. As rotas de dados exigem o header `x-admin-password` igual a `ADMIN_PASSWORD`. Sem `ADMIN_PASSWORD`, ficam abertas só em desenvolvimento local e fechadas na Vercel.
+
+**Modo demo.** `cora.com.br`, `pipefy.com` e `sallve.com.br` respondem na hora com análises pré-processadas, com ou sem internet e com ou sem chave. `DEMO_MODE=1` desliga a IA para qualquer URL e força o motor local. Enquanto não houver `GEMINI_API_KEY` ou `ANTHROPIC_API_KEY` em produção, qualquer site fora das demos passa pelo motor local.
 
 ## Contratos da API
 
-Todas as rotas respondem JSON (exceto a de arte, que devolve PNG), aceitam `OPTIONS` e mandam `access-control-allow-origin: *`. Erros seguem `{ "erro": "mensagem em português", ...detalhes }` com o status HTTP adequado.
+Todas as rotas respondem JSON (exceto a de arte, que devolve PNG), aceitam `OPTIONS` e mandam `access-control-allow-origin: *`. A exceção é `POST /api/lista-de-espera`, feita só para o formulário da própria página: não tem `OPTIONS` nem CORS aberto. Erros seguem `{ "erro": "mensagem em português", ...detalhes }` com o status HTTP adequado.
 
 ### POST /api/brand
 
@@ -121,7 +125,7 @@ Entrada:
 }
 ```
 
-Também aceita `{ "url": "cora.com.br", "quantidade": 6 }` sem `brand`, e nesse caso lê a marca sozinho (útil para integrações simples). `quantidade` vai de 1 a 12. `email` é usado no limite da demo (padrão 3 análises com IA por e-mail; sem e-mail, conta por IP). `forcarNovo` ignora o cache.
+Também aceita `{ "url": "cora.com.br", "quantidade": 6 }` sem `brand`, e nesse caso lê a marca sozinho (útil para integrações simples). `quantidade` vai de 1 a 12. `email` é usado no limite da demo (padrão 3 análises com IA por e-mail; sem e-mail, conta por IP). `forcarNovo` ignora o cache, mas só vale com o header `x-admin-password` certo (ignorar o cache custa uma chamada de IA); sem ele, é ignorado.
 
 Ordem de decisão: empresa de exemplo, cache da mesma URL e quantidade (7 dias), IA configurada (Gemini por padrão, Claude com `LLM_PROVIDER=claude`), motor local. Qualquer falha de IA cai para o motor local com um aviso; a rota não devolve erro por causa da IA.
 
@@ -336,7 +340,7 @@ Lista as empresas de exemplo: `[{ "id": "demo-cora", "nome": "Cora", "url": "...
 
 ### POST /api/feedback
 
-Registra uma decisão do baralho ou o resultado de um post publicado. O campo `tipo` define o formato.
+Registra uma decisão (aprovar ou recusar) ou o resultado de um post publicado. O campo `tipo` define o formato.
 
 Decisão:
 
@@ -355,7 +359,7 @@ Decisão:
 }
 ```
 
-`decisao` é `aprovado` ou `pulado`. `nicho` e `formato` precisam ser valores conhecidos; `padrao` é opcional (padrão `""`).
+`decisao` é `aprovado` ou `pulado` (o botão Recusar grava `pulado`). `nicho` e `formato` precisam ser valores conhecidos; `padrao` é opcional (padrão `""`).
 
 Resultado:
 
@@ -369,11 +373,12 @@ Resultado:
   "alcance": 1800,
   "curtidas": 95,
   "comentarios": 7,
-  "salvamentos": 12
+  "salvamentos": 12,
+  "compartilhamentos": 3
 }
 ```
 
-Os quatro números são inteiros de 0 a 1 bilhão ou `null` quando o founder não informou. O `dominio` é guardado em minúsculas.
+Os números são inteiros de 0 a 1 bilhão ou `null` quando o founder não informou. `compartilhamentos` é opcional (a coluna entrou depois em `metricas`). O `dominio` é guardado em minúsculas.
 
 Saída: `{ "ok": true }`. Erros: `400` para dados inválidos, `503` quando o armazenamento falha. Com Supabase, decisões vão para a tabela `feedback` e resultados para `metricas`; sem Supabase, para `.data/` (ou `/tmp` na Vercel).
 
@@ -441,7 +446,36 @@ Saída (resumida, fintech com a base atual):
 
 `GET /api/validacao` (admin) lista as respostas.
 
+### POST /api/lista-de-espera
+
+Inscrição na lista de espera. Entrada:
+
+```json
+{ "empresa": "Rota ERP", "email": "voce@suaempresa.com", "website": "" }
+```
+
+`empresa` de 2 a 120 caracteres, `email` válido até 254 (guardado em minúsculas). `website` é um campo escondido contra robôs: se vier preenchido, a rota responde 400. Corpo acima de 2 KB responde 413.
+
+Saída: `{ "ok": true }`. Grava em `leads` com `origem = 'lista-de-espera'`. Só confirma com Supabase configurado: sem banco, ou se a gravação falhar, responde 503 com `erro` e o formulário não mostra sucesso. Não junta inscrições repetidas e não manda e-mail de confirmação.
+
 ### Rotas de admin
+
+Todas exigem o header `x-admin-password` igual a `ADMIN_PASSWORD` e respondem 401 com `erro` quando ele falta ou está errado. Sem `ADMIN_PASSWORD`, abrem só em desenvolvimento local.
+
+`GET /api/admin/verificar`: `{ "ok": true }` com a senha certa. É o que a tela de senha do admin usa; cada erro espera 400 ms antes de responder.
+
+`GET /api/admin/lista-de-espera`: inscrições da lista, mais novas primeiro, sem juntar e-mails repetidos.
+
+```json
+{
+  "itens": [{ "empresa": "Rota ERP", "email": "voce@suaempresa.com", "criado_em": "2026-09-26T22:10:00.000Z" }],
+  "total": 1,
+  "armazenamento": "supabase",
+  "persistente": true
+}
+```
+
+`persistente` é `false` quando não há Supabase. Falha de leitura responde 500.
 
 `GET` e `POST /api/admin/virais`: lista a base e o catálogo de padrões; cadastra ou atualiza um item, validado com as regras de curadoria (verificado exige fonte, métrica exige observação de onde foi lida, nenhum travessão).
 
@@ -449,7 +483,7 @@ Saída (resumida, fintech com a base atual):
 
 ## Opportunity Score
 
-Calculado no navegador por `pontuar` em `src/lib/oportunidade.ts`, de 0 a 100, com três sinais que o produto consegue medir hoje:
+Fora do painel atual: só o baralho de Ideias do dia (`IdeiasEMetricas.tsx`), que não está na tela, usa o score. Calculado no navegador por `pontuar` em `src/lib/oportunidade.ts`, de 0 a 100, com três sinais que o produto consegue medir hoje:
 
 - **Força do padrão no nicho (40%).** Frequência do `padrao_inspirador` do post na base curada, relativa ao padrão mais frequente do nicho: `0,25 + 0,75 x freq / freqMax`. Sem dados do radar, fica em 0,5.
 - **Aderência à marca (40%).** Aprovações do founder no mesmo formato com suavização: `(aprovados + 1) / (decisões + 2)`, que dá 50% sem histórico. Se houver resultados com alcance no formato, mistura 70% disso com 30% do engajamento informado (5% de engajamento ou mais conta como nota cheia).
@@ -461,6 +495,6 @@ Cada sinal gera um motivo em texto só quando há número real por trás (por ex
 
 ## Dados
 
-Supabase (rode `supabase/schema.sql`): `virais`, `analises` (cache), `uso` (limite da demo), `leads`, `validacao`, `entrevistas`, `feedback` (decisões do baralho), `metricas` (resultados informados dos posts) e o bucket público `posts`. Sem Supabase, tudo vai para `.data/` localmente (ou para `/tmp` na Vercel, que é temporário).
+Supabase, provisionado pela Vercel Marketplace (variáveis em `DEPLOY.md`) e com `supabase/schema.sql` aplicado: `virais`, `analises` (cache), `uso` (limite da demo), `leads` (as inscrições da lista de espera ficam com `origem = 'lista-de-espera'`), `validacao`, `entrevistas`, `feedback` (decisões de aprovar e recusar), `metricas` (resultados informados dos posts) e o bucket público `posts`. Sem Supabase, tudo vai para `.data/` localmente (ou para `/tmp` na Vercel, que é temporário).
 
 Base de virais versionada em `data/virais/<nicho>/itens.json` e catálogo em `data/virais/catalogo.json` (`npm run virais:catalogo`). Demos em `data/demo/`, geradas por `npm run demo:gerar` a partir de `data/demo/conteudo/`.

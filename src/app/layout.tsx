@@ -14,9 +14,9 @@ const instrument = Instrument_Serif({
 const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  title: "social.Ai | O que você sabe vira post de autoridade",
+  title: "social.Ai | Seu negócio está na sua cabeça. Seu marketing não deveria estar.",
   description:
-    "Conte o que só você sabe sobre mercado, produto e cliente. O social.Ai transforma isso em posts de autoridade para o cliente certo, com a pauta da semana pronta e o melhor horário para cada um.",
+    "Transforme o que você sabe sobre o seu mercado, produto e cliente em marketing que gera resultado. Sem passar horas pesquisando, criando, revisando ou ensinando uma IA sobre a sua própria empresa.",
 };
 
 export const viewport: Viewport = {

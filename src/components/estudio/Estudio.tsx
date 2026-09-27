@@ -43,12 +43,18 @@ export function Estudio({
   return (
     <>
       <section id="topo" className="scroll-mt-4">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 pb-12 sm:gap-10 sm:px-6 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14 lg:pb-28 lg:pt-10">
-          <div className="flex flex-col justify-center pb-2 pt-10 sm:pb-4 sm:pt-16 lg:py-0">
+        <div
+          className={`mx-auto grid max-w-6xl gap-8 px-4 sm:gap-10 sm:px-6 lg:pt-10 ${
+            vitrine ? "pb-12 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:items-center lg:gap-14 lg:pb-28" : "pb-10 sm:pb-14 sm:text-center lg:pb-16"
+          }`}
+        >
+          {/* Sem vitrine, o topo é uma coluna só, centrada a partir do tablet (no celular fica alinhado à esquerda).
+              O respiro de baixo é curto de propósito: o título da seção seguinte aparece no fim da primeira tela do computador. */}
+          <div className={`flex flex-col justify-center pb-2 pt-6 sm:pb-4 sm:pt-16 ${vitrine ? "lg:py-0" : "lg:pt-20"}`}>
           {cabecalho}
-          <div style={{ "--atraso": "340ms" } as CSSProperties} className="entrada mt-8 max-w-2xl sm:mt-10">
+          <div style={{ "--atraso": "340ms" } as CSSProperties} className={`entrada mt-8 w-full sm:mt-10 ${vitrine ? "max-w-2xl" : `sm:mx-auto ${aberto ? "max-w-xl" : "max-w-2xl"}`}`}>
             {aberto ? (
-              <Formulario onEnviar={ir} ocupado={indo} />
+              <Formulario onEnviar={ir} ocupado={indo} centrado={!vitrine} />
             ) : (
               <button
                 type="button"
@@ -59,14 +65,14 @@ export function Estudio({
               </button>
             )}
             {exemplos.length > 0 && (
-              <p className={`mt-6 text-sm text-tinta-3 ${aberto ? "" : "hidden sm:block"}`}>
+              <p className={`mt-4 text-sm text-tinta-3 ${aberto ? "" : "hidden sm:block"}`}>
                 ver exemplo:{" "}
                 {exemplos.map((ex, i) => (
                   <Fragment key={ex.dominio}>
                     <button
                       type="button"
                       onClick={() => exemplo(ex.dominio)}
-                      className="inline-flex min-h-11 items-center underline decoration-tinta/30 underline-offset-4 transition-colors hover:text-tinta hover:decoration-tinta sm:min-h-0"
+                      className="inline-flex min-h-11 items-center underline decoration-tinta/30 underline-offset-4 transition-colors hover:text-tinta hover:decoration-tinta"
                     >
                       {ex.nome}
                     </button>
