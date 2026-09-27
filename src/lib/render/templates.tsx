@@ -126,19 +126,6 @@ function Marca({ p, cor, fundoClaro, tamanho = 1 }: { p: ArteProps; cor: string;
   );
 }
 
-function Rodape({ p, cor, fundoClaro, contador }: { p: ArteProps; cor: string; fundoClaro: boolean; contador?: string }) {
-  const u = Math.min(p.w, p.h) / 1080;
-  return (
-    <div style={row({ alignItems: "center", justifyContent: "space-between", width: "100%" })}>
-      <Marca p={p} cor={cor} fundoClaro={fundoClaro} />
-      <div style={row({ alignItems: "center", gap: 24 * u, fontFamily: "Corpo", fontSize: 28 * u, color: cor, opacity: 0.8 })}>
-        <div>{handleDe(p.brand, p.post)}</div>
-        {contador ? <div style={{ fontWeight: 700 }}>{contador}</div> : null}
-      </div>
-    </div>
-  );
-}
-
 function Moldura({ p, bg, children, style }: { p: ArteProps; bg: string; children: ReactNode; style?: CSSProperties }) {
   const u = Math.min(p.w, p.h) / 1080;
   const paisagem = p.w / p.h > 1.3;
@@ -263,9 +250,6 @@ function depoisDaFoto(p: ArteProps, f: { w: number; h: number; paisagem: boolean
 
 // ---------------------------------------------------------------- foto de fundo (imagem da IA)
 
-/** Cor do véu sobre a foto: o escuro da marca, puxado para o preto para não acinzentar a imagem. */
-const corDoVeu = (tema: Tema) => mix(tema.escuro, "#000000", 0.3);
-
 /**
  * Opacidade mínima do véu para cada texto ter contraste com qualquer foto por baixo. Confere o pior caso
  * (foto branca sob o véu), do mesmo jeito que o tema confere cada par de cores. Nunca abaixo de 0,7: menos que isso
@@ -278,43 +262,6 @@ export function veuLegivel(veu: string, textos: [cor: string, minimo: number][])
   }
   return 0.97;
 }
-
-/**
- * Foto em tela cheia com véu só onde o texto fica: embaixo (retrato e quadrado) ou à esquerda (paisagem),
- * mais uma faixa no topo para a marca. `bloco` é o tamanho do texto (altura embaixo, largura à esquerda):
- * o véu cobre esse bloco com a opacidade cheia e some aos poucos depois dele. Devolve também a opacidade.
- */
-function FundoFoto({ p, foto, textos, bloco, lado, topo = true }: { p: ArteProps; foto: string; textos: [string, number][]; bloco: number; lado: "baixo" | "esquerda"; topo?: boolean }) {
-  const u = Math.min(p.w, p.h) / 1080;
-  const cor = corDoVeu(p.tema);
-  const alfa = veuLegivel(cor, textos);
-  const cheio = withAlpha(cor, alfa);
-  const nada = withAlpha(cor, 0);
-  const total = lado === "baixo" ? p.h : p.w;
-  // Padding da moldura, o bloco e um respiro. Nunca menos de 30% nem mais de 70% da arte.
-  const ate = Math.round(Math.min(0.7, Math.max(0.3, (bloco + 130 * u) / total)) * 100);
-  // Um bloco só, em posição absoluta: fragmento com filhos absolutos sai deslocado pelo padding no Satori.
-  return (
-    <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: p.w, height: p.h }}>
-      <img src={foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: p.w, height: p.h, objectFit: "cover" }} />
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: p.w,
-          height: p.h,
-          backgroundImage: `linear-gradient(${lado === "baixo" ? "to top" : "to right"}, ${cheio} 0%, ${cheio} ${ate}%, ${withAlpha(cor, alfa * 0.45)} ${Math.min(100, ate + 12)}%, ${nada} ${Math.min(100, ate + 28)}%)`,
-        }}
-      />
-      {topo ? (
-        <div style={{ position: "absolute", left: 0, top: 0, width: p.w, height: 250 * u, backgroundImage: `linear-gradient(to bottom, ${cheio} 0%, ${withAlpha(cor, alfa * 0.8)} 45%, ${nada} 100%)` }} />
-      ) : null}
-    </div>
-  );
-}
-
-const SOMBRA_TEXTO = "0 2px 18px rgba(0,0,0,0.35)";
 
 // ---------------------------------------------------------------- capa-gancho (carrossel)
 
@@ -500,7 +447,7 @@ function PrintX(p: ArteProps) {
   const fs = caber(texto, cartaoW - 120 * u, h * (paisagem ? 0.42 : 0.4), 58 * u, 30 * u, 1.32, 0.5);
   const handle = brand.handles.x ?? brand.handles.instagram ?? (dominioVisivel(brand) ? "@" + brand.dominio.split(".")[0] : arrobaDoNome(brand));
   return (
-    <Moldura p={p} bg={tema.primaria} style={{ alignItems: "center", justifyContent: "center" }}>
+    <Moldura p={p} bg={p.foto ? tema.escuro : tema.papel} style={{ alignItems: "center", justifyContent: "center" }}>
       {p.foto ? (
         // O cartão é branco com texto escuro: a foto fica inteira, só um pouco mais escura para o cartão saltar.
         <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: w, height: h }}>
@@ -509,11 +456,22 @@ function PrintX(p: ArteProps) {
         </div>
       ) : (
         <>
-          <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.25 }} />
-          <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.naPrimaria, opacity: 0.12 }} />
+          <FaixaTopo p={p} largura={w} />
+          <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.marcaTexto, opacity: 0.55 }} />
+          <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.12 }} />
         </>
       )}
-      <div style={col({ width: cartaoW, background: "#ffffff", borderRadius: 40 * u, padding: 60 * u, gap: 36 * u, boxShadow: `0 ${30 * u}px ${80 * u}px rgba(0,0,0,0.25)` })}>
+      <div
+        style={col({
+          width: cartaoW,
+          background: "#ffffff",
+          borderRadius: 40 * u,
+          padding: 60 * u,
+          gap: 36 * u,
+          boxShadow: `0 ${24 * u}px ${60 * u}px rgba(0,0,0,0.14)`,
+          border: `${2 * u}px solid ${withAlpha(tema.tintaNoPapel, 0.08)}`,
+        })}
+      >
         <div style={row({ alignItems: "center", gap: 24 * u })}>
           <div style={row({ width: 104 * u, height: 104 * u, borderRadius: 9999, background: p.logo ? "#ffffff" : tema.primaria, border: `${3 * u}px solid #e7e7e7`, alignItems: "center", justifyContent: "center", overflow: "hidden" })}>
             {p.logo ? (
@@ -540,42 +498,25 @@ function PrintX(p: ArteProps) {
 function Bastidor(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
-  const paisagem = w / h > 1.3;
   const s = post.slides[0];
   const titulo = limpar(s.titulo || post.gancho);
   const texto = limpar(s.texto);
-  const areaW = p.foto && paisagem ? w * 0.52 : w - 168 * u;
-  const areaH = p.foto && !paisagem ? h * 0.3 : h * 0.44;
-  const fs = caber(titulo, areaW - 40 * u, areaH, 112 * u, 44 * u, 1.05);
-  const conteudo = (
-    <div style={row({ gap: 34 * u, alignItems: "stretch" })}>
-      <div style={{ width: 12 * u, background: tema.primariaNoClaro, borderRadius: 99 }} />
-      <div style={col({ gap: 30 * u, flex: 1 })}>
-        <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.05, color: tema.tintaNoClaro, letterSpacing: -fs * 0.025 }}><Kern t={titulo} fs={fs} /></div>
-        {texto ? <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.2, 42 * u, 26 * u, 1.38, 0.5), lineHeight: 1.38, color: tema.mutedNoClaro }}>{texto}</div> : null}
-      </div>
-    </div>
-  );
+  const f = p.foto ? faixaDaFoto(p, 0.42) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fs = caber(titulo, areaW, f ? h * 0.26 : h * 0.42, 108 * u, 44 * u, 1.02);
   return (
-    <Moldura p={p} bg={tema.claro} style={p.foto && paisagem ? { paddingLeft: w * 0.42 + 60 * u } : undefined}>
-      {p.foto ? (
-        <img
-          src={p.foto}
-          alt=""
-          style={
-            paisagem
-              ? { position: "absolute", left: 0, top: 0, width: w * 0.42, height: h, objectFit: "cover" }
-              : { position: "absolute", left: 0, top: 0, width: w, height: h * 0.42, objectFit: "cover" }
-          }
-        />
-      ) : null}
-      <div style={row({ alignItems: "center", gap: 16 * u, marginTop: p.foto && !paisagem ? h * 0.42 - 40 * u : 0 })}>
-        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 5 * u, color: tema.primariaNoClaro }}>BASTIDORES</div>
-        <div style={{ width: 120 * u, height: 3 * u, background: tema.primariaNoClaro }} />
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={row({ alignItems: "center", gap: 16 * u })}>
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 5 * u, color: tema.primariaNoPapel }}>BASTIDORES</div>
+        <div style={{ width: 120 * u, height: 3 * u, background: tema.primariaNoPapel }} />
       </div>
-      {conteudo}
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <div style={col({ gap: 24 * u, maxWidth: areaW })}>
+        <TituloCreator texto={titulo} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.02} />
+        {texto ? <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.18, 40 * u, 26 * u, 1.38, 0.5), lineHeight: 1.38, color: tema.mutedNoPapel }}>{texto}</div> : null}
+      </div>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
@@ -587,7 +528,7 @@ function AntesDepois(p: ArteProps) {
   const paisagem = w / h > 1.1;
   const antes = post.slides[0] ?? { titulo: "Antes", texto: "" };
   const depois = post.slides[1] ?? { titulo: "Depois", texto: post.gancho };
-  const cinza = "#e9e6e1";
+  const cinza = mix(tema.papel, "#000000", 0.06);
   const metadeW = paisagem ? w / 2 : w;
   const metadeH = paisagem ? h : h / 2;
   const bloco = (s: { titulo: string; texto: string }, bg: string, cor: string, rotulo: string, riscado: boolean) => {
@@ -630,6 +571,7 @@ function AntesDepois(p: ArteProps) {
       <div style={row({ position: "absolute", right: 60 * u, bottom: 48 * u, alignItems: "center" })}>
         <Marca p={p} cor={tema.naPrimaria} fundoClaro={false} tamanho={0.9} />
       </div>
+      <FaixaTopo p={p} largura={w} />
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { Arte, limpar, marcarDestaque } from "@/lib/render/templates";
 import { temaDaMarca, TAMANHOS, type Tamanho } from "@/lib/render/tema";
 import { fontesDaMarca } from "@/lib/render/fonts";
 import { DEMOS } from "@/lib/engine/demo";
+import { TEMPLATES } from "@/lib/engine/schema";
 import type { PostGerado, TemplateId } from "@/lib/types";
 
 // Desvio do plano: DEMOS aqui é um array ([cora, pipefy, sallve]), não um objeto por nome. DEMOS[0] é a Cora.
@@ -75,4 +76,10 @@ describe("carrossel creator", () => {
       for (const tamanho of ["feed", "quadrado", "linkedin", "x"] as Tamanho[])
         for (const foto of [null, FOTO]) expect((await desenhar(post, t, 0, tamanho, foto)).length).toBeGreaterThan(5000);
   }, 60_000);
+
+  it("todos os templates desenham nos 4 tamanhos", async () => {
+    for (const t of TEMPLATES as readonly TemplateId[])
+      for (const tamanho of ["feed", "quadrado", "linkedin", "x"] as Tamanho[])
+        for (const foto of [null, FOTO]) expect((await desenhar({ ...carrossel, template: t } as PostGerado, t, 0, tamanho, foto)).length).toBeGreaterThan(5000);
+  }, 180_000);
 });
