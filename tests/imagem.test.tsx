@@ -249,6 +249,12 @@ describe("criar imagem", () => {
 });
 
 describe("limite de imagens", () => {
+  it("limite padrão: 30 capas por IP e 150 por dia", () => {
+    const agora = new Date("2026-10-01T12:00:00Z");
+    for (let i = 0; i < 30; i++) expect(reservarUsoImagem("ip-limite", agora)).toBe(true);
+    expect(reservarUsoImagem("ip-limite", agora)).toBe(false);
+  });
+
   it("limita por IP e no total do dia, e zera no dia seguinte", () => {
     vi.stubEnv("LIMITE_IMAGENS_POR_IP", "2");
     vi.stubEnv("LIMITE_IMAGENS_DIA", "3");

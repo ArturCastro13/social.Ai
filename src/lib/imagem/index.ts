@@ -112,14 +112,14 @@ export async function criarImagemDoPost(e: EntradaImagem, deps: Dependencias = {
 const uso = { dia: "", global: 0, porIp: new Map<string, number>() };
 
 /**
- * Reserva uma imagem: até LIMITE_IMAGENS_POR_IP (padrão 10) por IP e LIMITE_IMAGENS_DIA (padrão 60) no total,
+ * Reserva uma imagem: até LIMITE_IMAGENS_POR_IP (padrão 30) por IP e LIMITE_IMAGENS_DIA (padrão 150) no total,
  * por dia. false quando passou.
  */
 export function reservarUsoImagem(ip: string, agora = new Date()): boolean {
   const hoje = agora.toISOString().slice(0, 10);
   if (uso.dia !== hoje) Object.assign(uso, { dia: hoje, global: 0, porIp: new Map() });
-  const porIp = Number(process.env.LIMITE_IMAGENS_POR_IP || 10);
-  const global = Number(process.env.LIMITE_IMAGENS_DIA || 60);
+  const porIp = Number(process.env.LIMITE_IMAGENS_POR_IP || 30);
+  const global = Number(process.env.LIMITE_IMAGENS_DIA || 150);
   const n = uso.porIp.get(ip) ?? 0;
   if (n >= porIp || uso.global >= global) return false;
   uso.porIp.set(ip, n + 1);
