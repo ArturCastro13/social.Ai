@@ -21,7 +21,33 @@ export interface ArteProps {
 }
 
 const EMOJI = /[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu;
-export const limpar = (s: string) => s.replace(EMOJI, "").replace(/\s{2,}/g, " ").trim();
+
+/** Tira o [PREENCHER: ...] da arte: o cartão do post pede para completar, a imagem nunca mostra o marcador. */
+export function semPlaceholder(s: string): string {
+  // Nota (desvio do plano): "%" fica de fora da junção com o espaço anterior. O plano original juntava também o
+  // "%" à palavra ("Ganhe%"), mas o próprio teste do plano espera o espaço antes do símbolo ("Ganhe % de tempo.").
+  return s.replace(/\s*\[PREENCHER[^\]]*\]\s*/gi, " ").replace(/\s+([.,;:!?])/g, "$1").replace(/\s{2,}/g, " ").trim();
+}
+
+export const limpar = (s: string) => semPlaceholder(s.replace(EMOJI, "")).replace(/\s{2,}/g, " ").trim();
+
+const palavraNormal = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+
+/** Divide o título em palavras e marca as que formam o destaque (sem diferença de acento, caixa e pontuação). */
+export function marcarDestaque(texto: string, destaque?: string | null): { palavra: string; marcada: boolean }[] {
+  const palavras = limpar(texto).split(" ").filter(Boolean);
+  const out = palavras.map((palavra) => ({ palavra, marcada: false }));
+  const alvo = limpar(destaque ?? "").split(" ").map(palavraNormal).filter(Boolean);
+  if (!alvo.length) return out;
+  const norm = palavras.map(palavraNormal);
+  for (let i = 0; i + alvo.length <= norm.length; i++) {
+    if (alvo.every((a, k) => norm[i + k] === a)) {
+      for (let k = 0; k < alvo.length; k++) out[i + k].marcada = true;
+      break;
+    }
+  }
+  return out;
+}
 
 /** Tamanho de fonte que cabe na caixa, estimando largura média de caractere. */
 function contarLinhas(palavras: string[], largura: number, s: number, larguraChar: number) {
@@ -132,6 +158,107 @@ function Moldura({ p, bg, children, style }: { p: ArteProps; bg: string; childre
       {children}
     </div>
   );
+}
+
+// ---------------------------------------------------------------- estilo creator: peças comuns
+
+/** Faixa de cor da marca no topo da arte (ou só da imagem, quando ela ocupa a faixa de cima). */
+function FaixaTopo({ p, largura }: { p: ArteProps; largura: number }) {
+  const u = Math.min(p.w, p.h) / 1080;
+  return <div style={{ position: "absolute", left: 0, top: 0, width: largura, height: 14 * u, background: p.tema.primaria }} />;
+}
+
+/** Fundo de papel no tom da marca com a faixa no topo: a base de quase todos os templates. */
+function Papel({ p, children, style }: { p: ArteProps; children: ReactNode; style?: CSSProperties }) {
+  return (
+    <Moldura p={p} bg={p.tema.papel} style={style}>
+      <FaixaTopo p={p} largura={p.w} />
+      {children}
+    </Moldura>
+  );
+}
+
+/** Autor no topo, como nos carrosséis de creator: avatar (logo ou inicial), nome e @. */
+function Autor({ p, cor, corSec, tamanho = 1 }: { p: ArteProps; cor: string; corSec: string; tamanho?: number }) {
+  const u = (Math.min(p.w, p.h) / 1080) * tamanho;
+  const nome = limpar(p.brand.nome);
+  const lado = 76 * u;
+  return (
+    <div style={row({ alignItems: "center", gap: 20 * u })}>
+      {p.logo ? (
+        <div style={row({ width: lado, height: lado, borderRadius: 9999, background: "#ffffff", alignItems: "center", justifyContent: "center", overflow: "hidden", border: `${2 * u}px solid ${withAlpha(cor, 0.15)}` })}>
+          <img src={p.logo} alt="" style={{ width: lado * 0.68, height: lado * 0.68, objectFit: "contain" }} />
+        </div>
+      ) : (
+        <div style={row({ width: lado, height: lado, borderRadius: 9999, background: p.tema.primaria, color: p.tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 36 * u })}>
+          {nome.charAt(0).toUpperCase()}
+        </div>
+      )}
+      <div style={col({ gap: 2 * u })}>
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u, color: cor }}>{nome}</div>
+        <div style={{ fontFamily: "Corpo", fontSize: 24 * u, color: corSec }}>{handleDe(p.brand, p.post)}</div>
+      </div>
+    </div>
+  );
+}
+
+/** Título display com o trecho de destaque sobre um marca-texto na cor da marca. */
+function TituloCreator({ texto, destaque, fs, cor, marca, lh = 0.98 }: { texto: string; destaque?: string | null; fs: number; cor: string; marca: string; lh?: number }) {
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", columnGap: fs * 0.24, rowGap: fs * 0.06, fontFamily: "Titulo", fontSize: fs, lineHeight: lh, color: cor, letterSpacing: -fs * 0.035 }}>
+      {marcarDestaque(texto, destaque).map((w, i) => (
+        <div
+          key={i}
+          style={
+            w.marcada
+              ? { display: "flex", backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 50%, ${marca} 50%, ${marca} 94%, rgba(0,0,0,0) 94%)`, padding: `0 ${fs * 0.05}px`, margin: `0 ${-fs * 0.05}px` }
+              : { display: "flex" }
+          }
+        >
+          {w.palavra}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/** Contador e barra de progresso no rodapé do carrossel. */
+function Progresso({ p, i, total, cor, trilho }: { p: ArteProps; i: number; total: number; cor: string; trilho: string }) {
+  const u = Math.min(p.w, p.h) / 1080;
+  return (
+    <div style={col({ gap: 14 * u, width: "100%" })}>
+      <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 2 * u, color: cor })}>
+        <div>{`${i + 1} / ${total}`}</div>
+        <div>{i + 1 < total ? "DESLIZE →" : ""}</div>
+      </div>
+      <div style={row({ width: "100%", height: 6 * u, borderRadius: 99, background: trilho })}>
+        <div style={{ width: `${((i + 1) / total) * 100}%`, height: "100%", borderRadius: 99, background: p.tema.primaria }} />
+      </div>
+    </div>
+  );
+}
+
+/** Onde a imagem da IA fica: faixa de cima (retrato e quadrado) ou metade esquerda (paisagem). */
+function faixaDaFoto(p: ArteProps, fracao: number) {
+  const paisagem = p.w / p.h > 1.3;
+  return paisagem ? { w: Math.round(p.w * 0.44), h: p.h, paisagem } : { w: p.w, h: Math.round(p.h * fracao), paisagem };
+}
+
+/** A imagem da IA na faixa, com a faixa de cor da marca por cima. */
+function FotoFaixa({ p, foto, w, h }: { p: ArteProps; foto: string; w: number; h: number }) {
+  return (
+    <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: w, height: h }}>
+      <img src={foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: w, height: h, objectFit: "cover" }} />
+      <FaixaTopo p={p} largura={w} />
+    </div>
+  );
+}
+
+/** Padding da arte quando a imagem ocupa a faixa: o conteúdo começa depois dela. */
+function depoisDaFoto(p: ArteProps, f: { w: number; h: number; paisagem: boolean } | null): CSSProperties | undefined {
+  const u = Math.min(p.w, p.h) / 1080;
+  if (!f) return undefined;
+  return f.paisagem ? { paddingLeft: f.w + 60 * u } : { paddingTop: f.h + 44 * u };
 }
 
 // ---------------------------------------------------------------- foto de fundo (imagem da IA)
