@@ -1,10 +1,12 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { blocosClaude, partesGemini, type AnexoLLM } from "./anexos";
 
 // Adaptador de IA de texto: Gemini por padrão (cota gratuita), Claude quando LLM_PROVIDER=claude.
 
 export interface LLM {
   nome: string;
   gerar(sistema: string, prompt: string): Promise<string>;
+  gerarComAnexos?(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string>;
 }
 
 class GeminiLLM implements LLM {
@@ -33,6 +35,20 @@ class GeminiLLM implements LLM {
     if (!txt) throw new Error("Gemini respondeu vazio");
     return txt;
   }
+  async gerarComAnexos(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string> {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${this.modelo}:generateContent`, {
+      method: "POST", headers: { "content-type": "application/json", "x-goog-api-key": this.chave },
+      body: JSON.stringify({ systemInstruction: { parts: [{ text: sistema }] }, contents: [{ role: "user", parts: partesGemini(prompt, anexos) }], generationConfig: { responseMimeType: "application/json", temperature: 0.1, maxOutputTokens: 6000 } }),
+      signal: AbortSignal.timeout(45_000),
+    });
+    if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`);
+    const data = await res.json();
+    const candidate = data.candidates?.[0];
+    if (candidate?.finishReason !== "STOP") throw new Error("Resposta incompleta ou recusada pelo modelo");
+    const txt = candidate.content?.parts?.filter((p: { thought?: boolean }) => !p.thought).map((p: { text?: string }) => p.text ?? "").join("");
+    if (!txt) throw new Error("Resposta vazia");
+    return txt;
+  }
 }
 
 class ClaudeLLM implements LLM {
@@ -55,6 +71,11 @@ class ClaudeLLM implements LLM {
     const msg = await stream.finalMessage();
     if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
     return msg.content.map((b) => (b.type === "text" ? b.text : "")).join("");
+  }
+  async gerarComAnexos(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string> {
+    const msg = await this.client.messages.create({ model: this.modelo, max_tokens: 6000, system: sistema, messages: [{ role: "user", content: blocosClaude(prompt, anexos) }] }, { timeout: 45_000, maxRetries: 0 });
+    if (msg.stop_reason !== "end_turn") throw new Error("Resposta incompleta ou recusada pelo modelo");
+    return msg.content.map(b => b.type === "text" ? b.text : "").join("");
   }
 }
 

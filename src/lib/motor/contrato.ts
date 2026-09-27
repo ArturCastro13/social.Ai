@@ -1,6 +1,7 @@
 // Contrato entre o onboarding em camadas (interface) e o motor de posts (/api).
 // Fonte: PROMPT_MOTOR_POSTS.md. Tudo aqui é opcional para o motor: ele funciona só com a leitura do site.
 import { z } from "zod";
+import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
 
 import { FORMATOS_MOTOR, OBJETIVOS, type FormatoMotor, type Frequencia, type ObjetivoId } from "./constantes";
 
@@ -43,6 +44,7 @@ export type TomDeVoz = z.infer<typeof tomDeVozSchema>;
 
 /** O que a interface manda em POST /api/analyze no campo `preferencias` (telas 1, 2 e 3). */
 export const preferenciasSchema = z.object({
+  contexto_empresa: contextoConfirmadoSchema.optional(),
   perfil_alvo: z.enum(["founder", "empresa", "ambos"]).default("empresa"),
   /** Quem o founder/empresa quer atingir, em texto livre (vem pré-preenchido pela inferência e é editável). */
   publico_alvo: z.string().trim().max(300).optional(),

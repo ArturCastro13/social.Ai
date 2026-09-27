@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { brandSemSite, type EmpresaSemSite } from "@/lib/brand/sem-site";
+import { useState } from "react";
+import type { EmpresaSemSite } from "@/lib/brand/sem-site";
 import type { RedeArroba } from "@/lib/client/onboarding";
 import { NICHOS, type Nicho } from "@/lib/types";
 import { CampoPrint } from "./AjustesRedes";
 import { CampoConcorrentes, type ControleConcorrentes } from "./Concorrentes";
 import { CampoArroba, Chip } from "./ui";
+import { MateriaisEmpresa, type ControleMateriais } from "./MateriaisEmpresa";
 
 export type RedeEmpresa = "instagram" | "linkedin" | "x" | "facebook";
 
@@ -71,6 +72,7 @@ export function TelaSemSite({
   onFounder,
   concorrentes,
   onContinuar,
+  materiais,
 }: {
   empresa: Empresa;
   onChange: (e: Empresa) => void;
@@ -78,26 +80,11 @@ export function TelaSemSite({
   onFounder: (f: { valor: string; rede: RedeArroba }) => void;
   concorrentes: ControleConcorrentes;
   onContinuar: () => void;
+  materiais?: ControleMateriais;
 }) {
   const [erros, setErros] = useState<{ nome?: string; descricao?: string }>({});
 
-  // Com nome e descrição, pede sugestões de concorrentes quando a pessoa sai de um campo ou troca o nicho,
-  // não a cada pausa de digitação: com IA ligada, cada pedido é uma chamada paga.
-  const { buscar } = concorrentes;
-  const nome = empresa.nome.trim();
-  const descricao = empresa.descricao.trim();
-  const { nicho, publico } = empresa;
-  const [pedido, setPedido] = useState(0);
-  const pedir = () => setPedido((n) => n + 1);
-  const atual = useRef({ nome, descricao, nicho, publico });
-  useEffect(() => {
-    atual.current = { nome, descricao, nicho, publico };
-  });
-  useEffect(() => {
-    const a = atual.current;
-    if (!a.nome || a.descricao.length < 20) return;
-    buscar(brandSemSite({ nome: a.nome, descricao: a.descricao, nicho: a.nicho ?? undefined, publico: a.publico }), a.publico);
-  }, [buscar, pedido, nicho]);
+  // Sugestões só depois de o founder confirmar o contexto completo na tela de ajustes.
 
   function continuar(ev: React.FormEvent) {
     ev.preventDefault();
@@ -135,7 +122,6 @@ export function TelaSemSite({
           </label>
           <input
             id="empresa-nome"
-            onBlur={pedir}
             value={empresa.nome}
             onChange={(e) => {
               onChange({ ...empresa, nome: e.target.value });
@@ -165,7 +151,6 @@ export function TelaSemSite({
           </p>
           <textarea
             id="empresa-descricao"
-            onBlur={pedir}
             rows={3}
             value={empresa.descricao}
             onChange={(e) => {
@@ -195,7 +180,6 @@ export function TelaSemSite({
           </label>
           <input
             id="empresa-publico"
-            onBlur={pedir}
             value={empresa.publico}
             onChange={(e) => onChange({ ...empresa, publico: e.target.value })}
             maxLength={300}
@@ -288,6 +272,7 @@ export function TelaSemSite({
         <div className="border-t border-tinta/10 pt-6">
           <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />
         </div>
+        {materiais && <div className="border-t border-tinta/10 pt-6"><MateriaisEmpresa controle={materiais} /></div>}
       </div>
 
       <div className="mt-8">

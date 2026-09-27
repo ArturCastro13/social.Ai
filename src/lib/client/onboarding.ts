@@ -1,6 +1,8 @@
 // Apoio do onboarding em camadas (telas 1, 2 e 3). Tudo aqui roda no navegador e não chama IA.
 import type { ConhecimentoFounder, FormatoMotor, Frequencia, ObjetivoId, Preferencias, SugestaoConcorrente, SugestoesOnboarding, TomDeVoz } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
+import { semContextoPrivado } from "@/lib/contexto/revisao";
+import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
 export type PerfilAlvo = Preferencias["perfil_alvo"];
 export type RedeArroba = "instagram" | "linkedin" | "x";
@@ -141,7 +143,7 @@ export function normalizarConcorrentes(links: string[]): string[] {
  * Sugestões de concorrentes do POST /api/concorrentes. Qualquer falha (rota ausente, tempo esgotado,
  * resposta estranha) vira lista vazia: os campos manuais continuam valendo.
  */
-export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: string, sinal?: AbortSignal): Promise<SugestaoConcorrente[]> {
+export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: string, sinal?: AbortSignal, contexto?: ContextoConfirmado): Promise<SugestaoConcorrente[]> {
   // Controlador próprio em vez de AbortSignal.any, que falta em iPhone mais antigo.
   const ctrl = new AbortController();
   const parar = () => ctrl.abort();
@@ -152,7 +154,7 @@ export async function buscarSugestoesConcorrentes(brand: BrandProfile, publico: 
     const res = await fetch("/api/concorrentes", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ brand, publico: publico.trim().slice(0, 300) || undefined }),
+      body: JSON.stringify({ brand, publico: publico.trim().slice(0, 300) || undefined, contexto }),
       signal: ctrl.signal,
     });
     if (!res.ok) throw new Error(String(res.status));
@@ -204,7 +206,7 @@ export function lerPreferenciasSalvas(dominio: string): Preferencias | null {
 
 export function salvarPreferencias(dominio: string, p: Preferencias) {
   try {
-    localStorage.setItem(CHAVE(dominio), JSON.stringify(p));
+    localStorage.setItem(CHAVE(dominio), JSON.stringify(semContextoPrivado(p)));
   } catch {
     /* navegador sem armazenamento: segue sem lembrar */
   }

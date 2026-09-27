@@ -42,6 +42,7 @@ import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import { ultimaPorPost } from "@/lib/feedback";
 import type { CalendarioItem } from "@/lib/types";
 import { textoDaMarca } from "./nicho";
+import { aplicarContextoMarca } from "@/lib/contexto/revisao";
 
 export const LIMITE_POSTS = 12;
 
@@ -181,6 +182,7 @@ const PRAZO_IA_MS = 85_000;
  * Nunca lança erro por falha de IA: sempre devolve uma análise utilizável.
  */
 export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise<Analise> {
+  brand = aplicarContextoMarca(brand, op.preferencias?.contexto_empresa);
   const quantidade = Math.min(LIMITE_POSTS, Math.max(1, Math.round(op.quantidade)));
   const pref = op.preferencias ?? null;
   const llm = provedorConfigurado();
@@ -192,7 +194,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     contextoDoSite(brand, { objetivos, publico: pref?.publico_alvo || publico, gatilho: "site", marcarRevisao });
 
   const demo = demoPorDominio(brand.dominio);
-  if (demo && (!llm || !op.forcarNovo)) {
+  if (demo && !pref?.contexto_empresa && (!llm || !op.forcarNovo)) {
     const ctxDemo = enderecarSite(false, demo.contexto_inferido?.publico);
     const doSite = garantirEnderecamento(demo, ctxDemo).posts.map(comReferencia);
     // Com "O que só você sabe" preenchido, os posts do founder (motor local, instantâneo) entram intercalados na frente.
@@ -285,7 +287,8 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
     ? extrairInspiracoes(pref.concorrentes.map((url) => ({ url }))).catch(() => ({}))
     : Promise.resolve({});
 
-  const { nicho: palpite } = palpiteNicho(brand);
+  const nichoConfirmado = pref?.contexto_empresa?.entendimento.nicho;
+  const palpite = nichoConfirmado && nichoConfirmado !== "outro" ? nichoConfirmado : palpiteNicho(brand).nicho;
   const avisos: string[] = [];
   const id = novoId();
 
@@ -371,7 +374,7 @@ export async function analisar(brand: BrandProfile, op: AnalisarOpcoes): Promise
         }
       }
       if (!saida) {
-        console.error("[analyze] IA falhou:", erroAnterior);
+        console.error("[analyze] IA falhou:", pref?.contexto_empresa ? "Falha ao gerar com contexto privado" : erroAnterior);
         avisos.push("A IA não respondeu direito desta vez. Esta versão foi montada pelo motor local, sem IA; tente de novo em instantes para a versão completa.");
       }
     }

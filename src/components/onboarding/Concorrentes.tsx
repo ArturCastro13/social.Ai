@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { buscarSugestoesConcorrentes, normalizarConcorrentes, normalizarLink } from "@/lib/client/onboarding";
 import type { SugestaoConcorrente } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
+import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
 const MAXIMO = 3;
 
@@ -21,7 +22,8 @@ export interface ControleConcorrentes {
   status: StatusSugestoes;
   sugestoes: SugestaoConcorrente[];
   /** Pede sugestões para a marca. Não trava nada: enquanto isso, os campos manuais funcionam. */
-  buscar: (brand: BrandProfile, publico: string) => void;
+  buscar: (brand: BrandProfile, publico: string, contexto?: ContextoConfirmado) => void;
+  invalidar: () => void;
   /** Traz os links salvos da última vez, se a pessoa ainda não mexeu em nada. */
   restaurar: (links: string[]) => void;
   /** Até 3 links finais, para `preferencias.concorrentes`. */
@@ -59,20 +61,15 @@ export function useConcorrentes(): ControleConcorrentes {
       const porLink = new Map(novas.map((s) => [s.url, s]));
       // Link colado que é igual a uma sugestão vira sugestão marcada.
       const iguais = c.manuais.map((m) => normalizarLink(m)).filter((u): u is string => !!u && porLink.has(u));
-      let marcados = [...new Set([...c.marcados, ...iguais])];
+      const marcados = [...new Set([...c.marcados, ...iguais])];
       const manuais = c.manuais.map((m) => (iguais.includes(normalizarLink(m) ?? "") ? "" : m));
-      if (!escolheu.current) {
-        const vagas = MAXIMO - marcados.length - manuaisValidos(manuais);
-        const daIa = novas.filter((s) => s.fonte === "ia" && !marcados.includes(s.url)).slice(0, Math.max(0, vagas));
-        marcados = [...marcados, ...daIa.map((s) => s.url)];
-      }
       return { marcados: marcados.slice(0, MAXIMO), manuais };
     });
   }, []);
 
   const buscar = useCallback(
-    (brand: BrandProfile, publico: string) => {
-      const chave = `${brand.dominio}|${publico.trim().toLowerCase()}`;
+    (brand: BrandProfile, publico: string, contexto?: ContextoConfirmado) => {
+      const chave = `${brand.dominio}|${publico.trim().toLowerCase()}|${JSON.stringify(contexto ?? null)}`;
       if (chave === ultimaChave.current) return;
       ultimaChave.current = chave;
       ctrl.current?.abort();
@@ -85,7 +82,7 @@ export function useConcorrentes(): ControleConcorrentes {
       const c = new AbortController();
       ctrl.current = c;
       setStatus("carregando");
-      buscarSugestoesConcorrentes(brand, publico, c.signal)
+      buscarSugestoesConcorrentes(brand, publico, c.signal, contexto)
         .then((lista) => {
           if (c.signal.aborted) return;
           cache.current.set(chave, lista);
@@ -116,7 +113,13 @@ export function useConcorrentes(): ControleConcorrentes {
 
   const finais = useCallback(() => normalizarConcorrentes([...valorRef.current.marcados, ...valorRef.current.manuais]), []);
 
-  return { valor, setValor, status, sugestoes, buscar, restaurar, finais };
+  const invalidar = useCallback(() => {
+    ctrl.current?.abort(); ultimaChave.current = ""; cache.current.clear();
+    setSugestoes([]); setStatus("ocioso");
+    setValorBruto(c => ({ ...c, marcados: [] }));
+  }, []);
+
+  return { valor, setValor, status, sugestoes, buscar, restaurar, finais, invalidar };
 }
 
 const CAMPO =
@@ -166,7 +169,7 @@ export function CampoConcorrentes({ controle, titulo }: { controle: ControleConc
       )}
 
       {status !== "carregando" && daIa.length > 0 && (
-        <GrupoSugestoes titulo="Achamos estes. Marque os que valem." itens={daIa} marcados={valor.marcados} cheio={cheio} onAlternar={alternar} />
+        <GrupoSugestoes titulo="Sugestões para você conferir" dica="Sugeridas por IA, não confirmadas como concorrentes. Marque apenas as que fazem sentido para o seu negócio." itens={daIa} marcados={valor.marcados} cheio={cheio} onAlternar={alternar} />
       )}
       {status !== "carregando" && doNicho.length > 0 && (
         <GrupoSugestoes

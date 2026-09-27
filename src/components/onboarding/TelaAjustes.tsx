@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AjustesRedes, CampoQuantidade, type Redes } from "./AjustesRedes";
 import { dominioDe } from "@/components/estudio/useGeracao";
 import type { DadosFormulario } from "@/components/estudio/Formulario";
@@ -28,6 +28,9 @@ import { TelaTurbinar, TURBO_VAZIO, type Turbo } from "./TelaTurbinar";
 import { EMPRESA_VAZIA, empresaParaMarca, TelaSemSite, type Empresa } from "./TelaSemSite";
 import { CampoConcorrentes, useConcorrentes } from "./Concorrentes";
 import { Chip } from "./ui";
+import { MateriaisEmpresa, useMateriaisEmpresa } from "./MateriaisEmpresa";
+import { ResumoNegocio, type RascunhoContexto } from "./ResumoNegocio";
+import type { ContextoConfirmado } from "@/lib/contexto/contrato";
 
 const SUBTITULO = "font-display text-lg font-semibold tracking-[-0.01em]";
 
@@ -89,6 +92,7 @@ export function TelaAjustes({
 }) {
   const semSite = !!dados.semSite;
   const dominio = dominioDe(dados.url);
+  const materiais = useMateriaisEmpresa(dados.semSite ? "empresa-sem-site-desta-sessao" : dominio);
   const perfilInicial: PerfilAlvo = dados.perfil ?? "empresa";
   const [carregando, setCarregando] = useState(true);
   const [brand, setBrand] = useState<BrandProfile | null>(null);
@@ -119,6 +123,14 @@ export function TelaAjustes({
   const [saber, setSaber] = useState<Saber>(SABER_VAZIO);
   const [usarSaber, setUsarSaber] = useState(true);
   const [link, setLink] = useState("");
+  const [contextoSalvo, setContextoSalvo] = useState<{ chave: string; valor: ContextoConfirmado } | null>(null);
+  const [rascunhoContexto, setRascunhoContexto] = useState<RascunhoContexto | null>(null);
+  const [erroContexto, setErroContexto] = useState("");
+  const assinatura = JSON.stringify({ dominio: brand?.dominio, descricao: brand?.description, saber: usarSaber ? saber : {}, publico, materiais: materiais.estado.revisao, paleta: redes.paletaInstagram, empresa: semSite ? empresa : null });
+  const contexto = contextoSalvo?.chave === assinatura ? contextoSalvo.valor : undefined;
+  const invalidarConcorrentes = concorrentes.invalidar;
+  useEffect(() => { invalidarConcorrentes(); }, [assinatura, invalidarConcorrentes]);
+  const invalidarContexto = useCallback(() => { setContextoSalvo(null); invalidarConcorrentes(); }, [invalidarConcorrentes]);
 
   function aplicarSugestao(s: SugestoesOnboarding) {
     setPublico(s.publico_alvo);
@@ -166,7 +178,7 @@ export function TelaAjustes({
     // Links salvos entram antes da busca, para a busca não marcar nada por cima da escolha antiga.
     concorrentes.restaurar(salvasAntes?.concorrentes ?? []);
     // Sem site, a busca já saiu da tela da empresa. Com site, sai agora e não trava a tela.
-    if (!pronta && b) concorrentes.buscar(b, s.publico_alvo);
+    // Concorrentes só são buscados após a revisão conjunta de respostas e materiais.
     const salvas = salvasAntes;
     if (salvas) {
       setDaUltimaVez(true);
@@ -242,7 +254,7 @@ export function TelaAjustes({
   }
 
   const frase = useMemo(() => (mexeuNoTom ? fraseDoTom(tom) : sugestao.exemplo_tom), [mexeuNoTom, tom, sugestao.exemplo_tom]);
-  const nicho = NICHOS.find((n) => n.id === (empresa.nicho ?? sugestao.nicho))?.nome;
+  const nicho = contexto ? (NICHOS.find(n => n.id === contexto.entendimento.nicho)?.nome ?? contexto.entendimento.segmento) : "segmento a confirmar";
   const freqSugerida = FREQUENCIAS.find((f) => f.id === sugestao.frequencia);
 
   function alternarObjetivo(id: ObjetivoId) {
@@ -272,8 +284,9 @@ export function TelaAjustes({
     const destino = normalizarLink(link);
     const objetivoEscrito = objetivoLivre.trim().slice(0, 200);
     return {
+      ...(contexto ? { contexto_empresa: contexto } : {}),
       perfil_alvo: perfil,
-      ...(publico.trim() ? { publico_alvo: publico.trim().slice(0, 300) } : {}),
+      ...((contexto?.entendimento.publico || publico).trim() ? { publico_alvo: (contexto?.entendimento.publico || publico).trim().slice(0, 300) } : {}),
       ...(conhecimento ? { conhecimento_founder: conhecimento } : {}),
       ...(destino ? { link_destino: destino.slice(0, 500) } : {}),
       founder: {
@@ -295,6 +308,11 @@ export function TelaAjustes({
 
   function gerar(e: React.FormEvent) {
     e.preventDefault();
+    if (materiais.pendente || (brand && !contexto) || (!brand && materiais.materiais.length)) {
+      setErroContexto("Confira e confirme o contexto da empresa antes de gerar a pauta.");
+      document.getElementById("contexto-empresa")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     const p = montarPreferencias();
     const quem = { perfil, founder: founder.valor.trim() || undefined, redeFounder: founder.valor.trim() ? founder.rede : undefined };
     if (semSite) {
@@ -340,6 +358,7 @@ export function TelaAjustes({
   if (passo === "empresa") {
     return (
       <TelaSemSite
+        materiais={materiais}
         empresa={empresa}
         onChange={setEmpresa}
         founder={founder}
@@ -404,7 +423,7 @@ export function TelaAjustes({
       <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-tinta-2">
         {brand && (
           <span className="flex" aria-hidden>
-            {[brand.paleta.primaria, brand.paleta.secundaria, brand.paleta.destaque].map((c, i) => (
+            {[contexto?.paleta?.primaria ?? brand.paleta.primaria, contexto?.paleta?.secundaria ?? brand.paleta.secundaria, contexto?.paleta?.destaque ?? brand.paleta.destaque].map((c, i) => (
               <span key={c + i} className="-ml-1.5 h-6 w-6 rounded-full border-2 border-papel first:ml-0" style={{ background: c }} />
             ))}
           </span>
@@ -499,7 +518,6 @@ export function TelaAjustes({
         </div>
 
         {/* Sem site, os concorrentes já foram pedidos na tela da empresa. */}
-        {!semSite && <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />}
 
         <fieldset>
           <legend className={SUBTITULO}>Quem assina os posts</legend>
@@ -522,6 +540,16 @@ export function TelaAjustes({
         ) : (
           <AjustesRedes redes={redes} onChange={setRedes} founder={founder} onFounder={setFounder} titulo={SUBTITULO} />
         )}
+
+        <MateriaisEmpresa controle={materiais} />
+        {brand && <ResumoNegocio
+          entrada={{ brand, founder: usarSaber ? saber : {}, materiais: materiais.materiais, publico, ...(semSite ? { descricaoManual: empresa.descricao } : {}) }}
+          revisao={materiais.estado.revisao} chaveEntrada={assinatura} pendente={materiais.pendente} confirmado={!!contexto}
+          inicial={rascunhoContexto} onGuardar={setRascunhoContexto}
+          onInvalidar={invalidarContexto}
+          onConfirmar={c => { setContextoSalvo({ chave: assinatura, valor: c }); setErroContexto(""); concorrentes.buscar(brand, c.entendimento.publico, c); }}
+        />}
+        <CampoConcorrentes controle={concorrentes} titulo={SUBTITULO} />
 
         <fieldset>
           <legend className={SUBTITULO}>Objetivo</legend>
@@ -645,6 +673,7 @@ export function TelaAjustes({
           {abrirTurbo ? "Fechar o turbo" : "Quer turbinar?"}
         </button>
       </div>
+      {erroContexto && <p role="alert" className="mt-3 text-sm text-pauta-escura">{erroContexto}</p>}
     </form>
   );
 }

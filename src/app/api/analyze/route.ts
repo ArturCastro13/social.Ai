@@ -5,6 +5,7 @@ import { analisar, LIMITE_POSTS } from "@/lib/engine";
 import { adminOk, erro, json, lerJson, options } from "@/lib/http";
 import { preferenciasSchema } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
+import { aplicarContextoMarca } from "@/lib/contexto/revisao";
 
 export const maxDuration = 120;
 
@@ -81,6 +82,8 @@ export async function POST(req: Request) {
   }
 
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+  try { brand = aplicarContextoMarca(brand, preferencias?.contexto_empresa); }
+  catch { return erro("O contexto não corresponde a esta empresa. Revise antes de gerar.", 400); }
   let analise;
   try {
     analise = await analisar(brand, {
