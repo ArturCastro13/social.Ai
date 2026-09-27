@@ -14,6 +14,8 @@ export const FONTES_EMBUTIDAS: Record<string, Partial<Record<400 | 700 | 800, st
   "Plus Jakarta Sans": { 400: "PlusJakartaSans-400.ttf", 800: "PlusJakartaSans-800.ttf" },
   "Space Grotesk": { 400: "SpaceGrotesk-400.ttf", 700: "SpaceGrotesk-700.ttf" },
   "DM Serif Display": { 400: "DMSerifDisplay-400.ttf" },
+  "Bricolage Grotesque": { 800: "BricolageGrotesque-800.ttf" },
+  Fraunces: { 800: "Fraunces-800.ttf" },
 };
 
 const DIR = path.join(process.cwd(), "assets", "fonts");
@@ -68,13 +70,23 @@ async function primeiroQueCarrega(familia: string, pesos: number[]) {
   return null;
 }
 
+// Fontes genéricas deixam o post com cara de template. No título, elas dão lugar a uma display com personalidade
+// escolhida pelo tom de voz; o corpo continua na fonte da marca.
+const GENERICAS = /^(inter|roboto|arial|helvetica( neue)?|system-ui|sans-serif|open sans|lato|montserrat|poppins|segoe ui|-apple-system|noto sans)$/i;
+const TOM_EDITORIAL = /sofistic|elegan|premium|luxo|acolhed|cuidad|delicad|sens[ií]vel|institucional|s[ée]ri[oa]|editorial|cl[aá]ssic/i;
+
+export function familiaDoTitulo(fonteDaMarca: string, tom = ""): string {
+  if (!GENERICAS.test(fonteDaMarca.trim())) return fonteDaMarca;
+  return TOM_EDITORIAL.test(tom) ? "Fraunces" : "Bricolage Grotesque";
+}
+
 /**
  * Monta a lista de fontes para o Satori com os nomes "Titulo" e "Corpo".
  * Se a fonte da marca não carregar, cai para Inter embutida.
  */
-export async function fontesDaMarca(titulo: string, corpo: string): Promise<FonteCarregada[]> {
+export async function fontesDaMarca(titulo: string, corpo: string, tom = ""): Promise<FonteCarregada[]> {
   const [t, c, fbTitulo, fbCorpo] = await Promise.all([
-    primeiroQueCarrega(titulo, [800, 700, 900, 600, 400]),
+    primeiroQueCarrega(familiaDoTitulo(titulo, tom), [800, 700, 900, 600, 400]),
     primeiroQueCarrega(corpo, [400, 500]),
     carregar("Inter", 800),
     carregar("Inter", 400),

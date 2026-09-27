@@ -2,10 +2,38 @@ import { describe, expect, it } from "vitest";
 import { contrastRatio } from "@/lib/color";
 import { DEMOS } from "@/lib/engine/demo";
 import { adaptarSlides } from "@/lib/render/adaptar";
+import { familiaDoTitulo } from "@/lib/render/fonts";
 import { temaDaMarca } from "@/lib/render/tema";
 import { caber, limpar } from "@/lib/render/templates";
 import { TEMPLATES } from "@/lib/engine/schema";
 import type { BrandProfile } from "@/lib/types";
+
+describe("fonte do título", () => {
+  it("fonte genérica vira display pelo tom; fonte com personalidade fica", () => {
+    for (const f of ["Inter", "Roboto", "Arial", "Helvetica", "system-ui", "Open Sans", "Montserrat", "Poppins"]) {
+      expect(familiaDoTitulo(f, "direto, prático e bem-humorado")).toBe("Bricolage Grotesque");
+    }
+    expect(familiaDoTitulo("Inter")).toBe("Bricolage Grotesque");
+    expect(familiaDoTitulo("Inter", "acolhedor e cuidadoso")).toBe("Fraunces");
+    expect(familiaDoTitulo("Roboto", "Sofisticado, premium")).toBe("Fraunces");
+    expect(familiaDoTitulo("Arial", "institucional e sério")).toBe("Fraunces");
+    expect(familiaDoTitulo("DM Serif Display", "acolhedor")).toBe("DM Serif Display");
+    expect(familiaDoTitulo("Space Grotesk")).toBe("Space Grotesk");
+  });
+});
+
+describe("tema do estilo creator", () => {
+  it("papel, textos e marca-texto legíveis em várias paletas", () => {
+    for (const primaria of ["#10b77f", "#fe3e6d", "#0b66ff", "#ffd400", "#111111", "#f5f5f5"]) {
+      const brand = { ...DEMOS[0].brand, paleta: { ...DEMOS[0].brand.paleta, primaria } } as BrandProfile;
+      const t = temaDaMarca(brand);
+      expect(contrastRatio(t.tintaNoPapel, t.papel)).toBeGreaterThanOrEqual(7);
+      expect(contrastRatio(t.mutedNoPapel, t.papel)).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(t.primariaNoPapel, t.papel)).toBeGreaterThanOrEqual(3);
+      expect(contrastRatio(t.tintaNoPapel, t.marcaTexto)).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+});
 
 describe("render", () => {
   it("tema garante contraste legível para qualquer cor principal", () => {

@@ -30,6 +30,11 @@ export interface Tema {
   destaqueNoEscuro: string;
   secundaria: string;
   naSecundaria: string;
+  papel: string; // fundo "papel" do estilo creator, levemente quente e tingido da marca
+  tintaNoPapel: string;
+  mutedNoPapel: string;
+  primariaNoPapel: string; // primária legível no papel (números, aspas)
+  marcaTexto: string; // cor clara atrás do trecho de destaque do título
 }
 
 /** Deriva um tema legível da paleta da marca. Todo par texto/fundo passa por checagem de contraste. */
@@ -47,6 +52,12 @@ export function temaDaMarca(brand: BrandProfile, corOverride?: string | null): T
   const naPrimaria = bestTextOn(primaria, ["#ffffff", tinta]);
   const destaqueNaPrimaria = [secundaria, destaque].find((c) => contrastRatio(c, primaria) >= 3) ?? naPrimaria;
 
+  const papel = mix("#f6f3ec", primaria, 0.05);
+  const tintaNoPapel = ensureContrast(tinta, papel, 7);
+  // Marca-texto: a primária clareada até o texto escuro ficar legível por cima dela.
+  let marcaTexto = mix(primaria, "#ffffff", 0.55);
+  for (let k = 0; k < 8 && contrastRatio(tintaNoPapel, marcaTexto) < 4.5; k++) marcaTexto = mix(marcaTexto, "#ffffff", 0.25);
+
   return {
     primaria,
     naPrimaria,
@@ -60,5 +71,10 @@ export function temaDaMarca(brand: BrandProfile, corOverride?: string | null): T
     destaqueNoEscuro: [primaria, destaque, secundaria].find((c) => contrastRatio(c, escuro) >= 3.2) ?? ensureContrast(primaria, escuro, 3.2),
     secundaria,
     naSecundaria: bestTextOn(secundaria, ["#ffffff", tinta]),
+    papel,
+    tintaNoPapel,
+    mutedNoPapel: ensureContrast(mix(tinta, papel, 0.35), papel, 4.5),
+    primariaNoPapel: ensureContrast(primaria, papel, 3),
+    marcaTexto,
   };
 }
