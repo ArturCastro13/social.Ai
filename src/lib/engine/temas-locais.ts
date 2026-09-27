@@ -787,6 +787,9 @@ const PADRAO: Record<Nicho, string> = {
   healthtech: "healthtech-padrao",
   edtech: "edtech-padrao",
   "ecommerce-dtc": "ecommerce-padrao",
+  "marketing-agencias": "saas-padrao",
+  "servicos-locais": "ecommerce-padrao",
+  "ia-dev": "saas-padrao",
 };
 
 /**

@@ -50,6 +50,18 @@ const DIAG_NICHO: Record<Nicho, [string, string][]> = {
     ["Tenha opinião", "Vários virais de DTC da base vêm de marcas que assumem posições e falam como gente. Vale revisar se o tom atual soa mais como conversa ou como catálogo."],
     ["Faça do cliente o conteúdo", "Avaliações, fotos e perguntas de clientes viram antes e depois e listas que o público guarda, sempre com autorização."],
   ],
+  "marketing-agencias": [
+    ["Mostre o método, não só o resultado", "Na base de marketing, os posts que mais circulam abrem o processo por trás de uma campanha: o que foi testado, o que deu errado e o que ficou. Isso vende a agência melhor que o print do resultado."],
+    ["Tenha uma opinião sobre o mercado", "Posts que contrariam uma prática comum do setor geram debate nos comentários e trazem o cliente certo para perto."],
+  ],
+  "servicos-locais": [
+    ["Mostre o dia a dia de perto", "Bastidor do atendimento, da equipe e do espaço aproxima quem mora perto e ainda não conhece. Rosto e lugar reais geram confiança."],
+    ["Responda a dúvida que chega no WhatsApp", "A pergunta que a recepção ouve toda semana vira um carrossel curto que a pessoa salva e manda para alguém."],
+  ],
+  "ia-dev": [
+    ["Mostre funcionando", "Na base de IA e dev, o que viraliza é demonstração: antes e depois, passo a passo e comparação honesta com o jeito antigo."],
+    ["Explique o técnico em linguagem simples", "Carrosséis que traduzem um conceito técnico em poucos slides são salvos e compartilhados por quem decide a compra."],
+  ],
 };
 
 const REDES_NOME: Record<Rede, string> = { instagram: "Instagram", linkedin: "LinkedIn", x: "X", facebook: "Facebook" };

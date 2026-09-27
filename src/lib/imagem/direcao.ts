@@ -1,6 +1,7 @@
 import type { LLM } from "@/lib/llm";
 import { extrairJson } from "@/lib/engine/schema";
 import { corte } from "@/lib/engine/texto-local";
+import type { EstiloCapa } from "@/lib/motor/contrato";
 import type { Formato, Nicho, PostGerado, Rede } from "@/lib/types";
 import { nomeDaCor } from "./cores";
 
@@ -9,7 +10,7 @@ import { nomeDaCor } from "./cores";
 // Sem IA, a cena sai de uma lista por nicho.
 
 export interface EntradaImagem {
-  post: Pick<PostGerado, "id" | "gancho" | "slides" | "formato" | "rede_principal" | "template">;
+  post: Pick<PostGerado, "id" | "gancho" | "slides" | "formato" | "rede_principal" | "template" | "direcao_capa">;
   brand: {
     nome: string;
     dominio: string;
@@ -20,7 +21,7 @@ export interface EntradaImagem {
   variacao?: number;
 }
 
-export type Estilo = "fotografia" | "ilustracao-3d" | "ilustracao-flat";
+export type Estilo = EstiloCapa;
 
 export interface Direcao {
   estilo: Estilo;
@@ -136,6 +137,21 @@ const CENAS: Record<string, string[]> = {
     "An unboxing moment seen from above: hands opening a plain box with tissue paper, soft daylight, clean surface.",
     "A doorstep delivery scene with a plain parcel on a sunny porch, soft focus background, warm and inviting.",
   ],
+  "marketing-agencias": [
+    "A bright creative studio table seen from above with blank colored paper swatches, a ruler and a small plant, arranged in a clean grid, soft daylight.",
+    "Editorial still life of a single glowing spotlight beam falling on a pedestal with a smooth colored sphere, dark seamless backdrop, sense of attention.",
+    "A megaphone made of folded colored paper on a smooth surface, playful premium campaign look, soft studio light.",
+  ],
+  "servicos-locais": [
+    "A welcoming neighborhood storefront at golden hour seen from the sidewalk, warm light inside, plants by the door, no signage.",
+    "Top-down still life of tidy work tools of a local professional on a wooden counter, soft morning light, sense of care.",
+    "A calm, clean treatment room with soft towels, a plant and natural light through a window, serene and inviting.",
+  ],
+  "ia-dev": [
+    "Abstract 3D composition of smooth glowing nodes connected by thin light threads floating over a matte surface, soft studio light.",
+    "Editorial still life of interlocking translucent geometric blocks assembling themselves into a neat structure, clean seamless backdrop.",
+    "A single small robot figurine made of matte clay arranging tiny colored blocks on a desk, warm soft light, playful and precise.",
+  ],
   padrao: [
     "Abstract sculptural composition of smooth rounded 3D shapes balanced on each other, matte material, soft studio light and gentle shadows.",
     "Editorial still life of a single meaningful object on a pedestal with a clean seamless backdrop, dramatic soft side light.",
@@ -210,11 +226,11 @@ export function montarPromptImagem(e: EntradaImagem, d: Direcao): string {
     (outras.length ? `, with ${outras.map((c) => `${c.nome} (${c.hex})`).join(" and ")} as accents` : "") +
     ". Neutrals only in support.";
   return [
-    `Vertical ${FORMATO_EN[e.post.formato] ?? "image"} for a professional ${REDE_EN[e.post.rede_principal]} brand post.`,
+    `Horizontal ${FORMATO_EN[e.post.formato] ?? "image"} for a professional ${REDE_EN[e.post.rede_principal]} brand post.`,
     d.cena,
     ESTILO_EN[d.estilo],
     paleta,
-    "Composition: main subject in the upper and middle part of the frame; the lower third stays calm, simple and uncluttered (smooth surface, soft shadow or defocused background) because a headline will be placed there later.",
+    "Composition: wide horizontal frame; keep the main subject inside the central 60% so it survives a crop to a wide band or to a square; calm, uncluttered edges.",
     "Absolutely no text of any kind: no letters, words, numbers, captions, signage, labels, logos, brand marks, watermarks, user interfaces or readable screens anywhere in the image.",
     "No identifiable real people, faces or celebrities; no before-and-after or split-screen layout.",
     ehSaude(e) ? "No sick patients, blood, needles, surgery, pills in close-up or medical procedures." : "",

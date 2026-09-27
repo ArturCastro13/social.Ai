@@ -490,5 +490,1287 @@
     },
     "status": "a verificar",
     "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Não usar o dado \"metade dos candidatos\" sem fonte real da questão escolhida."
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Desânimo, tédio, sensação de estar só passando o tempo. Se isso tem sido rotina no trabalho, pode não ser burnout, é boreout.",
+    "estrutura": [
+      "Slide 1: capa com o título 'Ei, não é burnout. É boreout!'",
+      "Slide 2: define boreout, a síndrome do tédio crônico no trabalho",
+      "Slides 3 a 5: sinais para reconhecer (desânimo, tédio, sensação de passar o tempo)",
+      "Slide 6: impacto na saúde mental e na motivação",
+      "Slide 7: fechamento com a marca EBAC"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF nativo de 7 páginas, capa com título grande",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega um termo que todo mundo conhece (burnout) e apresenta um vizinho pouco falado (boreout), o que gera identificação imediata e vontade de salvar. A escola vende educação sem falar de curso: entrega um diagnóstico útil para a carreira.",
+    "autor_ou_marca": "EBAC (Escola Britânica de Artes Criativas e Tecnologia)",
+    "link_fonte": "https://www.linkedin.com/posts/ebaconline_ei-n%C3%A3o-%C3%A9-burnout-%C3%A9-boreout-activity-7330200589517144065-GIde",
+    "metricas": {
+      "curtidas": 3630,
+      "comentarios": 83,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026. Compartilhamentos e visualizações não aparecem na página."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 19/05/2025. Reverificado em 27/09/2026: texto, autor, título do documento ('Ei, não é burnout. É boreout!') e total de 7 páginas confirmados na configuração do documento nativo. A ordem dos slides 2 a 6 é inferida pela legenda; só a capa e o total de páginas foram lidos.",
+    "nicho": "edtech",
+    "id": "edtech-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Antes de criar a Rocketseat eu vivi 6 meses no seguro desemprego.",
+    "estrutura": [
+      "Bloco 1: confissão de vulnerabilidade (6 meses no seguro desemprego)",
+      "Bloco 2: a aposta 50/50 de abrir uma escola de programação diferente",
+      "Bloco 3: pergunta retórica sobre quando soube que tinha dado certo",
+      "Bloco 4: a virada não foi lucro nem big number, foi o primeiro aluno que conseguiu vaga com o conteúdo dele",
+      "Bloco 5: prova social (mais de 5000 depoimentos na DM, chutando por baixo)",
+      "Bloco 6: propósito pessoal (programação o fez crescer) e fechamento de venda suave: 'essa é a melhor oportunidade dos próximos 5 anos'"
+    ],
+    "padrao_visual": {
+      "fundo": "texto longo com uma foto anexada: torso de camiseta cinza segurando caneca da Rocketseat com código impresso",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma fragilidade concreta do fundador e redefine sucesso como resultado do aluno, não como receita. Só na última linha vira oferta, depois que a história já comprou a confiança do leitor.",
+    "autor_ou_marca": "Diego Schell Fernandes (Rocketseat)",
+    "link_fonte": "https://www.linkedin.com/posts/diego-schell-fernandes_antes-de-criar-a-rocketseat-eu-vivi-6-meses-activity-7400250956644270080-yuME",
+    "metricas": {
+      "curtidas": 977,
+      "comentarios": 25,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 28/11/2025. Texto e autor confirmados. Imagem conferida: não mostra rosto (só torso e caneca da marca), por isso uso_rosto passou a false. O fechamento é uma chamada de venda, a estrutura foi ajustada.",
+    "nicho": "edtech",
+    "id": "edtech-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "A Anthropic disponibilizou 13 cursos gratuitos sobre Claude, fluência em IA, agentes, MCP e aplicações práticas para negócios, educação e tecnologia.",
+    "estrutura": [
+      "Bloco 1: anúncio com número (13 cursos gratuitos)",
+      "Bloco 2: promessa de entregar tudo traduzido e com link",
+      "Bloco 3: lista numerada, cada item com nome em português, nome original e link",
+      "Bloco 4: itens para educação (fluência em IA para educadores, ensinando fluência em IA)",
+      "Bloco 5: itens técnicos no fim (Claude com Amazon Bedrock e com Google Cloud Vertex AI) e assinatura"
+    ],
+    "padrao_visual": {
+      "fundo": "texto em lista numerada com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Curadoria pronta de conteúdo gratuito com número no gancho e links diretos: o leitor salva e compartilha porque o post substitui uma pesquisa. A tradução dos nomes reduz a barreira para o público brasileiro.",
+    "autor_ou_marca": "Fabiano Rodrigues",
+    "link_fonte": "https://www.linkedin.com/posts/fabiano-rodriguesia_a-anthropic-disponibilizou-13-cursos-gratuitos-activity-7478070791352418304-rrkq",
+    "metricas": {
+      "curtidas": 1746,
+      "comentarios": 39,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 01/07/2026. Texto e autor confirmados. Criador de conteúdo sobre IA, não é empresa de edtech, mas o tema é cursos e formação. A página mostra uma imagem anexada, não várias. O post parecido do mesmo autor ('20 cursos gratuitos...', 889 reações) não foi reverificado.",
+    "nicho": "edtech",
+    "id": "edtech-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A USP abriu um curso GRATUITO de Machine Learning com Python com certificado!",
+    "estrutura": [
+      "Bloco 1: notícia com três gatilhos (USP, gratuito, certificado)",
+      "Bloco 2: para quem é e prazo de inscrição (até 27/jan/2026)",
+      "Bloco 3: quando acontece (datas, horário e gravações por 15 dias)",
+      "Bloco 4: o que você vai aprender, em tópicos (Pandas, Matplotlib e Seaborn, fundamentos de ML, interpretação)",
+      "Bloco 5: por que vale a pena, em tópicos",
+      "Bloco 6: CTA com link oficial, link de inscrição e informações da USP/Esalq"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com emojis de seção e uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Junta autoridade (USP), preço zero e credencial (certificado) numa frase só, com prazo que cria urgência. A estrutura em seções com emojis deixa o post escaneável como um folheto.",
+    "autor_ou_marca": "Fernando Schmidt",
+    "link_fonte": "https://www.linkedin.com/posts/fernando-schmidt_ausp-abriu-um-curso-gratu%C3%ADto-de-machine-activity-7414623087276560384-WXFR",
+    "metricas": {
+      "curtidas": 687,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 07/01/2026. Texto e autor confirmados. O original abre com emoji de foguete e escreve 'GRATUÍTO' com acento; a grafia foi corrigida no gancho. Curso da USP/Esalq na plataforma MBX.",
+    "nicho": "edtech",
+    "id": "edtech-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Duolingo, Busuu, TripLingo e Babbel já podem se aposentar. O melhor app para aprender outros idiomas gratuitamente é o... ChatGPT!",
+    "estrutura": [
+      "Bloco 1: provocação contra apps de idioma conhecidos, com suspense (reticências)",
+      "Bloco 2: revelação (ChatGPT) e promessa de um plano de 15 dias para aprender inglês",
+      "Bloco 3: regra de uso (15 a 20 minutos por dia)",
+      "Bloco 4: Semana 1 (fundamentos), um prompt pronto por dia e quiz de revisão no dia 7",
+      "Bloco 5: Semana 2 (rotina e objetos do dia a dia) no mesmo formato, revisão no dia 14",
+      "Bloco 6: dia 15 com teste final e chamada para treinamentos complementares"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, em formato de plano diário",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Ataca marcas famosas para gerar reação e usa suspense antes da revelação. Depois entrega um plano de 15 dias com prompts prontos para copiar, o que puxa salvamentos.",
+    "autor_ou_marca": "Rapha Mello",
+    "link_fonte": "https://www.linkedin.com/posts/rapha-mello-adm_oportunidade-vagas-conhecimento-activity-7492211365571600387-ihh-",
+    "metricas": {
+      "curtidas": 345,
+      "comentarios": 20,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/08/2026. Texto e autor confirmados; post sem imagem no JSON-LD. As versões de outros perfis (Marcelle Nogueira, Marçal Delaqua) citadas antes não foram reverificadas. Não é post de empresa de educação, é de criador, mas o tema é aprendizado de idiomas.",
+    "nicho": "edtech",
+    "id": "edtech-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Nas minhas duas primeiras semanas como CTO da Alura, encontrei todos os nossos times de tech. E a mesma pergunta apareceu 2 ou 3 vezes: na sua opinião, o que é um dev sênior?",
+    "estrutura": [
+      "Bloco 1: contexto de chegada como CTO e a pergunta que se repetiu",
+      "Bloco 2: bastidor (resposta escrita no chat interno, sem revisão, publicada no blog da Alura sem edição)",
+      "Bloco 3: resumo em 5 tópicos (fundamentos, se desbloquear, profundidade e foco, escolher batalhas, elevar o time)",
+      "Bloco 4: CTA para o texto completo nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "texto curto com lista de tópicos e uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa uma pergunta que toda a audiência dev faz a si mesma e responde com autoridade de cargo. O bastidor 'saiu direto da cabeça pro teclado' dá autenticidade e o link nos comentários preserva o alcance.",
+    "autor_ou_marca": "Maurício Aniche (CTO da Alura)",
+    "link_fonte": "https://www.linkedin.com/posts/mauricioaniche_lideranca-engenharia-alura-activity-7459595684602839040-T8BQ",
+    "metricas": {
+      "curtidas": 237,
+      "comentarios": 11,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 11/05/2026. Texto, autor e CTA confirmados. Conteúdo de carreira que leva para o blog de uma edtech. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-21"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "LANÇAMENTO CURSO COMPLETO DE JAVA! ~30h",
+    "estrutura": [
+      "Bloco 1: anúncio em caixa alta com número de horas",
+      "Bloco 2: saudação direta ('Fala galera, beleza?') e bastidor (meses de trabalho)",
+      "Bloco 3: números do produto (mais de 300 aulas, quase 30 horas, 15 projetos)",
+      "Bloco 4: link de compra e desconto de lançamento",
+      "Bloco 5: sem pré-requisito, do zero ao avançado",
+      "Bloco 6: garantias em lista (7 dias, suporte 1 a 1, acesso vitalício, certificado)"
+    ],
+    "padrao_visual": {
+      "fundo": "texto de lançamento com uma imagem anexada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O criador fala direto com a audiência que já o segue e empilha números concretos do curso. A lista de garantias derruba objeções na própria legenda.",
+    "autor_ou_marca": "Matheus Battisti (Hora de Codar)",
+    "link_fonte": "https://www.linkedin.com/posts/matheusbattisti_lan%C3%A7amento-curso-completo-de-java-30h-activity-7251593760873091072-BDaU",
+    "metricas": {
+      "curtidas": 230,
+      "comentarios": 19,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/10/2024. Texto e autor confirmados. O original abre com emoji de círculo vermelho. A lista de garantias (bloco 6) vem da descrição anterior; conferi na página o trecho até os pré-requisitos. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-22"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "A maioria usa o ChatGPT como um chatbot. Pergunta, recebe resposta, fecha.",
+    "estrutura": [
+      "Slide 1: '01 de 2', título 'Como Usar ChatGPT', tabela com 5 recursos de Fundamentos (Imagens, Voz e Arquivos; Projetos; Memória; Canvas; Análise de Dados) nas colunas o que é, experimente, faça isso, evite isso",
+      "Slide 2: nível Avançado (Deep Research, GPTs Personalizados, Apps, Codex, Tasks), inferido pela legenda",
+      "Legenda Bloco 1: o erro comum (usar o ChatGPT só como chatbot) e a promessa de 2 níveis",
+      "Legenda Bloco 2: regra geral (objetivo, contexto e estrutura)",
+      "Legenda Bloco 3: CTA de salvar, arrastar para o lado e comentar 'GPT' para receber um curso gratuito"
+    ],
+    "padrao_visual": {
+      "fundo": "infográfico claro em formato de tabela, ícones verdes, faixa escura no rodapé com assinatura @prof.italoteotonio",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Aponta um uso errado que o leitor reconhece em si e oferece uma escada de dois níveis em tabela de consulta, feita para salvar. O CTA 'comente GPT' troca comentário por curso gratuito, o que infla o engajamento.",
+    "autor_ou_marca": "Eliete Oliveira",
+    "link_fonte": "https://www.linkedin.com/posts/elieteoliveiraconsultoria_cursoia-chatgpt-cursogratuitoia-activity-7465435408114376705-fmEL",
+    "metricas": {
+      "curtidas": 229,
+      "comentarios": 31,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 27/05/2026. Texto e autor da postagem confirmados. A página pública mostra só a primeira imagem, marcada '01 de 2'; a segunda foi inferida pela legenda. Atenção: a arte leva a assinatura @prof.italoteotonio, ou seja, o design é de outro criador e a autora repostou. Não é documento PDF nativo.",
+    "nicho": "edtech",
+    "id": "edtech-23"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "CI&T e DIO lançam bootcamp gratuito de Java com foco em IA",
+    "estrutura": [
+      "Bloco 1: manchete com duas marcas e 'gratuito'",
+      "Bloco 2: subtítulo com dados (53 horas, sem conhecimento prévio, GitHub Copilot e agentes de IA)",
+      "Bloco 3: citação de Rodrigo Gaião (CI&T) sobre aprendizado contínuo",
+      "Bloco 4: link para a matéria completa"
+    ],
+    "padrao_visual": {
+      "fundo": "formato notícia com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Manchete jornalística com parceria de marcas conhecidas e oferta gratuita, reforçada por números concretos. A citação de executivo dá credibilidade de mercado ao curso.",
+    "autor_ou_marca": "IA Brasil Notícias (sobre DIO e CI&T)",
+    "link_fonte": "https://www.linkedin.com/posts/ia-brasil-noticias_cit-e-dio-lan%C3%A7am-bootcamp-gratuito-de-java-activity-7503490131425931264-PDLa",
+    "metricas": {
+      "curtidas": 410,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/09/2026. Texto e autor confirmados. É uma página de notícias, não a própria edtech, mas mostra o formato de anúncio de bootcamp que funciona no nicho. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-24"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "木 é árvore. 林 é bosque. 森 é floresta.",
+    "estrutura": [
+      "Bloco 1: três caracteres e seus significados, que mostram o padrão visual",
+      "Bloco 2: explicação (em japonês e chinês alguns caracteres parecem o que significam) e a ressalva de que depois fica mais difícil",
+      "Bloco 3: como o Duolingo ensina escrita, em lista de 3 recursos (caracteres, histórias com resposta própria, flashcards digitados)",
+      "Bloco 4: base científica (prática de recuperação)",
+      "Bloco 5: link para saber mais"
+    ],
+    "padrao_visual": {
+      "fundo": "ilustração em fundo branco com três cartões ligados por setas: uma, duas e três árvores verdes sobre cada caractere",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um mini aprendizado que o leitor absorve em 3 segundos e a imagem prova visualmente (1, 2, 3 árvores). Só depois conecta ao produto e a um conceito de ciência da aprendizagem.",
+    "autor_ou_marca": "Duolingo",
+    "link_fonte": "https://www.linkedin.com/posts/duolingo_learning-activity-7507777682852483072-ySu3",
+    "metricas": {
+      "curtidas": 2657,
+      "comentarios": 41,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/09/2026. Original em inglês: '木 is tree. 林 is woods. 森 is forest.' Imagem conferida: ilustração única com os três caracteres e árvores.",
+    "nicho": "edtech",
+    "id": "edtech-25"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Quando Ozan Varol virou professor de direito, ele pausava no meio da aula e perguntava: \"Alguém tem alguma pergunta?\"",
+    "estrutura": [
+      "Bloco 1: cena da sala de aula com a pergunta clássica",
+      "Bloco 2: silêncio, e a prova mostrando que ninguém tinha entendido",
+      "Bloco 3: o experimento (nova frase que normaliza a confusão: 'Isso foi confuso. Com certeza vocês têm perguntas.')",
+      "Bloco 4: resultado (mãos levantadas)",
+      "Bloco 5: por que funcionou, em 3 itens numerados",
+      "Bloco 6: aplicação para médicos e líderes, com frases prontas",
+      "Bloco 7: lição final sobre criar condições para respostas honestas e pergunta para os comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "texto em linhas curtas com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Micro história com virada clara e uma frase pronta para copiar. Parte da sala de aula e generaliza para liderança, o que amplia o público sem perder o gancho educacional, e fecha pedindo que o leitor reescreva uma pergunta nos comentários.",
+    "autor_ou_marca": "Daniel Pink",
+    "link_fonte": "https://www.linkedin.com/posts/danielpink_when-ozan-varol-first-became-a-law-professor-activity-7338656208934916096-55P6",
+    "metricas": {
+      "curtidas": 3628,
+      "comentarios": 317,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 11/06/2025. Original em inglês: 'When Ozan Varol first became a law professor, he'd pause mid-lecture and ask: Does anyone have any questions?' Autor é escritor, não edtech; entra pelo tema didática e professores, encaixe no nicho é parcial. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-26"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Novo lançamento: Torne-se um Engenheiro de IA. Aprenda fazendo. Curso em turma.",
+    "estrutura": [
+      "Bloco 1: anúncio do lançamento com o nome do curso",
+      "Bloco 2: bastidor (meses de preparação, primeira turma, feito com o autor best-seller Ali Aminian e publicado pela ByteByteGo)",
+      "Bloco 3: posicionamento ('não é só mais um curso sobre frameworks e ferramentas')",
+      "Bloco 4: diferenciais em lista (aprender fazendo, trilha estruturada, feedback e mentoria ao vivo, comunidade)",
+      "Bloco 5: foco em habilidade, não em teoria ou aprendizado passivo",
+      "Bloco 6: CTA para quem quer começar do zero, com link"
+    ],
+    "padrao_visual": {
+      "fundo": "texto de lançamento com uma imagem anexada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O autor já tem audiência técnica enorme e troca 'curso' por 'turma' com mentoria ao vivo, o que justifica preço e cria escassez. Os diferenciais respondem às objeções de quem já comprou cursos gravados e não terminou.",
+    "autor_ou_marca": "Alex Xu (ByteByteGo)",
+    "link_fonte": "https://www.linkedin.com/posts/alexxubyte_ai-aiengineer-machinelearning-activity-7374107635442438144-oI8n",
+    "metricas": {
+      "curtidas": 2797,
+      "comentarios": 69,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2025. Original em inglês: 'New Launch: Become an AI Engineer | Learn by Doing | Cohort Based Course'. Texto e autor confirmados. Os números dos posts de última chamada (1509 e 971 reações) não foram reverificados. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-27"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Você não consegue aprender um idioma por completo em seis meses.",
+    "estrutura": [
+      "Bloco 1: frase que contraria a promessa do próprio setor",
+      "Bloco 2: a boa notícia (em seis meses dá para conversar, pedir comida e se apresentar)",
+      "Bloco 3: 3 dicas numeradas de um especialista (falar no primeiro dia, aceitar errar, imersão diária)",
+      "Bloco 4: resposta honesta a 'o Duolingo funciona?'",
+      "Bloco 5: link para mais conteúdo"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma marca de idiomas admitir um limite gera confiança e surpresa. Em seguida ela ajusta a expectativa para algo alcançável e entrega dicas práticas.",
+    "autor_ou_marca": "Duolingo",
+    "link_fonte": "https://www.linkedin.com/posts/duolingo_learning-activity-7506321489659518976-SxMG",
+    "metricas": {
+      "curtidas": 356,
+      "comentarios": 32,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2026. Original em inglês: 'You cannot fully learn a language in six months.' Texto e autor confirmados. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-28"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "O que começou como a busca por um professor de inglês virou a ideia de conectar alunos aos melhores tutores do mundo.",
+    "estrutura": [
+      "Bloco 1: origem pessoal do produto (procurar um tutor de inglês)",
+      "Bloco 2: escala atual (mais de 150 mil tutores, 180 países)",
+      "Bloco 3: gancho de mídia (perfil do cofundador e CEO Kirill Bigai na Fortune)",
+      "Bloco 4: bastidores (segundo emprego, ligações frias para os primeiros clientes, empresa de US$ 1,2 bi)",
+      "Bloco 5: virada (resolver um problema vivido pelo próprio time)",
+      "Bloco 6: link para a matéria"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A história de origem começa por uma dor comum (achar um bom professor) e sobe para números de escala e uma validação da imprensa. É o modelo 'founder story' contado pela página da empresa.",
+    "autor_ou_marca": "Preply",
+    "link_fonte": "https://www.linkedin.com/posts/preply_what-started-as-a-search-for-an-english-tutor-activity-7497639774703210496-xyIs",
+    "metricas": {
+      "curtidas": 288,
+      "comentarios": 11,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (LikeAction) e comentários lidos no JSON-LD da página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/08/2026. Original em inglês: 'What started as a search for an English tutor became an idea to connect learners with the best tutors around the world.' Texto e autor confirmados. Uso de rosto na imagem não conferido.",
+    "nicho": "edtech",
+    "id": "edtech-29"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Vai estudar pro Enem, Enzo",
+    "estrutura": [
+      "Slide 1: mascote Duo de boné do Nubank apontando para a câmera, texto: VAI ESTUDAR PRO ENEM ENZO",
+      "Slide 2 a 9: a mesma imagem trocando só o nome (Valentina, Miguel, Luiza, Alice, Murilo, Julia, Nicolas, Bernardo)",
+      "Slide 10: último nome (Lara), sem chamada comercial",
+      "Legenda: manda pro oreia seca que vai fazer enem"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de portão de escola com o mascote em 3D em primeiro plano",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Cada slide traz um dos nomes mais comuns da geração que faz o Enem, então o leitor procura o próprio nome ou o do amigo e marca a pessoa. A legenda pede o envio de forma explícita, o que transforma o carrossel em corrente de marcação.",
+    "autor_ou_marca": "Duolingo Brasil (@duolingobrasil), ação com Nubank",
+    "link_fonte": "https://www.instagram.com/p/Ddr6VeGmiSv/",
+    "metricas": {
+      "curtidas": 10304,
+      "comentarios": 435,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas (10.304) e comentários (435) no embed público; og:description mostra 10K likes e 435 comments. Lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Autor, legenda e texto da capa (VAI ESTUDAR PRO ENEM ENZO) conferidos na fonte em 27/09/2026. Sequência de nomes dos slides internos vem da curadoria anterior, não reconferida. Parte da campanha Duolingo x Nubank para o Enem 2026.",
+    "nicho": "edtech",
+    "id": "edtech-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "ENEMigos do atraso",
+    "estrutura": [
+      "Slide 1: trocadilho ENEMigos do atraso e oferta: só clientes Nubank têm 3 meses de Super Duolingo grátis para se preparar para a prova",
+      "Slide 2: aperto de mãos com o selo odiar atraso e o texto: quem vai fazer Enem e ainda não tá com os estudos em dia tem que correr atrás do prejuízo",
+      "Slide 3: 0800 até a hora do portão fechar, com o passo a passo: abra o app do Nubank e ative os 3 meses",
+      "Slide 4: repete o trocadilho e fecha com: agora corre pra estudar e manda pra quem vai fazer Enem"
+    ],
+    "padrao_visual": {
+      "fundo": "blocos chapados roxo Nubank e verde Duolingo, tipografia grossa branca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O trocadilho da capa junta a dor do momento (Enem) com um meme conhecido (inimigos do fim) e entrega a oferta já no primeiro slide. A gíria 0800 e o prazo do portão criam urgência sem parecer anúncio.",
+    "autor_ou_marca": "Duolingo Brasil (@duolingobrasil), parceria Nubank",
+    "link_fonte": "https://www.instagram.com/p/DdSEpReGj43/",
+    "metricas": {
+      "curtidas": 7717,
+      "comentarios": 267,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "7.717 curtidas e 267 comentários, iguais no embed público e no og:description, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026. Capa (ENEMigos do atraso, roxo e verde) e legenda (Enemigos do atraso aqui. Clientes Nubank têm 3 meses de Duolingo Super grátis...) conferidas na fonte. Slides 2 a 4 vêm da curadoria anterior. Bom exemplo de co-branding em formato de meme.",
+    "nicho": "edtech",
+    "id": "edtech-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Campeonato de farmar aura com Duolingo",
+    "estrutura": [
+      "Slide 1: capa com três mascotes envoltos em aura roxa, título campeonato de farmar aura com duolingo e botão saiba mais",
+      "Slide 2: QUE MANÉ FARMAR AURA, SEU BETINHA: é um campeonato de quem corre mais rápido pra não atrasar pro Enem, com dia, horário, local e aviso de brindes exclusivos",
+      "Legenda: VOCÊ tá na nossa lista de estudantes que vão correr pra não se atrasar para o Enem, com quando (18 e 19 de setembro, 10h às 18h) e onde (Shopping Cidade São Paulo)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de rua com mascotes de pelúcia e brilho roxo, caixas roxas de informação",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa a gíria da geração Z (farmar aura) para vender um evento presencial, e o segundo slide quebra a expectativa com humor de zoeira. O tema atraso no Enem é meme nacional, então o evento parece piada antes de parecer convite.",
+    "autor_ou_marca": "Duolingo Brasil (@duolingobrasil)",
+    "link_fonte": "https://www.instagram.com/p/DdXaqw0mrZF/",
+    "metricas": {
+      "curtidas": 4939,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "4.939 curtidas no embed público, lido em 27/09/2026. Comentários não apareceram na leitura e ficaram null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/09/2026. Capa e legenda conferidas na fonte. Evento em 18 e 19/09 no Shopping Cidade São Paulo (confirmado na legenda). Texto do slide 2 vem da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Só deu time Ferretto na Matemática do Enem 2025",
+    "estrutura": [
+      "Slide 1: mosaico de rostos de alunos e o título só deu time Ferretto na Matemática do Enem 2025, com subtítulo ano após ano, nossos alunos entregam resultados",
+      "Slide 2: aluno com a nota 967,7 em destaque e print da mensagem de agradecimento",
+      "Slide 3 a 10: um aluno por slide, nota em verde grande (957,9 até 909,2) e print da mensagem ou do boletim",
+      "Slide 11: última aluna com 894,9 e depoimento"
+    ],
+    "padrao_visual": {
+      "fundo": "azul royal com fotos circulares dos alunos, título em tarjas verdes",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Número alto e rosto real em cada slide fazem prova social em série, e o print da mensagem do próprio aluno dá credibilidade que um depoimento escrito pela marca não tem. Quem está estudando se imagina no próximo slide.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DT_RurAEc9f/",
+    "metricas": {
+      "curtidas": 9319,
+      "comentarios": 41,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "9.319 curtidas e 41 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/01/2026. Capa e legenda (Os nossos alunos mandaram bem demais na prova do ENEM!) conferidas na fonte. Notas dos slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "URGENTE: o tema da redação do Enem pode ser Alfabetização e leitura no Brasil",
+    "estrutura": [
+      "Slide 1: selo URGENTE sobre foto de criança lendo e a promessa veja como se preparar",
+      "Slide 2: superamos a meta: 66% das crianças alfabetizadas na idade certa, com barra de progresso",
+      "Slide 3 a 6: como o Brasil chegou nesse número, mapa da desigualdade por estado, o que atrapalha o aprendizado e a EJA",
+      "Slide 7: pausa: salva esse post agora",
+      "Slide 8: repertório Paulo Freire e Constituição",
+      "Slide 9 a 11: como eu faria a introdução e dois parágrafos argumentativos prontos",
+      "Slide 12: compartilha agora esse card com quem vai fazer o Enem"
+    ],
+    "padrao_visual": {
+      "fundo": "capa com foto de criança lendo e selo vermelho, miolo azul royal com títulos brancos",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A palavra urgente e a aposta de tema mexem com a ansiedade do vestibulando, e o carrossel entrega um material completo que vale salvar. O pedido de salvar no meio do carrossel pega o leitor no pico de interesse.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DdpOHh7lEre/",
+    "metricas": {
+      "curtidas": 5231,
+      "comentarios": 28,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "5.231 curtidas e 28 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/09/2026. Capa (URGENTE, O TEMA DA REDAÇÃO DO ENEM PODE SER: ALFABETIZAÇÃO E LEITURA NO BRASIL) e legenda (O tema da redação do Enem pode ser Alfabetização!) conferidas. Legenda cita 66% alfabetizadas, meta de 64% e Ceará com 84%. Slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O que você deve focar agora para melhorar em Matemática até o Enem (ensinando como se você fosse uma criança de 4 anos)",
+    "estrutura": [
+      "Slide 1: caricatura do professor como criança numa mesinha e a promessa do título",
+      "Slide 2: primeira semana: matemática básica, com lista de tópicos sobre foto do professor",
+      "Slide 3: segunda semana: geometria",
+      "Slide 4: pausa: antes de continuar, salve esse post para revisar depois",
+      "Slide 5 a 8: terceira a sexta semana (funções, estatística, combinatória e probabilidade, outros)",
+      "Slide 9: nunca se esqueça de resolver questões e fazer simulados",
+      "Slide 10: se este post te ajudou, compartilhe com quem vai fazer o Enem"
+    ],
+    "padrao_visual": {
+      "fundo": "capa azul ilustrada, depois fotos reais do professor com texto branco sobreposto",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transforma a ansiedade da reta final em um plano de 6 semanas, fácil de salvar e seguir. O rosto do professor em cada slide cria presença de creator, e o como se você tivesse 4 anos reduz o medo da matéria.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DdmovNHFHNk/",
+    "metricas": {
+      "curtidas": 4996,
+      "comentarios": 17,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "4.996 curtidas e 17 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Capa e legenda (Plano para melhorar em Matemática até o ENEM!, próximas 6 semanas) conferidas na fonte. Slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Inep reforça alerta contra repertórios de bolso!",
+    "estrutura": [
+      "Slide 1: foto de Paulo Freire com a cartilha do Enem e o alerta em caixa alta, subtítulo sobre a Cartilha de Redação do Enem 2026",
+      "Slide 2: o que é a Cartilha do Participante 2026",
+      "Slide 3 e 4: o que é repertório de bolso e o que o corretor espera",
+      "Slide 5 e 6: o exemplo que o Inep usou (citação de Aristóteles) e o veredito",
+      "Slide 7 e 8: a correção de 2025 e a resposta do Inep",
+      "Slide 9: teste do bolso: 4 verificações antes de fechar o parágrafo",
+      "Slide 10 a 15: repertório produtivo, situações que zeram a redação e como funciona a correção",
+      "Slide 16: sabia de tudo isso? Comenta aqui"
+    ],
+    "padrao_visual": {
+      "fundo": "capa com foto e títulos brancos, miolo azul royal com caixas escuras para citações",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa uma notícia oficial fresca como gancho e nomeia um erro que muitos alunos cometem sem saber (repertório decorado). O checklist de 4 verificações dá algo prático para salvar.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DdcWRpglLKz/",
+    "metricas": {
+      "curtidas": 4605,
+      "comentarios": 49,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "4.605 curtidas e 49 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 18/09/2026. Capa (INEP REFORÇA ALERTA CONTRA REPERTÓRIOS DE BOLSO!) e legenda (Cartilha da Redação divulgada!) conferidas. Slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "A educação no Brasil está entre as piores do mundo",
+    "estrutura": [
+      "Slide 1: globo sobre fundo vermelho e a manchete, com subtítulo: resultados do PISA mostram desempenho inferior ao de 6 vizinhos latino-americanos em matemática",
+      "Slide 2: o que é o Pisa",
+      "Slide 3: o pior dado: 43,8% abaixo do nível mínimo nas três áreas",
+      "Slide 4 a 8: gráficos de desempenho, disciplina mais crítica, quem lidera o ranking e série histórica",
+      "Slide 9: por que isso vira repertório na redação",
+      "Slide 10 a 12: três eixos temáticos com possíveis temas do Enem",
+      "Slide 13 a 17: introdução nota 1000, desenvolvimento, o erro que derruba o repertório, frases modelo e checklist",
+      "Slide 18: sabia de tudo isso? Comenta aqui"
+    ],
+    "padrao_visual": {
+      "fundo": "capa com foto dramática em vermelho, miolo azul royal com gráficos",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A manchete negativa sobre o país provoca indignação e convida à opinião, e o post teve bem mais comentários que os vizinhos do perfil. Depois o carrossel converte a polêmica em repertório de redação, então o leitor comenta e também salva.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DdSEeN5lMmj/",
+    "metricas": {
+      "curtidas": 3769,
+      "comentarios": 280,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "3.769 curtidas e 280 comentários no embed público, lidos em 27/09/2026. Comentários bem acima dos outros posts do perfil nesta lista (17 a 49)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026. Capa (A EDUCAÇÃO NO BRASIL ESTÁ ENTRE AS PIORES DO MUNDO) e legenda (Brasil entre os piores países do mundo no PISA) conferidas. Legenda cita 71º de 89 em matemática. Slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Medicina não está na lista: 10 profissões que mais vão crescer até 2035",
+    "estrutura": [
+      "Slide 1: estetoscópio e manchete, com subtítulo: o relatório acabou de sair, antes de você se desesperar, seis dessas dez vagas são da área da saúde",
+      "Slide 2: de onde vem o dado (Bureau of Labor Statistics)",
+      "Slide 3 a 6: o setor que puxa a fila, os nomes no topo e os cargos com percentuais",
+      "Slide 7: por que a saúde cresce tanto",
+      "Slide 8: pergunta de suspense: cadê o médico nessa lista? A resposta está no próximo card",
+      "Slide 9 a 12: a pegadinha do percentual, medicina joga em outra escala e a IA",
+      "Slide 13 a 18: dados da geração, Brasil e a parte que ninguém fala em voz alta",
+      "Slide 19 e 20: no dia em que você quiser desistir e salva esse carrossel"
+    ],
+    "padrao_visual": {
+      "fundo": "azul escuro com foto de estetoscópio, títulos brancos em caixa alta",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A capa ataca o sonho de quem presta Medicina e gera choque, mas o subtítulo já promete alívio. O slide de suspense no meio segura o leitor até o fim de um carrossel de 20 slides.",
+    "autor_ou_marca": "Professor Ferretto (@professorferretto)",
+    "link_fonte": "https://www.instagram.com/p/DdZO_H8EZDh/",
+    "metricas": {
+      "curtidas": 2484,
+      "comentarios": 31,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "2.484 curtidas e 31 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2026. Capa (MEDICINA NÃO ESTÁ NA LISTA, 10 PROFISSÕES QUE MAIS VÃO CRESCER ATÉ 2035) e legenda conferidas. Slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Assuntos que mais caem no Enem: dia 2",
+    "estrutura": [
+      "Slide 1: título e gráfico de barras com as quatro matérias (Matemática, Física, Química, Biologia)",
+      "Slide 2: o que mais cai no Enem: Biologia, com percentuais por tema (Ecologia 24%)",
+      "Slide 3: Química (Química Orgânica 24%)",
+      "Slide 4: Matemática (Razão e proporção 21%)",
+      "Slide 5: Física (Ondulatória 22%)"
+    ],
+    "padrao_visual": {
+      "fundo": "off white com título em tarja vermelha e barras em rosa",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um percentual por barra responde em segundos a pergunta que todo aluno faz na véspera: onde focar. A série repete o mesmo molde da semana anterior, então dá para salvar e consultar como tabela.",
+    "autor_ou_marca": "Me Salva! (@mesalvaoficial)",
+    "link_fonte": "https://www.instagram.com/p/DB8-6Hvu5UN/",
+    "metricas": {
+      "curtidas": 2915,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "2.915 curtidas no embed público, lido em 27/09/2026. Comentários não apareceram na leitura e ficaram null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 04/11/2024. Capa (ASSUNTOS QUE MAIS CAEM NO ENEM, DIA 2) e legenda (Bora repetir a mesma estratégia da semana passada?) conferidas. Percentuais dos slides internos vêm da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Fechamento dos portões do Enem",
+    "estrutura": [
+      "Slide 1: mapa do Brasil colorido por fuso com os horários 11h, 12h e 13h",
+      "Slide 2: lista de estados por horário de fechamento",
+      "Legenda: não queremos aparecer nos noticiários como um atrasado do ENEM, envia para o seu colega também não perder a hora"
+    ],
+    "padrao_visual": {
+      "fundo": "off white com mapa em tons de vermelho, laranja e amarelo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Informação útil e urgente na véspera da prova, com recorte local (cada um procura o próprio estado). A legenda usa o meme do atrasado do Enem e pede o envio ao colega.",
+    "autor_ou_marca": "Me Salva! (@mesalvaoficial)",
+    "link_fonte": "https://www.instagram.com/p/DB3ucWnJfaD/",
+    "metricas": {
+      "curtidas": 1060,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.060 curtidas no embed público, lido em 27/09/2026. Comentários não apareceram na leitura e ficaram null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/11/2024. Capa (FECHAMENTO DOS PORTÕES DO ENEM, mapa com 11h, 12h e 13h) e legenda conferidas. Slide 2 vem da curadoria anterior.",
+    "nicho": "edtech",
+    "id": "edtech-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Ninguém me peça pra calcular nada agora",
+    "estrutura": [
+      "Slide 1: personagem ilustrado arrastando o mascote, fala: you stupid (você é burro)",
+      "Slide 2: no i'm not (não sou não)",
+      "Slide 3: what's 9 + 10? (quanto é 9 + 10?)",
+      "Slide 4: silêncio (reticências)",
+      "Slide 5: o personagem responde 21, referência ao meme clássico"
+    ],
+    "padrao_visual": {
+      "fundo": "branco liso com ilustração de artista convidado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Recria em quadrinhos um meme antigo que todo mundo conhece (9 + 10 = 21), e o mascote vira coadjuvante. O leitor passa os slides para chegar ao desfecho que já espera, e a legenda em primeira pessoa transforma a piada em confissão do próprio leitor.",
+    "autor_ou_marca": "Duolingo (@duolingo), arte de @eleheba",
+    "link_fonte": "https://www.instagram.com/p/DdZhOsSlFca/",
+    "metricas": {
+      "curtidas": 191542,
+      "comentarios": 1318,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "191.542 curtidas e 1.318 comentários no embed público, lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês, legenda: no one ask me to calculate anything rn, com crédito de arte para @eleheba (conferido). Capa com a fala \"you stupid\" conferida. Slides 2 a 5 vêm da curadoria anterior. Post de 17/09/2026.",
+    "nicho": "edtech",
+    "id": "edtech-41"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Gíria gamer: repita depois da Duokitty",
+    "estrutura": [
+      "Slide 1: tela falsa de lição do app: GAMER SLANG, repeat after Duokitty: gg ferkin ez",
+      "Slide 2: leia e responda: o que significa cooked?",
+      "Slide 3: quem é pwincess? Resposta: você, uwu xD",
+      "Slide 4: combine os pares: GG, EZ, GLHF",
+      "Slide 5: traduza o emoticon rawr :3",
+      "Slide 6: traduza a frase Ws in the chat e parabéns, pwincess"
+    ],
+    "padrao_visual": {
+      "fundo": "interface branca do próprio app, com botões verdes e personagens",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa o próprio produto (a tela de exercício) como formato de meme e ensina gírias da comunidade gamer. É anúncio de parceria que parece piada interna, então o público gamer compartilha.",
+    "autor_ou_marca": "Duolingo (@duolingo)",
+    "link_fonte": "https://www.instagram.com/p/Ddj0zzulPmY/",
+    "metricas": {
+      "curtidas": 103403,
+      "comentarios": 725,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "103.403 curtidas e 725 comentários no embed público; og:description mostra 103K likes e 725 comments. Lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês, legenda: can pwincess get free nitro? (conferida). Capa com GAMER SLANG, Repeat after Duokitty e gg ferkin ez conferida. Slides 2 a 6 vêm da curadoria anterior. Post de 21/09/2026. Contexto de parceria com Discord (nitro).",
+    "nicho": "edtech",
+    "id": "edtech-42"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Alemães quando dizem: \"thank you\"",
+    "estrutura": [
+      "Slide 1: alemães quando dizem thank you, imagem de pato distorcido (danke soa como donkey)",
+      "Slide 2: 3 (drei soa como dry): mascote seco no deserto",
+      "Slide 3: pants: mascote molhando o urso com mangueira",
+      "Slide 4: 10 (zehn soa como brain): cérebro gigante",
+      "Slide 5: bright: mascote em chamas",
+      "Slide 6: 11 (elf): mascote vestido de elfo com presentes"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com título verde fixo e ilustração do mascote",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Ensina pronúncia em alemão por trocadilho visual, e cada slide é uma pequena charada que o leitor resolve sozinho. O molde fixo (título igual, palavra muda) é fácil de replicar para qualquer idioma.",
+    "autor_ou_marca": "Duolingo (@duolingo)",
+    "link_fonte": "https://www.instagram.com/p/Ddrs0etFMAa/",
+    "metricas": {
+      "curtidas": 97322,
+      "comentarios": 418,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "97.322 curtidas e 418 comentários no embed público; og:description mostra 97K likes e 418 comments. Lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: germans when they say: \"thank you\" (capa conferida). Legenda: nein out of ten, would learn again (conferida). Post de 24/09/2026. Slides 2 a 6 vêm da curadoria anterior. As explicações dos trocadilhos entre parênteses são leitura do curador, não texto do post.",
+    "nicho": "edtech",
+    "id": "edtech-43"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Bora pegar esse diploma",
+    "estrutura": [
+      "Slide 1 a 7: sete fotos de meme de pessoas chorando ou em desespero, todas com o mesmo texto: let's get this degree",
+      "Legenda: how it feels working to get this degree rn"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de meme com texto branco centralizado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A repetição da frase motivacional sobre rostos em colapso cria ironia instantânea e identificação com o estudante cansado. A marca não aparece no conteúdo, só na conta, e por isso o post é compartilhado como meme puro.",
+    "autor_ou_marca": "Quizlet (@quizlet)",
+    "link_fonte": "https://www.instagram.com/p/DQLM5a8jJkl/",
+    "metricas": {
+      "curtidas": 132090,
+      "comentarios": 106,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "132.090 curtidas e 106 comentários no embed público; og:description mostra 132K likes e 106 comments. Lidos em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: let's get this degree. Legenda: how it feels working to get this degree rn (conferida). Capa com foto de rosto em desespero conferida; o texto sobreposto aparece cortado na miniatura, então a frase exata dos slides vem da curadoria anterior. Post de 23/10/2025.",
+    "nicho": "edtech",
+    "id": "edtech-44"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "que evento incrível da Apple! espero muito que minha marca não seja infringida 💚",
+    "estrutura": [
+      "Bloco 1: Post curto publicado durante o evento da Apple (17:12 UTC), antes do nome do aparelho ser revelado, insinuando conflito de marca.",
+      "Bloco 2: Emoji verde que remete ao Duo e reforça a persona da coruja.",
+      "Bloco 3: O próprio Duolingo responde no fio quando o nome sai: it's called the iPhone WHAT???, depois oh god oh god my SEO my SEO.",
+      "Bloco 4: Marca a Apple e criadores no fio (@johnternus pick up the phone pls; @ijustine help me out here) e a Samsung Mobile US entra na conversa com um 👀."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto puro no feed do X, sem mídia",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Publica antes do anúncio uma insinuação que só faz sentido quando o nome iPhone Duo aparece, então quem chega depois relê o post como profecia. O fio em minúsculas com respostas em sequência encena um personagem em pânico ao vivo e atrai outras marcas, como a Samsung, para dentro da conversa.",
+    "autor_ou_marca": "Duolingo (@duolingo)",
+    "link_fonte": "https://x.com/duolingo/status/2097734978746372358",
+    "metricas": {
+      "curtidas": 17067,
+      "comentarios": 185,
+      "compartilhamentos": 601,
+      "visualizacoes": 1348868,
+      "observacao": "Relido via api.fxtwitter.com (status e conversa) em 27/09/2026: 17.067 curtidas, 185 respostas, 601 reposts, 1.348.868 visualizações, 107 citações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: \"what an exciting Apple event! i sure hope my brand doesn't get infringed upon 💚\". Postado em 09/09/2026, 17:12 UTC, dia do lançamento do iPhone Duo dobrável. Verificado no fio: respostas do Duolingo (iPhone WHAT, my SEO, marcação de @johnternus e @ijustine) e da @SamsungMobileUS (apenas 👀). A troca com a Samsung com a provocação ugly stranger, citada na versão anterior, NÃO foi encontrada nas respostas e foi retirada da estrutura.",
+    "nicho": "edtech",
+    "id": "edtech-45"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "o nome é iPhone O QUÊ???",
+    "estrutura": [
+      "Bloco 1: Reação em caixa alta ao nome do produto concorrente, como resposta ao próprio post anterior sobre o evento da Apple.",
+      "Bloco 2: Um minuto depois, segue o fio com oh god oh god my SEO my SEO, admitindo com humor o medo de perder a busca pelo nome Duo.",
+      "Bloco 3: Marca executivo da Apple e criadora de tecnologia pedindo ajuda, mantendo o personagem em pânico."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto puro no X, sem mídia",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Reação exagerada em cinco palavras, postada logo após o anúncio, soa espontânea e pessoal. A piada do SEO na sequência revela o interesse real da marca (ser achada quando alguém busca Duo) sem parecer propaganda, e essa resposta teve mais visualizações que o próprio post.",
+    "autor_ou_marca": "Duolingo (@duolingo)",
+    "link_fonte": "https://x.com/duolingo/status/2097745909698167209",
+    "metricas": {
+      "curtidas": 6775,
+      "comentarios": 49,
+      "compartilhamentos": 361,
+      "visualizacoes": 449915,
+      "observacao": "Relido via api.fxtwitter.com em 27/09/2026: 6.775 curtidas, 49 respostas, 361 reposts, 449.915 visualizações. A resposta seguinte (my SEO) tinha 5.800 curtidas e 744.854 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: \"it's called the iPhone WHAT???\". Postado em 09/09/2026, 17:56 UTC, como resposta ao tweet 2097734978746372358 do próprio Duolingo. A frase iPhone Duo: $1999. Duo on your iPhone: free., citada pela imprensa, NÃO apareceu nas respostas do fio e foi retirada da estrutura e da análise.",
+    "nicho": "edtech",
+    "id": "edtech-46"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Oi @duolingo. Tem como ajudar um pequeno fã do Duo? Meu filho de 10 anos tinha uma ofensiva de mais de 300 dias, mas foi hospitalizado de repente e perdeu as lições.",
+    "estrutura": [
+      "Bloco 1: Mãe marca a marca e faz um pedido público: o filho de 10 anos ficou internado, está em casa se recuperando, mas triste por perder a ofensiva.",
+      "Bloco 2: Duolingo responde em público: que bom que ele está se recuperando, qual é o usuário dele? vamos fazer essa ofensiva andar de novo.",
+      "Bloco 3: Marca confirma no fio: ofensiva de 301 dias recuperada, com gemas e um Protetor de Ofensiva de brinde.",
+      "Bloco 4: Imprensa repercute a resposta como exemplo de atendimento humano."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto puro no X, fio de respostas",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A história tem vulnerabilidade real (criança internada) e um pedido simples que a marca resolve em público em dois posts. A resposta rápida transforma um caso de suporte em prova social e mostra o valor emocional da ofensiva, que é o núcleo do produto.",
+    "autor_ou_marca": "Sunny Chaos (@762cayuga no X) com resposta do Duolingo",
+    "link_fonte": "https://www.ibtimes.co.uk/duolingo-restores-301-day-streak-hospitalised-boy-1813986",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": 15000000,
+      "observacao": "IBTimes UK (publicada em 13/08/2026), lida em 27/09/2026: o pedido passou de 15 milhões de visualizações no X. Número arredondado pela matéria; o post original não foi aberto."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Original em inglês: \"Hi @duolingo. Any chance you can help a little Duo fan out? My 10-year-old son had a 300+ day streak, but was unexpectedly hospitalized and missed his lessons. He's home and recovering, but heartbroken about losing his streak.\" Respostas: \"glad to hear that he's recovering! what's his Duolingo username? let's get that streak going again.\" e \"301-day streak repaired! threw in some gems and a Streak Shield too ❤️\". Rebaixado para a verificar: texto e autora confirmados só na matéria (crédito da imagem: Sunny Chaos/X @762cayuga), sem link do status. O @ foi corrigido: a versão anterior dizia @SunnyChaos, mas a matéria credita @762cayuga. Agosto de 2026.",
+    "nicho": "edtech",
+    "id": "edtech-47"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Sobre os tema da redação do Enem. Enem 2023: das mulheres. Enem 2024: das negras. Enem 2025: das velhas. Agora em 2026 tem q ser das gays",
+    "estrutura": [
+      "Bloco 1: Abre com o assunto que todo candidato está comentando no dia (tema da redação do Enem).",
+      "Bloco 2: Lista curta ano a ano, criando um padrão que o leitor reconhece na hora.",
+      "Bloco 3: Quebra o padrão com uma previsão engraçada para o ano seguinte.",
+      "Bloco 4: Vídeo de reação de 16 segundos reforça a piada."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto no X com vídeo curto de 16 segundos",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Publicado no primeiro dia de prova, quando milhões procuram o tema da redação. A lista por ano cria reconhecimento imediato e a previsão final convida cada leitor a responder ou repostar com a própria aposta, o que explica 8,8 mil reposts.",
+    "autor_ou_marca": "@itsjustjonts",
+    "link_fonte": "https://twitter.com/itsjustjonts/status/1987567710411071646",
+    "metricas": {
+      "curtidas": 71024,
+      "comentarios": 335,
+      "compartilhamentos": 8829,
+      "visualizacoes": 703353,
+      "observacao": "Relido via api.fxtwitter.com em 27/09/2026: 71.024 curtidas, 335 respostas, 8.829 reposts, 703.353 visualizações. Vídeo de 16 s confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de usuário, não de marca, publicado em 09/11/2025, primeiro dia do Enem 2025. Gancho agora é a frase literal, com os erros de digitação do original (os tema, q). Serve de referência de event-jacking para cursinhos e preparatórios; atenção ao tom, que brinca com grupos sociais e pode não caber na voz de uma marca.",
+    "nicho": "edtech",
+    "id": "edtech-48"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "pior do que ver a nota do ENEM é passar o dia inteiro com os parentes perguntando quanto você tirou",
+    "estrutura": [
+      "Bloco 1: Estrutura pior do que X é Y, que parte da dor esperada (a nota) e troca por uma dor mais identificável (os parentes).",
+      "Bloco 2: Vídeo de reação de 7 segundos reforça a situação.",
+      "Bloco 3: Publicado no dia da divulgação das notas, quando o público inteiro está vivendo a mesma cena."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto no X com vídeo de reação de 7 segundos",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A comparação desloca a dor do resultado para uma situação familiar que todo estudante reconhece. A identificação gera repost de quem quer mostrar aos amigos que passa pela mesma coisa, daí 617 reposts para 3,1 mil curtidas.",
+    "autor_ou_marca": "mandy (@amandstudy)",
+    "link_fonte": "https://twitter.com/i/status/2012119501589164236",
+    "metricas": {
+      "curtidas": 3122,
+      "comentarios": 15,
+      "compartilhamentos": 617,
+      "visualizacoes": 34538,
+      "observacao": "Relido via api.fxtwitter.com em 27/09/2026: 3.122 curtidas, 15 respostas, 617 reposts, 34.538 visualizações. Vídeo de 6,8 s confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Perfil de estudante (studygram). Postado em 16/01/2026, dia do resultado do Enem 2025. A cena de Succession citada antes não foi conferida; a estrutura agora fala só em vídeo de reação.",
+    "nicho": "edtech",
+    "id": "edtech-49"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "pensando aqui se a pior sensação é 1 dia antes de fazer o enem ou 1 dia antes de sair o resultado",
+    "estrutura": [
+      "Bloco 1: Dilema entre duas ansiedades do vestibulando, em forma de pergunta sem resposta.",
+      "Bloco 2: Vídeo de reação ansiosa de 11 segundos.",
+      "Bloco 3: Postado na véspera do resultado, convida o leitor a escolher um lado nas respostas ou no repost."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto no X com vídeo de 11 segundos",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Coloca lado a lado dois momentos de ansiedade que o público conhece bem, na noite em que um deles está acontecendo. A pergunta sem resposta pede opinião e rende reposts de quem quer declarar o próprio lado.",
+    "autor_ou_marca": "ka. (@karenxis_)",
+    "link_fonte": "https://twitter.com/i/status/2011964435724742948",
+    "metricas": {
+      "curtidas": 986,
+      "comentarios": 2,
+      "compartilhamentos": 105,
+      "visualizacoes": 19946,
+      "observacao": "Relido via api.fxtwitter.com em 27/09/2026: 986 curtidas, 2 respostas, 105 reposts, 19.946 visualizações. Vídeo de 10,9 s confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de usuária, 16/01/2026 às 00:51 UTC (noite de 15/01 no horário de Brasília, véspera do resultado). Alcance médio, útil como modelo de gancho em dilema para cursinhos.",
+    "nicho": "edtech",
+    "id": "edtech-50"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "e o shawn que PAGOU UM CURSO DE INGLÊS pra um vendedor no rio , um príncipe mds",
+    "estrutura": [
+      "Bloco 1: Fato surpreendente em caixa alta: uma celebridade pagou curso de inglês para um vendedor ambulante.",
+      "Bloco 2: Vídeo de 28 segundos em que o próprio vendedor conta a história em primeira pessoa.",
+      "Bloco 3: Reação afetiva (um príncipe mds) que convida o leitor a concordar."
+    ],
+    "padrao_visual": {
+      "fundo": "Texto no X com vídeo vertical de 28 segundos",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Junta celebridade, mudança de vida e aprendizado de idioma numa história contada por quem recebeu o presente. Para escolas de idiomas, mostra que a promessa de fluência como porta de oportunidade viraliza quando o depoimento vem do aluno, não da escola.",
+    "autor_ou_marca": "acervo shawn mendes (@acervoshwn)",
+    "link_fonte": "https://x.com/acervoshwn/status/2102142644927312110",
+    "metricas": {
+      "curtidas": 1492,
+      "comentarios": 17,
+      "compartilhamentos": 106,
+      "visualizacoes": 27645,
+      "observacao": "Relido via api.fxtwitter.com em 27/09/2026: 1.492 curtidas, 17 respostas, 106 reposts, 27.645 visualizações. Vídeo de 28 s confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fã-clube, não marca. Postado em 21/09/2026. Segundo o Vagalume (não relido nesta verificação), o vídeo original é do TikTok do vendedor Ruan Patrick (São Conrado, Rio). A escola não é nomeada. Alcance modesto; vale como exemplo de narrativa, não de volume.",
+    "nicho": "edtech",
+    "id": "edtech-51"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Ela prestando mais atenção na aula do que meus alunos. 🤡😂",
+    "estrutura": [
+      "Bloco 1: Cena real de sala de aula: professor dá aula segurando a bebê de uma aluna.",
+      "Bloco 2: Legenda curta com autodepreciação, comparando a bebê aos alunos.",
+      "Bloco 3: Imprensa regional repercute e o professor explica que sempre acolhe alunas mães."
+    ],
+    "padrao_visual": {
+      "fundo": "Vídeo vertical gravado em sala de aula",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Bastidor autêntico com um gesto de acolhimento que o professor não precisa explicar, porque a imagem já mostra. A legenda de piada tira o tom de autopromoção e deixa o público fazer o elogio nos comentários.",
+    "autor_ou_marca": "Rodolpho Guedes (@rodolphoguedes), professor da Uespi",
+    "link_fonte": "https://www.instagram.com/reel/DdUuFHuhAZL/",
+    "metricas": {
+      "curtidas": 13000,
+      "comentarios": 606,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Meta tags do reel lidas em 27/09/2026: 13K curtidas (arredondado pelo Instagram) e 606 comentários. Visualizações não aparecem na página."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de 15/09/2026 confirmado na página, autor rodolphoguedes. Floriano (PI). Formato real é Reel. O Portal O Dia fala em quase 100 mil visualizações, número não confirmado.",
+    "nicho": "edtech",
+    "id": "edtech-52"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Encantado.... amei....",
+    "estrutura": [
+      "Bloco 1: Vídeo mostra trabalho de Artes de uma aluna de 13 anos: um iPhone de papelão com o perfil de Instagram de Leonardo da Vinci.",
+      "Bloco 2: Aluna rola as obras do artista num mecanismo de papelão, como se fosse o feed.",
+      "Bloco 3: Legenda mínima de emoção do professor e hashtags de vida de professor (#professor #vidadeprofessor #escola)."
+    ],
+    "padrao_visual": {
+      "fundo": "Vídeo vertical em sala de aula com objeto artesanal em destaque",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O trabalho do aluno é o protagonista, e a ideia cruza escola com a própria rede social, então o público do Instagram reconhece o feed de papelão na hora. A legenda de duas palavras deixa o trabalho falar e leva a conversa para os comentários (6,7 mil).",
+    "autor_ou_marca": "Prof. Lantieri Muniz (@prof.lantierimuniz.oficial)",
+    "link_fonte": "https://www.instagram.com/reel/DcuTEqKvvY0/",
+    "metricas": {
+      "curtidas": 227000,
+      "comentarios": 6732,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Meta tags do reel lidas em 27/09/2026: 227K curtidas (arredondado pelo Instagram) e 6.732 comentários. Visualizações não aparecem na página."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de 31/08/2026 confirmado na página. Professor de Mato Grosso do Sul, aluna Eloá Gabrieli de Souza (segundo a imprensa). Formato real é Reel. O Só Notícia Boa fala em 1,7 milhão de visualizações, número não confirmado e por isso retirado. Ótimo modelo para escola ou professor mostrar trabalho de aluno.",
+    "nicho": "edtech",
+    "id": "edtech-53"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Vida na Prática: alunos do Ensino Médio aprendem a trocar um chuveiro",
+    "estrutura": [
+      "Bloco 1: Vídeo mostra estudantes do Ensino Médio trocando um chuveiro com eletricista e professor acompanhando.",
+      "Bloco 2: Atividade faz parte do projeto opcional e semanal Vida na Prática, com temas sugeridos pelos próprios alunos.",
+      "Bloco 3: Projeto já teve culinária, mecânica de carro e compras de supermercado, o que vira série de conteúdo.",
+      "Bloco 4: Comentários abrem debate sobre a ausência de meninas na turma, o que amplia o alcance e exige resposta da escola."
+    ],
+    "padrao_visual": {
+      "fundo": "Vídeo vertical gravado na escola",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Responde a uma crítica comum à escola (não ensina coisas úteis) mostrando o contrário em vídeo. Pais e ex-alunos compartilham porque é uma habilidade que queriam ter aprendido, e a polêmica sobre gênero nos comentários empurrou ainda mais o alcance.",
+    "autor_ou_marca": "Colégio Magnificat (Divinópolis, MG), conta que publicou não identificada",
+    "link_fonte": "https://oantagonista.com.br/brasil/escola-de-mg-ensina-troca-de-chuveiro-no-ensino-medio/",
+    "metricas": {
+      "curtidas": 58000,
+      "comentarios": 1200,
+      "compartilhamentos": null,
+      "visualizacoes": 2000000,
+      "observacao": "Números lidos na matéria de O Antagonista (25/09/2026) em 27/09/2026: mais de 2 milhões de visualizações em cerca de 24 horas, mais de 58 mil curtidas, cerca de 1,2 mil comentários no Instagram. Post original não aberto."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "ATENÇÃO: o gancho não é a legenda literal; é o nome do projeto mais a descrição da matéria. A matéria não traz o link nem o perfil que publicou (diz só registros divulgados nas redes sociais); atribuir ao perfil oficial do colégio é suposição. Reitor Eduardo Rodrigues. Parte dos comentários criticou a ausência de meninas; o reitor disse que elas não se interessaram, o que é risco de imagem se usado como referência. Setembro de 2026.",
+    "nicho": "edtech",
+    "id": "edtech-54"
   }
 ]

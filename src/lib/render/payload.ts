@@ -21,6 +21,8 @@ export const payloadSchema = z.object({
     hashtags: z.array(z.string().max(40)).max(12).default([]),
     padrao_inspirador: texto(80),
     por_que: texto(400),
+    destaque: z.string().max(160).optional(),
+    direcao_capa: z.object({ cena: z.string().max(900), estilo: z.enum(["fotografia", "ilustracao-3d", "ilustracao-flat"]) }).optional(),
   }),
   brand: z.object({
     nome: z.string().min(1).max(80),

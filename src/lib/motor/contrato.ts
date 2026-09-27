@@ -2,6 +2,7 @@
 // Fonte: PROMPT_MOTOR_POSTS.md. Tudo aqui é opcional para o motor: ele funciona só com a leitura do site.
 import { z } from "zod";
 import { contextoConfirmadoSchema } from "@/lib/contexto/contrato";
+import { IDS_NICHO, type Analise, type PostGerado } from "@/lib/types";
 
 import { FORMATOS_MOTOR, OBJETIVOS, type FormatoMotor, type Frequencia, type ObjetivoId } from "./constantes";
 
@@ -54,6 +55,16 @@ export const itemEmAltaSchema = z.object({
   url: z.string().trim().url().max(500).optional(),
 });
 
+/** Um post que está rendendo agora no nicho do cliente, achado na busca ao vivo. */
+export const viralAoVivoSchema = z.object({
+  gancho: z.string().trim().min(1).max(240),
+  formato: textoPesquisa(40),
+  rede: textoPesquisa(20),
+  por_que: textoPesquisa(300),
+  quem: textoPesquisa(100),
+  url: z.string().trim().url().max(500).optional(),
+});
+
 /**
  * Pesquisa de mercado feita na web enquanto o founder responde as perguntas (POST /api/concorrentes).
  * Volta para o motor dentro das preferências: o que cada concorrente publica e o que está em alta no nicho.
@@ -62,13 +73,15 @@ export const pesquisaMercadoSchema = z.object({
   /** O mercado em uma frase, como a pesquisa entendeu. */
   mercado: textoPesquisa(300),
   /** Nicho da base curada que mais se aproxima. Vale mais que o palpite por palavra-chave. */
-  nicho: z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"]).optional(),
+  nicho: z.enum(IDS_NICHO).optional(),
   concorrentes: z
     .array(z.object({ nome: z.string().trim().max(80), url: z.string().trim().url().max(500), o_que_publica: textoPesquisa(400) }))
     .max(6)
     .default([]),
   /** Temas e ganchos que estão rendendo com concorrentes e mídias do nicho, cada um com a fonte achada na busca. */
   em_alta: z.array(itemEmAltaSchema).max(8).default([]),
+  /** Posts de alto engajamento do nicho nos últimos 12 meses, da quarta busca. */
+  virais_ao_vivo: z.array(viralAoVivoSchema).max(6).default([]),
 });
 export type PesquisaMercado = z.infer<typeof pesquisaMercadoSchema>;
 
@@ -139,6 +152,9 @@ export interface Enderecamento {
   acao_esperada: string;
 }
 
+/** Estilo da imagem da capa. O mesmo que a direção de arte usa (src/lib/imagem/direcao.ts). */
+export type EstiloCapa = "fotografia" | "ilustracao-3d" | "ilustracao-flat";
+
 /** Campos extras que o motor novo adiciona a cada post (todos opcionais para não quebrar demo e cache antigos). */
 export interface ExtrasPost {
   trilho?: "founder" | "empresa";
@@ -151,6 +167,12 @@ export interface ExtrasPost {
   padrao_referencia?: { nome: string; fonte_url: string };
   chamada_final?: string;
   precisa_revisao?: string[];
+  /** Padrão viral que o post adaptou e de onde ele veio (busca ao vivo ou biblioteca curada). */
+  padrao_viral?: { nome: string; origem: "ao_vivo" | "biblioteca" };
+  /** Trecho do título da capa que a arte marca com a cor da marca. */
+  destaque?: string;
+  /** Direção de arte da imagem da capa, escrita pelo Claude junto com o post (em inglês). */
+  direcao_capa?: { cena: string; estilo: EstiloCapa };
 }
 
 /**
@@ -252,3 +274,17 @@ export function conhecimentoPreenchido(c?: ConhecimentoFounder | null): Conhecim
   }
   return Object.keys(out).length ? out : null;
 }
+
+/**
+ * Eventos da geração ao vivo (POST /api/analyze com `stream: true`), um por linha de NDJSON.
+ * `previa` diz se o post veio da escrita ao vivo da IA (true) ou saiu pronto no fim (demo, cache, motor local).
+ */
+export type EventoAoVivo =
+  | { tipo: "inicio"; concorrentes: string[]; em_alta: string[]; virais_ao_vivo: number; preenchimento?: string }
+  | { tipo: "escrevendo"; indice: number; gancho: string | null }
+  | { tipo: "post"; indice: number; post: PostGerado; previa: boolean }
+  | { tipo: "final"; analise: Analise }
+  | { tipo: "erro"; mensagem: string };
+
+/** O que o motor emite enquanto escreve. */
+export type EventoDoMotor = Extract<EventoAoVivo, { tipo: "escrevendo" | "post" }>;

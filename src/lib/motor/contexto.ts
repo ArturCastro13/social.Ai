@@ -58,6 +58,8 @@ export interface ContextoMotor {
   mercado_pesquisado: string | null;
   /** Temas e ganchos que estão rendendo agora com concorrentes e mídias do nicho, achados na web, com a fonte. */
   em_alta_no_nicho: { tema: string; gancho: string; por_que: string; quem: string; url: string | null }[];
+  /** Posts que estão rendendo agora no nicho deste cliente, da busca ao vivo. Mecanismo para adaptar, nunca texto para copiar. */
+  virais_ao_vivo: { gancho: string; formato: string; rede: string; por_que: string; quem: string; url: string | null }[];
   /** Posts publicados com os números que o founder informou, e o que se sabe de cada um. */
   desempenho_proprio: {
     rede: string;
@@ -190,7 +192,7 @@ const semTraco = (s: string) => s.replace(/\s*[—–]\s*/g, ", ").trim();
 function referenciasDoNicho(refs: ExtrasContexto["referencias"] = []): ContextoMotor["referencias_nicho"] {
   const out: ContextoMotor["referencias_nicho"] = [];
   for (const { padrao, exemplos } of refs) {
-    const lista = exemplos.length ? exemplos.slice(0, 2) : [null];
+    const lista = exemplos.length ? exemplos.slice(0, 3) : [null];
     for (const e of lista) {
       out.push({
         padrao: padrao.nome,
@@ -200,13 +202,14 @@ function referenciasDoNicho(refs: ExtrasContexto["referencias"] = []): ContextoM
         metrica_verificada: e?.status === "verificado",
         fonte_url: e?.link_fonte ?? "",
         texto_gancho: corte(semTraco(e?.texto_gancho ?? ""), 200),
-        estrutura: (e?.estrutura ?? []).slice(0, 4).map((x) => corte(semTraco(x), 100)),
-        por_que_funciona: corte(semTraco(e?.por_que_funciona || padrao.descricao || ""), 200),
+        estrutura: (e?.estrutura ?? []).slice(0, 6).map((x) => corte(semTraco(x), 120)),
+        por_que_funciona: corte(semTraco(e?.por_que_funciona || padrao.descricao || ""), 240),
       });
     }
   }
-  // Verificados primeiro (camada 4 da hierarquia de evidências), depois o resto.
-  return out.sort((a, b) => Number(b.metrica_verificada) - Number(a.metrica_verificada)).slice(0, 14);
+  // Verificados primeiro (camada 4 da hierarquia), carrossel em seguida (o formato principal do produto).
+  const peso = (r: ContextoMotor["referencias_nicho"][number]) => Number(r.metrica_verificada) * 2 + Number(r.formato === "carrossel");
+  return out.sort((a, b) => peso(b) - peso(a)).slice(0, 12);
 }
 
 function historico(decisoes: Decisao[], posts: Map<string, PostGerado>): ContextoMotor["historico_preferencias"] {
@@ -321,6 +324,14 @@ export function montarContexto(brand: BrandProfile, preferencias?: Preferencias 
       por_que: semTraco(t.por_que),
       quem: semTraco(t.quem),
       url: t.url ?? null,
+    })),
+    virais_ao_vivo: (p?.pesquisa_mercado?.virais_ao_vivo ?? []).map((v) => ({
+      gancho: semTraco(v.gancho),
+      formato: v.formato,
+      rede: v.rede,
+      por_que: semTraco(v.por_que),
+      quem: semTraco(v.quem),
+      url: v.url ?? null,
     })),
     desempenho_proprio: desempenho(ds),
     aprendizados_calculados: calcularAprendizados(ds),

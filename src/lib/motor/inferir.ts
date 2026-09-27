@@ -21,7 +21,7 @@ export function objetivosDoSite(texto: string, nicho: Nicho): ObjetivoId[] {
   if (/\b(lancamento|lancamos|acabamos de lancar|novidade|beta|lista de espera|em breve|novo produto)\b/.test(t)) out.push("lancar_produto");
   if (/\b(investidores?|rodada|seed|serie a|captamos|aporte)\b/.test(t) && out.length < 2) out.push("atrair_investidor");
   if (/\b(comunidade|membros|clube)\b/.test(t) && out.length < 2) out.push("comunidade");
-  const b2b = nicho === "saas-b2b" || /\b(b2b|empresas|pmes?|times|equipes|gestores)\b/.test(t);
+  const b2b = nicho === "saas-b2b" || nicho === "marketing-agencias" || nicho === "ia-dev" || /\b(b2b|empresas|pmes?|times|equipes|gestores)\b/.test(t);
   if (b2b && !out.includes("gerar_clientes")) out.push("gerar_clientes");
   for (const padrao of ["autoridade_founder", "gerar_clientes"] as ObjetivoId[]) {
     if (out.length >= 2) break;

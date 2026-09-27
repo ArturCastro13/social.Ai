@@ -1,3 +1,4 @@
+import { lerLinhasJson } from "./ao-vivo";
 import { adaptarSlides } from "@/lib/render/adaptar";
 import type { RoteiroVideo } from "@/lib/motor/contrato";
 import type { Analise, BrandProfile, PostGerado, Rede, TemplateId } from "@/lib/types";
@@ -110,9 +111,16 @@ export interface ImagemCriada {
 
 /**
  * Pede a imagem do post com IA (direção de arte do Claude, imagem da OpenAI). Leva o texto editado, para a cena
- * bater com o que vai na arte. `variacao` maior que 0 pede outra cena ("Gerar outra").
+ * bater com o que vai na arte. `variacao` maior que 0 pede outra cena ("Gerar outra"). `aoParcial` recebe a
+ * prévia borrada enquanto a capa é pintada, quando o servidor manda em NDJSON.
  */
-export async function criarImagemIA(analise: Analise, original: PostGerado, pers: Personalizacao, variacao = 0): Promise<ImagemCriada> {
+export async function criarImagemIA(
+  analise: Analise,
+  original: PostGerado,
+  pers: Personalizacao,
+  variacao = 0,
+  aoParcial?: (dataUrl: string) => void,
+): Promise<ImagemCriada> {
   const { legendas: _l, ...post } = postEditado(original, pers);
   void _l;
   const corte = (s: string | undefined, n: number) => (s ? s.slice(0, n) : undefined);
@@ -131,10 +139,21 @@ export async function criarImagemIA(analise: Analise, original: PostGerado, pers
           resumo: corte(analise.resumo_negocio, 1200),
         },
         variacao,
+        ...(aoParcial ? { aoVivo: true } : {}),
       }),
     });
   } catch {
     throw new Error("Sem conexão com o servidor. Confira a internet e tente de novo.");
+  }
+  if (aoParcial && res.ok && (res.headers.get("content-type") ?? "").includes("ndjson")) {
+    let final: ImagemCriada | null = null;
+    await lerLinhasJson<{ tipo: string; imagem?: string; url?: string; direcao?: string; mensagem?: string }>(res, (e) => {
+      if (e.tipo === "parcial" && e.imagem) aoParcial(e.imagem);
+      else if (e.tipo === "pronta" && e.url) final = { url: e.url, direcao: e.direcao ?? "" };
+      else if (e.tipo === "erro") throw new Error(e.mensagem || "Não deu para criar a imagem agora. Tente de novo.");
+    });
+    if (!final) throw new Error("A imagem parou no meio. Tente de novo.");
+    return final;
   }
   const dados = (await res.json().catch(() => null)) as (Partial<ImagemCriada> & { erro?: string }) | null;
   if (!res.ok || !dados?.url) throw new Error(dados?.erro || "Não deu para criar a imagem agora. Tente de novo.");

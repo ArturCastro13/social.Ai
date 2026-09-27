@@ -1,8 +1,28 @@
 # Status: o que ficou pronto, o que falta e por onde começar
 
-Última atualização: fim da noite de 26/09/2026.
+Última atualização: madrugada de 27/09/2026.
 
 Produção: **https://social-ai-beige.vercel.app** · Repositório: https://github.com/bruno-dotcom12/social.Ai
+
+## 27/09/2026 madrugada: posts virais, capas automáticas e tela ao vivo
+
+Spec: `docs/superpowers/specs/2026-09-26-posts-virais-design.md`. Plano: `docs/superpowers/plans/2026-09-26-posts-virais.md`.
+
+- **Biblioteca de virais:** 457 posts reais em 8 nichos (425 conferidos na fonte), antes eram 74 em 5. Nichos novos: marketing e agências, serviços locais, IA e tech para devs. O motor recebe os 12 melhores do nicho.
+- **Pesquisa com 4 buscas** (concorrentes, em alta, assunto do momento, virais do nicho). Chave da pesquisa guardada versionada (`v2|`). O log registra as consultas feitas (`[ia] buscas:`).
+- **Motor dos posts em streaming** (Sonnet 5, cache de prompt): carrossel de creator, padrão viral por post, trecho de destaque e direção de arte da capa na mesma chamada. Cache de análise versionado (`v2:`).
+- **Tela ao vivo:** `POST /api/analyze` com `stream: true` responde NDJSON; os posts aparecem um a um. Sem `stream`, o contrato do `SPEC.md` continua igual.
+- **Capas automáticas:** gpt-image-2 em paisagem, a partir da direção do Claude; o Haiku confere cada capa por visão e pede outra se houver texto, logo ou rosto. Limites: 30 imagens por IP e 150 por dia.
+- **Visual creator** em todos os templates: papel no tom da marca, autor no topo, título display (Bricolage Grotesque ou Fraunces, pelo tom) com marca-texto, progresso e chamada escura. `[PREENCHER]` nunca aparece na arte.
+- **Custo medido** (`npm run ia:custo -- <log> [linha]`): RD Station US$ 0,70 (com uma capa repetida pelo script), V4 Company US$ 0,62, Nuvemshop sem capas US$ 0,29. Por site novo com capas: ~US$ 0,62. Validação inteira: US$ 1,81.
+- **Tempos:** primeiro post na tela ~38 s depois da pesquisa (~25 s); texto completo ~100 s; capas ~30 s cada, 3 ao mesmo tempo.
+
+Pendências conhecidas:
+- **Virais ao vivo vieram vazios** nas 4 pesquisas, apesar da 4ª busca feita. A regra foi afrouxada depois da última rodada paga e não foi revalidada. O motor segue com a biblioteca.
+- **1 de 4 pesquisas voltou sem JSON legível** (Sorridents). Agora o log guarda o começo e o fim da resposta (`[concorrentes] resposta sem JSON legível`).
+- **Destaque:** a correção final (aproveitar a maior sequência que bate com o título) não passou por rodada paga.
+- **Auditoria dos 3 sites (nota 5/10, puxada pelas respostas de founder iguais que o script usou nos três):** um número da fonte foi usado para outro assunto (58% de mídia paga virou "58% usam IA"; na fonte, IA é 59%) e um depoimento de cliente saiu sem dizer que era cliente. As duas regras entraram no prompt (4a) sem rodada paga. A checagem em código confere se o número existe nas fontes, não se fala do mesmo assunto.
+- A tela ao vivo não foi vista no navegador nesta rodada (extensão do Chrome desconectada); as rotas foram validadas pelo mesmo caminho da tela (`scripts/validar-site.ts`).
 
 ## 26/09/2026 fim da noite: IA ligada, pesquisa de mercado e auditoria
 

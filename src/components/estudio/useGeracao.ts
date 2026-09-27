@@ -2,10 +2,21 @@
 
 import { useRef, useState } from "react";
 import { ehSemSite } from "@/lib/brand/sem-site";
-import type { Preferencias } from "@/lib/motor/contrato";
-import type { Analise, BrandProfile } from "@/lib/types";
+import { lerLinhasJson } from "@/lib/client/ao-vivo";
+import type { EventoAoVivo, Preferencias } from "@/lib/motor/contrato";
+import type { Analise, BrandProfile, PostGerado } from "@/lib/types";
 import type { Etapa } from "./Carregando";
 import type { DadosFormulario } from "./Formulario";
+
+/** O que a tela ao vivo mostra enquanto a análise é escrita. */
+export interface EstadoAoVivo {
+  resumo: { concorrentes: string[]; em_alta: string[]; virais_ao_vivo: number } | null;
+  /** Posts já prontos, por índice. `previa` diz se vieram da escrita ao vivo da IA. */
+  posts: Record<number, { post: PostGerado; previa: boolean }>;
+  escrevendo: { indice: number; gancho: string | null } | null;
+}
+
+export const AO_VIVO_VAZIO: EstadoAoVivo = { resumo: null, posts: {}, escrevendo: null };
 
 const espera = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const agora = () => Date.now();
@@ -63,6 +74,7 @@ export function useGeracao(totalVirais: number) {
   const [analise, setAnalise] = useState<Analise | null>(null);
   const [dominio, setDominio] = useState("");
   const [erro, setErro] = useState("");
+  const [aoVivo, setAoVivo] = useState<EstadoAoVivo>(AO_VIVO_VAZIO);
   const execucao = useRef(0);
 
   const marcar = (id: string, estado: Etapa["estado"]) => setEtapas((es) => es.map((e) => (e.id === id ? { ...e, estado } : e)));
@@ -75,6 +87,7 @@ export function useGeracao(totalVirais: number) {
     setBrand(null);
     setAnalise(null);
     setErro("");
+    setAoVivo(AO_VIVO_VAZIO);
   }
 
   async function gerar(d: DadosFormulario, opcoes: OpcoesGeracao = {}) {
@@ -87,6 +100,7 @@ export function useGeracao(totalVirais: number) {
     setErro("");
     setBrand(null);
     setAnalise(null);
+    setAoVivo(AO_VIVO_VAZIO);
     setEtapas(etapasIniciais(dom, d.quantidade, totalVirais, semSite ? { comPrint: d.paletaInstagram.length > 0 } : undefined));
     setFase("trabalhando");
     const inicio = agora();
@@ -131,12 +145,27 @@ export function useGeracao(totalVirais: number) {
         ra = await fetch("/api/analyze", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade, ...(opcoes.preferencias ? { preferencias: opcoes.preferencias } : {}) }),
+          body: JSON.stringify({ brand: b, ...handles, quantidade: d.quantidade, stream: true, ...(opcoes.preferencias ? { preferencias: opcoes.preferencias } : {}) }),
         });
       } finally {
         clearInterval(timer);
       }
-      const a = await lerResposta(ra, "O motor demorou demais para responder. Tente de novo ou use um dos exemplos.");
+      // Guardado num objeto: atribuição dentro do callback não é vista pelo controle de tipos.
+      const fim: { analise: Analise | null } = { analise: null };
+      if (!ra.ok || !(ra.headers.get("content-type") ?? "").includes("ndjson")) {
+        fim.analise = await lerResposta(ra, "O motor demorou demais para responder. Tente de novo ou use um dos exemplos.");
+      } else {
+        await lerLinhasJson<EventoAoVivo>(ra, (e) => {
+          if (!vivo()) return;
+          if (e.tipo === "inicio") setAoVivo((s) => ({ ...s, resumo: { concorrentes: e.concorrentes, em_alta: e.em_alta, virais_ao_vivo: e.virais_ao_vivo } }));
+          else if (e.tipo === "escrevendo") setAoVivo((s) => ({ ...s, escrevendo: { indice: e.indice, gancho: e.gancho } }));
+          else if (e.tipo === "post") setAoVivo((s) => ({ ...s, posts: { ...s.posts, [e.indice]: { post: e.post, previa: e.previa } } }));
+          else if (e.tipo === "final") fim.analise = e.analise;
+          else if (e.tipo === "erro") throw new Error(e.mensagem);
+        });
+        if (!fim.analise) throw new Error("A geração parou no meio. Tente de novo em instantes.");
+      }
+      const a = fim.analise;
       if (!vivo()) return;
       for (const id of avancos) marcar(id, "feito");
       marcar("artes", "andando");
@@ -154,5 +183,5 @@ export function useGeracao(totalVirais: number) {
     }
   }
 
-  return { fase, etapas, brand, analise, dominio, erro, gerar, reiniciar };
+  return { fase, etapas, brand, analise, dominio, erro, aoVivo, gerar, reiniciar };
 }

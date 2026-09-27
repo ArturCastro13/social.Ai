@@ -2,8 +2,8 @@
 // "queda de 40% em afastamentos") mesmo proibido no prompt. Aqui, todo número com unidade (%, R$, horas, mil...)
 // ou maior que 10 só fica no post se aparecer nas fontes: site, respostas do founder, materiais, notícias ou a
 // pesquisa de mercado. O que não aparece vira [PREENCHER: número real] e o post vai para revisão.
-import type { PostGerado } from "@/lib/types";
-import type { RoteiroVideo } from "./contrato";
+import type { BrandProfile, PostGerado } from "@/lib/types";
+import type { Preferencias, RoteiroVideo } from "./contrato";
 
 export const AVISO_NUMEROS = "Tirei números que não estavam nas fontes (e onde não dava, deixei [PREENCHER: número real]). Confira se as frases ainda dizem o que você quer antes de publicar.";
 
@@ -192,4 +192,26 @@ export function humanizarTudo<T>(v: T): T {
   if (Array.isArray(v)) return v.map(humanizarTudo) as T;
   if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, humanizarTudo(x)])) as T;
   return v;
+}
+
+/** Tudo o que a IA recebeu como fato: o que o site diz, o que o founder contou, materiais, notícias e a pesquisa. */
+export function textosDasFontes(brand: BrandProfile, pref: Preferencias | null): (string | null | undefined)[] {
+  return [
+    brand.nome,
+    brand.title,
+    brand.description,
+    brand.og?.description,
+    ...brand.headings.h1,
+    ...brand.headings.h2,
+    ...brand.paragrafos,
+    ...(brand.provas ?? []),
+    JSON.stringify(pref?.conhecimento_founder ?? {}),
+    pref?.founder?.transcricao_audio,
+    pref?.brand_book_texto,
+    pref?.objetivo_livre,
+    pref?.publico_alvo,
+    JSON.stringify(pref?.noticias ?? []),
+    JSON.stringify(pref?.pesquisa_mercado ?? {}),
+    JSON.stringify(pref?.contexto_empresa ?? {}),
+  ];
 }

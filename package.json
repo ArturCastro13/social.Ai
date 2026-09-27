@@ -10,7 +10,8 @@
     "test": "vitest run",
     "virais:catalogo": "tsx scripts/gerar-catalogo.ts",
     "demo:gerar": "tsx scripts/gerar-demo.ts",
-    "ia:auditar": "tsx scripts/auditar-ia.ts"
+    "ia:auditar": "tsx scripts/auditar-ia.ts",
+    "ia:custo": "tsx scripts/custo-do-log.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

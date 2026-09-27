@@ -32,6 +32,7 @@ import {
   buscarConcorrentes,
   lerPesquisaIA,
   lerSugestoesIA,
+  MAX_BUSCAS,
   MOTIVO_BASE,
   pesquisaGuardada,
   SISTEMA_PESQUISA,
@@ -162,6 +163,11 @@ describe("sugerirConcorrentes", () => {
         { tema: "Sem link válido", url: "javascript:alert(1)" },
         { gancho: "sem tema" },
       ],
+      virais_ao_vivo: [
+        { gancho: "Sua agenda tem buraco na terça? Faça isto", formato: "carrossel", rede: "instagram", por_que: "nomeia a dor do dono", quem: "creator de gestão", url: "https://exemplo.com/v1" },
+        { gancho: "Sem link", formato: "carrossel", rede: "linkedin", por_que: "x", quem: "y", url: "ftp://ruim" },
+        { formato: "carrossel" },
+      ],
     });
     const prompts: string[] = [];
     const llm = {
@@ -181,8 +187,12 @@ describe("sugerirConcorrentes", () => {
     expect(r.pesquisa?.nicho).toBe("saas-b2b");
     expect(r.pesquisa?.concorrentes).toEqual([{ nome: "Feegow", url: "https://feegow.com.br/", o_que_publica: "Dicas de gestão, em carrossel" }]);
     expect(r.pesquisa?.em_alta.map((t) => [t.tema, t.url])).toEqual([["Falta de paciente", "https://exemplo.com/a"], ["Sem link válido", undefined]]);
+    expect(r.pesquisa?.virais_ao_vivo.map((v) => [v.gancho, v.url])).toEqual([
+      ["Sua agenda tem buraco na terça? Faça isto", "https://exemplo.com/v1"],
+      ["Sem link", undefined],
+    ]);
     expect(await pesquisaGuardada(marca)).toEqual(r);
-    expect(pesquisasNoBanco.get("pesquisa-teste.com.br||")).toEqual(r);
+    expect(pesquisasNoBanco.get("v2|pesquisa-teste.com.br||")).toEqual(r);
     expect(await pesquisaGuardada(marca, "outro público")).toBeNull();
   });
 
@@ -192,23 +202,29 @@ describe("sugerirConcorrentes", () => {
       sugestoes: [{ nome: "Feegow", url: "https://feegow.com.br/", motivo: "Agenda.", fonte: "ia" }],
       pesquisa: { mercado: "Agenda para clínicas", nicho: "saas-b2b", concorrentes: [], em_alta: [{ tema: "Falta de paciente" }] },
     };
-    pesquisasNoBanco.set("banco-teste.com.br||", salva);
+    pesquisasNoBanco.set("v2|banco-teste.com.br||", salva);
     const r = await pesquisaGuardada(marca);
     expect(r?.sugestoes[0].nome).toBe("Feegow");
     expect(r?.pesquisa?.em_alta[0]).toMatchObject({ tema: "Falta de paciente", gancho: "" });
-    pesquisasNoBanco.set("banco-teste.com.br|outro|", { sugestoes: "formato velho" });
+    pesquisasNoBanco.set("v2|banco-teste.com.br|outro|", { sugestoes: "formato velho" });
     expect(await pesquisaGuardada(marca, "outro")).toBeNull();
   });
 
   it("lerPesquisaIA nunca lança e ignora nicho fora da lista", () => {
-    expect(lerPesquisaIA("nada")).toEqual({ mercado: "", em_alta: [] });
-    expect(lerPesquisaIA('{"nicho":"agro","mercado":"x"}')).toEqual({ mercado: "x", em_alta: [] });
+    expect(lerPesquisaIA("nada")).toEqual({ mercado: "", em_alta: [], virais_ao_vivo: [] });
+    expect(lerPesquisaIA('{"nicho":"agro","mercado":"x"}')).toEqual({ mercado: "x", em_alta: [], virais_ao_vivo: [] });
   });
 
   it("lerSugestoesIA aceita lista direta e ignora o que não é sugestão", () => {
     expect(lerSugestoesIA('[{"nome":"A","url":"a.com","motivo":"m"}]')).toEqual([{ nome: "A", url: "a.com", motivo: "m" }]);
     expect(lerSugestoesIA('{"outra":1}')).toEqual([]);
     expect(lerSugestoesIA("nada")).toEqual([]);
+  });
+
+  it("o prompt da pesquisa pede 4 buscas, a última de virais do nicho", () => {
+    expect(MAX_BUSCAS).toBe(4);
+    expect(SISTEMA_PESQUISA).toContain("virais_ao_vivo");
+    expect(SISTEMA_PESQUISA).toMatch(/4\. Virais do nicho/);
   });
 });
 

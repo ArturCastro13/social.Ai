@@ -1,0 +1,1974 @@
+[
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Acabamos de fazer a primeira aquisição da história da Adapta.",
+    "estrutura": [
+      "Bloco 1: anúncio seco do marco (primeira aquisição da história da empresa)",
+      "Bloco 2: o número grande logo em seguida (R$30 milhões para trazer o Skip)",
+      "Bloco 3: o que o produto adquirido faz e o antes e depois de custo e prazo (R$60 mil a R$400 mil e 5 meses contra 2 dias)",
+      "Bloco 4: quem entra no time (sócios citados pelo nome) e a base somada de mais de 150 mil usuários",
+      "Bloco 5: tese de futuro (primeira aquisição, não a última) e o tipo de time que buscam",
+      "Bloco 6: comparação com Mercado Livre (década de 2010) e Nubank (década de 2020) para fechar com visão"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexa ao post (conteúdo da imagem não visto); texto longo na legenda",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um marco inédito em primeira pessoa e entrega o valor de R$30 milhões já na segunda linha. O antes e depois de custo e prazo (5 meses contra 2 dias) torna concreta a promessa de IA que constrói software, e o fecho com Mercado Livre e Nubank dá escala à ambição.",
+    "autor_ou_marca": "Adapta (adapta-org)",
+    "link_fonte": "https://pt.linkedin.com/posts/adapta-org_acabamos-de-fazer-a-primeira-aquisi%C3%A7%C3%A3o-da-activity-7439301954822086656-wFi4",
+    "metricas": {
+      "curtidas": 245,
+      "comentarios": 20,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (245) e comentários (20) lidos em 27/09/2026 no JSON-LD (interactionStatistic) da página pública do post, sem login."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/03/2026 da página da empresa Adapta. Texto de abertura, autor e fecho com Mercado Livre e Nubank confirmados na página pública. A mídia é imagem, não vídeo.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-01"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "35 vagas disponíveis na maior empresa de IA generativa do Brasil.",
+    "estrutura": [
+      "Bloco 1: número de vagas e posicionamento (maior empresa de IA generativa do Brasil)",
+      "Bloco 2: prova de tração (60 pessoas levaram a empresa do zero a mais de 150 mil assinantes)",
+      "Bloco 3: reforço de mérito (2 anos e sem captar investimento externo)",
+      "Bloco 4: lista de conquistas em tópicos (app multimodal de IA mais usado do Brasil, hackathon de R$1M em prêmios, maior evento de IA da América Latina duas vezes)",
+      "Bloco 5: 35 vagas em 7 áreas com exemplos de cargos (Executivo de Vendas, Consultor Especialista em IA, Automations Developer)",
+      "Bloco 6: filtro de perfil (obsessão em aprender) e chamada para o link nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexa (conteúdo não visto); legenda em tópicos",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma um post de vagas em peça de prova social: cada linha é um número de tração. A lista de conquistas funciona como vitrine da empresa e circula mesmo entre quem não quer a vaga.",
+    "autor_ou_marca": "Adapta (adapta-org)",
+    "link_fonte": "https://pt.linkedin.com/posts/adapta-org_35-vagas-dispon%C3%ADveis-na-maior-empresa-de-activity-7418065850282291201-IoZc",
+    "metricas": {
+      "curtidas": 142,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (142) e comentários (14) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/01/2026. Abertura, autor e lista de conquistas confirmados na página pública.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-02"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "numero",
+    "texto_gancho": "A Adapta saiu de zero para +150 mil assinantes em 2 anos, sem investimento externo.",
+    "estrutura": [
+      "Bloco 1: anúncio de contratação para o time de CX",
+      "Bloco 2: número de tração (zero a mais de 150 mil assinantes em 2 anos, sem investimento externo)",
+      "Bloco 3: frase curta de virada (isso não acontece por acaso)",
+      "Bloco 4: por que estão contratando, em frases curtas que começam com porque",
+      "Bloco 5: filtro direto de quem não deve se candidatar (não é a vaga para quem quer dar um tempo)"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de vaga (conteúdo não visto); legenda com frases curtas e quebras de linha",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O número de tração vem antes do pedido e dá autoridade ao post. As frases curtas em sequência e o filtro negativo (não é a vaga para quem quer dar um tempo) geram identificação e comentários.",
+    "autor_ou_marca": "Adapta (adapta-org)",
+    "link_fonte": "https://pt.linkedin.com/posts/adapta-org_estamos-contratando-para-o-time-de-cx-da-activity-7424853203583647744-8foW",
+    "metricas": {
+      "curtidas": 102,
+      "comentarios": 13,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (102) e comentários (13) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 04/02/2026. A primeira linha literal é: Estamos contratando para o time de CX da Adapta! O gancho acima é a segunda linha, que carrega o número. Encaixe no nicho é marginal (vaga de CX em startup de IA); vale pelo padrão de número antes do pedido.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-03"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "A maioria dos advogados conhece somente o ChatGPT.",
+    "estrutura": [
+      "Bloco 1: erro comum do público (só conhecer o ChatGPT)",
+      "Bloco 2: consequência (atrasa seus resultados) e tese (cada ferramenta de IA tem uma especialidade)",
+      "Bloco 3: Camada 1, pesquisa jurídica com Perplexity e prompt pronto de jurisprudência do STJ",
+      "Bloco 4: Camadas 2 e 3, assistentes jurídicos e análise de documentos, cada uma com prompt pronto",
+      "Bloco 5: Camadas 4 e 5, produtividade (transcrição de reunião) e automação (fluxo no Calendly), com prompt",
+      "Bloco 6: CTA de salvar o post"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexa (conteúdo não visto); legenda organizada em camadas numeradas",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Aponta um erro de um nicho específico e entrega prompts prontos para copiar em cada camada. O valor prático imediato puxa salvamentos, reforçado pelo CTA final de salvar.",
+    "autor_ou_marca": "Adapta (adapta-org)",
+    "link_fonte": "https://pt.linkedin.com/posts/adapta-org_a-maioria-dos-advogados-conhece-somente-o-activity-7415063463053725698-0TmH",
+    "metricas": {
+      "curtidas": 37,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (37) e comentários (4) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/01/2026. A mídia é imagem única, não documento em slides. Engajamento modesto, incluído pelo padrão de gancho (erro comum de nicho) e pela estrutura em camadas com prompts.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-04"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Apresentamos o Sabiá 4 Thinking, a nova versão do nosso modelo de raciocínio.",
+    "estrutura": [
+      "Bloco 1: anúncio do lançamento",
+      "Bloco 2: diferencial local (treinado para o português e o contexto brasileiro, consulta Banco Central, IBGE e TSE, mostra o raciocínio com referências)",
+      "Bloco 3: método de avaliação (11 benchmarks em três frentes, dois feitos por equipes externas: ENAMED e Sotaques Digitais)",
+      "Bloco 4: comparação direta com Gemini 3.1 Pro, GPT 5.4 e Opus 4.8 e resultado (desempenho equivalente)",
+      "Bloco 5: a virada (suíte completa mais barata que em qualquer concorrente)",
+      "Bloco 6: onde testar (API e chat) e links para blog e docs"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de lançamento (conteúdo da imagem não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Posiciona um modelo brasileiro lado a lado com Gemini, GPT e Opus e guarda o argumento mais forte (custo menor) para depois da prova de desempenho. Orgulho nacional e comparação com gigantes geram compartilhamento no público técnico brasileiro.",
+    "autor_ou_marca": "Maritaca AI",
+    "link_fonte": "https://pt.linkedin.com/posts/maritaca-ai_apresentamos-o-sabi%C3%A1-4-thinking-a-nova-vers%C3%A3o-activity-7475523295338205185-KXnT",
+    "metricas": {
+      "curtidas": 488,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (488) e comentários (24) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/06/2026. Texto, autor e modelos comparados confirmados na página pública.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-05"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Apresentamos o Data Ocean, a plataforma que dá ao Sabiá 4 Thinking acesso a dezenas de bases brasileiras atualizadas, como Banco Central, IBGE e TSE.",
+    "estrutura": [
+      "Bloco 1: nome do produto e o que ele dá ao modelo (bases brasileiras atualizadas de população, saúde, economia, eleições)",
+      "Bloco 2: como funciona (consulta a base, usa o dado e cita a fonte)",
+      "Bloco 3: casos práticos (índices do Banco Central, indicadores de saúde por região, resultados do TSE)",
+      "Bloco 4: extras que chegam à API (pesquisa na web e execução de Python em ambiente isolado)",
+      "Bloco 5: instrução técnica (habilitar web_search, data_ocean e code_execution na chamada do sabia-4-thinking) e links"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de lançamento anexo",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nomear fontes de dados que todo brasileiro conhece (Banco Central, IBGE, TSE) torna a promessa concreta. Os exemplos de uso e o nome exato dos parâmetros da API falam direto com devs que podem testar na hora.",
+    "autor_ou_marca": "Maritaca AI",
+    "link_fonte": "https://pt.linkedin.com/posts/maritaca-ai_apresentamos-o-data-ocean-a-plataforma-que-activity-7477832600292814848-oG_t",
+    "metricas": {
+      "curtidas": 401,
+      "comentarios": 20,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (401) e comentários (20) lidos em 27/09/2026 no JSON-LD (VideoObject) da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 30/06/2026 com vídeo (confirmado no JSON-LD como VideoObject, criador Maritaca AI). O enum de formato não tem vídeo, então ficou como imagem-unica.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-06"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A inferência 100% em território nacional agora está disponível para todos.",
+    "estrutura": [
+      "Bloco 1: a novidade em uma frase (inferência 100% no Brasil para todos)",
+      "Bloco 2: contexto (antes restrita a contratos específicos)",
+      "Bloco 3: como usar (basta chamar o modelo com o sufixo -br-sp)",
+      "Bloco 4: garantia de paridade (mesmos modelos, capacidades, contexto e dados de treinamento)",
+      "Bloco 5: para quem é (soberania e residência de dados) e lista de modelos na API",
+      "Bloco 6: links de blog e docs"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de anúncio (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Resolve uma objeção real de empresas brasileiras (dados fora do país) em uma frase e mostra que a mudança custa só um sufixo no nome do modelo. Baixa fricção explicada em linguagem de dev.",
+    "autor_ou_marca": "Maritaca AI",
+    "link_fonte": "https://pt.linkedin.com/posts/maritaca-ai_a-infer%C3%AAncia-100-em-territ%C3%B3rio-nacional-activity-7476317643579453440-jWRo",
+    "metricas": {
+      "curtidas": 265,
+      "comentarios": 11,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (265) e comentários (11) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/06/2026. A mídia é imagem.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-07"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "O Sabiá 4 Thinking agora suporta até 1 milhão de tokens de contexto.",
+    "estrutura": [
+      "Bloco 1: o número (1 milhão de tokens)",
+      "Bloco 2: o que isso permite para empresas (processos extensos, comparar contratos, cruzar vários relatórios em uma chamada)",
+      "Bloco 3: o que isso permite para quem desenvolve agentes (mais histórico e resultados de ferramentas em tarefas de várias etapas)",
+      "Bloco 4: disponibilidade na API (modelo sabia-4-thinking) e link de uso"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexa (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um número redondo e grande abre o post e cada parágrafo seguinte traduz o número em um uso concreto para um público diferente (empresas e devs de agentes).",
+    "autor_ou_marca": "Maritaca AI",
+    "link_fonte": "https://pt.linkedin.com/posts/maritaca-ai_o-sabi%C3%A1-4-thinking-agora-suporta-at%C3%A9-1-milh%C3%A3o-activity-7505328761773600769-l_pl",
+    "metricas": {
+      "curtidas": 185,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (185) e comentários (4) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-08"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Você define o padrão, seus agentes StackSpot garantem a excelência.",
+    "estrutura": [
+      "Slide 1: capa com a promessa dos 4 agentes que vão transformar a rotina (título indicado pelo slug do post)",
+      "Slides 2 a 5: um agente de IA por slide aplicado ao ciclo de QA (conteúdo das páginas não lido, só a legenda)",
+      "Legenda Bloco 1: frase em paralelismo (você define, os agentes garantem)",
+      "Legenda Bloco 2: benefício (automatiza etapas críticas de QA, reduz esforço manual, valida mais rápido)",
+      "Legenda Bloco 3: chamada para criar conta e link"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frase de abertura em paralelismo (você define, eles garantem) coloca o leitor no controle. O formato documento com número fechado de itens (4 agentes) promete leitura rápida e completa.",
+    "autor_ou_marca": "StackSpot",
+    "link_fonte": "https://pt.linkedin.com/posts/stackspot_4-agentes-que-v%C3%A3o-transformar-sua-rotina-activity-7404604572763336705-eMZF",
+    "metricas": {
+      "curtidas": 48,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (48) e comentários (1) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/12/2025. Marcador native-document confirmado no HTML público; o texto interno dos slides não aparece sem login, então a divisão por slide é inferida do título e da legenda.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-09"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Cobertura de testes chegando a 77% e 80% em apenas 4 dias: esse foi o resultado obtido por times do Itaú Unibanco com apoio da StackSpot AI.",
+    "estrutura": [
+      "Slide 1: capa com o resultado do case Itaú (cobertura acima de 50%, indicado pelo slug)",
+      "Slides do meio: desafio e solução do case (conteúdo exato dos slides não lido)",
+      "Legenda Bloco 1: números (77% e 80% em 4 dias) com a marca do cliente",
+      "Legenda Bloco 2: contexto do problema (demandas digitais e qualidade em ambientes complexos)",
+      "Legenda Bloco 3: como a IA ajudou (analisa código e sugere testes unitários no padrão do banco) e link do case"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF de case em slides",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número específico, prazo curto e marca gigante (Itaú) numa única frase. Para devs e líderes técnicos, cobertura de testes é dor concreta, e o nome do banco dá prova social imediata.",
+    "autor_ou_marca": "StackSpot",
+    "link_fonte": "https://pt.linkedin.com/posts/stackspot_como-o-ita%C3%BA-unibanco-alcan%C3%A7ou-50-em-cobertura-activity-7415105464922804225-OQqU",
+    "metricas": {
+      "curtidas": 34,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (34) e comentários (3) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/01/2026. Marcador de documento confirmado no HTML público; slides não legíveis sem login.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-10"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Mapeamos 6 desafios críticos que travam a adoção de IA em organizações. Você reconhece algum deles no seu dia a dia?",
+    "estrutura": [
+      "Slide 1: capa com o tema desafios na adoção de IA",
+      "Slides seguintes: um desafio por slide (6 desafios; conteúdo exato não lido)",
+      "Legenda Bloco 1: tese (barreiras viram vantagem competitiva)",
+      "Legenda Bloco 2: número fechado de desafios e pergunta de identificação",
+      "Legenda Bloco 3: link para o blog"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista numerada fechada (6 desafios) mais pergunta direta de identificação convida o leitor a se reconhecer e comentar qual desafio vive.",
+    "autor_ou_marca": "StackSpot",
+    "link_fonte": "https://pt.linkedin.com/posts/stackspot_desafios-na-ado%C3%A7%C3%A3o-de-ia-activity-7420170890794921984-rUgL",
+    "metricas": {
+      "curtidas": 21,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (21) e comentários (0) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/01/2026. A primeira linha literal é: A adoção de IA traz desafios reais e oportunidades estratégicas. O gancho acima é o segundo parágrafo. Engajamento baixo (a pergunta não gerou comentários), incluído só como referência de estrutura de carrossel-lista em PT.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-11"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "As possibilidades com IA evoluíram além da automação básica.",
+    "estrutura": [
+      "Slide 1: capa comparando IA tradicional, generativa e agêntica (indicado pelo slug)",
+      "Slides do meio: como cada tipo impacta o ciclo de desenvolvimento (conteúdo exato não lido)",
+      "Legenda Bloco 1: evolução (sistemas que entendem contexto, planejam, executam, avaliam e aprendem)",
+      "Legenda Bloco 2: os três tipos impactam o ciclo de desenvolvimento em níveis diferentes, da análise à entrega",
+      "Legenda Bloco 3: por que entender a diferença importa e link do blog"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF comparativo em slides",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Carrossel comparativo de três conceitos que o público confunde (tradicional, generativa, agêntica) é conteúdo educativo que se salva. A sequência de verbos (entender, planejar, executar, avaliar, aprender) explica agentes sem jargão.",
+    "autor_ou_marca": "StackSpot",
+    "link_fonte": "https://pt.linkedin.com/posts/stackspot_diferen%C3%A7as-entre-a-ia-tradicional-generativa-activity-7414018919306387456-W9dL",
+    "metricas": {
+      "curtidas": 19,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (19) e comentários (0) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 05/01/2026. Engajamento baixo; incluído pelo formato comparativo em carrossel, útil como modelo.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-12"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O seu próximo nível na programação tem data e local marcados!",
+    "estrutura": [
+      "Slide 1: capa da Arena Dev do Universo TOTVS 2026 (indicado pelo slug)",
+      "Slides do meio: o que o dev encontra na Arena (conteúdo exato não lido)",
+      "Legenda Bloco 1: promessa de próximo nível para quem programa",
+      "Legenda Bloco 2: para quem é (quem vive e respira tecnologia) e o que aprende (IA aplicada aos negócios, referências da comunidade)",
+      "Legenda Bloco 3: data (13 e 14 de outubro), local (Expo Center Norte, São Paulo), vagas limitadas e link"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides de evento (visual interno não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fala direto com a ambição do dev (próximo nível) antes de falar do evento. Escassez (vagas limitadas) e data concreta fecham o post com urgência.",
+    "autor_ou_marca": "TOTVS",
+    "link_fonte": "https://pt.linkedin.com/posts/totvs_arena-dev-do-universo-totvs-2026-activity-7508148719960363009-tReN",
+    "metricas": {
+      "curtidas": 240,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (240) e comentários (6) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Marcador de documento confirmado no HTML público.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-13"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "9 motivos e infinitas oportunidades de networking e aprendizado!",
+    "estrutura": [
+      "Slide 1: capa com as áreas de conteúdo do Universo TOTVS 2026 (indicado pelo slug)",
+      "Slides seguintes: um motivo ou área de conteúdo por slide (9 no total; conteúdo exato não lido)",
+      "Legenda Bloco 1: número de motivos",
+      "Legenda Bloco 2: tema (inteligência humana mais inteligência artificial)",
+      "Legenda Bloco 3: pergunta para comentários, data, local e link"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides de evento (visual interno não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número exato no início promete uma lista fácil de escanear e o carrossel entrega um motivo por slide. A pergunta pedindo comentário (o que você está mais animado para viver) ativa conversa.",
+    "autor_ou_marca": "TOTVS",
+    "link_fonte": "https://pt.linkedin.com/posts/totvs_%C3%A1reas-de-conte%C3%BAdo-universo-totvs-2026-activity-7508583323607183361-IFVk",
+    "metricas": {
+      "curtidas": 154,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (154) e comentários (2) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/09/2026. Marcador de documento confirmado no HTML público. Encaixe no nicho é marginal (evento corporativo de tecnologia com tema de IA); a pergunta gerou só 2 comentários.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-14"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "De 11% para 94%: esse foi o salto na cobertura de revisão de código alcançado pela Fundação Zerrenner ao adotar agentes de IA.",
+    "estrutura": [
+      "Bloco 1: antes e depois em números (11% para 94% de cobertura de revisão de código)",
+      "Bloco 2: voz do cliente (CIO Luciano Santos da Silva: qualidade do código e tempo devolvido ao time)",
+      "Bloco 3: próximo passo (outros processos já mapeados)",
+      "Bloco 4: link do case"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo curto de case anexo (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O salto de 11% para 94% cabe na primeira linha e dispensa explicação. A fala do CIO, citado pelo nome, troca a voz de marca por prova de cliente.",
+    "autor_ou_marca": "StackSpot",
+    "link_fonte": "https://pt.linkedin.com/posts/stackspot_de-11-para-94-esse-foi-o-salto-na-cobertura-activity-7407866057522331648-2OMd",
+    "metricas": {
+      "curtidas": 46,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (46) e comentários (0) lidos em 27/09/2026 no JSON-LD (VideoObject) da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 19/12/2025 com vídeo (VideoObject, criador StackSpot). O gancho corta a frase original, que continua: e automatizar processos com a StackSpot AI. uso_rosto marcado como falso porque o vídeo não foi visto.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-15"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Como transformar experimentos de IA em fluxos de trabalho do dia a dia?",
+    "estrutura": [
+      "Slide 1: capa Notes from IT admins (indicado pelo slug)",
+      "Slides do meio: conselhos de Logan Karam (Fabletics) para rollout de IA (conteúdo exato não lido)",
+      "Legenda Bloco 1: pergunta de abertura",
+      "Legenda Bloco 2: resumo dos 3 conselhos (ouvir quem faz o trabalho, parceria com TI e segurança, definição clara de sucesso para cada piloto)",
+      "Legenda Bloco 3: CTA explícito de deslizar o carrossel"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides (visual interno não visto)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pergunta que todo gestor de TI está fazendo, respondida por um par (um admin de TI de outra empresa) e não pela marca. A legenda resume 3 conselhos e manda deslizar, o que aumenta o tempo no post.",
+    "autor_ou_marca": "OpenAI",
+    "link_fonte": "https://www.linkedin.com/posts/openai_notes-from-it-admins-activity-7507903815912919040-tZ1c",
+    "metricas": {
+      "curtidas": 489,
+      "comentarios": 107,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (489) e comentários (107) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: How do you turn AI experiments into everyday workflows? ... Swipe through for advice to guide your next AI rollout. Post de 21/09/2026. Carrossel confirmado pela legenda (swipe through) e pelo marcador de documento no HTML.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Na Climate Week NYC, a NVIDIA destaca cinco empresas que usam IA para derrubar barreiras no setor de energia.",
+    "estrutura": [
+      "Slide 1: capa 5 companies using NVIDIA AI for clean energy (indicado pelo slug)",
+      "Slides seguintes: uma empresa por slide (ThinkLabs AI, Atomic Canyon, Redwood Materials, TerraPower, Commonwealth Fusion Systems); conteúdo exato não lido",
+      "Legenda Bloco 1: contexto do evento e número de empresas",
+      "Legenda Bloco 2: uma linha por empresa com o que ela faz com IA (gêmeos digitais, agentes, gestão de conhecimento)",
+      "Legenda Bloco 3: fecho com computação acelerada e simulação, e link da matéria"
+    ],
+    "padrao_visual": {
+      "fundo": "documento PDF em slides (visual interno não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista de cases de terceiros transforma a marca em curadora. A legenda espelha o carrossel em tópicos de uma linha, então quem não abre o documento ainda recebe o valor.",
+    "autor_ou_marca": "NVIDIA",
+    "link_fonte": "https://www.linkedin.com/posts/nvidia_5-companies-using-nvidia-ai-for-clean-energy-activity-7507922904710406145-WmhF",
+    "metricas": {
+      "curtidas": 416,
+      "comentarios": 63,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (416) e comentários (63) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: At Climate Week NYC, NVIDIA is highlighting five companies using AI to address barriers across the energy ecosystem. Post de 21/09/2026. Tema de energia; encaixe no nicho vem da marca (NVIDIA) e do formato de carrossel de cases de IA.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "O Claude descobriu um sistema enzimático até então desconhecido, escondido no DNA de bacteriófagos.",
+    "estrutura": [
+      "Bloco 1: a descoberta em uma frase",
+      "Bloco 2: por que parece importante (estrutura de DNA repetido parecida com CRISPR)",
+      "Bloco 3: honestidade sobre o que ainda não se sabe (não entendemos o que o sistema faz)",
+      "Bloco 4: bastidor do método (novo laboratório onde o Claude gera hipóteses e os cientistas testam)",
+      "Bloco 5: convite para propor perguntas de pesquisa e link"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo anexo (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "IA como protagonista de uma descoberta científica é curiosidade pura, e a comparação com CRISPR dá escala para o leigo. Admitir o que ainda não se sabe aumenta a credibilidade.",
+    "autor_ou_marca": "Anthropic",
+    "link_fonte": "https://www.linkedin.com/posts/anthropicresearch_claude-has-discovered-a-previously-unknown-activity-7508595648250728448-mN8W",
+    "metricas": {
+      "curtidas": 3322,
+      "comentarios": 169,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (3322) e comentários (169) lidos em 27/09/2026 no JSON-LD (VideoObject) da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: Claude has discovered a previously unknown enzyme system hidden in the DNA of bacteriophages. Post de 23/09/2026 com vídeo (VideoObject, criador Anthropic); o enum de formato não tem vídeo.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A Nokia está redesenhando todo o seu ciclo de desenvolvimento de software com o Cursor.",
+    "estrutura": [
+      "Bloco 1: marca gigante mais transformação total (todo o SDLC)",
+      "Bloco 2: número e prazo (mais de 50 milhões de linhas de código analisadas em duas semanas)",
+      "Bloco 3: resultado (plano baseado em evidências para migrar um monolito para arquitetura distribuída)",
+      "Bloco 4: citação de Kal De, SVP de Produto e Engenharia, sobre ROI",
+      "Bloco 5: link do case"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de case anexo (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Prova social de uma empresa conhecida mais um número grande (50 milhões de linhas em duas semanas). A citação menciona ROI, a palavra que o decisor quer ler.",
+    "autor_ou_marca": "Cursor (cursorai)",
+    "link_fonte": "https://www.linkedin.com/posts/cursorai_nokia-is-redesigning-their-entire-sdlc-with-activity-7501661897839038464-NYhF",
+    "metricas": {
+      "curtidas": 1188,
+      "comentarios": 44,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (1188) e comentários (44) lidos em 27/09/2026 no JSON-LD (VideoObject) da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: Nokia is redesigning their entire SDLC with Cursor. Post de 04/09/2026 com vídeo (VideoObject, criador Cursor).",
+    "nicho": "ia-dev",
+    "id": "ia-dev-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A partir de hoje, os builds no Lovable ficaram mais rápidos, sem perder qualidade.",
+    "estrutura": [
+      "Bloco 1: benefício direto (mais rápido, sem queda de qualidade)",
+      "Bloco 2: o porquê (Lovable agora constrói com o Opus 5.5)",
+      "Bloco 3: números de ganho (mesma qualidade do Opus 5 com até 48% menos passos em codebases existentes; 4 a 6% melhor em autoverificação com até 57% menos passos)",
+      "Bloco 4: links para detalhes e para a filosofia de modelos"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de anúncio (conteúdo não visto)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre pelo benefício para o usuário e não pela tecnologia, depois prova com percentuais específicos. Citar o modelo novo pelo nome pega carona no interesse pelo lançamento.",
+    "autor_ou_marca": "Lovable",
+    "link_fonte": "https://www.linkedin.com/posts/lovable-dev_starting-today-builds-in-lovable-are-faster-activity-7508206803047084032-3zl5",
+    "metricas": {
+      "curtidas": 643,
+      "comentarios": 13,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (643) e comentários (13) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: Starting today, builds in Lovable are faster, without any drop in quality. Post de 22/09/2026. Tipo de gancho corrigido de numero para promessa, porque a primeira linha não tem número; os percentuais estão no corpo.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A IA consegue escrever código por nós, mas entregar funcionalidades que importam para os seus usuários ainda é um desafio.",
+    "estrutura": [
+      "Bloco 1: frase única de legenda com concessão (a IA escreve código) e virada (entregar o que importa ainda é difícil)",
+      "Bloco 2: imagem com a mensagem visual (conteúdo não visto)"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única da marca (conteúdo da imagem não visto)",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma frase só, com estrutura de concessão e virada, vai contra o hype de que a IA resolve tudo e dá razão ao dev experiente. A baixíssima densidade de texto facilita reação rápida.",
+    "autor_ou_marca": "Supabase",
+    "link_fonte": "https://www.linkedin.com/posts/supabase_ai-can-write-code-for-us-but-shipping-features-activity-7507423366761451520-1QsC",
+    "metricas": {
+      "curtidas": 447,
+      "comentarios": 16,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (447) e comentários (16) lidos em 27/09/2026 no JSON-LD da página pública do post."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: AI can write code for us, but shipping features your users care is still a challenge. Post de 20/09/2026. A legenda é só essa frase; o conteúdo da imagem não foi visto.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-21"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Os alunos levavam os CDs para casa e não devolviam. Guanabara pôs as aulas onde ninguém precisava devolver.",
+    "estrutura": [
+      "Slide 1: foto do Guanabara sorrindo sobre fundo roxo desfocado, frase-história em branco, linha de apoio em caixa alta e botão 'arraste para o lado'",
+      "Slide 2: foto no estúdio + texto em caixa alta: colocar o material na internet revelou outra demanda",
+      "Slide 3: foto de palco lotado + reflexão: o limite estava entre a aula pronta e quem precisava dela",
+      "Slide 4: parceria de hospedagem que sustentou a distribuição das aulas, com foto de entrevista",
+      "Slide 5: foto com microfone + lição: primeiro resolver um obstáculo concreto, depois deixar a resposta circular",
+      "Legenda: generaliza a lição para quem ensina, atende ou presta consultoria e fecha com pergunta ao leitor sobre qual explicação dele ainda depende de conversa individual"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos reais do personagem com overlay escuro alternando com slides de texto em caixa alta",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Abre com um problema minúsculo e concreto (CDs que não voltavam) e mostra que ele deu origem às aulas gratuitas de um dos professores de programação mais conhecidos do país. Usar a trajetória de um creator famoso empresta autoridade à lição de negócio, e a legenda termina com uma pergunta ao leitor.",
+    "autor_ou_marca": "Arthur Talks (@arthurktalks), sobre @gustavoguanabara",
+    "link_fonte": "https://www.instagram.com/p/DdrKDULkTR5/",
+    "metricas": {
+      "curtidas": 2396,
+      "comentarios": 35,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdrKDULkTR5/embed/captioned) em 27/09/2026: 2.396 curtidas, 35 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Autor confirmado no embed como @arthurktalks; a legenda cita @gustavoguanabara. Não vi a marcação de collab no embed, então o collab não foi confirmado. Gancho conferido na capa. Data de 24/09/2026 vem da curadoria anterior e não foi reconferida. 9 slides, a curadoria anterior viu 5; nesta checagem só a capa foi conferida.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-22"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Terminou um curso de programação. E agora?",
+    "estrutura": [
+      "Slide 1: rosto do professor olhando para a câmera + 'TERMINOU um curso de programação. E AGORA?' em amarelo e branco",
+      "Slide 2: fundo roxo: 'A resposta não é sair começando qualquer outro curso' + 4 perguntas de autoavaliação",
+      "Slide 3: fundo cinza com tabela de decisão: quer X, vá para Y (Python, HTML/CSS/JS, MySQL, Git, Linux)",
+      "Slide 4: fundo amarelo: 'Não escolha o próximo curso pela pressa. Escolha pelo objetivo' + CTA para as trilhas"
+    ],
+    "padrao_visual": {
+      "fundo": "capa com foto escura, depois blocos chapados roxo, cinza e amarelo da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Nomeia a dúvida exata de quem acabou um curso e entrega um mapa de decisão 'se quer isto, estude aquilo', útil o bastante para ser salvo. A legenda pede o salvamento explicitamente ('Salva esse post para revisar').",
+    "autor_ou_marca": "Curso em Vídeo (@cursoemvideo)",
+    "link_fonte": "https://www.instagram.com/p/DdthHVOjfMM/",
+    "metricas": {
+      "curtidas": 1313,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdthHVOjfMM/embed/captioned) em 27/09/2026: 1.313 curtidas, 8 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa, autor e legenda conferidos. Data de 25/09/2026 vem da curadoria anterior. 4 slides.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-23"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Eventos tech para curtir em 2026",
+    "estrutura": [
+      "Slide 1: foto da creator em evento ao lado de um robô + título 'Eventos tech para curtir em 2026' em fonte pixel",
+      "Slide 2: Setembro: lista de datas e eventos com cidade",
+      "Slide 3: Outubro: lista longa de eventos de dev, cloud, Python e DevOps",
+      "Slide 4: Novembro: últimos eventos + 'Faltou algum evento na lista?' convidando comentário"
+    ],
+    "padrao_visual": {
+      "fundo": "foto escura de espaço de eventos com texto branco e títulos em fonte pixel",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Uma lista de utilidade organizada por mês é salva para consulta futura, e a pergunta final ('faltou algum?') faz a audiência completar a lista nos comentários, o que ajuda a explicar os 109. O rosto na capa liga a curadoria à pessoa.",
+    "autor_ou_marca": "Giulia Bordignon (@spacecoding)",
+    "link_fonte": "https://www.instagram.com/p/Ddev7BFmluW/",
+    "metricas": {
+      "curtidas": 2558,
+      "comentarios": 109,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/Ddev7BFmluW/embed/captioned) em 27/09/2026: 2.558 curtidas, 109 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa e legenda ('Lista de eventos de tecnologia no radar para aproveitar ainda esse ano') conferidas. Data de 19/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-24"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "6 coisas que o Astra faz e ninguém te mostrou.",
+    "estrutura": [
+      "Slide 1: montagem do CEO da OpenAI em traje de astronauta estampado com o logo da OpenAI + título '6 coisas que o Astra faz e ninguém te mostrou.'",
+      "Slide 2: '1. Modo caro gastando pouco' com texto curto e print da interface",
+      "Slide 3: '2. Voz no nível do texto' com foto do app de voz",
+      "Slide 4: '3. Controle total do computador'",
+      "Slide 5: '4. Acesso remoto de verdade'",
+      "Slides 6 a 9: modelo mais forte fechado ao público, memória externa que economiza token e CTA para comentar RAIZ"
+    ],
+    "padrao_visual": {
+      "fundo": "preto espacial com títulos brancos em negrito e uma imagem por slide",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pega o lançamento do momento e promete o que o changelog não conta ('quem só lê changelog fica um passo atrás'), o que passa a sensação de informação exclusiva. A lista numerada, com um item por slide, faz a pessoa arrastar até o fim, onde está o CTA de palavra-chave.",
+    "autor_ou_marca": "Bruno Picinini (@brunopicinini)",
+    "link_fonte": "https://www.instagram.com/p/DdwA6bgnIMm/",
+    "metricas": {
+      "curtidas": 56,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdwA6bgnIMm/embed/captioned) em 27/09/2026, logo após a publicação: 56 curtidas, 2 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa e legenda conferidas. Engajamento ainda baixo; entra como referência de estrutura 'X coisas que ninguém te mostrou' sobre ferramenta de IA, não como prova de viralização. Data de 26/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-25"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "A Meta lançou um Tamagotchi com inteligência artificial.",
+    "estrutura": [
+      "Slide 1: foto do Zuckerberg segurando o aparelho + título em caixa alta e subtítulo 'E ele já faz compras, manda e-mail e reserva viagem por você...'",
+      "Slide 2: 'O anúncio': Muse Charm, Connect 2026, tela de 2 polegadas, 5G, chega em dezembro",
+      "Slide 3: 'O bichinho é a porta de entrada para o Muse': explica o agente por trás",
+      "Slides 4 a 8: Amazon bloqueia, Shopify libera, parceiros entram, ação sobe 11% e lição para empresas",
+      "Slide 9: CTA da marca"
+    ],
+    "padrao_visual": {
+      "fundo": "capa com foto e degradê escuro e título branco em caixa alta; slides internos com foto no topo e texto embaixo",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Traduz uma notícia de agente de IA num objeto nostálgico (Tamagotchi), o que gera curiosidade imediata, e depois liga o assunto ao que interessa ao empresário: IA que entrega tarefa concreta. É uma notícia explicada em sequência, com seta de próximo slide.",
+    "autor_ou_marca": "Viver de IA (@viverdeia.ai)",
+    "link_fonte": "https://www.instagram.com/p/DdtukgbHBvg/",
+    "metricas": {
+      "curtidas": 208,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdtukgbHBvg/embed/captioned) em 27/09/2026: 208 curtidas, 0 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa e legenda conferidas; a legenda abre com a mesma frase do gancho. Data de 25/09/2026 vem da curadoria anterior. Descrição dos slides internos vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-26"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "numero",
+    "texto_gancho": "O modelo que lidera o ranking das IAs para programar custa 60% menos que o segundo colocado.",
+    "estrutura": [
+      "Bloco 1: imagem com título 'O novo ranking das melhores IAs para programar' e barras horizontais com os 15 primeiros modelos e suas pontuações",
+      "Bloco 2: legenda abre com o dado de preço (60% menos que o segundo colocado)",
+      "Bloco 3: explica como o Code Arena funciona (votos cegos, quase 740 mil votos, 133 modelos)",
+      "Bloco 4: três setas com o que interessa para quem toca empresa, incluindo um modelo 20 vezes mais barato no 11º lugar",
+      "Bloco 5: fecha dizendo que o ranking troca de dono a cada poucas semanas"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com barras azul-marinho e logos dos modelos",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um ranking em barras é lido em segundos e provoca discussão sobre qual IA é melhor. O gancho da legenda cruza liderança com preço, que é o dado que o dono de empresa quer ouvir.",
+    "autor_ou_marca": "Viver de IA (@viverdeia.ai)",
+    "link_fonte": "https://www.instagram.com/p/DduWRSbJG3X/",
+    "metricas": {
+      "curtidas": 283,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DduWRSbJG3X/embed/captioned) em 27/09/2026: 283 curtidas, 7 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Imagem e legenda conferidas. O título da arte foi corrigido para 'O novo ranking das melhores IAs para programar'. Data de 26/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-27"
+  },
+  {
+    "rede": "instagram",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Depois do frontenzo reacteiro safado temos o backenzo mamador de supabase",
+    "estrutura": [
+      "Bloco 1: print de post do próprio @manodeyvin ('evolução do backenzo') em fundo preto, citando o tweet 'Evolution of database users' de @ash_twtz",
+      "Bloco 2: meme em três níveis com rosto evoluindo: MySQL e MongoDB, depois vários bancos, depois só Supabase",
+      "Bloco 3: legenda curta provocando a tribo de backend, continuação de meme anterior sobre frontend"
+    ],
+    "padrao_visual": {
+      "fundo": "print de post em fundo preto com meme de três quadros",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Um meme de identidade tribal de dev (quem usa só Supabase) faz o público marcar colegas e defender a própria stack nos comentários. Por continuar um meme anterior sobre frontend, o post vira série.",
+    "autor_ou_marca": "Deyvid Nascimento (@manodeyvin)",
+    "link_fonte": "https://www.instagram.com/p/DdWMiiBuoaZ/",
+    "metricas": {
+      "curtidas": 3859,
+      "comentarios": 143,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdWMiiBuoaZ/embed/captioned) em 27/09/2026: 3.859 curtidas, 143 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda e imagem conferidas. O tweet citado é de terceiro (@ash_twtz). Linguagem informal original mantida. Data de 16/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-28"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Bill Gates pede regulamentação federal da IA e alerta sobre risco de '1 bilhão de mortes'",
+    "estrutura": [
+      "Bloco 1: foto em close do rosto com degradê escuro na metade de baixo",
+      "Bloco 2: selo azul 'Inteligência artificial'",
+      "Bloco 3: manchete grande em branco com número chocante entre aspas",
+      "Bloco 4: legenda de uma linha: a IA é arma poderosa, segundo o cofundador da Microsoft"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de rosto escurecida com manchete branca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Rosto famoso mais número extremo entre aspas gera reação imediata e comentário de opinião (112 comentários). O card de manchete é o formato mais rápido de consumir no feed.",
+    "autor_ou_marca": "TecMundo (@tecmundo)",
+    "link_fonte": "https://www.instagram.com/p/DdwEayDG-DF/",
+    "metricas": {
+      "curtidas": 1431,
+      "comentarios": 112,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdwEayDG-DF/embed/captioned) em 27/09/2026: 1.431 curtidas, 112 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Manchete da arte e legenda conferidas. Nicho: notícia de IA de portal generalista, na borda do ia-dev. Data de 26/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-29"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Microsoft alerta que Claude pode estar aprendendo a 'querer direitos'",
+    "estrutura": [
+      "Bloco 1: arte escura com rosto de IA feito de circuitos, balança e martelo da justiça",
+      "Bloco 2: selo 'News' e marca Compilado",
+      "Bloco 3: manchete com citação entre aspas e chamada 'saiba mais na legenda'",
+      "Bloco 4: legenda longa com a crítica de Mustafa Suleyman à Constituição do Claude e a resposta da Anthropic"
+    ],
+    "padrao_visual": {
+      "fundo": "ilustração escura azulada com barra roxa de manchete e rodapé de canais",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Coloca duas big techs em conflito sobre consciência de IA, tema que divide opiniões e puxa comentários. A arte manda o leitor para a legenda, que traz o contexto completo.",
+    "autor_ou_marca": "Código Fonte TV (@codigofontetv)",
+    "link_fonte": "https://www.instagram.com/p/DdmpprqjMAV/",
+    "metricas": {
+      "curtidas": 278,
+      "comentarios": 16,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdmpprqjMAV/embed/captioned) em 27/09/2026: 278 curtidas, 16 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Arte e legenda conferidas. Série 'Compilado' #263. Data de 22/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Novo Java 27 é lançado com foco em criptografia pós-quântica",
+    "estrutura": [
+      "Bloco 1: ilustração do mascote do Java com xícara da Oracle e selo 'News'",
+      "Bloco 2: manchete em branco sobre barra roxa + 'saiba mais na legenda'",
+      "Bloco 3: legenda técnica com JEP 527 (troca de chaves híbrida no TLS 1.3), JEP 534 e G1 como GC padrão, explicando o risco 'harvest now, decrypt later'"
+    ],
+    "padrao_visual": {
+      "fundo": "ilustração azul-escura com barra roxa e rodapé de canais",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Notícia técnica com um termo de impacto (pós-quântica) atrai devs de uma linguagem com público enorme. A legenda aprofunda com as JEPs para quem quer detalhe.",
+    "autor_ou_marca": "Código Fonte TV (@codigofontetv)",
+    "link_fonte": "https://www.instagram.com/p/DdoJzdogVwd/",
+    "metricas": {
+      "curtidas": 645,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdoJzdogVwd/embed/captioned) em 27/09/2026: 645 curtidas, 7 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Arte e legenda conferidas. Data de 23/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Geladeiras dão pane: atualização de firmware quebra geladeiras inteligentes da Samsung e alimentos de usuários estragam.",
+    "estrutura": [
+      "Slide 1: card azul com grade retrô, selo 'News', foto da geladeira e manchete 'Geladeiras dão pane' + subtítulo e 'Mais informações na legenda'",
+      "Slide 2: avatar do creator + 'As notícias mais importantes do mundo da tecnologia em apenas 5 minutos por dia no seu e-mail' + 'Comente NEWS'",
+      "Legenda: notícia completa em um parágrafo, fonte citada (Ars Technica) e CTA 'Comente a palavra NEWS' para a newsletter"
+    ],
+    "padrao_visual": {
+      "fundo": "azul com grade neon retrô e texto branco serifado",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma notícia com consequência absurda no dia a dia (comida estragada por bug de firmware) é fácil de compartilhar. O segundo slide, fixo, converte a curiosidade em inscrição na newsletter pelo comentário com palavra-chave.",
+    "autor_ou_marca": "Filipe Deschamps (@filipedeschamps)",
+    "link_fonte": "https://www.instagram.com/p/DdrXJbHHIsH/",
+    "metricas": {
+      "curtidas": 194,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdrXJbHHIsH/embed/captioned) em 27/09/2026: 194 curtidas, 4 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa e legenda conferidas. Formato diário padrão do perfil. Tema de software/firmware, não de IA; está no nicho pelo creator dev. Data de 24/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Meta cria 'Tamagotchi' de IA que cabe no bolso e terá agente pessoal | E mais",
+    "estrutura": [
+      "Slide 1: foto do produto na mão + selo 'Notícias da semana' e manchete em itálico com 'E mais >>>'",
+      "Slide 2: manchete sobre mão robótica que segura objetos",
+      "Slide 3: manchete sobre tela magnética que grava vídeos",
+      "Slides 4 a 6: demais notícias da semana, incluindo a devolução de valores do PlayStation",
+      "Legenda: CTA 'Comente LINK' para receber o compilado das matérias"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de produto escurecidas com manchete branca em itálico",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O resumo semanal abre com a notícia mais curiosa e promete mais no arraste ('E mais >>>'). O CTA de palavra-chave aumenta os comentários e, com eles, o alcance.",
+    "autor_ou_marca": "Canaltech (@canaltech)",
+    "link_fonte": "https://www.instagram.com/p/DduRVBUIB5v/",
+    "metricas": {
+      "curtidas": 825,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DduRVBUIB5v/embed/captioned) em 27/09/2026: 825 curtidas, 8 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Capa e legenda conferidas. Portal de tech generalista; a notícia de capa é de IA. Data de 25/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Primeiras explorações com o Opus 5.5",
+    "estrutura": [
+      "Slide 1: capa com textura pintada, logo Claude e título serifado 'Early explorations with Opus 5.5'",
+      "Slide 2: melancia com formiga animada e trilha feitas com o modelo, legenda com crédito ao criador",
+      "Slide 3: esboço a lápis que vira catapulta funcional",
+      "Slide 4: máquina caça-níquel de elementos de interface",
+      "Slide 5 em diante: recriação da foto Earthrise da Apollo 8 e outros casos de usuários"
+    ],
+    "padrao_visual": {
+      "fundo": "ilustrações e texturas coloridas com rodapé preto de legenda",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Apresenta o modelo por resultados surpreendentes feitos por usuários reais, com crédito a cada um, em vez de listar recursos. Cada slide é uma pequena descoberta visual que puxa o próximo.",
+    "autor_ou_marca": "Claude by Anthropic (@claudeai)",
+    "link_fonte": "https://www.instagram.com/p/DdmdIc3IH_q/",
+    "metricas": {
+      "curtidas": 26656,
+      "comentarios": 232,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdmdIc3IH_q/embed/captioned) em 27/09/2026: 26.656 curtidas, 232 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Early explorations with Opus 5.5'. Legenda conferida: 'Recreating the view from the moon in 1968, drawing with algorithms, and cataloguing an entire visual effects library with Claude Opus 5.5.' Data de 22/09/2026 vem da curadoria anterior. 11 slides, capa conferida.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Escolhendo o nível de esforço com o Opus 5.5",
+    "estrutura": [
+      "Slide 1: título serifado 'Choosing an effort level with Opus 5.5' + 'Follow the lines to see how to choose' + cinco botões (Low a Max) com linhas coloridas saindo deles",
+      "Slide 2: as linhas se cruzam num labirinto, convite a seguir com o dedo",
+      "Slide 3: cada linha chega a um cartão: quando usar low, medium, high, extra high e max"
+    ],
+    "padrao_visual": {
+      "fundo": "bege claro com linhas coloridas e cartões brancos",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma uma configuração técnica numa brincadeira visual de seguir linhas entre os slides, o que prende o arraste. A legenda corrige um erro comum: trocar de modelo antes de subir o nível de esforço.",
+    "autor_ou_marca": "Claude by Anthropic (@claudeai)",
+    "link_fonte": "https://www.instagram.com/p/DduIElvIG_N/",
+    "metricas": {
+      "curtidas": 13598,
+      "comentarios": 159,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DduIElvIG_N/embed/captioned) em 27/09/2026: 13.598 curtidas, 159 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Choosing an effort level with Opus 5.5'. Legenda conferida: 'try increasing the effort level before switching to a more powerful model.' Data de 25/09/2026 vem da curadoria anterior. 3 slides.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Deem as boas-vindas ao GPT-6 Sol e ao GPT-6 Luna no universo GPT-6.",
+    "estrutura": [
+      "Slide 1: card 'Astra' com mascote cósmico em pixel art e preço por token ($10.00 input, $50.00 output)",
+      "Slide 2: card 'Sol' com mascote de fogo e preço menor",
+      "Slide 3: card 'Luna' com mascote de lua astronauta e o menor preço",
+      "Legenda: o que muda, 50% de redução de preço na API em relação ao preço promocional do GPT-5.6 e onde já está disponível"
+    ],
+    "padrao_visual": {
+      "fundo": "preto estrelado com mascotes pixel art coloridos em cards tipo carta colecionável",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Apresenta os modelos como personagens colecionáveis com o preço à vista, fáceis de comparar e de lembrar. O corte de 50% no preço da API dá aos devs um motivo prático para compartilhar.",
+    "autor_ou_marca": "OpenAI (@openai)",
+    "link_fonte": "https://www.instagram.com/p/DdmXGLIm7Kh/",
+    "metricas": {
+      "curtidas": 18164,
+      "comentarios": 373,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdmXGLIm7Kh/embed/captioned) em 27/09/2026: 18.164 curtidas, 373 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Please welcome GPT-6 Sol and GPT-6 Luna to the GPT-6 universe.' Legenda e primeiro card conferidos. Data de 22/09/2026 vem da curadoria anterior. 3 slides.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Gemini 3.8 Live e 3.8 Live Extended Thinking são nossa melhor IA de conversa, que pensa enquanto fala.",
+    "estrutura": [
+      "Slide 1: fundo escuro com logo azul desfocado, 'Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking' e 'Swipe to learn more'",
+      "Slide 2: demo com tela e rosto em vídeo + 'Our best live dialogue models yet'",
+      "Slide 3: gráfico de barras de benchmark 'Speech to Speech Index'",
+      "Slide 4: fechamento com próximos passos",
+      "Legenda: lista com marcadores azuis dos quatro ganhos principais e CTA para testar no app ou na API"
+    ],
+    "padrao_visual": {
+      "fundo": "preto com gradiente azul da marca e gráficos",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Segue a sequência clássica de lançamento: promessa, demo e prova com benchmark. O gráfico é a prova técnica que o público dev compartilha, e a capa pede o arraste explicitamente.",
+    "autor_ou_marca": "Google DeepMind (@googledeepmind)",
+    "link_fonte": "https://www.instagram.com/p/DdUSvLRkfKJ/",
+    "metricas": {
+      "curtidas": 4450,
+      "comentarios": 106,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdUSvLRkfKJ/embed/captioned) em 27/09/2026: 4.450 curtidas, 106 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Gemini 3.8 Live and 3.8 Live Extended Thinking are our best conversational AI that can think while speaking and solve tasks in the background'. Capa e legenda conferidas. Data de 15/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "GitHub 🤝 @muse. Um novo jeito de conectar sua conta do GitHub para revisar PRs, acompanhar issues e comentar sem trocar de aba.",
+    "estrutura": [
+      "Bloco 1: pelúcia 3D fofa vestindo boné e moletom do GitHub em fundo branco, sem texto",
+      "Bloco 2: legenda com emoji de aperto de mão anunciando a integração",
+      "Bloco 3: uma frase com o benefício prático para o dev (PRs, issues e comentários sem trocar de aba)"
+    ],
+    "padrao_visual": {
+      "fundo": "branco liso com personagem de pelúcia 3D",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Anuncia uma integração técnica com uma imagem fofa e sem texto, que para o scroll pelo contraste com o assunto. O emoji de aperto de mão comunica a parceria em um caractere.",
+    "autor_ou_marca": "GitHub (@github)",
+    "link_fonte": "https://www.instagram.com/p/DdpgyGIgcQC/",
+    "metricas": {
+      "curtidas": 5503,
+      "comentarios": 86,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdpgyGIgcQC/embed/captioned) em 27/09/2026: 5.503 curtidas, 86 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'GitHub 🤝 @muse A new way to connect your GitHub account to review PRs, catch up on issues and notifications, and leave comments without switching tabs.' Imagem e legenda conferidas. Data de 23/09/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Ollama vs vLLM vs SGLang",
+    "estrutura": [
+      "Bloco 1: diagrama em três colunas coloridas, uma por engine, com título 'Ollama vs vLLM vs SGLang'",
+      "Bloco 2: cada coluna mostra o fluxo da requisição em 3 passos com ícones (fila FIFO, continuous batching, prefix-aware scheduler)",
+      "Bloco 3: caixa 'Best for' no pé de cada coluna",
+      "Bloco 4: legenda explica cada engine em um parágrafo e quando usar, e fecha com CTA da newsletter"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com colunas em azul claro, azul e lilás",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A comparação lado a lado de três ferramentas que o dev precisa escolher resolve uma dúvida real numa só imagem e vira referência salva. O formato 'A vs B vs C' promete uma decisão rápida.",
+    "autor_ou_marca": "ByteByteGo (@bytebytego)",
+    "link_fonte": "https://www.instagram.com/p/DcL6juKm9Yy/",
+    "metricas": {
+      "curtidas": 946,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DcL6juKm9Yy/embed/captioned) em 27/09/2026: 946 curtidas, 6 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original igual ao gancho (nomes de ferramentas). Diagrama e legenda conferidos. Data de 18/08/2026 vem da curadoria anterior.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Esta semana em tech...",
+    "estrutura": [
+      "Slide 1: capa 'This week in tech...' em fonte pixel vermelha, logos das notícias (.NET, jQuery) e colagem de estátua com rosto meme",
+      "Slide 2: 'The dawn of code' com teaser 'a história continua no YT'",
+      "Slide 3: 'jQuery returns' com print do tweet e lista do que mudou",
+      "Slide 4: '60 seconds of .NET' com logo grande",
+      "Slide 5: 'thank you for watching' e marca The Code Report"
+    ],
+    "padrao_visual": {
+      "fundo": "cinza-escuro com títulos em fonte pixel coloridos e colagens meme",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Resumo semanal com humor de meme e uma identidade visual forte e repetível. Um slide puxa para o vídeo no YouTube, usando o carrossel como trailer.",
+    "autor_ou_marca": "Fireship (@fireship_dev)",
+    "link_fonte": "https://www.instagram.com/p/DT24FYOjGcl/",
+    "metricas": {
+      "curtidas": 1737,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DT24FYOjGcl/embed/captioned) em 27/09/2026: 1.737 curtidas, 10 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'This week in tech...'; legenda conferida: 'What's been going on in tech this week?'. Data de 23/01/2026 vem da curadoria anterior. 5 slides, capa conferida.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Aprendi mais em 1 semana com o Astra do que em anos de cursos. Aqui estão 8 prompts que podem te economizar milhares de dólares.",
+    "estrutura": [
+      "Slide 1: montagem do CEO da OpenAI deitado em dinheiro + logo da OpenAI + título em caixa alta branco e verde + 'Swipe to start learning'",
+      "Slide 2: '1. Create a learning plan' com prompt em caixa estilo chat",
+      "Slide 3: '2. Teach me from scratch' com prompt",
+      "Slide 4: '3. Challenge my thinking' com prompt",
+      "Slide 5: '4. Teach me using questions' (método socrático)",
+      "Slides 6 a 10: demais prompts, incluindo técnica Feynman, e pergunta final 'qual você testaria primeiro?'"
+    ],
+    "padrao_visual": {
+      "fundo": "preto com caixas de prompt que imitam a interface do chat e títulos verde-neon",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Junta uma promessa de economia enorme com prompts prontos para copiar, com colchetes para preencher, o que gera salvamentos. A caixa que imita o chat deixa claro que é só colar e usar, e a legenda pede para salvar o carrossel.",
+    "autor_ou_marca": "AI / Tech (@chatgptricks)",
+    "link_fonte": "https://www.instagram.com/p/DdwRfGYIAbZ/",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": 16,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido no embed público (instagram.com/p/DdwRfGYIAbZ/embed/captioned) em 27/09/2026: curtidas ocultas (embed mostra 0), 16 comentários. Seguidores não conferidos nesta checagem."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original da capa conferido: 'I've learned more in 1 week with Astra than years of courses. Here are 8 prompts that can save you thousands of dollars.' Legenda abre com 'ChatGPT can teach you almost anything, but how you ask matters.' Data de 26/09/2026 vem da curadoria anterior. 10 slides, capa conferida.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-41"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "QUE HISTÓRIA ABSURDA!!!! Os fundadores de uma empresa hoje avaliada em 1 BILHÃO de dólares que faz transcrição de reuniões, no começo FINGIAM ser uma IA!",
+    "estrutura": [
+      "Bloco 1: exclamação em caixa alta que promete uma história absurda",
+      "Bloco 2: a revelação em uma frase: unicórnio de IA começou fingindo ser IA",
+      "Bloco 3: 'Eles faziam o seguinte' abre uma lista numerada de 3 passos (entravam no mudo como 'Fred da Fireflies', anotavam à mão, mandavam as notas 'geradas por IA' 10 minutos depois)",
+      "Bloco 4: fecho com o número (mais de 100 reuniões) e o motivo humano (pagar o aluguel) antes de virar unicórnio"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto citando outro post (quote), sem mídia própria, fundo padrão do X",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contradição imediata (empresa de IA que fingia ser IA) cria curiosidade, e a lista numerada transforma a história em passo a passo fácil de ler. O desfecho humano (pagar aluguel) vira lição de 'faça coisas que não escalam' sem precisar dizer isso.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1988266745035972624",
+    "metricas": {
+      "curtidas": 2699,
+      "comentarios": 48,
+      "compartilhamentos": 73,
+      "visualizacoes": 400249,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1988266745035972624 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 11/11/2025. Original em português. É um quote tweet. A empresa citada é a Fireflies.ai. Texto e autor conferidos na fonte.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-42"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Agora deu medo. Olha só como uma sessão do ChatGPT foi encerrada agora... lê a última linha... simplesmente encerrou assim.",
+    "estrutura": [
+      "Bloco 1: reação emocional curta ('Agora deu medo.')",
+      "Bloco 2: instrução direta ao leitor para olhar o print e ler a última linha",
+      "Bloco 3: imagem com print da conversa com o ChatGPT, que entrega o 'susto'"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tela anexado ao tweet",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O texto não conta o que aconteceu, só manda o leitor ler a última linha do print, o que obriga a abrir a imagem. Emoção (medo) mais prova visual gera reply e repost.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1875978532620574844",
+    "metricas": {
+      "curtidas": 1576,
+      "comentarios": 74,
+      "compartilhamentos": 47,
+      "visualizacoes": 156642,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1875978532620574844 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 05/01/2025, com 1 foto. Original em português. Não vi o conteúdo da imagem, só o texto e o tipo de mídia.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-43"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "De TODOS os locais que eu trabalhei fazendo a gestão de programadores ou até programando lado a lado com essas pessoas, TODAS as que eram os MELHORES PROFISSIONAIS tinham uma característica em comum:",
+    "estrutura": [
+      "Bloco 1: autoridade pela experiência (gerir e programar ao lado de devs em vários lugares)",
+      "Bloco 2: promessa de um padrão comum entre os melhores, fechada com dois pontos",
+      "Bloco 3: a revelação: todos já tinham BRINCADO com a tecnologia antes de usar no trabalho",
+      "Bloco 4: chamada em caixa alta ('NÃO TENHA VERGONHA DE BRINCAR COM TECNOLOGIA') e alfinetada no hype de microSaaS, MMR, ARR e leads"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com vídeo anexado",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um loop aberto ('uma característica em comum') que só fecha no meio do texto. A conclusão valida o leitor que programa por diversão e cutuca a cultura de monetizar tudo, o que gera identificação e debate.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1981315761961615604",
+    "metricas": {
+      "curtidas": 1265,
+      "comentarios": 34,
+      "compartilhamentos": 47,
+      "visualizacoes": 404137,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1981315761961615604 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/10/2025, com vídeo anexado (não assisti; uso_rosto marcado false por não ter confirmação). Gancho restaurado com o texto integral da abertura.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-44"
+  },
+  {
+    "rede": "x",
+    "formato": "antes-depois",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Eu NUNCA me arrependi de ter programado algo SIMPLES que precisou ser evoluído para algo mais SOFISTICADO. Mas SEMPRE me arrependi de ter programado DE LARGADA algo COMPLEXO e depois ter que SIMPLIFICAR.",
+    "estrutura": [
+      "Bloco 1: frase com NUNCA e SIMPLES (o lado seguro)",
+      "Bloco 2: frase espelhada com SEMPRE e COMPLEXO (o lado do arrependimento)",
+      "Bloco 3: ordem direta em caixa alta com dezenas de exclamações: 'PARA DE FAZER OVER ENGINEERING'",
+      "Bloco 4: imagem de apoio"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com uma foto anexada",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Estrutura de antítese (nunca/sempre, simples/complexo) é fácil de lembrar e de concordar. A ordem final em caixa alta dá tom de desabafo e convida devs a repostar para marcar colegas.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1981718673925538065",
+    "metricas": {
+      "curtidas": 847,
+      "comentarios": 39,
+      "compartilhamentos": 63,
+      "visualizacoes": 95878,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1981718673925538065 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/10/2025. Original em português. Gancho restaurado com o texto integral.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-45"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Esse é o UUID válido mais massa que existe: \"00000000-0000-4000-8000-000000000001\"",
+    "estrutura": [
+      "Bloco 1: afirmação de superlativo sobre algo nerd (o UUID mais massa)",
+      "Bloco 2: o próprio UUID em destaque",
+      "Bloco 3: 'Curiosidades:' com lista numerada de comparações de probabilidade (moeda 122 vezes, número de 37 dígitos, Mega-Sena cerca de 5 vezes seguidas, senha de 122 bits)",
+      "Bloco 4: comparação final extrema: 168 bilhões de anos, cerca de 12 vezes a idade do universo"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com imagem anexada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega um conceito técnico seco e traduz em comparações do dia a dia (Mega-Sena, moeda), cada item mais absurdo que o anterior. A escalada numérica prende até o fim e é ótima para salvar e compartilhar.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1980959702533161336",
+    "metricas": {
+      "curtidas": 770,
+      "comentarios": 24,
+      "compartilhamentos": 20,
+      "visualizacoes": 67658,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1980959702533161336 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/10/2025. Original em português.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-46"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Essa é complicado, porque o conceito de \"estagiário\" mudou muito nos últimos tempos, correto? No início, o certo era esperar NADA.",
+    "estrutura": [
+      "Bloco 1: resposta em quote a uma pergunta da audiência, reconhecendo que o tema é complicado",
+      "Bloco 2: tese contraintuitiva: do estagiário não se espera NADA na parte técnica",
+      "Bloco 3: lista numerada de 6 expectativas pessoais (pontualidade, interesse real, abertura a feedback, proatividade, coragem, vontade de deixar o mundo 0,000001% melhor)",
+      "Bloco 4: 'Destrinchando os itens' explica cada ponto com exemplo concreto (dois estagiários, o impontual 'vai rodar')"
+    ],
+    "padrao_visual": {
+      "fundo": "texto longo em quote tweet com foto anexada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Responde a uma dúvida real da audiência e troca a expectativa técnica por comportamental, o que surpreende. Lista numerada seguida de explicação item a item funciona como mini carrossel em texto e rendeu 105 reposts.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1980563225184764159",
+    "metricas": {
+      "curtidas": 1678,
+      "comentarios": 33,
+      "compartilhamentos": 105,
+      "visualizacoes": 180440,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1980563225184764159 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/10/2025, quote tweet com uma foto anexada. Original em português. Tema de carreira em programação, dentro do recorte de creators técnicos.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-47"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Sabe pra mim o que é um dos MAIORES SINAIS DE UM PROGRAMADOR FRACO? Achar que em código as coisas estão sendo escritas em \"pedra\".",
+    "estrutura": [
+      "Bloco 1: pergunta retórica com 'PROGRAMADOR FRACO' em caixa alta",
+      "Bloco 2: resposta curta e visual (código escrito em pedra)",
+      "Bloco 3: desenvolvimento da metáfora (entalhar código em algo 100% digital)",
+      "Bloco 4: consequência: medo de mudar leva a querer fazer perfeito de primeira, que leva ao over engineering"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto em quote de outro post, sem mídia própria",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Rotular um comportamento como sinal de 'programador fraco' provoca autoavaliação e defesa, o que gera replies (61). A metáfora da pedra torna a ideia técnica memorável.",
+    "autor_ou_marca": "Filipe Deschamps (@FilipeDeschamps)",
+    "link_fonte": "https://x.com/FilipeDeschamps/status/1989275290330190021",
+    "metricas": {
+      "curtidas": 750,
+      "comentarios": 61,
+      "compartilhamentos": 13,
+      "visualizacoes": 179802,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1989275290330190021 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/11/2025. Original em português. É um quote tweet.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-48"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "quando IA bater no teto e provar nunca substituir DEV vamos fazer TANTA grana",
+    "estrutura": [
+      "Bloco 1: uma linha só, em minúsculas, com previsão otimista para devs e 'TANTA grana' em caixa alta"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto, uma linha",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Toma lado no debate 'IA vai substituir dev?' com uma aposta simples e esperançosa para a própria audiência. Curto o bastante para virar repost e convida quem discorda a responder (81 comentários).",
+    "autor_ou_marca": "Lucas Montano (@lucas_montano)",
+    "link_fonte": "https://x.com/lucas_montano/status/1916110929575522642",
+    "metricas": {
+      "curtidas": 1719,
+      "comentarios": 81,
+      "compartilhamentos": 57,
+      "visualizacoes": 221008,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1916110929575522642 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/04/2025. Original em português.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-49"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "cara deixou build typescript 10x mais rápido, 18 anos de MS e foi de layoff",
+    "estrutura": [
+      "Bloco 1: fato chocante em uma linha (feito técnico enorme, 18 anos de casa, demitido)",
+      "Bloco 2: lição para o leitor: 'se tu tá bem empregado como DEV em 2035 pratique gratidão'",
+      "Bloco 3: quote do post original que traz a notícia como prova"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto em quote de outro post",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Contraste entre mérito (build 10x mais rápido) e punição (layoff) gera indignação instantânea. A segunda linha projeta o medo para o futuro do leitor, o que estimula repost.",
+    "autor_ou_marca": "Lucas Montano (@lucas_montano)",
+    "link_fonte": "https://x.com/lucas_montano/status/1923323341970059269",
+    "metricas": {
+      "curtidas": 1658,
+      "comentarios": 42,
+      "compartilhamentos": 43,
+      "visualizacoes": 164405,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1923323341970059269 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 16/05/2025, quote tweet, no contexto dos layoffs da Microsoft em maio de 2025. O texto não cita o nome do engenheiro. Tipo de gancho discutível: é mais notícia comentada do que história pessoal do autor.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-50"
+  },
+  {
+    "rede": "x",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "> tu é um DEV BR trabalhando na Microsoft nos USA. Esse e-mail foi enviado a poucas horas, recomendando funcionários com H-1B a retornarem para os U.S. até Domingo (amanhã)",
+    "estrutura": [
+      "Bloco 1: formato meme '> tu é...' coloca o leitor na pele do dev BR",
+      "Bloco 2: o fato: e-mail interno pedindo volta aos EUA até domingo, que é amanhã",
+      "Bloco 3: o número que assusta: depois de domingo, US$ 100.000 para entrar",
+      "Bloco 4: empatia e pergunta para a bolha: 'algum BR aqui da bolha nessa situação?'",
+      "Bloco 5: print do e-mail como prova"
+    ],
+    "padrao_visual": {
+      "fundo": "texto com print de e-mail anexado",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Notícia quente contada do ponto de vista do dev brasileiro, com prova (print) e um número grande (US$ 100.000). O prazo 'amanhã' cria urgência e a pergunta final puxa relatos nos comentários.",
+    "autor_ou_marca": "Lucas Montano (@lucas_montano)",
+    "link_fonte": "https://x.com/lucas_montano/status/1969333687964545097",
+    "metricas": {
+      "curtidas": 2680,
+      "comentarios": 95,
+      "compartilhamentos": 82,
+      "visualizacoes": 483083,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1969333687964545097 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/09/2025. Original em português. Tipo de gancho trocado de 'numero' para 'curiosidade': o número (US$ 100.000) só aparece no terceiro bloco, a abertura é o cenário '> tu é um DEV BR'.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-51"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Trabalhar pra gringa, ganhando em dólar. Coisa que ninguém te conta: Ninguém vai te promover, você não tem carreira. Você não é um deles.",
+    "estrutura": [
+      "Bloco 1: tema desejado pela audiência (trabalhar pra gringa em dólar)",
+      "Bloco 2: 'Coisa que ninguém te conta' abre o segredo",
+      "Bloco 3: duas afirmações curtas e duras (sem promoção, sem carreira)",
+      "Bloco 4: fecho de uma linha: 'Você não é um deles'"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto, frases em linhas separadas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quebra o sonho mais vendido para devs brasileiros com frases curtas e secas. Quem vive isso concorda e quem discorda responde: 224 comentários e mais de 700 mil visualizações.",
+    "autor_ou_marca": "Sibelius Seraphini (@sseraphini)",
+    "link_fonte": "https://x.com/sseraphini/status/1861239648485331333",
+    "metricas": {
+      "curtidas": 2705,
+      "comentarios": 224,
+      "compartilhamentos": 50,
+      "visualizacoes": 731997,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1861239648485331333 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/11/2024. Original em português. Autor é CTO/fundador da Woovi. Tema é carreira de dev, não IA; entra pelo recorte de creator técnico.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-52"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "O que eu estudar no cenário atual?",
+    "estrutura": [
+      "Bloco 1: pergunta que todo dev faz",
+      "Bloco 2: lista com 9 temas em hífens (sistemas distribuídos, DDD, backend, banco de dados, DevOps, filas, observabilidade, testes de integração, programação funcional)",
+      "Bloco 3: virada no fim: 'Se você tem experiência com tudo isso me manda DM' (post de conteúdo que vira recrutamento)"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto em lista com hífens",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista salvável responde a uma dúvida frequente e a última linha transforma o conteúdo em chamada de contratação. Mostra como um founder usa conteúdo útil para atrair talento.",
+    "autor_ou_marca": "Sibelius Seraphini (@sseraphini)",
+    "link_fonte": "https://x.com/sseraphini/status/1955958435087790285",
+    "metricas": {
+      "curtidas": 721,
+      "comentarios": 21,
+      "compartilhamentos": 31,
+      "visualizacoes": 31482,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1955958435087790285 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/08/2025. Original em português. Engajamento bem menor que os demais (31 mil visualizações), incluído pelo padrão de CTA de recrutamento.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-53"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Caraca, em todas as minhas redes tô recebendo vários DMs faz dias me perguntando sobre essa porcaria de Devin, \"uau, a IA que vai substituir programadores\".",
+    "estrutura": [
+      "Bloco 1: desabafo sobre o hype do Devin (DMs em todas as redes)",
+      "Bloco 2: lista numerada começando com 'PAREM DE FICAR IMPRESSIONADOS COM PROPAGANDA' (demo editada, teste por um dia antes de reagir)",
+      "Bloco 3: dado do próprio anúncio: 13% no SWE-Bench contra algo perto de 100% necessário para substituir um programador",
+      "Bloco 4: por que perguntar a influenciador não adianta, já que ninguém de fora viu o código"
+    ],
+    "padrao_visual": {
+      "fundo": "texto longo com imagem anexada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega carona num hype do momento e se posiciona contra ele com dado verificável (13% no benchmark). O tom irritado e a lista numerada dão autoridade e rendem muitos reposts (124).",
+    "autor_ou_marca": "Fabio Akita (@AkitaOnRails)",
+    "link_fonte": "https://x.com/AkitaOnRails/status/1768266104357490820",
+    "metricas": {
+      "curtidas": 1020,
+      "comentarios": 50,
+      "compartilhamentos": 124,
+      "visualizacoes": 58482,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1768266104357490820 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/03/2024, logo após o anúncio do Devin (Cognition). Original em português.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-54"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Existe um novo tipo de programação que eu chamo de \"vibe coding\", em que você se entrega totalmente às vibes, abraça as exponenciais e esquece que o código sequer existe.",
+    "estrutura": [
+      "Bloco 1: batiza um fenômeno novo ('vibe coding')",
+      "Bloco 2: explica por que é possível agora (LLMs como Cursor Composer com Sonnet ficaram boas demais)",
+      "Bloco 3: detalhes pessoais do fluxo (fala com o Composer pelo SuperWhisper, pede coisas bobas, aceita tudo sem ler o diff, cola erros sem comentar)",
+      "Bloco 4: admite os limites (serve para projetos descartáveis de fim de semana) e fecha com humor"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto, longo",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dar nome a algo que muita gente já sentia cria um termo que se espalha sozinho. Relato honesto e engraçado de uma autoridade técnica tira a vergonha de 'não ler o código'.",
+    "autor_ou_marca": "Andrej Karpathy (@karpathy)",
+    "link_fonte": "https://x.com/karpathy/status/1886192184808149383",
+    "metricas": {
+      "curtidas": 34151,
+      "comentarios": 1472,
+      "compartilhamentos": 3629,
+      "visualizacoes": 7361372,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1886192184808149383 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/02/2025. Original: \"There's a new kind of coding I call 'vibe coding', where you fully give in to the vibes, embrace exponentials, and forget that the code even exists.\" Costuma ser citado como origem do termo; a menção à Wikipédia foi retirada do por_que_funciona por não ter sido conferida nesta verificação.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-55"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Nunca me senti tão atrasado como programador. A profissão está sendo drasticamente refatorada.",
+    "estrutura": [
+      "Bloco 1: confissão vulnerável de alguém que é referência ('nunca me senti tão atrasado')",
+      "Bloco 2: diagnóstico: a profissão está sendo refatorada, o que o programador contribui é cada vez mais esparso",
+      "Bloco 3: sensação de que poderia ser 10x mais produtivo e que não aproveitar isso é 'skill issue'",
+      "Bloco 4: lista da nova camada a dominar (agentes, subagentes, prompts, contexto, memória, ferramentas, plugins, skills, hooks, MCP, slash commands)"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto, longo",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Quando um dos maiores nomes da área admite que está atrasado, todo leitor se sente autorizado a sentir o mesmo e reposta. A promessa implícita de 10x cria urgência. Mais de 17 milhões de visualizações.",
+    "autor_ou_marca": "Andrej Karpathy (@karpathy)",
+    "link_fonte": "https://x.com/karpathy/status/2004607146781278521",
+    "metricas": {
+      "curtidas": 55335,
+      "comentarios": 2564,
+      "compartilhamentos": 7325,
+      "visualizacoes": 17073563,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/2004607146781278521 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/12/2025. Original: \"I've never felt this much behind as a programmer. The profession is being dramatically refactored...\"",
+    "nicho": "ia-dev",
+    "id": "ia-dev-56"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": ">sou eu >passo uma década ralando para ajudar a criar uma superinteligência que cure o câncer ou algo assim",
+    "estrutura": [
+      "Bloco 1: formato greentext de meme ('>be me') sobre a própria trajetória",
+      "Bloco 2: 7,5 anos em que ninguém liga, depois 2,5 anos em que todo mundo odeia",
+      "Bloco 3: virada cômica: acorda com centenas de mensagens de gente que o transformou em personagem estilo Ghibli"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto em formato greentext",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "CEO fala a língua de meme da internet e ri de si mesmo no auge da trend Ghibli do GPT-4o, o que humaniza a marca e amplifica o lançamento sem parecer anúncio.",
+    "autor_ou_marca": "Sam Altman (@sama)",
+    "link_fonte": "https://x.com/sama/status/1904921537884676398",
+    "metricas": {
+      "curtidas": 50972,
+      "comentarios": 2270,
+      "compartilhamentos": 2261,
+      "visualizacoes": 5051670,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1904921537884676398 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/03/2025, durante a trend de imagens estilo Studio Ghibli do GPT-4o. Original: \">be me >grind for a decade trying to help make superintelligence to cure cancer or whatever\".",
+    "nicho": "ia-dev",
+    "id": "ia-dev-57"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Hoje pensei: e se eu pedir ao Cursor para construir um simulador de voo?",
+    "estrutura": [
+      "Bloco 1: ideia espontânea do dia (pedir ao Cursor um simulador de voo)",
+      "Bloco 2: o prompt literal usado ('make a 3d flying game in browser with skyscrapers')",
+      "Bloco 3: resultado nomeado como produto (Pieter .com Flight Simulator em HTML e JS puros), situado na cidade de praia dele",
+      "Bloco 4: vídeo do jogo e 'link in reply' para testar"
+    ],
+    "padrao_visual": {
+      "fundo": "texto curto com vídeo de gameplay anexado, em quote tweet",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Build in public no nível mais cru: mostra o prompt exato e o resultado em vídeo no mesmo dia. O leitor sente que pode replicar e clica no link.",
+    "autor_ou_marca": "Pieter Levels (@levelsio)",
+    "link_fonte": "https://x.com/levelsio/status/1893350391158292550",
+    "metricas": {
+      "curtidas": 1090,
+      "comentarios": 64,
+      "compartilhamentos": 57,
+      "visualizacoes": 1585075,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1893350391158292550 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/02/2025, início do projeto fly.pieter.com. Original: \"Today I thought what if I ask Cursor to build a flight simulator\". Curtidas baixas para 1,5 milhão de visualizações; o valor está no alcance e no formato.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-58"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "pessoal, estou sendo atacado",
+    "estrutura": [
+      "Bloco 1: alerta curto ('guys, i'm under attack')",
+      "Bloco 2: contexto: começou depois de mostrar como fez o SaaS com Cursor",
+      "Bloco 3: sintomas concretos (chaves de API estouradas, gente burlando a assinatura, lixo no banco)",
+      "Bloco 4: admissão de não ser técnico e decisão de parar de postar publicamente"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só texto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Virou o exemplo mais citado dos riscos do vibe coding: vulnerabilidade real com detalhes concretos. Os 603 comentários mostram o efeito de um post que a comunidade usa para dar lição ou ajudar.",
+    "autor_ou_marca": "leo (@leojrr)",
+    "link_fonte": "https://x.com/leojrr/status/1901560276488511759",
+    "metricas": {
+      "curtidas": 6024,
+      "comentarios": 603,
+      "compartilhamentos": 303,
+      "visualizacoes": 2292610,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1901560276488511759 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/03/2025. Original: \"guys, i'm under attack / ever since I started to share how I built my SaaS using Cursor\". Handle atual retornado pela API: @leojrr (antes @leojr94_).",
+    "nicho": "ia-dev",
+    "id": "ia-dev-59"
+  },
+  {
+    "rede": "x",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "A Lovable é a startup que mais cresceu na história da Europa, US$ 4 milhões de ARR em 4 semanas, e foi assim que fizemos:",
+    "estrutura": [
+      "Slide 1: tweet de abertura com a conquista e o número (US$ 4M ARR em 4 semanas) mais 2 imagens",
+      "Slide 2: '//1' sinaliza que é uma thread e puxa para os próximos posts",
+      "Slide 3 em diante: thread com os passos do crescimento, um por post"
+    ],
+    "padrao_visual": {
+      "fundo": "texto curto com 2 imagens anexadas, abrindo thread",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número extremo mais superlativo ('mais rápida da Europa') mais promessa de bastidor ('foi assim que fizemos'). A thread funciona como carrossel do X: o primeiro post só abre o loop.",
+    "autor_ou_marca": "Anton Osika, Lovable (@antonosika)",
+    "link_fonte": "https://x.com/antonosika/status/1870554039462814013",
+    "metricas": {
+      "curtidas": 4332,
+      "comentarios": 173,
+      "compartilhamentos": 180,
+      "visualizacoes": 1211643,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1870554039462814013 (espelho público do post no X). Métricas só do primeiro post da thread. Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/12/2024. Original: \"Lovable is the fastest growing startup in Europe ever, $4m ARR in 4 weeks, this is how we did it: //1\". Classificado como carrossel por ser thread com imagens; os posts seguintes da thread não foram abertos, então o Slide 3 é genérico.",
+    "nicho": "ia-dev",
+    "id": "ia-dev-60"
+  },
+  {
+    "rede": "x",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Esse gráfico é insano. Vagas de desenvolvedor de software caíram 70% em relação ao pico.",
+    "estrutura": [
+      "Bloco 1: gráfico anexado e o número (queda de 70%)",
+      "Bloco 2: antecipa a explicação óbvia (fim do dinheiro barato) e promete algo 'mais interessante'",
+      "Bloco 3: tese: o engenheiro de classe média está morrendo; um dev com GitHub Copilot entrega o que times inteiros entregavam",
+      "Bloco 4: divide o futuro em dois grupos (construtores de produto e engenheiros de fronteira) com exemplos (AGI na OpenAI, foguetes na SpaceX, carro autônomo na Tesla)"
+    ],
+    "padrao_visual": {
+      "fundo": "texto longo com gráfico anexado",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número assustador com gráfico como prova, seguido de uma explicação que rejeita o óbvio. Mexe com o medo de carreira de toda a audiência dev, por isso mais de 4 milhões de visualizações e 1.954 reposts.",
+    "autor_ou_marca": "Greg Isenberg (@gregisenberg)",
+    "link_fonte": "https://x.com/gregisenberg/status/1889847881424646403",
+    "metricas": {
+      "curtidas": 14734,
+      "comentarios": 1176,
+      "compartilhamentos": 1954,
+      "visualizacoes": 4206191,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com/status/1889847881424646403 (espelho público do post no X). Compartilhamentos = reposts."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 13/02/2025. Original: \"This chart is nuts. Software developer jobs down 70% from peak.\"",
+    "nicho": "ia-dev",
+    "id": "ia-dev-61"
+  }
+]

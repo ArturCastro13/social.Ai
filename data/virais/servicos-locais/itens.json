@@ -1,0 +1,1939 @@
+[
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Todo mundo sabe quanto entra. Quase ninguém sabe quanto sobra.",
+    "estrutura": [
+      "Bloco 1: contraste em duas frases curtas (entra versus sobra)",
+      "Bloco 2: explica por que faturamento é o número fácil (maquininha, extrato, relatório)",
+      "Bloco 3: lista os custos que comem a margem (insumo, folha, imposto, aluguel, taxa de cartão)",
+      "Bloco 4: caso real de bairro: a padaria da Iris, na Vila Matilde, fatura R$ 300 mil por mês",
+      "Bloco 5: pergunta de palpite ao leitor: quanto você acha que sobra pra Iris no fim do mês?"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de campanha (série Quanto Sobra?)",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um contraste que todo dono de negócio local reconhece e segura a revelação do número, pedindo que o leitor chute antes. O caso concreto de uma padaria de bairro com faturamento declarado dá prova e curiosidade ao mesmo tempo.",
+    "autor_ou_marca": "Conta Azul",
+    "link_fonte": "https://pt.linkedin.com/posts/contaazul_todo-mundo-sabe-quanto-entra-quase-ningu%C3%A9m-activity-7509582864288468992-H6V9",
+    "metricas": {
+      "curtidas": 11,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários relidos na página pública do post no LinkedIn em 27/09/2026 (post de cerca de 15 horas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 26/09/2026. Texto de abertura, autor e o caso da padaria da Iris na Vila Matilde (R$ 300 mil por mês) confirmados na página. Engajamento baixo porque tinha menos de um dia no ar. Série de campanha Quanto Sobra?. Mídia do post não conferida visualmente.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-01"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "A pergunta que está espalhada pelos muros de São Paulo é nossa.",
+    "estrutura": [
+      "Bloco 1: revela a autoria da campanha de rua (quebra de mistério)",
+      "Bloco 2: apresenta a pergunta Quanto Sobra? e o prazo: a conta que a gente vai abrir até novembro",
+      "Bloco 3: promessa de método: empresas de verdade, com o dono explicando cada centavo, sem média de mercado",
+      "Bloco 4: devolve a pergunta ao leitor: quanto você acha que sobra?"
+    ],
+    "padrao_visual": {
+      "fundo": "foto da campanha de rua (muro com a pergunta)",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Aproveita a curiosidade criada fora do LinkedIn (mural na rua) e fecha o ciclo revelando quem está por trás. Termina com pergunta direta que convida o dono de negócio a comentar um número.",
+    "autor_ou_marca": "Conta Azul",
+    "link_fonte": "https://pt.linkedin.com/posts/contaazul_a-pergunta-que-est%C3%A1-espalhada-pelos-muros-activity-7509220515807600640-aUJ2",
+    "metricas": {
+      "curtidas": 22,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 dia antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 26/09/2026. Abertura confirmada: \"A pergunta que está espalhada pelos muros de São Paulo é nossa. 'Quanto Sobra?' é a conta que a gente vai abrir até novembro.\" Par com o item da padaria da Iris. Blocos 3 e 4 vêm da leitura anterior, não relidos. Mídia não conferida visualmente.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-02"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Tem DAS atrasado? Antes de pensar em como pagar, vale entender onde essa dívida está.",
+    "estrutura": [
+      "Bloco 1: pergunta de dor direta ao MEI (DAS atrasado)",
+      "Bloco 2: reframe: antes de pagar, localizar a dívida",
+      "Bloco 3: condição: se o débito já foi inscrito em Dívida Ativa da União, pode haver negociação pelo Desenrola MEI",
+      "Bloco 4: urgência com data: adesões até 30 de setembro",
+      "Bloco 5: orientação prática para quem recebeu Termo de Exclusão"
+    ],
+    "padrao_visual": {
+      "fundo": "card institucional com texto",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pergunta de dor específica filtra na primeira linha exatamente quem precisa ler. Prazo com data concreta cria urgência real, e o passo a passo curto entrega utilidade imediata, formato ideal para contador ou escritório de bairro.",
+    "autor_ou_marca": "Sebrae",
+    "link_fonte": "https://pt.linkedin.com/posts/sebrae_regularizar-as-pend%C3%AAncias-tamb%C3%A9m-%C3%A9-cuidar-activity-7509260985682214913-rngG",
+    "metricas": {
+      "curtidas": 62,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações relidas na página pública do post no LinkedIn em 27/09/2026; comentários não exibidos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 26/09/2026. Três primeiras frases confirmadas na página. Blocos 4 e 5 vêm da leitura anterior. Tema sazonal (prazo do Desenrola MEI).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-03"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Centralizar tudo funcionava no início, mas e agora que o negócio cresceu?",
+    "estrutura": [
+      "Bloco 1: nomeia o erro que deu certo no começo (centralizar tudo)",
+      "Bloco 2: vira a pergunta para o momento de crescimento",
+      "Bloco 3: apresenta o artigo de Eduardo Curado Matta, gerente do Sebrae",
+      "Bloco 4: promessa: sinais da centralização e como usar IA para liberar tempo e dar autonomia à equipe"
+    ],
+    "padrao_visual": {
+      "fundo": "capa de artigo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fala com o dono de negócio local que faz tudo sozinho: valida o passado (funcionava) e cria tensão com o presente. A pergunta na primeira linha gera identificação imediata.",
+    "autor_ou_marca": "Sebrae",
+    "link_fonte": "https://pt.linkedin.com/posts/sebrae_a-centraliza%C3%A7%C3%A3o-est%C3%A1-esgotando-voc%C3%AA-veja-activity-7508284227491270656-Rt4r",
+    "metricas": {
+      "curtidas": 91,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 4 dias antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 23/09/2026. Abertura e autor confirmados. Post com link para artigo; adaptável para carrossel de sinais de centralização.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-04"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Um padrão comum nas empresas: a contratação depende de intuição, não de processo. O treinamento depende da memória de quem já sabe fazer.",
+    "estrutura": [
+      "Bloco 1: anuncia um padrão comum nas empresas",
+      "Bloco 2: três sintomas em tópicos: contratação por intuição, treinamento na memória de alguém, delegação que não acontece porque o risco parece maior que o ganho de tempo",
+      "Bloco 3: convite para masterclass gratuita de Gestão e Liderança em 29/09 às 19h, com uso de IA na operação"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem com texto no feed",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista de sintomas em tópicos permite que o dono de clínica, salão ou restaurante se reconheça item a item. O diagnóstico vem antes do convite, então a chamada para a masterclass chega como solução e não como anúncio.",
+    "autor_ou_marca": "Sebrae",
+    "link_fonte": "https://pt.linkedin.com/posts/sebrae_movimentonegocioemdia-ia-sebrae-activity-7509024342056431616-zxoU",
+    "metricas": {
+      "curtidas": 17,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido na página pública do post no LinkedIn em 27/09/2026 (post de 2 dias antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 25/09/2026. Promovido de a verificar para verificado: abertura, os três tópicos e o autor foram confirmados na página do post. A estrutura foi corrigida (o post convida para uma masterclass de 29/09, não só para o movimento Negócio em Dia).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-05"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Uma agenda cheia não significa, necessariamente, uma clínica saudável.",
+    "estrutura": [
+      "Bloco 1: frase contraintuitiva sobre agenda cheia",
+      "Bloco 2: os números que importam aparecem numa rotina de acompanhamento, não numa olhada no consultório cheio",
+      "Bloco 3: cinco indicadores para revisão semanal",
+      "Bloco 4: direciona para o artigo completo"
+    ],
+    "padrao_visual": {
+      "fundo": "capa de artigo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Desmonta a métrica de vaidade que todo dono de clínica usa (agenda lotada) e promete um número fechado de indicadores com rotina semanal. Fala de gestão, não de resultado clínico.",
+    "autor_ou_marca": "OdontoCompany",
+    "link_fonte": "https://pt.linkedin.com/pulse/os-cinco-indicadores-que-sustentam-gest%C3%A3o-de-uma-cl%C3%ADnica-eerbe",
+    "metricas": {
+      "curtidas": 6,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "6 curtidas lidas na página do artigo no LinkedIn em 27/09/2026; comentários não exibidos. O número é do artigo, não do post de divulgação."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Artigo \"Os cinco indicadores que sustentam a gestão de uma clínica odontológica\", de 10/09/2026, autor OdontoCompany, confirmado. A abertura do artigo é outra: \"Abrir a agenda do dia costuma dizer pouco sobre a saúde financeira de uma clínica.\" O gancho acima veio da listagem da página da empresa e não foi visto no post. Engajamento muito baixo; entra só como modelo de gancho para clínica.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-06"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Cinco anos depois, voltamos à B3 para tocar o sino.",
+    "estrutura": [
+      "Bloco 1: cena de retorno (tocar o sino na B3 cinco anos depois)",
+      "Bloco 2: contexto improvável: abrir capital em julho de 2021 com unidades que tinham passado meses de portas fechadas",
+      "Bloco 3: antes e depois em números: de 950 para mais de 2.200 unidades, de 2 para cerca de 8 milhões de clientes",
+      "Bloco 4: investimento de R$ 8 bilhões em expansão e presença em 16 países",
+      "Bloco 5: novas frentes (TotalPass, BEON Studios)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de evento na B3",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Abre com uma cena simbólica e depois empilha números de antes e depois fáceis de comparar. Admitir que o momento era nada óbvio (academias fechadas na pandemia) dá tom de superação.",
+    "autor_ou_marca": "Grupo Smart Fit",
+    "link_fonte": "https://pt.linkedin.com/posts/gruposmartfit_gruposmartfit-activity-7501389652688560128-Oq8U",
+    "metricas": {
+      "curtidas": 157,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 3 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 06/09/2026. Abertura e números confirmados. Rede de academias; tema de relação com investidores, então adaptar para academia de bairro contar aniversário de unidade (alunos antes e depois). Foto do evento não conferida visualmente.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-07"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Hola, Venezuela. A Smart Fit chegou a Caracas.",
+    "estrutura": [
+      "Bloco 1: saudação no idioma do novo mercado",
+      "Bloco 2: primeira unidade no país e local (Centro Comercial Chacaíto)",
+      "Bloco 3: marco: presença em 17 países na América Latina",
+      "Bloco 4: o que a unidade oferece (musculação, cardio, funcional, aulas, recuperação, app)",
+      "Bloco 5: fala do CEO sobre adaptar o modelo a cada região"
+    ],
+    "padrao_visual": {
+      "fundo": "foto da unidade inaugurada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Gancho curto e caloroso na língua local transforma um anúncio corporativo em celebração de inauguração. Para academia de bairro, a mesma lógica vale para abrir unidade nova chamando o bairro pelo nome.",
+    "autor_ou_marca": "Grupo Smart Fit",
+    "link_fonte": "https://pt.linkedin.com/posts/gruposmartfit_gruposmartfit-activity-7509334582911987713-iNye",
+    "metricas": {
+      "curtidas": 263,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 dia antes, editado)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 26/09/2026. Abertura, local e marco de 17 países confirmados. Blocos 4 e 5 vêm da leitura anterior, resumidos.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-08"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Estamos ampliando o significado de ser uma marca fitness.",
+    "estrutura": [
+      "Bloco 1: anuncia a mudança de significado da marca",
+      "Bloco 2: novo conceito: É mais que Fit. É Smart Fit, que vai além de campanha ou identidade visual",
+      "Bloco 3: define o que é ser fitness hoje (treino, alimentação, evolução, orientação)",
+      "Bloco 4: o app como hub entre físico e digital",
+      "Bloco 5: nova identidade visual e tom de voz",
+      "Bloco 6: fecho: não somos apenas um lugar para treinar"
+    ],
+    "padrao_visual": {
+      "fundo": "peça da nova identidade visual",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Reposicionamento contado em primeira pessoa, com frase de fecho memorável que resume a mudança. Útil para academia ou negócio local que amplia serviços e precisa explicar isso aos clientes.",
+    "autor_ou_marca": "Grupo Smart Fit",
+    "link_fonte": "https://pt.linkedin.com/posts/gruposmartfit_smartfit-gruposmartfit-activity-7503162825075388416-7uzw",
+    "metricas": {
+      "curtidas": 110,
+      "comentarios": 5,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 2 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 13/09/2026. Abertura e frase de fecho confirmadas.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-09"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Ritmo acelerado por aqui! A Folha de S.Paulo publicou uma matéria sobre o momento de expansão que estamos vivendo.",
+    "estrutura": [
+      "Bloco 1: energia e prova externa (matéria da Folha)",
+      "Bloco 2: número concreto: 32 novas academias de agosto a dezembro de 2026",
+      "Bloco 3: detalhe: 26 próprias e 6 franqueadas, em 10 estados",
+      "Bloco 4: propósito: academia de qualidade para mais brasileiros",
+      "Bloco 5: fecho em tríade: Mais cidades. Mais academias. Mais pessoas se movimentando com a gente."
+    ],
+    "padrao_visual": {
+      "fundo": "imagem com recorte da matéria",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa a imprensa como prova social e sustenta com número específico. A tríade final dá ritmo e é fácil de repetir.",
+    "autor_ou_marca": "Selfit Academias",
+    "link_fonte": "https://pt.linkedin.com/posts/selfitacademias_selfit-expans%C3%A3o-rededeacademias-activity-7504269821467877377-h-Z1",
+    "metricas": {
+      "curtidas": 153,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 2 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 13/09/2026. Abertura, números (32, 26, 6, 10 estados) e fecho confirmados. Rede de academias do Nordeste.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-10"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Mais um marco na jornada da Selfit! A excelência em NPS é resultado de consistência, escuta e dedicação diária.",
+    "estrutura": [
+      "Bloco 1: anuncia o marco",
+      "Bloco 2: número: 103 Selos de Excelência para unidades com NPS acima de +75",
+      "Bloco 3: cada selo representa uma unidade e um time",
+      "Bloco 4: citação do diretor de operações sobre transformar feedback em ação",
+      "Bloco 5: fecho: um reconhecimento que celebra o que já foi construído e inspira o que vem pela frente"
+    ],
+    "padrao_visual": {
+      "fundo": "arte de premiação",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Traduz satisfação do cliente em um número exato e em uma meta clara (NPS acima de +75). Dá crédito aos times das unidades, o que gera compartilhamento interno.",
+    "autor_ou_marca": "Selfit Academias",
+    "link_fonte": "https://pt.linkedin.com/posts/selfitacademias_selfit-nps-experienciadocliente-activity-7500643679867486209-tR-R",
+    "metricas": {
+      "curtidas": 143,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 3 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 06/09/2026. Abertura, número de selos e última frase confirmados. Fecho corrigido para a frase real do post. Mídia não conferida visualmente.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-11"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Pelo 3º ano consecutivo, somos o Melhor Delivery do Brasil com o Madero!",
+    "estrutura": [
+      "Bloco 1: conquista com número de repetição (3º ano seguido)",
+      "Bloco 2: dobradinha: Madero e Jeronimo com 100% dos restaurantes como Super Restaurantes",
+      "Bloco 3: contexto do evento (Prêmio iFood Move, no São Paulo Expo)",
+      "Bloco 4: fala do VP de Operações",
+      "Bloco 5: menção ao time e fecho de celebração"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do time no evento de premiação",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Prêmio recorrente com número na primeira linha e selo ligado à avaliação de clientes no app dá credibilidade. Citar nomes do time multiplica o alcance pelos marcados.",
+    "autor_ou_marca": "Grupo Madero",
+    "link_fonte": "https://pt.linkedin.com/posts/grupo-madero_confira-um-pouco-como-foi-o-evento-ifood-activity-7506680376786984960-hqKd",
+    "metricas": {
+      "curtidas": 95,
+      "comentarios": 12,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 semana antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 20/09/2026. Abertura, dobradinha Madero e Jeronimo e evento confirmados. Blocos 4 e 5 vêm da leitura anterior. Modelo para restaurante de bairro divulgar selo de avaliação no app de delivery.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-12"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Existe um rito na nossa agenda que não é sobre metas, projetos ou entregas: é sobre o nosso propósito.",
+    "estrutura": [
+      "Bloco 1: anuncia um ritual pelo que ele não é",
+      "Bloco 2: revela o ritual: VT para Vteranos, papo direto com o fundador Vitor Torres",
+      "Bloco 3: quem participa (2 anos ou mais de casa) e o que acontece (tirar dúvidas, realinhar visões)",
+      "Bloco 4: valor: ambiente seguro, sem barreiras",
+      "Bloco 5: convite para trabalhar na empresa"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do encontro com o fundador",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A negação na abertura (não é sobre metas) cria curiosidade sobre o que é. Mostra acesso direto ao fundador, bastidor que humaniza uma empresa de contabilidade e serve para escritório contábil mostrar cultura.",
+    "autor_ou_marca": "Contabilizei",
+    "link_fonte": "https://pt.linkedin.com/posts/contabilizei_existe-um-rito-na-nossa-agenda-que-n%C3%A3o-%C3%A9-activity-7509267047105581056-jsKU",
+    "metricas": {
+      "curtidas": 125,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 dia antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 26/09/2026. Três primeiras frases confirmadas. Contabilidade online.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-13"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Estar junto ou trabalhar de onde quiser? Por aqui, a gente prefere o equilíbrio.",
+    "estrutura": [
+      "Bloco 1: pergunta de dilema (presencial ou remoto)",
+      "Bloco 2: resposta rápida: equilíbrio",
+      "Bloco 3: explica o modelo híbrido e remoto como sinal de confiança no time",
+      "Bloco 4: valores do ambiente (aprendizado, respeito, pertencimento)",
+      "Bloco 5: chamada para a página de carreiras com trocadilho: venha ser o contador da sua própria história"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do time",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pergunta de dilema que divide opiniões puxa comentários, e a resposta imediata evita enrolação. O trocadilho do fecho amarra a marca ao setor contábil.",
+    "autor_ou_marca": "Contabilizei",
+    "link_fonte": "https://pt.linkedin.com/posts/contabilizei_estar-junto-ou-trabalhar-de-onde-quiser-activity-7508609592604405761-kz1L",
+    "metricas": {
+      "curtidas": 197,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 3 dias antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de cerca de 24/09/2026. Abertura e fecho confirmados. Post de marca empregadora; mídia não conferida visualmente.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-14"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Um abraço. Um pup cup. Um bilhete escrito à mão. Uma festa de 100 anos.",
+    "estrutura": [
+      "Bloco 1: quatro gestos em fragmentos curtos",
+      "Bloco 2: Mary e o cachorro Griswold, recebidos toda manhã no drive thru",
+      "Bloco 3: Sean, notado por um barista num dia difícil",
+      "Bloco 4: Lesli, mensagens de incentivo nos copos durante o tratamento de câncer",
+      "Bloco 5: Burt, festa de aniversário com bolo, balões e gaita de foles",
+      "Bloco 6: fecho: atendimento feito de momentos grandes e pequenos, pelos atendentes, todos os dias, com link para as histórias"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem com link para as histórias (mídia não conferida)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com quatro fragmentos concretos e curtos que despertam curiosidade, e depois dá nome a cada cliente. Prova atendimento com casos reais em vez de promessa, modelo direto para café ou restaurante de bairro.",
+    "autor_ou_marca": "Starbucks",
+    "link_fonte": "https://www.linkedin.com/posts/starbucks_starbucks-stories-activity-7494088001418022912-lRWt",
+    "metricas": {
+      "curtidas": 227,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 mês antes). Compartilhamentos não exibidos na página, por isso null."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"A hug. A pup cup. A handwritten note. A 100th birthday celebration.\" Post de cerca de agosto de 2026. Texto completo confirmado. Reclassificado de carrossel para lista: a releitura não encontrou documento de 10 páginas nem contagem de compartilhamentos (o 11 anterior não foi visto).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-15"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "De poltronas aconchegantes e arte local a detalhes inspirados na comunidade, a Starbucks está reimaginando a cafeteria, um bairro de cada vez.",
+    "estrutura": [
+      "Bloco 1: três elementos concretos do novo ambiente (poltronas, arte local, detalhes da comunidade)",
+      "Bloco 2: conceito: um bairro de cada vez",
+      "Bloco 3: número: mais de 1.000 cafeterias renovadas na América do Norte, com mais a caminho",
+      "Bloco 4: link para ver como ficaram os espaços"
+    ],
+    "padrao_visual": {
+      "fundo": "prévia de link com foto de interior de loja",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista elementos que o cliente vê e sente no espaço, e a ideia de um bairro de cada vez conversa com negócio local. O número fecha com escala e o link promete a revelação visual.",
+    "autor_ou_marca": "Starbucks",
+    "link_fonte": "https://www.linkedin.com/posts/starbucks_see-starbucks-latest-coffeehouse-redesigns-activity-7508570087981785088-wnab",
+    "metricas": {
+      "curtidas": 297,
+      "comentarios": 16,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 3 dias antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"From cozy seating and local artwork to community-inspired design details, Starbucks is reimagining the coffeehouse experience one neighborhood at a time.\" Post de cerca de 24/09/2026. Reclassificado de carrossel para imagem única: a página mostra post com link encurtado, sem carrossel. Estrutura refeita a partir do texto real. Comentários mistos (crítica a ambiente estéril e elogio de atendente).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "O outono está chegando! Uma prévia do cardápio de outono da Starbucks, com o icônico Pumpkin Spice Latte, o novo Chaider e mais favoritos da estação.",
+    "estrutura": [
+      "Bloco 1: gatilho sazonal (o outono está chegando)",
+      "Bloco 2: prévia do cardápio com o item ícone",
+      "Bloco 3: novidade (Chaider)",
+      "Bloco 4: data de chegada às lojas (25 de agosto)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto com bebidas da estação",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Sazonalidade e prévia exclusiva criam antecipação, e o item ícone ancora o interesse. Texto curtíssimo com data concreta. Maior engajamento entre os itens desta lista.",
+    "autor_ou_marca": "Starbucks",
+    "link_fonte": "https://www.linkedin.com/posts/starbucks_starbucks-fall-menu-activity-7490075611596582912-Wpni",
+    "metricas": {
+      "curtidas": 1087,
+      "comentarios": 43,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 mês antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Fall is on the way! Here's a sneak peek at Starbucks fall menu featuring the iconic Pumpkin Spice Latte, the new Chaider and more seasonal favorites. Coming to U.S. coffeehouses on Aug. 25.\" Post de cerca de agosto de 2026, com 1 imagem. Modelo de cardápio sazonal para café ou restaurante.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Há dois anos, a Starbucks foca no básico: baristas qualificados, cafeterias inspiradoras, cardápio inovador e conexões reais com o cliente.",
+    "estrutura": [
+      "Bloco 1: volta ao básico em quatro pilares",
+      "Bloco 2: afirmação de resultado e progresso",
+      "Bloco 3: link para o balanço de dois anos"
+    ],
+    "padrao_visual": {
+      "fundo": "capa de artigo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Balanço de virada com lista de fundamentos é fácil de ler, e a afirmação otimista provocou réplica nos comentários (funcionários e clientes discordando), o que aumenta alcance. Serve de alerta: dizer algo que a equipe da ponta não sente gera réplica pública.",
+    "autor_ou_marca": "Starbucks",
+    "link_fonte": "https://www.linkedin.com/posts/starbucks_back-to-starbucks-two-years-of-progress-activity-7503966854248402944-BAcl",
+    "metricas": {
+      "curtidas": 369,
+      "comentarios": 26,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 2 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"For two years, Starbucks has focused squarely on the fundamentals: skilled baristas, inspiring coffeehouses, an innovative menu and meaningful customer connections.\" Post de cerca de 13/09/2026. Comentários majoritariamente críticos (salário, falta de pessoal, música alta). O Bloco 2 vem da leitura anterior; a releitura só mostrou a primeira frase.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A percepção dos clientes sobre o aumento de preços mudou muito em dois anos. O comportamento deles quase não mudou.",
+    "estrutura": [
+      "Bloco 1: contraste entre sentimento e comportamento",
+      "Bloco 2: convite para a edição da newsletter Toast on the Ground",
+      "Bloco 3: promessa: o que fecha essa lacuna e o pedido que os clientes repetem",
+      "Bloco 4: artigo: os clientes sabem por que seu preço subiu, só querem ser avisados antes"
+    ],
+    "padrao_visual": {
+      "fundo": "capa de artigo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Duas frases em oposição criam tensão e tocam numa dor real do dono de restaurante (reajuste de preço). Guarda a resposta (o pedido dos clientes) para depois do clique.",
+    "autor_ou_marca": "Toast",
+    "link_fonte": "https://www.linkedin.com/posts/toast-inc_guests-know-why-your-prices-went-up-they-activity-7498084519938543616-Al_L",
+    "metricas": {
+      "curtidas": 50,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 1 mês antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Guest sentiment on rising prices has shifted a lot in two years. Guest behavior barely has.\" Post de cerca de agosto de 2026. Título do artigo deduzido do slug do link. Parte dos comentários é reclamação sobre o serviço da Toast.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Sim, a gente faz catering. E às vezes fazemos 500 refeições de uma vez.",
+    "estrutura": [
+      "Bloco 1: resposta direta a uma dúvida comum (sim, fazemos catering)",
+      "Bloco 2: número de impacto: quase 500 refeições num único pedido",
+      "Bloco 3: bastidor: a equipe de Beacon Hill, em Boston, deu conta do pedido",
+      "Bloco 4: qualquer tamanho, todo dia: do almoço de escritório para 20 ao evento para mais de 500",
+      "Bloco 5: chamada para o site de catering"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única (mídia não conferida)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Responde uma pergunta que o cliente tem e surpreende com um número grande logo depois. Dá crédito à equipe de uma unidade específica, prova de capacidade sem promessa vaga.",
+    "autor_ou_marca": "sweetgreen",
+    "link_fonte": "https://www.linkedin.com/posts/sweetgreen_sweetgreen-sweetgreencatering-catering-activity-7500988840762068992-pt4W",
+    "metricas": {
+      "curtidas": 122,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 3 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Yes, we cater. And sometimes... we cater 500 meals at a time.\" Post de cerca de 06/09/2026. Texto completo confirmado. Reclassificado de carrossel para imagem única: a releitura não encontrou carrossel. Estrutura refeita a partir do texto.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Quem melhor para ensinar truques do cardápio do que os próprios chefs?",
+    "estrutura": [
+      "Bloco 1: pergunta retórica que aponta os chefs como autoridade",
+      "Bloco 2: os chefs Nevielle J. Panthaky e Leslie Serrano mostram seu jeito favorito de pedir Pollo Asado e Chili Lime Chips",
+      "Bloco 3: dicas para experimentar as edições limitadas como especialista"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de entrevista com chefs (garfo como microfone)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Troca o anúncio de produto por bastidor com gente da cozinha, e o formato divertido (garfo de microfone) gerou comentários. Dica de como pedir é conteúdo útil e compartilhável para restaurante de bairro.",
+    "autor_ou_marca": "Chipotle Mexican Grill",
+    "link_fonte": "https://www.linkedin.com/posts/chipotle-mexican-grill_who-better-to-ask-for-menu-hacks-than-the-activity-7503059638053920768-DhvC",
+    "metricas": {
+      "curtidas": 212,
+      "comentarios": 15,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido na página pública do post no LinkedIn em 27/09/2026 (post de 2 semanas antes)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Who better to ask for menu hacks than the chefs themselves?\" Post de cerca de 13/09/2026. Texto completo e comentário sobre o garfo microfone confirmados. Vídeo; formato mais próximo no esquema foi bastidor (não há fundador no vídeo).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-21"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "O lançamento foi um sucesso e faremos a reposição de alguns itens em lojas selecionadas.",
+    "estrutura": [
+      "Slide 1: capa 'A grande abóbora chegou' com os produtos da coleção Peanuts + Starbucks",
+      "Slide 2: anúncio da reposição com caixas de destaque 'Estado de São Paulo: sábado, 26 de setembro' e 'Brasil: datas na próxima semana'",
+      "Slides 3 a 9: um produto por slide, nome grande e selo 'Últimas unidades'",
+      "Slide 10: caneca com selo 'Esgotou' para reforçar a escassez",
+      "Slides 11 e 12: chaveiro e pelúcia pixelados com selo 'Em breve'",
+      "Legenda: regras de compra (até 2 unidades por item) e lista de lojas nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "laranja sólido de outono com ilustrações e folhas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Anuncia a reposição dizendo que o lançamento foi um sucesso e mostra selos 'Últimas unidades' e 'Esgotou' ao lado de itens 'Em breve' pixelados: escassez e curiosidade no mesmo arrasto. Mandar a lista de lojas para os comentários gera centenas de comentários de quem procura a sua unidade.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/DduAv1clqr1/",
+    "metricas": {
+      "curtidas": 10394,
+      "comentarios": 899,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DduAv1clqr1/embed/captioned/ relido pelo verificador em 27/09/2026 ('10,394 likes', 'View all 899 comments'); post com 2 dias, números ainda subindo."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026 (data decodificada do código). Autor e legenda conferidos no embed; 12 slides baixados e vistos (a curadoria anterior contou 10). A frase do gancho está no slide 2; a capa diz 'A grande abóbora chegou'. Legenda abre com 'sim, teremos reposição de itens selecionados'. Serve para café, padaria ou loja de bairro que esgota um produto sazonal.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-22"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Olá, Rio! Tem mais Starbucks chegando por aí.",
+    "estrutura": [
+      "Slide 1: mão segurando bandeja de bebidas com 'Olá, Rio!' em letras grandes e 'Tem mais Starbucks chegando por aí'",
+      "Slide 2: 'Shopping Tijuca 23/09' sobre foto de lanche na mesa, endereço (Av. Maracanã, 987) no rodapé",
+      "Slide 3: 'RioSul Shopping Center 27/09' com endereço (Rua Lauro Müller, 116) no rodapé",
+      "Legenda: 'marquem na agenda' e horário de abertura"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos escuras e quentes de produto na mesa",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Chamar a cidade pelo nome ('Olá, Rio!') faz o morador se sentir chamado, e cada slide seguinte traz só unidade, data e endereço, o que transforma curiosidade em visita. Gera marcação de amigos nos comentários.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/Ddm5MPGFrPP/",
+    "metricas": {
+      "curtidas": 7517,
+      "comentarios": 589,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Ddm5MPGFrPP/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Legenda: 'rio, mais motivos para colocar um cafezinho no caminho, marquem na agenda! Abertura do Shop Tijuca a partir de 13h'. 3 slides baixados e vistos. Modelo direto para inauguração de unidade de bairro.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-23"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "No clima de pumpkin cold foam.",
+    "estrutura": [
+      "Slide 1: capa 'No clima de pumpkin cold foam' com as quatro bebidas juntas",
+      "Slides 2 a 5: uma bebida por slide, cada uma ligada a um personagem (Charlie Brown, Linus, Snoopy, Lucy) desenhado ao lado do copo",
+      "Rodapé de cada slide: sabores da bebida em uma linha (ex.: 'Abóbora e Mocha com Pumpkin Cold Foam')",
+      "Legenda: 'descubra seus favoritos de primavera'"
+    ],
+    "padrao_visual": {
+      "fundo": "verde sólido da marca com ilustrações",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dar um personagem a cada item do cardápio faz o seguidor escolher 'qual é o meu' e comentar. Um item por slide, com sabor em uma linha, mantém o arrasto sem cansar.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/DdosChdFpMz/",
+    "metricas": {
+      "curtidas": 7499,
+      "comentarios": 146,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdosChdFpMz/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/09/2026. 5 slides baixados e vistos. Gancho trocado para o texto da capa; a legenda diz 'descubra seus favoritos de primavera com as bebidas de peanuts + @starbucks'.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-24"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Conheça a família Pumpkin Spice. Qual é o seu?",
+    "estrutura": [
+      "Slide 1: 'Conheça a família Pumpkin Spice' com todas as bebidas e a pergunta 'Qual é o seu?'",
+      "Slides 2 a 6: uma bebida por slide cortada ao meio, com linhas brancas nomeando cada camada (topping, chantilly, gelo, base)",
+      "Legenda curta: 'hora de saber o que está por trás da sua bebida favorita da temporada'"
+    ],
+    "padrao_visual": {
+      "fundo": "laranja caramelo liso com foto de produto e linhas brancas",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O formato 'anatomia do produto' educa sem parecer anúncio e é salvo como referência. A pergunta da capa puxa comentários de quem declara a sua favorita.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/Dc1zsM_j6Ke/",
+    "metricas": {
+      "curtidas": 4013,
+      "comentarios": 247,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Dc1zsM_j6Ke/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 03/09/2026. 6 slides baixados e vistos. Gancho trocado para o texto da capa; a legenda original é 'hora de saber o que está por trás da sua bebida favorita da temporada'. Adaptável para restaurante (o que vai no prato) ou clínica (o que acontece em cada etapa do atendimento).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-25"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Olá, Belo Horizonte! Nova Starbucks para matar a saudade.",
+    "estrutura": [
+      "Slide 1: cliente tomando café com bolo na mesa, 'Olá, Belo Horizonte!' no topo e 'Nova Starbucks para matar a saudade' embaixo",
+      "Slide 2: 'Boulevard Shopping Belo Horizonte' sobre foto de bebida, endereço (Av. dos Andradas, 3000) e 'Inauguração dia 26/09 às 12h'",
+      "Legenda: 'BH, seu caminho acaba de ganhar uma nova Starbucks'"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de ambiente com luz quente",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Saudação à cidade mais a promessa emocional 'matar a saudade' dá sensação de pertencimento local. Dois slides bastam: emoção no primeiro, logística no segundo.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/Ddr5y9HD4IQ/",
+    "metricas": {
+      "curtidas": 1920,
+      "comentarios": 96,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Ddr5y9HD4IQ/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. 2 slides baixados e vistos.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-26"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Todo grupo tem cinco amigas, cada uma apaixonada por uma bebida da família pumpkin spice.",
+    "estrutura": [
+      "Slide 1: grupo de amigas brindando com as bebidas",
+      "Slide 2: o grupo conversando no sofá da loja",
+      "Slide 3: plano aberto do grupo sentado no chão do ambiente",
+      "Legenda: a frase 'todo grupo tem...' que convida a marcar as amigas"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos lifestyle dentro da loja, tons terrosos",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A fórmula 'todo grupo tem' faz cada seguidora se identificar com uma personagem e marcar as amigas. O texto fica todo na legenda e as fotos só criam clima de encontro na loja.",
+    "autor_ou_marca": "Starbucks Brasil (@starbucksbrasil)",
+    "link_fonte": "https://www.instagram.com/p/DdY_7hRlvqv/",
+    "metricas": {
+      "curtidas": 1310,
+      "comentarios": 92,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdY_7hRlvqv/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2026. 3 fotos baixadas e vistas, sem texto nas imagens.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-27"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Qual é o signo perfeito para compartilhar cada Board?",
+    "estrutura": [
+      "Slide 1: pergunta na capa com a mesa cheia e 'Últimos dias para descobrir, Boards Outback só até 04/10'",
+      "Slides 2 a 7: uma dupla de signos por slide (Leão + Peixes, Touro + Capricórnio, Áries + Escorpião, Gêmeos + Sagitário, Libra + Aquário, Câncer + Virgem) com uma frase sobre a dupla e o nome da combinação",
+      "Slide 8: 'Agora mande no grupo e descubra quem compartilha com você! Bora de Outback?'"
+    ],
+    "padrao_visual": {
+      "fundo": "céu estrelado escuro com roda de signos e foto do prato iluminada no centro",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Astrologia é tema de identificação imediata: cada um procura o seu signo e o do amigo, e o último slide pede o envio no grupo. Um prato de compartilhar vira motivo para marcar alguém.",
+    "autor_ou_marca": "Outback Steakhouse Brasil (@outbackbrasil)",
+    "link_fonte": "https://www.instagram.com/p/Ddrr4myGK0T/",
+    "metricas": {
+      "curtidas": 1323,
+      "comentarios": 64,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Ddrr4myGK0T/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. 8 slides baixados e vistos. Adaptável para qualquer restaurante ou salão ('qual corte combina com seu signo').",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-28"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Todo mundo vê uma Board. A gente vê o detalhe que dá vontade de chegar mais perto.",
+    "estrutura": [
+      "Slide 1: 'O que todo mundo vê' sobre foto do prato com camarão empanado",
+      "Slide 2: close do empanado sendo mergulhado no molho, com moldura fina",
+      "Slide 3: 'O que todo mundo vê' sobre o prato com quesadilla e fritas",
+      "Slide 4: close de mãos abrindo a quesadilla",
+      "Slide 5: 'O que todo mundo vê' sobre o prato de costela",
+      "Slide 6: close extremo do molho brilhando na costela",
+      "Legenda: descreve texturas e fecha com tempo limitado"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de comida em mesa de madeira, closes com moldura fina",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O ritmo em pares, prato inteiro e depois zoom no detalhe, cria fome visual a cada arrasto. A legenda sensorial faz o trabalho do texto nos slides.",
+    "autor_ou_marca": "Outback Steakhouse Brasil (@outbackbrasil)",
+    "link_fonte": "https://www.instagram.com/p/DdZ9Du4mGIh/",
+    "metricas": {
+      "curtidas": 1354,
+      "comentarios": 25,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdZ9Du4mGIh/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 17/09/2026. 6 slides baixados e vistos. O gancho é a primeira frase da legenda; a arte da capa diz só 'O que todo mundo vê'.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-29"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Limpeza no dentista: o que você imagina x o que realmente acontece.",
+    "estrutura": [
+      "Slide 1: print de conversa de WhatsApp com a piada 'Seu dente tem mais medo da cárie do que você do dentista' e figurinha de cachorro",
+      "Slide 2: título 'Limpeza no dentista: o que você imagina x o que realmente acontece' com dois memes",
+      "Slides 3 a 5: cartão 'Expectativa' com a frase de medo ('vai doer, vai sangrar', 'isso vai gastar o meu dente', 'só preciso ir quando doer') e cartão 'Realidade' com a resposta calma",
+      "Slide 6: 'No final, você sai com aquele sentimento de dente limpo e higienizado', alerta 'o cuidado continua em casa' e botão 'Vamos marcar uma avaliação?'"
+    ],
+    "padrao_visual": {
+      "fundo": "verde da marca com cartões brancos e memes",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Responde a três medos reais do paciente com humor e memes conhecidos, sem prometer resultado. O par expectativa e realidade é fácil de ler e a legenda pede para salvar.",
+    "autor_ou_marca": "OdontoCompany (@odontocompany)",
+    "link_fonte": "https://www.instagram.com/p/DcbFWGNlbxT/",
+    "metricas": {
+      "curtidas": 34,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DcbFWGNlbxT/embed/captioned/ relido pelo verificador em 27/09/2026; o embed mostrou curtidas mas não mostrou número de comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/08/2026. Engajamento absoluto baixo: entra como referência de formato para odontologia, não como prova de viralização. 6 slides baixados e vistos. O gancho está no slide 2; o slide 1 é a piada no print de WhatsApp. Legenda: 'Salva pra lembrar na próxima'.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Alguns registros dos últimos TNTs que aconteceram pelo Brasil.",
+    "estrutura": [
+      "Slide 1: close de latte art sendo feito",
+      "Slides 2 a 5: baristas competindo no balcão e colegas comemorando",
+      "Slides 6 a 15: loja cheia, plateia filmando com o celular e aplaudindo em volta do balcão",
+      "Slides 16 a 19: xícaras finalizadas no balcão e público apontando para a vencedora",
+      "Legenda bilíngue: cidades que receberam o evento e 'o café também é sobre comunidade, conexões e pessoas'"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos reais de evento noturno dentro da loja",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Mostrar a loja cheia de gente e a equipe em ação é prova social de comunidade. Quem esteve lá se reconhece e marca, e quem não foi quer ir no próximo encontro.",
+    "autor_ou_marca": "The Coffee (@thecoffee.jp)",
+    "link_fonte": "https://www.instagram.com/p/DctZDDijqo7/",
+    "metricas": {
+      "curtidas": 571,
+      "comentarios": 17,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DctZDDijqo7/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 31/08/2026. 19 fotos baixadas e vistas (a curadoria anterior contou 10). TNT é o encontro de latte art entre baristas. Legenda bilíngue PT e EN, cita São Paulo, Rio de Janeiro, Fortaleza e Porto Alegre.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "No Campeonato Brasileiro de Latte Art o café oficial foi The Coffee.",
+    "estrutura": [
+      "Slide 1: telão com os pacotes de café da marca e baristas no palco",
+      "Slides 2 e 3: competidores preparando latte art diante dos juízes",
+      "Slide 4: pódio com os três campeões segurando troféus",
+      "Slides 5 a 11: provas, bancada, juízes avaliando e público no salão",
+      "Slides 12 a 14: carrinho de café da marca, telão e xícara com latte art na mão",
+      "Legenda: conta a torra criada para a prova, as regras (8 minutos, dois pares de desenhos) e marca os vencedores"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de evento com cenário roxo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Associar o negócio a uma competição reconhecida é autoridade emprestada. Marcar os baristas vencedores e a associação organizadora leva o post para o público deles.",
+    "autor_ou_marca": "The Coffee (@thecoffee.jp)",
+    "link_fonte": "https://www.instagram.com/p/DdJvVEaDsuk/",
+    "metricas": {
+      "curtidas": 465,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdJvVEaDsuk/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 11/09/2026. 14 fotos baixadas e vistas (a curadoria anterior contou 10). Legenda marca @edu.o.santos, @tiaguinhoo2000, @leo_mesquita1 e @bsca_specialtycoffee.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Tira aí uma foto minha \"distraído\".",
+    "estrutura": [
+      "Slide 1: foto rindo olhando para o lado, pose de 'distraído'",
+      "Slide 2: mesma cena olhando para a câmera e sorrindo",
+      "Slide 3: variação rindo, entregando a brincadeira",
+      "Legenda curta com emoji de câmera e de coruja"
+    ],
+    "padrao_visual": {
+      "fundo": "painel roxo e branco ao fundo com as palavras 'foco, estudo, disciplina'",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Autoironia sobre a pose ensaiada humaniza um advogado e gera comentários de piada. Para profissional liberal, rosto e leveza aproximam mais que conteúdo técnico.",
+    "autor_ou_marca": "Murilo Bastos, advogado (@murilobastos.adv)",
+    "link_fonte": "https://www.instagram.com/p/DdU-XNKGhsp/",
+    "metricas": {
+      "curtidas": 3789,
+      "comentarios": 163,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdU-XNKGhsp/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 15/09/2026 (16/09 em UTC). Carrossel de 3 fotos baixadas e vistas. Advogado e influenciador digital, como indica o telão do item seguinte. A menção à FENALAW 2026 da curadoria anterior não foi conferida e saiu.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Uma honra palestrar na IX Conferência Estadual da Advocacia Baiana sobre um tema que faz parte da minha história.",
+    "estrutura": [
+      "Slide 1: telão da conferência com nome, foto e 'Advogado e influenciador digital', ele falando no palco",
+      "Slides 2 a 4: palco, fala ao microfone e interação com uma participante",
+      "Slides 5 a 8: fotos com colegas, plateia e painel posando diante do telão",
+      "Slides 9 a 11: fala em sala menor, encontro com colega e selfie no palco",
+      "Legenda: tema da palestra (conteúdo nas redes), 'estratégia, ética e propósito' e agradecimento à @oab.bahia"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de evento com telão azul",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Palco e telão com o próprio nome são prova de autoridade que o cliente de advocacia entende sem explicação. Marcar a entidade organizadora amplia o alcance.",
+    "autor_ou_marca": "Murilo Bastos, advogado (@murilobastos.adv)",
+    "link_fonte": "https://www.instagram.com/p/DbgIarIFd9U/",
+    "metricas": {
+      "curtidas": 2254,
+      "comentarios": 106,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DbgIarIFd9U/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 01/08/2026. 11 fotos baixadas e vistas (a curadoria anterior contou 10).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Unidade Itaim Bibi, a primogênita. 12 anos, 16 cadeiras. Aproximadamente 700.000 serviços foram realizados por aqui.",
+    "estrutura": [
+      "Bloco 1: foto noturna da fachada da unidade com o letreiro Corleone e o número 390, sem texto na imagem",
+      "Bloco 2: legenda abre com os números da unidade (12 anos, 16 cadeiras, 700 mil serviços)",
+      "Bloco 3: tom afetivo sobre histórias e amigos feitos nas cadeiras",
+      "Bloco 4: endereço com pin (Rua Dr. Renato Paes de Barros, 390)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto noturna da fachada escura com luz quente",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Números concretos da própria operação (12 anos, 700 mil serviços) viram prova social de bairro e orgulho para clientes antigos. A fachada reconhecível mais o endereço transformam nostalgia em visita.",
+    "autor_ou_marca": "Barbearia Corleone (@barbeariacorleone)",
+    "link_fonte": "https://www.instagram.com/p/Ddtd5whJmTq/",
+    "metricas": {
+      "curtidas": 519,
+      "comentarios": 12,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Ddtd5whJmTq/embed/captioned/ relido pelo verificador em 27/09/2026 ('519 likes', 'View all 12 comments')."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026. Legenda e autor confirmados no embed; a imagem foi baixada nesta verificação e o visual foi descrito.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Sua empresa já faz parte da história da Corleone no MorumbiShopping?",
+    "estrutura": [
+      "Bloco 1: foto da fachada da loja dentro do shopping, sem texto na imagem",
+      "Bloco 2: legenda abre com a pergunta que coloca o cliente como parte da história",
+      "Bloco 3: contexto de quase uma década atendendo quem trabalha na região (corte antes da reunião, barba no intervalo)",
+      "Bloco 4: pedido 'conte nos comentários onde você trabalha e veja se aparece alguém do seu escritório'"
+    ],
+    "padrao_visual": {
+      "fundo": "foto da fachada preta da loja no corredor claro do shopping",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pergunta fácil de responder (onde você trabalha) e com recompensa social (achar colegas) gera comentários de quem é da região. É o modelo de engajamento de negócio de bairro.",
+    "autor_ou_marca": "Barbearia Corleone (@barbeariacorleone)",
+    "link_fonte": "https://www.instagram.com/p/DdrPZOLpvyU/",
+    "metricas": {
+      "curtidas": 391,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdrPZOLpvyU/embed/captioned/ relido pelo verificador em 27/09/2026; o embed não mostrou número de comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026. Legenda e autor confirmados no embed; imagem baixada e vista nesta verificação.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Surpresa! O 6 por 4 continua. Segure os pontinhos e arraste.",
+    "estrutura": [
+      "Slides 1 a 9: a mesma arte desfocada, ficando mais nítida a cada slide, com 'Hold the dots and scroll' no rodapé",
+      "Slide 10: arte nítida: 'Surprise! 6-for-4 is sticking around' e selo 'Now through Saturday!' sobre os doces",
+      "Legenda: 'Sooo… we decided to keep the party going' e pedido para enviar a alguém"
+    ],
+    "padrao_visual": {
+      "fundo": "rosa da marca com fotos de cookies",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O desfoque que some aos poucos transforma o carrossel em animação quando o usuário segura e arrasta, e obriga a ir até o fim para ler a oferta. A extensão da promoção vira notícia e o pedido de envio gera compartilhamento.",
+    "autor_ou_marca": "Crumbl (@crumbl)",
+    "link_fonte": "https://www.instagram.com/p/DdsO9eHk3-E/",
+    "metricas": {
+      "curtidas": 26098,
+      "comentarios": 159,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdsO9eHk3-E/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original (arte): 'SURPRISE! 6-FOR-4 IS STICKING AROUND' e 'Hold the dots and scroll'. Legenda original: 'Sooo… we decided to keep the party going. 6 desserts for the price of 4 through Saturday! Send this to someone that needs to know the sweet news!'. Post de 25/09/2026. 10 slides baixados e vistos. Rede de confeitaria dos EUA.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Arraste para uma surpresa...",
+    "estrutura": [
+      "Slide 1: pilha de cookies com granulado em fundo rosa, sem texto",
+      "Slide 2: emoji de mãos fechadas cobrindo a oferta e 'Swipe for a surprise...'",
+      "Slide 3: mãos abrem e revelam '6 for 4' com estrelas",
+      "Legenda: oferta de aniversário válida até sábado"
+    ],
+    "padrao_visual": {
+      "fundo": "rosa e close de massa de cookie com granulado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A revelação em três passos (produto, suspense, oferta) usa o arrasto como mecânica de presente. Serve para qualquer promoção de padaria ou café.",
+    "autor_ou_marca": "Crumbl (@crumbl)",
+    "link_fonte": "https://www.instagram.com/p/Ddt8I4CkxcT/",
+    "metricas": {
+      "curtidas": 11641,
+      "comentarios": 33,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/Ddt8I4CkxcT/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original na arte: 'SWIPE FOR A SURPRISE...'. Legenda original: 'You can't have a birthday without sprinkles… or a birthday deal. Get 6-for-4 through Saturday and celebrate with us!'. Post de 25/09/2026. 3 slides baixados e vistos.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Nosso desejo de aniversário? Mais uma semana do Brownie de Chocolate estilo Dubai.",
+    "estrutura": [
+      "Slide 1: pilha de brownies em close com fundo rosa",
+      "Slide 2: brownies com globos espelhados e confete, clima de festa",
+      "Slide 3: mão segurando um brownie",
+      "Legenda: pedido de 'mais uma semana' e aviso para pegar antes de acabar"
+    ],
+    "padrao_visual": {
+      "fundo": "rosa degradê de estúdio",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Enquadrar a volta de um item querido como 'desejo de aniversário' dá emoção a uma simples extensão de cardápio. Fotos só de produto, sem texto, deixam o apetite fazer o trabalho.",
+    "autor_ou_marca": "Crumbl (@crumbl)",
+    "link_fonte": "https://www.instagram.com/p/DdmAlDJE-Mr/",
+    "metricas": {
+      "curtidas": 46153,
+      "comentarios": 109,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdmAlDJE-Mr/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda original: 'Our birthday wish? One more week of Dubai-Style Chocolate Brownie. Get it before the party's over.' Post de 22/09/2026. 3 slides baixados e vistos.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Olhos aqui embaixo.",
+    "estrutura": [
+      "Slide 1: atriz deitada em editorial de moda ao lado de uma travessa de couve de bruxelas",
+      "Slide 2: close do rosto com brinco feito de couve de bruxelas",
+      "Slide 3: atriz de vestido longo regando uma torre de couves com calda",
+      "Slide 4: a torre de couves sozinha no pedestal",
+      "Legenda: apresenta o prato novo do cardápio de outono"
+    ],
+    "padrao_visual": {
+      "fundo": "estúdio bege dourado, estética de editorial de moda",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Tratar um acompanhamento banal como peça de alta moda cria estranhamento e humor. A atriz marcada em collab leva o post ao público dela.",
+    "autor_ou_marca": "sweetgreen (@sweetgreen)",
+    "link_fonte": "https://www.instagram.com/p/DdMXc4jDk88/",
+    "metricas": {
+      "curtidas": 117591,
+      "comentarios": 181,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Embed público instagram.com/p/DdMXc4jDk88/embed/captioned/ relido pelo verificador em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Legenda original: 'eyes down here. @maiareficco meets fall's best dressed: maple-glazed brussels that are sweet, a little unexpected, and very hard to look away from. now on the @sweetgreen menu.' Post de 12/09/2026. 4 slides baixados e vistos. Rede de restaurantes de saladas dos EUA; o número alto provavelmente vem do alcance da atriz marcada (collab), então não serve como referência de alcance para negócio pequeno.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A gente jurava que isso nem precisava entrar nos requisitos… mas estamos em 2026.",
+    "estrutura": [
+      "Slide 1: anúncio de vaga dizendo que o restaurante procura pessoas que consigam fazer o básico, com convite para arrastar ou indicar alguém",
+      "Slide 2: lista de requisitos óbvios: chegar no horário, cumprir a jornada, avisar quando faltar, não sumir no expediente, tratar colegas e clientes com respeito",
+      "Slide 3: habilidades 'raras' valorizadas, como não responder 'não fui contratado pra isso'",
+      "Slide 4: recado sobre não pedir para deixar de registrar a carteira por causa do seguro-desemprego, fechado com 'a gente sabe. você sabe. todo mundo sabe'",
+      "Slide final: se você leu e pensou 'mas isso aí é o mínimo', você é a pessoa que a gente procura"
+    ],
+    "padrao_visual": {
+      "fundo": "cards de texto com identidade da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma um anúncio de emprego banal em desabafo irônico que todo dono de pequeno negócio reconhece. A lista do óbvio divide patrões e funcionários, e a briga nos comentários (quase 14 mil) empurra o alcance.",
+    "autor_ou_marca": "California (@californiafood.co), restaurante de comida saudável em São Paulo",
+    "link_fonte": "https://www.instagram.com/p/Dc_4EULlDIf/",
+    "metricas": {
+      "curtidas": 182575,
+      "comentarios": 13863,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e comentários lidos no embed público do Instagram em 27/09/2026. O Globo (08/09/2026) registrava mais de 7 mil comentários na tarde seguinte à publicação."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 07/09/2026, carrossel (GraphSidecar) confirmado no embed, com legenda e autor batendo. Conteúdo dos cards conferido na matéria de O Globo/Época: https://oglobo.globo.com/economia/epoca/noticia/2026/09/08/chegar-no-horario-e-trabalhar-restaurante-em-sp-viraliza-ao-exigir-o-basico-em-anuncio-de-emprego-inusitado.ghtml. O trecho 'não fui contratado pra isso' gerou polêmica.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-41"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Indestrutíveeeeeeeel.... não para a bolos feios hahahaha",
+    "estrutura": [
+      "Slide 1: foto do bolo 'feio' finalizado, com arte em chantilly inspirada na Pabllo Vittar",
+      "Slides seguintes: outros ângulos e detalhes da decoração exagerada e colorida",
+      "Legenda: trocadilho com a música 'Indestrutível' e hashtags de confeitaria e da artista",
+      "Bloco extra: o perfil vira vitrine de encomendas, com bolos temáticos de cultura pop"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do produto, cores saturadas",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um posicionamento assumidamente 'feio' quebra a estética perfeita da confeitaria no Instagram e vira assunto. Referências pop (Pabllo Vittar, Ana Maria Braga) dão motivo para compartilhar, e o feio intencional passa a ser lido como arte.",
+    "autor_ou_marca": "Bolos Feios da Mari (@bolosfeiosdamari), confeitaria em São Paulo",
+    "link_fonte": "https://www.instagram.com/p/DdTxy6zDtTE/",
+    "metricas": {
+      "curtidas": 36114,
+      "comentarios": 659,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e comentários lidos no embed público do Instagram em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Carrossel (GraphSidecar), setembro de 2026; legenda e autor conferidos no embed. O viral começou com um post no X de @1eozinho01 ('Encantado com essa loja de bolos', 17/09/2026), com 547,3 mil visualizações e 48 mil curtidas segundo a PEGN, que também fala em produção 90% maior: https://revistapegn.globo.com/redes-sociais/noticia/2026/09/bolos-feios-viralizam-nas-redes-e-confeiteira-aumenta-a-producao-em-90percent-artista.ghtml. Os slides foram descritos a partir da legenda e da matéria, não vistos um por um.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-42"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "A diferença que faz o atendimento",
+    "estrutura": [
+      "Bloco 1: título curto que resume a lição ('A diferença que faz o atendimento')",
+      "Bloco 2: contexto: achou que o restaurante abria às 11h, mas o garçom avisou educadamente que era às 11h30",
+      "Bloco 3: o gesto: a casa deixou o grupo entrar meia hora antes de abrir",
+      "Bloco 4: o resultado: o prato chegou em cerca de 10 minutos",
+      "Bloco 5: fotos do lugar e do prato, com promessa de voltar"
+    ],
+    "padrao_visual": {
+      "fundo": "texto do tweet com fotos reais do restaurante",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma gentileza pequena e concreta, contada por um cliente em primeira pessoa, funciona como prova social mais forte que qualquer anúncio. O sócio disse à PEGN que projetava 15% a mais de movimento.",
+    "autor_ou_marca": "Gabriel Duarte (@GabrielD_Ouro), cliente do Filé do Lira (Rio de Janeiro)",
+    "link_fonte": "https://x.com/GabrielD_Ouro/status/1975210802937299359",
+    "metricas": {
+      "curtidas": 40083,
+      "comentarios": 238,
+      "compartilhamentos": null,
+      "visualizacoes": 1700000,
+      "observacao": "Curtidas e respostas lidas na API pública de embed do X em 27/09/2026. As visualizações (mais de 1,7 milhão) vêm da PEGN de 07/10/2025, conferida em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Tweet de 06/10/2025, texto e autor conferidos na API de embed. A PEGN cita o autor como @osrduarte (provável troca de handle), mas embute este mesmo ID de tweet: https://revistapegn.globo.com/redes-sociais/noticia/2025/10/elogio-a-atendimento-em-restaurante-no-rio-de-janeiro-viraliza-e-dono-ja-projeta-15percent-de-aumento-no-movimento.ghtml. O post é de um cliente, não do restaurante: bom modelo para o negócio repostar como depoimento.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-43"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Decorei uma lajota pra uma cliente caloteira 🫢",
+    "estrutura": [
+      "Bloco 1: frase na tela anunciando a vingança contra a cliente que não pagou o primeiro bolo e pediu outro",
+      "Bloco 2: a confeiteira decora um tijolo como se fosse bolo",
+      "Bloco 3: acabamento e embalagem como encomenda normal",
+      "Bloco 4: entrega, e a parte 2 publicada depois como encenação a pedido dos seguidores"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo caseiro na cozinha",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Toca numa dor universal de quem vende sob encomenda (o calote) e entrega a vingança bem-humorada que ninguém tem coragem de fazer. O pedido de parte 2 nos comentários virou uma sequência que também viralizou.",
+    "autor_ou_marca": "Nathanya Rodrigues (@nathanyarodrigues95), confeiteira em Moreira Sales (PR)",
+    "link_fonte": "https://www.instagram.com/p/DdQ-V94zNea/",
+    "metricas": {
+      "curtidas": 22597,
+      "comentarios": 2843,
+      "compartilhamentos": null,
+      "visualizacoes": 171451,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (17/09/2026) fala em mais de 23,4 milhões de visualizações somando TikTok e Instagram."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel (GraphVideo), sem formato de vídeo no schema, classificado como bastidor-founder. Postado no Instagram em 14/09/2026. A parte 2 (https://www.instagram.com/p/DdU9fattpok/) tem 32.029 curtidas e 946 comentários no embed, e a legenda admite que é encenação. Matéria: https://revistapegn.globo.com/redes-sociais/noticia/2026/09/confeiteira-viraliza-ao-fazer-bolo-de-tijolo-para-cliente-que-nao-pagou-encomenda.ghtml",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-44"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Vamos fazer um torneio de karaokê, quem topa participar? 😅",
+    "estrutura": [
+      "Bloco 1: cliente cantando no karaokê do salão enquanto faz as unhas ou o cabelo",
+      "Bloco 2: letra da música na TV e profissionais trabalhando ao fundo",
+      "Bloco 3: legenda com convite para um torneio entre clientes",
+      "Bloco 4: regra do torneio divulgada depois: cinco vídeos em uma semana, e quem tiver mais engajamento ganha um procedimento no salão"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo real dentro do salão",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transforma o atendimento comum num momento de entretenimento que as clientes querem viver e filmar. A pergunta na legenda chama a audiência para ser o próximo conteúdo, e o prêmio em procedimento amarra o viral à agenda do salão.",
+    "autor_ou_marca": "Lenna's Beauty Hair Salon (@lennasbeautyhairsalon), Açailândia (MA)",
+    "link_fonte": "https://www.instagram.com/p/DRqKJZ1kmjp/",
+    "metricas": {
+      "curtidas": 43832,
+      "comentarios": 1428,
+      "compartilhamentos": null,
+      "visualizacoes": 432733,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (02/12/2025) citava 244 mil visualizações em um vídeo de 30/11/2025."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel (GraphVideo), classificado como bastidor-founder por falta de formato de vídeo no schema. Fim de 2025. A dona, Erilene Neves, contou à PEGN a regra do torneio: https://revistapegn.globo.com/redes-sociais/noticia/2025/12/salao-de-beleza-maranhense-viraliza-com-karaoke-e-lanca-torneio-para-os-melhores-cantores.ghtml",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-45"
+  },
+  {
+    "rede": "instagram",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "🚨 ATENÇÃO PARA AS LETRAS MIÚDAS DA PROMOÇÃO: Se o Brasil perder para a Noruega, a gente paga a sua conta!",
+    "estrutura": [
+      "Bloco 1: alerta de letras miúdas e a promessa ousada",
+      "Bloco 2: 'Sim, você leu certo. Não, a gente não pensou muito bem nisso.'",
+      "Bloco 3: regras em lista: só vale para quem consumir no local",
+      "Bloco 4: o pedido precisa ser feito antes do jogo começar, e depois que a bola rolar não adianta chamar o VAR",
+      "Bloco 5: chamada para chegar cedo e reservar mesa pelo WhatsApp"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo com a equipe explicando a promoção",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pega carona num evento que o país inteiro acompanha (Copa) e cria uma aposta com risco real para o negócio. A autoironia ('a gente não pensou muito bem nisso') gera simpatia e mais de 5 mil comentários.",
+    "autor_ou_marca": "Croc Frangos Taquara (@crocfrangostaquara), Taquara (RS)",
+    "link_fonte": "https://www.instagram.com/p/DaWl6u2Az4x/",
+    "metricas": {
+      "curtidas": 36163,
+      "comentarios": 5029,
+      "compartilhamentos": null,
+      "visualizacoes": 867631,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (07/07/2026) diz que o anúncio soma dois milhões de visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel publicado dias antes de 05/07/2026; legenda e autor conferidos no embed. Classificado como lista porque a legenda é uma lista de regras. Matéria: https://revistapegn.globo.com/redes-sociais/noticia/2026/07/restaurante-que-prometeu-pagar-a-conta-dos-clientes-se-noruega-ganhasse-diz-que-quase-quebrou.ghtml. É promoção de preço, não promessa de resultado, então não fere a regra do nicho.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-46"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "POV: tu descobriu que a promoção era real… só depois que o jogo acabou. 😭😂",
+    "estrutura": [
+      "Bloco 1: POV de quem não acreditou na promoção",
+      "Bloco 2: relembra a promessa: se o Brasil perdesse, ninguém pagaria a conta",
+      "Bloco 3: 'O Brasil perdeu. Foi eliminado. E a conta chegou pra gente.'",
+      "Bloco 4: promessa é promessa: cumpriram e ninguém pagou nada",
+      "Bloco 5: 'Valeu a pena? Pro financeiro, não. Pra história, com certeza.' e pergunta para os comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo no salão do restaurante",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A continuação mostra a promessa cumprida mesmo com prejuízo, o que converte o viral em confiança na marca. Assumir o prejuízo em público humaniza o negócio e a pergunta final reabre a conversa.",
+    "autor_ou_marca": "Croc Frangos Taquara (@crocfrangostaquara)",
+    "link_fonte": "https://www.instagram.com/p/Dadg52TAePx/",
+    "metricas": {
+      "curtidas": 13047,
+      "comentarios": 398,
+      "compartilhamentos": null,
+      "visualizacoes": 218702,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (07/07/2026) fala em 491 mil visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Vídeo de 06/07/2026, dia seguinte à eliminação; legenda e autor conferidos no embed. Na PEGN, a marca diz: 'A Noruega quase quebrou o nosso restaurante'. Bom par com o item anterior, como viral em duas partes.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-47"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Queridos, se é experiência que vocês querem, podem ter certeza que eu tenho! 😂",
+    "estrutura": [
+      "Bloco 1: a advogada veterana em vídeo de humor jurídico, com bordões próprios",
+      "Bloco 2: piada sobre a própria idade e os anos de carreira",
+      "Bloco 3: virada na legenda: 'brincadeiras à parte, são muitos anos de profissão, dedicação, aprendizado constante'",
+      "Bloco 4: CTA leve: 'Se precisarem de uma advogada com experiência, é só me chamar!'"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo no escritório",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Faz da idade e da experiência, que costumam ser escondidas, o centro de um humor autodepreciativo. Mostra como uma profissão regulada cresce nas redes com CTA leve e sem prometer resultado.",
+    "autor_ou_marca": "Maria da Conceição Carcará (@conceicaocarcara.adv), advogada em Teresina (PI)",
+    "link_fonte": "https://www.instagram.com/p/DVI2Hublshw/",
+    "metricas": {
+      "curtidas": 478323,
+      "comentarios": 5556,
+      "compartilhamentos": null,
+      "visualizacoes": 2140295,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel embutido na matéria da PEGN de 15/06/2026: https://revistapegn.globo.com/redes-sociais/noticia/2026/06/com-divorcio-de-adao-e-eva-advogada-faz-sucesso-com-humor-juridico-nas-redes-e-impulsiona-negocio.ghtml. Legenda e autor conferidos no embed. Ex-promotora e ex-conselheira da OAB. Para advocacia, atenção às regras de publicidade da OAB: o post não promete resultado.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-48"
+  },
+  {
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Ideia criativa para hamburgueria 🍔",
+    "estrutura": [
+      "Bloco 1: resultado final: hambúrguer com ingredientes flutuando, que parece feito por IA",
+      "Bloco 2: bastidor: a equipe monta o lanche sobre uma mesa",
+      "Bloco 3: cada ingrediente é fotografado separadamente em posições diferentes",
+      "Bloco 4: montagem das camadas até formar a foto final, sem IA"
+    ],
+    "padrao_visual": {
+      "fundo": "estúdio de fotografia de comida",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Quem vê a foto pensa em IA, e o vídeo prova que é tudo artesanal. A curiosidade do 'como fizeram' segura até o fim e serve de modelo para qualquer restaurante mostrar o bastidor da própria foto de cardápio.",
+    "autor_ou_marca": "Pinha Studio (@pinhastudio), fotógrafo Thiago Pinheiro, para a El Bigodon Burger (Piracicaba, SP)",
+    "link_fonte": "https://www.instagram.com/p/DbMfX1QtieD/",
+    "metricas": {
+      "curtidas": 529006,
+      "comentarios": 1631,
+      "compartilhamentos": null,
+      "visualizacoes": 2189476,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (27/07/2026) fala em mais de 8,4 milhões de visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de julho de 2026; legenda e autor conferidos no embed. Matéria: https://revistapegn.globo.com/redes-sociais/noticia/2026/07/ideia-de-foto-sem-ia-para-hamburgueria-encanta-internet-parece-cena-do-chaves.ghtml. O autor é o estúdio fotográfico que atende a hamburgueria, não o restaurante; entra no nicho como bastidor de conteúdo para restaurante. Classificado como antes-depois (processo e resultado).",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-49"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "PRIMEIRA E ÚNICA CAFETERIA DE BRASÍLIA, QUE VOCÊ CONTROLA UMA ESCAVADEIRA 😱",
+    "estrutura": [
+      "Bloco 1: promessa de novidade única na cidade, em caixa alta",
+      "Bloco 2: clientes adultos operando miniescavadeiras no playground da cafeteria",
+      "Bloco 3: marcação do perfil da cafeteria (@obracafeinada) e do bairro (Taguatinga)",
+      "Bloco 4: preço promocional de R$ 20 por 30 minutos até 31 de janeiro, subindo para R$ 30 em fevereiro",
+      "Bloco 5: horário e endereço"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo no local com as máquinas em miniatura",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A parceria com um perfil de dicas locais leva a experiência inusitada ao público certo da cidade. O vídeo vende a brincadeira, não o café, e o preço com data de reajuste cria urgência.",
+    "autor_ou_marca": "O Melhor do Distrito (@omelhordodistrito) em parceria com a Obra Cafeinada, Taguatinga (DF)",
+    "link_fonte": "https://www.instagram.com/p/DT0O0qcESaD/",
+    "metricas": {
+      "curtidas": 183232,
+      "comentarios": 2646,
+      "compartilhamentos": null,
+      "visualizacoes": 2095139,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos no embed público do Instagram em 27/09/2026. A PEGN (05/02/2026) fala em 3,2 milhões de visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de 22/01/2026; legenda e autor conferidos no embed (a legenda começa com 'SE LIGA NA DESCRIÇÃO ⤵️' e o gancho vem logo depois). A PEGN diz que a cafeteria recebeu 690 pessoas em janeiro, contra cerca de 500 desde a abertura: https://revistapegn.globo.com/redes-sociais/noticia/2026/02/empresario-do-df-viraliza-com-cafeteria-que-tem-playgroud-com-miniveiculos-de-construcao.ghtml. O post é de um perfil de dicas, não do dono.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-50"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Se você chegou até nós por causa do tweet, seja muito bem-vindo. Nossa mesa está aberta para você ❤️",
+    "estrutura": [
+      "Bloco 1: imagem de boas-vindas do restaurante",
+      "Bloco 2: legenda que cita o tweet viral de um cliente",
+      "Bloco 3: convite afetivo: a mesa está aberta"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem do restaurante",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O restaurante responde rápido a um viral espontâneo de cliente e recebe o novo público com calor, em vez de só comemorar. Isso fecha o ciclo entre o post no X e a visita à loja.",
+    "autor_ou_marca": "Zaitona Shawerma Árabe (@zaitona_restaurante), São Paulo",
+    "link_fonte": "https://www.instagram.com/p/DcpZYonsure/",
+    "metricas": {
+      "curtidas": 1051,
+      "comentarios": 63,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e comentários lidos no embed público do Instagram em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Início de setembro de 2026; legenda e autor conferidos no embed (o original escreve 'bemvindo'). O viral original é um post no X de um cliente (29/08/2026) com foto do shawarma e da placa em que os donos palestinos contam que saíram de Gaza. Matéria: https://revistapegn.globo.com/redes-sociais/noticia/2026/09/restaurante-arabe-que-viralizou-nas-redes-e-de-palestinos-que-vieram-da-faixa-de-gaza-para-o-brasil-em-2025.ghtml. Engajamento baixo: vale como exemplo de resposta a viral, não como viral em si.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-51"
+  },
+  {
+    "rede": "instagram",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Nós estamos entregando até no esgoto, onde tu mora, viu? É só você pedir que a gente faz entrega aí no esgoto, tá bom?",
+    "estrutura": [
+      "Bloco 1: pergunta provocativa de um seguidor na tela ('entrega no Brasil ou só na Índia?')",
+      "Bloco 2: resposta sincerona da empreendedora, falando para a câmera enquanto produz geladinhos",
+      "Bloco 3: bastidor da produção dos geladinhos",
+      "Bloco 4: formato fixo de responder perguntas de seguidores, que vira marca do perfil"
+    ],
+    "padrao_visual": {
+      "fundo": "cozinha de produção caseira",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Responder provocação com humor ácido e sotaque próprio cria personagem e rende comentários até de grandes marcas (Mercado Livre e iFood comentaram). O formato de pergunta e resposta é repetível toda semana.",
+    "autor_ou_marca": "Mary Duarte (@maryduarteof), produtora de geladinhos",
+    "link_fonte": "https://www.instagram.com/p/DbTkhEtxzAJ/",
+    "metricas": {
+      "curtidas": 492742,
+      "comentarios": 9982,
+      "compartilhamentos": null,
+      "visualizacoes": 3348535,
+      "observacao": "Curtidas, comentários e visualizações (campo video_view_count) lidos nos dados do embed público do Instagram em 27/09/2026. A PEGN (30/07/2026) falava em 2,1 milhões de visualizações."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "O embed confirma autor e números, mas o post não tem legenda visível. A frase do gancho é falada no vídeo e foi transcrita pela PEGN, que embute este post: https://revistapegn.globo.com/redes-sociais/noticia/2026/07/empreendedora-e-elogiada-apos-resposta-sincerona-a-cliente-ate-no-esgoto-onde-tu-mora.ghtml. Fim de julho de 2026.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-52"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Morango O QUE??",
+    "estrutura": [
+      "Bloco 1: reação curta e em caixa alta",
+      "Bloco 2: print do cardápio do app de delivery com o erro 'morango escravejado'",
+      "Bloco 3: comentários criam apelidos para o doce e o erro vira meme"
+    ],
+    "padrao_visual": {
+      "fundo": "print de tela do app de delivery",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um erro de digitação no doce da moda (morango cravejado) vira piada coletiva. Mostra como um detalhe do cardápio no app viraliza sem o dono saber, e como a dona pode transformar o erro em nomes criativos.",
+    "autor_ou_marca": "@97sblonded (cliente), sobre a confeitaria ARTMYBE Gourmet (Rio de Janeiro)",
+    "link_fonte": "https://revistapegn.globo.com/redes-sociais/noticia/2026/09/morango-escravejado-erro-de-digitacao-de-confeitaria-carioca-em-plataforma-de-delivery-diverte-a-web.ghtml",
+    "metricas": {
+      "curtidas": 53000,
+      "comentarios": 292,
+      "compartilhamentos": null,
+      "visualizacoes": 507700,
+      "observacao": "Números citados pela PEGN em 18/09/2026, página conferida em 27/09/2026. O tweet não foi aberto."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Post no X de 16/09/2026. Autor e frase conferidos na PEGN, mas sem o link do tweet: a busca web está esgotada e o endpoint de perfil do X devolveu 429. A dona, Tatiane Alves, disse à PEGN que corrigiu o nome e vai adotar nomes criativos.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-53"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Poucas coisas tiraram tanto meu juízo nos últimos meses quanto esse DIABO dessa pizzaria que simplesmente decidiu colocar o nome de todos os sabores de pizza começando com T",
+    "estrutura": [
+      "Bloco 1: desabafo exagerado em primeira pessoa",
+      "Bloco 2: prints do cardápio com Tuçarela, Talabresa e outros sabores renomeados com T",
+      "Bloco 3: nos comentários, o público se divide entre achar genial e irritante"
+    ],
+    "padrao_visual": {
+      "fundo": "prints do cardápio no app",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um cardápio com uma regra absurda e consistente (tudo com T) cria o gatilho de 'amo ou odeio' que faz o público discutir. Para o negócio, é branding feito só com o nome dos produtos.",
+    "autor_ou_marca": "@haveyoumetklev (cliente), sobre a pizzaria Trusta (SC)",
+    "link_fonte": "https://revistapegn.globo.com/redes-sociais/noticia/2026/08/tucarela-e-talabresa-menu-de-pizzaria-em-sc-viraliza-por-renomear-todos-os-sabores-para-comecar-com-t.ghtml",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": 633400,
+      "observacao": "Visualizações citadas pela PEGN em 24/08/2026, página conferida em 27/09/2026. O tweet não foi aberto."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Post no X de 23/08/2026. Frase e autor conferidos na PEGN, sem o link do tweet (busca esgotada, perfil do X com erro 429). Os nomes Tombinho Canadense e Trócolis com alho da versão anterior não foram conferidos e saíram da estrutura.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-54"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "\"O pedido veio todo errado.\" Resposta da pizzaria: \"MEU DEUS\"",
+    "estrutura": [
+      "Bloco 1: print do chat do app de delivery entre cliente e pizzaria",
+      "Bloco 2: o cliente reclama, a loja pergunta o que houve e, ao ver as fotos, responde só 'MEU DEUS'",
+      "Bloco 3: a sequência da conversa mostra a loja tentando resolver",
+      "Bloco 4: nos comentários, o público elogia a naturalidade do atendimento"
+    ],
+    "padrao_visual": {
+      "fundo": "print do chat do aplicativo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Na era dos bots e respostas padronizadas, uma reação humana e sincera do atendente parece autêntica e engraçada. Mostra que o tom de voz no atendimento vira conteúdo e reputação.",
+    "autor_ou_marca": "@ojuttel (cliente), sobre uma pizzaria não identificada",
+    "link_fonte": "https://revistapegn.globo.com/redes-sociais/noticia/2026/07/reacao-de-restaurante-a-reclamacao-de-pedido-errado-de-cliente-em-chat-de-app-viraliza-meu-deus.ghtml",
+    "metricas": {
+      "curtidas": null,
+      "comentarios": null,
+      "compartilhamentos": null,
+      "visualizacoes": 2800000,
+      "observacao": "Visualizações (mais de 2,8 milhões) citadas pela PEGN em 14/07/2026, página conferida em 27/09/2026. O tweet não foi aberto."
+    },
+    "status": "a verificar",
+    "notas_curadoria": "Julho de 2026. O gancho é o conteúdo do print descrito pela PEGN, não a legenda do autor, que não foi vista. Sem link do tweet (busca esgotada, perfil do X com erro 429). Os detalhes de motoboy e cinco estrelas da versão anterior não foram conferidos e saíram da estrutura.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-55"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Encomende seu bolo de cordeiro para a Páscoa! Hoje é o último dia para fazer pedidos.",
+    "estrutura": [
+      "Bloco 1: imagem (gerada por IA, como pegadinha de 1º de abril) de um bolo de cordeiro grotesco",
+      "Bloco 2: legenda séria de venda com sabores: chocolate, baunilha, amêndoa e limão",
+      "Bloco 3: prazo de pedido, horários de retirada e endereço em Westland",
+      "Bloco 4: nos comentários, o público reage entre riso e horror"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto (IA) em fundo de padaria",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O choque entre uma imagem absurda e uma legenda de venda totalmente séria cria a dúvida 'é sério?' e mais de 4 mil comentários. A padaria depois transformou a piada em produto real.",
+    "autor_ou_marca": "Homestead Kitchen Artisan Cakery (@homesteadcakelady), Westland, região de Detroit, EUA",
+    "link_fonte": "https://www.instagram.com/p/DWlp8P9DyzB/",
+    "metricas": {
+      "curtidas": 66390,
+      "comentarios": 4476,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e comentários lidos no embed público do Instagram em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'Order your lamb cake for Easter! Today is the last day to place orders. Choose from chocolate, vanilla, wedding almond, or lemon.' Post de 01/04/2026, legenda e autor conferidos no embed. Matéria: https://revistapegn.globo.com/redes-sociais/noticia/2026/04/bolo-de-pascoa-horripilante-de-ia-criado-para-o-dia-da-mentira-viraliza-e-padaria-transforma-em-produto-real.ghtml. Atenção: usar imagem de IA como produto pode confundir clientes; aqui era piada declarada depois.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-56"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Feliz Páscoa! E que Páscoa estranha foi essa, aqui na padaria. O que começou como uma pegadinha de 1º de abril virou um fenômeno internacional, com mais de 4 milhões de visualizações, um fim de semana esgotado e risadas sem fim.",
+    "estrutura": [
+      "Bloco 1: saudação de Páscoa e reconhecimento de que a semana foi estranha",
+      "Bloco 2: o número: mais de 4 milhões de visualizações e fim de semana esgotado",
+      "Bloco 3: convite para ler os comentários do post de 1º de abril",
+      "Bloco 4: agradecimento à comunidade ('vocês são estranhos e a gente ama')",
+      "Bloco 5: FAQ: sim, o cordeiro volta ano que vem; não, nossos bolos normalmente não são assim"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do bolo real",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fecha o ciclo do viral com números concretos e transforma a confusão em pertencimento. O FAQ antecipa dúvidas e já planta a venda do ano seguinte ('comece a planejar agora').",
+    "autor_ou_marca": "Homestead Kitchen Artisan Cakery (@homesteadcakelady)",
+    "link_fonte": "https://www.instagram.com/p/DWwcaS5jzI1/",
+    "metricas": {
+      "curtidas": 3833,
+      "comentarios": 129,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e comentários lidos no embed público do Instagram em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'Happy Easter! And what a strange one it was, here at the bakery. What started as an April Fool's joke, turned into an international sensation, with over 4 million views, a sell-out weekend, and endless laughs.' Post de 05/04/2026, legenda e autor conferidos no embed. Continuação do item anterior.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-57"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "\"Por favor, controlem seus filhos\" 👀 Visto no cardápio de um restaurante chinês local em SF.",
+    "estrutura": [
+      "Bloco 1: citação do aviso entre aspas e emoji de olhos",
+      "Bloco 2: contexto curto: onde foi visto",
+      "Bloco 3: fotos do cardápio com o aviso 'não somos um parquinho' e a lista de multas já cobradas (ex.: US$ 327,03 por uma maquininha de cartão quebrada)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do cardápio",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma regra da casa com valores reais de multas divide opiniões e parece corajosa. O público que apoia defende o restaurante nos comentários, e o dono diz que os incidentes diminuíram.",
+    "autor_ou_marca": "@raymmar (cliente), sobre o restaurante Chez Xue (Foster City, Califórnia)",
+    "link_fonte": "https://x.com/raymmar/status/2071331926410174687",
+    "metricas": {
+      "curtidas": 17026,
+      "comentarios": 226,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e respostas lidas na API pública de embed do X em 27/09/2026. A PEGN (08/07/2026) diz que o post passou de 1 milhão de visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: '\"Please control your children\" 👀 Spotted on a local Chinese restaurant menu in SF.' Tweet de 28/06/2026, texto e autor conferidos. Nome do restaurante, cidade e multa de US$ 327,03 conferidos na PEGN: https://revistapegn.globo.com/redes-sociais/noticia/2026/07/restaurante-gera-polemica-ao-multar-pais-por-estragos-causados-pelos-filhos-nao-e-um-parquinho.ghtml. Também coberto pelo NY Post: https://nypost.com/2026/07/07/lifestyle/bay-area-restaurant-chez-xue-fines-parents-of-unruly-kids/",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-58"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Lago de carpas no buffet chinês é uma das coisas mais ridículas que já vi.",
+    "estrutura": [
+      "Bloco 1: opinião forte em uma linha",
+      "Bloco 2: foto do lago de carpas no chão do restaurante, com cachoeira e piso rachado",
+      "Bloco 3: comentários com outros exemplos e confirmação de que o lugar existe"
+    ],
+    "padrao_visual": {
+      "fundo": "foto amadora do salão",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Uma foto inesperada do ambiente com uma opinião exagerada vira debate e gera respostas do tipo 'no meu estado também tem'. Mostra o poder do espaço físico como conteúdo, para o bem e para o mal.",
+    "autor_ou_marca": "Phillip Thurgood (@barbourlover), sobre o China Buffet (Tennessee, EUA)",
+    "link_fonte": "https://x.com/barbourlover/status/1882907638079643948",
+    "metricas": {
+      "curtidas": 176786,
+      "comentarios": 739,
+      "compartilhamentos": null,
+      "visualizacoes": 7000000,
+      "observacao": "Curtidas e respostas lidas na API pública de embed do X em 27/09/2026. As visualizações (mais de 7 milhões) vêm da PEGN de 27/01/2025, conferida em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'Chinese buffet koi pond is one of the more ridiculous things I’ve ever seen.' Tweet de 24/01/2025, texto e autor conferidos; a PEGN embute este ID: https://revistapegn.globo.com/redes-sociais/noticia/2025/01/lago-de-carpas-em-chao-de-restaurante-viraliza-uma-das-coisas-mais-ridiculas-que-ja-vi.ghtml. Viral de cliente, nem sempre positivo para o negócio.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-59"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "café iraniano, você é um divo",
+    "estrutura": [
+      "Bloco 1: legenda curta e afetiva",
+      "Bloco 2: foto do quadro de regras do café em lista: não flertar com o caixa, não pedir desconto, não discutir jogos de azar, entre outras",
+      "Bloco 3: nos comentários, o público escolhe sua regra favorita e imagina a história por trás de cada uma"
+    ],
+    "padrao_visual": {
+      "fundo": "foto da placa com as regras da casa",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Regras da casa escritas com personalidade funcionam como lista pronta para comentar. Cada 'não' sugere uma história por trás, o que gera curiosidade e identificação.",
+    "autor_ou_marca": "@saysomethingsus (cliente), sobre o Irani Cafe (Pune, Índia)",
+    "link_fonte": "https://x.com/saysomethingsus/status/1876208648315342997",
+    "metricas": {
+      "curtidas": 3797,
+      "comentarios": 72,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Curtidas e respostas lidas na API pública de embed do X em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: 'irani cafe you diva'. Tweet de 06/01/2025, texto e autor conferidos. Coberto pelo Terra em 10/01/2025 (não reaberto nesta verificação): https://www.terra.com.br/vida-e-estilo/degusta/cafeteria-viraliza-com-aviso-inusitado-aos-clientes-nao-flertar-com-o-caixa,20e14eec3b9d4daef6a8d63c71fd9beeytwnm4f6.html. As regras listadas vêm da cobertura, não da imagem. Engajamento menor que o dos outros itens.",
+    "nicho": "servicos-locais",
+    "id": "servicos-locais-60"
+  }
+]
