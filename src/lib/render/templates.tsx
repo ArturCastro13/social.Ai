@@ -198,26 +198,33 @@ function palavraComKern(palavra: string, fs: number) {
   return (
     <div style={{ display: "flex" }}>
       <div>{m[1]}</div>
-      <div style={{ marginLeft: -fs * 0.13 }}>{m[2]}</div>
+      <div style={{ marginLeft: -fs * 0.05 }}>{m[2]}</div>
     </div>
   );
 }
 
 function TituloCreator({ texto, destaque, fs, cor, marca, lh = 0.98 }: { texto: string; destaque?: string | null; fs: number; cor: string; marca: string; lh?: number }) {
+  const palavras = marcarDestaque(texto, destaque);
+  const gap = fs * 0.24;
+  const pad = fs * 0.05;
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", columnGap: fs * 0.24, rowGap: fs * 0.06, fontFamily: "Titulo", fontSize: fs, lineHeight: lh, color: cor, letterSpacing: -fs * 0.035 }}>
-      {marcarDestaque(texto, destaque).map((w, i) => (
-        <div
-          key={i}
-          style={
-            w.marcada
-              ? { display: "flex", backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 50%, ${marca} 50%, ${marca} 94%, rgba(0,0,0,0) 94%)`, padding: `0 ${fs * 0.05}px`, margin: `0 ${-fs * 0.05}px` }
-              : { display: "flex" }
-          }
-        >
-          {palavraComKern(w.palavra, fs)}
-        </div>
-      ))}
+    <div style={{ display: "flex", flexWrap: "wrap", columnGap: gap, rowGap: fs * 0.06, fontFamily: "Titulo", fontSize: fs, lineHeight: lh, color: cor, letterSpacing: -fs * 0.035 }}>
+      {palavras.map((w, i) => {
+        // Palavra marcada seguida de outra marcada: o marca-texto cobre também o espaço entre elas.
+        const direita = pad + (w.marcada && palavras[i + 1]?.marcada ? gap : 0);
+        return (
+          <div
+            key={i}
+            style={
+              w.marcada
+                ? { display: "flex", backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 50%, ${marca} 50%, ${marca} 94%, rgba(0,0,0,0) 94%)`, padding: `0 ${direita}px 0 ${pad}px`, margin: `0 ${-direita}px 0 ${-pad}px` }
+                : { display: "flex" }
+            }
+          >
+            {palavraComKern(w.palavra, fs)}
+          </div>
+        );
+      })}
     </div>
   );
 }
