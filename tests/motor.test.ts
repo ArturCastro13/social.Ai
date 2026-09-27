@@ -15,7 +15,7 @@ vi.mock("@/lib/store", () => ({
 
 import { DEMOS } from "@/lib/engine/demo";
 import { analiseLocal } from "@/lib/engine/local";
-import { analiseIASchema } from "@/lib/engine/schema";
+import { analiseIASchema, postDaSaida } from "@/lib/engine/schema";
 import { analisar, chaveCache, finalizar, hashPreferencias } from "@/lib/engine";
 import type { Analise, BrandProfile } from "@/lib/types";
 import { doresDoSite, publicoAlvoDoSite, REVISAR_PUBLICO } from "@/lib/motor/enderecamento";
@@ -24,7 +24,7 @@ import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
 import { itensDoArquivo } from "@/lib/virais";
 import { preferenciasSchema } from "@/lib/motor/contrato";
 import { montarContexto, ogDoHtml } from "@/lib/motor/contexto";
-import { aplicarExtras, legendasPorRede, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor/saida";
+import { aplicarExtras, contextoDosPosts, legendasPorRede, postDoMotor, postMotorSchema, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor/saida";
 import { filtrarLocal, termosProibidos, violaProibicao } from "@/lib/motor/local-filtros";
 import { brandParaInferencia, inferirSugestoes, tomDoSite } from "@/lib/motor/inferir";
 import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
@@ -35,7 +35,7 @@ const catalogo = construirCatalogo(itensDoArquivo());
 const CHAVES_CONTEXTO = [
   "perfil_alvo", "publico_alvo", "conhecimento_founder", "empresa", "founder", "nicho", "objetivos", "objetivo_livre", "tom_de_voz", "formatos_permitidos", "frequencia_escolhida", "redes",
   "proibicoes", "inspiracoes", "concorrencia", "desempenho_proprio", "aprendizados_calculados", "insights_audiencia", "referencias_nicho", "benchmarks_publicacao", "noticias",
-  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho", "hoje",
+  "historico_preferencias", "quantidade_posts", "mercado_pesquisado", "em_alta_no_nicho", "virais_ao_vivo", "hoje",
 ];
 
 describe("montarContexto", () => {
@@ -55,6 +55,7 @@ describe("montarContexto", () => {
     expect(c.concorrencia).toEqual([]);
     expect(c.mercado_pesquisado).toBeNull();
     expect(c.em_alta_no_nicho).toEqual([]);
+    expect(c.virais_ao_vivo).toEqual([]);
     expect(c.aprendizados_calculados).toEqual({ n_posts: 0, mediana_engajamento_pct: null, por_formato: [], por_origem_tema: [], por_padrao: [], por_rede: [] });
     expect(c.historico_preferencias).toEqual({ aprovados: [], recusados: [] });
     // Nunca inventa horário.
@@ -275,7 +276,7 @@ describe("cache com preferências", () => {
   it("a chave muda com as preferências e é estável", () => {
     const a = preferenciasSchema.parse({ perfil_alvo: "founder" });
     const b = preferenciasSchema.parse({ perfil_alvo: "empresa" });
-    expect(chaveCache("https://cora.com.br")).toBe("cora.com.br");
+    expect(chaveCache("https://cora.com.br")).toBe("v2:cora.com.br");
     expect(chaveCache("https://cora.com.br", a)).not.toBe(chaveCache("https://cora.com.br", b));
     expect(chaveCache("https://cora.com.br", a)).toBe(chaveCache("https://www.cora.com.br/", preferenciasSchema.parse({ perfil_alvo: "founder" })));
     expect(hashPreferencias(a)).toHaveLength(12);
@@ -389,5 +390,48 @@ describe("objetivo endereçado", () => {
     expect(a.posts[0].enderecamento?.objetivo).toBe("autoridade_founder");
     expect(a.posts[1].enderecamento?.objetivo).toBe("autoridade_founder");
     expect(a.posts.every((p) => p.precisa_revisao?.includes(REVISAR_PUBLICO))).toBe(true);
+  });
+});
+
+describe("postDoMotor", () => {
+  const cru = (extra: Record<string, unknown> = {}) =>
+    postMotorSchema.parse({ rede: "instagram", formato: "carrossel", gancho: "Gancho forte", slides_ou_arte: [{ titulo: "Gancho forte", texto: "" }], legenda: "Legenda", ...extra });
+
+  it("perfil ambos alterna o trilho quando o modelo não manda", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 3, redes: ["instagram"], preferencias: preferenciasSchema.parse({ perfil_alvo: "ambos" }) });
+    const a = postDoMotor(cru(), 0, [], c);
+    const b = postDoMotor(cru(), 1, [a.extras.trilho ?? "empresa"], c);
+    expect([a.extras.trilho, b.extras.trilho]).toEqual(["founder", "empresa"]);
+    expect(a.post.template).toBe("capa-gancho");
+  });
+
+  it("postDaSaida dá id da análise e template válido", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const { post } = postDoMotor(cru(), 0, [], c);
+    const final = postDaSaida(post, "abc", 0);
+    expect(final.id).toBe("abc-p1");
+    expect(final.legendas.instagram).toContain("Legenda");
+  });
+
+  it("leva padrão viral, destaque que existe no título e direção da capa", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const p = cru({
+      slides_ou_arte: [{ titulo: "Por que seus alunos somem antes do 3º mês", texto: "" }],
+      padrao_viral: { nome: "erro invisível", origem: "ao_vivo" },
+      destaque: "antes do 3º mês",
+      direcao_capa: { cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d" },
+    });
+    const { extras } = postDoMotor(p, 0, [], c);
+    expect(extras.padrao_viral).toEqual({ nome: "erro invisível", origem: "ao_vivo" });
+    expect(extras.destaque).toBe("antes do 3º mês");
+    expect(extras.direcao_capa).toEqual({ cena: "Dancers fading into mist at practice bars", estilo: "ilustracao-3d" });
+  });
+
+  it("destaque que não está no título sai; campos ruins não derrubam o post", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const { extras } = postDoMotor(cru({ destaque: "outra coisa", padrao_viral: "x", direcao_capa: 3 }), 0, [], c);
+    expect(extras.destaque).toBeUndefined();
+    expect(extras.padrao_viral).toBeUndefined();
+    expect(extras.direcao_capa).toBeUndefined();
   });
 });

@@ -5,6 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import type { Decisao, ResultadoPost } from "@/lib/feedback";
 import type { Analise, ViralItem } from "@/lib/types";
+import { IDS_NICHO } from "@/lib/types";
 
 export interface Lead {
   email: string;
@@ -310,7 +311,7 @@ function localStore(): Store {
     async listarVirais() {
       // Em dev, lê os arquivos do repositório de novo para refletir o que o /admin acabou de salvar.
       if (naVercel) return ler<ViralItem>("virais");
-      const nichos = ["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"];
+      const nichos = [...IDS_NICHO];
       const listas = await Promise.all(
         nichos.map(async (n) => {
           try {

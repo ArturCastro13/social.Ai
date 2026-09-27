@@ -460,5 +460,1589 @@
     },
     "status": "a verificar",
     "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. A fonte foi encontrada via busca (título confirma o uso de memes e humor), mas a página retornou bloqueio ao abrir. Não há post específico com métrica verificada."
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A próxima onda de HealthTech vai ser chata. É por isso que ela vai vencer.",
+    "estrutura": [
+      "Bloco 1: Frase curta e provocativa em duas linhas (a próxima onda será chata, e por isso vence)",
+      "Bloco 2: Contexto: mais de uma década de ciclos de hype (diagnóstico por IA, terapias digitais, gêmeos digitais)",
+      "Bloco 3: Diagnóstico: os sistemas falham porque o que existe não se conecta (dados em silos, prontuários que não conversam, falta de interoperabilidade)",
+      "Bloco 4: Virada: a próxima fase parece menos invenção e mais reconstrução; confiabilidade vale mais que novidade",
+      "Bloco 5: Quem vence: quem conserta as camadas invisíveis (integração, confiança, padronização, governança de dados)",
+      "Bloco 6: Fecho em frase curta: em saúde, progresso é o que finalmente funciona",
+      "Bloco 7: Documento de 11 páginas anexado com a mesma tese"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 11 páginas anexado ao post",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Inverte a expectativa do setor (todo mundo vende disrupção, ele elogia o chato) e depois entrega um diagnóstico que qualquer operador de saúde reconhece. As frases curtas em linhas separadas seguram a leitura até o documento.",
+    "autor_ou_marca": "Kevin McDonnell (consultor e ex-executivo de HealthTech, Reino Unido)",
+    "link_fonte": "https://www.linkedin.com/posts/kevinmcdonnell_the-next-healthtech-wave-will-be-boring-activity-7385215834857832448-Bdtu",
+    "metricas": {
+      "curtidas": 474,
+      "comentarios": 79,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 474 reações e 79 comentários. Compartilhamentos e visualizações não aparecem."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"The next HealthTech wave will be boring. That's why it'll win.\" Publicado em 18/10/2025. Documento anexado: \"The next HealthTech wave will be boring\", 11 páginas. Texto e autor conferidos na fonte.",
+    "nicho": "healthtech",
+    "id": "healthtech-15"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "HealthTech fracassa pelo mesmo motivo simples. Ela resiste ao contexto do fluxo de trabalho.",
+    "estrutura": [
+      "Bloco 1: Afirmação de causa única para o fracasso das healthtechs",
+      "Bloco 2: A crença comum que ele ataca: primeiro construir ótima tecnologia, depois focar em adoção",
+      "Bloco 3: Tese: adoção não é uma etapa, é o acúmulo de milhares de pequenas decisões de design desde o primeiro dia",
+      "Bloco 4: Exemplos concretos: um algoritmo que adiciona dez segundos a cada atendimento vira fardo; um recurso de compliance que complica o prontuário é contornado em silêncio",
+      "Bloco 5: O que fazer: começar pelo fluxo e não pelo wireframe, cocriar com clínicos, medir usabilidade junto com desfecho",
+      "Bloco 6: Fecho: adoção não é marco depois do sucesso, é a própria medida do sucesso",
+      "Bloco 7: Documento de 12 páginas anexado"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 12 páginas anexado ao post",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nomeia um erro que investidores e founders repetem e o desmonta com o exemplo dos dez segundos de atrito por atendimento, fácil de visualizar. Quem trabalha com clínicas se reconhece e comenta.",
+    "autor_ou_marca": "Kevin McDonnell",
+    "link_fonte": "https://www.linkedin.com/posts/kevinmcdonnell_build-healthtech-that-gets-used-activity-7385578216893095936-JXzu",
+    "metricas": {
+      "curtidas": 118,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 118 reações e 24 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"HealthTech fails for the same simple reason. They resist workflow context.\" Publicado em 19/10/2025. Documento anexado: \"Build HealthTech that get's used\", 12 páginas.",
+    "nicho": "healthtech",
+    "id": "healthtech-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Percebi que a maioria dos founders de HealthTech acha que inovação é o seu diferencial. Na prática, quase nunca é.",
+    "estrutura": [
+      "Bloco 1: Quebra de crença: inovação raramente é o diferencial",
+      "Bloco 2: O que falta não é brilho técnico, é tradução da pesquisa para adoção real no NHS",
+      "Bloco 3: Os problemas mais difíceis são organizacionais: compras que priorizam custo unitário, financiamento, cultura",
+      "Bloco 4: Dados: quase um terço dos fornecedores evita licitações do NHS; mais de 70% dos líderes de trusts citam restrição financeira como principal barreira",
+      "Bloco 5: Conclusão: o sucesso não é qualidade da inovação, é domínio do sistema",
+      "Bloco 6: P.S. com convite para founders chamarem por DM",
+      "Bloco 7: Documento de 11 páginas anexado"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 11 páginas anexado ao post",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Começa com uma observação pessoal que contraria o orgulho do público (founders) e sustenta com números de mercado. Adaptável ao Brasil trocando NHS por operadoras e SUS.",
+    "autor_ou_marca": "Kevin McDonnell",
+    "link_fonte": "https://www.linkedin.com/posts/kevinmcdonnell_the-real-healthtech-revolution-activity-7386061449812447232-4g7k",
+    "metricas": {
+      "curtidas": 68,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 68 reações e 14 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"I've found that most HealthTech founders assume innovation is their differentiator. In practice, it rarely is.\" Publicado em 20/10/2025. Documento: \"The Real HealthTech Revolution\", 11 páginas. Números citados são do autor, não checados de forma independente.",
+    "nicho": "healthtech",
+    "id": "healthtech-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Médicos não resistem à inovação porque não gostam de tecnologia. Resistem porque a maioria das tecnologias ignora o lado humano do trabalho deles.",
+    "estrutura": [
+      "Bloco 1: Aviso de repost (compartilhando porque diz uma verdade pouco dita)",
+      "Bloco 2: Inversão da crença de que médico é avesso à tecnologia",
+      "Bloco 3: Conceito próprio nomeado (Humanology: onde empatia encontra implementação)",
+      "Bloco 4: Checagem de realidade com dados dos apps prescritos na Alemanha (DiGA): 56 apps listados, só 31% dos médicos já prescreveram, 12,6% de uso entre pacientes em uma especialidade",
+      "Bloco 5: Conclusão: o que importa é encaixe com fluxo, confiança e comportamento sob pressão, e educação de todos os envolvidos",
+      "Bloco 6: Documento de 11 páginas compartilhado (de Kevin McDonnell)"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 11 páginas compartilhado no repost",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Defende o público clínico contra um estereótipo, o que gera identificação e comentários de profissionais de saúde. Os números de adoção criam a tensão entre infraestrutura pronta e uso baixo.",
+    "autor_ou_marca": "Urška Bux",
+    "link_fonte": "https://www.linkedin.com/posts/urskabux_clinicians-dont-want-your-healthtech-solution-activity-7386682516755251201-D4Sb",
+    "metricas": {
+      "curtidas": 85,
+      "comentarios": 18,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 85 reações e 18 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Clinicians don't resist innovation because they dislike technology. They resist because most technology ignores the human side of their work.\" Publicado em 22/10/2025. É repost comentado: o documento compartilhado (\"Clinicians don't want your HealthTech solution\", 11 páginas) é de Kevin McDonnell; o texto de legenda é da Urška.",
+    "nicho": "healthtech",
+    "id": "healthtech-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Existe uma expressão que circula no mundo healthtech: \"morte por piloto\".",
+    "estrutura": [
+      "Bloco 1: Apresenta um jargão do setor que todos reconhecem",
+      "Bloco 2: Explica a queixa comum (pilotos sem recurso, sem intenção de contrato)",
+      "Bloco 3: Virada: se o produto não aguenta um piloto no caos do cuidado real, por que alguém confiaria seus pacientes a ele?",
+      "Bloco 4: Como a empresa faz: pilotos gratuitos, rigorosos e inegociáveis, incluindo de propósito uma unidade com dificuldade",
+      "Bloco 5: Fecho com gratidão (ser aceito para um piloto é uma honra) e admissão de medo",
+      "Bloco 6: \"Fim do desabafo\" e pedido de experiências nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao post",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega uma reclamação coletiva do setor e toma o lado oposto com argumento ético (segurança do paciente). A founder mostra método próprio e termina pedindo relatos, o que abre debate.",
+    "autor_ou_marca": "Jenna Tregarthen (cofundadora, healthtech de saúde mental)",
+    "link_fonte": "https://www.linkedin.com/posts/jenna-tregarthen-2075a21a_theres-a-phrase-that-floats-around-in-healthtech-activity-7389296203206885377-RG5f",
+    "metricas": {
+      "curtidas": 37,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 37 reações e 7 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"There's a phrase that floats around in healthtech circles: 'death by pilot.'\" Publicado em 29/10/2025. Engajamento modesto, mas gancho e estrutura muito reaproveitáveis. Não vi o conteúdo da imagem.",
+    "nicho": "healthtech",
+    "id": "healthtech-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Seu melhor engenheiro acabou de terminar um sprint brutal de 14 horas. Ele entra no portal de benefícios e vê um lembrete gentil para \"respirar fundo dez vezes\" num app de meditação.",
+    "estrutura": [
+      "Bloco 1: Cena concreta em segunda pessoa (sprint de 14 horas e lembrete de respiração)",
+      "Bloco 2: Metáfora de choque: é o equivalente corporativo de pôr um band-aid numa perna quebrada",
+      "Bloco 3: Frase de efeito: não dá para meditar para sair de uma semana de 80 horas",
+      "Bloco 4: Nomeia o problema: meia dúzia de apps desconectados geram fadiga de benefícios e engajamento de um dígito",
+      "Bloco 5: Chamada para a edição da newsletter Wellness Pulse sobre a biologia do burnout e a consolidação da estratégia de bem-estar"
+    ],
+    "padrao_visual": {
+      "fundo": "card de artigo da newsletter anexado",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma cena que o gestor de RH reconhece e ridiculariza o benefício superficial, sem fazer promessa clínica. A crítica ao próprio mercado de bem-estar dá credibilidade à marca.",
+    "autor_ou_marca": "Wellhub (antigo Gympass)",
+    "link_fonte": "https://www.linkedin.com/posts/wellhub_stop-prescribing-meditation-apps-for-80-hour-activity-7508574291739779072-6sTX",
+    "metricas": {
+      "curtidas": 28,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 28 reações e 3 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Your top engineer just finished a brutal 14-hour sprint. They log into your benefits portal and see a gentle reminder to 'take ten deep breaths' on a standalone meditation app.\" Publicado em 23/09/2026. Artigo anexado: \"Stop Prescribing Meditation Apps for 80-Hour Workweeks\". Empresa de origem brasileira, post global em inglês.",
+    "nicho": "healthtech",
+    "id": "healthtech-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Toda grande trajetória começa com um primeiro passo. A do Ricardo começou em 2018, quando ele entrou na Beep como motorista.",
+    "estrutura": [
+      "Bloco 1: Frase universal de abertura sobre primeiro passo",
+      "Bloco 2: Personagem real com ponto de partida humilde (motorista em 2018)",
+      "Bloco 3: Arco de transformação: da operação à Coordenação de Suporte na área de Tecnologia",
+      "Bloco 4: Moral da empresa: pessoas e empresa evoluem juntas",
+      "Bloco 5: Pergunta ao leitor (a próxima história pode ser a sua) e link de vagas",
+      "Bloco 6: Documento de 5 páginas com a história"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 5 páginas anexado ao post",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "História de ascensão interna com personagem real gera orgulho da equipe e comentários de colegas. O arco de motorista para tecnologia é curto e crível, e a pergunta final transforma o leitor em candidato.",
+    "autor_ou_marca": "Beep Saúde",
+    "link_fonte": "https://www.linkedin.com/posts/beepsaude_carreiras-que-inspiram-activity-7487929241590743040-ba_V",
+    "metricas": {
+      "curtidas": 187,
+      "comentarios": 18,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 187 reações e 18 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 28/07/2026. Documento \"Carreiras que inspiram!\", 5 páginas. Uso de rosto presumido pelo tema (história do colaborador); não vi as páginas do documento.",
+    "nicho": "healthtech",
+    "id": "healthtech-21"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "No 2º trimestre de 2026, a Dasa seguiu avançando em seu processo de turnaround, com crescimento de EBITDA, forte geração de caixa e redução da dívida líquida.",
+    "estrutura": [
+      "Bloco 1: Resultado do trimestre em uma frase (EBITDA, caixa, dívida)",
+      "Bloco 2: Leitura estratégica: foco em eficiência, crescimento sustentável e core business",
+      "Bloco 3: Visão de longo prazo ligada à missão de transformar o cuidado com a saúde no Brasil",
+      "Bloco 4: Documento de 5 páginas com os destaques do trimestre"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 5 páginas anexado ao post",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Texto de três frases que resume o trimestre e deixa os números para o documento, formato que o LinkedIn recompensa com tempo de permanência. A palavra turnaround sinaliza virada para investidores e mercado.",
+    "autor_ou_marca": "Dasa",
+    "link_fonte": "https://www.linkedin.com/posts/dasa_2%C2%BA-trimestre-de-2026-dasa-activity-7494145196121780225-Z8bu",
+    "metricas": {
+      "curtidas": 138,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 138 reações e 2 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 14/08/2026. Documento \"2º trimestre de 2026 - Dasa\", 5 páginas. Contraste alto não conferido (não vi as páginas). Modelo útil para founder que divulga resultado: legenda enxuta e números no documento.",
+    "nicho": "healthtech",
+    "id": "healthtech-22"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "\"É culpa do estagiário\" ser protagonista da própria carreira!",
+    "estrutura": [
+      "Bloco 1: Subverte o meme corporativo \"a culpa é do estagiário\"",
+      "Bloco 2: Valor da empresa: ideias que não ficam no papel",
+      "Bloco 3: Gancho de data (Dia do Estagiário) e personagem real (Nathália Marques) convidada a contar a trajetória",
+      "Bloco 4: O que a história mostra: encarar o desconhecido com frio na barriga, assumir responsabilidade",
+      "Bloco 5: Chamada explícita: confira o carrossel",
+      "Bloco 6: Documento de 4 páginas com a trajetória"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 4 páginas anexado ao post",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pega um meme que todo profissional brasileiro conhece e vira o sentido para o positivo, o que gera sorriso e clique. A história em primeira pessoa humaniza um plano de saúde.",
+    "autor_ou_marca": "Sami (plano de saúde)",
+    "link_fonte": "https://www.linkedin.com/posts/samisaude_dia-do-estagi%C3%A1rio-activity-7498087834508214273-ebzR",
+    "metricas": {
+      "curtidas": 36,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 36 reações e 8 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 25/08/2026. Documento \"Dia do Estagiário\", 4 páginas. Uso de rosto presumido pelo tema; não vi as páginas do documento.",
+    "nicho": "healthtech",
+    "id": "healthtech-23"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "\"Estar próximo com relevância de conteúdo\"",
+    "estrutura": [
+      "Bloco 1: Citação curta entre aspas como título",
+      "Bloco 2: Quem disse e onde (CMO na entrevista ao Valor Econômico, com destaque na capa do jornal)",
+      "Bloco 3: Resumo dos temas: conhecimento do cliente, personalização, prevenção e conteúdo",
+      "Bloco 4: O que isso significa para a marca: comunicação como relacionamento, não só divulgação",
+      "Bloco 5: Segunda citação de fecho e link da entrevista completa"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao post",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Abre com uma frase citável e usa a prova social de um veículo de peso (capa do Valor). Transforma cobertura de imprensa em conteúdo de posicionamento, com duas citações que funcionam como frases de efeito.",
+    "autor_ou_marca": "SulAmérica",
+    "link_fonte": "https://www.linkedin.com/posts/sulamerica_estar-pr%C3%B3ximo-com-relev%C3%A2ncia-de-conte%C3%BAdo-activity-7507896794131955713-sg1W",
+    "metricas": {
+      "curtidas": 119,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 119 reações (não 118) e 4 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 21/09/2026. Corrigido: o anexo é uma imagem única, não documento em carrossel. Uso de rosto presumido (entrevista com a executiva); não vi a imagem.",
+    "nicho": "healthtech",
+    "id": "healthtech-24"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Neste Setembro Amarelo, os números sobre saúde mental no trabalho reforçam uma urgência que empresas, RHs e lideranças já não podem tratar como distante.",
+    "estrutura": [
+      "Bloco 1: Data de campanha e promessa de números",
+      "Bloco 2: Por trás dos afastamentos existe um conjunto de fatores ligados à forma como o trabalho é organizado e liderado",
+      "Bloco 3: Gancho regulatório: a nova NR-1 amplia a conversa",
+      "Bloco 4: Tese: saúde mental precisa entrar na estratégia, nos dados, na escuta, na prevenção e no acesso ao cuidado",
+      "Bloco 5: Chamada para a página da campanha",
+      "Bloco 6: Documento de 9 páginas com os dados"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 9 páginas com dados de saúde mental no trabalho",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Junta data sazonal (Setembro Amarelo) e obrigação legal (NR-1), dois motivos para o RH parar e ler. Os números ficam no documento, o que aumenta o tempo na peça.",
+    "autor_ou_marca": "Conexa Saúde",
+    "link_fonte": "https://www.linkedin.com/posts/conexa-saude_dados-sobre-sa%C3%BAde-mental-no-trabalho-que-activity-7505713933136142336-CgGo",
+    "metricas": {
+      "curtidas": 24,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 24 reações e 0 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 15/09/2026. Documento \"Dados sobre saúde mental no trabalho que queremos mudar\", 9 páginas. Engajamento baixo, incluído como referência de formato. Não vi os números do documento.",
+    "nicho": "healthtech",
+    "id": "healthtech-25"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "O Setembro Amarelo amplia uma conversa essencial sobre saúde mental, prevenção e cuidado.",
+    "estrutura": [
+      "Bloco 1: Abertura com a campanha do mês",
+      "Bloco 2: Cenário: ansiedade, depressão, estresse e burnout afetam rotina, relações e trabalho",
+      "Bloco 3: Papel da empresa: acesso à informação, lideranças fortalecidas e caminhos de apoio",
+      "Bloco 4: Compromisso da marca em uma frase (o cuidado transforma caminhos)",
+      "Bloco 5: Documento de 9 páginas da campanha"
+    ],
+    "padrao_visual": {
+      "fundo": "documento de 9 páginas da campanha",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Tom acolhedor, sem promessa clínica, com foco no papel da empresa e não do indivíduo. Serve de modelo seguro para healthtech de saúde mental em datas sensíveis.",
+    "autor_ou_marca": "Telavita",
+    "link_fonte": "https://www.linkedin.com/posts/telavita_setembro-amarelo-telavita-activity-7501632721622843393-YoGa",
+    "metricas": {
+      "curtidas": 28,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 28 reações e 1 comentário."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 04/09/2026. Documento \"Setembro Amarelo Telavita\", 9 páginas. Referência de tom responsável em tema sensível (prevenção do suicídio). Gancho fraco, vale pelo tom.",
+    "nicho": "healthtech",
+    "id": "healthtech-26"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Um mal-entendido frequente entre os times de RH: achar que monitorar saúde mental no trabalho significa diagnosticar colaboradores.",
+    "estrutura": [
+      "Bloco 1: Nomeia o erro do público-alvo (RH) logo na primeira linha",
+      "Bloco 2: Por que importa: é o primeiro passo para enxergar sinais antes da crise",
+      "Bloco 3: Autoridade: artigo do cofundador e COO",
+      "Bloco 4: O que o artigo cobre: o que cabe à empresa, o que é exclusivo de profissionais de saúde, como ler absenteísmo e presenteísmo",
+      "Bloco 5: Chamada para ler na íntegra"
+    ],
+    "padrao_visual": {
+      "fundo": "card de artigo anexado",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O gancho de erro comum faz o leitor de RH se perguntar se está errando. Separar o papel da empresa do papel clínico é útil e evita promessa médica.",
+    "autor_ou_marca": "Telavita (artigo de Lucas Arthur, cofundador e COO)",
+    "link_fonte": "https://www.linkedin.com/posts/telavita_como-mapear-riscos-de-sa%C3%BAde-mental-no-trabalho-activity-7503104995475488769-GM-s",
+    "metricas": {
+      "curtidas": 37,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 37 reações e 3 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 08/09/2026. Artigo anexado: \"Como mapear riscos de saúde mental no trabalho: Da triagem à gestão preditiva\". Formato: post da empresa que empurra artigo do founder.",
+    "nicho": "healthtech",
+    "id": "healthtech-27"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "O modelo tradicional de saúde suplementar está insustentável.",
+    "estrutura": [
+      "Bloco 1: Afirmação forte contra o status quo em uma linha",
+      "Bloco 2: Dor do cliente: empresas pagam cada vez mais por um sistema que só age quando a urgência já aconteceu",
+      "Bloco 3: Prova externa: matéria da Startupi sobre o avanço das healthtechs",
+      "Bloco 4: Alternativa da marca: Médico Pessoal, Equipe de Saúde e coordenação do cuidado",
+      "Bloco 5: Pergunta provocativa para RH: fazer o modelo antigo funcionar melhor ou buscar uma nova forma de cuidar?",
+      "Bloco 6: Resposta da marca (escolhemos a segunda opção) e link da matéria"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao post",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frase de abertura polarizadora que o comprador de plano (RH e CFO) sente no bolso. Termina com uma pergunta binária e a marca já responde, o que força o leitor a se posicionar.",
+    "autor_ou_marca": "Sami (plano de saúde)",
+    "link_fonte": "https://www.linkedin.com/posts/samisaude_o-modelo-tradicional-de-sa%C3%BAde-suplementar-activity-7506290679699050497-R7or",
+    "metricas": {
+      "curtidas": 27,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 27 reações e 0 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 17/09/2026. Corrigido: o anexo é imagem única, não card de link (o link da matéria está no texto). Engajamento baixo; incluído pelo gancho polêmico bem executado.",
+    "nicho": "healthtech",
+    "id": "healthtech-28"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Mais de 62% das pessoas deixam de buscar atendimento médico quando precisam.",
+    "estrutura": [
+      "Bloco 1: Dado de impacto com causa (superlotação e longa espera)",
+      "Bloco 2: Resposta da empresa: parceria com a StaryaAI anunciada em julho",
+      "Bloco 3: Como funciona: assistentes virtuais na triagem que encaminham ao profissional com o contexto da conversa",
+      "Bloco 4: Prova de escala: mais de 276 mil pacientes acolhidos",
+      "Bloco 5: Propósito e fonte dos dados citada no fim (Vital Strategies e StaryaAI)"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com estatística que incomoda e liga a solução diretamente ao problema. Cita a fonte e deixa claro que a IA encaminha ao profissional, o que reduz o risco de promessa clínica (atenção: o post fala em diagnósticos mais rápidos, trecho a evitar em adaptações).",
+    "autor_ou_marca": "dr.consulta",
+    "link_fonte": "https://www.linkedin.com/posts/drconsulta_drconsulta-staryaai-ia-activity-7503457830859980800-Y3ob",
+    "metricas": {
+      "curtidas": 36,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 36 reações e 1 comentário."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 09/09/2026. Fonte do dado citada no post: Vital Strategies e StaryaAI (não checada de forma independente).",
+    "nicho": "healthtech",
+    "id": "healthtech-29"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Setembro nos lembra de olhar para sinais. No ambiente de trabalho, um dos mais ignorados é o presenteísmo.",
+    "estrutura": [
+      "Bloco 1: Data sazonal e conceito pouco conhecido (presenteísmo)",
+      "Bloco 2: Descrição da pessoa que não falta, não reclama e já não aguenta o ritmo",
+      "Bloco 3: Frase de tensão: o RH tem processo para quem falta e não tem para quem fica no limite",
+      "Bloco 4: Convite para webinar com especialistas, data, horário e link"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única de divulgação do webinar",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Descreve um tipo de colaborador que todo gestor conhece e revela um ponto cego do RH numa frase simétrica e memorável. Converte a curiosidade em inscrição.",
+    "autor_ou_marca": "Conexa Saúde",
+    "link_fonte": "https://www.linkedin.com/posts/conexa-saude_setembro-nos-lembra-de-olhar-para-sinais-activity-7501344953273344003-ao-N",
+    "metricas": {
+      "curtidas": 26,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 nos dados estruturados (JSON-LD) da página pública do post: 26 reações e 4 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 03/09/2026. A frase do RH com processo para quem falta é o trecho mais reaproveitável. Uso de rosto na imagem não conferido.",
+    "nicho": "healthtech",
+    "id": "healthtech-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "26.203 pessoas.",
+    "estrutura": [
+      "Slide 1: capa amarela com recorte de prédio corporativo e frase em caixa alta condensada sobre alguém no escritório que pensa em desistir todos os dias",
+      "Bloco 1: número cru e isolado na primeira linha da legenda (26.203 pessoas)",
+      "Bloco 2: explica que o número está por trás dos 14,75% de colaboradores com ideação suicida no Anuário Censo de Saúde Mental 2025 (35 empresas de grande porte)",
+      "Bloco 3: humaniza o dado: não é só estatística, é gente ao lado de quem menos se imagina",
+      "Bloco 4: contexto do Setembro Amarelo (IASP e OMS, 10 de setembro)",
+      "Bloco 5: tese: cuidado não tem mês, acontece em liderança que escuta e time seguro para falar",
+      "Bloco 6: dois CTAs: se você passa por isso, procure ajuda; se percebeu em alguém, não finja que não viu",
+      "Bloco 7: recurso concreto: CVV 188 e cvv.org.br, 24h e gratuito"
+    ],
+    "padrao_visual": {
+      "fundo": "amarelo sólido com recorte de foto de prédio corporativo, texto preto em caixa alta condensada",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um número absoluto em vez de percentual, o que transforma dado frio em pessoas contáveis. O dado é proprietário (anuário da própria marca), o que dá autoridade B2B, e a legenda fecha com dois pedidos de ação distintos, para quem sofre e para quem observa, mais o contato do CVV.",
+    "autor_ou_marca": "Vittude (@vittude)",
+    "link_fonte": "https://www.instagram.com/p/DdHyMsUGmvE/",
+    "metricas": {
+      "curtidas": 122,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "122 curtidas e 2 comentários lidos na meta description da página do post; 122 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/09/2026 (Dia Mundial de Prevenção do Suicídio), carrossel confirmado no embed. Legenda confere integralmente e termina com CVV 188. Tema sensível: ao usar como referência, manter o tom de acolhimento e orientação para ajuda, sem promessa clínica.",
+    "nicho": "healthtech",
+    "id": "healthtech-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Seu impacto na vida das pessoas é maior do que você pensa.",
+    "estrutura": [
+      "Bloco 1: arte tipográfica em fundo branco com rabisco amarelo: Tem gente que se inspira em você",
+      "Bloco 2: legenda repete a tese: seu impacto é maior do que você pensa",
+      "Bloco 3: lista de microexemplos do dia a dia (alguém ouve um podcast porque você indicou, alguém ainda ri de algo que você falou, tem gente te admirando em silêncio)",
+      "Bloco 4: fecho afetivo: você é importante na vida das pessoas, não esqueça disso"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com traço ondulado amarelo desenhado à mão e texto azul marinho arredondado",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frase de autoestima feita para ser enviada a um amigo. Os microexemplos concretos tornam a mensagem crível e o visual limpo com uma frase só funciona bem no feed e no story.",
+    "autor_ou_marca": "Conexa Saúde (@conexa_saude), em collab com Zenklub",
+    "link_fonte": "https://www.instagram.com/p/DdSGJK7vdgD/",
+    "metricas": {
+      "curtidas": 265,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "265 curtidas e 9 comentários lidos na meta description da página do post; 265 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026. Collab conexa_saude e zenklub confirmada no cabeçalho do embed. Setembro Amarelo.",
+    "nicho": "healthtech",
+    "id": "healthtech-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "citacao",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Ana Suy diz que os nossos amigos são uma espécie de \"backup do sujeito\": quando nos esquecemos quem somos, são eles que estão ali para nos lembrar.",
+    "estrutura": [
+      "Bloco 1: arte em fundo roxo escuro com rabisco amarelo e frase: Que você tenha por perto (pessoas que te lembrem quem você é)",
+      "Bloco 2: legenda cita uma autora conhecida (Ana Suy) e o conceito de backup do sujeito",
+      "Bloco 3: ponte para o leitor: talvez agora você só esteja precisando disso",
+      "Bloco 4: ação concreta e leve: vá tomar aquele café com a amiga que você não vê há tempo"
+    ],
+    "padrao_visual": {
+      "fundo": "roxo escuro sólido com traço ondulado amarelo e tipografia creme arredondada",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Empresta autoridade de uma psicanalista popular entre o público e traduz o conceito em uma metáfora tecnológica fácil (backup). Termina com uma ação pequena e social, o que estimula marcar amigos nos comentários.",
+    "autor_ou_marca": "Zenklub (@zenklub)",
+    "link_fonte": "https://www.instagram.com/p/DdEUvk_RHxA/",
+    "metricas": {
+      "curtidas": 279,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "279 curtidas e 10 comentários lidos na meta description da página do post; 279 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/09/2026. Legenda confere integralmente.",
+    "nicho": "healthtech",
+    "id": "healthtech-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Começar a terapia pode parecer um passo grande, mas ele não precisa ser distante, complicado ou cheio de dúvidas.",
+    "estrutura": [
+      "Slide 1: foto de rosto sorrindo com selo de texto sobre cuidado emocional",
+      "Bloco 1: nomeia a objeção (começar terapia parece um passo grande)",
+      "Bloco 2: desmonta a objeção com três atributos: online, sigilo total, você escolhe o profissional",
+      "Bloco 3: oferta: primeira consulta grátis com cupom EXPERIMENTEZEN2026",
+      "Bloco 4: escassez dupla: agendamentos até 30 de agosto de 2026 e limite de 1.000 cupons"
+    ],
+    "padrao_visual": {
+      "fundo": "foto quente de pessoa sorrindo em ambiente doméstico",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Parte da barreira emocional antes de apresentar a oferta, então o cupom soa como alívio e não como venda. A escassez por prazo e por quantidade ajuda a explicar 47 comentários para 57 curtidas.",
+    "autor_ou_marca": "Zenklub (@zenklub)",
+    "link_fonte": "https://www.instagram.com/p/DcRIyR6jNKh/",
+    "metricas": {
+      "curtidas": 57,
+      "comentarios": 47,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "57 curtidas e 47 comentários lidos na meta description da página do post; 57 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/08/2026, carrossel confirmado no embed. Cupom, prazo e limite de 1.000 cupons conferidos na legenda. Slides internos não foram lidos, estrutura baseada na capa e na legenda.",
+    "nicho": "healthtech",
+    "id": "healthtech-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A gente acha chic demais ser o maior ecossistema de saúde digital da América Latina no CONARH26",
+    "estrutura": [
+      "Slide 1: foto do estande no evento com título sobreposto: Coisas que...",
+      "Slide 2 em diante: bastidores do estande e da equipe no CONARH",
+      "Bloco 1: legenda com autoelogio bem humorado (chic demais) e posicionamento de liderança",
+      "Bloco 2: convite para o terceiro dia do evento"
+    ],
+    "padrao_visual": {
+      "fundo": "foto real do estande com neon rosa e azul, título branco grande na base",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma presença em evento B2B de RH em conteúdo de bastidor com tom leve. O claim de liderança aparece na foto do estande, então a prova social é visual e não só texto.",
+    "autor_ou_marca": "Conexa Saúde (@conexa_saude), em collab com Zenklub",
+    "link_fonte": "https://www.instagram.com/p/DcQm0D9iCXn/",
+    "metricas": {
+      "curtidas": 177,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "177 curtidas e 14 comentários lidos na meta description da página do post; 177 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/08/2026 durante o CONARH 2026, carrossel confirmado no embed. Legenda original usa emojis de brilho em volta de chic demais.",
+    "nicho": "healthtech",
+    "id": "healthtech-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Tem luta que ninguém vê.",
+    "estrutura": [
+      "Bloco 1: frase curta de abertura: tem luta que ninguém vê",
+      "Bloco 2: lista em versos de esforços invisíveis (levantar mesmo cansado, tentar de novo, marcar, voltar, acompanhar)",
+      "Bloco 3: reconhece o atrito: fazer caber na rotina o que deveria ser simples",
+      "Bloco 4: tese: cuidar da saúde exige constância e não é pouco",
+      "Bloco 5: fecho de validação: você luta pela sua saúde e isso diz muito sobre você"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem em tons bege e marrom desfocados, estética de filme",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Valida o esforço do cliente em vez de vender o produto, o que gera identificação e comentários de pessoas contando a própria luta. Frases curtas em versos criam ritmo de manifesto.",
+    "autor_ou_marca": "Alice (@alicesaude)",
+    "link_fonte": "https://www.instagram.com/p/DWgmTJZDhBI/",
+    "metricas": {
+      "curtidas": 170,
+      "comentarios": 54,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "170 curtidas e 54 comentários lidos na meta description da página do post; 170 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 27/03/2026, carrossel confirmado no embed, parte da campanha de posicionamento sobre luta pela saúde. Link diferente do item já existente da Alice na biblioteca.",
+    "nicho": "healthtech",
+    "id": "healthtech-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Se cuidar da saúde já dá trabalho, o sistema não deveria dificultar.",
+    "estrutura": [
+      "Bloco 1: crítica direta ao sistema de saúde como vilão comum",
+      "Bloco 2: posicionamento: a gente entra nessa luta também",
+      "Bloco 3: três promessas em versos (simplificar o caminho, conectar cada etapa do cuidado, resposta e não só espera)",
+      "Bloco 4: diferencial: time que acompanha de verdade e tecnologia a seu favor",
+      "Bloco 5: assinatura: a gente também luta, pra que a saúde seja como deve ser"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem desfocada em tons bege e rosados",
+      "contraste": "baixo",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Coloca a marca ao lado do cliente contra um inimigo que todo mundo reconhece (a burocracia do sistema de saúde). É par do carrossel Tem luta que ninguém vê e fecha a narrativa com a proposta de valor.",
+    "autor_ou_marca": "Alice (@alicesaude)",
+    "link_fonte": "https://www.instagram.com/p/DWglGxmDkgI/",
+    "metricas": {
+      "curtidas": 103,
+      "comentarios": 15,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "103 curtidas e 15 comentários lidos na meta description da página do post; 103 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 27/03/2026, mesmo dia do carrossel Tem luta que ninguém vê. Legenda confere integralmente.",
+    "nicho": "healthtech",
+    "id": "healthtech-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Seja inverno ou verão, toda vez que a tosse bate, a dúvida também vem. Será que vai piorar?",
+    "estrutura": [
+      "Slide 1: tela magenta com vídeo e texto: Na dúvida, você não precisa decidir sozinho",
+      "Bloco 1: cena cotidiana (a tosse bate) e a pergunta ansiosa: será que vai piorar?",
+      "Bloco 2: recorte de persona: especialmente se você é cuidador de uma criança",
+      "Bloco 3: solução: Alice Agora, profissionais de saúde em até 60 segundos pelo app para ouvir, avaliar e orientar",
+      "Bloco 4: assinatura: saúde como deve ser"
+    ],
+    "padrao_visual": {
+      "fundo": "magenta da marca com cartão cinza claro e texto branco",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Começa pela dúvida ansiosa do usuário e não pelo produto. A promessa é de orientação rápida (60 segundos) e não de cura, o que evita promessa clínica e mantém o foco em acesso.",
+    "autor_ou_marca": "Alice (@alicesaude)",
+    "link_fonte": "https://www.instagram.com/p/DZ8SyeNiavE/",
+    "metricas": {
+      "curtidas": 180,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "180 curtidas e 2 comentários lidos na meta description da página do post; 180 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/06/2026. Carrossel com um vídeo entre os slides, confirmado no embed.",
+    "nicho": "healthtech",
+    "id": "healthtech-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Numa corrida, dá pra ver o ritmo de cada um. Quem voa, quem segura, quem para e volta.",
+    "estrutura": [
+      "Slide 1: foto de corredor com camiseta da marca e texto: Parar pra respirar não tira você da corrida. É o que mantém você nela.",
+      "Bloco 1: metáfora da corrida e dos ritmos diferentes",
+      "Bloco 2: vira a metáfora para a vida: fora da prova o esforço de manter a rotina fica invisível",
+      "Bloco 3: bastidor: a marca esteve na Live! Run mais uma vez",
+      "Bloco 4: mensagem: cada um luta no seu ritmo e ninguém devia lutar sozinho",
+      "Bloco 5: pergunta final para comentários: qual tem sido o seu ritmo ultimamente?"
+    ],
+    "padrao_visual": {
+      "fundo": "off white com linha fina de conexão, foto recortada e título magenta grande",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Usa um evento patrocinado como gancho de narrativa e não de propaganda. A frase de capa é uma reflexão compartilhável e a pergunta no final puxa conversa.",
+    "autor_ou_marca": "Alice (@alicesaude)",
+    "link_fonte": "https://www.instagram.com/p/DdbahxCDmfc/",
+    "metricas": {
+      "curtidas": 165,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "165 curtidas e 10 comentários lidos na meta description da página do post; 165 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 18/09/2026, após a corrida Live! Run. Carrossel com fotos e vídeos, confirmado no embed.",
+    "nicho": "healthtech",
+    "id": "healthtech-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Novidade chegando pra você cuidar ainda melhor da sua saúde!",
+    "estrutura": [
+      "Slide 1: logos dr.consulta e TotalPass e título: Cuidar da saúde ficou ainda melhor",
+      "Bloco 1: anúncio da parceria com a TotalPass para assinantes",
+      "Bloco 2: números de escala: mais de 250 modalidades e treinos online",
+      "Bloco 3: preço âncora exclusivo para assinantes: a partir de R$ 39,90",
+      "Bloco 4: extensão para dependentes da assinatura",
+      "Bloco 5: CTA link na bio e letras miúdas de elegibilidade (não vale para assinantes empresa)"
+    ],
+    "padrao_visual": {
+      "fundo": "faixa roxa com logos no topo e fundo branco com título roxo em negrito",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Anúncio de benefício com preço concreto e exclusividade para quem já é cliente, o que gera perguntas nos comentários (40 comentários para 36 curtidas). Mostra como uma parceria vira conteúdo de retenção.",
+    "autor_ou_marca": "dr.consulta (@drconsulta)",
+    "link_fonte": "https://www.instagram.com/p/Dcv73YJAY27/",
+    "metricas": {
+      "curtidas": 36,
+      "comentarios": 40,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "36 curtidas e 40 comentários lidos na meta description da página do post; 36 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 01/09/2026. Engajamento absoluto baixo, incluído como referência de post de anúncio que gera conversa. A legenda abre com emoji de sirene.",
+    "nicho": "healthtech",
+    "id": "healthtech-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Enquanto o mercado tradicional tenta disfarçar a conta de desperdícios em letras miúdas, nós escolhemos fazer o óbvio: organizar o cuidado desde o primeiro passo.",
+    "estrutura": [
+      "Slide 1: foto de médica sorrindo segurando o app da marca",
+      "Bloco 1: ataque ao mercado tradicional (desperdício escondido em letras miúdas)",
+      "Bloco 2: modelo da marca: médico pessoal que centraliza histórico e orienta decisões",
+      "Bloco 3: consequências práticas: menos exames duplicados, menos idas desnecessárias ao hospital, faturas previsíveis",
+      "Bloco 4: resultado da conta: modelo sustentável, resolutivo e feito para durar",
+      "Bloco 5: CTA de carrossel: arraste para entender como a nossa matemática funciona na prática"
+    ],
+    "padrao_visual": {
+      "fundo": "rosa claro com foto em moldura estilo polaroid e selo vermelho da marca",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Enquadra o plano de saúde como uma conta que o cliente não vê, criando inimigo claro e curiosidade pelo cálculo nos slides seguintes. A chamada arraste para entender a matemática transforma o carrossel em explicação.",
+    "autor_ou_marca": "Sami (@sami.saude)",
+    "link_fonte": "https://www.instagram.com/p/Dc1FXbWmc9D/",
+    "metricas": {
+      "curtidas": 18,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "18 curtidas e 0 comentários lidos na meta description da página do post; 18 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 03/09/2026. Engajamento baixo; incluído pelo gancho de posicionamento contra o mercado, útil como modelo para healthtech de plano de saúde, não como prova de viralização. Slides internos não foram lidos.",
+    "nicho": "healthtech",
+    "id": "healthtech-41"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O som da natureza pode ser tudo o que você precisa para encontrar um pouco de paz",
+    "estrutura": [
+      "Slide 1: vídeo de lago cristalino com título: 5 sons que podem acalmar seu sistema nervoso",
+      "Slide 2 a 6: um som da natureza por slide, em vídeo curto",
+      "Bloco final: legenda curta de uma linha com emoji"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de paisagem natural com água transparente e título serifado branco centralizado",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista numerada com promessa de alívio imediato e consumo sem esforço: a pessoa usa o próprio carrossel como experiência de relaxamento e salva para voltar. O verbo pode acalmar evita promessa clínica.",
+    "autor_ou_marca": "Calm (@calm)",
+    "link_fonte": "https://www.instagram.com/p/DdJxl0_lcjh/",
+    "metricas": {
+      "curtidas": 27869,
+      "comentarios": 325,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "27.869 curtidas lidas no embed captioned (edge_liked_by) e 325 comentários na meta description do Instagram em 27/09/2026. A meta description arredonda para 28K."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original em inglês: Nature's soundtrack might be all you need to find a little peace. Título da capa conferido na imagem: 5 Sounds That May Calm Your Nervous System. Post de 11/09/2026. Carrossel de vídeos confirmado no embed; sons individuais não foram assistidos um a um.",
+    "nicho": "healthtech",
+    "id": "healthtech-42"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Um pouco mais de tempo pensando no que está dando certo",
+    "estrutura": [
+      "Bloco 1: foto de céu com nuvens em tom analógico",
+      "Bloco 2: frase serifada sobre a imagem virando o hábito de pensar demais: você pode pensar demais nas coisas boas também",
+      "Bloco 3: legenda de uma linha reforçando a ideia"
+    ],
+    "padrao_visual": {
+      "fundo": "céu azul acinzentado com nuvens, textura de filme, texto serifado creme",
+      "contraste": "baixo",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega um comportamento que o público reconhece (pensar demais) e inverte para algo positivo. É frase curta, visual calmo e fácil de repostar no story.",
+    "autor_ou_marca": "Calm (@calm)",
+    "link_fonte": "https://www.instagram.com/p/Dc_UgLJG7ge/",
+    "metricas": {
+      "curtidas": 10577,
+      "comentarios": 47,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "10.577 curtidas lidas no embed captioned e 47 comentários na meta description do Instagram em 27/09/2026. A meta description arredonda para 11K."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original da legenda: A little more time thinking about what's going right. Texto da imagem visível parcialmente na capa (...an overthink ... the good stuff too). Post de 07/09/2026.",
+    "nicho": "healthtech",
+    "id": "healthtech-43"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Você é amado.",
+    "estrutura": [
+      "Slide 1: fundo verde com frase gigante: You are LOVED (You are em branco, LOVED em rosa)",
+      "Slides seguintes: mensagens de acolhimento (não lidas uma a uma)",
+      "Bloco 1: legenda situa a data: Dia Mundial de Prevenção ao Suicídio",
+      "Bloco 2: fala diretamente com três públicos (quem perdeu alguém, quem teve pensamentos suicidas, quem apoia alguém) e diz: a gente vê você",
+      "Bloco 3: indica linha de apoio 24 horas (988)"
+    ],
+    "padrao_visual": {
+      "fundo": "verde sólido com tipografia sem serifa enorme em branco e rosa",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Capa com três palavras e cor chapada para em qualquer feed e é fácil de repostar. A legenda nomeia cada público específico, então muita gente se sente vista, e termina com um recurso de ajuda concreto.",
+    "autor_ou_marca": "Headspace (@headspace)",
+    "link_fonte": "https://www.instagram.com/p/DdHAZjMFAhB/",
+    "metricas": {
+      "curtidas": 2386,
+      "comentarios": 21,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "2.386 curtidas e 21 comentários lidos na meta description da página do post; 2.386 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto da capa conferido na imagem: You are LOVED. Legenda original começa com: Today is World Suicide Prevention Day. Indica a linha 988 (EUA); ao adaptar para o Brasil, citar o CVV 188. Post de 10/09/2026, carrossel confirmado no embed.",
+    "nicho": "healthtech",
+    "id": "healthtech-44"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Hora do check in: como você está se sentindo de verdade hoje?",
+    "estrutura": [
+      "Bloco 1: selo amarelo Check-in time no topo",
+      "Bloco 2: pergunta com a palavra really em itálico",
+      "Bloco 3: fileira de personagens com emoções (Proud, Curious e outros) para a pessoa escolher",
+      "Bloco 4: legenda curta: reconheça as emoções como visitantes e deixe que sigam seu caminho"
+    ],
+    "padrao_visual": {
+      "fundo": "off white com selo amarelo e personagens coloridos da marca",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Formato de enquete implícita: o leitor responde nos comentários qual emoção escolheu, com esforço mínimo. Os mascotes tornam o tema emocional leve.",
+    "autor_ou_marca": "Headspace (@headspace)",
+    "link_fonte": "https://www.instagram.com/p/DdeNlcLl4rp/",
+    "metricas": {
+      "curtidas": 1398,
+      "comentarios": 50,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.398 curtidas e 50 comentários lidos na meta description da página do post; 1.398 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto da arte conferido na imagem: Check-in time, (how) are you really feeling today, com personagens Proud e Curious visíveis. Legenda original: Let's acknowledge our emotions as visitors, and let them go about their way. Post de 19/09/2026.",
+    "nicho": "healthtech",
+    "id": "healthtech-45"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Conheça o Wellhub AI. Arraste para roubar estes prompts.",
+    "estrutura": [
+      "Slide 1: foto de pessoa treinando com balão de prompt: Quero fazer Reformer Pilates esta semana. Encontre um estúdio perto e me diga o que esperar.",
+      "Slides seguintes: um prompt pronto por slide para usar no assistente",
+      "Bloco 1: legenda apresenta o produto em uma linha",
+      "Bloco 2: convite a roubar os prompts",
+      "Bloco 3: caminho no app para achar a função (perfil, rolar, Wellhub AI)"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de treino com cartão rosa coral e texto branco entre aspas",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Lança uma função de IA mostrando prompts prontos em vez de descrever o recurso, o que dá valor salvável e ensina o uso. O caminho exato no app remove atrito.",
+    "autor_ou_marca": "Wellhub (@wellhub)",
+    "link_fonte": "https://www.instagram.com/p/Dc3A9_8Dm_r/",
+    "metricas": {
+      "curtidas": 73,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "73 curtidas e 9 comentários lidos na meta description da página do post; 73 curtidas confirmadas no embed captioned. Leitura em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: Meet Wellhub AI. Your next step in wellbeing, made simple. Swipe to steal these prompts. Prompt da capa conferido na imagem. Post de 04/09/2026. Wellhub (ex Gympass) é de origem brasileira, mas o perfil global posta em inglês. Engajamento baixo, vale pelo formato.",
+    "nicho": "healthtech",
+    "id": "healthtech-46"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Se as operadoras de saúde podem negar atendimento e chamar de \"clinicamente desnecessário\", por que elas não são obrigadas a ter seguro contra erro médico quando erram e alguém piora ou morre?",
+    "estrutura": [
+      "Bloco 1: pergunta retórica que inverte a lógica do setor (a operadora decide como médico, mas não responde como médico)",
+      "Bloco 2: nenhuma explicação nem link, a pergunta sozinha força o leitor a completar o raciocínio",
+      "Bloco 3: respostas e citações viram o debate, o autor quase não precisa voltar"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X, sem imagem",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega uma dor que quase todo mundo já viveu (negativa de cobertura) e aplica uma regra de justiça simples: quem decide como médico deveria responder como médico. Uma frase só, em forma de pergunta, pede resposta e compartilhamento.",
+    "autor_ou_marca": "Mark Cuban (@mcuban, fundador da Cost Plus Drugs)",
+    "link_fonte": "https://x.com/mcuban/status/2053654287046017039",
+    "metricas": {
+      "curtidas": 14567,
+      "comentarios": 591,
+      "compartilhamentos": 1583,
+      "visualizacoes": 679203,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X): likes, replies, retweets e views conferidos."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos no espelho. Original: \"If insurance companies can deny care and call it \"medically unnecessary\", why aren't they required to have malpractice insurance doe when they get it wrong and someone gets sicker or tragically dies ?\" Postado em 11/05/2026.",
+    "nicho": "healthtech",
+    "id": "healthtech-47"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Espero que as pessoas percebam que, no futuro próximo, o custo dos benefícios de saúde vai fazer mais gente ser demitida, ou deixar de ser contratada, do que a IA.",
+    "estrutura": [
+      "Bloco 1: compara o medo da moda (IA tirando empregos) com um vilão ignorado (custo do plano de saúde corporativo)",
+      "Bloco 2: afirmação curta, sem dados, que obriga o leitor a concordar ou discordar",
+      "Bloco 3: conversa nas respostas entre RHs, founders e funcionários"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega carona no assunto mais comentado do momento (IA e emprego) para puxar a atenção para o custo do benefício de saúde. A troca do vilão esperado gera surpresa e debate. Serve de modelo para quem vende plano empresarial ou gestão de benefícios.",
+    "autor_ou_marca": "Mark Cuban (@mcuban)",
+    "link_fonte": "https://x.com/mcuban/status/2102506001517686853",
+    "metricas": {
+      "curtidas": 9491,
+      "comentarios": 726,
+      "compartilhamentos": 811,
+      "visualizacoes": 1099495,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X). Views atualizadas de 1.099.419 para 1.099.495."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Original: \"I hope people realize that for the foreseeable future, the cost of healthcare benefits will get more people fired, or not hired, than AI\". Postado em 22/09/2026.",
+    "nicho": "healthtech",
+    "id": "healthtech-48"
+  },
+  {
+    "rede": "x",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Se eu fosse médico com consultório particular, eu me ofereceria para sentar com o paciente e configurar o Claude, o ChatGPT, o Gemini e o Grok dele com instruções e tarefas.",
+    "estrutura": [
+      "Bloco 1: cenário hipotético \"se eu fosse médico\" que já entrega a ideia",
+      "Bloco 2: exemplo concreto do prompt: todo dia às 17h a IA faz perguntas ao paciente e envia a conversa por e-mail ao médico",
+      "Bloco 3: segundo passo da rotina (toda manhã a IA busca novas perguntas que o médico mandou por e-mail)",
+      "Bloco 4: resumo em uma linha (use a IA do paciente para ajudar você a ajudar o paciente)",
+      "Bloco 5: pergunta final \"O que acham?\" para puxar comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X, post longo",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Entrega uma ideia prática e copiável de acompanhamento do paciente com IA, com o prompt escrito por extenso. A pergunta no fim gerou 1.818 respostas contra 259 retweets, sinal de debate forte.",
+    "autor_ou_marca": "Mark Cuban (@mcuban)",
+    "link_fonte": "https://x.com/mcuban/status/2090279266806038641",
+    "metricas": {
+      "curtidas": 7472,
+      "comentarios": 1818,
+      "compartilhamentos": 259,
+      "visualizacoes": 1310757,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X). Views atualizadas de 1.310.753 para 1.310.757."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Original começa: \"If I was a doctor with a private practice, I would offer to sit with the patient and configure their Claude, ChatGPT, Gemini and Grok with instructions and skills...\" e termina com \"Help the patient use AI to help you help the patient. Thoughts ?\" Postado em 20/08/2026. Não é promessa clínica, é modelo de acompanhamento.",
+    "nicho": "healthtech",
+    "id": "healthtech-49"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Me digam onde eu e o Claude erramos. Os EUA não têm um problema de remédio, têm um problema de US$ 360 bilhões em rebates de intermediários.",
+    "estrutura": [
+      "Bloco 1: convite à correção (\"me digam onde erramos\") que chama especialistas para a conversa",
+      "Bloco 2: reenquadramento do problema com um número grande (mais de US$ 360 bi em rebates)",
+      "Bloco 3: explicação curta do mecanismo (preço de tabela inflado para pagar spreads, taxas e rebates das PBMs)",
+      "Bloco 4: anúncio da solução em thread (formulário federal aberto e preço cost-plus transparente) com emoji de fio"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X, abre uma thread",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Troca o culpado óbvio (o remédio caro) por um culpado escondido e dá a ele um número. Pedir correção pública convida quem entende do assunto a responder, e a thread segura quem quer ver a solução.",
+    "autor_ou_marca": "Mark Cuban (@mcuban)",
+    "link_fonte": "https://x.com/mcuban/status/2089204025849790854",
+    "metricas": {
+      "curtidas": 5147,
+      "comentarios": 385,
+      "compartilhamentos": 429,
+      "visualizacoes": 1713671,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do primeiro post da thread no X). Views atualizadas de 1.713.670 para 1.713.671."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Original: \"Tell me where Claude and I got this wrong. The U.S. doesn't have a drug problem, it has a $360B+ middleman rebate problem. List prices are inflated just to fund PBM spreads, fees, and retrospective rebates. A blueprint to fix it: An Open Federal Formulary + Transparent Cost-Plus Pricing\" (no original há um travessão depois de \"drug problem\", trocado por vírgula aqui). Postado em 17/08/2026. Só o primeiro post da thread foi lido; a classificação como lista vem do anúncio do fio.",
+    "nicho": "healthtech",
+    "id": "healthtech-50"
+  },
+  {
+    "rede": "x",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Os 3 motivos pelos quais a IA não vai reduzir empregos na área clínica.",
+    "estrutura": [
+      "Bloco 1: promessa numerada (3 motivos) que responde a um medo comum de profissionais de saúde",
+      "Bloco 2: motivo 1, paradoxo de Jevons (mais eficiência, mais uso)",
+      "Bloco 3: motivo 2, falácia do \"montante fixo de trabalho\" (o tipo de trabalho muda)",
+      "Bloco 4: motivo 3, tarefas não são habilidades",
+      "Bloco 5: crédito à fonte (artigo no NEJM, marcando o autor) com link e imagem anexada"
+    ],
+    "padrao_visual": {
+      "fundo": "texto no X com 1 foto anexada",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lista curta e numerada responde a uma ansiedade real de médicos e enfermeiros com conceitos que cabem em uma linha cada. Citar o NEJM dá credibilidade sem alongar o post.",
+    "autor_ou_marca": "Eric Topol (@EricTopol, cardiologista e pesquisador de saúde digital)",
+    "link_fonte": "https://x.com/EricTopol/status/2098769745348907076",
+    "metricas": {
+      "curtidas": 1071,
+      "comentarios": 61,
+      "compartilhamentos": 313,
+      "visualizacoes": 102249,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X). Post tem 1 foto anexada."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Original: \"The 3 reasons why AI won't reduce clinician jobs: Jevon's paradox (more efficiency, more use), 'Lump of labor' fallacy (the type of work changes), Tasks ≠ Skills. @NEJM @DhruvKhullar\" (no original cada item começa com travessão, removido aqui). Postado em 12/09/2026.",
+    "nicho": "healthtech",
+    "id": "healthtech-51"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Expectativa de vida versus gasto com saúde em um gráfico só. A pergunta de um trilhão de dólares: gastar mais com saúde traz resultados melhores?",
+    "estrutura": [
+      "Bloco 1: promessa de síntese (\"em um gráfico só\")",
+      "Bloco 2: a pergunta de um trilhão de dólares",
+      "Bloco 3: resposta curta e contraintuitiva (parece que não, e o sistema dos EUA é a prova)",
+      "Bloco 4: exceções positivas (Japão, Suíça, Austrália, Alemanha)",
+      "Bloco 5: CTA discreto para o livro do autor, separado por uma linha"
+    ],
+    "padrao_visual": {
+      "fundo": "gráfico de expectativa de vida por gasto em saúde, publicado como mídia de vídeo nativa do LinkedIn",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um gráfico que se lê em segundos derruba a crença de que mais dinheiro é igual a mais saúde. O texto tem quatro frases e deixa o debate para os comentários (249).",
+    "autor_ou_marca": "Bertalan Meskó, MD, PhD (The Medical Futurist)",
+    "link_fonte": "https://www.linkedin.com/posts/bertalanmesko_life-expectancy-vs-health-expenditure-in-activity-7284505805096189954-r-SW",
+    "metricas": {
+      "curtidas": 2573,
+      "comentarios": 249,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 2.573 reações e 249 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos na página pública. Original: \"Life expectancy vs health expenditure in one graph. The trillion dollar question: do you achieve better healthcare outcomes by spending more on healthcare? It seems not really and the US system is the proof for that.\" Publicado em 13/01/2025. A página marca a mídia como vídeo (VideoObject), por isso o formato mudou de imagem-unica para dado-impacto. Fora do ângulo X/imprensa, mas é referência internacional de healthtech.",
+    "nicho": "healthtech",
+    "id": "healthtech-52"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Comprando remédio: \"É R$ 215? Mas não paguei R$ 180 mês passado?\" \"Sim, pagou, mas o preço não subiu. O que mudou foi o desconto do laboratório.\"",
+    "estrutura": [
+      "Bloco 1: cena de balcão de farmácia em forma de diálogo",
+      "Bloco 2: a explicação oficial que não faz sentido para quem paga",
+      "Bloco 3: o cliente aponta que na prática ficou R$ 30 mais caro",
+      "Bloco 4: resposta absurda final (o desconto pode mudar sem aviso) e emoji de palhaço como punchline"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X em formato de diálogo",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma uma distorção de preço de remédio em uma cena que quase todo brasileiro já viveu, com números concretos. O humor do diálogo faz o post circular como desabafo coletivo.",
+    "autor_ou_marca": "Atila Iamarino (@oatila)",
+    "link_fonte": "https://x.com/oatila/status/1806747530795073617",
+    "metricas": {
+      "curtidas": 11767,
+      "comentarios": 118,
+      "compartilhamentos": 343,
+      "visualizacoes": 648819,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Postado em 28/06/2024. No original as falas começam com hífen. Útil para farmácias digitais e healthtechs de acesso a medicamento.",
+    "nicho": "healthtech",
+    "id": "healthtech-53"
+  },
+  {
+    "rede": "x",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Para quem acha que é só um joguinho: as Bets geram um impacto de R$ 30 bilhões por ano no SUS (dados IEPS).",
+    "estrutura": [
+      "Bloco 1: rebate uma frase que o público repete (\"é só um joguinho\")",
+      "Bloco 2: número de impacto na saúde pública com fonte entre parênteses (IEPS)",
+      "Bloco 3: segundo número com fonte (mais de R$ 120 bi por ano fora da economia, FEA-USP)",
+      "Bloco 4: fecho que traz o custo para o bolso de todo mundo"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro no X",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Liga um hábito popular a um custo de saúde que todo mundo paga, com dois números grandes e a fonte entre parênteses. A fonte citada dá segurança para compartilhar.",
+    "autor_ou_marca": "Nath Finanças (@nathfinancas)",
+    "link_fonte": "https://x.com/nathfinancas/status/2103681646163587576",
+    "metricas": {
+      "curtidas": 26695,
+      "comentarios": 653,
+      "compartilhamentos": 4760,
+      "visualizacoes": 315851,
+      "observacao": "Relido em 27/09/2026 via api.fxtwitter.com (espelho público do post no X). Números atualizados: likes de 26.605 para 26.695, retweets de 4.746 para 4.760, views de 314.864 para 315.851."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Postado em 26/09/2026. Encaixe no nicho é indireto: a autora é de finanças, o tema é custo de saúde pública ligado a apostas. Serve como modelo de dado de impacto para healthtechs de saúde mental, sem promessa clínica.",
+    "nicho": "healthtech",
+    "id": "healthtech-54"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Alerta para as empresas: 86% das pessoas mudariam de emprego para melhorar sua saúde mental e a satisfação com o trabalho.",
+    "estrutura": [
+      "Bloco 1: alerta com número grande logo na primeira linha, entre emojis de megafone",
+      "Bloco 2: fonte e tamanho da pesquisa (InfoJobs, mais de 2 mil pessoas de 17 a 60 anos)",
+      "Bloco 3: números de apoio (76% conhecem alguém afastado, 61% insatisfeitos, 75% sem ações de saúde mental na empresa)",
+      "Bloco 4: os três estágios de maturidade das empresas (95% em Conscientização, 4,9% com programas estratégicos, 0,1% em Reinvenção)",
+      "Bloco 5: CTA direto da founder (\"me manda uma mensagem\") para empresas que querem começar"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, sem mídia identificada na página pública",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um número que ameaça o que o RH mais teme (perder gente) e empilha dados que reforçam o problema. Os estágios de maturidade fazem o leitor se localizar (\"estou nos 95%\") antes do convite para conversar.",
+    "autor_ou_marca": "Tatiana Pimenta (CEO e fundadora da Vittude)",
+    "link_fonte": "https://pt.linkedin.com/posts/tatianapimenta_sa%C3%BAde-mental-86-dos-funcion%C3%A1rios-mudariam-activity-7134858433320599554-rMoD",
+    "metricas": {
+      "curtidas": 299,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 299 reações e 6 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 27/11/2023. Estrutura corrigida: o fecho é um CTA de contato, não uma fala sobre o papel do RH, e a página não mostra card de matéria. Abre com emoji de megafone, removido do gancho.",
+    "nicho": "healthtech",
+    "id": "healthtech-55"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Estamos construindo um modelo de cuidado que promove mais saúde para nossos membros enquanto evita desperdícios para o sistema como um todo.",
+    "estrutura": [
+      "Bloco 1: tese da empresa em uma frase",
+      "Bloco 2: por que isso importa (menos desperdício, sinistralidade controlada, reajuste menor)",
+      "Bloco 3: resultados numerados de 2024: (1) mais de R$ 350 milhões de receita, crescimento 70% maior que em 2023, (2) reajuste médio de 12%, 40% menor que a média dos grandes, (3) mais de 42 mil membros",
+      "Bloco 4: anúncio do novo aporte de mais de US$ 22 milhões",
+      "Bloco 5: link da entrevista nos comentários e fecho \"Vida longa à Alice!\""
+    ],
+    "padrao_visual": {
+      "fundo": "texto com uma imagem anexada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O founder transforma um anúncio de rodada em prova da tese, com números fáceis de comparar (reajuste 40% menor que a média). Deixar o link nos comentários preserva o alcance do post.",
+    "autor_ou_marca": "André Florence (CEO e cofundador da Alice)",
+    "link_fonte": "https://pt.linkedin.com/posts/andreflorence_estamos-alice-construindo-um-modelo-de-activity-7295188431180062721-1OoL",
+    "metricas": {
+      "curtidas": 400,
+      "comentarios": 36,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 400 reações e 36 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 11/02/2025. No original a primeira frase é \"Estamos (Alice) construindo...\". A página confirma uma imagem anexada, mas o uso de rosto nela não foi confirmado visualmente.",
+    "nicho": "healthtech",
+    "id": "healthtech-56"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Falar sobre SAÚDE MENTAL deixou de ser tabu em muitas sociedades, mas ainda há grandes DIFERENÇAS na forma como cada país reconhece, nomeia e compartilha esse tipo de sofrimento.",
+    "estrutura": [
+      "Bloco 1: afirmação que parece consenso, virada com um \"mas\"",
+      "Bloco 2: contexto (a pandemia acelerou a conversa sobre ansiedade, estresse e depressão)",
+      "Bloco 3: dado internacional (mais de 40% dos adultos nos EUA relataram sintomas, pesquisa Statista 2025 e 2026)",
+      "Bloco 4: dado do Brasil (32%) marcado com check verde",
+      "Bloco 5: leitura crítica sobre prevalência autorrelatada e diferenças culturais"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem anexada com o dado (gráfico ou infográfico, não confirmado visualmente)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Palavras-chave em caixa alta guiam quem só passa o olho. O número do Brasil ao lado do dos EUA dá comparação imediata, e o post interpreta o dado sem prometer nada.",
+    "autor_ou_marca": "Martha Gabriel, PhD",
+    "link_fonte": "https://pt.linkedin.com/posts/marthagabriel_falar-sobre-sa%C3%BAde-mental-deixou-de-ser-tabu-activity-7508133120509104128-vW3k",
+    "metricas": {
+      "curtidas": 258,
+      "comentarios": 17,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 258 reações e 17 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 22/09/2026. Autora é referência em marketing e tecnologia, não em healthtech, mas o tema e o formato servem ao nicho de saúde mental.",
+    "nicho": "healthtech",
+    "id": "healthtech-57"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Ei, não é burnout. É boreout!",
+    "estrutura": [
+      "Slide 1: capa com o título que corrige um termo que todo mundo usa",
+      "Legenda: sintomas de identificação (desânimo, tédio, sensação de só passar o tempo)",
+      "Legenda: a virada (pode não ser burnout, é boreout, uma síndrome menos falada)",
+      "Slides 2 a 7: conteúdo do documento não lido; a legenda indica explicação do boreout e impacto na saúde mental e na motivação"
+    ],
+    "padrao_visual": {
+      "fundo": "carrossel em PDF (documento de 7 páginas)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Corrige um termo popular com um nome novo e fácil de lembrar, o que dá ao leitor algo para repassar. A legenda de três sintomas faz a pessoa se reconhecer antes de abrir o documento.",
+    "autor_ou_marca": "EBAC (Escola Britânica de Artes Criativas e Tecnologia)",
+    "link_fonte": "https://www.linkedin.com/posts/ebaconline_ei-n%C3%A3o-%C3%A9-burnout-%C3%A9-boreout-ugcPost-7329244345759412226-MTaf/",
+    "metricas": {
+      "curtidas": 3630,
+      "comentarios": 83,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 3.630 reações e 83 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Autor e texto conferidos. Publicado em 19/05/2025 (a data anterior, 16/05, era a do upload do documento). O gancho é o título do documento de 7 páginas; a legenda abre com \"Desânimo, tédio, sensação de estar só passando o tempo.\" Marca de educação, tema de bem-estar corporativo.",
+    "nicho": "healthtech",
+    "id": "healthtech-58"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Três lideranças da Dasa estão entre os 100 Mais Influentes da Saúde 2026.",
+    "estrutura": [
+      "Bloco 1: anúncio do reconhecimento com número (três lideranças)",
+      "Bloco 2: nome e cargo de cada uma (CEO, CIO e diretora de negócios nacionais) e quem concede o prêmio (Grupo Mídia)",
+      "Bloco 3: o que o prêmio destaca (contribuição para a transformação da saúde no Brasil)",
+      "Bloco 4: fecho institucional e três hashtags",
+      "Mídia: 4 imagens em sequência"
+    ],
+    "padrao_visual": {
+      "fundo": "post com 4 imagens",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Prêmio de terceiros é prova social pronta, e cada executivo citado tende a repostar para a própria rede, o que multiplica o alcance. Nomear pessoas humaniza uma marca grande.",
+    "autor_ou_marca": "Dasa",
+    "link_fonte": "https://pt.linkedin.com/posts/dasa_dasa-100maisinfluentesdasa%C3%BAde-lideran%C3%A7aemsa%C3%BAde-activity-7501740046342057985-RGJ-",
+    "metricas": {
+      "curtidas": 332,
+      "comentarios": 20,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 332 reações e 20 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 04/09/2026. A página lista 4 imagens (post de várias imagens, não PDF), classificado como carrossel por isso. O conteúdo de cada imagem não foi visto; uso de rosto presumido por serem imagens de lideranças. Estrutura reescrita a partir da legenda.",
+    "nicho": "healthtech",
+    "id": "healthtech-59"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "A Alice chegou a 100 mil membros. E esse é um marco importante diante da nossa missão: tornar o mundo mais saudável.",
+    "estrutura": [
+      "Bloco 1: marco numérico na primeira linha",
+      "Bloco 2: a ação de bastidor (cada pessoa do time teve o rosto fotografado e impresso na hora para um mural coletivo)",
+      "Bloco 3: o significado (cem mil membros são cem mil pessoas confiando a própria saúde a alguém)",
+      "Bloco 4: frase de efeito \"a luta sempre tem um rosto, nunca só um número\"",
+      "Bloco 5: assinatura da marca (\"Alice. Saúde como deve ser.\")"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo nativo do mural com rostos do time",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Celebra um número grande mostrando pessoas, não gráfico. O ritual físico do mural cria uma imagem memorável, e o time compartilha porque aparece no conteúdo.",
+    "autor_ou_marca": "Alice (gestora de saúde)",
+    "link_fonte": "https://pt.linkedin.com/posts/alice_a-alice-chegou-a-100-mil-membros-e-esse-activity-7495903517791027200-Nu0O",
+    "metricas": {
+      "curtidas": 175,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 175 reações e 7 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 19/08/2026. A página marca a mídia como vídeo. Diferente dos itens da Alice já catalogados (campanha de 1 ano e post do André sobre Alice Agora).",
+    "nicho": "healthtech",
+    "id": "healthtech-60"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Quando um membro da Alice é internado, tem um médico e um time nosso acompanhando ele de perto, todos os dias, ao lado da equipe que já cuida dele.",
+    "estrutura": [
+      "Bloco 1: cena concreta de internação vista pelo lado do paciente",
+      "Bloco 2: nome do modelo (Retaguarda, coordenação de cuidado dentro dos hospitais)",
+      "Bloco 3: resultados em lista: reinternação em 30 dias de 6,6%, satisfação 4,5 de 5 contra 4,2 sem o modelo, 24 hospitais, 150 médicos parceiros, cerca de 70% das internações de urgência acompanhadas",
+      "Bloco 4: promessa operacional (nenhum membro recebe alta sem um plano)",
+      "Bloco 5: prova social externa (3ª vez seguida na lista de empresas de saúde mais inovadoras da Fast Company)"
+    ],
+    "padrao_visual": {
+      "fundo": "post de texto com vídeo nativo",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Começa pela cena que dá medo (internação) e responde com números operacionais, sem promessa clínica. A comparação 4,5 contra 4,2 mostra o efeito do modelo de forma honesta.",
+    "autor_ou_marca": "Alice (gestora de saúde)",
+    "link_fonte": "https://pt.linkedin.com/posts/alice_quando-um-membro-da-alice-%C3%A9-internado-tem-activity-7501728565932027904-Epup",
+    "metricas": {
+      "curtidas": 95,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 95 reações e 4 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 04/09/2026. Engajamento modesto, incluído pela estrutura de dados operacionais. A página marca a mídia como vídeo. No original os itens da lista começam com travessão, trocados aqui. Um comentário público critica a operadora por cortes de serviço, vale saber antes de usar como referência.",
+    "nicho": "healthtech",
+    "id": "healthtech-61"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Compartilho 5 ótimas razões para sua empresa buscar a Certificação de Empresa Promotora da Saúde Mental!",
+    "estrutura": [
+      "Bloco 1: promessa numerada (5 razões)",
+      "Bloco 2: contexto (certificação não obrigatória, mas vantajosa)",
+      "Bloco 3: crédito à imprensa (conversa com Layane Serrano, da Exame)",
+      "Bloco 4: razões com um emoji por item, começando por eficiência operacional e redução de custos com saúde, contribuição previdenciária e absenteísmo",
+      "Bloco 5: dados e casos da Vittude como prova"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, sem mídia identificada na página pública",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Liga saúde mental a dinheiro (custo, absenteísmo, previdência), que é a língua de quem aprova orçamento. Citar a Exame empresta autoridade de imprensa ao post da founder.",
+    "autor_ou_marca": "Tatiana Pimenta (CEO e fundadora da Vittude)",
+    "link_fonte": "https://www.linkedin.com/posts/tatianapimenta_certificado-de-sa%C3%BAde-mental-o-que-a-empresa-activity-7189254309568532480-vPVT",
+    "metricas": {
+      "curtidas": 161,
+      "comentarios": 32,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 161 reações e 32 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Texto e autor conferidos. Publicado em 25/04/2024. Cita a matéria da Exame (Layane Serrano), dentro do ângulo imprensa. O card de matéria não aparece na página pública; fundo ajustado.",
+    "nicho": "healthtech",
+    "id": "healthtech-62"
   }
 ]

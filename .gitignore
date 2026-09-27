@@ -43,3 +43,6 @@ next-env.d.ts
 
 # armazenamento local (modo sem Supabase)
 /.data/
+
+# rascunhos visuais do brainstorming
+/.superpowers/

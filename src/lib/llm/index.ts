@@ -21,6 +21,8 @@ export interface LLM {
   gerarComAnexos?(sistema: string, prompt: string, anexos: AnexoLLM[]): Promise<string>;
   /** Como gerar, mas o modelo pode buscar na web (até maxBuscas vezes). Só existe no Claude. */
   pesquisar?(sistema: string, prompt: string, op: { maxBuscas: number; prazoMs: number }): Promise<string>;
+  /** Como gerar, mas entrega o texto aos pedaços enquanto o modelo escreve. Só existe no Claude. */
+  gerarEmStream?(sistema: string, prompt: string, aoTexto: (delta: string) => void, sinal?: AbortSignal): Promise<string>;
 }
 
 class GeminiLLM implements LLM {
@@ -89,6 +91,22 @@ function registrarFalha(modelo: string, tipo: string, e: unknown, inicio: number
   console.error(`[ia] ${tipo} ${modelo} falhou ${e instanceof Error ? e.name : "erro"} ${Date.now() - inicio}ms`);
 }
 
+/**
+ * Corpo do pedido ao Claude. As instruções fixas grandes vão com cache de prompt de 5 minutos: o Sonnet cacheia a
+ * partir de 1.024 tokens (6 mil caracteres dão folga) e o Haiku só a partir de 4.096, por isso fica de fora.
+ */
+export function parametrosDoPedido(modelo: string, op: { maxTokens: number; esforco?: Esforco }, sistema: string, prompt: string) {
+  const haiku = modelo.startsWith("claude-haiku");
+  const cache = !haiku && sistema.length >= 6000;
+  return {
+    model: modelo,
+    max_tokens: op.maxTokens,
+    system: cache ? [{ type: "text" as const, text: sistema, cache_control: { type: "ephemeral" as const } }] : sistema,
+    messages: [{ role: "user" as const, content: prompt }],
+    ...(op.esforco && !haiku ? { output_config: { effort: op.esforco } } : {}),
+  };
+}
+
 class ClaudeLLM implements LLM {
   nome: string;
   private client: Anthropic;
@@ -102,19 +120,26 @@ class ClaudeLLM implements LLM {
   }
   async gerar(sistema: string, prompt: string): Promise<string> {
     const inicio = Date.now();
-    const stream = this.client.messages.stream({
-      model: this.modelo,
-      max_tokens: this.op.maxTokens,
-      system: sistema,
-      messages: [{ role: "user", content: prompt }],
-      // O Haiku 4.5 não aceita esforço; nos outros, ele segura quanto o modelo pensa (e quanto custa).
-      ...(this.op.esforco && !this.modelo.startsWith("claude-haiku") ? { output_config: { effort: this.op.esforco } } : {}),
-    });
+    const stream = this.client.messages.stream(parametrosDoPedido(this.modelo, this.op, sistema, prompt));
     const msg = await stream.finalMessage().catch((e: unknown) => {
       registrarFalha(this.modelo, "gerar", e, inicio);
       throw e;
     });
     registrarUso(this.modelo, "gerar", msg.usage, inicio);
+    if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
+    if (msg.stop_reason === "max_tokens") throw new Error("Claude parou no limite de tamanho da resposta");
+    return msg.content.map((b) => (b.type === "text" ? b.text : "")).join("");
+  }
+
+  async gerarEmStream(sistema: string, prompt: string, aoTexto: (delta: string) => void, sinal?: AbortSignal): Promise<string> {
+    const inicio = Date.now();
+    const stream = this.client.messages.stream(parametrosDoPedido(this.modelo, this.op, sistema, prompt), sinal ? { signal: sinal } : undefined);
+    stream.on("text", (delta) => aoTexto(delta));
+    const msg = await stream.finalMessage().catch((e: unknown) => {
+      registrarFalha(this.modelo, "gerar-ao-vivo", e, inicio);
+      throw e;
+    });
+    registrarUso(this.modelo, "gerar-ao-vivo", msg.usage, inicio);
     if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
     if (msg.stop_reason === "max_tokens") throw new Error("Claude parou no limite de tamanho da resposta");
     return msg.content.map((b) => (b.type === "text" ? b.text : "")).join("");
@@ -162,6 +187,8 @@ class ClaudeLLM implements LLM {
         throw e;
       });
       registrarUso(this.modelo, "pesquisar", msg.usage, inicio);
+      const consultas = msg.content.flatMap((b) => (b.type === "server_tool_use" && typeof (b.input as { query?: unknown }).query === "string" ? [(b.input as { query: string }).query] : []));
+      if (consultas.length) console.info(`[ia] buscas: ${consultas.join(" | ").slice(0, 600)}`);
       if (msg.stop_reason === "refusal") throw new Error("Claude recusou a solicitação");
       if (msg.stop_reason === "pause_turn" && Date.now() < fim) {
         messages.push({ role: "assistant", content: msg.content });

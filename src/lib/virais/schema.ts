@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { IDS_NICHO } from "@/lib/types";
 
-export const nichoSchema = z.enum(["saas-b2b", "fintech", "healthtech", "edtech", "ecommerce-dtc"]);
+export const nichoSchema = z.enum(IDS_NICHO);
 export const redeSchema = z.enum(["instagram", "linkedin", "x", "facebook"]);
 export const formatoSchema = z.enum([
   "carrossel", "imagem-unica", "print-tweet", "citacao", "lista", "antes-depois", "dado-impacto", "bastidor-founder",

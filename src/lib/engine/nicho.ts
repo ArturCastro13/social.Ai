@@ -27,6 +27,21 @@ const PALAVRAS: Record<Nicho, string[]> = {
     "cosmético", "cosmetico", "pele", "entrega", "desconto", "cupom", "kit", "vegano", "sustentável", "look",
     "tamanho", "estoque", "adicionar ao carrinho",
   ],
+  "marketing-agencias": [
+    "agência", "agencia", "marketing digital", "tráfego pago", "trafego pago", "social media", "branding", "gestão de redes",
+    "assessoria de marketing", "growth", "inbound", "lançamento", "lancamento", "infoproduto", "copywriting", "anúncios",
+    "anuncios", "funil", "leads",
+  ],
+  "servicos-locais": [
+    "clínica de estética", "clinica de estetica", "estética", "estetica", "odontologia", "dentista", "academia", "personal",
+    "salão", "salao", "barbearia", "restaurante", "cardápio", "cardapio", "advocacia", "advogado", "contabilidade",
+    "agende", "agendamento", "unidade", "bairro", "horário de funcionamento", "horario de funcionamento",
+  ],
+  "ia-dev": [
+    "inteligência artificial", "inteligencia artificial", "ia generativa", "llm", "machine learning", "modelo de linguagem",
+    "desenvolvedores", "devs", "developer", "sdk", "open source", "github", "deploy", "agente de ia", "agentes", "prompt",
+    "gpu", "dev tools",
+  ],
 };
 
 export function textoDaMarca(b: BrandProfile): string {

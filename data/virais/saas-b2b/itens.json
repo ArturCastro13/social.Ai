@@ -497,5 +497,1380 @@
     },
     "status": "verificado",
     "notas_curadoria": "Adaptação em PT do gancho original 'AI skills will be crucial for years to come. Knowing how to use ChatGPT isn't enough.' Autor é criador de conteúdo B2B, não founder de SaaS."
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "O engenheiro, produteiro e designer tradicionais ficaram obsoletos na Conta Azul.",
+    "estrutura": [
+      "Bloco 1: afirmação chocante de que três cargos clássicos ficaram obsoletos dentro de uma empresa SaaS conhecida",
+      "Bloco 2: descreve o PM que fez carreira em metodologia, frameworks e rituais e diz que esse perfil perdeu valor ali dentro",
+      "Bloco 3: explica o modelo AI Native: tudo começa no PRD (regra de negócio, compliance fiscal e contábil) e a IA constrói em minutos o que levava semanas",
+      "Bloco 4: virada: PRD raso gera produto raso, só que mais rápido; metodologia virou commodity e o diferencial passa a ser profundidade de negócio",
+      "Bloco 5: anuncia a troca de nomenclatura para Product Builder e AI Engineer e compara com o PM tradicional, em que a engenharia era o gargalo",
+      "Bloco 6: frase dupla de fechamento (quem decorou método vai sentir o chão mexer, quem entende negócio nunca valeu tanto) e convite para conversar nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do autor sorrindo, braços cruzados, camiseta da Conta Azul, em frente a painel azul da empresa",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Usa o nome de uma empresa SaaS real e conhecida para bancar uma frase que ameaça diretamente o cargo de quem lê (PM, designer, engenheiro). O leitor de produto precisa ler até o fim para saber se ainda tem valor, e a pergunta aberta no final transforma esse incômodo em 46 comentários de debate.",
+    "autor_ou_marca": "Neto Rodrigues (Conta Azul)",
+    "link_fonte": "https://www.linkedin.com/posts/netorodrigues_o-engenheiro-produteiro-e-designer-tradicionais-activity-7503769367852064768-EQSB",
+    "metricas": {
+      "curtidas": 209,
+      "comentarios": 46,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (209) e comentários (46) lidos nos dados estruturados da página pública do post em 27/09/2026. Compartilhamentos e visualizações não aparecem na página."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 10/09/2026. Texto e autor conferidos na fonte. Correção: não é carrossel nem PDF; o post tem uma única foto do autor. Conta Azul é ERP e gestão financeira para PMEs, dentro do nicho.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Aumentei em 4x a conversão de trial para assinante do meu SaaS com uma dica super boba que você pode aplicar no seu produto em 1 dia.",
+    "estrutura": [
+      "Bloco 1: resultado numérico (4x na conversão trial para assinante) mais promessa de aplicar em 1 dia",
+      "Bloco 2: contexto do produto (Posttar, piloto automático de carrosséis para Instagram)",
+      "Bloco 3: o problema: metade dos usuários testa em 15 minutos, gasta todos os créditos e nunca volta para escolher plano no fim dos 3 dias",
+      "Bloco 4: a solução: ao gastar o último crédito, a pessoa cai numa página com créditos bônus e desconto no primeiro mês, oferta que dura 30 minutos de verdade",
+      "Bloco 5: resultado: mais compras e gente assinando antes do fim do trial",
+      "Bloco 6: CTA informal pedindo comentário para engajar e receber mais conteúdo de SaaS"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, sem imagem ou documento",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Combina número concreto (4x) com barreira baixa ('dica boba', '1 dia'), então qualquer founder de SaaS acha que consegue replicar. O detalhe operacional real (gatilho no último crédito, oferta de 30 minutos) dá credibilidade e o tom descontraído aproxima.",
+    "autor_ou_marca": "Tiago Costa (Posttar)",
+    "link_fonte": "https://www.linkedin.com/posts/tiagofonsecacosta_aumentei-em-4x-a-convers%C3%A3o-de-trial-para-activity-7501012617155670018-IOav",
+    "metricas": {
+      "curtidas": 189,
+      "comentarios": 15,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (189) e comentários (15) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/09/2026. Texto e autor conferidos. Correção: não há documento anexado; é post só de texto, por isso o formato mudou de carrossel para bastidor-founder.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "\"Não tenho interesse.\" Essa é uma das objeções que mais derruba SDR júnior.",
+    "estrutura": [
+      "Bloco 1: abre com a objeção literal entre aspas, como numa ligação",
+      "Bloco 2: diz que não é difícil de contornar, mas a maioria não entende o que ela significa, e promete 3 movimentos mais o que não fazer",
+      "Bloco 3: resposta errada marcada com X e por que queima o lead",
+      "Bloco 4: movimento 1: validar e perguntar se é momento, budget ou prioridade",
+      "Bloco 5: movimento 2 (se for timing, combinar data) e movimento 3 (se faltar contexto, oferecer caso de empresa parecida)",
+      "Bloco 6: fechamento: a objeção é o começo da conversa, mais CTA para seguir"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, com emojis de X e check marcando errado e certo",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Começa com a frase exata que todo SDR ouve todo dia, então o reconhecimento é instantâneo. Entrega o roteiro palavra por palavra em formato errado versus certo, o que torna o post salvável e fácil de repassar para o time.",
+    "autor_ou_marca": "Jéssica Bosco Holz",
+    "link_fonte": "https://www.linkedin.com/posts/jessicabosco_sdr-obje%C3%A7%C3%B5es-coldcall-activity-7464655096992358401-SrZn",
+    "metricas": {
+      "curtidas": 208,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (208) e comentários (9) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/05/2026. Texto e autora conferidos. Correção: não há documento anexado; é post só de texto em lista, formato mudou de carrossel para lista.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O Hubspot acaba de resolver a reclamação NÚMERO UM dos times de vendas.",
+    "estrutura": [
+      "Bloco 1: anúncio com tom de notícia: a maior reclamação de vendas (e de marketing e produto) foi resolvida",
+      "Bloco 2: alívio emocional exagerado: não precisa mais preencher o CRM, o Salesbud Autopilot faz isso",
+      "Bloco 3: a dor: preencher CRM no meio da reunião, WhatsApp Business não integrado, informação de calls perdida",
+      "Bloco 4: dado de impacto: 70% do tempo do vendedor vai para tarefas manuais",
+      "Bloco 5: lista com setas do que muda agora (WhatsApp resumido no CRM, reuniões gravadas, temperatura do lead, pitch avaliado por IA, follow ups criados)",
+      "Bloco 6: CTA segmentado por público (vendas, marketing, produto, quem riu) pedindo comentário, acesso no comentário e P.S. assumindo que é publi"
+    ],
+    "padrao_visual": {
+      "fundo": "fundo branco com logo da HubSpot, sinal de mais e ícones de WhatsApp, telefone, Zoom, Teams e Google Agenda",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega carona numa marca gigante (HubSpot) e numa dor universal de vendas (preencher CRM), com tom informal e exagerado que soa humano. O CTA que chama quatro públicos diferentes para comentar explica 49 comentários mesmo sendo uma publi declarada.",
+    "autor_ou_marca": "Bianca Maia, MSc (publi para Salesbud)",
+    "link_fonte": "https://www.linkedin.com/posts/atalbiancamaia_o-hubspot-acaba-de-resolver-a-reclama%C3%A7%C3%A3o-activity-7457384100585201667-P9Vv",
+    "metricas": {
+      "curtidas": 136,
+      "comentarios": 49,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (136) e comentários (49) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 05/05/2026. Texto e autora conferidos. Correção: não é carrossel; tem uma imagem única (HubSpot mais ícones de apps). O próprio post declara ser publi. A menção a um post quase idêntico de outra autora não foi verificada nesta rodada.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Conheci um SaaS que saiu de R$ 3 mil de faturamento para R$ 942 mil em 8 meses. E o mais 🤯 é que é 1 SaaS de 5.",
+    "estrutura": [
+      "Bloco 1: salto de faturamento com números exatos e prazo, mais a revelação de que é 1 de 5",
+      "Bloco 2: o segredo em uma linha: um portfólio de Micro-SaaS",
+      "Bloco 3: citação do fundador e apresentação dele e da holding (mais de R$ 4 milhões por ano com equipe pequena)",
+      "Bloco 4: história: o Clonou ficou 3 anos de lado faturando de R$ 3 a 6 mil por mês",
+      "Bloco 5: virada: influenciadores e infoprodutores entram como afiliados, vendas disparam, mais de 1.039 afiliados e top 3 da Eduzz",
+      "Bloco 6: bastidores da escala (suporte, rodízio de equipe, infra abaixo de R$ 1 mil) e reflexão do autor sobre preferir um portfólio de pequenas apostas"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto com emojis marcando cada parágrafo",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O contraste de R$ 3 mil para R$ 942 mil em 8 meses gera curiosidade imediata, e o '1 de 5' amplia a ambição. A narrativa de case real, com citações do fundador e números de bastidor, segura a leitura até a lição final.",
+    "autor_ou_marca": "Bruno Okamoto (Comunidade Micro-SaaS)",
+    "link_fonte": "https://www.linkedin.com/posts/obrunookamoto_conheci-um-saas-que-saiu-de-r-3-mil-de-faturamento-activity-7225116413189844992-p1pP",
+    "metricas": {
+      "curtidas": 311,
+      "comentarios": 23,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (311) e comentários (23) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/08/2024. Texto e autor conferidos. O case contado é de Jonatan Fróes (Clonou), não do autor.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Este CEO fez um app em vibe coding sozinho e faturou R$ 15M em 48h.",
+    "estrutura": [
+      "Bloco 1: resultado extremo com prazo curto (R$ 15M em 48h) e 'maior case de Lovable do mundo'",
+      "Bloco 2: frases curtas de reforço ('Velocidade virou a nova vantagem')",
+      "Bloco 3: contexto: Caio Moretti, com 400 funcionários, codou ele mesmo no Lovable em 14 dias",
+      "Bloco 4: lista com setas do que tinha no produto",
+      "Bloco 5: por que deu certo, em lista",
+      "Bloco 6: playbook do CEO em passos curtos, mudança de squads fixos para pools por problema e link para a entrevista completa no YouTube"
+    ],
+    "padrao_visual": {
+      "fundo": "post de texto em listas com vídeo do YouTube embutido (entrevista)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número grande com prazo absurdo mais o tema do momento (vibe coding) desperta curiosidade e ceticismo ao mesmo tempo. As listas escaneáveis (produto, motivos, playbook) entregam valor prático rápido e empurram para a entrevista completa.",
+    "autor_ou_marca": "Bruno Okamoto",
+    "link_fonte": "https://www.linkedin.com/posts/obrunookamoto_como-ele-fez-r-15-milh%C3%B5es-em-apenas-48-horas-activity-7359577880156168193-0xlN",
+    "metricas": {
+      "curtidas": 268,
+      "comentarios": 19,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Contadores visíveis na página pública em 27/09/2026: 268 reações e 19 comentários (este post não traz reações nos dados estruturados, só no HTML)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/08/2025. Texto e autor conferidos. O gancho fala em R$ 15M e o corpo em US$ 3 milhões, sem explicar a conversão. O produto do case é de edtech (não B2B puro); entra pelo público de founders de SaaS.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-21"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "O SDR perde tempo em 3 coisas (e nenhuma é gerar oportunidade 😅😅)",
+    "estrutura": [
+      "Bloco 1: gancho com número e ironia, mais CTA de comentário logo no topo ('Comenta SDR que vou te entregar a solução')",
+      "Bloco 2: cena do dia a dia vendendo pelo WhatsApp: conversas abertas e notificações sem parar",
+      "Bloco 3: pergunta que quebra a sensação de produtividade: quantas conversas avançaram?",
+      "Bloco 4: item 1 (tentar se organizar) e item 2 (caçar contexto em mil abas), cada um com consequências marcadas com X",
+      "Bloco 5: item 3 (digitar tudo manualmente) e diagnóstico: o problema não é o WhatsApp, é operar sem inteligência",
+      "Bloco 6: como a PipeLovers resolve com IA e Wati e oferta do material para quem comentar SDR"
+    ],
+    "padrao_visual": {
+      "fundo": "print real de conversa de WhatsApp com um SDR ('Falei com 42 leads', 'nenhum avançou de etapa')",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O print de WhatsApp mostra a dor em uma imagem que qualquer gestor reconhece (42 leads, zero avanço). O CTA de 'comente a palavra' logo no começo multiplica comentários (98 contra 50 reações), o que empurra o alcance.",
+    "autor_ou_marca": "Gustavo Pagotto (PipeLovers)",
+    "link_fonte": "https://www.linkedin.com/posts/gpagotto_o-sdr-perde-tempo-em-3-coisas-e-nenhuma-activity-7447584099462017024-B_hN",
+    "metricas": {
+      "curtidas": 50,
+      "comentarios": 98,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (50) e comentários (98) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/04/2026. Texto e autor conferidos. Exemplo de post isca de comentário, com conteúdo patrocinado ou em parceria com a Wati.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-22"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "A maioria ainda usa a regra 80/20 em vendas do jeito errado.",
+    "estrutura": [
+      "Bloco 1: acusa o erro comum com um conceito que todo mundo conhece (Pareto tratado como gestão de tempo)",
+      "Bloco 2: reenquadra: em vendas B2B, Pareto separa atividade de decisão",
+      "Bloco 3: lista do que gera 80% dos resultados (contas bem escolhidas, diagnóstico profundo, redução de risco)",
+      "Bloco 4: lista do que não gera, marcada com X (pipeline inflado, follow-up de lembrete, calls sem critério)",
+      "Bloco 5: o que os melhores vendedores fazem, em setas",
+      "Bloco 6: frase final de efeito (não vence quem faz mais, vence quem decide melhor) e crédito do texto"
+    ],
+    "padrao_visual": {
+      "fundo": "infográfico claro em tons de azul com título grande, gráfico de pizza 80/20 e três blocos de dicas com ícones",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Pega um conceito famoso e diz que o leitor usa errado, o que provoca curiosidade e leve ego. O infográfico denso funciona como material de consulta, então é salvo, e as listas de faz e não faz são fáceis de escanear.",
+    "autor_ou_marca": "Koncepto Gestão Corporativa (texto de André Santos)",
+    "link_fonte": "https://www.linkedin.com/posts/konceptogc_a-maioria-ainda-usa-a-regra-8020-em-vendas-activity-7444716155983814656-SIvn",
+    "metricas": {
+      "curtidas": 113,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (113) e comentários (8) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 31/03/2026. Texto e página conferidos; o post credita o texto original a André Santos, Head de Vendas. Koncepto é consultoria, não SaaS; entra pelo tema vendas B2B.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-23"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Cada \"não\" tem um propósito quando o \"sim\" finalmente chega 🙌",
+    "estrutura": [
+      "Bloco 1: frase emocional sobre rejeições e aprovação",
+      "Bloco 2: apresenta a candidata real (Michelle Cavalcante) e a caminhada até o Hospital da Mulher de São Paulo",
+      "Bloco 3: a marca se coloca como coadjuvante ('ainda que de longe')",
+      "Bloco 4: CTA duplo: marque alguém que está nessa busca ou conte qual foi o seu sim",
+      "Bloco 5: repost do post original da candidata, com foto do crachá novo"
+    ],
+    "padrao_visual": {
+      "fundo": "foto amadora de estojo com canetas coloridas e crachá do hospital em destaque (repost do post da candidata)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca de RH tech tira o produto do centro e amplifica a conquista de uma usuária real, com foto crua do crachá novo. O CTA de marcar alguém ou contar o próprio 'sim' puxa 40 comentários de gente em busca de emprego.",
+    "autor_ou_marca": "Gupy",
+    "link_fonte": "https://www.linkedin.com/posts/gupy_cada-n%C3%A3o-tem-um-prop%C3%B3sito-quando-o-sim-activity-7508199633391628288-K_I3",
+    "metricas": {
+      "curtidas": 205,
+      "comentarios": 40,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (205) e comentários (40) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Texto e página conferidos. Correção: é um repost comentado de um post da Michelle Cavalcante; a imagem é do post original (crachá, rosto só em miniatura).",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-24"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "\"Minha startup de IA chegou a US$ 1M de MRR em 3 meses.\"",
+    "estrutura": [
+      "Bloco 1: cita a frase de vaidade que todo founder de IA repete",
+      "Bloco 2: reconhece os números, as curvas verticais e o apetite dos VCs",
+      "Bloco 3: vira o jogo: e quando 90% dos clientes pagantes somem?",
+      "Bloco 4: nomeia o fenômeno: churn de conclusão (dev paga um ou dois meses, termina o projeto e vai embora)",
+      "Bloco 5: mercado B2B: campeões verticais (Harvey, Hebbia) ainda ouvem 'o que você agrega além do ChatGPT Pro?'",
+      "Bloco 6: diferenciais defensáveis (dados proprietários, agentes, UX) e fechamento: ciclos de IA comprimidos tornam o vencedor imprevisível"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, abrindo com a frase citada entre aspas",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com a frase de vaidade mais comum do ecossistema e depois a desmonta com um conceito novo e nomeado ('completion churn'). Contrariar o hype com argumento e exemplos reais gera debate (104 comentários).",
+    "autor_ou_marca": "Gabriel Jarrosson",
+    "link_fonte": "https://www.linkedin.com/posts/gabrieljarrosson_my-ai-startup-is-at-1m-mrr-in-3-months-activity-7306298247281602560-li-P",
+    "metricas": {
+      "curtidas": 585,
+      "comentarios": 104,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (585) e comentários (104) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"My AI startup is at $1M MRR in 3 months\". Post de 14/03/2025. Texto e autor conferidos. Correção: não há documento anexado; é post só de texto.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-25"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Com US$ 20 mil de MRR e 5% de churn, você nunca vai chegar a US$ 40 mil.",
+    "estrutura": [
+      "Bloco 1: afirmação categórica com números",
+      "Bloco 2: a conta: US$ 2 mil de MRR novo por mês; churn zero chega a 44 mil em 12 meses, churn de 5% para em 29 mil",
+      "Bloco 3: o gap de US$ 15 mil por mês com o mesmo produto",
+      "Bloco 4: onboarding por e-mail (Loops) com cadência dia a dia e gatilho por comportamento",
+      "Bloco 5: suporte com agente (Chatbase) treinado em docs e tickets, integrado aos sistemas, com regra de escalar para humano",
+      "Bloco 6: analytics (PostHog) com um evento de ativação, mensagem de valor clara e fechamento: ninguém comemora o cliente que ficou 3 anos"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem clara e minimalista com três ícones de app (Loops, Chatbase, PostHog) num card arredondado",
+      "contraste": "baixo",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Transforma churn, um conceito abstrato, numa conta simples que o founder faz de cabeça e sente no bolso (15 mil por mês de diferença). Depois entrega táticas concretas com ferramentas nomeadas, e a imagem das três marcas resume a stack.",
+    "autor_ou_marca": "Sandra Đajic",
+    "link_fonte": "https://www.linkedin.com/posts/sandra-dajic_at-20k-mrr-with-5-churn-you-will-never-activity-7484880410712104960-wTc3",
+    "metricas": {
+      "curtidas": 91,
+      "comentarios": 26,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (91) e comentários (26) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"At $20k MRR with 5% churn, you will never reach $40k.\" Post de 20/07/2026. Texto e autora conferidos. Correção: não é carrossel; é texto em lista com uma imagem única. O vínculo dela com a Chatbase não foi confirmado na página (o texto só diz 'we use Chatbase').",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-26"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Meus 5 melhores templates de cold email para SaaS B2B de todos os tempos, ranqueados por taxa de resposta. Roube todos.",
+    "estrutura": [
+      "Bloco 1: promessa com número e permissão para copiar",
+      "Bloco 2: prova: análise de 147.687 e-mails enviados por SDRs, BDRs e AEs vendendo SaaS",
+      "Bloco 3: o que cada template inclui (assunto, texto palavra por palavra, por que funciona, follow-up)",
+      "Bloco 4: resultado de um AE mentorado: 12% de resposta só com o template 1",
+      "Bloco 5: CTA triplo: curtir, comentar 'Email' e conectar",
+      "Bloco 6: P.S. com urgência para começar o trimestre"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto, sem imagem",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Amostra gigante (147.687 e-mails) dá autoridade e o 'roube todos' baixa a guarda. O material fica preso ao comentário, então quase todo leitor interessado comenta (104 comentários para 112 reações).",
+    "autor_ou_marca": "Aaron Reeves (Outbound OS)",
+    "link_fonte": "https://www.linkedin.com/posts/aaron-reeves-sales_my-top-5-b2b-saas-cold-email-templates-of-activity-7445759835784040448-6Xtr",
+    "metricas": {
+      "curtidas": 112,
+      "comentarios": 104,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (112) e comentários (104) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"My top 5 B2B SaaS cold email templates of all time ranked by response rate. Steal them all.\" Post de 03/04/2026. Texto e autor conferidos. Correção: não há imagem; é post só de texto.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-27"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Guia rápido de SaaS (Software as a Service). Tudo o que eu sei sobre o mercado 👇",
+    "estrutura": [
+      "Bloco 1: título de cheat sheet e credencial (CFO fracionado de dezenas de founders de SaaS)",
+      "Bloco 2: o que é SaaS",
+      "Bloco 3: como funciona o modelo recorrente (MRR e ARR)",
+      "Bloco 4: como calcular MRR: novo, churn, expansão e contração",
+      "Bloco 5: por que investidores amam SaaS e cuidados com o modelo",
+      "Bloco 6: imagem de cheat sheet que resume tudo, com glossário de métricas"
+    ],
+    "padrao_visual": {
+      "fundo": "cheat sheet vertical em fundo branco com blocos cinza escuro, fórmulas, logos de ferramentas e coluna de métricas; foto pequena do autor no rodapé",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Formato de cheat sheet é salvo e compartilhado por ser referência de consulta. A credencial no início e as seções com setas deixam o conteúdo didático para founders e times financeiros.",
+    "autor_ou_marca": "Josh Aharonoff, CPA",
+    "link_fonte": "https://www.linkedin.com/posts/joshaharonoff_software-as-a-service-saas-cheat-sheet-activity-7060988853737680896-sXqq",
+    "metricas": {
+      "curtidas": 1272,
+      "comentarios": 59,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (1.272) e comentários (59) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Software as a Service (SaaS) Cheat Sheet ... This is everything I know about the space\". Post de 07/05/2023 (fora da janela preferida). Texto, autor e imagem conferidos.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-28"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Algumas críticas que recebi sobre minha presença no LinkedIn: é perda de tempo. Não é importante. Não tem impacto no negócio.",
+    "estrutura": [
+      "Bloco 1: lista as críticas recebidas, cada uma com um emoji",
+      "Bloco 2: vira com um fato: estamos contratando na EMEA e procurei 29 candidatos ontem à noite",
+      "Bloco 3: prova: 19 responderam em horas e 6 entrevistas marcadas",
+      "Bloco 4: pergunta irônica sobre impacto no negócio e promessa de continuar"
+    ],
+    "padrao_visual": {
+      "fundo": "post só de texto",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A estrutura crítica seguida de prova numérica vira o jogo em poucas linhas. O líder de vendas defende o próprio hábito com resultado mensurável, o que dá munição a quem quer justificar LinkedIn para o chefe.",
+    "autor_ou_marca": "Kyle Coleman",
+    "link_fonte": "https://www.linkedin.com/posts/kyletcoleman_sales-sdr-activity-6925839754538184704-f3Dw",
+    "metricas": {
+      "curtidas": 2475,
+      "comentarios": 185,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações (2.475) e comentários (185) lidos nos dados estruturados da página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Some criticism I've gotten regarding my LinkedIn presence: It's a waste of time. It's not important. There's no business impact.\" Post de 29/04/2022 (fora da janela preferida). Texto e autor conferidos. A empresa dele na época não aparece no post.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-29"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Sabe quem vai ser o maior fã da nova IA do RD Station CRM? O seu vendedor nº 1",
+    "estrutura": [
+      "Slide 1: pergunta de curiosidade em fundo azul marinho, foto de vendedor sorrindo, mockups de chat e gráfico, pílula ciano com a resposta e seta de arraste",
+      "Slide 2: a dor nomeada: o gênio do fechamento que não consegue atualizar o histórico do sistema no fim do dia",
+      "Slide 3: o dilema do gestor: precisa dos dados para previsibilidade, mas cada minuto no administrativo é receita perdida",
+      "Slide 4: apresenta o add-on IA para Negociações como copiloto invisível",
+      "Slide 5: como funciona: a IA escuta a call, reunião ou WhatsApp e preenche o CRM",
+      "Slide 6: prova concreta: resumo tático e follow-up agendados sem digitar uma linha",
+      "Slide 7: benefício duplo: horas produtivas para o time e forecast para o gestor",
+      "Slide 8: CTA de comentário: comente COPILOTO e receba o link na DM"
+    ],
+    "padrao_visual": {
+      "fundo": "azul marinho com destaques ciano da marca, foto de pessoa real e mockups de interface",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Abre pelo beneficiário inesperado (o vendedor, não o gestor) e transforma uma feature em conflito humano conhecido: bom de negociação, ruim de preencher CRM. A resposta já vem na capa em pílula de destaque, e o CTA de palavra no comentário (COPILOTO) gera sinal de engajamento e lead na DM.",
+    "autor_ou_marca": "RD Station (@rdstation)",
+    "link_fonte": "https://www.instagram.com/p/DdryHHFD_te/",
+    "metricas": {
+      "curtidas": 22,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública (22 likes, 8 comments) e no embed captioned, que mostrava View all 5 comments; adotado o número da meta description"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026, carrossel de cerca de 8 slides. Capa conferida na imagem do embed. Legenda abre com: Bons vendedores custam caro, o tempo deles gastando energia com burocracia custa mais caro ainda. CTA da legenda confirmado: Comente COPILOTO. Slides 2 a 8 descritos pela curadoria original, não conferidos um a um. Engajamento absoluto baixo; vale como referência de estrutura de carrossel de feature de SaaS BR, não como viral.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Tudo que a liderança quer ver (e não quer ver) em uma operação de vendas com IA",
+    "estrutura": [
+      "Slide 1: capa do podcast Bastidores do Resultado T3EP03 com rosto do convidado ao microfone e promessa de lista quer ver / não quer ver",
+      "Slide 2: quer ver: o contexto do cliente como ativo central da operação",
+      "Slide 3: não quer ver: escalar a própria desordem, com dados de 75% que não batem meta e 62% que não acompanham o processo",
+      "Slide 4: quer ver: o time focado em estratégia, 80% do tempo em insights e não em extrair dados",
+      "Slide 5: não quer ver: projetos de IA naufragando antes do ROI, citando 95% segundo o MIT",
+      "Slide 6: quer muito ver: marketing, vendas e atendimento conectados",
+      "Slide 7: CTA para o episódio do podcast"
+    ],
+    "padrao_visual": {
+      "fundo": "ciano vivo com moldura roxa e foto do convidado recortada",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A estrutura binária quer ver e não quer ver dá ritmo e faz o gestor se autoavaliar a cada slide. Os números por slide (75%, 62%, 95%) dão autoridade e tornam cada página salvável, e o rosto do convidado transforma o recorte de podcast em conteúdo de pessoa, não de marca.",
+    "autor_ou_marca": "RD Station (@rdstation), com Fabio Duran (CEO da 8D Hubify)",
+    "link_fonte": "https://www.instagram.com/p/DdpOydtDxNT/",
+    "metricas": {
+      "curtidas": 35,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (35 likes, 6 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/09/2026, carrossel de cerca de 7 slides, recorte do podcast Bastidores do Resultado (T3EP03). Capa conferida na imagem do embed. Legenda abre com citação: No mercado de hoje não existe mais um gargalo tecnológico. O grande problema é a existência de silos de dados. Dados dos slides internos vêm da curadoria original.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "O maior presente que o seu cliente pode receber é um processo que funcione.",
+    "estrutura": [
+      "Slide 1: frase contraintuitiva em caixa alta com ícones de presente, foto de vendedor e cliente e seta de arraste",
+      "Slide 2: crítica ao mercado: todo setembro todo mundo corta margem para bater meta",
+      "Slide 3: tese: confiança vem de marketing, vendas e atendimento falando a mesma língua",
+      "Slide 4: oferta em três cartões (1º mês grátis, 30% off, CRM grátis por 6 meses)",
+      "Slide 5: antes do Brasil que vende existe o Brasil que escolhe",
+      "Slide 6: cenas de jornada fragmentada vistas pelo cliente",
+      "Slide 7: o ecossistema como solução para operar como frente única",
+      "Slide 8: CTA: comente ECOSSISTEMA e receba as ofertas na DM"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com tipografia grande azul marinho em caixa alta e foto de pessoas na metade inferior",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Pega uma data promocional saturada (Mês do Cliente) e a vira do avesso: o presente não é desconto, é processo. Isso posiciona a oferta contra a guerra de preço (Seja a primeira escolha, e não apenas o menor preço) antes de mostrar os descontos.",
+    "autor_ou_marca": "RD Station (@rdstation)",
+    "link_fonte": "https://www.instagram.com/p/DduRMiPj2x3/",
+    "metricas": {
+      "curtidas": 16,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública (16 likes, 3 comments) e no embed captioned"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026, carrossel de cerca de 8 slides. Capa conferida na imagem do embed. Legenda abre com: No fim do dia, o maior brinde que você pode oferecer é não fazer o seu cliente perder tempo. CTA ECOSSISTEMA confirmado na legenda. Engajamento baixo; referência de estrutura de oferta sazonal B2B.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "70,7% das empresas já usam IA. Só 6,3% conseguem dizer que o processo está realmente orquestrado.",
+    "estrutura": [
+      "Slide 1: contraste de dois números (70,7% vs 6,3%) em destaque sobre grade de pontos, cartão Pipefy AI Research com selo Exclusivo",
+      "Slide 2: iniciativa não significa maturidade",
+      "Slide 3: o paradoxo da automação: mais ferramentas, menos integração",
+      "Slide 4: a IA não corrige um processo fragmentado, ela acelera a fragmentação",
+      "Slide 5: a diferença está no processo, não na tecnologia",
+      "Slide 6: a IA não substituiu o time, ela muda o papel dele",
+      "Slide 7: enquanto a governança não chega, a IA já está sendo usada sem controle",
+      "Slide 8: três movimentos separam quem entrega resultado de quem acumula pilotos: orquestração agêntica",
+      "Slide 9: CTA pergunta: sua operação já usa IA? ela já está orquestrada? baixe a pesquisa"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com grade de pontos azul e magenta e degradê lilás, tipografia editorial",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Dado proprietário com contraste brutal entre dois números cria o gap que prende no primeiro slide. Cada slide seguinte é uma frase de tese curta e citável, e o fecho vira pergunta de autodiagnóstico que leva ao download.",
+    "autor_ou_marca": "Pipefy Brasil (@pipefybr)",
+    "link_fonte": "https://www.instagram.com/p/Ddj-c3xlY3A/",
+    "metricas": {
+      "curtidas": 27,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (27 likes, 2 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/09/2026, carrossel de cerca de 9 itens, pesquisa com 148 empresas clientes no Brasil e nos EUA. Capa conferida na imagem do embed. Legenda abre com: Exclusivo: Pipefy AI Research! O embed indica um item de vídeo dentro do carrossel.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "85,2% das empresas brasileiras ainda calculam a remuneração variável em planilhas.",
+    "estrutura": [
+      "Slide 1: capa Como as empresas operam a Remuneração Variável no Brasil, com três números nas folhas de um trevo (85,2%, 89 horas por mês, 45%)",
+      "Slide 2: ouvimos 100 empresas no Brasil: 85,2% ainda calculam RV em planilhas",
+      "Slide 3: pergunta: quanto tempo estratégico a sua empresa perde nesse processo sem perceber?",
+      "Slide 4: nós temos a resposta do mercado: apresenta o estudo",
+      "Slide 5: o que tem no relatório em quatro tópicos (porte vs tempo, custo do erro, déficit de confiança, alavanca de performance)",
+      "Slide 6: CTA: pesquisa já disponível, acesse agora"
+    ],
+    "padrao_visual": {
+      "fundo": "bege claro com trevo verde escuro e tipografia serifada",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um número alto e vergonhoso sobre uma dor que todo gestor comercial conhece (planilha de comissão) gera identificação imediata. O trevo da capa vira o próprio gráfico da marca, e a pergunta no slide 3 transforma o dado em custo pessoal antes de oferecer o material.",
+    "autor_ou_marca": "Trevo by Sankhya (@trevo.br_), em collab exibido no perfil da Meetime (@meetimebr)",
+    "link_fonte": "https://www.instagram.com/p/DaiF_J5ESJl/",
+    "metricas": {
+      "curtidas": 31,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (31 likes, 0 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 08/07/2026, carrossel de cerca de 6 slides. O gancho é a primeira linha da legenda (confirmada); a capa traz o título Como as empresas operam a Remuneração Variável no Brasil. O embed atribui a autoria a trevo.br_; a presença na grade da Meetime (collab) vem da curadoria original, não reconferida. Legenda cita 69% dos vendedores questionando a própria comissão.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Fazendo prospecção outbound pelo CRM? O CRM foi criado para a gestão dos vendedores, e não para guiar a rotina de SDRs.",
+    "estrutura": [
+      "Slide 1: pergunta que acusa o erro comum com marca-texto verde limão e anúncio de 3 problemas específicos",
+      "Slide 2: Problema #1: desorganização na prospecção, com lista de sintomas",
+      "Slide 3: Problema #2: perda de tempo entre telas e ferramentas",
+      "Slide 4: Problema #3: dificuldade de seguir a cadência",
+      "Slide 5: a solução: Meetime Flow e o que ele faz",
+      "Slide 6: CTA: faça a demo, com prova social de +500 empresas"
+    ],
+    "padrao_visual": {
+      "fundo": "cinza claro com marca-texto verde limão e traços decorativos",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Nomeia um erro que o SDR comete sem perceber e já promete na capa um número fechado de problemas, o que dá sensação de diagnóstico e motiva arrastar até o fim. Estrutura problema, problema, problema, solução é fácil de replicar.",
+    "autor_ou_marca": "Meetime (@meetimebr)",
+    "link_fonte": "https://www.instagram.com/p/DYmiCjuAK7A/",
+    "metricas": {
+      "curtidas": 7,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (7 likes, 1 comment)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/05/2026, carrossel de cerca de 6 slides. Capa conferida na imagem do embed. Legenda abre com: O CRM foi feito para vendedores, não para SDRs. Engajamento muito baixo; entra pela estrutura exemplar de carrossel problema e solução.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Não mais: esqueci de preencher o CRM com os dados do WhatsApp. E mais: o preenchimento automático salvou minha rotina de vendas.",
+    "estrutura": [
+      "Slide 1: antes e depois em balões de fala (NÃO MAIS / E MAIS) sobre fundo claro",
+      "Slide 2: o que é o WhatsApp Sync",
+      "Slide 3: para quem é: times de 3 ou mais vendedores B2B que vendem pelo celular",
+      "Slide 4: como facilita a rotina de vendedores e gestores",
+      "Slide 5: transição: e o que as pessoas que usam estão falando?",
+      "Slide 6: depoimento de cliente 1 em mockup de celular",
+      "Slide 7: depoimento de cliente 2",
+      "Slide 8: depoimento de cliente 3",
+      "Slide 9: CTA: teste grátis por 14 dias"
+    ],
+    "padrao_visual": {
+      "fundo": "branco com leve degradê verde na capa, balões de fala, títulos em verde WhatsApp e azul",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A capa usa a voz do próprio vendedor em formato de mensagem, o que soa como depoimento e não como anúncio. Três depoimentos em sequência reforçam a prova social antes do teste grátis de 14 dias.",
+    "autor_ou_marca": "Agendor CRM (@agendorcrm)",
+    "link_fonte": "https://www.instagram.com/p/DduF6qTGAsc/",
+    "metricas": {
+      "curtidas": 10,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (10 likes, 1 comment)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026, carrossel de cerca de 9 slides. Capa conferida na imagem do embed (fundo claro, não azul marinho como na curadoria original). Legenda abre com: O vendedor vende pelo WhatsApp, mas depois precisa parar tudo para atualizar o CRM? (com emoji de palhaço). Teste de 14 dias confirmado na legenda.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Sete CNPJs fechando por minuto. Casas Bahia, Habib's e Tok&Stok pedindo socorro à Justiça em questão de semanas.",
+    "estrutura": [
+      "Bloco 1: vídeo com capa de manchete de jornal antigo: dívida de 44 bilhões de reais e planos de recuperação judicial",
+      "Bloco 2: legenda abre com número chocante e marcas conhecidas",
+      "Bloco 3: pergunta de curiosidade: o que está por trás disso?",
+      "Bloco 4: CTA: comenta SOS e recebe o episódio completo na DM"
+    ],
+    "padrao_visual": {
+      "fundo": "recorte de jornal em preto e branco com faixa azul de destaque",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Número por minuto mais marcas famosas em crise é notícia que o dono de pequena empresa, público do ERP, não ignora. O CTA de palavra-chave converte curiosidade em comentário, o que explica 25 comentários contra 49 curtidas.",
+    "autor_ou_marca": "Conta Azul (@contaazul)",
+    "link_fonte": "https://www.instagram.com/p/Ddr9rRmD9j9/",
+    "metricas": {
+      "curtidas": 49,
+      "comentarios": 25,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (49 likes, 25 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026, formato vídeo, classificado como dado-impacto por falta de opção de vídeo no enum. Capa do vídeo conferida no embed. Legenda completa é só o gancho mais o CTA SOS. Melhor razão comentário por curtida entre as marcas SaaS BR analisadas.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "90% das empresas usam IA. 6% estão de fato tendo resultados. Sua empresa faz parte dos 6%?",
+    "estrutura": [
+      "Slide 1: gráfico de pontos: 90% usam IA, 6% em laranja têm resultado",
+      "Slide 2: pergunta de pertencimento (você está nos 6%?) e CTA para baixar o relatório"
+    ],
+    "padrao_visual": {
+      "fundo": "lilás claro com pontos brancos e destaque laranja",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Carrossel de só dois slides: um dado visual que se lê em um segundo e uma pergunta que coloca o leitor no grupo minoritário desejado. Economia máxima para promover um material rico (relatório State of AI).",
+    "autor_ou_marca": "HubSpot (@hubspot)",
+    "link_fonte": "https://www.instagram.com/p/Ddtziozl4tn/",
+    "metricas": {
+      "curtidas": 58,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública (58 likes, 6 comments); o embed captioned mostrava View all 5 comments"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 25/09/2026, 2 slides. Capa conferida na imagem do embed. Original da legenda: Yep. Everyone's using AI, but new data shows only 6% of companies are getting actual value from it. Slides originais: 90% of companies use AI / 6% are actually getting results / Is your company part of the 6%? (a pergunta do slide 2 não foi vista na imagem).",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Você não conseguia mudar o seu próprio número de telefone. Precisava pedir para a gente. Toda vez.",
+    "estrutura": [
+      "Slide 1: confissão da falha do produto em três frases curtas, texto branco sobre verde",
+      "Slide 2: o custo: uma edição de dez segundos que virou chamado de suporte bem mais de cem vezes em um trimestre",
+      "Slide 3: Corrigido. No ar, com o caminho Settings, Profile e print da tela"
+    ],
+    "padrao_visual": {
+      "fundo": "verde escuro sólido da marca com texto branco grande",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca expõe uma falha embaraçosa do próprio produto em vez de celebrar lançamento, o que gera confiança e curiosidade. A legenda anuncia que cada correção da lista vai ser publicada quando sair e fecha pedindo que o cliente conte que pequeno incômodo ele contorna, abrindo conversa e pauta.",
+    "autor_ou_marca": "Pipedrive (@pipedrive)",
+    "link_fonte": "https://www.instagram.com/p/DdpAuHYD1vF/",
+    "metricas": {
+      "curtidas": 32,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (32 likes, 2 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 23/09/2026, carrossel de cerca de 3 slides. Capa conferida: You couldn't change your own phone number. You had to ask us. Every single time. Legenda original abre com: This is a slightly embarrassing thing to publish, which is precisely why we're publishing it. O número 115 tickets em 90 dias da curadoria original não foi visto; a legenda diz well over a hundred times last quarter. Série de correções confirmada pela legenda: The rest of the list gets the same treatment, one fix at a time, posted as it ships.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Acabamos de pegar as chaves desta conta. O que vocês querem ver da gente?",
+    "estrutura": [
+      "Bloco 1: selfie casual de três pessoas do time no escritório, sem arte de marca",
+      "Bloco 2: legenda de uma linha anunciando o novo time no perfil",
+      "Bloco 3: pergunta aberta para o público decidir o conteúdo"
+    ],
+    "padrao_visual": {
+      "fundo": "selfie espontânea de três pessoas sorrindo em escritório aberto",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Tom humano e informal de quem acabou de chegar, com selfie sem produção, contrasta com o feed corporativo e convida resposta. Pedir sugestão dá ao público sensação de coautoria do conteúdo.",
+    "autor_ou_marca": "Notion (@notionhq)",
+    "link_fonte": "https://www.instagram.com/p/DdkbkeIo6S-/",
+    "metricas": {
+      "curtidas": 573,
+      "comentarios": 25,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública e no embed captioned (573 likes, 25 comments)"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 21/09/2026. Imagem conferida no embed (selfie de três pessoas, rostos inteiros). Original: Just got the keys to this account. What do you want to see from us?",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Nossa nova coleção acabou de ser lançada.",
+    "estrutura": [
+      "Slide 1: The Gantt Gown: modelo em passarela com vestido que é um gráfico de Gantt, painel monday.com Fashion Week",
+      "Slide 2: The Agentic A-line",
+      "Slide 3: The monday mini com o logo como estampa",
+      "Slide 4: The Vibe Vest",
+      "Slide 5: The Done Dress com status Done",
+      "Slide 6: The Agent Anorak",
+      "Slide 7: The Prompt Pants"
+    ],
+    "padrao_visual": {
+      "fundo": "passarela de desfile com painel monday.com Fashion Week",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transforma elementos da interface do produto (Gantt, status Done, agentes) em moda de passarela, uma piada visual que funciona sem ler nada. Os trocadilhos nos nomes das peças, numerados na legenda, recompensam quem conhece o produto.",
+    "autor_ou_marca": "monday.com (@mondaydotcom)",
+    "link_fonte": "https://www.instagram.com/p/DdRRDusCHs-/",
+    "metricas": {
+      "curtidas": 291,
+      "comentarios": 12,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na meta description da página pública (291 likes, 12 comments); o embed captioned mostrava View all 11 comments"
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 14/09/2026, carrossel de cerca de 7 slides, aparentemente gerado com IA. Capa conferida no embed. Original: Our latest collection has officially shipped. Lista: The Gantt Gown, The Agentic A-line, The monday mini, The Vibe Vest, The Done Dress, The Agent Anorak, The Prompt Pants. Descrição visual dos slides 2 a 7 vem da curadoria original.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-41"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Houve um momento na Conta Azul em que tínhamos um pouco mais de 100 pessoas no time e dois meses de caixa. Por fora, parecia crescimento, mas não era. Era sobrevivência.",
+    "estrutura": [
+      "Bloco 1: Cena de crise concreta com número (100 pessoas, dois meses de caixa)",
+      "Bloco 2: Virada em frase curta: parecia crescimento, era sobrevivência",
+      "Bloco 3: Como o founder media sucesso antes (mais clientes, mais produto, mais gente) e a dúvida que surgiu com a empresa maior",
+      "Bloco 4: A troca de perguntas: o cliente segue satisfeito seis meses depois do contrato? A decisão de ontem faz sentido em dois anos?",
+      "Bloco 5: Contraste cinco anos atrás e hoje: de clientes fechados no trimestre para há quanto tempo o cliente está com a empresa"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao texto, sem texto alternativo (conteúdo da imagem não conferido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com um número vulnerável que quase nenhum CEO admite em público (dois meses de caixa) e resolve com uma lição de métrica de SaaS (retenção acima de volume). O contraste entre como ele respondia antes e como responde hoje dá ao leitor uma régua para se comparar.",
+    "autor_ou_marca": "Vinicius Roveda (cofundador e CEO da Conta Azul)",
+    "link_fonte": "https://www.linkedin.com/posts/viniciusroveda_houve-um-momento-na-conta-azul-em-que-t%C3%ADnhamos-activity-7498711184850849792-gGTU",
+    "metricas": {
+      "curtidas": 481,
+      "comentarios": 22,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post (pt.linkedin.com) e nos dados estruturados da página em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 27/08/2026. Texto de abertura, autor e data conferidos na página pública. Post de texto longo com uma imagem anexada; se a imagem mostra o founder não foi conferido.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-42"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Empreender machuca. Isso não dá pra romantizar.",
+    "estrutura": [
+      "Bloco 1: Frase curta que contraria o discurso romântico do empreendedorismo",
+      "Bloco 2: Ninguém conta o meio do processo, só o começo e o fim, e é no meio que a maioria desiste",
+      "Bloco 3: 2008, dinheiro apertado, porão na casa da avó de amigos, vender de dia e programar de noite",
+      "Bloco 4: Três, quatro tentativas de lançar a Conta Azul que deram errado",
+      "Bloco 5: Proposta de compra de meio milhão de reais recusada no pior momento",
+      "Bloco 6: O que segurou foram os sócios, e o fechamento liga a história ao propósito do produto com a frase: não acabe com o sonho, acabe com o medo"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao texto, sem texto alternativo (conteúdo da imagem não conferido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Gancho de duas frases que nega o clichê do founder vencedor e promete o bastidor que ninguém mostra. Detalhes concretos (porão, 2008, proposta de meio milhão recusada) dão credibilidade e a frase final vira citação fácil de compartilhar.",
+    "autor_ou_marca": "Vinicius Roveda (Conta Azul)",
+    "link_fonte": "https://www.linkedin.com/posts/viniciusroveda_empreender-machuca-isso-n%C3%A3o-d%C3%A1-pra-romantizar-activity-7488610654845677569-xeZ2",
+    "metricas": {
+      "curtidas": 145,
+      "comentarios": 9,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post (pt.linkedin.com) em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 30/07/2026. Abertura, autor e data conferidos na página pública. Texto longo com uma imagem anexada, conteúdo da imagem não conferido.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-43"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "lista",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Os dois movimentos que mudaram meu jeito de liderar. (O segundo foi o mais importante!)",
+    "estrutura": [
+      "Bloco 1: Promessa numerada com teaser entre parênteses sobre o segundo item",
+      "Bloco 2: Contexto: decisões importantes tomadas de forma aleatória no início da carreira",
+      "Bloco 3: Movimento 1 em caixa alta: entender como as decisões são tomadas (o MBA que não trouxe respostas prontas, mas mostrou que falta critério)",
+      "Bloco 4: Movimento 2 em caixa alta: construir o próprio critério (dado antes de solução, duas ou três hipóteses, testar rápido e pequeno)",
+      "Bloco 5: Hábitos em tópicos curtos e pergunta final: qual decisão de liderança só fez sentido anos depois?"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao texto, sem texto alternativo (conteúdo da imagem não conferido)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O número fechado (dois) e o parêntese que valoriza o segundo item criam um loop aberto que obriga a ler até o fim. Os títulos em caixa alta tornam o texto escaneável e a pergunta final pede histórias do leitor.",
+    "autor_ou_marca": "Vinicius Roveda (Conta Azul)",
+    "link_fonte": "https://www.linkedin.com/posts/viniciusroveda_os-dois-movimentos-que-mudaram-meu-jeito-activity-7496174485897777153-VEf4",
+    "metricas": {
+      "curtidas": 110,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post (pt.linkedin.com) em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 20/08/2026. Abertura, autor e data conferidos na página pública.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-44"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "O SaaS vai morrer. Essa manchete sensacionalista aparece de tempos em tempos.",
+    "estrutura": [
+      "Bloco 1: Afirmação polêmica que o próprio autor chama de manchete sensacionalista",
+      "Bloco 2: Correção: não é o fim do SaaS, é a transformação do SaaS",
+      "Bloco 3: O que muda: interfaces conversacionais, cobrança por resultado ou tarefa no lugar da mensalidade, compressão de margens",
+      "Bloco 4: O que não muda: fundamentos de produto, mercado e construção de software",
+      "Bloco 5: CTA para o episódio completo do podcast do SaaS BR Club"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única anexada ao post (conteúdo não conferido)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Usa a manchete que todo founder de SaaS teme como isca e entrega logo em seguida uma visão equilibrada com três mudanças concretas. A tensão entre medo e reenquadramento leva ao clique no episódio.",
+    "autor_ou_marca": "Bruno Ghisi",
+    "link_fonte": "https://www.linkedin.com/posts/brunoghisi_saas-produto-tecnologia-activity-7440374089736744960-UmgB",
+    "metricas": {
+      "curtidas": 125,
+      "comentarios": 6,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post (pt.linkedin.com) em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 19/03/2026, sobre conversa com Matheus Weigand no podcast do SaaS BR Club. Autor e texto conferidos. O cargo atual do autor não foi conferido na página, por isso ficou só o nome.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-45"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Qual o papel da IA no crescimento das empresas?",
+    "estrutura": [
+      "Bloco 1: Pergunta ampla que todo gestor está fazendo",
+      "Bloco 2: Prova social: fórum The AI Economy Brazil da Bloomberg Línea, com iFood, Sólides e Bloomberg Línea",
+      "Bloco 3: Tese clara: nunca tivemos tantas ferramentas capazes de nivelar o jogo para PMEs",
+      "Bloco 4: IA deixa de ser tendência e vira infraestrutura, com a Omie como exemplo prático",
+      "Bloco 5: Contraponto: tecnologia sozinha não faz milagre, o diferencial é a aplicação no dia a dia"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do autor no palco do fórum (texto alternativo da imagem confirma)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A pergunta abre um tema quente e a presença em evento com marcas grandes empresta autoridade. A frase de contraponto (tecnologia sozinha não faz milagre) evita o tom de hype e gera concordância.",
+    "autor_ou_marca": "Marcelo Lombardo (fundador da Omie)",
+    "link_fonte": "https://www.linkedin.com/posts/marcelolombardo_intelig%C3%AAnciaartificial-transforma%C3%A7%C3%A3odigital-activity-7454996702127714304-9ZjW",
+    "metricas": {
+      "curtidas": 183,
+      "comentarios": 8,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post (pt.linkedin.com) em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 28/04/2026. Título da página confirma autor Marcelo Lombardo e Omie. Imagem com texto alternativo: Marcelo Lombardo no forum The AI Economy Brazil, da Bloomberg Linea.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-46"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Ainda em 2013, quando a RD começou a ajudar a disseminar o Inbound Marketing no Brasil, o caminho entre a descoberta de uma marca e a compra era mais linear.",
+    "estrutura": [
+      "Bloco 1: Legenda abre com a própria história da marca: 2013, Inbound, jornada linear organizada no funil",
+      "Bloco 2: Virada: mais de uma década depois o Inbound segue relevante, mas tudo mudou ao redor",
+      "Bloco 3: A jornada de hoje: rede social, Google, recomendação em IA, WhatsApp e compra em outro canal",
+      "Slide 1: Documento de 3 páginas intitulado Marketing Contínuo, apresentado como a evolução do Inbound"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 3 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca usa a própria história (quem popularizou o Inbound no Brasil) para lançar o próximo conceito. O contraste 2013 versus hoje faz o leitor reconhecer a dor da jornada fragmentada antes de ver o nome da solução.",
+    "autor_ou_marca": "RD Station",
+    "link_fonte": "https://pt.linkedin.com/posts/rd-station_marketing-cont%C3%ADnuo-activity-7500885014436519936-Ezxp",
+    "metricas": {
+      "curtidas": 44,
+      "comentarios": 4,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026. Documento com 3 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 02/09/2026. Texto e autor conferidos. Estrutura baseada na legenda; as páginas do documento não foram lidas uma a uma. Engajamento modesto para o tamanho da página; vale como referência de formato de lançamento de categoria.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-47"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Na noite em que viu a notícia de que a RD Station tinha lançado o MCP, o Bruno Dallan, diretor executivo da Aventum, quase não dormiu.",
+    "estrutura": [
+      "Bloco 1: A cena: cliente que quase não dormiu querendo testar o MCP",
+      "Bloco 2: Usos reais hoje: forecast, funil e desempenho de vendedores",
+      "Bloco 3: Consulta a outros sistemas para recuperar oportunidades e testar integrações",
+      "Bloco 4: O ponto: dados, CRM, ERP e IA já existiam, o MCP encurtou o caminho entre pergunta e ação",
+      "Slide 1: Documento de 8 páginas intitulado MCP na prática"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 8 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com uma cena emocional de cliente real em vez de anunciar feature, o que transforma um lançamento técnico (MCP) em história. Os usos citados na legenda (forecast, funil, vendedores) são concretos para gestor comercial.",
+    "autor_ou_marca": "RD Station",
+    "link_fonte": "https://pt.linkedin.com/posts/rd-station_mcp-na-pr%C3%A1tica-activity-7505594244150239232-0tjH",
+    "metricas": {
+      "curtidas": 32,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026. Documento com 8 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 15/09/2026. Texto e autor conferidos. Estrutura baseada na legenda; páginas do documento não lidas, e se há foto do cliente não foi conferido.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-48"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Tem cliente que vira amigo e vendedor que sabe até o nome do filho. Vender no Brasil é assim.",
+    "estrutura": [
+      "Bloco 1: Traço cultural: venda brasileira é relacional, com conversa e comparação antes de fechar",
+      "Bloco 2: O cliente: Gran Coffee, máquinas de café para empresas, onde o consultor precisa entender cada negócio",
+      "Bloco 3: O desafio: dar escala à proximidade com áreas desconectadas",
+      "Bloco 4: A solução: Marketing, Conversas e CRM alimentando a mesma conversa",
+      "Bloco 5: Resultado: mais 15% de conversão e mais 20% em vendas com estrutura comercial 60% menor",
+      "Slide 1: Documento de 8 páginas intitulado Case Gran Coffee"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 8 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O gancho fala de um traço cultural que todo vendedor brasileiro reconhece, e só depois entra no case. Os três números do resultado (15%, 20%, 60%) fecham a prova de forma escaneável.",
+    "autor_ou_marca": "RD Station",
+    "link_fonte": "https://www.linkedin.com/posts/rd-station_case-gran-coffee-activity-7508133376655249411-h63L",
+    "metricas": {
+      "curtidas": 16,
+      "comentarios": 0,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações lidas na página pública em 27/09/2026. Contador de comentários não exibido; os dados estruturados da página registram 0 comentários. Documento com 8 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 22/09/2026. Abertura e autor conferidos. Os números de resultado vêm da estrutura original e não foram reconferidos um a um na legenda. Engajamento baixo; entra como modelo de carrossel de case B2B com gancho cultural, não como viral.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-49"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Estamos construindo a maior biblioteca de skills de IA para processos de negócio. Queremos você como co-criador e ainda receba prêmios por isso!",
+    "estrutura": [
+      "Bloco 1: Emoji de troféu e promessa com superlativo: a maior biblioteca de skills de IA",
+      "Bloco 2: O que é: aprender o Pipefy AI Toolkit, criar skills conectando o Pipefy a Claude e Cursor via MCP e publicar no GitHub oficial",
+      "Bloco 3: Legenda manda para os slides: passo a passo para participar e prêmios",
+      "Bloco 4: CTA de inscrição com prazo (até 01/09)",
+      "Slide 1: Documento de 5 páginas intitulado MCP Builders by Pipefy"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 5 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Convida a comunidade a cocriar em vez de só consumir, com superlativo, recompensa e prazo. A legenda aponta para os slides como tutorial, o que justifica o arrastar.",
+    "autor_ou_marca": "Pipefy",
+    "link_fonte": "https://pt.linkedin.com/posts/pipefy_mcp-builders-by-pipefy-activity-7498799691351109632-mB2r",
+    "metricas": {
+      "curtidas": 25,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e contador de 2 comentários lidos na página pública do post em 27/09/2026. Documento com 5 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 27/08/2026. Texto original começa com emoji de troféu e escreve co-criador com hífen. Estrutura baseada na legenda, que cita passo a passo e prêmios nos slides.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-50"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Ter muitos leads chegando ao time de vendas pode dar a sensação de que existem muitas oportunidades. Mas volume e qualidade não são a mesma coisa.",
+    "estrutura": [
+      "Bloco 1: Crença comum sobre volume de leads e a quebra: volume e qualidade não são a mesma coisa",
+      "Bloco 2: O problema: leads sem critério, dados incompletos, vendedor perdendo tempo",
+      "Bloco 3: É aí que entra a pré venda",
+      "Bloco 4: Tópicos com marcador: qualificar é priorizar, dados confiáveis, filtro compartilhado entre Marketing, pré venda e Vendas, qualidade acompanhada",
+      "Slide 1: Documento de 6 páginas que acompanha os tópicos"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 6 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Ataca uma crença comum de gestor comercial (mais leads é melhor) e desmonta em tópicos curtos com marcador. Cada tópico é uma regra aplicável, bom para salvar.",
+    "autor_ou_marca": "Theo Orosco",
+    "link_fonte": "https://www.linkedin.com/posts/theoorosco_ter-muitos-leads-chegando-ao-time-de-vendas-activity-7508978777113223168-kG_B",
+    "metricas": {
+      "curtidas": 7,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026. Documento com 6 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 24/09/2026 (três dias antes da coleta, engajamento ainda baixo). Cargo do autor (RD Station, Exact Sales) não conferido na página, por isso ficou só o nome. Entra como modelo de carrossel educativo de vendas B2B, não como viral comprovado.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-51"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Pois é. Todo mundo está usando IA, mas dados novos mostram que só 6% das empresas estão tirando valor real dela.",
+    "estrutura": [
+      "Bloco 1: Número de choque na legenda: só 6% das empresas tiram valor real da IA",
+      "Bloco 2: Promessa: descobrimos o que essas empresas fazem diferente",
+      "Bloco 3: Isca: relatório State of AI 2026 com link nos comentários",
+      "Slide 1: Documento de 2 páginas que acompanha o dado"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 2 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Um único número baixo contradiz a sensação de que todos já dominam IA e gera o medo de estar nos 94%. Texto de três linhas e o relatório como isca no comentário.",
+    "autor_ou_marca": "HubSpot",
+    "link_fonte": "https://www.linkedin.com/posts/hubspot_hubspot-activity-7509275824353755137-t_UZ",
+    "metricas": {
+      "curtidas": 81,
+      "comentarios": 15,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026. Documento com 2 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Yep. Everyone's using AI, but new data shows only 6% of companies are getting actual value from it.\" Post de 25/09/2026.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-52"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Uma confissão para começar: personalizar um único link dentro de um e-mail dava mais trabalho do que escrever o e-mail.",
+    "estrutura": [
+      "Bloco 1: A confissão da marca sobre uma limitação do próprio produto",
+      "Bloco 2: A dor: 40 destinatários, 40 destinos, edição manual ou um template por pessoa, e a marca admite que eram respostas erradas",
+      "Bloco 3: A correção: merge fields funcionando dentro de links em composer, templates, sequências e automações",
+      "Bloco 4: CTA: temos uma lista dessas e estamos limpando em público, conte o que você aprendeu a tolerar no Pipedrive",
+      "Slide 1: Documento de 3 páginas que acompanha a novidade"
+    ],
+    "padrao_visual": {
+      "fundo": "documento LinkedIn de 3 páginas (visual das páginas não conferido)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca assume em público que errou, o que desarma o leitor e diferencia de anúncios de feature. O pedido final transforma o post em fila de comentários com dores reais que entram numa lista pública.",
+    "autor_ou_marca": "Pipedrive",
+    "link_fonte": "https://www.linkedin.com/posts/pipedrive_activity-7506668811291508736-EGME",
+    "metricas": {
+      "curtidas": 32,
+      "comentarios": 3,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026. Documento com 3 páginas."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"An admission to start with: personalizing a single link inside an email used to be more work than writing the email.\" Post de 18/09/2026. A legenda fala em uma lista de correções feitas em público; que seja uma série de posts não foi conferido.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-53"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "O PIOR CONSELHO DE TODOS: \"Tudo bem fazer demo na call de descoberta.\"",
+    "estrutura": [
+      "Bloco 1: Rótulo em caixa alta PIOR CONSELHO DE TODOS mais a frase citada",
+      "Bloco 2: Assume o debate: tema polêmico, mas a marca bate o pé",
+      "Bloco 3: Por que a demo cedo muda a call de entender para vender e leva ao despejo de features",
+      "Bloco 4: A pergunta que a descoberta deve responder: existe um problema que vale resolver?",
+      "Bloco 5: Tática: 30 minutos inteiros de dor, urgência e impacto, e pergunta sobre quem mais do time deve entrar",
+      "Bloco 6: Pergunta final pedindo a tática de descoberta do leitor"
+    ],
+    "padrao_visual": {
+      "fundo": "mídia não exibida na página pública (formato de imagem não confirmado)",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Rótulo forte (pior conselho) que cita um hábito que muito vendedor pratica, provocando defesa e ataque nos comentários. A pergunta final converte a discordância em engajamento: 55 comentários.",
+    "autor_ou_marca": "Gong",
+    "link_fonte": "https://www.linkedin.com/posts/gong-io_worst-advice-ever-its-okay-to-demo-on-activity-7506442155628924928-Lh8H",
+    "metricas": {
+      "curtidas": 313,
+      "comentarios": 55,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"WORST ADVICE EVER. 'It's okay to demo on the discovery call.' Huge topic of debate. But we stand by this.\" Post de 17/09/2026. Título da página: Discovery Calls Shouldn't Be About Demos. A página pública não exibe mídia, então o formato imagem única não foi confirmado.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-54"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Faz meses que demos churn silencioso no Notion. Nem percebemos. Nem avisamos o Notion.",
+    "estrutura": [
+      "Bloco 1: Confissão curta envolvendo uma marca conhecida",
+      "Bloco 2: Duas frases de reforço: não percebemos, não avisamos",
+      "Bloco 3: Explicação: nossos agentes não precisam da ferramenta, eles fazem o trabalho",
+      "Bloco 4: Nome para o fenômeno: stealth churn, o uso cai a zero em silêncio e o e-mail de renovação nem é enviado"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro, sem mídia exibida na página pública",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Cita uma marca SaaS famosa num cenário que todo founder teme (perder cliente sem saber) e batiza o fenômeno (stealth churn). Cinco linhas e alto potencial de debate: 24 comentários para 36 reações.",
+    "autor_ou_marca": "Jason Lemkin (SaaStr)",
+    "link_fonte": "https://www.linkedin.com/posts/jasonmlemkin_we-stealth-churned-off-notion-months-ago-activity-7509623202252451840-ca11",
+    "metricas": {
+      "curtidas": 36,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026, um dia após a publicação."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"We stealth-churned off Notion months ago. We didn't realize it. We didn't tell Notion.\" Post de 26/09/2026, números ainda em crescimento. A página pública não mostra imagem; parece post só de texto, e o enum não tem essa opção, então imagem única é aproximação.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-55"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "citacao",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Ouvido no UNBOUND: \"E se, em vez de você atualizar o CRM, o CRM atualizasse você?\"",
+    "estrutura": [
+      "Bloco 1: Moldura de bastidor de evento: ouvido no UNBOUND",
+      "Bloco 2: Citação que inverte a relação usuário e ferramenta",
+      "Bloco 3: Atribuição a Duncan Lennox",
+      "Bloco 4: CTA curto para o novo CRM que se atualiza sozinho, com link nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "texto puro com a citação, sem mídia exibida na página pública",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A inversão de frase ataca a maior dor de quem usa CRM (preencher dados) em uma linha memorável. A moldura de ouvido no evento soa como bastidor, não como anúncio.",
+    "autor_ou_marca": "HubSpot",
+    "link_fonte": "https://www.linkedin.com/posts/hubspot_overheard-at-unbound-instead-of-you-updating-activity-7506721235058339841-p5WN",
+    "metricas": {
+      "curtidas": 192,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Reações e comentários lidos na página pública do post em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: \"Overheard at UNBOUND: 'Instead of you updating the CRM, what if the CRM updated you?' - Duncan Lennox\". Post de 18/09/2026.",
+    "nicho": "saas-b2b",
+    "id": "saas-b2b-56"
   }
 ]

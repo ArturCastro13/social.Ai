@@ -3,6 +3,7 @@ import { readBrand } from "@/lib/brand";
 import { ehSemSite } from "@/lib/brand/sem-site";
 import { analisar, LIMITE_POSTS } from "@/lib/engine";
 import { adminOk, erro, json, lerJson, options } from "@/lib/http";
+import { inicioDaPesquisa, respostaAoVivo } from "@/lib/http-ao-vivo";
 import { preferenciasSchema } from "@/lib/motor/contrato";
 import type { BrandProfile } from "@/lib/types";
 import { aplicarContextoMarca } from "@/lib/contexto/revisao";
@@ -22,6 +23,7 @@ const Entrada = z
     quantidade: z.coerce.number().int().min(1).max(LIMITE_POSTS).default(6),
     email: z.string().email().max(200).optional(),
     forcarNovo: z.boolean().optional(),
+    stream: z.boolean().optional(),
     // Onboarding em camadas (src/lib/motor/contrato.ts). Validado à parte para a mensagem de erro ser clara.
     preferencias: z.unknown().optional(),
   })
@@ -84,17 +86,24 @@ export async function POST(req: Request) {
   const ip = req.headers.get("x-real-ip") || req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
   try { brand = aplicarContextoMarca(brand, preferencias?.contexto_empresa); }
   catch { return erro("O contexto não corresponde a esta empresa. Revise antes de gerar.", 400); }
+  const opcoes = {
+    quantidade: d.quantidade,
+    email: d.email ?? null,
+    identificadores: [`ip:${ip}`, ...(d.email ? [d.email.toLowerCase()] : [])],
+    // Ignorar o cache custa uma chamada de IA: só o time pode pedir.
+    forcarNovo: d.forcarNovo && adminOk(req),
+    // Os @ do founder vão só no contexto do motor, não nos handles da marca.
+    preferencias,
+  };
+  // Tela ao vivo: cada post sai assim que fica pronto. Sem `stream`, a resposta é a mesma de sempre (SPEC.md, Adapta).
+  if (d.stream) {
+    return respostaAoVivo(inicioDaPesquisa(preferencias?.pesquisa_mercado), (emitir) =>
+      analisar(brand, { ...opcoes, aoVivo: emitir, sinal: req.signal }),
+    );
+  }
   let analise;
   try {
-    analise = await analisar(brand, {
-      quantidade: d.quantidade,
-      email: d.email ?? null,
-      identificadores: [`ip:${ip}`, ...(d.email ? [d.email.toLowerCase()] : [])],
-      // Ignorar o cache custa uma chamada de IA: só o time pode pedir.
-      forcarNovo: d.forcarNovo && adminOk(req),
-      // Os @ do founder vão só no contexto do motor, não nos handles da marca.
-      preferencias,
-    });
+    analise = await analisar(brand, opcoes);
   } catch (e) {
     console.error("[analyze]", (e as Error).message);
     return erro("O motor tropeçou nesta análise. Tente de novo ou use um dos exemplos.", 500);

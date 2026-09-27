@@ -4,6 +4,9 @@ import fintech from "../../../data/virais/fintech/itens.json";
 import healthtech from "../../../data/virais/healthtech/itens.json";
 import edtech from "../../../data/virais/edtech/itens.json";
 import ecommerce from "../../../data/virais/ecommerce-dtc/itens.json";
+import marketingAgencias from "../../../data/virais/marketing-agencias/itens.json";
+import servicosLocais from "../../../data/virais/servicos-locais/itens.json";
+import iaDev from "../../../data/virais/ia-dev/itens.json";
 import { viralItemSchema } from "./schema";
 import { construirCatalogo, padroesDoNicho } from "./catalogo";
 import { store } from "@/lib/store";
@@ -15,6 +18,9 @@ export const BASE_ARQUIVO: Record<Nicho, ViralItem[]> = {
   healthtech: healthtech as ViralItem[],
   edtech: edtech as ViralItem[],
   "ecommerce-dtc": ecommerce as ViralItem[],
+  "marketing-agencias": marketingAgencias as ViralItem[],
+  "servicos-locais": servicosLocais as ViralItem[],
+  "ia-dev": iaDev as ViralItem[],
 };
 
 export function itensDoArquivo(): ViralItem[] {
@@ -46,6 +52,6 @@ export async function contextoViralDoNicho(nicho: Nicho, max = 10) {
   const porId = new Map(itens.map((i) => [i.id, i]));
   return padroes.map((p) => ({
     padrao: p,
-    exemplos: p.exemplos.map((id) => porId.get(id)).filter((x): x is ViralItem => !!x).slice(0, 2),
+    exemplos: p.exemplos.map((id) => porId.get(id)).filter((x): x is ViralItem => !!x).slice(0, 3),
   }));
 }

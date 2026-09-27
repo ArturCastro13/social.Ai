@@ -1,6 +1,6 @@
 import { jsonrepair } from "jsonrepair";
 import { z } from "zod";
-import type { Formato, TemplateId } from "@/lib/types";
+import type { Formato, PostGerado, TemplateId } from "@/lib/types";
 import { formatoSchema, nichoSchema, redeSchema } from "@/lib/virais/schema";
 import { templateDoFormato } from "@/lib/virais/catalogo";
 import { ORIGENS_TEMA } from "@/lib/motor/contrato";
@@ -102,6 +102,23 @@ export type AnaliseIA = z.infer<typeof analiseIASchema>;
 
 export function templateValido(t: string | undefined, formato: Formato): TemplateId {
   return TEMPLATES.includes(t as TemplateId) ? (t as TemplateId) : templateDoFormato(formato);
+}
+
+/** Post da saída validada no formato final, com o id da análise. Serve ao fim da análise e à prévia ao vivo. */
+export function postDaSaida(p: AnaliseIA["posts"][number], id: string, i: number): PostGerado {
+  return {
+    id: `${id}-p${i + 1}`,
+    rede_principal: p.rede_principal,
+    formato: p.formato,
+    template: templateValido(p.template, p.formato),
+    gancho: p.gancho,
+    slides: p.slides.map((s) => ({ titulo: s.titulo ?? "", texto: s.texto ?? "" })),
+    legendas: p.legendas,
+    hashtags: p.hashtags.map((h) => h.replace(/^#/, "").replace(/\s+/g, "")).filter(Boolean),
+    padrao_inspirador: p.padrao_inspirador,
+    por_que: p.por_que,
+    ...(p.origem_tema ? { origem_tema: p.origem_tema } : {}),
+  };
 }
 
 /** A copy não pode ter travessão. Troca por vírgula e limpa espaços duplos, recursivamente. */

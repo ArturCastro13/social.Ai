@@ -492,5 +492,1376 @@
     },
     "status": "a verificar",
     "notas_curadoria": "Gancho de exemplo no padrão, não citação literal. Padrão de thread de Nik Sharma descrito em resultados de busca (Shopify, ecorn.agency); a página linkada não foi aberta nesta curadoria."
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Tiago Dalvi, nosso fundador e CEO, foi reconhecido na lista Forbes The Founders 2026. A matéria destaca um traço que marca a trajetória dele: a capacidade de desapegar.",
+    "estrutura": [
+      "Bloco 1: reconhecimento externo (Forbes The Founders 2026) como abertura de autoridade",
+      "Bloco 2: o traço contraintuitivo do fundador, abandonar uma ideia mesmo que tenha dado certo quando ela deixa de entregar valor ao cliente",
+      "Bloco 3: prova concreta, quase 20 anos de mudanças de rota e a descontinuação este ano do produto que deu origem à Olist",
+      "Bloco 4: número de resultado, alta de mais de 60% na primeira metade do ano",
+      "Bloco 5: missão (transformar pequenas e médias empresas) e agradecimento ao time e à Forbes Brasil"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única ligada à matéria",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Transforma um prêmio em lição de gestão: descontinuar o produto que criou a empresa é uma decisão que parece errada e gera curiosidade. O número de crescimento logo depois valida a decisão e fecha o argumento.",
+    "autor_ou_marca": "Olist",
+    "link_fonte": "https://pt.linkedin.com/posts/olist_tiago-dalvi-nosso-fundador-e-ceo-foi-reconhecido-activity-7495587648951119872-1Cjn",
+    "metricas": {
+      "curtidas": 171,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "171 reações e 2 comentários lidos na página pública do post no LinkedIn (dados estruturados e contador da página) em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post da página da empresa, publicado em 18/08/2026 (data confirmada na página). Imagem única. Texto e autor conferidos na fonte. Removida do por_que_funciona a menção a 'unicórnio', que não está neste post.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-16"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Chegamos ao breakeven! Em agosto, a Olist passou a gerar caixa, um marco construído ao longo de uma transformação de cinco anos.",
+    "estrutura": [
+      "Bloco 1: anúncio do marco com exclamação (breakeven)",
+      "Bloco 2: contexto de uma transformação de cinco anos, com o empreendedor no centro de cada decisão",
+      "Bloco 3: chamada para o relato do fundador e CEO Tiago Dalvi",
+      "Bloco 4: agradecimento ao time e aos lojistas",
+      "Bloco 5: repost embutido do post do CEO com os números (break-even de EBITDA, crescimento acima de 50% ao ano, cerca de R$ 70 bilhões transacionados por ano)"
+    ],
+    "padrao_visual": {
+      "fundo": "repost do post do CEO embutido abaixo da legenda curta",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Marco financeiro concreto dito na primeira linha, sem rodeio. A página da empresa escreve pouco e empresta a voz do fundador pelo repost, que traz os números e a história completa.",
+    "autor_ou_marca": "Olist",
+    "link_fonte": "https://pt.linkedin.com/posts/olist_a-olist-matou-o-neg%C3%B3cio-que-a-fez-unic%C3%B3rnio-activity-7508141750876803072-dKKS",
+    "metricas": {
+      "curtidas": 68,
+      "comentarios": 1,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "68 reações e 1 comentário lidos na página pública do post no LinkedIn em 27/09/2026 (post de 5 dias, engajamento ainda em crescimento)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 22/09/2026 (confirmado na página). É um compartilhamento da página Olist sobre o post de Tiago Dalvi; o conteúdo embutido do CEO confirma break-even de EBITDA em agosto e cerca de R$ 70 bilhões em notas e faturas por ano. O slug da URL traz 'a olist matou o negócio que a fez unicórnio'.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-17"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Construímos uma IA do zero para vender pelo WhatsApp. Sem plataforma terceira. Sem depender de atualização de ninguém.",
+    "estrutura": [
+      "Bloco 1: afirmação forte do que foi construído (IA própria de vendas no WhatsApp, da recomendação ao pagamento)",
+      "Bloco 2: frases curtas de negação que reforçam independência",
+      "Bloco 3: o insight, a IAra mostra onde o cliente trava, o que falta e o que converte, com granularidade que o site não captura",
+      "Bloco 4: 'E estamos só no começo' e aviso de que o link da matéria da EXAME está nos comentários"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única da marca",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Frases curtas em staccato criam ritmo e confiança. Mistura tema quente (IA, WhatsApp) com um ganho prático que todo lojista quer: entender onde a venda trava. O link fica no comentário para não derrubar o alcance.",
+    "autor_ou_marca": "Insider Store",
+    "link_fonte": "https://pt.linkedin.com/posts/insider-store_insiderstore-inteligenciaartificial-fashiontech-activity-7487585725690068992-r3X_",
+    "metricas": {
+      "curtidas": 195,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "195 reações e 14 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 27/07/2026 (confirmado na página). A assistente se chama IAra. Texto e autor conferidos na fonte.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-18"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "O essencial não é o básico.",
+    "estrutura": [
+      "Bloco 1: frase de cinco palavras que separa dois conceitos parecidos",
+      "Bloco 2: nove anos transformando a camiseta em produto de tecnologia, 'apenas o começo'",
+      "Bloco 3: reposicionamento, a marca das roupas essenciais, indispensáveis e não o mínimo necessário",
+      "Bloco 4: a diferença percebida no segundo ou terceiro uso (tecido, caimento, durabilidade)",
+      "Bloco 5: próximos passos (materiais proprietários, varejo físico, tecnologia até o WhatsApp) e link da matéria da EXAME com o CEO"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem de capa única",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Gancho curto que corrige uma ideia comum (essencial igual a básico) e obriga a ler o resto para entender a distinção. Serve de manifesto de posicionamento de marca DTC.",
+    "autor_ou_marca": "Insider Store",
+    "link_fonte": "https://pt.linkedin.com/posts/insider-store_insiderstore-essenciais-inovacao-activity-7484972963973287936-cxbq",
+    "metricas": {
+      "curtidas": 166,
+      "comentarios": 5,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "166 reações e 5 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 20/07/2026 (confirmado na página). Divulga matéria da EXAME com Yuri Gricheno, CEO e cofundador. Link da matéria vai no corpo do post.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-19"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "A Sallve foi reconhecida pela Bain & Company e NielsenIQ como uma das 53 Marcas Insurgentes do Brasil em 2026.",
+    "estrutura": [
+      "Bloco 1: selo de autoridade externa com número (53 marcas)",
+      "Bloco 2: o funil do estudo, cerca de 10 mil marcas avaliadas e só 53 passaram por todos os critérios",
+      "Bloco 3: o que a métrica mede, crescimento até 10x acima da categoria, sustentado e puxado por volume",
+      "Bloco 4: a crença da marca, comunidade engajada como ativo mais valioso",
+      "Bloco 5: cofundador e CEO presentes na premiação e agradecimento"
+    ],
+    "padrao_visual": {
+      "fundo": "duas imagens da premiação e da marca",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O contraste de 10 mil avaliadas contra 53 aprovadas deixa o feito tangível. A marca usa o prêmio para reforçar a tese de comunidade, que é o diferencial DTC dela.",
+    "autor_ou_marca": "Sallve",
+    "link_fonte": "https://pt.linkedin.com/posts/sallve_a-sallve-foi-reconhecida-pela-bain-company-activity-7470594592472682496-9Mcd",
+    "metricas": {
+      "curtidas": 300,
+      "comentarios": 24,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "300 reações e 24 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 10/06/2026 (confirmado na página). Estudo 'Insurgent Brands Brasil 2026'. Post com 2 imagens. uso_rosto não confirmado nas imagens, mantido false.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-20"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A Sallve lança hoje o incrível Firmador Pró-Colágeno, um novo tratamento de alta performance.",
+    "estrutura": [
+      "Bloco 1: anúncio direto do lançamento",
+      "Bloco 2: ligação com a crença da marca, viver bem na própria pele",
+      "Bloco 3: origem do produto, pedido da comunidade, 'sem promessas impossíveis'",
+      "Bloco 4: números de eficácia em lista (3,5x colágeno tipo I, 1,4x tipo III, 1,8x elastina) e primeiros resultados em 7 dias",
+      "Bloco 5: pergunta final 'Vem experimentar?'"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo curto de produto (13 segundos)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Lançamento contado como resposta à comunidade (cocriação) e ancorado em números de eficácia fáceis de escanear. Fecha com pergunta que convida comentário.",
+    "autor_ou_marca": "Sallve",
+    "link_fonte": "https://pt.linkedin.com/posts/sallve_sallve-vivaasuapele-dermocosmeticos-activity-7447389643228057600-kn1y",
+    "metricas": {
+      "curtidas": 293,
+      "comentarios": 14,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "293 reações e 14 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 07/04/2026 (confirmado na página). A mídia é um vídeo de 13 segundos, não foto; 'imagem-unica' é o formato mais próximo disponível. tipo_gancho trocado de 'numero' para 'promessa', porque a primeira linha é anúncio de lançamento e os números só aparecem no meio.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-21"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "bastidor-founder",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "100 anos de um legado. Neste domingo, celebramos o centenário de nascimento de Luiza Trajano Donato, nossa fundadora.",
+    "estrutura": [
+      "Bloco 1: número redondo e emocional (100 anos)",
+      "Bloco 2: a fundadora que começou a empreender nos anos 1950, com coragem e visão",
+      "Bloco 3: o valor dela, ouvir as pessoas e criar laço com cada cliente ('gente que gosta de gente')",
+      "Bloco 4: ponte com o presente, das novas lojas físicas ao agente de IA que vende pelo WhatsApp",
+      "Bloco 5: fecho afetivo, a história segue viva em cada canto do Magalu"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de 1min19s com a voz e a imagem da fundadora",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "História de origem com voz humana conecta passado e futuro (IA no WhatsApp) sem perder calor. Datas simbólicas geram engajamento alto em páginas de empresa.",
+    "autor_ou_marca": "Magalu",
+    "link_fonte": "https://pt.linkedin.com/posts/magazine-luiza_100-anos-de-um-legado-neste-domingo-celebramos-activity-7507883889080578048-LZrY",
+    "metricas": {
+      "curtidas": 226,
+      "comentarios": 2,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "226 reações e 2 comentários lidos na página pública do post no LinkedIn em 27/09/2026 (post de 6 dias)."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 21/09/2026 (confirmado na página). A mídia é um vídeo de 1min19s com falas da fundadora (transcrição na página), não foto de capa.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-22"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "A madrugada ficou curta para as garras do mutante mais famoso do mundo!",
+    "estrutura": [
+      "Bloco 1: frase enigmática que só faz sentido lendo (o mutante é o Wolverine)",
+      "Bloco 2: o evento, Midnight Opening de Marvel's Wolverine na Galeria Magalu, Avenida Paulista, com KaBuM!, KaBuM! Ads e PlayStation",
+      "Bloco 3: escala e experiências, mais de 400 fãs, gameplay antecipado, credenciais estilo dogtag, sorteios e concurso de cosplay",
+      "Bloco 4: convidados, Jovem Nerd e dubladores do jogo",
+      "Bloco 5: resultado de negócio, vendas 200% acima da média de dias de semana",
+      "Bloco 6: carrossel com 11 fotos reais do evento"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos reais do evento",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Abre com uma frase enigmática que só faz sentido lendo e fecha com um número de negócio (+200% em vendas). As 11 fotos reais mostram escala e servem de prova social do evento.",
+    "autor_ou_marca": "Magalu (KaBuM!)",
+    "link_fonte": "https://pt.linkedin.com/posts/magazine-luiza_a-madrugada-ficou-curta-para-as-garras-do-activity-7506052483656450048-OmlP",
+    "metricas": {
+      "curtidas": 143,
+      "comentarios": 10,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "143 reações e 10 comentários lidos na página pública do post no LinkedIn em 27/09/2026. Página lista 11 imagens."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 16/09/2026 (confirmado na página). Estrutura refeita a partir da legenda real; a ordem das fotos não foi conferida uma a uma.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-23"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Uma noite no museu: foi assim que a gente comemorou 20 anos.",
+    "estrutura": [
+      "Bloco 1: título que remete a filme conhecido e anuncia os 20 anos",
+      "Bloco 2: cenário, Museu do Amanhã, ícone do Rio de Janeiro, e 'afetos reais'",
+      "Bloco 3: quem estava lá, amigos, colaboradores, influenciadores e convidados",
+      "Bloco 4: tese de marca, 'a gente nunca fez só roupa'",
+      "Bloco 5: pergunta final 'Bora pros próximos vinte?' e assinatura 'Feitas por gente boa e do bem'",
+      "Bloco 6: carrossel com 12 fotos da festa"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de evento noturno",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Título que remete a filme conhecido e cria cena. As fotos de pessoas reais reforçam a tese de marca de afeto, e o fecho com pergunta puxa comentários.",
+    "autor_ou_marca": "Reserva",
+    "link_fonte": "https://pt.linkedin.com/posts/reserva_reserva20anos-humanwear-activity-7503183724034019328-ME6z",
+    "metricas": {
+      "curtidas": 136,
+      "comentarios": 7,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "136 reações e 7 comentários lidos na página pública do post no LinkedIn em 27/09/2026. Página lista 12 imagens."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 08/09/2026 (confirmado na página). Página da empresa, diferente dos posts de Rony Meisler já na biblioteca. Estrutura refeita a partir da legenda real.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-24"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Se você tem pet, sabe que cuidar dele também faz parte da nossa rotina. E essa preocupação não fica de fora do trabalho.",
+    "estrutura": [
+      "Bloco 1: identificação com o leitor tutor de pet",
+      "Bloco 2: dado, 74% dos tutores relatam melhora na saúde mental com plano de saúde pet",
+      "Bloco 3: comparação com benefícios já comuns (academia, terapia, educação) e pergunta 'por que não para os pets?'",
+      "Bloco 4: dado de pertencimento, para 7 em cada 10 brasileiros pet é família",
+      "Bloco 5: CTA, indique sua empresa no link do primeiro comentário, 'a gente cuida da conversa com o RH'"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única da marca",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Fala com o funcionário e não com o RH, e dá a ele dois números para argumentar. O CTA de baixo atrito (indicar a empresa) transforma leitor em canal de venda B2B2C.",
+    "autor_ou_marca": "Petlove",
+    "link_fonte": "https://pt.linkedin.com/posts/petlove_se-voc%C3%AA-tem-pet-sabe-que-cuidar-dele-tamb%C3%A9m-activity-7503873746877960192-Gn3Y",
+    "metricas": {
+      "curtidas": 399,
+      "comentarios": 32,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "399 reações e 32 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Publicado em 10/09/2026 (confirmado na página). E-commerce pet vendendo plano de saúde como benefício corporativo. Entre os comentários há uma reclamação de cliente (conferido), sinal de alcance fora da bolha.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-25"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "SNEAK PEEK: uma primeira olhada no interior da nossa primeira loja flagship nos EUA, Gymshark Bond St., Nova York.",
+    "estrutura": [
+      "Bloco 1: alerta visual (emojis de sirene) e 'SNEAK PEEK' em caixa alta",
+      "Bloco 2: o que é, primeira flagship nos EUA, Bond St., Nova York",
+      "Bloco 3: data de abertura (13 de dezembro, 'este fim de semana') e 'mal podemos esperar para ver vocês'",
+      "Bloco 4: crédito do fotógrafo",
+      "Bloco 5: carrossel com 13 fotos do interior da loja"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de arquitetura e varejo",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Bastidor antes da inauguração cria antecipação. Carrossel longo de fotos entrega exclusividade, e o texto mínimo deixa as imagens trabalharem.",
+    "autor_ou_marca": "Gymshark",
+    "link_fonte": "https://www.linkedin.com/posts/gymshark_sneak-peek-a-first-look-at-the-inside-activity-7404807208074645504-l2qI",
+    "metricas": {
+      "curtidas": 1769,
+      "comentarios": 49,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "1.769 reações e 49 comentários lidos na página pública do post no LinkedIn em 27/09/2026. Página lista 13 imagens."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: '🚨 SNEAK PEEK 🚨 A first look at the inside of our first US flagship store - Gymshark Bond St., New York City. We open our doors this weekend, December 13th and can't wait to see you 👀 📸: TDM.Space'. Publicado em 11/12/2025 (confirmado na página). Removido da estrutura o detalhe da 'Estátua da Liberdade com halter', que não foi conferido.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-26"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Estivemos ocupados! Nossa segunda loja permanente em Dubai abriu as portas ontem no Mall of the Emirates.",
+    "estrutura": [
+      "Bloco 1: tom casual ('We've been busy!') e o anúncio da abertura",
+      "Bloco 2: números e conteúdo da loja, 468 m², coleções novas, drops exclusivos de Dubai e personal shopping",
+      "Bloco 3: citação de Hannah Mercer, General Manager de Wholesale and Retail, sobre a comunidade do Oriente Médio",
+      "Bloco 4: 'Here's a quick look around the new store' apontando para as fotos",
+      "Bloco 5: carrossel com 8 fotos da loja"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de loja física",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Tom casual humaniza um anúncio corporativo. As fotos mostram a escala da expansão física de uma marca nascida online, e a citação da executiva dá peso de negócio.",
+    "autor_ou_marca": "Gymshark",
+    "link_fonte": "https://www.linkedin.com/posts/gymshark_weve-been-busy-our-second-permanent-dubai-activity-7401966436719472640-RwFF",
+    "metricas": {
+      "curtidas": 875,
+      "comentarios": 29,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "875 reações e 29 comentários lidos na página pública do post no LinkedIn em 27/09/2026. Página lista 8 imagens."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'We've been busy! Our second permanent Dubai store opened it's doors yesterday in the Mall of the Emirates 🇦🇪'. Publicado em 03/12/2025 (confirmado na página). Cargo da executiva corrigido.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-27"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Todo mundo sabe: a gente faz academia (WE DO GYM). Agora a gente faz academias.",
+    "estrutura": [
+      "Bloco 1: trocadilho com o bordão da marca",
+      "Bloco 2: anúncio da primeira academia pública, em Wynwood, Miami",
+      "Bloco 3: origem, de um quarto em Birmingham a uma comunidade de mais de 20 milhões",
+      "Bloco 4: mensagem do fundador Ben Francis, a pergunta mais feita em 13 anos e por que Miami",
+      "Bloco 5: 'GSLC Miami em breve' e hashtag #WeDoGyms"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem única da campanha",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Brinca com o próprio slogan para anunciar uma extensão de marca. A voz do fundador respondendo a um pedido antigo da comunidade faz o anúncio parecer um presente para os fãs.",
+    "autor_ou_marca": "Gymshark (Ben Francis)",
+    "link_fonte": "https://www.linkedin.com/posts/gymshark_wedogyms-activity-7449471972469751808-6JAL",
+    "metricas": {
+      "curtidas": 2451,
+      "comentarios": 102,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "2.451 reações e 102 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Everybody knows, WE DO GYM. Now we do gyms.' Publicado em 13/04/2026 (confirmado na página). Post da página Gymshark citando Ben Francis MBE.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-28"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "imagem-unica",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Nós queremos o seu xixi. Por favor, nos dê o seu xixi.",
+    "estrutura": [
+      "Bloco 1: pedido absurdo e repetido",
+      "Bloco 2: contexto real, data centers de IA gastam milhões de galões de água para resfriar servidores",
+      "Bloco 3: a 'solução' satírica com parceiros (Garage Beer, Jason Kelce), beber e mandar o xixi para os data centers",
+      "Bloco 4: produto de edição limitada (Data Center Coolant Jars) com link",
+      "Bloco 5: crédito de coautoria de humor (Sabrina Jalees)"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo de 1min29s da campanha satírica",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Humor absurdo pego de um debate quente (IA e consumo de água) para ganhar alcance. O gancho é impossível de ignorar no feed sério do LinkedIn e gerou comentários dos dois lados.",
+    "autor_ou_marca": "Liquid Death",
+    "link_fonte": "https://www.linkedin.com/posts/liquid-death_we-want-your-pee-please-give-us-your-pee-activity-7495466470714322944-dlfh",
+    "metricas": {
+      "curtidas": 737,
+      "comentarios": 52,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "737 reações e 52 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'We want your pee. Please give us your pee.' Publicado em 18/08/2026 (confirmado na página). A mídia é um vídeo de 1min29s, não imagem; 'imagem-unica' é o formato mais próximo disponível. uso_rosto não conferido no vídeo. Post diferente dos itens de Liquid Death já na biblioteca.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-29"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "dado-impacto",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "\"A IA vai substituir a busca.\" \"A busca por IA ainda é pequena demais para importar.\" Já ouvimos as duas opiniões. A realidade tem mais nuance.",
+    "estrutura": [
+      "Bloco 1: duas opiniões opostas entre aspas",
+      "Bloco 2: dado, sessões vindas de IA nas lojas Shopify cresceram quase 3x no ano",
+      "Bloco 3: busca orgânica também cresceu, sobre uma base muito maior",
+      "Bloco 4: conclusão, o comprador não troca um canal pelo outro, cada um serve a um trabalho",
+      "Bloco 5: IA para jornadas de pesquisa e comparação, orgânica para quem já tem marca ou produto em mente",
+      "Bloco 6: link para o conteúdo completo sobre comportamento de compra"
+    ],
+    "padrao_visual": {
+      "fundo": "link de artigo com imagem de prévia",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Abre com as duas posições do debate e promete desempatar com dados próprios da plataforma. O leitor de qualquer lado quer saber quem estava certo.",
+    "autor_ou_marca": "Shopify",
+    "link_fonte": "https://www.linkedin.com/posts/shopify_ai-and-organic-search-are-doing-different-activity-7492943387809996800-qYbn",
+    "metricas": {
+      "curtidas": 294,
+      "comentarios": 50,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "294 reações e 50 comentários lidos na página pública do post no LinkedIn em 27/09/2026."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: '\"AI will replace search.\" \"AI search is still too small to matter.\" We've heard both takes. The reality is more nuanced.' Publicado em 11/08/2026 (confirmado na página).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-30"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Em nome do nosso compromisso com a qualidade Boca Rosa, o lançamento oficial será adiado até que todos os produtos estejam 100% perfeitos, da maneira que vocês merecem.",
+    "estrutura": [
+      "Bloco 1: anúncio direto do adiamento, sem rodeio, já na primeira frase",
+      "Bloco 2: agradecimento aos feedbacks da pré-venda, reconhecendo o problema sem negar",
+      "Bloco 3: promessa de escuta contínua ('Vocês sempre serão ouvidos')",
+      "Bloco 4: pedido de desculpas e compromisso com a experiência do lançamento oficial da nova Boca Rosa"
+    ],
+    "padrao_visual": {
+      "fundo": "arte de comunicado da marca, post collab com a fundadora @bianca",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca assume publicamente a falha da pré-venda antes que a crise cresça e transforma o recuo em prova de padrão de qualidade. Publicado em collab com o perfil pessoal da fundadora, o comunicado chega à audiência dela e vira defesa espontânea nos comentários.",
+    "autor_ou_marca": "Boca Rosa Beauty (@bocarosabeauty, collab com @bianca)",
+    "link_fonte": "https://www.instagram.com/p/C9JDOpKs65V/",
+    "metricas": {
+      "curtidas": 307451,
+      "comentarios": 6788,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/C9JDOpKs65V/embed/captioned/ em 27/09/2026: 307,451 likes e 'View all 6,788 comments'. Autor @bocarosabeauty e collab @bianca confirmados no embed. Tipo GraphImage."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de julho de 2024 (data derivada do shortcode), após falhas de embalagem na pré-venda do relançamento da marca. Achado via matéria do GKPB (gkpb.com.br/167671/boca-rosa-falha-embalagens/). Imagem única confirmada. Legenda conferida na íntegra.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-31"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Alerta de Spoiler! Galo forte e vingador!",
+    "estrutura": [
+      "Bloco 1: 'Alerta de Spoiler!' para criar sensação de informação exclusiva",
+      "Bloco 2: grito de torcida do clube parceiro, falando a língua do torcedor ('Massa atleticana', 'honrar o manto')",
+      "Bloco 3: revela que o mascote da marca (Pica-pau) vai vestir o time, com seleção de produtos",
+      "Bloco 4: CTA de lista de espera: inscreva-se pelo link da bio"
+    ],
+    "padrao_visual": {
+      "fundo": "arte preto e branco nas cores do Atlético Mineiro com o mascote da Reserva",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Junta a paixão de uma torcida gigante com o mascote da marca e usa formato de teaser com lista de espera, capturando demanda antes do produto estar à venda. O post em collab com o clube aparece no feed dos seguidores do @atletico e multiplica o alcance.",
+    "autor_ou_marca": "Reserva (@reserva, collab com @atletico)",
+    "link_fonte": "https://www.instagram.com/p/DFqXBltuGeR/",
+    "metricas": {
+      "curtidas": 51031,
+      "comentarios": 1320,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DFqXBltuGeR/embed/captioned/ em 27/09/2026: 51,031 likes e 'View all 1,320 comments'. Autor @reserva e collab @atletico confirmados. Tipo GraphImage."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Fevereiro de 2025 (data derivada do shortcode). Achado via GKPB (gkpb.com.br/175472/atletico-reserva/). Imagem única confirmada. Descrição visual (preto e branco, mascote) não conferida na imagem, apenas coerente com a legenda.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-32"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "VEM AÍ! Gente, é com muita felicidade que eu e a @brunatavares anunciamos a nossa linha de lábios.",
+    "estrutura": [
+      "Bloco 1: 'VEM AÍ!' com emoji de sirene para parar o scroll",
+      "Bloco 2: anúncio da collab na voz da personagem Lu, em primeira pessoa",
+      "Bloco 3: detalhe do produto (4 batons e um gloss 2 em 1) com trocadilho de marca: gloss 'Pixels', brilhante como tela 4K",
+      "Bloco 4: 'Mas calma': data futura de lançamento (dezembro) para gerar espera",
+      "Bloco 5: CTA para os stories, onde a parceira conta mais"
+    ],
+    "padrao_visual": {
+      "fundo": "imagem da Lu (avatar 3D do Magalu) com a maquiadora Bruna Tavares",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A assistente virtual do marketplace fala como influenciadora e lança um produto próprio com uma creator conhecida, somando as duas audiências. O trocadilho 'Pixels' amarra o produto à identidade digital da personagem, e o 'mas calma' com data distante vende antecipação.",
+    "autor_ou_marca": "Magazine Luiza (@magazineluiza, collab com @epocacosmeticos)",
+    "link_fonte": "https://www.instagram.com/p/CypPuHeui4P/",
+    "metricas": {
+      "curtidas": 20280,
+      "comentarios": 725,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/CypPuHeui4P/embed/captioned/ em 27/09/2026: 20,280 likes e 'View all 725 comments'. Autor @magazineluiza e collab @epocacosmeticos confirmados. Tipo GraphImage."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Outubro de 2023 (data derivada do shortcode), fora da janela preferida 2024 a 2026, mantido por ser case forte de marketplace brasileiro com personagem. Achado via GKPB (gkpb.com.br/157599/bruna-tavares-lu-magalu/). Conteúdo da imagem inferido, não visto.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-33"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Algo MUITO brilhante está chegando… E seus lábios vão amar.",
+    "estrutura": [
+      "Slide 1: imagem teaser que não revela o produto",
+      "Slides seguintes: detalhes que insinuam brilho e textura",
+      "Bloco final da legenda: 'Amanhã, aqui no feed', marcando a hora da revelação"
+    ],
+    "padrao_visual": {
+      "fundo": "close de produto com brilho e tons rosados da marca",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Teaser de véspera que esconde o produto e marca a revelação para o dia seguinte, abrindo um loop que traz a audiência de volta ao feed. A legenda tem só duas linhas, então toda a curiosidade fica na imagem.",
+    "autor_ou_marca": "Boca Rosa Beauty (@bocarosabeauty)",
+    "link_fonte": "https://www.instagram.com/p/DUGU7oUjvaO/",
+    "metricas": {
+      "curtidas": 5593,
+      "comentarios": 677,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DUGU7oUjvaO/embed/captioned/ em 27/09/2026: 5,593 likes e 'View all 677 comments'. Tipo GraphSidecar (carrossel) confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Janeiro de 2026 (data derivada do shortcode), teaser da collab adidas Originals x Boca Rosa para o Carnaval 2026. Achado via GKPB (gkpb.com.br/186897/adidas-e-boca-rosa-carnaval/). Conteúdo dos slides e visual inferidos da legenda, imagens não vistas.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-34"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A GENTE OUVIU VOCÊS: a partir de hoje, vocês vão poder escolher o seu Canarinho iFood favorito (e completar a coleção!).",
+    "estrutura": [
+      "Slide 1: manchete em caixa alta 'A GENTE OUVIU VOCÊS' respondendo a um pedido do público",
+      "Slides seguintes: os modelos de Canarinho disponíveis para escolha (há vídeo entre as mídias)",
+      "Bloco final da legenda: convite a completar a coleção e hashtags da campanha (#iFoodÉDoBrasil #CanarinhosiFood)"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos e vídeo de produto dos bonecos Canarinho nas cores do Brasil",
+      "contraste": "alto",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Responde publicamente a um pedido da comunidade e transforma a reclamação em lançamento, o que gera sensação de ser ouvido. A lógica de coleção ('completar a coleção') estimula pedidos repetidos dentro do app.",
+    "autor_ou_marca": "iFood (@ifoodbrasil)",
+    "link_fonte": "https://www.instagram.com/p/DZdFjuNiVu-/",
+    "metricas": {
+      "curtidas": 2677,
+      "comentarios": 867,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DZdFjuNiVu-/embed/captioned/ em 27/09/2026: 2,677 likes e 'View all 867 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Junho de 2026 (data derivada do shortcode), campanha de Copa do Mundo. Marketplace de delivery, adjacente ao nicho. Tipo de gancho corrigido de 'pergunta' para 'promessa' (não há pergunta no texto). Achado via GKPB (gkpb.com.br/192421/canarinho-ifood-preco-escolha/). Conteúdo dos slides inferido.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-35"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "O seu verão com mais cor, sabor e estilo!",
+    "estrutura": [
+      "Slide 1: peça da collab com cores de gelato",
+      "Slides seguintes: looks e detalhes de tecido inspirados nos sabores, com vídeo entre as mídias",
+      "Bloco da legenda: apresenta a collab #hoperesort x @baciodilatte e traduz gelato em cor e tecido",
+      "Bloco final da legenda: 'Deslize para se encantar' como instrução explícita de swipe"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de moda praia em tons pastel com referências de sorvete",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Collab entre marca de moda e marca de sorvete traduz sabor em cor, algo que se entende só pela imagem. O pedido explícito para deslizar aumenta o tempo no carrossel, e o post em collab aparece para os seguidores das duas marcas.",
+    "autor_ou_marca": "Hope Resort (@hope.sportresort, collab com @baciodilatte)",
+    "link_fonte": "https://www.instagram.com/p/DDFJxIEu-iO/",
+    "metricas": {
+      "curtidas": 3972,
+      "comentarios": 158,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DDFJxIEu-iO/embed/captioned/ em 27/09/2026: 3,972 likes e 'View all 158 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias. Collab @baciodilatte confirmada."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Dezembro de 2024 (data derivada do shortcode). Tipo de gancho corrigido de 'historia-pessoal' para 'promessa' (promessa sensorial, sem relato pessoal). Achado via GKPB (gkpb.com.br/173268/bacio-di-latte-hope/). Visual inferido da legenda.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-36"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "A pop-up está chegando à capital mais fria do Brasil em 12/04!",
+    "estrutura": [
+      "Slide 1: anúncio da pop-up com data e cidade sem citar o nome (capital mais fria)",
+      "Bloco 2: data de abertura do agendamento pelo Sympla",
+      "Bloco 3: regras de acesso, horários e entrada de crianças",
+      "Bloco 4: formas de pagamento aceitas na loja física",
+      "Bloco 5: benefício exclusivo (10% off em qualquer compra e 20% off acima de R$ 450)",
+      "Bloco 6: avisos sobre trocas, gratuidade dos ingressos e combate a revenda"
+    ],
+    "padrao_visual": {
+      "fundo": "artes informativas da SHEIN em preto e branco",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Marca 100% online cria escassez física (evento com agendamento) e resolve todas as dúvidas em lista com emojis, reduzindo atrito. Chamar Curitiba de 'capital mais fria do Brasil' faz o público local se reconhecer, e o desconto só para visitantes converte a visita em venda.",
+    "autor_ou_marca": "SHEIN Brasil (@sheinbrasil)",
+    "link_fonte": "https://www.instagram.com/p/C5Qo8UliVQr/",
+    "metricas": {
+      "curtidas": 2891,
+      "comentarios": 130,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/C5Qo8UliVQr/embed/captioned/ em 27/09/2026: 2,891 likes e 'View all 130 comments'. Carrossel (GraphSidecar) confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Abril de 2024 (data derivada do shortcode), pop-up em Curitiba (#SHEINCuritiba). Estrutura baseada na legenda, conferida na íntegra; conteúdo exato de cada slide e visual não vistos. Achado via GKPB (gkpb.com.br/164307/shein-loja-curitiba/).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-37"
+  },
+  {
+    "rede": "instagram",
+    "formato": "dado-impacto",
+    "tipo_gancho": "numero",
+    "texto_gancho": "Foram necessários dois anos e mais de 19 testes para podermos dizer: somos a primeira trufa zero plástico do Brasil.",
+    "estrutura": [
+      "Bloco 1: número de esforço (2 anos, mais de 19 testes) seguido do feito inédito",
+      "Bloco 2: pergunta 'Mas por que isso é importante?'",
+      "Bloco 3: propósito da marca além do chocolate (zerar plástico como meta)",
+      "Bloco 4: convite ao público a repensar o próprio consumo de plástico",
+      "Bloco 5: fecho com o nome da marca ('um mundo com mais dengo?')"
+    ],
+    "padrao_visual": {
+      "fundo": "foto de produto com a nova embalagem sem plástico",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Números de esforço tornam a conquista crível e o 'primeira do Brasil' dá status de pioneira. A pergunta no meio da legenda puxa a leitura até o propósito, e o fecho usa o próprio nome da marca como palavra comum.",
+    "autor_ou_marca": "Dengo Chocolates (@dengochocolates)",
+    "link_fonte": "https://www.instagram.com/p/C5WvYcXusNe/",
+    "metricas": {
+      "curtidas": 4335,
+      "comentarios": 185,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/C5WvYcXusNe/embed/captioned/ em 27/09/2026: 4,335 likes e 'View all 185 comments'. Tipo GraphImage."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Abril de 2024 (data derivada do shortcode). Imagem única confirmada. Marca brasileira com forte venda online própria. Legenda conferida na íntegra; visual inferido. Achado via GKPB (gkpb.com.br/164441/dengo-embalagens-zero-plastico/).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-38"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Heeeeeey. Chamei a Pinguina pra um date diferente!",
+    "estrutura": [
+      "Slide 1: mascote da marca na première do filme Barbie",
+      "Slides seguintes: cenas do evento com a personagem",
+      "Bloco da legenda: relato em primeira pessoa ('tá simplesmente pincrível')",
+      "Bloco final da legenda: data de estreia e link de ingresso do parceiro @wbpictures_br"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos do evento com estética rosa Barbiecore",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O varejista usa o mascote como influenciador e surfa uma trend cultural (Barbiecore) no pico. O trocadilho 'pincrível' e o tom de conversa com amigo afastam a cara de anúncio.",
+    "autor_ou_marca": "Pontofrio (@pontofrio)",
+    "link_fonte": "https://www.instagram.com/p/Cu3Nq3ItMBl/",
+    "metricas": {
+      "curtidas": 2287,
+      "comentarios": 37,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/Cu3Nq3ItMBl/embed/captioned/ em 27/09/2026: 2,287 likes e 'View all 37 comments'. Carrossel (GraphSidecar) confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Julho de 2023 (data derivada do shortcode), fora da janela preferida. Varejista e e-commerce do grupo Casas Bahia. Engajamento baixo para 'viral'; vale como par comparativo do item Casas Bahia. Achado via GKPB (gkpb.com.br/129430/casas-bahia-ponto-barbiecore/).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-39"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Cheguei na premiere da Barbie!",
+    "estrutura": [
+      "Bloco 1: frase de chegada em primeira pessoa, como creator",
+      "Bloco 2: expectativa sobre o filme ('promete muitas surpresas')",
+      "Bloco 3: CTA de marcação ('Marca aqui quem você vai chamar pra assistir junto!')"
+    ],
+    "padrao_visual": {
+      "fundo": "foto do mascote Baianinho no evento com estética rosa",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "O mascote do varejo fala como influenciador presente no evento e fecha com pedido de marcação, que espalha o post entre amigos sem mídia paga.",
+    "autor_ou_marca": "Casas Bahia (@casasbahia)",
+    "link_fonte": "https://www.instagram.com/p/Cu26t9fN3GJ/",
+    "metricas": {
+      "curtidas": 1125,
+      "comentarios": 77,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/Cu26t9fN3GJ/embed/captioned/ em 27/09/2026: 1,125 likes e 'View all 77 comments'. Tipo GraphImage."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Julho de 2023 (data derivada do shortcode), fora da janela preferida. Mesma ação do item Pontofrio, útil como par comparativo. Engajamento baixo para 'viral'. Visual inferido. Achado via GKPB (gkpb.com.br/129430/casas-bahia-ponto-barbiecore/).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-40"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Ooh, você e eu… a gente tem uma reputação e tanto.",
+    "estrutura": [
+      "Slide 1: creator com a nova coleção que ela dirigiu",
+      "Slides seguintes: peças da linha Adapt, com vídeo entre as mídias",
+      "Bloco da legenda: orgulho de assinar a coleção como Creative Director, com crédito às designers da @gymsharkwomen",
+      "Bloco final: data e hora de lançamento (27 de fevereiro, 8h PST) mais cupom WHITNEY10"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de estúdio da creator vestindo a coleção",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A abertura cita uma letra de música conhecida (referência a Taylor Swift, com emoji de cobra) e prende sem dizer o que é. A marca DTC coloca a creator como diretora criativa, não só como garota-propaganda, e data exata mais cupom com o nome dela criam urgência rastreável.",
+    "autor_ou_marca": "Whitney Simmons (@whitneyysimmons) para Gymshark",
+    "link_fonte": "https://www.instagram.com/p/DGjazHmyhvh/",
+    "metricas": {
+      "curtidas": 88678,
+      "comentarios": 608,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DGjazHmyhvh/embed/captioned/ em 27/09/2026: 88,678 likes e 'View all 608 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Ooh, you and me… we got big reputations'. Fevereiro de 2025 (data derivada do shortcode). Tipo de gancho corrigido de 'prova-social' para 'curiosidade'. Visual inferido. Achado no blog da Shopify (shopify.com/blog/product-launch).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-41"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Agora você pode usar links de afiliado para marcar produtos nos seus reels e ganhar comissão quando as pessoas comprarem pelo seu conteúdo.",
+    "estrutura": [
+      "Slide 1: anúncio da novidade em uma frase",
+      "Slides seguintes: como o recurso funciona (há vídeo entre as mídias)",
+      "Bloco final da legenda: prazo de liberação ('nas próximas semanas')"
+    ],
+    "padrao_visual": {
+      "fundo": "telas do app com a nova função de compra",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Novidade de plataforma que mexe direto com o dinheiro de creators e lojas, contada em uma frase de benefício pelo chefe do Instagram. Legenda de duas linhas, sem jargão, e o post em collab com @creators alcança exatamente quem vai usar o recurso.",
+    "autor_ou_marca": "Adam Mosseri (@mosseri, collab com @creators)",
+    "link_fonte": "https://www.instagram.com/p/DWyhjRhEZ2i/",
+    "metricas": {
+      "curtidas": 78388,
+      "comentarios": 2135,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DWyhjRhEZ2i/embed/captioned/ em 27/09/2026: 78,388 likes e 'View all 2,135 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias. Collab @creators confirmada."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'You can now use affiliate links to tag products in your reels and earn a commission when people shop your content. Rolling out over the coming weeks.' Abril de 2026 (data derivada do shortcode). Uso de rosto e conteúdo dos slides inferidos, não vistos. Social commerce: perfil de executivo de plataforma, não de loja. Achado no blog da Shopify.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-42"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "prova-social",
+    "texto_gancho": "Ela voltou ao estoque! Rápido: o macacão Calla esgotou da última vez.",
+    "estrutura": [
+      "Slide 1: peça de volta ao estoque vestida",
+      "Slides seguintes: outros ângulos da peça, com vídeo entre as mídias",
+      "Bloco da legenda: pedido para garantir a peça enquanto há estoque",
+      "Bloco final da legenda: prova social de celebridade ('As seen on @lolathompson')"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de moda com modelo",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "'Back in stock' com histórico de esgotado cria escassez e urgência com base em fato. Tratar a peça como 'ela' dá personalidade ao produto, e a menção a uma celebridade usando o macacão valida o desejo.",
+    "autor_ou_marca": "Oh Polly (@ohpolly)",
+    "link_fonte": "https://www.instagram.com/p/DXEh9IMDPqe/",
+    "metricas": {
+      "curtidas": 6389,
+      "comentarios": 23,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DXEh9IMDPqe/embed/captioned/ em 27/09/2026: 6,389 likes e 'View all 23 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'She's back in stock! Quick - the Calla capri jumpsuit sold out last time so make sure to grab her whilst she's back. As seen on @lolathompson'. Abril de 2026 (data derivada do shortcode). Visual inferido. Achado no blog da Shopify (user-generated-content).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-43"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Link para assinar a newsletter na bio.",
+    "estrutura": [
+      "Slide 1: peças estampadas à mão",
+      "Slides seguintes: processo artesanal e detalhes das estampas",
+      "Bloco final da legenda: CTA único para a newsletter e hashtags de valores (#handprinted, #sustainablefashion, #madeincanada)"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de produto e processo com estampas artesanais",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Marca DTC pequena deixa o carrossel vender o produto e usa a legenda só para levar tráfego a um canal próprio (newsletter), que não depende do algoritmo. As hashtags carregam os valores da marca no lugar de texto explicativo.",
+    "autor_ou_marca": "Thief & Bandit (@thiefandbandit)",
+    "link_fonte": "https://www.instagram.com/p/DFlsI06O3V-/",
+    "metricas": {
+      "curtidas": 4252,
+      "comentarios": 100,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DFlsI06O3V-/embed/captioned/ em 27/09/2026: 4,252 likes e 'View all 100 comments'. Carrossel (GraphSidecar) confirmado."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'Newsletter subscription link in bio.' Fevereiro de 2025 (data derivada do shortcode). O texto de abertura é um CTA, não um gancho de verdade: o gancho está nas imagens, que não foram vistas. Conteúdo dos slides inferido das hashtags. Achado no blog da Shopify (instagram-marketing).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-44"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Fechou, LA! Deslize para ver os bastidores do nosso segundo End of Summer Market.",
+    "estrutura": [
+      "Slide 1: foto de encerramento do evento presencial",
+      "Slides seguintes: bastidores do mercado com a comunidade, com vídeo entre as mídias",
+      "Bloco da legenda: agradecimento a amigos, família e comunidade pelo lançamento",
+      "Bloco final: lista de marcas parceiras marcadas"
+    ],
+    "padrao_visual": {
+      "fundo": "fotos de evento ao ar livre",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Marca DTC de skincare leva a comunidade para um evento físico e usa o carrossel de bastidores como prova social. Marcar mais de dez marcas parceiras na legenda soma o alcance das audiências delas.",
+    "autor_ou_marca": "OSEA Malibu (@oseamalibu, collab com @happypalmer)",
+    "link_fonte": "https://www.instagram.com/p/DAby86ZTLW5/",
+    "metricas": {
+      "curtidas": 1164,
+      "comentarios": 123,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Relido pelo verificador no embed público instagram.com/p/DAby86ZTLW5/embed/captioned/ em 27/09/2026: 1,164 likes e 'View all 123 comments'. Carrossel (GraphSidecar) confirmado, com vídeo entre as mídias. Collab @happypalmer confirmada."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Original: 'That's a wrap, LA! Swipe for a behind-the-scenes look at our second annual End of Summer Market.' Setembro de 2024 (data derivada do shortcode). Engajamento baixo para 'viral'. Visual inferido; removida a menção a Malibu como local do evento, que não está na legenda. Achado no blog da Shopify (shopify.com/blog/instagram-carousel).",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-45"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Gente, eu tenho CUPONS pra vcs aproveitarem ainda mais o #OutletMagalu. Maaas, como é outlet já sabem: a quantidade é LI-MI-TA-DA! Então, eu vou dar duas opções e quem vai decidir são VOCÊS.",
+    "estrutura": [
+      "Bloco 1: Lu anuncia que tem cupons e cria escassez (a quantidade é LI-MI-TA-DA)",
+      "Bloco 2: passa a decisão ao público, com duas opções numa enquete",
+      "Bloco 3: prazo curto (Vcs têm 2 horas pra decidir. Valendo!)",
+      "Bloco 4: tweet de resultado 2h30 depois: a enquete está encerrada e vcs decidiram pela opção 50 CUPONS DE R$1000",
+      "Bloco 5: promessa de voltar com o nome do cupom e as regras, pedindo para deixar o Super App Magalu na mão"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet só de texto, sem imagem",
+      "contraste": "alto",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca transforma a liberação de um cupom num jogo com enquete: o público vota, sente que decidiu e volta para ver o resultado. A escassez somada ao prazo de 2 horas gerou mais de 1.200 respostas no primeiro tweet e mais de 2.100 no tweet do resultado.",
+    "autor_ou_marca": "Magalu (Lu do Magalu, @magalu)",
+    "link_fonte": "https://x.com/magalu/status/1214577301326876672",
+    "metricas": {
+      "curtidas": 3782,
+      "comentarios": 1239,
+      "compartilhamentos": 170,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com (3.782 curtidas, 1.239 respostas, 170 retweets; visualizações não disponíveis para tweet de 2020). O tweet de resultado (x.com/magalu/status/1214615356993609730) tinha 5.563 curtidas, 2.189 respostas e 163 retweets na mesma leitura."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Tweet de 07/01/2020, 15h59 UTC; resultado às 18h30 UTC do mesmo dia. Texto e autor confirmados na API pública do fxtwitter. Achado pela matéria do GKPB 'Magalu disponibiliza 50 cupons de R$1.000 e gera polêmica no Twitter'. Anterior a 2024, entra como referência de mecânica de engajamento.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-46"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "contraintuitivo",
+    "texto_gancho": "Vc achou msm que eu ia deixar o seu pai ganhar só uma lembrancinha?",
+    "estrutura": [
+      "Bloco 1: tweet da manhã vende uma meia exclusiva de Dia dos Pais, só 500 pares (Aqui tá a SURPRESA!)",
+      "Bloco 2: tweet da tarde finge bronca porque as meias esgotaram (Meia de presente no Dia dos Pais não, né???) e promete dar um jeito",
+      "Bloco 3: virada à noite: quem comprou a meia ganhou cupom de R$500 para um PRESENTÃO no SuperApp Magalu",
+      "Bloco 4: prova social com cliente real marcada (@laixcost)",
+      "Bloco 5: chamada para o fio (segue o fio) para quem não aproveitou"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet com imagens anexas (não analisadas)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca monta uma pegadinha em três tweets no mesmo dia: vende um produto bobo, finge indignação e recompensa quem comprou. Os dois primeiros tweets tiveram 64 e 73 curtidas, e a virada teve 2.894, porque a história só fecha no fim.",
+    "autor_ou_marca": "Magalu (Lu do Magalu, @magalu)",
+    "link_fonte": "https://x.com/magalu/status/1421206316056469520",
+    "metricas": {
+      "curtidas": 2894,
+      "comentarios": 101,
+      "compartilhamentos": 28,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com (2.894 curtidas, 101 respostas, 28 retweets). Os tweets anteriores da sequência (1421101993511329794 e 1421143461907021835) tinham 64 e 73 curtidas na mesma leitura."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Sequência de 30/07/2021 (13h34, 16h19 e 20h29 UTC). Os três textos e o autor foram confirmados no fxtwitter. Achado pela matéria do GKPB 'Magalu dá cupom de R$ 500 para quem comprou meia de Dia Dos Pais'. Anterior a 2024.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-47"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Acabei de sair de uma reunião e tenho novidades: o nome Pontofrio tá de volta 😌",
+    "estrutura": [
+      "Bloco 1: o mascote Pin anuncia em primeira pessoa, como quem sai de uma reunião",
+      "Bloco 2: credita a vitória à comunidade (A conquista é nossa, Pinautas)",
+      "Bloco 3: admite que o rebranding não pegou (Até tentaram mudar, mas o melhor caminho é esse, né?)",
+      "Bloco 4: pede para ser chamado do jeito antigo, Pin do Pontofrio",
+      "Bloco 5: fecha com pertencimento (Cola na minha e vamos juntos nessa)"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A varejista admite em público que a troca de nome para Ponto não pegou e entrega a vitória aos clientes. O anúncio vem na voz do mascote, como bastidor de reunião, e a admissão do erro com humor puxa comentários de apoio.",
+    "autor_ou_marca": "Pontofrio (@pontofrio)",
+    "link_fonte": "https://www.instagram.com/p/C5-5horhay0/",
+    "metricas": {
+      "curtidas": 5351,
+      "comentarios": 291,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 5,351 likes e View all 291 comments."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de abril de 2024 (matéria GKPB 164971/pontofrio-nome-original). Legenda e autor confirmados no embed. Volta do nome Pontofrio após o rebranding para Ponto.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-48"
+  },
+  {
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "erro-comum",
+    "texto_gancho": "Vcs: o nome dessa cor é encardida. A gente: no capricho meu patrão 🫡😌✨",
+    "estrutura": [
+      "Bloco 1: reproduz a zoeira dos clientes no formato Vcs: / A gente:",
+      "Bloco 2: vídeo com gravação do site de Havaianas, buscando o modelo",
+      "Bloco 3: revelação: o nome do produto na loja online mudou de creme para encardida",
+      "Bloco 4: descrição #PraTodosVerem explicando a troca"
+    ],
+    "padrao_visual": {
+      "fundo": "gravação de tela do site de Havaianas (segundo a descrição #PraTodosVerem)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca pega a piada dos clientes e muda de verdade o nome do produto na loja online. A gravação de tela do site vira prova de que a marca escuta, e o público compartilha porque a piada virou fato.",
+    "autor_ou_marca": "Havaianas (@havaianas)",
+    "link_fonte": "https://www.instagram.com/reel/DMI_RulRujp/",
+    "metricas": {
+      "curtidas": 4957,
+      "comentarios": 361,
+      "compartilhamentos": null,
+      "visualizacoes": 118036,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 4,957 likes, 361 comentários e 118.036 visualizações de vídeo."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de julho de 2025 (matéria GKPB 180287/havaianas-encardida). Legenda e autor confirmados no embed. Classificado como antes e depois pela troca creme para encardida no e-commerce da marca.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-49"
+  },
+  {
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Ao longo dos meus 20 anos de existência passei por algumas atualizações, agora chegou a hora de me atualizar mais uma vez!",
+    "estrutura": [
+      "Bloco 1: Lu fala em primeira pessoa sobre os 20 anos de história",
+      "Bloco 2: apresenta a nova versão (Apresento a vocês, a minha nova versão)",
+      "Bloco 3: explica o que muda: visual repaginado e tecnologia para interagir mais",
+      "Bloco 4: frase de identidade (Eu sou virtual, mas adoro me inspirar em vocês, humanos!)",
+      "Bloco 5: pergunta aberta (O que acharam na minha nova versão?) e hashtag #NovaVersãoDaLu"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (reel; só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Mudar o rosto de uma personagem que o público conhece há 20 anos provoca comparação imediata com a versão antiga. A pergunta final pede opinião, e o post passou de 5.800 comentários com cerca de 14 mil curtidas.",
+    "autor_ou_marca": "Magalu (Lu do Magalu, @magazineluiza)",
+    "link_fonte": "https://www.instagram.com/reel/C85U056peSW/",
+    "metricas": {
+      "curtidas": 14056,
+      "comentarios": 5830,
+      "compartilhamentos": null,
+      "visualizacoes": 144700,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 14,056 likes, 5.830 comentários e 144.700 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de julho de 2024 (matéria GKPB 167458, 'Magalu apresenta nova Lu, agora mais realista'). Legenda e autor confirmados no embed; a pergunta original tem o erro 'na minha nova versão'. O rosto da Lu é avatar virtual.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-50"
+  },
+  {
+    "rede": "instagram",
+    "formato": "antes-depois",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Renovação do visual? TEMOS! 💁🏼‍♀️",
+    "estrutura": [
+      "Bloco 1: pergunta e resposta curta (Renovação do visual? TEMOS!)",
+      "Bloco 2: Lu aparece com transformação ICÔNICA no cabelo, ligada ao carnaval",
+      "Bloco 3: o produto parceiro como causa da mudança (Koleston Deluxe, da @wellabr)",
+      "Bloco 4: benefícios do produto numa frase (sem amônia, 100% de cobertura, brilho)",
+      "Bloco 5: CTA com código do produto no app Magalu (hcb5363499)"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (reel; só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "A mudança de visual de uma personagem conhecida vira notícia e gera comentário, e o produto patrocinado aparece como a causa da transformação. O código do produto na legenda leva direto à compra no app, unindo publi e venda no mesmo post.",
+    "autor_ou_marca": "Magalu (Lu do Magalu, @magazineluiza) com Wella (@wellabr)",
+    "link_fonte": "https://www.instagram.com/reel/DUUEI5HgUjb/",
+    "metricas": {
+      "curtidas": 11476,
+      "comentarios": 6297,
+      "compartilhamentos": null,
+      "visualizacoes": 333824,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 11,476 likes, 6.297 comentários e 333.824 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de fevereiro de 2026 (matéria GKPB 'Lu do Magalu fica loira em campanha da Koleston', 04/02/2026). Legenda e autor confirmados no embed. O fato de ser a primeira vez que a Lu fica loira vem da matéria, não da legenda. Exemplo de retail media dentro de conteúdo de personagem.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-51"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "promessa",
+    "texto_gancho": "Chegou a hora de arrasar com a minha nova coleção SHEIN x Anitta.",
+    "estrutura": [
+      "Bloco 1: anúncio da coleção em primeira pessoa da artista",
+      "Bloco 2: posicionamento (pra quem vive sem medo de ser ousado e estar sempre na moda)",
+      "Bloco 3: ligação com as várias versões dela (looks que combinam com todas as minhas versões)",
+      "Bloco 4: cupom pessoal ANITTAFASHION com 10% OFF no app, sem valor mínimo, um uso por CPF",
+      "Bloco 5: CTA para o app da @sheinbrasil e hashtags #publi"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (vídeo; só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "O marketplace publica pelo perfil da celebridade e herda a audiência dela, com 130 mil curtidas. O cupom com o nome da artista torna a venda rastreável e dá ao fã um motivo concreto para abrir o app.",
+    "autor_ou_marca": "Anitta (@anitta) em publi com SHEIN Brasil (@sheinbrasil)",
+    "link_fonte": "https://www.instagram.com/reel/C3DOwV4uUAj/",
+    "metricas": {
+      "curtidas": 130678,
+      "comentarios": 3122,
+      "compartilhamentos": null,
+      "visualizacoes": 893935,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 130,678 likes, 3.122 comentários e 893.935 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Reel de fevereiro de 2024 (matéria GKPB 162575/shein-anitta-2). Legenda e autor (@anitta) confirmados no embed. É vídeo; o formato mais próximo no enum é imagem única com oferta.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-52"
+  },
+  {
+    "rede": "linkedin",
+    "formato": "carrossel",
+    "tipo_gancho": "historia-pessoal",
+    "texto_gancho": "Depois de alguns anos tentando encontrar uma brecha para desenvolver uma pelúcia Disney exclusiva para a Americanas, finalmente consegui tirar essa ideia do papel.",
+    "estrutura": [
+      "Bloco 1: anos de tentativa até a conquista pessoal",
+      "Bloco 2: o obstáculo: os formatos tradicionais de pelúcia licenciada já têm exclusividade com grandes indústrias",
+      "Bloco 3: a pergunta que muda o jogo (por que seguir o caminho convencional?)",
+      "Bloco 4: a solução: pelúcias quadradas da Disney, com visual forte no ponto de venda e vontade de colecionar",
+      "Bloco 5: a referência que inspirou (a marca americana Moosh-Moosh) e as imagens do produto pronto"
+    ],
+    "padrao_visual": {
+      "fundo": "post com várias imagens do produto (não analisadas)",
+      "contraste": "medio",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A pessoa que criou o produto conta o problema, a restrição de licenciamento e a saída criativa. O leitor tira uma lição de negócio sobre fugir do formato saturado e ainda vê o produto exclusivo da varejista pronto.",
+    "autor_ou_marca": "Carolline Albano (Americanas)",
+    "link_fonte": "https://www.linkedin.com/posts/carollinealbano_depois-de-alguns-anos-tentando-encontrar-ugcPost-7470141463771664385-YWsC/",
+    "metricas": {
+      "curtidas": 2202,
+      "comentarios": 83,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 na página pública do post no LinkedIn: 2.202 reações (data-num-reactions) e 83 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de 09/06/2026 (datePublished na página). Texto e autora confirmados na página pública. Achado pela matéria GKPB 192659/americanas-pelucias-quadradas. Post de imagens múltiplas, não documento PDF; classificado como carrossel por aproximação. Número exato de imagens não confirmado.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-53"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Brasil, futebol é movimento. Samba. Ritmo. Ícones que vivem para sempre.",
+    "estrutura": [
+      "Bloco 1: frases curtas de ritmo sobre o futebol brasileiro",
+      "Bloco 2: crédito ao ilustrador brasileiro que fez o design (@ilustraguarisco)",
+      "Bloco 3: o que a arte mistura (lendas, lugares icônicos, cultura)",
+      "Bloco 4: nome da coleção e teaser (Stanley 1913 Artistas do Futebol. Disponível em breve)",
+      "Bloco 5: mesma legenda em inglês, com a data de lançamento (Available May 14) e a numeração 2/7 da série"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A marca fala primeiro com o Brasil, em português, sobre futebol em ano de Copa, e credita um artista local, o que puxa o orgulho do público. O teaser de lançamento com data e a série numerada criam expectativa de drop antes da venda.",
+    "autor_ou_marca": "Stanley 1913 (@stanley1913_brand)",
+    "link_fonte": "https://www.instagram.com/p/DYNL_mmEbSj/",
+    "metricas": {
+      "curtidas": 1915,
+      "comentarios": 167,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 1,915 likes e 167 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de maio de 2026 (matéria GKPB 191104/stanley-copa-do-mundo). Legenda e autor confirmados no embed. Legenda bilíngue, português primeiro. Encaixe no nicho: marca com forte venda direta e mecânica de drop; caso de marca global, não de loja brasileira.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-54"
+  },
+  {
+    "rede": "instagram",
+    "formato": "imagem-unica",
+    "tipo_gancho": "pergunta",
+    "texto_gancho": "Alguém já teve o nome ou telefone linkado a uma compra indevida? Pois é. As Casas Bahia acham que eu sou Emília.",
+    "estrutura": [
+      "Bloco 1: pergunta ao público sobre compra indevida ligada ao próprio nome",
+      "Bloco 2: o problema concreto (as Casas Bahia acham que eu sou Emília)",
+      "Bloco 3: tudo o que já tentou (três meses, 0800, site, mais de 10 ligações por dia)",
+      "Bloco 4: bordão com humor, repetido (Casas Bahia: eu não sou Emília. Nem cara de Emília eu tenho) e hashtag #casabahiaeunãosou",
+      "Bloco 5: a marca responde no Twitter com prazo de 15 dias úteis, e a resposta gera mais críticas"
+    ],
+    "padrao_visual": {
+      "fundo": "vídeo selfie (segundo a matéria; não analisado)",
+      "contraste": "medio",
+      "densidade_texto": "baixa",
+      "uso_rosto": true
+    },
+    "por_que_funciona": "Um cliente famoso transforma uma cobrança errada num bordão com humor e hashtag fácil de repetir, e o caso vira meme. Serve como exemplo de erro para varejistas: a resposta padrão da marca, com prazo de 15 dias úteis, aumentou a repercussão negativa.",
+    "autor_ou_marca": "Boninho (@jbboninho) sobre Casas Bahia",
+    "link_fonte": "https://www.instagram.com/tv/CS1_RE1lcUM/",
+    "metricas": {
+      "curtidas": 74994,
+      "comentarios": 9277,
+      "compartilhamentos": null,
+      "visualizacoes": 634446,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 74,994 likes, 9,277 comentários e 634.446 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Vídeo de 21/08/2021. Link original achado no embed da matéria do Meio & Mensagem (Bárbara Sacchitiello, 23/08/2021), que transcreve a fala. A legenda no Instagram confirma autor e tema: 'Gente tem três meses que a cobrança da @casasbahia procurando uma tal de Emília! ... Casa Bahia eu não sou a Emília!!! #casabahiaeunãosou'. A fala do gancho vem da transcrição da matéria. A resposta da marca (twitter.com/CasasBahia/status/1429129791085625349) não abriu na API. Formato corrigido de bastidor-founder (Boninho não é fundador) para imagem-unica, a aproximação usada para vídeo único. Anterior a 2024; entra como caso de gestão de crise no varejo.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-55"
+  },
+  {
+    "rede": "x",
+    "formato": "print-tweet",
+    "tipo_gancho": "polemica",
+    "texto_gancho": "Antes de pedir mais headcount e recursos, os times precisam demonstrar por que não conseguem fazer o que querem usando IA.",
+    "estrutura": [
+      "Bloco 1: CEO publica no X, como Article, o memorando interno que estava para vazar (Context: ... it was in the process of being leaked)",
+      "Bloco 2: título com a tese: uso reflexivo de IA passa a ser expectativa básica na Shopify",
+      "Bloco 3: ligação com a missão: mais comerciantes e empreendedores do que nunca, com IA fazendo parte do trabalho",
+      "Bloco 4: regra prática para contratação: provar antes que a IA não resolve",
+      "Bloco 5: pergunta para os times: como seria esta área se agentes autônomos de IA já fizessem parte do time?"
+    ],
+    "padrao_visual": {
+      "fundo": "tweet sem texto próprio, só com X Article anexado (memorando em texto longo)",
+      "contraste": "alto",
+      "densidade_texto": "alta",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "Publicar por conta própria um memorando interno antes do vazamento transforma uma regra dura em notícia controlada pelo CEO. A regra sobre contratação é concreta e fácil de citar, por isso rendeu 2,5 milhões de visualizações e virou debate.",
+    "autor_ou_marca": "Tobi Lütke (CEO da Shopify, @tobi)",
+    "link_fonte": "https://x.com/tobi/status/1909251946235437514",
+    "metricas": {
+      "curtidas": 7141,
+      "comentarios": 313,
+      "compartilhamentos": 968,
+      "visualizacoes": 2546845,
+      "observacao": "Lido em 27/09/2026 via api.fxtwitter.com: 7.141 curtidas, 313 respostas, 968 retweets e 2.546.845 visualizações."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Tweet de 07/04/2025. O texto do tweet é só um link (t.co) para o X Article 'Reflexive AI usage is now a baseline expectation at Shopify', lido no fxtwitter. Frase original confirmada no Article: Before asking for more Headcount and resources, teams must demonstrate why they cannot get what they want done using AI. Repercussão na TechCrunch.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-56"
+  },
+  {
+    "rede": "instagram",
+    "formato": "carrossel",
+    "tipo_gancho": "curiosidade",
+    "texto_gancho": "Desbloqueie o seu Smurf interior com a nossa coleção edição limitada #SmurfCrewCollection 🩵",
+    "estrutura": [
+      "Bloco 1: frase de convite com o nome da collab e edição limitada",
+      "Bloco 2: lista de produtos, um emoji por item",
+      "Bloco 3: nomes dos tons ligados aos personagens (Smurfette Effect, Smurf'Melon, Smurf'Berry)",
+      "Bloco 4: itens colecionáveis de brinde (chaveiro, presilhas e esponja de cogumelo)",
+      "Bloco 5: CTA de compra no site próprio (fentybeauty.com) e em @sephora e @ultabeauty, com gancho da estreia do filme em 18 de julho"
+    ],
+    "padrao_visual": {
+      "fundo": "não observado (só a legenda foi lida no embed)",
+      "contraste": "medio",
+      "densidade_texto": "media",
+      "uso_rosto": false
+    },
+    "por_que_funciona": "A collab com um personagem nostálgico e o selo de edição limitada criam urgência de compra. A legenda em lista com emoji funciona como catálogo rápido, e o CTA leva direto para o site da marca e para os varejistas.",
+    "autor_ou_marca": "Fenty Beauty (@fentybeauty)",
+    "link_fonte": "https://www.instagram.com/p/DLaWlipvAiG/",
+    "metricas": {
+      "curtidas": 42082,
+      "comentarios": 196,
+      "compartilhamentos": null,
+      "visualizacoes": null,
+      "observacao": "Lido em 27/09/2026 no embed público do Instagram (/embed/captioned/): 42,082 likes e 196 comentários."
+    },
+    "status": "verificado",
+    "notas_curadoria": "Post de junho de 2025 (matéria GKPB 180333/fenty-beauty-smurfs). Legenda e autor confirmados no embed. Original: Get your inner Smurf unlocked with our limited-edition #SmurfCrewCollection. Encaixe no nicho: marca de beleza com venda direta pelo site próprio e por varejistas.",
+    "nicho": "ecommerce-dtc",
+    "id": "ecommerce-dtc-57"
   }
 ]

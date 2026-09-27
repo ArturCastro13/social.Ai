@@ -21,7 +21,33 @@ export interface ArteProps {
 }
 
 const EMOJI = /[\p{Extended_Pictographic}\u{FE0F}\u{200D}]/gu;
-export const limpar = (s: string) => s.replace(EMOJI, "").replace(/\s{2,}/g, " ").trim();
+
+/** Tira o [PREENCHER: ...] da arte: o cartão do post pede para completar, a imagem nunca mostra o marcador. */
+export function semPlaceholder(s: string): string {
+  // Nota (desvio do plano): "%" fica de fora da junção com o espaço anterior. O plano original juntava também o
+  // "%" à palavra ("Ganhe%"), mas o próprio teste do plano espera o espaço antes do símbolo ("Ganhe % de tempo.").
+  return s.replace(/\s*\[PREENCHER[^\]]*\]\s*/gi, " ").replace(/\s+([.,;:!?])/g, "$1").replace(/\s{2,}/g, " ").trim();
+}
+
+export const limpar = (s: string) => semPlaceholder(s.replace(EMOJI, "")).replace(/\s{2,}/g, " ").trim();
+
+const palavraNormal = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+
+/** Divide o título em palavras e marca as que formam o destaque (sem diferença de acento, caixa e pontuação). */
+export function marcarDestaque(texto: string, destaque?: string | null): { palavra: string; marcada: boolean }[] {
+  const palavras = limpar(texto).split(" ").filter(Boolean);
+  const out = palavras.map((palavra) => ({ palavra, marcada: false }));
+  const alvo = limpar(destaque ?? "").split(" ").map(palavraNormal).filter(Boolean);
+  if (!alvo.length) return out;
+  const norm = palavras.map(palavraNormal);
+  for (let i = 0; i + alvo.length <= norm.length; i++) {
+    if (alvo.every((a, k) => norm[i + k] === a)) {
+      for (let k = 0; k < alvo.length; k++) out[i + k].marcada = true;
+      break;
+    }
+  }
+  return out;
+}
 
 /** Tamanho de fonte que cabe na caixa, estimando largura média de caractere. */
 function contarLinhas(palavras: string[], largura: number, s: number, larguraChar: number) {
@@ -100,19 +126,6 @@ function Marca({ p, cor, fundoClaro, tamanho = 1 }: { p: ArteProps; cor: string;
   );
 }
 
-function Rodape({ p, cor, fundoClaro, contador }: { p: ArteProps; cor: string; fundoClaro: boolean; contador?: string }) {
-  const u = Math.min(p.w, p.h) / 1080;
-  return (
-    <div style={row({ alignItems: "center", justifyContent: "space-between", width: "100%" })}>
-      <Marca p={p} cor={cor} fundoClaro={fundoClaro} />
-      <div style={row({ alignItems: "center", gap: 24 * u, fontFamily: "Corpo", fontSize: 28 * u, color: cor, opacity: 0.8 })}>
-        <div>{handleDe(p.brand, p.post)}</div>
-        {contador ? <div style={{ fontWeight: 700 }}>{contador}</div> : null}
-      </div>
-    </div>
-  );
-}
-
 function Moldura({ p, bg, children, style }: { p: ArteProps; bg: string; children: ReactNode; style?: CSSProperties }) {
   const u = Math.min(p.w, p.h) / 1080;
   const paisagem = p.w / p.h > 1.3;
@@ -134,10 +147,128 @@ function Moldura({ p, bg, children, style }: { p: ArteProps; bg: string; childre
   );
 }
 
-// ---------------------------------------------------------------- foto de fundo (imagem da IA)
+// ---------------------------------------------------------------- estilo creator: peças comuns
 
-/** Cor do véu sobre a foto: o escuro da marca, puxado para o preto para não acinzentar a imagem. */
-const corDoVeu = (tema: Tema) => mix(tema.escuro, "#000000", 0.3);
+/** Faixa de cor da marca no topo da arte (ou só da imagem, quando ela ocupa a faixa de cima). */
+function FaixaTopo({ p, largura }: { p: ArteProps; largura: number }) {
+  const u = Math.min(p.w, p.h) / 1080;
+  return <div style={{ position: "absolute", left: 0, top: 0, width: largura, height: 14 * u, background: p.tema.primaria }} />;
+}
+
+/** Fundo de papel no tom da marca com a faixa no topo: a base de quase todos os templates. */
+function Papel({ p, children, style }: { p: ArteProps; children: ReactNode; style?: CSSProperties }) {
+  return (
+    <Moldura p={p} bg={p.tema.papel} style={style}>
+      <FaixaTopo p={p} largura={p.w} />
+      {children}
+    </Moldura>
+  );
+}
+
+/** Autor no topo, como nos carrosséis de creator: avatar (logo ou inicial), nome e @. */
+function Autor({ p, cor, corSec, tamanho = 1 }: { p: ArteProps; cor: string; corSec: string; tamanho?: number }) {
+  const u = (Math.min(p.w, p.h) / 1080) * tamanho;
+  const nome = limpar(p.brand.nome);
+  const lado = 76 * u;
+  return (
+    <div style={row({ alignItems: "center", gap: 20 * u })}>
+      {p.logo ? (
+        <div style={row({ width: lado, height: lado, borderRadius: 9999, background: "#ffffff", alignItems: "center", justifyContent: "center", overflow: "hidden", border: `${2 * u}px solid ${withAlpha(cor, 0.15)}` })}>
+          <img src={p.logo} alt="" style={{ width: lado * 0.68, height: lado * 0.68, objectFit: "contain" }} />
+        </div>
+      ) : (
+        <div style={row({ width: lado, height: lado, borderRadius: 9999, background: p.tema.primaria, color: p.tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 36 * u })}>
+          {nome.charAt(0).toUpperCase()}
+        </div>
+      )}
+      <div style={col({ gap: 2 * u })}>
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u, color: cor }}>{nome}</div>
+        <div style={{ fontFamily: "Corpo", fontSize: 24 * u, color: corSec }}>{handleDe(p.brand, p.post)}</div>
+      </div>
+    </div>
+  );
+}
+
+/** Título display com o trecho de destaque sobre um marca-texto na cor da marca. */
+// Satori não aplica kerning GPOS: numa fonte pesada, pontuação de fechamento (.,!?:;) fica afastada da
+// última letra. Separa a pontuação num bloco à parte com margem negativa para encostar de volta na palavra.
+function palavraComKern(palavra: string, fs: number) {
+  const m = palavra.match(/^(.*?)([.,!?:;]+)$/);
+  if (!m || !m[1]) return <>{palavra}</>;
+  return (
+    <div style={{ display: "flex" }}>
+      <div>{m[1]}</div>
+      <div style={{ marginLeft: -fs * 0.05 }}>{m[2]}</div>
+    </div>
+  );
+}
+
+function TituloCreator({ texto, destaque, fs, cor, marca, lh = 0.98 }: { texto: string; destaque?: string | null; fs: number; cor: string; marca: string; lh?: number }) {
+  const palavras = marcarDestaque(texto, destaque);
+  const gap = fs * 0.24;
+  const pad = fs * 0.05;
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", columnGap: gap, rowGap: fs * 0.06, fontFamily: "Titulo", fontSize: fs, lineHeight: lh, color: cor, letterSpacing: -fs * 0.035 }}>
+      {palavras.map((w, i) => {
+        // Palavra marcada seguida de outra marcada: o marca-texto cobre também o espaço entre elas.
+        const direita = pad + (w.marcada && palavras[i + 1]?.marcada ? gap : 0);
+        return (
+          <div
+            key={i}
+            style={
+              w.marcada
+                ? { display: "flex", backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 50%, ${marca} 50%, ${marca} 94%, rgba(0,0,0,0) 94%)`, padding: `0 ${direita}px 0 ${pad}px`, margin: `0 ${-direita}px 0 ${-pad}px` }
+                : { display: "flex" }
+            }
+          >
+            {palavraComKern(w.palavra, fs)}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Contador e barra de progresso no rodapé do carrossel. */
+function Progresso({ p, i, total, cor, trilho }: { p: ArteProps; i: number; total: number; cor: string; trilho: string }) {
+  const u = Math.min(p.w, p.h) / 1080;
+  return (
+    <div style={col({ gap: 14 * u, width: "100%" })}>
+      <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 2 * u, color: cor })}>
+        <div>{`${i + 1} / ${total}`}</div>
+        <div>{i + 1 < total ? "DESLIZE →" : ""}</div>
+      </div>
+      <div style={row({ width: "100%", height: 6 * u, borderRadius: 99, background: trilho })}>
+        <div style={{ width: `${((i + 1) / total) * 100}%`, height: "100%", borderRadius: 99, background: p.tema.primaria }} />
+      </div>
+    </div>
+  );
+}
+
+/** Onde a imagem da IA fica: faixa de cima (retrato e quadrado) ou metade esquerda (paisagem). */
+function faixaDaFoto(p: ArteProps, fracao: number) {
+  const paisagem = p.w / p.h > 1.3;
+  return paisagem ? { w: Math.round(p.w * 0.44), h: p.h, paisagem } : { w: p.w, h: Math.round(p.h * fracao), paisagem };
+}
+
+/** A imagem da IA na faixa, com a faixa de cor da marca por cima. */
+function FotoFaixa({ p, foto, w, h }: { p: ArteProps; foto: string; w: number; h: number }) {
+  return (
+    <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: w, height: h }}>
+      <img src={foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: w, height: h, objectFit: "cover" }} />
+      <FaixaTopo p={p} largura={w} />
+    </div>
+  );
+}
+
+/** Padding da arte quando a imagem ocupa a faixa: o conteúdo começa depois dela. */
+function depoisDaFoto(p: ArteProps, f: { w: number; h: number; paisagem: boolean } | null): CSSProperties | undefined {
+  const u = Math.min(p.w, p.h) / 1080;
+  if (!f) return undefined;
+  return f.paisagem ? { paddingLeft: f.w + 60 * u } : { paddingTop: f.h + 44 * u };
+}
+
+// ---------------------------------------------------------------- foto de fundo (imagem da IA)
 
 /**
  * Opacidade mínima do véu para cada texto ter contraste com qualquer foto por baixo. Confere o pior caso
@@ -152,128 +283,57 @@ export function veuLegivel(veu: string, textos: [cor: string, minimo: number][])
   return 0.97;
 }
 
-/**
- * Foto em tela cheia com véu só onde o texto fica: embaixo (retrato e quadrado) ou à esquerda (paisagem),
- * mais uma faixa no topo para a marca. `bloco` é o tamanho do texto (altura embaixo, largura à esquerda):
- * o véu cobre esse bloco com a opacidade cheia e some aos poucos depois dele. Devolve também a opacidade.
- */
-function FundoFoto({ p, foto, textos, bloco, lado, topo = true }: { p: ArteProps; foto: string; textos: [string, number][]; bloco: number; lado: "baixo" | "esquerda"; topo?: boolean }) {
-  const u = Math.min(p.w, p.h) / 1080;
-  const cor = corDoVeu(p.tema);
-  const alfa = veuLegivel(cor, textos);
-  const cheio = withAlpha(cor, alfa);
-  const nada = withAlpha(cor, 0);
-  const total = lado === "baixo" ? p.h : p.w;
-  // Padding da moldura, o bloco e um respiro. Nunca menos de 30% nem mais de 70% da arte.
-  const ate = Math.round(Math.min(0.7, Math.max(0.3, (bloco + 130 * u) / total)) * 100);
-  // Um bloco só, em posição absoluta: fragmento com filhos absolutos sai deslocado pelo padding no Satori.
-  return (
-    <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: p.w, height: p.h }}>
-      <img src={foto} alt="" style={{ position: "absolute", left: 0, top: 0, width: p.w, height: p.h, objectFit: "cover" }} />
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: p.w,
-          height: p.h,
-          backgroundImage: `linear-gradient(${lado === "baixo" ? "to top" : "to right"}, ${cheio} 0%, ${cheio} ${ate}%, ${withAlpha(cor, alfa * 0.45)} ${Math.min(100, ate + 12)}%, ${nada} ${Math.min(100, ate + 28)}%)`,
-        }}
-      />
-      {topo ? (
-        <div style={{ position: "absolute", left: 0, top: 0, width: p.w, height: 250 * u, backgroundImage: `linear-gradient(to bottom, ${cheio} 0%, ${withAlpha(cor, alfa * 0.8)} 45%, ${nada} 100%)` }} />
-      ) : null}
-    </div>
-  );
-}
-
-const SOMBRA_TEXTO = "0 2px 18px rgba(0,0,0,0.35)";
-
 // ---------------------------------------------------------------- capa-gancho (carrossel)
 
 function CapaGancho(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
+  const paisagem = w / h > 1.3;
   const total = post.slides.length;
   const i = Math.min(p.slide, total - 1);
   const s = post.slides[i];
-  const contador = `${i + 1}/${total}`;
-  const areaW = w - 168 * u;
-
-  if (i === 0 && p.foto) {
-    const titulo = limpar(s.titulo || post.gancho);
-    const paisagem = w / h > 1.3;
-    const larguraTexto = paisagem ? w * 0.5 : areaW;
-    const fs = caber(titulo, larguraTexto, h * (paisagem ? 0.46 : 0.26), 124 * u, 50 * u);
-    const sub = limpar(s.texto);
-    const fsSub = caber(sub, larguraTexto * 0.92, h * 0.08, 38 * u, 26 * u, 1.3, 0.5);
-    const bloco = paisagem ? larguraTexto : alturaTexto(titulo, larguraTexto, fs, 1.02) + (sub ? alturaTexto(sub, larguraTexto * 0.92, fsSub, 1.3, 0.5) + 28 * u : 0) + 90 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
-        <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-          <Marca p={p} cor={tema.naEscuro} fundoClaro={false} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naEscuro }}>{contador}</div>
-        </div>
-        <div style={col({ gap: 28 * u, maxWidth: larguraTexto })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.02, color: tema.naEscuro, letterSpacing: -fs * 0.03, textShadow: SOMBRA_TEXTO }}><Kern t={titulo} fs={fs} /></div>
-          {sub ? (
-            <div style={{ fontFamily: "Corpo", fontSize: fsSub, lineHeight: 1.3, color: tema.naEscuro, maxWidth: larguraTexto * 0.92 }}>{sub}</div>
-          ) : null}
-          <div style={row({ alignItems: "center" })}>
-            <div style={row({ alignItems: "center", background: tema.primaria, color: tema.naPrimaria, borderRadius: 999, padding: `${14 * u}px ${30 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u })}>
-              Arraste para o lado →
-            </div>
-          </div>
-        </div>
-      </Moldura>
-    );
-  }
+  const areaW = w - (paisagem ? 120 : 168) * u;
+  const trilho = withAlpha(tema.tintaNoPapel, 0.12);
 
   if (i === 0) {
     const titulo = limpar(s.titulo || post.gancho);
-    const fs = caber(titulo, areaW, h * 0.5, 150 * u, 56 * u);
+    const sub = limpar(s.texto);
+    const f = p.foto ? faixaDaFoto(p, 0.5) : null;
+    const textoW = f?.paisagem ? w - f.w - 120 * u : areaW;
+    const fs = f ? caber(titulo, textoW, f.paisagem ? h * 0.42 : h * 0.22, 104 * u, 44 * u, 0.98) : caber(titulo, areaW, h * (paisagem ? 0.46 : 0.42), 150 * u, 56 * u, 0.98);
+    const fsSub = caber(sub, textoW * 0.92, h * (f ? 0.07 : 0.1), (f ? 34 : 40) * u, 24 * u, 1.3, 0.5);
     return (
-      <Moldura p={p} bg={tema.primaria}>
-        <div style={{ position: "absolute", right: -260 * u, bottom: -300 * u, width: 820 * u, height: 820 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.22 }} />
-        <div style={{ position: "absolute", right: 120 * u, bottom: 160 * u, width: 180 * u, height: 180 * u, borderRadius: 9999, border: `${6 * u}px solid ${tema.naPrimaria}`, opacity: 0.35 }} />
-        <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-          <Marca p={p} cor={tema.naPrimaria} fundoClaro={false} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naPrimaria, opacity: 0.8 }}>{contador}</div>
+      <Papel p={p} style={depoisDaFoto(p, f)}>
+        {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+        <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={f ? 0.85 : 1} />
+        <div style={col({ gap: (f ? 18 : 26) * u, maxWidth: textoW })}>
+          <TituloCreator texto={titulo} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} />
+          {sub ? <div style={{ fontFamily: "Corpo", fontSize: fsSub, lineHeight: 1.3, color: tema.mutedNoPapel, maxWidth: textoW * 0.92 }}>{sub}</div> : null}
         </div>
-        <div style={col({ gap: 32 * u })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.02, color: tema.naPrimaria, letterSpacing: -fs * 0.03 }}><Kern t={titulo} fs={fs} /></div>
-          {s.texto ? (
-            <div style={{ fontFamily: "Corpo", fontSize: 40 * u, lineHeight: 1.3, color: tema.naPrimaria, opacity: 0.88, maxWidth: areaW * 0.85 }}>{limpar(s.texto)}</div>
-          ) : null}
-        </div>
-        <div style={row({ alignItems: "center", gap: 16 * u })}>
-          <div style={row({ alignItems: "center", gap: 14 * u, background: tema.naPrimaria, color: tema.primaria, borderRadius: 999, padding: `${14 * u}px ${30 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u })}>
-            Arraste para o lado →
-          </div>
-        </div>
-      </Moldura>
+        <Progresso p={p} i={0} total={total} cor={tema.tintaNoPapel} trilho={trilho} />
+      </Papel>
     );
   }
 
   if (i === total - 1) {
     const titulo = limpar(s.titulo);
-    const fs = caber(titulo, areaW, h * 0.32, 104 * u, 48 * u);
+    const texto = limpar(s.texto);
+    const fs = caber(titulo, areaW, h * 0.3, 100 * u, 44 * u, 1.02);
+    const acao = dominioVisivel(p.brand) || handleDe(p.brand, post);
     return (
       <Moldura p={p} bg={tema.escuro}>
-        <div style={{ position: "absolute", left: -200 * u, top: -200 * u, width: 600 * u, height: 600 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.35 }} />
-        <div style={row({ justifyContent: "flex-end", fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.naEscuro, opacity: 0.7 })}>{contador}</div>
-        <div style={col({ gap: 36 * u })}>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.05, color: tema.naEscuro, letterSpacing: -fs * 0.02 }}><Kern t={titulo} fs={fs} /></div>
-          <div style={{ fontFamily: "Corpo", fontSize: 42 * u, lineHeight: 1.35, color: tema.destaqueNoEscuro }}>{limpar(s.texto)}</div>
-        </div>
-        <div style={col({ gap: 20 * u })}>
-          <div style={{ height: 4 * u, width: "100%", background: tema.naEscuro, opacity: 0.2 }} />
-          <div style={row({ justifyContent: "space-between", alignItems: "center" })}>
-            <Marca p={p} cor={tema.naEscuro} fundoClaro={false} />
-            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naEscuro }}>{`Siga ${handleDe(p.brand, post)}`}</div>
+        <FaixaTopo p={p} largura={w} />
+        <Autor p={p} cor={tema.naEscuro} corSec={withAlpha(tema.naEscuro, 0.7)} tamanho={0.85} />
+        <div style={col({ gap: 28 * u })}>
+          <TituloCreator texto={titulo} fs={fs} cor={tema.naEscuro} marca={tema.escuro} lh={1.02} />
+          {texto ? (
+            <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.14, 38 * u, 26 * u, 1.35, 0.5), lineHeight: 1.35, color: withAlpha(tema.naEscuro, 0.78) }}>{texto}</div>
+          ) : null}
+          <div style={row({ alignItems: "center" })}>
+            <div style={row({ background: tema.primaria, color: tema.naPrimaria, borderRadius: 999, padding: `${16 * u}px ${34 * u}px`, fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u })}>{acao}</div>
           </div>
         </div>
+        <Progresso p={p} i={i} total={total} cor={tema.naEscuro} trilho={withAlpha(tema.naEscuro, 0.18)} />
       </Moldura>
     );
   }
@@ -281,28 +341,18 @@ function CapaGancho(p: ArteProps) {
   const numeroSo = /^\d+[.)]?$/.test(s.titulo.trim());
   const tituloLimpo = limpar(s.titulo.replace(/^\d+[.)]\s*/, ""));
   const texto = limpar(s.texto);
-  const fsTexto = caber(texto, areaW, h * 0.34, 50 * u, 30 * u, 1.35, 0.5);
-  const fsTitulo = caber(tituloLimpo, areaW, h * 0.2, 76 * u, 40 * u);
+  const fsTitulo = caber(tituloLimpo, areaW, h * 0.2, 80 * u, 40 * u, 1.02);
+  const fsTexto = caber(texto, areaW, h * 0.3, 44 * u, 28 * u, 1.38, 0.5);
   return (
-    <Moldura p={p} bg={tema.claro}>
-      <div style={col({ gap: 22 * u })}>
-        <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 28 * u, color: tema.mutedNoClaro })}>
-          <div>{limpar(post.gancho).slice(0, 48)}</div>
-          <div>{contador}</div>
-        </div>
-        <div style={row({ width: "100%", height: 8 * u, background: tema.mutedNoClaro, opacity: 0.25, borderRadius: 99 })}>
-          <div style={{ width: `${((i + 1) / total) * 100}%`, height: "100%", background: tema.primariaNoClaro, borderRadius: 99 }} />
-        </div>
+    <Papel p={p}>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.75} />
+      <div style={col({ gap: 24 * u })}>
+        <div style={{ fontFamily: "Titulo", fontSize: (paisagem ? 110 : 150) * u, lineHeight: 0.85, color: tema.primariaNoPapel, letterSpacing: -6 * u }}>{String(i).padStart(2, "0")}</div>
+        {!numeroSo && tituloLimpo ? <TituloCreator texto={tituloLimpo} fs={fsTitulo} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.02} /> : null}
+        {texto ? <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.38, color: tema.mutedNoPapel }}>{texto}</div> : null}
       </div>
-      <div style={col({ gap: 34 * u })}>
-        <div style={{ fontFamily: "Titulo", fontSize: 180 * u, lineHeight: 0.9, color: tema.primariaNoClaro, letterSpacing: -6 * u }}>{String(i).padStart(2, "0")}</div>
-        {!numeroSo && tituloLimpo ? (
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fsTitulo, lineHeight: 1.05, color: tema.tintaNoClaro, letterSpacing: -1.5 * u }}><Kern t={tituloLimpo} fs={fsTitulo} /></div>
-        ) : null}
-        <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.35, color: numeroSo ? tema.tintaNoClaro : tema.mutedNoClaro }}>{texto}</div>
-      </div>
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <Progresso p={p} i={i} total={total} cor={tema.tintaNoPapel} trilho={trilho} />
+    </Papel>
   );
 }
 
@@ -314,36 +364,38 @@ function Lista(p: ArteProps & { check?: boolean }) {
   const paisagem = w / h > 1.3;
   const [cab, ...itens] = post.slides;
   const titulo = limpar(cab?.titulo || post.gancho);
-  const lista = itens.slice(0, paisagem ? 6 : 6);
+  const lista = itens.slice(0, 6);
   const larguraItem = paisagem ? (w - 120 * u) / 2 - 24 * u : w - 168 * u;
-  const fsItem = Math.min(46 * u, ...lista.map((it) => caber(it.titulo, larguraItem - 110 * u, 110 * u, 46 * u, 26 * u, 1.15, 0.52)));
+  const fsItem = Math.min(44 * u, ...lista.map((it) => caber(it.titulo, larguraItem - 110 * u, 110 * u, 44 * u, 26 * u, 1.15, 0.52)));
+  const fsTitulo = caber(titulo, w - 168 * u, h * (paisagem ? 0.24 : 0.22), 92 * u, 40 * u, 1.0);
   return (
-    <Moldura p={p} bg={tema.claro}>
-      <div style={{ position: "absolute", right: -120 * u, top: -120 * u, width: 360 * u, height: 360 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.12 }} />
-      <div style={{ fontFamily: "Titulo", fontSize: caber(titulo, w - 168 * u, h * (paisagem ? 0.26 : 0.22), 88 * u, 40 * u), lineHeight: 1.04, color: tema.tintaNoClaro, letterSpacing: -2 * u, maxWidth: w * 0.86 }}>
-        {titulo}
+    <Papel p={p}>
+      <div style={col({ gap: 24 * u })}>
+        <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.75} />
+        <TituloCreator texto={titulo} destaque={post.destaque} fs={fsTitulo} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.0} />
       </div>
-      <div style={row({ flexWrap: "wrap", gap: `${(paisagem ? 18 : 26) * u}px ${48 * u}px` })}>
+      <div style={row({ flexWrap: "wrap", gap: `${(paisagem ? 16 : 24) * u}px ${48 * u}px` })}>
         {lista.map((it, k) => (
-          <div key={k} style={row({ alignItems: "center", gap: 28 * u, width: larguraItem })}>
+          <div key={k} style={row({ alignItems: "center", gap: 26 * u, width: larguraItem })}>
             {p.check ? (
-              <div style={row({ width: 64 * u, height: 64 * u, flexShrink: 0, borderRadius: 14 * u, border: `${5 * u}px solid ${tema.primariaNoClaro}`, alignItems: "center", justifyContent: "center" })}>
-                <div style={{ width: 16 * u, height: 30 * u, borderRight: `${6 * u}px solid ${tema.primariaNoClaro}`, borderBottom: `${6 * u}px solid ${tema.primariaNoClaro}`, transform: "rotate(45deg)", marginTop: -8 * u }} />
+              <div style={row({ width: 60 * u, height: 60 * u, flexShrink: 0, borderRadius: 14 * u, border: `${5 * u}px solid ${tema.primariaNoPapel}`, alignItems: "center", justifyContent: "center" })}>
+                <div style={{ width: 16 * u, height: 28 * u, borderRight: `${6 * u}px solid ${tema.primariaNoPapel}`, borderBottom: `${6 * u}px solid ${tema.primariaNoPapel}`, transform: "rotate(45deg)", marginTop: -8 * u }} />
               </div>
             ) : (
-              <div style={row({ width: 72 * u, height: 72 * u, flexShrink: 0, borderRadius: 9999, background: tema.primaria, color: tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 36 * u })}>
-                {k + 1}
-              </div>
+              <div style={row({ width: 64 * u, height: 64 * u, flexShrink: 0, borderRadius: 9999, background: tema.primaria, color: tema.naPrimaria, alignItems: "center", justifyContent: "center", fontFamily: "Titulo", fontSize: 32 * u })}>{k + 1}</div>
             )}
             <div style={col({ gap: 4 * u, flex: 1 })}>
-              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: fsItem, lineHeight: 1.15, color: tema.tintaNoClaro }}>{limpar(it.titulo)}</div>
-              {it.texto ? <div style={{ fontFamily: "Corpo", fontSize: fsItem * 0.7, lineHeight: 1.3, color: tema.mutedNoClaro }}>{limpar(it.texto)}</div> : null}
+              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: fsItem, lineHeight: 1.15, color: tema.tintaNoPapel }}>{limpar(it.titulo)}</div>
+              {it.texto ? <div style={{ fontFamily: "Corpo", fontSize: fsItem * 0.7, lineHeight: 1.3, color: tema.mutedNoPapel }}>{limpar(it.texto)}</div> : null}
             </div>
           </div>
         ))}
       </div>
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <div style={row({ justifyContent: "space-between", fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 2 * u, color: tema.mutedNoPapel })}>
+        <div>{handleDe(p.brand, post)}</div>
+        <div>SALVE PARA CONSULTAR</div>
+      </div>
+    </Papel>
   );
 }
 
@@ -354,47 +406,25 @@ function Citacao(p: ArteProps) {
   const u = Math.min(w, h) / 1080;
   const s = post.slides[0];
   const frase = limpar(s.texto || post.gancho);
-  const fs = caber(frase, w - 168 * u, h * 0.52, 104 * u, 40 * u, 1.12);
   const autor = limpar(s.titulo || "").toLowerCase() === limpar(p.brand.nome).toLowerCase() || !s.titulo ? null : limpar(s.titulo);
-  if (p.foto) {
-    const paisagem = w / h > 1.3;
-    const larguraTexto = paisagem ? w * 0.52 : w - 168 * u;
-    const fsFoto = caber(frase, larguraTexto, h * (paisagem ? 0.5 : 0.3), 88 * u, 36 * u, 1.12);
-    const aspas = tema.destaqueNoEscuro;
-    const bloco = paisagem ? larguraTexto : 100 * u + alturaTexto(frase, larguraTexto, fsFoto, 1.12) + (autor ? 70 * u : 0) + 90 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [aspas, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} topo={false} />
-        <div style={{ height: 1 }} />
-        <div style={col({ gap: 30 * u, maxWidth: larguraTexto })}>
-          <div style={{ fontFamily: "Titulo", fontSize: 150 * u, lineHeight: 0.6, height: 70 * u, color: aspas }}>“</div>
-          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fsFoto, lineHeight: 1.12, color: tema.naEscuro, letterSpacing: -fsFoto * 0.02, textShadow: SOMBRA_TEXTO }}><Kern t={frase} fs={fsFoto} /></div>
-          {autor ? (
-            <div style={row({ alignItems: "center", gap: 20 * u })}>
-              <div style={{ width: 70 * u, height: 6 * u, background: aspas }} />
-              <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 32 * u, color: tema.naEscuro }}>{autor}</div>
-            </div>
-          ) : null}
-          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-        </div>
-      </Moldura>
-    );
-  }
+  const f = p.foto ? faixaDaFoto(p, 0.42) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fs = caber(frase, areaW, f ? (f.paisagem ? h * 0.46 : h * 0.3) : h * 0.5, (f ? 84 : 100) * u, 38 * u, 1.1);
   return (
-    <Moldura p={p} bg={tema.primaria}>
-      <div style={{ position: "absolute", left: 40 * u, top: -120 * u, fontFamily: "Titulo", fontSize: 560 * u, color: tema.destaqueNaPrimaria, opacity: 0.35, lineHeight: 1 }}>“</div>
-      <div style={{ height: 120 * u }} />
-      <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.12, color: tema.naPrimaria, letterSpacing: -fs * 0.02 }}><Kern t={frase} fs={fs} /></div>
-      <div style={col({ gap: 26 * u })}>
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={{ fontFamily: "Titulo", fontSize: (f ? 140 : 220) * u, lineHeight: 0.7, height: (f ? 60 : 100) * u, color: tema.primariaNoPapel }}>“</div>
+      <div style={col({ gap: 26 * u, maxWidth: areaW })}>
+        <TituloCreator texto={frase} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.1} />
         {autor ? (
-          <div style={row({ alignItems: "center", gap: 20 * u })}>
-            <div style={{ width: 70 * u, height: 6 * u, background: tema.destaqueNaPrimaria }} />
-            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 34 * u, color: tema.naPrimaria }}>{autor}</div>
+          <div style={row({ alignItems: "center", gap: 18 * u })}>
+            <div style={{ width: 60 * u, height: 6 * u, background: tema.primaria }} />
+            <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 30 * u, color: tema.tintaNoPapel }}>{autor}</div>
           </div>
         ) : null}
-        <Rodape p={p} cor={tema.naPrimaria} fundoClaro={false} />
       </div>
-    </Moldura>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
@@ -403,48 +433,26 @@ function Citacao(p: ArteProps) {
 function DadoImpacto(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
-  const paisagem = w / h > 1.3;
   const s = post.slides[0];
   const numero = limpar(s.titulo || "");
-  const fsNum = caber(numero, paisagem ? w * 0.5 : w - 168 * u, h * 0.42, 400 * u, 120 * u, 1, 0.6);
   const texto = limpar(s.texto || post.gancho);
-  if (p.foto) {
-    const larguraTexto = paisagem ? w * 0.5 : w - 168 * u;
-    const fsNumFoto = caber(numero, larguraTexto, h * (paisagem ? 0.36 : 0.22), 300 * u, 96 * u, 1, 0.6);
-    const fsTextoFoto = caber(texto, larguraTexto, h * (paisagem ? 0.22 : 0.14), 46 * u, 28 * u, 1.3, 0.5);
-    const bloco = paisagem ? larguraTexto : fsNumFoto * 0.9 + alturaTexto(texto, larguraTexto, fsTextoFoto, 1.3, 0.5) + 110 * u;
-    return (
-      <Moldura p={p} bg={tema.escuro}>
-        <FundoFoto p={p} foto={p.foto} textos={[[tema.naEscuro, 4.5], [tema.destaqueNoEscuro, 3]]} bloco={bloco} lado={paisagem ? "esquerda" : "baixo"} />
-        <div style={row({ alignItems: "center", gap: 16 * u })}>
-          <div style={{ width: 18 * u, height: 18 * u, borderRadius: 99, background: tema.destaqueNoEscuro }} />
-          <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 4 * u, color: tema.naEscuro }}>EM NÚMEROS</div>
-        </div>
-        <div style={col({ gap: 24 * u, maxWidth: larguraTexto })}>
-          <div style={{ fontFamily: "Titulo", fontSize: fsNumFoto, lineHeight: 0.9, color: tema.destaqueNoEscuro, letterSpacing: -fsNumFoto * 0.04, textShadow: SOMBRA_TEXTO }}>{numero}</div>
-          <div style={{ fontFamily: "Corpo", fontSize: fsTextoFoto, lineHeight: 1.3, color: tema.naEscuro }}>{texto}</div>
-          <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-        </div>
-      </Moldura>
-    );
-  }
+  const f = p.foto ? faixaDaFoto(p, 0.4) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fsNum = caber(numero, areaW, h * (f ? 0.2 : 0.36), (f ? 260 : 380) * u, 96 * u, 1, 0.6);
+  const fsTexto = caber(texto, areaW, h * (f ? 0.14 : 0.2), 48 * u, 28 * u, 1.3, 0.5);
   return (
-    <Moldura p={p} bg={tema.escuro}>
-      {Array.from({ length: 6 }).map((_, k) => (
-        <div key={k} style={{ position: "absolute", left: 0, top: (h / 6) * k, width: w, height: 1, background: tema.naEscuro, opacity: 0.06 }} />
-      ))}
-      <div style={row({ alignItems: "center", gap: 16 * u })}>
-        <div style={{ width: 18 * u, height: 18 * u, borderRadius: 99, background: tema.destaqueNoEscuro }} />
-        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 4 * u, color: tema.naEscuro, opacity: 0.75 }}>EM NÚMEROS</div>
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={row({ alignItems: "center", gap: 14 * u })}>
+        <div style={{ width: 16 * u, height: 16 * u, borderRadius: 99, background: tema.primaria }} />
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 4 * u, color: tema.mutedNoPapel }}>EM NÚMEROS</div>
       </div>
-      <div style={paisagem ? row({ alignItems: "center", gap: 56 * u }) : col({ gap: 30 * u })}>
-        <div style={{ fontFamily: "Titulo", fontSize: fsNum, lineHeight: 0.9, color: tema.destaqueNoEscuro, letterSpacing: -fsNum * 0.04 }}>{numero}</div>
-        <div style={{ fontFamily: "Corpo", fontSize: caber(texto, paisagem ? w * 0.36 : w - 168 * u, h * 0.3, 54 * u, 30 * u, 1.3, 0.5), lineHeight: 1.3, color: tema.naEscuro, maxWidth: paisagem ? w * 0.38 : w * 0.85 }}>
-          {texto}
-        </div>
+      <div style={col({ gap: 20 * u, maxWidth: areaW })}>
+        <div style={{ fontFamily: "Titulo", fontSize: fsNum, lineHeight: 0.9, color: tema.primariaNoPapel, letterSpacing: -fsNum * 0.04 }}>{numero}</div>
+        <div style={{ fontFamily: "Corpo", fontSize: fsTexto, lineHeight: 1.3, color: tema.tintaNoPapel }}>{texto}</div>
       </div>
-      <Rodape p={p} cor={tema.naEscuro} fundoClaro={false} />
-    </Moldura>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
@@ -459,7 +467,7 @@ function PrintX(p: ArteProps) {
   const fs = caber(texto, cartaoW - 120 * u, h * (paisagem ? 0.42 : 0.4), 58 * u, 30 * u, 1.32, 0.5);
   const handle = brand.handles.x ?? brand.handles.instagram ?? (dominioVisivel(brand) ? "@" + brand.dominio.split(".")[0] : arrobaDoNome(brand));
   return (
-    <Moldura p={p} bg={tema.primaria} style={{ alignItems: "center", justifyContent: "center" }}>
+    <Moldura p={p} bg={p.foto ? tema.escuro : tema.papel} style={{ alignItems: "center", justifyContent: "center" }}>
       {p.foto ? (
         // O cartão é branco com texto escuro: a foto fica inteira, só um pouco mais escura para o cartão saltar.
         <div style={{ display: "flex", position: "absolute", left: 0, top: 0, width: w, height: h }}>
@@ -468,11 +476,22 @@ function PrintX(p: ArteProps) {
         </div>
       ) : (
         <>
-          <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.destaqueNaPrimaria, opacity: 0.25 }} />
-          <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.naPrimaria, opacity: 0.12 }} />
+          <FaixaTopo p={p} largura={w} />
+          <div style={{ position: "absolute", left: -180 * u, top: -180 * u, width: 520 * u, height: 520 * u, borderRadius: 9999, background: tema.marcaTexto, opacity: 0.55 }} />
+          <div style={{ position: "absolute", right: -140 * u, bottom: -160 * u, width: 440 * u, height: 440 * u, borderRadius: 9999, background: tema.primaria, opacity: 0.12 }} />
         </>
       )}
-      <div style={col({ width: cartaoW, background: "#ffffff", borderRadius: 40 * u, padding: 60 * u, gap: 36 * u, boxShadow: `0 ${30 * u}px ${80 * u}px rgba(0,0,0,0.25)` })}>
+      <div
+        style={col({
+          width: cartaoW,
+          background: "#ffffff",
+          borderRadius: 40 * u,
+          padding: 60 * u,
+          gap: 36 * u,
+          boxShadow: `0 ${24 * u}px ${60 * u}px rgba(0,0,0,0.14)`,
+          border: `${2 * u}px solid ${withAlpha(tema.tintaNoPapel, 0.08)}`,
+        })}
+      >
         <div style={row({ alignItems: "center", gap: 24 * u })}>
           <div style={row({ width: 104 * u, height: 104 * u, borderRadius: 9999, background: p.logo ? "#ffffff" : tema.primaria, border: `${3 * u}px solid #e7e7e7`, alignItems: "center", justifyContent: "center", overflow: "hidden" })}>
             {p.logo ? (
@@ -499,42 +518,25 @@ function PrintX(p: ArteProps) {
 function Bastidor(p: ArteProps) {
   const { tema, post, w, h } = p;
   const u = Math.min(w, h) / 1080;
-  const paisagem = w / h > 1.3;
   const s = post.slides[0];
   const titulo = limpar(s.titulo || post.gancho);
   const texto = limpar(s.texto);
-  const areaW = p.foto && paisagem ? w * 0.52 : w - 168 * u;
-  const areaH = p.foto && !paisagem ? h * 0.3 : h * 0.44;
-  const fs = caber(titulo, areaW - 40 * u, areaH, 112 * u, 44 * u, 1.05);
-  const conteudo = (
-    <div style={row({ gap: 34 * u, alignItems: "stretch" })}>
-      <div style={{ width: 12 * u, background: tema.primariaNoClaro, borderRadius: 99 }} />
-      <div style={col({ gap: 30 * u, flex: 1 })}>
-        <div style={{ display: "flex", fontFamily: "Titulo", fontSize: fs, lineHeight: 1.05, color: tema.tintaNoClaro, letterSpacing: -fs * 0.025 }}><Kern t={titulo} fs={fs} /></div>
-        {texto ? <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.2, 42 * u, 26 * u, 1.38, 0.5), lineHeight: 1.38, color: tema.mutedNoClaro }}>{texto}</div> : null}
-      </div>
-    </div>
-  );
+  const f = p.foto ? faixaDaFoto(p, 0.42) : null;
+  const areaW = f?.paisagem ? w - f.w - 120 * u : w - 168 * u;
+  const fs = caber(titulo, areaW, f ? h * 0.26 : h * 0.42, 108 * u, 44 * u, 1.02);
   return (
-    <Moldura p={p} bg={tema.claro} style={p.foto && paisagem ? { paddingLeft: w * 0.42 + 60 * u } : undefined}>
-      {p.foto ? (
-        <img
-          src={p.foto}
-          alt=""
-          style={
-            paisagem
-              ? { position: "absolute", left: 0, top: 0, width: w * 0.42, height: h, objectFit: "cover" }
-              : { position: "absolute", left: 0, top: 0, width: w, height: h * 0.42, objectFit: "cover" }
-          }
-        />
-      ) : null}
-      <div style={row({ alignItems: "center", gap: 16 * u, marginTop: p.foto && !paisagem ? h * 0.42 - 40 * u : 0 })}>
-        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 5 * u, color: tema.primariaNoClaro }}>BASTIDORES</div>
-        <div style={{ width: 120 * u, height: 3 * u, background: tema.primariaNoClaro }} />
+    <Papel p={p} style={depoisDaFoto(p, f)}>
+      {f && p.foto ? <FotoFaixa p={p} foto={p.foto} w={f.w} h={f.h} /> : null}
+      <div style={row({ alignItems: "center", gap: 16 * u })}>
+        <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 24 * u, letterSpacing: 5 * u, color: tema.primariaNoPapel }}>BASTIDORES</div>
+        <div style={{ width: 120 * u, height: 3 * u, background: tema.primariaNoPapel }} />
       </div>
-      {conteudo}
-      <Rodape p={p} cor={tema.tintaNoClaro} fundoClaro />
-    </Moldura>
+      <div style={col({ gap: 24 * u, maxWidth: areaW })}>
+        <TituloCreator texto={titulo} destaque={post.destaque} fs={fs} cor={tema.tintaNoPapel} marca={tema.marcaTexto} lh={1.02} />
+        {texto ? <div style={{ fontFamily: "Corpo", fontSize: caber(texto, areaW, h * 0.18, 40 * u, 26 * u, 1.38, 0.5), lineHeight: 1.38, color: tema.mutedNoPapel }}>{texto}</div> : null}
+      </div>
+      <Autor p={p} cor={tema.tintaNoPapel} corSec={tema.mutedNoPapel} tamanho={0.8} />
+    </Papel>
   );
 }
 
@@ -546,7 +548,7 @@ function AntesDepois(p: ArteProps) {
   const paisagem = w / h > 1.1;
   const antes = post.slides[0] ?? { titulo: "Antes", texto: "" };
   const depois = post.slides[1] ?? { titulo: "Depois", texto: post.gancho };
-  const cinza = "#e9e6e1";
+  const cinza = mix(tema.papel, "#000000", 0.06);
   const metadeW = paisagem ? w / 2 : w;
   const metadeH = paisagem ? h : h / 2;
   const bloco = (s: { titulo: string; texto: string }, bg: string, cor: string, rotulo: string, riscado: boolean) => {
@@ -558,9 +560,9 @@ function AntesDepois(p: ArteProps) {
           <div style={{ fontFamily: "Corpo", fontWeight: 700, fontSize: 26 * u, letterSpacing: 5 * u, color: cor, opacity: 0.75 }}>{rotulo}</div>
         </div>
         {limpar(s.titulo).toLowerCase() === rotulo.toLowerCase() ? null : (
-          <div style={{ fontFamily: "Titulo", fontSize: 54 * u, color: cor, textDecoration: riscado ? "line-through" : "none", opacity: riscado ? 0.55 : 1 }}>{limpar(s.titulo)}</div>
+          <div style={{ display: "flex", fontFamily: "Titulo", fontSize: 54 * u, color: cor, textDecoration: riscado ? "line-through" : "none", opacity: riscado ? 0.55 : 1 }}><Kern t={s.titulo} fs={54 * u} /></div>
         )}
-        <div style={{ fontFamily: riscado ? "Corpo" : "Titulo", fontSize: fs, lineHeight: 1.18, color: cor, opacity: riscado ? 0.7 : 1 }}>{t}</div>
+        <div style={{ display: "flex", fontFamily: riscado ? "Corpo" : "Titulo", fontSize: fs, lineHeight: 1.18, color: cor, opacity: riscado ? 0.7 : 1 }}>{riscado ? t : <Kern t={t} fs={fs} />}</div>
       </div>
     );
   };
@@ -589,6 +591,7 @@ function AntesDepois(p: ArteProps) {
       <div style={row({ position: "absolute", right: 60 * u, bottom: 48 * u, alignItems: "center" })}>
         <Marca p={p} cor={tema.naPrimaria} fundoClaro={false} tamanho={0.9} />
       </div>
+      <FaixaTopo p={p} largura={w} />
     </div>
   );
 }

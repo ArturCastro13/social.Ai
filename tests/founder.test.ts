@@ -172,7 +172,7 @@ describe("motor local com as três respostas", () => {
       expect(extras.enderecamento?.publico).toBe("Donos de PME que cuidam do financeiro sozinhos");
       for (const t of textos(post)) expect(/[—–]/.test(t), t).toBe(false);
     }
-    expect(fs.map((f) => f.post.padrao_inspirador)).toEqual(["imagem-unica--pergunta", "citacao--contraintuitivo", "bastidor-founder--historia-pessoal"]);
+    expect(fs.map((f) => f.post.padrao_inspirador)).toEqual(["print-tweet--pergunta", "citacao--contraintuitivo", "bastidor-founder--historia-pessoal"]);
   });
 
   it("perfil empresa fala como a gente, e resposta sozinha gera só o seu post", () => {
