@@ -455,7 +455,8 @@ export function postDoMotor(
       chamada_final: p.chamada_final || undefined,
       precisa_revisao: revisar,
       ...(p.padrao_viral.nome ? { padrao_viral: p.padrao_viral } : {}),
-      ...(destaqueValido(p.destaque, slides[0]?.titulo || gancho) ? { destaque: p.destaque.trim() } : {}),
+      // O destaque vale só se estiver no texto que a arte mostra grande: a frase na citação, o título nas demais.
+      ...(destaqueValido(p.destaque, template === "citacao" ? slides[0]?.texto || gancho : slides[0]?.titulo || gancho) ? { destaque: p.destaque.trim() } : {}),
       ...(p.direcao_capa.cena ? { direcao_capa: p.direcao_capa } : {}),
     },
   };

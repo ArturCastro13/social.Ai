@@ -118,7 +118,7 @@ Distribua os padrões: no máximo 2 posts do lote com o mesmo padrão. Quando vi
   Slide 1 (capa): o gancho no titulo, até 12 palavras, e no texto uma promessa curta do que vem.
   Slides do meio: um ponto por slide, titulo de até 8 palavras e texto de até 30. Siga a estrutura do padrão viral escolhido: tensão, valor, prova.
   Último slide: a chamada no titulo e, no texto, o que a pessoa ganha fazendo isso.
-  Em "destaque", copie de 2 a 5 palavras seguidas do titulo da capa que carregam a tensão do gancho. A arte marca esse trecho com a cor da marca.
+  Em "destaque", copie, letra por letra, de 2 a 5 palavras seguidas de slides[0].titulo (não do gancho) que carregam a tensão. Na citação, copie da frase em slides[0].texto. A arte marca esse trecho com a cor da marca; trecho que não estiver lá é descartado.
 - print_de_tweet: uma frase de até 280 caracteres, opinativa.
 - citacao, dado_de_impacto, bastidor: seguem o padrão da referência escolhida.
 Legenda adaptada por rede:
