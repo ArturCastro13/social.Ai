@@ -20,3 +20,9 @@
 - Stripe account calls, restricted-key permission checks, signed remote webhook delivery, payment simulation, and remote SQL deployment remain pending in an authorized sandbox. No secrets, remote API, Vercel, push, or production changes were used here.
 - Legacy Charges without a PaymentIntent require scanning known Customer invoices and their payment allocations; unresolved results stay in the durable risk queue for an operator.
 - The CLI replays only `pending` envelopes. `risk_unresolved` is an operator state and is intentionally excluded from automatic replay.
+
+## Review fix round 1 — null lease fencing
+
+- SQL regression assertions showed that a never-claimed lease row could accept `apply` with a null token and generation 0; the isolated PGlite suite failed with `never-claimed lease granted access` before the fix. The same assertions cover `hold` and both actions after release.
+- `billing_reconcile_step` now requires non-null caller token and generation and a non-null stored token and lease expiry before any fenced action. Claim rejects a null token. The existing generation and expiration comparisons still apply.
+- The isolated PGlite rerun passed migrations 0001–0004 and all four SQL suites. Focused Vitest passed 3 files/14 tests; `npx tsc --noEmit -p .`, focused ESLint, and `git diff --check` passed. No build was run in this fix round.

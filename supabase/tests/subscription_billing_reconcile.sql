@@ -18,6 +18,14 @@ do $$ declare w uuid:=current_setting('test.reconcile_workspace')::uuid; r jsonb
 begin
   perform public.billing_checkout_step('cccccccc-cccc-4ccc-8ccc-cccccccccccc',w,'claim_customer',p_token=>t1,p_key=>'reconcile-customer');
   perform public.billing_checkout_step('cccccccc-cccc-4ccc-8ccc-cccccccccccc',w,'save_customer',p_token=>t1,p_customer_id=>'cus_reconcile');
+  r:=public.billing_reconcile_step('apply',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_generation=>0,
+    p_subscription_id=>'sub_unclaimed',p_status=>'active',p_invoice_id=>'in_unclaimed',p_price_id=>'price_one',p_line_id=>'il_unclaimed',
+    p_paid_from=>from_date,p_paid_through=>through_date,p_billing_reason=>'subscription_create');
+  if r->>'ok'<>'false' or exists(select 1 from public.billing_paid_periods where invoice_id='in_unclaimed')
+    or (select status from public.workspace_billing_access where workspace_id=w)<>'none' then raise exception 'never-claimed lease granted access'; end if;
+  r:=public.billing_reconcile_step('hold',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_generation=>0,p_reason=>'unclaimed_hold');
+  if r->>'ok'<>'false' or (select risk_hold from public.workspace_billing_access where workspace_id=w)
+    or exists(select 1 from public.billing_operator_holds where workspace_id=w) then raise exception 'never-claimed lease set hold'; end if;
   r:=public.billing_reconcile_step('event_begin',p_event_id=>'evt_one',p_event_type=>'invoice.paid',p_object_id=>'in_one');
   if r->>'state'<>'pending' then raise exception 'event not persisted'; end if;
   r:=public.billing_reconcile_step('event_begin',p_event_id=>'evt_one',p_event_type=>'invoice.paid',p_object_id=>'in_one');
@@ -38,6 +46,12 @@ begin
   if r->>'ok'<>'true' or (select paid_through from public.workspace_billing_access where workspace_id=w)<>through_date
   then raise exception 'unpaid renewal changed paid period'; end if;
   perform public.billing_reconcile_step('release',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_token=>t1,p_generation=>1);
+  r:=public.billing_reconcile_step('apply',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_generation=>1,
+    p_subscription_id=>'sub_one',p_status=>'active');
+  if r->>'ok'<>'false' or (select status from public.workspace_billing_access where workspace_id=w)<>'past_due' then raise exception 'released lease rewrote access'; end if;
+  r:=public.billing_reconcile_step('hold',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_generation=>1,p_reason=>'released_hold');
+  if r->>'ok'<>'false' or (select risk_hold from public.workspace_billing_access where workspace_id=w)
+    or exists(select 1 from public.billing_operator_holds where workspace_id=w) then raise exception 'released lease set hold'; end if;
   r:=public.billing_reconcile_step('claim',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_token=>t2);
   if r->>'claimed'<>'true' or (r->>'generation')::bigint<>2 then raise exception 'generation did not advance'; end if;
   r:=public.billing_reconcile_step('apply',p_workspace_id=>w,p_customer_id=>'cus_reconcile',p_token=>t1,p_generation=>1,p_subscription_id=>'sub_one',p_status=>'active');

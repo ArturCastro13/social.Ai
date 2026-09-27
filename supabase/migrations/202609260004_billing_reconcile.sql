@@ -98,6 +98,7 @@ begin
   insert into public.billing_reconcile_leases(workspace_id) values(p_workspace_id) on conflict do nothing;
   select * into l from public.billing_reconcile_leases where workspace_id=p_workspace_id for update;
   if p_action = 'claim' then
+    if p_token is null then raise exception 'missing lease token'; end if;
     if l.lease_until is not null and l.lease_until >= pg_catalog.clock_timestamp() then
       return pg_catalog.jsonb_build_object('claimed',false,'generation',l.generation);
     end if;
@@ -105,7 +106,9 @@ begin
       where workspace_id=p_workspace_id returning * into l;
     return pg_catalog.jsonb_build_object('claimed',true,'generation',l.generation);
   end if;
-  if l.token is distinct from p_token or l.generation is distinct from p_generation or l.lease_until <= pg_catalog.clock_timestamp() then
+  if p_token is null or p_generation is null or l.token is null or l.lease_until is null
+    or l.token is distinct from p_token or l.generation is distinct from p_generation
+    or l.lease_until <= pg_catalog.clock_timestamp() then
     return pg_catalog.jsonb_build_object('ok',false);
   end if;
   if p_action = 'release' then
