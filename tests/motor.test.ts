@@ -15,7 +15,7 @@ vi.mock("@/lib/store", () => ({
 
 import { DEMOS } from "@/lib/engine/demo";
 import { analiseLocal } from "@/lib/engine/local";
-import { analiseIASchema } from "@/lib/engine/schema";
+import { analiseIASchema, postDaSaida } from "@/lib/engine/schema";
 import { analisar, chaveCache, finalizar, hashPreferencias } from "@/lib/engine";
 import type { Analise, BrandProfile } from "@/lib/types";
 import { doresDoSite, publicoAlvoDoSite, REVISAR_PUBLICO } from "@/lib/motor/enderecamento";
@@ -24,7 +24,7 @@ import { construirCatalogo, padroesDoNicho } from "@/lib/virais/catalogo";
 import { itensDoArquivo } from "@/lib/virais";
 import { preferenciasSchema } from "@/lib/motor/contrato";
 import { montarContexto, ogDoHtml } from "@/lib/motor/contexto";
-import { aplicarExtras, legendasPorRede, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor/saida";
+import { aplicarExtras, contextoDosPosts, legendasPorRede, postDoMotor, postMotorSchema, saidaMotorSchema, saidaParaAnaliseIA } from "@/lib/motor/saida";
 import { filtrarLocal, termosProibidos, violaProibicao } from "@/lib/motor/local-filtros";
 import { brandParaInferencia, inferirSugestoes, tomDoSite } from "@/lib/motor/inferir";
 import { montarPromptMotor, SISTEMA_MOTOR } from "@/lib/llm/prompt-motor";
@@ -390,5 +390,26 @@ describe("objetivo endereçado", () => {
     expect(a.posts[0].enderecamento?.objetivo).toBe("autoridade_founder");
     expect(a.posts[1].enderecamento?.objetivo).toBe("autoridade_founder");
     expect(a.posts.every((p) => p.precisa_revisao?.includes(REVISAR_PUBLICO))).toBe(true);
+  });
+});
+
+describe("postDoMotor", () => {
+  const cru = (extra: Record<string, unknown> = {}) =>
+    postMotorSchema.parse({ rede: "instagram", formato: "carrossel", gancho: "Gancho forte", slides_ou_arte: [{ titulo: "Gancho forte", texto: "" }], legenda: "Legenda", ...extra });
+
+  it("perfil ambos alterna o trilho quando o modelo não manda", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 3, redes: ["instagram"], preferencias: preferenciasSchema.parse({ perfil_alvo: "ambos" }) });
+    const a = postDoMotor(cru(), 0, [], c);
+    const b = postDoMotor(cru(), 1, [a.extras.trilho ?? "empresa"], c);
+    expect([a.extras.trilho, b.extras.trilho]).toEqual(["founder", "empresa"]);
+    expect(a.post.template).toBe("capa-gancho");
+  });
+
+  it("postDaSaida dá id da análise e template válido", () => {
+    const c = contextoDosPosts({ brand: cora, palpite: "fintech", quantidade: 1, redes: ["instagram"] });
+    const { post } = postDoMotor(cru(), 0, [], c);
+    const final = postDaSaida(post, "abc", 0);
+    expect(final.id).toBe("abc-p1");
+    expect(final.legendas.instagram).toContain("Legenda");
   });
 });

@@ -350,52 +350,82 @@ const DIAG_RESERVA: [string, string][] = [
 
 const texto = (s: string, reserva: string) => (s && s.trim() ? s.trim() : reserva);
 
-/** Converte a saída do modelo no formato AnaliseIA (validável por analiseIASchema) mais os extras do motor. */
-export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador): ResultadoMotor {
-  const saida = semTravessao(saidaBruta);
+/** O que todo post do lote precisa para virar post do app: perfil, redes, endereçamento e padrões conhecidos. */
+export interface ContextoPosts {
+  perfil: "founder" | "empresa" | "ambos";
+  redes: Rede[];
+  ctxEnd: ContextoEnderecamento;
+  padraoPorNome: Map<string, string>;
+}
+
+export function contextoDosPosts(op: OpcoesAdaptador, publicoInferido = ""): ContextoPosts {
   const pref = op.preferencias ?? null;
-  const perfil = pref?.perfil_alvo ?? "empresa";
-  const redes = op.redes.length ? op.redes : (["linkedin", "instagram"] as Rede[]);
   const padraoPorNome = new Map<string, string>();
   for (const p of op.padroes ?? []) {
     padraoPorNome.set(p.nome.toLowerCase(), p.id);
     padraoPorNome.set(p.id.toLowerCase(), p.id);
   }
-
-  const posts = saida.posts.slice(0, op.quantidade);
-  const extrasPosts: ExtrasPost[] = [];
-  // Endereçamento: o que o modelo não mandou é completado aqui (rodízio de objetivos, público da
-  // preferência ou do contexto inferido, gatilho do gancho) e o post vai para revisão.
-  const ctxEnd: ContextoEnderecamento = {
-    objetivos: objetivosDoRodizio(pref),
-    publico: pref?.publico_alvo?.trim() || saida.contexto_inferido.publico || publicoAlvoDoSite(op.brand),
-    gatilho: "gancho",
-    marca: op.brand.nome || undefined,
-    marcarRevisao: true,
+  return {
+    perfil: pref?.perfil_alvo ?? "empresa",
+    redes: op.redes.length ? op.redes : ["linkedin", "instagram"],
+    // Endereçamento: o que o modelo não mandou é completado (rodízio de objetivos, público da preferência ou do
+    // contexto inferido, gatilho do gancho) e o post vai para revisão.
+    ctxEnd: {
+      objetivos: objetivosDoRodizio(pref),
+      publico: pref?.publico_alvo?.trim() || publicoInferido || publicoAlvoDoSite(op.brand),
+      gatilho: "gancho",
+      marca: op.brand.nome || undefined,
+      marcarRevisao: true,
+    },
+    padraoPorNome,
   };
-  const analisePosts: AnaliseIA["posts"] = posts.map((p, i) => {
-    const rede = normalizarRede(p.rede) ?? redes[i % redes.length];
-    const fm = normalizarFormatoMotor(p.formato) ?? (p.slides_ou_arte.length > 1 ? "carrossel" : "estatico");
-    const tpl = TEMPLATES.includes(p.template as TemplateId) ? (p.template as TemplateId) : null;
-    const { formato, template } = formatoDoApp(fm, tpl);
-    const gancho = corte(p.gancho, 220);
-    const slides = p.slides_ou_arte.length ? p.slides_ou_arte : [{ titulo: gancho, texto: "" }];
-    const hashtags = p.hashtags.map((h) => h.replace(/^#/, "").replace(/\s+/g, "")).filter(Boolean);
-    const nomePadrao = p.padrao_referencia.nome;
-    const revisar = [...p.precisa_revisao];
-    const todoTexto = [p.gancho, p.legenda, ...slides.flatMap((s) => [s.titulo, s.texto])].join(" ");
-    if (/\[PREENCHER/i.test(todoTexto) && !revisar.length) revisar.push("Há um [PREENCHER] no texto: complete antes de publicar.");
-    // "ambos": sem trilho informado, o post vai para o trilho com menos posts até aqui.
-    const nFounder = extrasPosts.filter((e) => e.trilho === "founder").length;
-    const trilho = perfil === "ambos" ? (p.trilho ?? (nFounder <= i - nFounder ? "founder" : "empresa")) : perfil;
-    const { enderecamento, completou } = completarEnderecamento(
-      p.enderecamento,
-      { gancho, slides, legenda: p.legenda, chamada_final: p.chamada_final, objetivo: p.objetivo },
-      i,
-      ctxEnd,
-    );
-    if (completou && !revisar.includes(REVISAR_PUBLICO)) revisar.push(REVISAR_PUBLICO);
-    extrasPosts.push({
+}
+
+type PostMotor = z.output<typeof postMotorSchema>;
+
+/**
+ * Um post do modelo no formato do app, mais os extras do motor. `trilhosAntes` são os trilhos dos posts anteriores
+ * do lote: no perfil "ambos", o post sem trilho vai para o lado com menos posts até aqui.
+ */
+export function postDoMotor(
+  p: PostMotor,
+  i: number,
+  trilhosAntes: ("founder" | "empresa")[],
+  c: ContextoPosts,
+): { post: AnaliseIA["posts"][number]; extras: ExtrasPost } {
+  const rede = normalizarRede(p.rede) ?? c.redes[i % c.redes.length];
+  const fm = normalizarFormatoMotor(p.formato) ?? (p.slides_ou_arte.length > 1 ? "carrossel" : "estatico");
+  const tpl = TEMPLATES.includes(p.template as TemplateId) ? (p.template as TemplateId) : null;
+  const { formato, template } = formatoDoApp(fm, tpl);
+  const gancho = corte(p.gancho, 220);
+  const slides = p.slides_ou_arte.length ? p.slides_ou_arte : [{ titulo: gancho, texto: "" }];
+  const hashtags = p.hashtags.map((h) => h.replace(/^#/, "").replace(/\s+/g, "")).filter(Boolean);
+  const nomePadrao = p.padrao_referencia.nome;
+  const revisar = [...p.precisa_revisao];
+  const todoTexto = [p.gancho, p.legenda, ...slides.flatMap((s) => [s.titulo, s.texto])].join(" ");
+  if (/\[PREENCHER/i.test(todoTexto) && !revisar.length) revisar.push("Há um [PREENCHER] no texto: complete antes de publicar.");
+  const nFounder = trilhosAntes.filter((t) => t === "founder").length;
+  const trilho = c.perfil === "ambos" ? (p.trilho ?? (nFounder <= i - nFounder ? "founder" : "empresa")) : c.perfil;
+  const { enderecamento, completou } = completarEnderecamento(
+    p.enderecamento,
+    { gancho, slides, legenda: p.legenda, chamada_final: p.chamada_final, objetivo: p.objetivo },
+    i,
+    c.ctxEnd,
+  );
+  if (completou && !revisar.includes(REVISAR_PUBLICO)) revisar.push(REVISAR_PUBLICO);
+  return {
+    post: {
+      rede_principal: rede,
+      formato,
+      template,
+      gancho,
+      slides: slides.slice(0, 8),
+      legendas: legendasPorRede(rede, p.legenda, gancho, hashtags),
+      hashtags,
+      padrao_inspirador: corte(c.padraoPorNome.get(nomePadrao.toLowerCase()) ?? nomePadrao, 80),
+      por_que: corte(p.por_que_funciona, 400),
+    },
+    extras: {
       trilho,
       objetivo: p.objetivo || enderecamento.objetivo,
       enderecamento,
@@ -404,18 +434,21 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
       padrao_referencia: nomePadrao || p.padrao_referencia.fonte_url ? { nome: nomePadrao, fonte_url: p.padrao_referencia.fonte_url } : undefined,
       chamada_final: p.chamada_final || undefined,
       precisa_revisao: revisar,
-    });
-    return {
-      rede_principal: rede,
-      formato,
-      template,
-      gancho,
-      slides: slides.slice(0, 8),
-      legendas: legendasPorRede(rede, p.legenda, gancho, hashtags),
-      hashtags,
-      padrao_inspirador: corte(padraoPorNome.get(nomePadrao.toLowerCase()) ?? nomePadrao, 80),
-      por_que: corte(p.por_que_funciona, 400),
-    };
+    },
+  };
+}
+
+/** Converte a saída do modelo no formato AnaliseIA (validável por analiseIASchema) mais os extras do motor. */
+export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador): ResultadoMotor {
+  const saida = semTravessao(saidaBruta);
+  const pref = op.preferencias ?? null;
+  const c = contextoDosPosts(op, saida.contexto_inferido.publico);
+  const posts = saida.posts.slice(0, op.quantidade);
+  const extrasPosts: ExtrasPost[] = [];
+  const analisePosts: AnaliseIA["posts"] = posts.map((p, i) => {
+    const r = postDoMotor(p, i, extrasPosts.map((e) => e.trilho ?? "empresa"), c);
+    extrasPosts.push(r.extras);
+    return r.post;
   });
 
   const nicho = nichoDoMotor(saida.contexto_inferido.nicho) ?? op.palpite;
@@ -470,7 +503,7 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
 
   const comDado = new Set(op.horariosComDado ?? []);
   const slots = slotsCoerentes(saida, saida.posts.map((p) => p.post_id), analisePosts.map((p) => p.rede_principal), comDado);
-  const roteiros = roteirosDoModelo(saida, redes, ctxEnd, comDado).slice(0, quantosRoteiros(op.quantidade));
+  const roteiros = roteirosDoModelo(saida, c.redes, c.ctxEnd, comDado).slice(0, quantosRoteiros(op.quantidade));
   const ap = saida.aprendizados;
   const aprendizados = ap.funcionou.length || ap.nao_funcionou.length || ap.ajuste ? ap : undefined;
   // Só concorrentes que o founder informou, sem número nem frase de desempenho.
@@ -484,7 +517,7 @@ export function saidaParaAnaliseIA(saidaBruta: SaidaMotor, op: OpcoesAdaptador):
       por_rede: saida.estrategia.por_rede.filter((r) => r.rede && r.papel),
       comentario_frequencia: saida.calendario.comentario_frequencia || undefined,
       o_que_aprendi: saida.o_que_aprendi || undefined,
-      perfil_alvo: perfil,
+      perfil_alvo: c.perfil,
       ...(aprendizados ? { aprendizados } : {}),
       ...(benchmark.length ? { benchmark_concorrentes: benchmark } : {}),
     },

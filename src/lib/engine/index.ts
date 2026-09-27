@@ -9,7 +9,7 @@ import { contextoViralDoNicho } from "@/lib/virais";
 import { montarCalendario } from "./calendario";
 import { analiseLocal } from "./local";
 import { palpiteNicho } from "./nicho";
-import { analiseIASchema, extrairJson, semTravessao, templateValido, type AnaliseIA } from "./schema";
+import { analiseIASchema, extrairJson, postDaSaida, semTravessao, templateValido, type AnaliseIA } from "./schema";
 import { demoPorDominio } from "./demo";
 import type { Preferencias } from "@/lib/motor/contrato";
 import { intercalar, postsDoFounder, referenciaDoPadrao } from "@/lib/motor/local-founder";
@@ -106,20 +106,7 @@ export function finalizar(
   enderecar?: ContextoEnderecamento,
 ): Analise {
   const limpa = semTravessao(saida);
-  const posts: PostGerado[] = limpa.posts.map((p, i) => ({
-    ...enderecamentoDoPost(p, i, enderecar),
-    id: `${id}-p${i + 1}`,
-    rede_principal: p.rede_principal,
-    formato: p.formato,
-    template: templateValido(p.template, p.formato),
-    gancho: p.gancho,
-    slides: p.slides.map((s) => ({ titulo: s.titulo ?? "", texto: s.texto ?? "" })),
-    legendas: p.legendas,
-    hashtags: p.hashtags.map((h) => h.replace(/^#/, "").replace(/\s+/g, "")).filter(Boolean),
-    padrao_inspirador: p.padrao_inspirador,
-    por_que: p.por_que,
-    ...(p.origem_tema ? { origem_tema: p.origem_tema } : {}),
-  }));
+  const posts: PostGerado[] = limpa.posts.map((p, i) => ({ ...enderecamentoDoPost(p, i, enderecar), ...postDaSaida(p, id, i) }));
   return {
     id,
     url: brand.url,
