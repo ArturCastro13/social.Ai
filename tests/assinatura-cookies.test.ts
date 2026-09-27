@@ -1,0 +1,41 @@
+import { describe, expect, it, vi } from "vitest";
+import { NextRequest } from "next/server";
+
+const bridge = vi.hoisted(() => ({
+  options: null as null | { cookies: { getAll: () => unknown; setAll: (items: { name: string; value: string; options: object }[], headers: Record<string, string>) => void } },
+  set: vi.fn(),
+}));
+vi.mock("@supabase/ssr", () => ({
+  createServerClient: (_url: string, _key: string, options: typeof bridge.options) => {
+    bridge.options = options;
+    return { auth: { getUser: async () => {
+      options!.cookies.setAll([{ name: "sb-access", value: "refreshed", options: { path: "/", httpOnly: true } }], { "cache-control": "private, no-store" });
+      return { data: { user: null }, error: null };
+    } } };
+  },
+}));
+vi.mock("next/headers", () => ({ cookies: async () => ({ getAll: () => [], set: bridge.set }) }));
+
+import { createSessionClient } from "@/lib/auth/server";
+import { refreshSession } from "@/lib/auth/proxy";
+
+describe("propagação de cookies SSR", () => {
+  it("grava o cookie atualizado no contexto da rota", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://example.supabase.co");
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "anon-example");
+    bridge.set.mockReset();
+    await createSessionClient();
+    bridge.options!.cookies.setAll([{ name: "sb-access", value: "refreshed", options: { httpOnly: true, path: "/" } }], {});
+    expect(bridge.set).toHaveBeenCalledWith("sb-access", "refreshed", { httpOnly: true, path: "/" });
+    vi.unstubAllEnvs();
+  });
+
+  it("proxy devolve cookie atualizado e resposta não cacheável", async () => {
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_URL", "https://example.supabase.co");
+    vi.stubEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "anon-example");
+    const response = await refreshSession(new NextRequest("https://example.test/api/auth/session"));
+    expect(response.cookies.get("sb-access")?.value).toBe("refreshed");
+    expect(response.headers.get("cache-control")).toContain("no-store");
+    vi.unstubAllEnvs();
+  });
+});
