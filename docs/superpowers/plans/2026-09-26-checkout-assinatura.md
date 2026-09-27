@@ -12,6 +12,8 @@
 
 ## Global Constraints
 
+Revisão aprovada de 27/09/2026, no início da spec, prevalece sobre exemplos anteriores. Rodada atual: backend 1/2/3/5/6 e PR; 4/7 aguardam aviso do redesenho. Aceitação/documentação da Tarefa 8 será limitada ao backend neste primeiro PR; UI/ponta a ponta ficam no segundo.
+
 - “Esta entrega se limita a localhost/preview protegido e Stripe em modo de teste.”
 - “Não autoriza cobrança real nem migração de clientes para um plano pago.”
 - “Preservar componentes, fontes, cores e organização visual do Bruno; ajustes mobile-first e acessíveis.”
@@ -72,7 +74,7 @@ type CheckoutStatus = {
 };
 ```
 
-Não usar `CheckoutStatus.state` como estado da assinatura. `canceled` nesse contrato significa abandono da tentativa; `AccessState` é reconciliado separadamente. Respostas de erro privadas: `{code, message}`, sem stack/segredos; 401 sessão, 404 recurso ausente ou alheio, 409 versão/conflito, 402 acesso pago necessário, 429 cota/frequência, 503 dependência indisponível.
+Não usar `CheckoutStatus.state` como estado da assinatura. `canceled` nesse contrato significa abandono da tentativa; `AccessState` é reconciliado separadamente. Respostas de erro privadas: `{erro, codigo}`, sem stack/segredos; 401 sessão, 404 recurso ausente ou alheio, 409 versão/conflito, 402 acesso pago necessário, 429 cota/frequência, 503 dependência indisponível.
 
 ---
 

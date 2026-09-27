@@ -1,5 +1,19 @@
 # Assinatura e checkout Stripe — especificação para aprovação
 
+## Revisão aprovada em 27/09/2026 — coordenação com Bruno
+
+Esta revisão prevalece sobre divergências no texto original. PR #3 integrado à main; entregar backend (Tarefas 1/2/3/5/6) em um PR para Bruno revisar. Proteção das rotas e interface (4/7) ficam em outro PR, somente após o aviso de merge do redesenho. Atualizar então a branch e preservar NDJSON de `/api/analyze`, `postMotorSchema`/`postDoMotor`, `PostCard`, `AoVivo`, `useGeracao`, `Painel` e capas automáticas novos, sem telas paralelas.
+
+- Incluir `image_generate` na fixture sintética: 1 imagem gratuita e 24 por período pago (4 semanas × 6 capas), não oferta comercial. Cada imagem nova é uma operação; acerto de cache privado não consome cota. Proteção de `/api/imagem` e integração das capas pertencem ao segundo PR.
+- Capas privadas terão bucket privado, caminhos por workspace e URL assinada curta após autorização. Não reutilizar bucket público `posts` nem migrar imagens legadas automaticamente. Storage/políticas serão entregues no segundo PR, sem aplicação remota por agentes.
+- `reservarUso*` e limites globais continuam como frequência/segurança junto ao ledger. `LIMITE_ANALISES_POR_EMAIL` não será a franquia paga; workspace define a cota. Não entregar fallback local silencioso como análise paga. Caches de pesquisa/imagens incluem workspace. Concorrentes não podem consumir a amostra automaticamente.
+- APIs novas mantêm `{erro, codigo}`; reutilizam `protegerOrigem`/`lerCorpoLimitado`, acrescentando no-store e APP_ORIGIN estrito nas mutações. Exportar schemas BrandProfile/Personalizacao. `DraftBody.contexto` é canônico: duplicata divergente em `preferencias.contexto_empresa` é rejeitada; cópia idêntica é removida antes de persistir.
+- Migrations aditivas ordenadas, manuais e documentadas no DEPLOY.md; não substituir/reexecutar destrutivamente schema legado. Bruno aplica SQL após revisão; nenhum banco remoto será alterado nesta execução.
+- Retorno do checkout sincroniza Stripe sob os mesmos leases/fencing do webhook. Rascunho diferente expira checkout anterior antes de nova compra, reconciliando corridas com conclusão. Detectar segunda assinatura e bloquear nova compra, com intervenção registrada, sem cancelar/reembolsar automaticamente. `subscription_data.metadata` inclui workspace/tentativa opacos. Concessão de fatura paga aceita apenas `subscription_create`/`subscription_cycle`, além de Customer, Price, ambiente e período válidos.
+- Adicionar frequência persistente OTP/checkout, teto global persistente de operações onerosas e suporte a CAPTCHA no Supabase Auth. O teto sintético de 60 operações novas/dia não é promessa de orçamento monetário; configurar também limites de gasto nos provedores. Widget vem no segundo PR.
+- Configuração relatada pelo responsável: Price `price_1UK8zeA8V7kdEuoTxxss9Wyb`, R$1/mês; portal `bpc_1UK99SA8V7kdEuoTBBMUMYAr`. IDs não secretos, sujeitos a validação remota. Segredos continuam no ambiente do responsável; nenhuma mudança na Vercel. Convite, chave própria `rk_test` e Stripe CLI dependem de acesso efetivo, não presumido.
+- Esforço médio, lotes delimitados. Parar ao cumprir aceite ou depender de ação externa. Antes do PR: `npx vitest run`, `npx tsc --noEmit -p .`, `npx eslint`, `npm run build`. Identificar testes externos pendentes. Merge é do Bruno.
+
 ## 1. Decisões e objetivo
 
 Jornada e Stripe aprovados pelo Artur. Objetivo: permitir que o founder reconheça valor numa amostra personalizada e contrate a continuidade por assinatura mensal, sem perder seu trabalho ao pagar. Preservar componentes, fontes, cores e organização visual do Bruno; ajustes mobile-first e acessíveis.
