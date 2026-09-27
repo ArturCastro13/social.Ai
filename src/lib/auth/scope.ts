@@ -1,9 +1,14 @@
 import type { Scope } from "@/lib/assinatura/contrato";
 import { z } from "zod";
+import { billingMode } from "@/lib/assinatura/config";
 import { PrivateHttpError } from "./http";
 import { createSessionClient } from "./server";
 
 export async function requireScope(): Promise<Scope> {
+  // Assinatura desligada: rascunhos, status e portal ficam indisponíveis antes de tocar no Supabase.
+  let ligado = false;
+  try { ligado = billingMode() === "test"; } catch { /* modo inválido conta como desligado */ }
+  if (!ligado) throw new PrivateHttpError(503, "billing_disabled", "Assinatura indisponível.");
   let client: Awaited<ReturnType<typeof createSessionClient>>;
   try { client = await createSessionClient(); }
   catch { throw new PrivateHttpError(503, "dependency_unavailable", "Identidade temporariamente indisponível."); }
